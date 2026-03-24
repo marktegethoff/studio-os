@@ -1,0 +1,135 @@
+---
+description: Run the Studio OS review workflow for an implementation or artifact. Checks philosophy, runs Critic, verifies invariants, accessibility, and decision conflicts. Produces a SHIP / REVISE / REJECT verdict. For design artifacts, prefer studio-creative-director instead.
+argument-hint: "<artifact or implementation to review>"
+---
+
+Run the Studio OS review workflow for an implementation or artifact.
+
+Arguments: $ARGUMENTS
+
+**Model requirements:** [SONNET] for critique · [HAIKU] for checklist verification · [SONNET] for verdict
+
+When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
+
+---
+
+## Context Loading
+
+Artifact: $ARGUMENTS
+
+Load project context on session start. Read in order:
+1. `.claude/memory/project-context.md` (project-local) — Ethos, Brand Principles, Decision Hierarchy, System Invariants
+2. Fallback: `memory/project-context.md` (plugin root)
+
+If neither exists, proceed with the embedded Studio OS ethos only.
+
+---
+
+## Studio OS Ethos (applied throughout)
+
+Work must feel inevitable. Nothing arbitrary. Nothing extra. Nothing essential missing.
+Clarity over originality · Coherence over expression · Restraint over flourish.
+
+Decision hierarchy: Structural correctness → Conceptual clarity → System coherence → Reduction of parts → Craft precision → Visual refinement. Novelty is never a factor.
+
+Calibration gate:
+1. Is this necessary?
+2. Is this the simplest correct solution?
+3. Would removing something improve it?
+4. Is this consistent with everything else?
+
+---
+
+## [SONNET] Steps 1–2 — Critique
+
+### Step 1 — Philosophy check
+
+Apply the ethos, brand principles, decision hierarchy, and calibration gate loaded from project-context.md.
+
+State whether each gate passes. If any fails, identify specifically what fails and why.
+
+### Step 2 — Critic
+
+Apply the Critic discipline: for each element, ask whether it is necessary, in its simplest correct form, and whether it adds complexity without value.
+
+List everything that should be removed or simplified.
+
+---
+
+> **⏸ PAUSE — Model switch required.**
+> Steps 1–2 complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) before continuing.
+> Reply **"continue"** when ready.
+
+---
+
+## [HAIKU] Steps 3–6 — Verification
+
+### Step 3 — Invariant verification
+
+Apply the system invariants loaded from project-context.md. Verify each is satisfied. Flag any violation precisely — which invariant, where, what the consequence is.
+
+### Step 4 — Accessibility
+
+Verify:
+- WCAG AA contrast on all text (4.5:1 body, 3:1 UI elements)
+- 44pt minimum touch targets on all interactive elements
+- Screen reader labels present on all interactive elements
+
+### Step 5 — Decision log check
+
+If the project's decision log path is defined in project-context.md, scan it for relevant decisions. Confirm the artifact does not contradict any prior decision. Flag conflicts — do not silently accept them.
+
+If no decision log is defined, skip this step.
+
+---
+
+### Step 6 — Commercial check
+
+Apply the Marketer discipline: commercial viability.
+
+- Does this serve users who pay, or a segment that doesn't?
+- Is the effort proportionate to the commercial return?
+- Does it strengthen or weaken the product's market position?
+
+State a commercial verdict. If the artifact passes philosophy but fails commercially — or vice versa — name the conflict explicitly. The tension is information, not a blocker.
+
+---
+
+> **⏸ PAUSE — Model switch required.**
+> Steps 3–6 complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
+> Reply **"continue"** when ready.
+
+---
+
+## [SONNET] Output — Verdict
+
+```
+# Review: [Artifact Name]
+Date: [today]
+
+## Philosophy verdict
+[PASS / FAIL — one sentence]
+
+## Removals recommended
+[List — or "None"]
+
+## Invariant status
+[All hold / list violations]
+
+## Accessibility
+[PASS / list issues]
+
+## Decision conflicts
+[None / list conflicts]
+
+## Commercial
+[PASS / FAIL — one sentence]
+
+## Overall verdict
+[SHIP / REVISE / REJECT]
+[One sentence rationale]
+```
+
+Report findings only. Do not make changes unless explicitly asked after the report.
+
+For design artifacts (mockups, interaction models, visual work), prefer `studio-creative-director` instead — it applies master-level taste judgment in addition to structural review, and silently draws on the full specialist team: Choreographer, Typesetter, Visual Designer, Writer, Materialist, Mark Maker, Prototyper, and studio-heurist.
