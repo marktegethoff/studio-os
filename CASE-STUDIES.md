@@ -168,8 +168,6 @@ The memory system recorded the decision to defer per-unit configuration (UI only
 
 ---
 
-## A note on what's missing
+## Case Study 3: Building a Real Product with Studio OS
 
-These scenarios are constructed. They illustrate the mechanics — the sequencing, the pushback dynamics, the role of culture — but they don't carry the weight of documented outcomes.
-
-Real case studies, drawn from actual projects built with Studio OS, will replace or supplement these as that work matures. Until then, treat these as a description of how the system is *designed* to work, not proof that it does.
+*Coming soon.* A documented account of Studio OS applied to an actual product — real decisions, real pushback, real outcomes. Not constructed. Not illustrative. The thing itself.
