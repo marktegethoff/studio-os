@@ -1,6 +1,8 @@
 # Case Studies
 
-Two examples of Studio OS applied to real product problems. These walk through the workflow sequences, agent handoffs, and decisions that emerge — not as idealized narratives, but as demonstrations of what structured reasoning looks like in practice.
+These are illustrative scenarios, not documented engagements. They are constructed to show how Studio OS workflows, agent sequencing, and human-agent collaboration work in practice — the kinds of problems the system is designed for, the kinds of decisions it surfaces, and the dynamics that emerge when structured reasoning meets real product judgment.
+
+They are plausible. They are not evidence. Evidence comes from use.
 
 ---
 
@@ -163,3 +165,11 @@ The memory system recorded the decision to defer per-unit configuration (UI only
 **The a-ha moments belong to the human.** The agents don't produce insights. They produce the conditions for insight. The product lead's realization — "we're not redesigning onboarding, we're removing it" — was hers. The agents built the case across four handoffs, but the synthesis happened in her head. The CTO's recognition that "does delayed response create risk?" resolved weeks of ambiguous debate was his. The designer named the framing; the CTO recognized its power. This is the point of a multi-agent team: not to think for you, but to structure the thinking so that the conclusions you reach are sharper than the ones you'd reach alone.
 
 **Culture is a design input, not decoration.** The same Studio OS agents, running the same workflows, produce materially different outputs for different teams — because `/studio-init` captures the team's philosophy, brand principles, and voice as structured decision filters, not as style guidelines applied at the end. The analytics team's "respect the operator's time" principle eliminated the onboarding wizard before design even started. The healthcare team's "built by someone who's been on the floor" philosophy made "quiet by default" an inevitability, not a choice. A venture-backed growth-stage company with a principle like "guide users to mastery" would have gotten a different onboarding model — perhaps a more progressive one — from the same agents. A healthcare competitor whose philosophy centered on "comprehensive clinical awareness" might have kept the three-tier notification model. The structure of the system stays the same. The decisions it produces change because the inputs change. This is the point of the `/studio-init` interview: not to fill out a template, but to give every agent a precise understanding of *who this team is and what they believe*, so that the work reflects the team's judgment — amplified and structured — rather than generic best practices.
+
+---
+
+## A note on what's missing
+
+These scenarios are constructed. They illustrate the mechanics — the sequencing, the pushback dynamics, the role of culture — but they don't carry the weight of documented outcomes.
+
+Real case studies, drawn from actual projects built with Studio OS, will replace or supplement these as that work matures. Until then, treat these as a description of how the system is *designed* to work, not proof that it does.
