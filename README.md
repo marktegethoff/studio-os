@@ -26,7 +26,7 @@ The agents are opinionated. They remove before they add. They ask whether someth
 Requires [Claude Code](https://claude.ai/code).
 
 ```bash
-git clone https://github.com/standardworks/studio-os
+git clone https://github.com/marktegethoff/studio-os
 cd studio-os
 ./install.sh
 ```
