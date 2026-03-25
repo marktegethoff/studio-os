@@ -77,6 +77,8 @@ The point of a system like this is not to inherit someone else's judgment. It is
 
 See [PHILOSOPHY.md](PHILOSOPHY.md) for the reasoning behind the defaults.
 
+See [CASE-STUDIES.md](CASE-STUDIES.md) for illustrative examples of the system in use.
+
 ---
 
 ## Credits
