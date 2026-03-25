@@ -1,5 +1,5 @@
 ---
-description: Run the Studio OS review workflow for an implementation or artifact. Checks philosophy, runs Critic, verifies invariants, accessibility, and decision conflicts. Produces a SHIP / REVISE / REJECT verdict. For design artifacts, prefer studio-creative-director instead.
+description: Run the Studio OS review workflow for an implementation or artifact. Checks philosophy, runs Critic and Heurist, verifies invariants, accessibility, and decision conflicts. Produces a SHIP / REVISE / REJECT verdict. For design artifacts, prefer studio-creative-director instead.
 argument-hint: "<artifact or implementation to review>"
 ---
 
@@ -54,10 +54,22 @@ Apply the Critic discipline: for each element, ask whether it is necessary, in i
 
 List everything that should be removed or simplified.
 
+### Step 2.5 — Heurist (conditional)
+
+Run if the artifact includes an interactive surface. Skip for data models, service layer, or non-interactive changes.
+
+Evaluate:
+- Broken mental models — does this behave the way the user expects?
+- Invisible friction — what will users attempt that the design does not support?
+- Gesture dead-ends — are there states users can reach but not exit?
+- AI behavior concerns (if applicable) — does any AI-driven element erode trust or attribution?
+
+Flag violations with severity (P0–P3). P0 findings block ship.
+
 ---
 
 > **⏸ PAUSE — Model switch required.**
-> Steps 1–2 complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) before continuing.
+> Steps 1–2.5 complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) before continuing.
 > Reply **"continue"** when ready.
 
 ---
@@ -112,6 +124,9 @@ Date: [today]
 
 ## Removals recommended
 [List — or "None"]
+
+## Usability
+[PASS / list violations with severity (P0–P3) — or "Not applicable (non-interactive)"]
 
 ## Invariant status
 [All hold / list violations]

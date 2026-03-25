@@ -1,5 +1,5 @@
 ---
-description: Run the full Studio OS design workflow for a problem or feature. Activates Context → Historian → Strategist → Architect → Critic → Designer → Sub-team → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
+description: Run the full Studio OS design workflow for a problem or feature. Activates Context → Historian → Strategist → Architect → Critic → Designer → Sub-team → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
 ---
 
@@ -134,6 +134,18 @@ Invoke each discipline that applies:
 After any sub-team disciplines have run, always execute:
 
 **Visual Designer** — evaluate spacing, proportion, alignment, and visual weight distribution across the full surface using all sub-team outputs. Prescribe specific corrections. This step runs whenever the sub-team ran; skip only if zero sub-team disciplines were invoked.
+
+### Step 7.7 — Heurist (conditional)
+
+Run if the surface involves user interaction. Skip for data model or system-only changes with no new surface work.
+
+Evaluate the interaction model produced by the Designer (and refined by the sub-team) for:
+- Broken mental models — does this behave the way the user expects?
+- Invisible friction — what will users attempt that the design does not support?
+- Gesture dead-ends — are there states users can reach but not exit?
+- AI behavior concerns (if applicable) — does any AI-driven element erode trust or attribution?
+
+Findings at this step may require returning to the Designer. If so, state precisely what must change before proceeding to Accessibility.
 
 ### Step 8 — Accessibility
 
