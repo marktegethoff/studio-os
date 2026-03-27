@@ -171,3 +171,100 @@ The memory system recorded the decision to defer per-unit configuration (UI only
 ## Case Study 3: Building a Real Product with Studio OS
 
 *Coming soon.* A documented account of Studio OS applied to an actual product — real decisions, real pushback, real outcomes. Not constructed. Not illustrative. The thing itself.
+
+---
+
+## Case Study 4: Managing Code Drift Under Agent-Driven Development
+
+**Problem:** A product team has been using `studio-implement` to ship features over several weeks. The service layer has grown without a unifying pass — a helper added during a bug fix that was never removed, a protocol defined for a single caller, a pattern duplicated between two services because the agent didn't locate the existing implementation. The code works. No bugs have surfaced. But a new feature request requires extending the service layer, and the engineer who opens the files doesn't recognize the convention in one service as the same convention under a different name in the adjacent one.
+
+There is no crisis. There is drift. Drift compounds.
+
+---
+
+**Workflow used (Scenario 1):** `/studio-simplify services/`
+
+---
+
+### How the workflow ran
+
+**Context loading.** The skill loaded the project-context file and the two relevant spec files. One of the services had a spec; the other didn't. The audit would proceed against the first service with a contract baseline and against the second without one — a gap the context load surfaced explicitly before any code was touched.
+
+**Code Audit.** Five categories, scanned against the files in scope. The findings:
+
+- *Duplication:* A `parseTimestampedPayload()` helper in `SyncService` — a functional duplicate of `decodeEventPayload()` in `EventService`, written five commits later. Same logic, different name, both callers.
+- *Single-use abstraction:* A `RecordFilterable` protocol with one conforming type and one caller. The protocol adds no generality — the call site works directly with the concrete type. The protocol exists because the agent that wrote it preferred protocols at boundaries, whether or not the boundary had more than one side.
+- *Orphaned code:* A `debugValidateRecord()` function referenced in a comment but called nowhere. Left over from a bug investigation.
+- *Convention drift:* Two services use different async patterns — one uses `async throws`, the other uses `Result<T, Error>` completion handlers. The project-context file specifies `async throws` as the established convention.
+- *Scope creep:* A `formatDisplayString()` method on a service type — presentation logic inside a service layer, not traceable to any spec.
+
+The lead engineer looked at the audit and had an immediate reaction: "The `RecordFilterable` protocol isn't wrong. We added that intentionally — we were planning to add a second conformer." The audit had flagged it as a single-use abstraction. This was the first moment where human context mattered. The protocol wasn't accidental. The audit couldn't know that.
+
+**Critic Pass.** The Critic distinguished load-bearing from removable. `RecordFilterable` was moved to the **Leave** column — the team had stated intent to extend it, which changes the calculus. `parseTimestampedPayload()` was flagged for removal with consolidation to the existing `decodeEventPayload()`. `debugValidateRecord()` was removed without qualification. The `formatDisplayString()` method was flagged for relocation to a formatting utility, not deletion — the logic was used; it was in the wrong layer. The async convention drift was flagged for alignment to `async throws` throughout.
+
+The Critic's position on `formatDisplayString()` was notable: it did not recommend deletion. The function was legitimate; its location was wrong. A static analysis pass would have treated it as scope creep and flagged it for removal. The Critic evaluated what kind of problem this was — misplaced, not unnecessary — and produced a different recommendation.
+
+**Architect Pass.** Consolidating the two payload parsers required verifying that the call sites had identical semantic contracts — same error behavior, same edge cases. They did. Aligning the async convention required checking whether any callers depended on the completion handler interface. Two external callers did. The architect added a migration note: align internal service methods first, expose the updated public interface, update callers. Sequence matters. Removing the completion handlers without updating callers would break the build.
+
+**Distinguished Engineer — Plan Review.** The DE read the plan and the actual files.
+
+Verdict: **PROCEED.** The plan is sound. Duplication is correctly identified and consolidated at the right location. The Critic's decision to leave `RecordFilterable` reflects information the audit didn't have — the DE noted that a comment in the protocol file should document the extension intent so a future agent doesn't flag it again. The async migration sequence is correct.
+
+One risk flagged: `decodeEventPayload()` had a subtle difference in its null-handling path versus the duplicate. The implementation step should verify this before deleting the duplicate.
+
+**Engineer: Implement.** Four changes, sequenced. Duplicate parser removed after confirming identical null-handling semantics. Async convention aligned internally. `formatDisplayString()` extracted to a formatting utility. `debugValidateRecord()` deleted. `RecordFilterable` left with an added inline comment documenting extension intent.
+
+**QA.** All existing test scenarios passed. The async convention alignment required two test updates — tests that asserted on the completion handler signature, not the behavior. Behavior unchanged.
+
+**Distinguished Engineer — Code Review.** Verdict: **SHIP.** The implementation reflects the plan. The null-handling edge case was verified before the duplicate was removed. The codebase is simpler, the conventions are coherent, and the one intentional complexity is now documented.
+
+---
+
+### Scenario 2: DE standalone after `studio-implement`
+
+A separate feature — a new search indexing behavior — was implemented via `studio-implement`. QA passed. The spec was satisfied. The engineer invoked the Distinguished Engineer for the final code review before merging.
+
+The DE read the spec. The spec defined one method: `index(_ record: Record)`.
+
+The implementation was correct and complete. But the engineer had added a convenience method alongside it: `indexBatch(_ records: [Record])`, which called `index()` in a loop. No spec had authorized it. QA hadn't caught it — `indexBatch()` worked, so no test failed.
+
+Verdict: **REVISE.**
+
+The DE's finding: `indexBatch()` is not wrong today. It will become a problem when batch indexing needs to be optimized — transactions, write coalescing, background scheduling. At that point, the implementation will be `indexBatch()` calling `index()` in a loop, which is not how batch operations should work at scale. A future engineer will either leave it and accept the performance cost, or refactor it — but the refactor will require updating all callers who now depend on the batch interface. The convenience wrapper introduces a coupling between the public API surface and an implementation detail that isn't ready to be committed.
+
+The engineer pushed back. "It's just a loop. It makes the call site cleaner for consumers who have multiple records."
+
+The DE held the position. The cleaner call site is real. But the cost is forward — a public interface creates a contract; that contract constrains how batch operations can be implemented when they need to be different. The spec hadn't authorized this method because batch behavior wasn't ready to be specified. That gap was intentional, not an oversight.
+
+`indexBatch()` was removed. Two internal call sites were updated to call `index()` directly.
+
+DE Code Review, second pass: **SHIP.**
+
+---
+
+### What was removed (Scenario 1)
+
+- `parseTimestampedPayload()` — duplicate of `decodeEventPayload()`, added five commits later
+- `debugValidateRecord()` — orphaned, no callers
+- Completion handler async pattern — aligned to `async throws` throughout
+- `formatDisplayString()` from service layer — relocated to formatting utility
+
+### What was preserved
+
+- `RecordFilterable` — single conformer today, documented extension intent
+
+### What was removed (Scenario 2)
+
+- `indexBatch(_ records: [Record])` — convenience wrapper not authorized by spec; constrains future batch implementation
+
+---
+
+### Why it worked
+
+The audit found the problems. The Critic sorted them. But the consequential work was the Critic's distinction between *misplaced* and *unnecessary* — `formatDisplayString()` needed relocation, not deletion — and the DE's identification of a coupling that no static analysis would catch.
+
+`indexBatch()` worked. QA passed. The DE's objection wasn't about correctness — it was about what committing that interface would cost when the implementation needed to be something different. That's a judgment about durability, not about the code as written today. Linters cannot make that call. The DE made it because it read the spec, understood what the spec had deliberately not yet specified, and recognized that the convenience method had jumped ahead of a decision that hadn't been made.
+
+The engineer's pushback — "it's just a loop" — was reasonable from inside the feature. The DE's response didn't argue about the loop. It named the mechanism: public interfaces create contracts; contracts constrain future implementations; the spec hadn't authorized this contract because batch behavior wasn't ready to be specified. That reframe shifted the question from "is this code correct?" to "is this the right moment to commit this interface?" It wasn't.
+
+The `RecordFilterable` moment from Scenario 1 was the more instructive lesson for the team: the audit surfaced a problem, the Critic deferred to human context, and the DE added documentation so a future agent run wouldn't reopen the question. The system remembered what the audit couldn't know — because a human said so, and the plan captured it.
