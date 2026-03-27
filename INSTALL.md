@@ -23,8 +23,8 @@ This copies agents and skills to `~/.claude/` and memory files to `~/.claude/age
 ## What gets installed
 
 ```
-~/.claude/agents/          23 discipline agents
-~/.claude/skills/          7 workflow skill directories
+~/.claude/agents/          24 discipline agents
+~/.claude/skills/          8 workflow skill directories
 ~/.claude/agents/memory/   Design foundations and memory templates
 ```
 
@@ -103,6 +103,7 @@ rm ~/.claude/agents/prototyper.md
 rm -rf ~/.claude/skills/studio
 rm -rf ~/.claude/skills/studio-design
 rm -rf ~/.claude/skills/studio-implement
+rm -rf ~/.claude/skills/studio-simplify
 rm -rf ~/.claude/skills/studio-review
 rm -rf ~/.claude/skills/studio-solve
 rm -rf ~/.claude/skills/studio-experiment

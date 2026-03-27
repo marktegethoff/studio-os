@@ -1,6 +1,6 @@
 # Studio OS
 
-A structured multi-discipline reasoning system for Claude Code. It installs 23 discipline agents and 7 workflow orchestrators into the Claude Code CLI, giving you a coordinated team — strategic, structural, design, engineering, and evaluation — that works from a shared understanding of your project.
+A structured multi-discipline reasoning system for Claude Code. It installs 24 discipline agents and 8 workflow orchestrators into the Claude Code CLI, giving you a coordinated team — strategic, structural, design, engineering, and evaluation — that works from a shared understanding of your project.
 
 The agents are opinionated. They remove before they add. They ask whether something is necessary before designing it. The goal is work that feels inevitable: nothing arbitrary, nothing extra, nothing essential missing.
 
@@ -8,16 +8,16 @@ The agents are opinionated. They remove before they add. They ask whether someth
 
 ## What's included
 
-**23 discipline agents**, organized by function:
+**24 discipline agents**, organized by function:
 
 - **Strategic** — historian, strategist, scout, marketer
 - **Structural** — architect, critic
 - **Design team** — designer (leads), choreographer, typesetter, visual-designer, writer, materialist, mark-maker, prototyper
 - **Evaluation** — creative-director, heurist, accessibility, validate-design, specifier
-- **Engineering** — engineer, qa
+- **Engineering** — engineer, qa, distinguished-engineer (de)
 - **Ongoing** — audit, research-sweep
 
-**7 workflow skills** that orchestrate agents in sequence for common work patterns.
+**8 workflow skills** that orchestrate agents in sequence for common work patterns.
 
 ---
 
@@ -58,12 +58,25 @@ The `project-context.md` file is loaded at the start of every workflow. It conta
 /studio-init                     Set up project context
 /studio-design <problem>         Full design workflow
 /studio-implement <feature>      Engineering workflow
+/studio-simplify <file or area>  Code coherence workflow
 /studio-review <artifact>        Review workflow
 /studio-solve <problem>          Convergence loop for hard problems
 /studio-experiment <hypothesis>  Experiment workflow
 ```
 
 Individual agents can also be invoked directly by name — for example, `use the writer agent to evaluate this empty state copy`.
+
+---
+
+## Codebase coherence
+
+Agents generate code faster than review can track. Without a structural gate, implementations drift — duplicated patterns, single-use abstractions, orphaned code. The codebase becomes harder to extend and harder for future agents to reason about correctly.
+
+Two agents address this directly.
+
+**`distinguished-engineer`** (DE) is the code equivalent of the Creative Director. It evaluates implementations against a specification and delivers one verdict: SHIP, REVISE, or REJECT. It runs twice in any engineering workflow: before implementation begins, to verify the plan is sound; and after QA, to gate the merge. It can also be invoked standalone after any `studio-implement` run.
+
+**`studio-simplify`** is a periodic coherence workflow. Point it at a file or directory. It audits for complexity drift, converges a simplification plan through Critic, Architect, and DE, implements the reduction, and gates the result through DE before anything merges.
 
 ---
 
