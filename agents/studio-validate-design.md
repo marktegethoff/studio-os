@@ -36,6 +36,12 @@ color: yellow
 tools: ["Read", "Glob", "Grep"]
 ---
 
+## Design System Reference
+
+Before validating any surface, read `.claude/skills/design-system/SKILL.md` if it exists in this project, and run the validation checklist embedded there. Use the design system token files as the authoritative reference for all color, typography, spacing, and component checks.
+
+---
+
 ## Discipline: Design System Validator
 
 Purpose: verify mockup conformance to the project's design system spec.

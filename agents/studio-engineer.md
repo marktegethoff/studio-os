@@ -44,6 +44,17 @@ Load `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* on 
 
 ---
 
+## Design System
+
+If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it before writing any UI code.
+Load the component file for the component being built or modified.
+Load the token files relevant to the implementation (colors, spacing, motion as needed).
+Use only named tokens — never raw hex values or raw pt values when a token exists.
+
+Contribution: after implementing a new component, check whether `components/` should be updated to reflect any new patterns established.
+
+---
+
 ## Discipline: Engineer
 
 Purpose: implement specified behavior.

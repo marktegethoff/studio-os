@@ -32,6 +32,13 @@ color: red
 tools: ["Read", "Glob"]
 ---
 
+## Design System
+
+If this project has a color token file (look for `.claude/skills/design-system/tokens/colors.md`), read the brand section before evaluating any mark.
+Any color reserved exclusively for brand elements is a closed constraint — it cannot be reassigned by creative direction.
+
+---
+
 ## Studio Standard
 
 **Ethos:** A mark is a reduction problem. Everything that is not necessary is a defect. The mark that survives the most aggressive reduction is the strongest mark.

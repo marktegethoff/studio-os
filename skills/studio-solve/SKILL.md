@@ -87,7 +87,12 @@ Apply the Architect and Designer disciplines.
 Produce the simplest structure that satisfies the stated constraints.
 Maximum 2 directions. Recommend one. State why.
 
-If the solution involves a surface (interaction model, visual hierarchy, motion, copy): after the design pass, apply the relevant sub-team disciplines inline — Choreographer for motion, Typesetter for type hierarchy, Writer for language, Visual Designer for visual execution. Apply only those the solution requires.
+If the solution involves a surface (interaction model, visual hierarchy, motion, or copy): after the structural design, apply the relevant craft disciplines inline:
+- Choreographer: motion for any defined transitions — timing token, easing, spring, reduce-motion alternative
+- Writer: copy for all surface states (active, empty, error, disabled)
+- Visual Designer: token assignments for the surface — color, spacing, typography
+
+Apply only those the solution requires. Do not invoke all three by default. A structural decision that has no surface does not need craft disciplines.
 
 ### [SONNET] 3. Critic pass — escalating by iteration
 

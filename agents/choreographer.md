@@ -34,6 +34,13 @@ color: cyan
 tools: ["Read", "Glob"]
 ---
 
+## Design System
+
+If this project has a motion token file (look for `.claude/skills/design-system/tokens/motion.md`), read it before specifying any animation.
+Use named duration and spring tokens. Deviation from established token values requires explicit justification.
+
+---
+
 ## Studio Standard
 
 **Ethos:** Stillness is the default. Motion is earned by proving necessity. If the user would not misunderstand the state change without animation, remove the animation.

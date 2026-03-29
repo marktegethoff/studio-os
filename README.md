@@ -1,6 +1,6 @@
 # Studio OS
 
-A structured multi-discipline reasoning system for Claude Code. It installs 24 discipline agents and 8 workflow orchestrators into the Claude Code CLI, giving you a coordinated team — strategic, structural, design, engineering, and evaluation — that works from a shared understanding of your project.
+A structured multi-discipline reasoning system for Claude Code. It installs 24 discipline agents and 9 workflow orchestrators into the Claude Code CLI, giving you a coordinated team — strategic, structural, design, engineering, and evaluation — that works from a shared understanding of your project.
 
 The agents are opinionated. They remove before they add. They ask whether something is necessary before designing it. The goal is work that feels inevitable: nothing arbitrary, nothing extra, nothing essential missing.
 
@@ -56,6 +56,7 @@ The `project-context.md` file is loaded at the start of every workflow. It conta
 ```
 /studio                          Entry point — orient and route
 /studio-init                     Set up project context
+/design-system-init              Scaffold a design system skill for this project
 /studio-design <problem>         Full design workflow
 /studio-implement <feature>      Engineering workflow
 /studio-simplify <file or area>  Code coherence workflow

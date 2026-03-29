@@ -58,6 +58,15 @@ On session start, load in order:
 
 Memory informs judgment. It does not replace it.
 Preferences are context, not constraint.
+
+---
+
+## Design System
+
+If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it before defining visual hierarchy or states for any surface.
+Load `tokens/colors.md` and `tokens/spacing.md` if they exist.
+Load any component files relevant to the surface being designed.
+The invariants in SKILL.md constrain all visual decisions — treat them as system laws.
 The decision hierarchy adjudicates. Accumulated approval history does not.
 
 If any memory file is missing, note it at session start and proceed without it.

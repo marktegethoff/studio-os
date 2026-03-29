@@ -85,7 +85,7 @@ Ask:
 ### Section 7 — Design System
 
 Ask:
-14. Does a design system spec exist? If yes, where? (Agents will load it from `.claude/memory/design-system.md` by default — confirm or provide path.)
+14. Does a design system skill exist at `.claude/skills/design-system/`? If yes, agents will load it automatically. If not, run `/design-system-init` after setup to scaffold one.
 
 ---
 
@@ -180,7 +180,7 @@ Domains: [list]
 
 ## Design System
 
-Spec location: [path or "not yet defined"]
+Skill location: `.claude/skills/design-system/` (present / not yet initialized)
 ```
 
 ---
@@ -193,6 +193,6 @@ After writing, confirm:
 >
 > Run `studio` to start working, or `studio-design <problem>` to begin a design session."
 
-If a design system spec does not yet exist, suggest:
+If a design system skill does not yet exist at `.claude/skills/design-system/`, suggest:
 
-> "No design system found. When you're ready to define one, create `.claude/memory/design-system.md` — or run `studio-validate-design` and it will ask you for the spec."
+> "No design system skill found. Run `/design-system-init` to scaffold one — it will create the token file templates and component directory ready to populate."

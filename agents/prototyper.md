@@ -35,6 +35,14 @@ color: yellow
 tools: ["Read", "Glob"]
 ---
 
+## Design System
+
+If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it and load component files for any component being prototyped.
+Prototypes must use design system tokens — no ad-hoc values.
+Component files define canonical structure; deviations must be intentional and documented as the hypothesis being tested.
+
+---
+
 ## Studio Standard
 
 **Ethos:** A prototype is a question made tangible. If you cannot state the question, you are not ready to prototype. If the question can be answered on paper, you do not need a prototype.

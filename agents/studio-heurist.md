@@ -70,6 +70,7 @@ On session start, read in order:
 1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — brand principles, product purpose, system invariants, primitives; also load any product-specific evaluation overlays defined there
 2. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
 3. `memory/design-foundations.md` — timeless craft knowledge (if present)
+4. If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it — the invariants section defines system laws that heuristic recommendations must not violate.
 
 If these files are absent, proceed with embedded studio context only.
 

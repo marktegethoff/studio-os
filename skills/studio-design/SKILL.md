@@ -1,5 +1,5 @@
 ---
-description: Run the full Studio OS design workflow for a problem or feature. Activates Context → Historian → Strategist → Architect → Critic → Designer → Sub-team → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
+description: Run the full Studio OS design workflow for a problem or feature. Activates Context → Historian → Strategist → Architect → Critic → Designer → Choreographer → Writer → Visual Designer → Heurist → Accessibility → Specifier in sequence. Produces a complete engineering-ready spec. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
 ---
 
@@ -67,7 +67,7 @@ State any prior decisions from the decision log (if available) that constrain th
 
 ---
 
-## [SONNET] Steps 4–9 — Design work
+## [SONNET] Steps 4–13 — Design work
 
 ### Step 4 — Strategist
 
@@ -117,54 +117,61 @@ Produce:
 
 Apply the decision hierarchy to resolve trade-offs. Novelty is never a factor.
 
-### Step 7.5 — Design sub-team (conditional)
+### Step 8 — Choreographer
 
-Run only the disciplines relevant to this surface. Skip entirely if the outcome is a data model or system change with no new surface work.
+For each transition defined in Step 7, evaluate whether motion is earned or should be removed. Specify timing (duration token), easing (curve), and spring values where applicable. State the reduce-motion alternative.
 
-Invoke each discipline that applies:
+If Step 7 defined no transitions, skip this step and say so.
 
-**Typesetter** — if the surface introduces new text elements, a new typographic level, or a new type scale. Receives the Designer's hierarchy output. Produces a type system specification.
+### Step 9 — Writer
 
-**Choreographer** — if the surface has state transitions that involve motion. Receives the Designer's transitions. Applies the motion test: *What does the user misunderstand without this?* Removes what fails. Specifies what remains.
+Produce copy for every state this surface can be in:
+- Active / default state labels
+- Empty state message and action label (if any)
+- Loading / pending state text (if any)
+- Error state message
+- Disabled state label (if applicable)
 
-**Writer** — if the surface introduces new copy: labels, empty states, system messages, instructions, paywall text, or VoiceOver strings. Receives context from Typesetter (string length constraints) if Typesetter ran. Produces final copy.
+### Step 10 — Visual Designer
 
-**Materialist** — if the surface introduces new depth relationships, elevation, shadows, or surface finish. Evaluates whether material choices are intentional and coherent.
+For the surface defined in Steps 5–7, specify:
+- Color token assignments (which token for each element)
+- Spacing token assignments (row heights, gaps, padding)
+- Typography token assignments (register, size, weight for each text element)
+- Surface token assignments (corner radius, stroke, opacity states)
 
-After any sub-team disciplines have run, always execute:
+Flag any value with no token: "No token for [value] — define or accept the debt."
 
-**Visual Designer** — evaluate spacing, proportion, alignment, and visual weight distribution across the full surface using all sub-team outputs. Prescribe specific corrections. This step runs whenever the sub-team ran; skip only if zero sub-team disciplines were invoked.
-
-### Step 7.7 — Heurist (conditional)
+### Step 11 — Heurist (conditional)
 
 Run if the surface involves user interaction. Skip for data model or system-only changes with no new surface work.
 
-Evaluate the interaction model produced by the Designer (and refined by the sub-team) for:
+Evaluate the interaction model produced by the Designer (and refined by Steps 8–10) for:
 - Broken mental models — does this behave the way the user expects?
 - Invisible friction — what will users attempt that the design does not support?
 - Gesture dead-ends — are there states users can reach but not exit?
 - AI behavior concerns (if applicable) — does any AI-driven element erode trust or attribution?
 
-Findings at this step may require returning to the Designer. If so, state precisely what must change before proceeding to Accessibility.
+Findings at this step may require returning to the Designer. If so, state precisely what must change before proceeding to Step 12.
 
-### Step 8 — Accessibility
+### Step 12 — Accessibility
 
 Verify:
-- WCAG AA contrast (4.5:1 body text, 3:1 UI elements)
-- 44pt minimum touch targets
-- Screen reader labeling (use Writer output for VoiceOver strings if Writer ran)
+- WCAG AA contrast against Step 10 token assignments
+- 44pt minimum touch targets on all interactive elements
+- Screen reader labels for all interactive and informational elements (use Step 9 Writer output for VoiceOver strings)
+- Reduce-motion alternative confirmed for any animation from Step 8
 
-### Step 9 — Specifier
+### Step 13 — Specifier
 
-If this design will proceed to engineering, produce a complete engineering handoff specification:
-- All component states (default + every variant)
-- Dimensions and spacing using design token names, not raw values
-- Typography using token names
-- Color tokens with dark mode variants
-- Motion/transition parameters (from Choreographer output if applicable)
-- Accessibility: VoiceOver labels, traits, reading order
+Produce the engineering handoff document:
+- Every state named and described
+- Every token named (no raw values)
+- Every accessibility label written
+- Every interaction parameter measured (duration, spring, threshold)
+- Every gap flagged: "No token for [value]" or "No accessibility label specified for [element]"
 
-If this is exploratory design only (no immediate engineering handoff), skip this step but note explicitly: "Specifier not run — spec required before studio-implement."
+A spec that leaves decisions to the engineer is not finished. If this is exploratory design only, skip but note: "Specifier not run — spec required before studio-implement."
 
 ---
 
@@ -185,8 +192,17 @@ Date: [today]
 ## Interaction model
 [States, transitions, gestures]
 
-## Design sub-team notes
-[Typesetter / Choreographer / Writer / Materialist / Visual Designer outputs — omit if none ran]
+## Motion
+[Transition specs by token name — or "No motion: [reason]"]
+
+## Copy
+[All state copy — active, empty, loading, error, disabled]
+
+## Token assignments
+[Color, spacing, typography, surface tokens for each element]
+
+## Accessibility
+[Contrast results, touch targets, VoiceOver labels, reduce-motion notes]
 
 ## What was removed
 [List with rationale]

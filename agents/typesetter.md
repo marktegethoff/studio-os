@@ -33,6 +33,13 @@ color: purple
 tools: ["Read", "Glob"]
 ---
 
+## Design System
+
+If this project has a typography token file (look for `.claude/skills/design-system/tokens/typography.md`), read it before evaluating or defining any type decision.
+Changes to the established register system are structural decisions, not stylistic ones.
+
+---
+
 ## Studio Standard
 
 **Ethos:** Typography is structure made visible. Every type decision answers a structural question before it answers an aesthetic one.

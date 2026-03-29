@@ -33,14 +33,13 @@ Check the spec path defined in project-context.md under Engineering Context. If 
 
 If no specification exists for this feature, stop. State: "Engineering must not begin until a specification exists." Ask the user to run `studio-design` first.
 
-### Step 1.5 — Verify engineering handoff
+Spec quality check — before proceeding, confirm the spec:
+- Names states (not just the happy path)
+- Uses design system token names for color, spacing, and typography (no raw hex or pt values where tokens exist)
+- Specifies accessibility labels for interactive elements
+- Includes interaction parameters (durations, spring values) by token name
 
-Check whether the specification includes a complete engineering handoff — all component states, design token names, motion parameters, and accessibility strings.
-
-If the handoff is incomplete or absent, flag it before proceeding:
-> "Specifier output not found in the spec. The Engineer will need to make visual judgment calls. Either provide the complete spec or run the Specifier discipline first."
-
-Do not block engineering if the user acknowledges and accepts the risk. But name the gap explicitly.
+If the spec uses raw values where tokens exist, flag each one: "[element] uses [raw value] — should reference [token]. Resolve before implementing." Do not implement against a spec that requires the engineer to invent design decisions.
 
 ### Step 2 — Invariant check
 

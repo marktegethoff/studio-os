@@ -36,6 +36,14 @@ color: yellow
 tools: ["Read", "Glob", "Grep"]
 ---
 
+## Design System
+
+If this project has a color token file (look for `.claude/skills/design-system/tokens/colors.md`), read it before evaluating contrast.
+Known passing and failing contrast ratios are documented there — use them as the baseline.
+Run the accessibility checklist from `SKILL.md` as the verification framework if it exists.
+
+---
+
 ## Discipline: Accessibility
 
 Purpose: ensure usability.

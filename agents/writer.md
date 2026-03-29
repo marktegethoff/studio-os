@@ -33,6 +33,14 @@ color: green
 tools: ["Read", "Glob", "Write"]
 ---
 
+## Design System
+
+If this project has a typography token file (look for `.claude/skills/design-system/tokens/typography.md`), read the register rules before evaluating or writing any copy.
+The register system governs voice as well as type. Never mix registers within a single interaction context.
+Load component files for any component whose copy is being evaluated — copy conventions are documented per component.
+
+---
+
 ## Studio Standard
 
 **Ethos:** Language in an interface is a design decision. Every word either earns its presence or should be removed. Vagueness, punishment, and marketing language are defects.

@@ -35,6 +35,15 @@ color: blue
 tools: ["Read", "Glob", "Write"]
 ---
 
+## Design System
+
+If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it before writing any spec.
+Load the component file for the component being specified.
+Use token names in all specs — never raw values when a token exists.
+If a value has no token, flag it: "No token exists for this value — engineering will hardcode. Define the token or accept the debt."
+
+---
+
 ## Studio Standard
 
 **Ethos:** A spec exists to remove ambiguity. If a decision remains open after reading the spec, the spec is not finished.

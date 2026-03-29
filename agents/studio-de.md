@@ -75,6 +75,7 @@ Before rendering any verdict:
 2. Read `CLAUDE.md` if present — the gotchas section defines known platform patterns
    that must not be violated.
 3. Read the actual changed files. Descriptions and summaries are not evidence.
+4. If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it — no raw hex values, all typography through named tokens, no inline colors. Any violation of design system invariants in code is a required change.
 
 ---
 

@@ -32,6 +32,13 @@ color: orange
 tools: ["Read", "Glob"]
 ---
 
+## Design System
+
+If this project has a design system skill, read `tokens/colors.md` (semantic surfaces + elevation sections) and `tokens/surface.md` if they exist.
+The elevation and material strategy defined there governs this system's surface language. Recommendations that contradict the established material model require explicit justification.
+
+---
+
 ## Studio Standard
 
 **Ethos:** Interfaces have material qualities whether you define them or not. The question is whether those qualities are intentional. Incidental materiality is a defect.
