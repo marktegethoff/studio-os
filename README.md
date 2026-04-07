@@ -17,7 +17,7 @@ The agents are opinionated. They remove before they add. They ask whether someth
 - **Engineering** — engineer, qa, distinguished-engineer (de)
 - **Ongoing** — audit, research-sweep
 
-**8 workflow skills** that orchestrate agents in sequence for common work patterns.
+**9 workflow skills** that orchestrate agents in sequence for common work patterns.
 
 ---
 
@@ -57,6 +57,7 @@ The `project-context.md` file is loaded at the start of every workflow. It conta
 /studio                          Entry point — orient and route
 /studio-init                     Set up project context
 /design-system-init              Scaffold a design system skill for this project
+/studio-ideate <problem>         Divergent brainstorm — explore before committing
 /studio-design <problem>         Full design workflow
 /studio-implement <feature>      Engineering workflow
 /studio-simplify <file or area>  Code coherence workflow

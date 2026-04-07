@@ -168,6 +168,115 @@ The memory system recorded the decision to defer per-unit configuration (UI only
 
 ---
 
+## Case Study 5: Exploring a New Feature Direction with `/studio-ideate`
+
+**Problem:** A product team building a project management tool for async remote teams has noticed that users who return to the product after a gap — two or more days away — frequently log in, scan the screen for a moment, and close the app without taking any action. The team's session data confirms it: re-entry sessions under 90 seconds have a 60% same-day churn rate. Users who take an action in the first 90 seconds retain at twice the rate.
+
+The team's initial brief to the studio: "We need to add a Today view — a dashboard that shows what needs attention."
+
+**Workflow used:** `/studio-ideate users who return after a gap don't know where to start and often leave without acting`
+
+---
+
+### How the workflow ran
+
+**Problem gate.** The team's instinct — "add a Today view" — was a solution, not a problem. The skill rejected it and asked for a reframe: *what is the user unable to do, or doing poorly?* This was a brief pause for the team. They'd been debating what the Today view should contain for two weeks. The question "what are users unable to do?" redirected the conversation. The answer: users returning after a gap can't quickly orient to what's changed and what needs them. The Today view had been proposed as an answer before the question was clear.
+
+This reframe changed the terms. The question became: what makes re-entry disorienting, and what would make it clear? That is meaningfully different from "what should a dashboard contain?" — and it's the question that the divergence step actually ran against.
+
+**Divergence.** Seven disciplines, each given three constraint frames — capture moment (user in motion), review moment (user returning), transition moment (context has shifted). Each discipline was limited to 1–2 ideas. The raw list:
+
+*Historian:* Basecamp's "Hey!" page — a daily digest of what happened while you were away, pulled on demand. Survived because it respected the user's attention model: show me what changed, not what needs to be done. Proposed adaptation: a "what changed since you left" view, generated on re-entry, collapsed by default.
+
+*Designer:* Session restoration — return the user to exactly where they left off, with a brief ambient indicator showing what changed since then. The re-entry is not a new screen; it is a continuation. Second idea: an "attention gradient" — visual weight applied to items based on recency of change, so the user's eye is guided without explicit direction.
+
+*Architect:* A change event graph — a lightweight log of state changes (new assignments, status updates, comments) attached to each work item, queryable by "since I last saw this." The re-entry surface is a view of this graph, not a separate feature built on top of it.
+
+*Scout:* Linear's "my issues" and GitHub's notification model — the assigned-to-me filter as re-entry point. Both tools land users on a filtered view of their own work, not a global dashboard. The insight: re-entry orientation is a personal problem, not a team-wide one. A global dashboard adds noise; a personal lens removes it.
+
+*Marketer:* The commercial case isn't Today view features — it's time-to-first-action. Users who act within 90 seconds retain at 2×. Every second of disorientation at re-entry is a retention risk. The feature's value proposition isn't "comprehensive overview" — it's "get to your next action in one move." That framing changes what the feature should optimize for: not completeness, but speed-to-clarity.
+
+*Writer:* The language of re-entry is wrong in most tools. "Today" implies urgency but delivers breadth. The words users actually need on return are temporal and directional: *where were you, what changed, what's next.* Proposed: replace a dashboard label with a framing sentence — "When you left, you were working on X. Since then, Y." This isn't a feature. It's a copy decision that orients before the user even looks at a list.
+
+*Choreographer:* A brief re-entry state — a moment before content loads where the product acknowledges that time has passed. Not a loading screen. A deliberate pause: "You've been away for 3 days. Here's what to look at first." Motion is the signal; content fills in behind it. This exists in the transition between logging in and seeing work.
+
+The full list: twelve ideas across seven lenses.
+
+**Facilitated Reduction.** The Creative Director chaired with Strategist and Critic participating.
+
+*Strategist:* The change event graph (Architect) was marked TENSIONS — structurally interesting but introduces significant backend complexity that may be disproportionate to the re-entry problem alone. The global dashboard pattern (conventional Today view) was marked OUTSIDE — it solves the wrong problem by adding breadth when users need direction.
+
+*Critic:* The attention gradient (Designer) was eliminated as decorative — it adds visual complexity without solving the orientation problem directly. Users don't need help noticing weight; they need help knowing what to do. The assigned-to-me filter (Scout) was flagged as already existing in most tools — including this one. If users had it and weren't using it for re-entry, adding it again solves nothing.
+
+*Creative Director:* Four survived. The team lead asked why the change event graph hadn't been eliminated with the others — the Strategist had flagged it. The Creative Director held the position: the graph is TENSIONS, not OUTSIDE. Whether it's the right investment is a scoping question, not a quality question. It solves a real problem structurally. It's included because ideas that are expensive aren't wrong; they're deferred to feasibility. The four surviving ideas:
+
+1. **Re-entry framing** — a brief temporal orientation ("you were here / since then / here's what's first") surfaced at login, using copy as the primary mechanism, not a new surface.
+2. **Session restoration** — return the user to their last context, with a lightweight "since you left" indicator showing change count.
+3. **Personal work lens** — a persistent "my work" view that becomes the default landing for returning users, ordered by recency of change on items assigned to them.
+4. **Change event graph** — a structural layer that makes "since I last saw this" queryable across the product.
+
+The team lead pushed back on including Re-entry framing. "That's a copy change, not a feature. Our roadmap isn't going to make room for a copywriting decision." The Creative Director disagreed — the framing isn't a copy change, it's an orientation model. The copy is the mechanism, but the decision is about where and how users are oriented at re-entry. If the team treats it as a copywriting task, it will be handed to a writer after design is complete and applied as a veneer. It belongs in the ideation because it may be the right solution — and the right solution might be something product and engineering teams routinely overlook because it doesn't look like a feature. The team lead let it stand.
+
+**Synthetic User Desirability.** The project-context file defined three archetypes: the Executor (works through assigned tasks in priority order), the Orchestrator (manages multiple workstreams and tracks dependencies), and the Async Collaborator (works across time zones, catches up on batches of changes).
+
+*Re-entry framing:* The Async Collaborator lands here most strongly — they return from sleeping or a day away and need temporal orientation before they can act. The problem is real; they frequently describe their current behavior as "I just scroll around until I figure out where I left off." They would describe this to someone as "it tells you what changed while you were out." The Executor finds this less useful — they know exactly what's next; they don't need orientation.
+
+*Session restoration:* The Executor lands here — returning to exactly where they left off requires no orientation. The Orchestrator finds it less useful; they're tracking multiple contexts and rarely return to the same one. Real problem for Executor, less so for the other two.
+
+*Personal work lens:* Lands with all three archetypes but weakly — every tool they use already has a "my work" view and it hasn't solved the re-entry problem. The problem is real; the solution feels table-stakes. One archetype note: the Async Collaborator would describe it as "just a better version of what we already have," which is a low-energy endorsement.
+
+*Change event graph:* The Orchestrator lands here strongly — they manage dependencies across multiple workstreams and the "since I last saw this" query is something they currently do manually by scanning changelogs and Slack threads. The problem is acutely real and poorly served by existing tools. They would describe it as "finally, something that tells you what actually changed without you having to find it."
+
+One observation: Re-entry framing and Change event graph serve the same underlying need from opposite directions. Framing is surface-level and fast; the graph is structural and comprehensive. They are not redundant — they would coexist — but they represent very different investment levels for related outcomes.
+
+**User selection.** The team lead selected Re-entry framing and Change event graph. Her reasoning: "The framing is the fastest path to testing whether orientation is actually the problem. The graph is the right structural answer if it is. We want to validate the problem quickly before committing to the graph."
+
+This was exactly the right selection logic. The ideation had produced a cheap hypothesis (re-entry framing) and an expensive structural bet (change event graph), and the team lead read them correctly as a sequence rather than alternatives.
+
+**Feasibility Pass.** Evaluated in turn.
+
+*Re-entry framing:*
+Implementation complexity: LOW — requires session tracking to determine last context, a re-entry state in the navigation layer, and copy. All three exist or are straightforward to add. No new data model.
+What must not break: direct-link navigation (users who arrive via a notification link should not see the re-entry state), mobile/desktop parity on session state.
+Heuristic concerns: the re-entry framing must not appear on every login — only after a meaningful gap (the project-context file specified 24+ hours as the gap threshold for "returning" sessions). If it fires too frequently, it becomes noise. If it fires too rarely, it doesn't solve the problem.
+
+*Change event graph:*
+Implementation complexity: HIGH — requires an event log attached to every work item, an event schema, query infrastructure, and a read model for "changes since last seen." Nothing in the current architecture supports this; it is a new subsystem.
+What must not break: existing notification system (the event graph and the notification model must share the same event source or diverge intentionally), performance on workspaces with high activity volume.
+Heuristic concerns: "since I last saw this" requires tracking per-user, per-item last-seen timestamps — this is a privacy and data-volume consideration that the interaction model doesn't address. Flagged as underspecified.
+
+**DE Verdict.**
+
+*Re-entry framing:* **PROTOTYPE.** Implementation complexity is low, the interaction model is clear, and the hypothesis can be tested quickly. Build a prototype before writing production code — the copy and the re-entry state can be validated without the full engineering investment.
+
+*Change event graph:* **INVESTIGATE.** The structural approach is sound and the problem is real. But three questions must be answered before prototyping: (1) How does the event graph relate to the existing notification model — shared source or parallel infrastructure? (2) What is the per-user, per-item last-seen data model, and how does it scale? (3) Is 24-hour re-entry the right threshold for the Orchestrator archetype, or do they need a different gap definition? The investigation should produce architecture decisions, not a prototype. Schedule for the session after re-entry framing has been tested.
+
+---
+
+### What the studio produced
+
+- **Re-entry framing** — cleared for immediate prototyping. A temporal orientation state at login, copy-driven, triggered by 24+ hour gaps. Validate the hypothesis before engineering investment.
+- **Change event graph** — cleared for architectural investigation. Three specific questions to answer before prototyping begins.
+
+### What the studio deferred
+
+- Session restoration — right for the Executor archetype, but doesn't address the Async Collaborator's orientation problem. Revisit if re-entry framing validation shows Executors are underserved.
+- Personal work lens — table-stakes; already exists in partial form. Improve before adding a new surface.
+
+### Why it worked
+
+The problem gate prevented the team from spending the session debating Today view contents. The reframe — from "what should a dashboard show?" to "what makes re-entry disorienting?" — took thirty seconds and changed the direction of every idea that followed.
+
+The seven-lens divergence produced a range the team hadn't imagined. The team had been debating between a dashboard and a notification model for two weeks. Neither appeared in the final selection. Re-entry framing (Writer lens) and the change event graph (Architect lens) were outside the team's initial frame entirely. The constraint frames — capture, review, transition — forced each discipline to think specifically about the moment of return, not generically about "what users need."
+
+The Creative Director's insistence on keeping Re-entry framing over the team lead's objection ("that's a copy decision") was the most consequential moment in the session. The team lead had correctly identified that copy decisions don't get roadmap priority. The Creative Director's response — that orientation is the mechanism, and copy is how it's delivered — reframed the idea as an orientation model rather than a writing task. It passed feasibility as LOW complexity and was the first idea cleared for prototyping. The team lead acknowledged afterward that if the idea had been labeled "copy change," it would have been deferred indefinitely.
+
+The DE's verdict on the change event graph — INVESTIGATE rather than PROTOTYPE — was the right gate. The structural idea is sound; the unknowns are real. The team now has three specific questions to answer, rather than an open-ended architectural exploration. That specificity determines what the next session does, and what it doesn't.
+
+The re-entry framing prototype will validate whether orientation is the problem. If it confirms the hypothesis, the change event graph becomes the structural investment that scales the solution. The ideation produced a sequenced hypothesis, not a feature list.
+
+---
+
 ## Case Study 3: Building a Real Product with Studio OS
 
 *Coming soon.* A documented account of Studio OS applied to an actual product — real decisions, real pushback, real outcomes. Not constructed. Not illustrative. The thing itself.
