@@ -1,9 +1,9 @@
 ---
-description: Run the full Studio OS design workflow for a problem or feature. Activates Context → Historian → Strategist → Architect → Critic → Designer → Choreographer → Writer → Visual Designer → Heurist → Accessibility → Specifier in sequence. Produces a complete engineering-ready spec. Use when designing new features, interaction models, or resolving design problems.
+description: Run the full Log Studio OS design workflow for a problem or feature. Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
 ---
 
-Run the full Studio OS design workflow for a problem or feature.
+Run the full Log Studio OS design workflow for a problem or feature.
 
 Arguments: $ARGUMENTS
 
@@ -13,26 +13,60 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ---
 
-## Context Loading
+## Embedded Studio OS Context
 
-Problem: $ARGUMENTS
-
-Load project context on session start. Read in order:
-1. `.claude/memory/project-context.md` (project-local) — Brand Principles, System Invariants, System Model, Decision Hierarchy
-2. Fallback: `memory/project-context.md` (plugin root)
-
-If neither exists, ask: "No project context found. Run `studio-init` to set up Studio OS for this project, or describe the product purpose and invariants before continuing."
-
-Also check the project's decision log (path defined in project-context.md). If available, scan for prior decisions that constrain this problem. Do not repeat rejected approaches.
-
----
-
-## Studio OS Ethos (applied throughout)
-
+### Ethos
 Work must feel inevitable. Nothing arbitrary. Nothing extra. Nothing essential missing.
 Clarity over originality · Coherence over expression · Restraint over flourish.
 
-Decision hierarchy: Structural correctness → Conceptual clarity → System coherence → Reduction of parts → Craft precision → Visual refinement. Novelty is never a factor.
+### Brand Principles
+1. The brand is the surface, not decoration
+2. The period, not the cursor
+3. Monochrome until it means something
+4. Stillness over performance
+5. The mechanism and the tape
+6. The drum turns between entries
+7. The tape gets wider but the instrument stays the same
+
+### Decision Hierarchy
+Evaluate decisions in this order:
+1. Structural correctness
+2. Conceptual clarity
+3. System coherence
+4. Reduction of parts
+5. Craft precision
+6. Visual refinement
+
+Novelty is never a deciding factor.
+
+### System Invariants
+- User thought remains the primary artifact
+- Entries are append-only
+- Chronology is never rewritten
+- AI assists interpretation but never replaces authorship
+- Color represents semantic signal only
+- Organization creates conditions for clarity; the instrument does not prompt
+
+### System Model
+**Entry** — recorded thought, append-only, primary artifact.
+**Thread** — related entries on a topic. Archivist proposes; user confirms.
+**Collection** — related threads. Archivist surfaces cross-thread relationships.
+**Archive** — lifecycle state for dormant material.
+**Archivist** — AI organizer. Does not author or interpret the thinker. Intelligence ceiling 3.5.
+
+### Disciplines
+**Historian:** What similar systems existed? What patterns endured? What mistakes to avoid?
+**Strategist:** Does this strengthen the clarity instrument? Does it improve long-term value?
+**Architect:** Data model, system boundaries, scalability, integration points.
+**Critic:** Remove unnecessary features, simplify flows, eliminate decoration.
+**Designer:** Interaction model (states + transitions), visual hierarchy, 2–3 options max.
+**Accessibility:** WCAG AA contrast, 44pt touch targets, screen reader labels.
+
+---
+
+## Context
+
+Problem: $ARGUMENTS
 
 ---
 
@@ -40,24 +74,26 @@ Decision hierarchy: Structural correctness → Conceptual clarity → System coh
 
 ### Step 1 — Philosophy validation
 
-Apply the ethos, brand principles, and decision hierarchy loaded from project-context.md.
+Apply the embedded ethos, brand principles, and decision hierarchy above.
 
 Apply the calibration gate: Is this necessary? Is this the simplest correct solution? Would removing something improve it?
 
 If the problem statement fails the gate, say so and stop.
 
+Also check: if in a Log• project, read `studio_os/memory_index/index.md`, `studio_os/ledger/schema.md`, and all files in `studio_os/ledger/decisions/` to surface prior decisions that constrain this problem. If not in a Log• project, proceed with embedded context.
+
 ### Step 2 — Historian
+
+Apply the Historian discipline (embedded above).
 
 Answer:
 - What similar systems existed?
 - What patterns endured?
 - What mistakes must be avoided?
 
-Cite specific precedent. Do not generalize.
-
 ### Step 3 — Note constraints
 
-State any prior decisions from the decision log (if available) that constrain this problem. Do not repeat rejected approaches.
+State any prior decisions from the ledger (if available) that constrain this problem. Do not repeat rejected approaches.
 
 ---
 
@@ -67,13 +103,15 @@ State any prior decisions from the decision log (if available) that constrain th
 
 ---
 
-## [SONNET] Steps 4–13 — Design work
+## [SONNET] Steps 4–9 — Design work
 
 ### Step 4 — Strategist
 
+Apply the Strategist discipline (embedded above).
+
 Answer:
-- Does this strengthen the product as defined in project-context.md?
-- Does it improve long-term value for the user?
+- Does this strengthen the clarity instrument?
+- Does it improve long-term value?
 
 If the answer to either is no, state why and reduce scope before continuing.
 
@@ -81,7 +119,7 @@ If the answer to either is no, state why and reduce scope before continuing.
 
 If the arguments include `--commercial`, apply the Marketer discipline.
 
-- Does this differentiate the product or close a table-stakes gap that matters to the market?
+- Does this differentiate Log• or close a table-stakes gap?
 - Does it serve the users who pay?
 - Is this an acquisition or retention feature — and is that the right priority right now?
 - Is the commercial timing right?
@@ -92,14 +130,16 @@ State the commercial position in 3–4 sentences. If it conflicts with the Strat
 
 ### Step 5 — Architect
 
+Apply the Architect discipline (embedded above).
+
 Define:
 - Data model changes (if any)
 - System boundaries
 - Integration points
 
-Flag any violation of system invariants loaded from project-context.md. Do not proceed past a violation.
-
 ### Step 6 — Critic
+
+Apply the Critic discipline (embedded above).
 
 Remove:
 - Unnecessary features
@@ -110,6 +150,8 @@ State what was removed and why.
 
 ### Step 7 — Designer
 
+Apply the Designer discipline (embedded above).
+
 Produce:
 - Interaction model (states and transitions)
 - Visual hierarchy
@@ -117,61 +159,75 @@ Produce:
 
 Apply the decision hierarchy to resolve trade-offs. Novelty is never a factor.
 
-### Step 8 — Choreographer
+### Step 7.5 — Design sub-team (conditional, parallel)
 
-For each transition defined in Step 7, evaluate whether motion is earned or should be removed. Specify timing (duration token), easing (curve), and spring values where applicable. State the reduce-motion alternative.
+Skip entirely if the outcome is a data model or system change with no new surface work.
 
-If Step 7 defined no transitions, skip this step and say so.
+First, determine which disciplines apply to this surface. Then run in two phases:
 
-### Step 9 — Writer
+**Phase A — spawn in parallel** (if applicable, send all in a single message with `run_in_background: true`):
 
-Produce copy for every state this surface can be in:
-- Active / default state labels
-- Empty state message and action label (if any)
-- Loading / pending state text (if any)
-- Error state message
-- Disabled state label (if applicable)
+- **Typesetter** — if the surface introduces new text elements, a new typographic level, or a new type scale. Give it the Designer's visual hierarchy output. Task: produce a type system specification — scale, roles, string length constraints.
 
-### Step 10 — Visual Designer
+- **Choreographer** — if the surface has state transitions that involve motion. Give it the Designer's transition descriptions. Task: apply the motion test (*what does the user misunderstand without this?*), remove what fails, specify what remains with timing and easing.
 
-For the surface defined in Steps 5–7, specify:
-- Color token assignments (which token for each element)
-- Spacing token assignments (row heights, gaps, padding)
-- Typography token assignments (register, size, weight for each text element)
-- Surface token assignments (corner radius, stroke, opacity states)
+- **Materialist** — if the surface introduces new depth relationships, elevation, shadows, or surface finish. Give it the Designer's surface description. Task: evaluate whether material choices are intentional and coherent.
 
-Flag any value with no token: "No token for [value] — define or accept the debt."
+Wait for all Phase A agents to complete before proceeding.
 
-### Step 11 — Heurist (conditional)
+**Phase B — run sequentially after Phase A:**
+
+- **Writer** — if the surface introduces new copy: labels, empty states, system messages, instructions, paywall text, or VoiceOver strings. Run Writer after Typesetter completes — pass Typesetter's string length constraints into the Writer prompt. If Typesetter did not run, Writer may spawn immediately alongside Phase A.
+
+- **Visual Designer** — always runs last, after all Phase A and Phase B agents complete. Evaluate spacing, proportion, alignment, and visual weight distribution across the full surface using all sub-team outputs. Prescribe specific corrections. Skip only if zero sub-team disciplines were invoked.
+
+### Step 7.7 — Heurist (conditional)
 
 Run if the surface involves user interaction. Skip for data model or system-only changes with no new surface work.
 
-Evaluate the interaction model produced by the Designer (and refined by Steps 8–10) for:
+Evaluate the interaction model produced by the Designer (and refined by the sub-team) for:
 - Broken mental models — does this behave the way the user expects?
 - Invisible friction — what will users attempt that the design does not support?
 - Gesture dead-ends — are there states users can reach but not exit?
 - AI behavior concerns (if applicable) — does any AI-driven element erode trust or attribution?
 
-Findings at this step may require returning to the Designer. If so, state precisely what must change before proceeding to Step 12.
+Findings at this step may require returning to the Designer. If so, state precisely what must change before proceeding to Accessibility.
 
-### Step 12 — Accessibility
+---
+
+> **⏸ PAUSE — Canvas prototype required.**
+> Design is complete. Before accessibility review or specifier output:
+>
+> 1. Build the Canvas prototype in `Log Canvas/Log Canvas/Experiments/` or update the relevant screen in `Log Canvas/Log Canvas/Screens/`.
+> 2. Open the preview in Xcode. Verify the design renders correctly in light and dark mode.
+> 3. If the design needs adjustment, iterate in Canvas. Do not write to production files.
+>
+> **Do not write to any file in `Log/Log/` until Canvas confirms the design.**
+>
+> Reply **"canvas confirmed"** when the prototype is verified and ready to proceed to Accessibility + Specifier.
+
+---
+
+### Step 8 — Accessibility
+
+Apply the Accessibility discipline (embedded above).
 
 Verify:
-- WCAG AA contrast against Step 10 token assignments
-- 44pt minimum touch targets on all interactive elements
-- Screen reader labels for all interactive and informational elements (use Step 9 Writer output for VoiceOver strings)
-- Reduce-motion alternative confirmed for any animation from Step 8
+- WCAG AA contrast
+- 44pt minimum touch targets
+- Screen reader labeling (use Writer output for VoiceOver strings if Writer ran)
 
-### Step 13 — Specifier
+### Step 9 — Specifier
 
-Produce the engineering handoff document:
-- Every state named and described
-- Every token named (no raw values)
-- Every accessibility label written
-- Every interaction parameter measured (duration, spring, threshold)
-- Every gap flagged: "No token for [value]" or "No accessibility label specified for [element]"
+If this design will proceed to engineering, produce a complete engineering handoff specification:
+- All component states (default + every variant)
+- Dimensions and spacing using design token names, not raw values
+- Typography using token names
+- Color tokens with dark mode variants
+- Motion/transition parameters (from Choreographer output if applicable)
+- Accessibility: VoiceOver labels, traits, reading order
 
-A spec that leaves decisions to the engineer is not finished. If this is exploratory design only, skip but note: "Specifier not run — spec required before studio-implement."
+If this is exploratory design only (no immediate engineering handoff), skip this step but note explicitly: "Specifier not run — spec required before studio-implement."
 
 ---
 
@@ -192,17 +248,8 @@ Date: [today]
 ## Interaction model
 [States, transitions, gestures]
 
-## Motion
-[Transition specs by token name — or "No motion: [reason]"]
-
-## Copy
-[All state copy — active, empty, loading, error, disabled]
-
-## Token assignments
-[Color, spacing, typography, surface tokens for each element]
-
-## Accessibility
-[Contrast results, touch targets, VoiceOver labels, reduce-motion notes]
+## Design sub-team notes
+[Typesetter / Choreographer / Writer / Materialist / Visual Designer outputs — omit if none ran]
 
 ## What was removed
 [List with rationale]
@@ -211,4 +258,4 @@ Date: [today]
 [Only genuine blockers — omit if none]
 ```
 
-If the project's decision log path is defined in project-context.md, offer to write this to the appropriate artifacts directory.
+If in a Log• project, offer to write this to `studio_os/artifacts/design.md`.
