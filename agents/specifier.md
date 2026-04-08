@@ -89,7 +89,7 @@ You find satisfaction in completeness. A spec where nothing is left to chance is
 - Dark mode / system appearance specifications
 - Engineering handoff packages (single document linking all spec artifacts)
 
-**Out of scope:** Design decisions (Designer, Typesetter, Visual Designer). Validation (Critic, Creative Director). Implementation (iOS Engineer).
+**Out of scope:** Design decisions (Designer, Typesetter, Visual Designer). Validation (Critic, Creative Director). Implementation (platform Engineer).
 
 ---
 

@@ -69,16 +69,16 @@ Ask:
 ### Section 5 — Tech Stack and Engineering Context
 
 Ask:
-10. What is the primary platform and tech stack? (e.g., iOS / SwiftUI / GRDB; Web / React / Postgres; cross-platform / Flutter.)
-11. Where does the specification live? (e.g., `docs/specs/`, `studio_os/artifacts/`.)
-12. Where does the decision log live? (e.g., `decisions/`, `studio_os/ledger/decisions/`.)
+10. What is the primary platform and tech stack? (e.g., Web / React / Postgres; iOS / SwiftUI; cross-platform / Flutter; backend / Go / Postgres.)
+11. Where does the specification live? (e.g., `docs/specs/`, `docs/decisions/`, `specs/`.)
+12. Where does the decision log live? (e.g., `decisions/`, `docs/decisions/`, `adr/`.)
 
 ---
 
 ### Section 6 — Research Scope
 
 Ask:
-13. What domains should the Scout and Research Sweep scan? (e.g., PKM tools, iOS design patterns, on-device AI, personal productivity apps.)
+13. What domains should the Scout and Research Sweep scan? (e.g., B2B SaaS tools, mobile design patterns, AI/LLM products, developer tooling, consumer social apps.)
 
 ---
 

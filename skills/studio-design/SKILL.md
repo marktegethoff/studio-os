@@ -1,9 +1,9 @@
 ---
-description: Run the full Log Studio OS design workflow for a problem or feature. Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
+description: Run the full Studio OS design workflow for a problem or feature. Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
 ---
 
-Run the full Log Studio OS design workflow for a problem or feature.
+Run the full Studio OS design workflow for a problem or feature.
 
 Arguments: $ARGUMENTS
 
@@ -20,13 +20,7 @@ Work must feel inevitable. Nothing arbitrary. Nothing extra. Nothing essential m
 Clarity over originality · Coherence over expression · Restraint over flourish.
 
 ### Brand Principles
-1. The brand is the surface, not decoration
-2. The period, not the cursor
-3. Monochrome until it means something
-4. Stillness over performance
-5. The mechanism and the tape
-6. The drum turns between entries
-7. The tape gets wider but the instrument stays the same
+Load from `project-context.md`. If not available, ask the user to state 3–5 principles before continuing.
 
 ### Decision Hierarchy
 Evaluate decisions in this order:
@@ -40,19 +34,10 @@ Evaluate decisions in this order:
 Novelty is never a deciding factor.
 
 ### System Invariants
-- User thought remains the primary artifact
-- Entries are append-only
-- Chronology is never rewritten
-- AI assists interpretation but never replaces authorship
-- Color represents semantic signal only
-- Organization creates conditions for clarity; the instrument does not prompt
+Load from `project-context.md`. If not available, ask the user to state the non-negotiable constraints before continuing.
 
 ### System Model
-**Entry** — recorded thought, append-only, primary artifact.
-**Thread** — related entries on a topic. Archivist proposes; user confirms.
-**Collection** — related threads. Archivist surfaces cross-thread relationships.
-**Archive** — lifecycle state for dormant material.
-**Archivist** — AI organizer. Does not author or interpret the thinker. Intelligence ceiling 3.5.
+Load from `project-context.md`. If not available, ask the user to describe the core data model and key entities before continuing.
 
 ### Disciplines
 **Historian:** What similar systems existed? What patterns endured? What mistakes to avoid?
@@ -80,7 +65,7 @@ Apply the calibration gate: Is this necessary? Is this the simplest correct solu
 
 If the problem statement fails the gate, say so and stop.
 
-Also check: if in a Log• project, read `studio_os/memory_index/index.md`, `studio_os/ledger/schema.md`, and all files in `studio_os/ledger/decisions/` to surface prior decisions that constrain this problem. If not in a Log• project, proceed with embedded context.
+Also check the project's decision log (path defined in `project-context.md`). If available, scan for prior decisions that constrain this problem. Do not repeat rejected approaches.
 
 ### Step 2 — Historian
 
@@ -110,8 +95,8 @@ State any prior decisions from the ledger (if available) that constrain this pro
 Apply the Strategist discipline (embedded above).
 
 Answer:
-- Does this strengthen the clarity instrument?
-- Does it improve long-term value?
+- Does this strengthen the product's core purpose as defined in project-context.md?
+- Does it improve long-term value for users?
 
 If the answer to either is no, state why and reduce scope before continuing.
 
@@ -119,7 +104,7 @@ If the answer to either is no, state why and reduce scope before continuing.
 
 If the arguments include `--commercial`, apply the Marketer discipline.
 
-- Does this differentiate Log• or close a table-stakes gap?
+- Does this differentiate the product or close a table-stakes gap?
 - Does it serve the users who pay?
 - Is this an acquisition or retention feature — and is that the right priority right now?
 - Is the commercial timing right?
@@ -195,16 +180,16 @@ Findings at this step may require returning to the Designer. If so, state precis
 
 ---
 
-> **⏸ PAUSE — Canvas prototype required.**
+> **⏸ PAUSE — Prototype required.**
 > Design is complete. Before accessibility review or specifier output:
 >
-> 1. Build the Canvas prototype in `Log Canvas/Log Canvas/Experiments/` or update the relevant screen in `Log Canvas/Log Canvas/Screens/`.
-> 2. Open the preview in Xcode. Verify the design renders correctly in light and dark mode.
-> 3. If the design needs adjustment, iterate in Canvas. Do not write to production files.
+> 1. Build a prototype in your team's design tool (Figma, your canvas project, or equivalent).
+> 2. Verify the design renders correctly across relevant states and appearance modes.
+> 3. If the design needs adjustment, iterate in the prototype. Do not write to production files.
 >
-> **Do not write to any file in `Log/Log/` until Canvas confirms the design.**
+> **Do not write production code until the prototype is confirmed.**
 >
-> Reply **"canvas confirmed"** when the prototype is verified and ready to proceed to Accessibility + Specifier.
+> Reply **"prototype confirmed"** when ready to proceed to Accessibility + Specifier.
 
 ---
 
@@ -258,4 +243,4 @@ Date: [today]
 [Only genuine blockers — omit if none]
 ```
 
-If in a Log• project, offer to write this to `studio_os/artifacts/design.md`.
+If the project has a design artifacts directory (defined in `project-context.md`), offer to write the design artifact there.
