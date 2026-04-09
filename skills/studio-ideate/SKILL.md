@@ -8,6 +8,7 @@ Divergent brainstorm for a product problem or opportunity.
 Arguments: $ARGUMENTS
 
 **Model requirements:** [HAIKU] for problem gate + context · [SONNET] for divergence, synthetic users, feasibility · [OPUS] for facilitated reduction (Creative Director) + DE verdict
+**Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -58,6 +59,8 @@ Scan the decision log for prior decisions that constrain or have already address
 
 State in one sentence: what is the core problem or opportunity? What does a good solution need to accomplish?
 
+Capture this as **[PROBLEM]** — you will embed it in the outer agent prompt in Step 2.
+
 ---
 
 > **⏸ PAUSE — Model switch required.**
@@ -66,58 +69,63 @@ State in one sentence: what is the core problem or opportunity? What does a good
 
 ---
 
-## [SONNET] Step 2 — Divergence
+## [SONNET] Step 2 — Divergence (outer background agent)
 
-Each discipline generates ideas from their specific lens across three constraint frames. Ideas should be genuinely distinct — not variations on the same approach. Constraint thinking about feasibility is prohibited at this stage.
+Spawn ONE outer background agent with `run_in_background: true`. This agent reads project context, orchestrates all 7 discipline lenses in parallel, compiles the raw idea list, and returns it. You receive one notification when divergence is complete.
 
-Each discipline generates **1–2 ideas total** — use the frames as constraint lenses to sharpen thinking, not as multipliers. Quality over volume.
+Before spawning: substitute [PROBLEM] in the outer agent prompt with the one-sentence problem statement from Step 1.
 
-**Three constraint frames** — apply each discipline through all three moments:
-- **Capture moment:** the user is actively in the product, doing something, in motion
-- **Review moment:** the user has returned and is making sense of prior work
-- **Transition moment:** something has shifted — a project, a decision, a context
+**Outer agent**
+Description: `"Divergence — 7 lenses"`
+Prompt (substitute [PROBLEM] before sending):
 
----
+===BEGIN OUTER AGENT PROMPT===
 
-**Historian lens**
-What has been tried before in this product category or adjacent ones on this class of problem? What succeeded? What failed and why? What survived long enough to be worth learning from?
-Apply the three frames: what pattern fits the capture moment? The review moment? The transition moment?
-Generate ideas by applying surviving patterns to the current problem.
+You are orchestrating a divergent product design brainstorm for a Studio OS project.
 
-**Designer lens**
-What interaction patterns could address this problem? Think in terms of states, transitions, affordances, and user behaviors — not features. What does the user do differently if this problem is solved?
-Apply the three frames: what interaction belongs at capture? At review? At transition?
-Generate ideas from the interaction space.
+First, read the project context file (try `.claude/memory/project-context.md` first, then `memory/project-context.md` as fallback). Extract: product purpose, core system invariants, and user archetypes. You will embed this as [PRODUCT PURPOSE] and [SYSTEM INVARIANTS] in the inner agent prompts below.
 
-**Architect lens**
-What structural models could address this problem? Think in terms of data relationships, system boundaries, and layer model implications. What new structure, if it existed, would make this problem disappear?
-Apply the three frames: what structure would a capturing user need? A reviewing user? A user in transition?
-Generate ideas from the structural space.
+Problem: [PROBLEM]
 
-**Scout lens**
-What are analogous products in adjacent spaces doing that this product is not? What patterns from outside this category are relevant here?
-Apply the three frames: what do adjacent tools do well at the moment of capture? Of review? Of transition?
-Generate ideas by importing patterns from adjacent domains.
+Spawn all 7 discipline agents simultaneously in a SINGLE Agent tool call message, each with run_in_background: true. Do not run sequentially — wait for all to complete, then compile.
 
-**Marketer lens**
-What ideas would create genuine pull — something users would seek out, choose over alternatives, or pay for? What solves a pain users already articulate, rather than one they don't know they have?
-Apply the three frames: what would a user seek out at capture? At review? At transition?
-Generate ideas from the demand and desirability space.
+Three constraint frames (embed in each agent): Capture moment (user actively in the product, in motion) · Review moment (user returned, making sense of prior work) · Transition moment (something has shifted — project, decision, context).
 
-**Writer lens**
-What if the problem is fundamentally a language or framing problem? What does the vocabulary of the current experience communicate — and what should it communicate instead? What copy, label, or empty state, if rewritten, would reveal that the problem is solved?
-Apply the three frames: what words matter most at capture? At review? At transition?
-Generate ideas from the language and meaning space.
+Rules for all inner agents: 1–2 ideas maximum total across all frames. No feasibility evaluation. No cross-lens comparison. Output format: [Lens] Idea name: one sentence.
 
-**Choreographer lens**
-What if the solution exists entirely in motion, gesture, or transition? What behavior — not surface — would solve this? What does the user feel, not read, that tells them the problem is gone?
-Apply the three frames: what motion belongs at capture? At review? At transition?
-Generate ideas from the gesture and behavior space.
+Agent 1 — Historian
+Description: "Historian lens — product ideation"
+Prompt: You are generating ideas from the Historian lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. System invariants: [SYSTEM INVARIANTS]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What has been tried before in this product category or adjacent ones on this class of problem? What succeeded and survived? What failed and why? Apply surviving patterns to the current problem. Rules: no feasibility evaluation, no cross-lens comparison, 1–2 ideas max. Output: [Historian] Idea name: one sentence.
 
----
+Agent 2 — Designer
+Description: "Designer lens — product ideation"
+Prompt: You are generating ideas from the Designer lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. System invariants: [SYSTEM INVARIANTS]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What interaction patterns could address this problem? Think in states, transitions, affordances, user behaviors — not features. What does the user do differently if this problem is solved? Rules: no feasibility, no cross-lens comparison, 1–2 ideas max. Output: [Designer] Idea name: one sentence.
 
-**Output: raw idea list**
-Compile all ideas generated above. Present them briefly — one sentence each, tagged with the lens that produced it. Do not evaluate yet. Target: 10–14 distinct ideas.
+Agent 3 — Architect
+Description: "Architect lens — product ideation"
+Prompt: You are generating ideas from the Architect lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. System invariants: [SYSTEM INVARIANTS]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What structural models could address this problem? Think in data relationships, system boundaries, layer model implications. What new structure, if it existed, would make this problem disappear? Rules: no feasibility, no cross-lens comparison, 1–2 ideas max. Output: [Architect] Idea name: one sentence.
+
+Agent 4 — Scout
+Description: "Scout lens — product ideation"
+Prompt: You are generating ideas from the Scout lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What are analogous products in adjacent spaces doing that this product is not? What patterns from outside this category are relevant here? Import patterns from adjacent domains. Rules: no feasibility, no cross-lens comparison, 1–2 ideas max. Output: [Scout] Idea name: one sentence.
+
+Agent 5 — Marketer
+Description: "Marketer lens — product ideation"
+Prompt: You are generating ideas from the Marketer lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What ideas would create genuine pull — something users would seek out, choose over alternatives, or pay for? What solves a pain users already articulate, rather than one they don't know they have? Rules: no feasibility, no cross-lens comparison, 1–2 ideas max. Output: [Marketer] Idea name: one sentence.
+
+Agent 6 — Writer
+Description: "Writer lens — product ideation"
+Prompt: You are generating ideas from the Writer lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What if the problem is fundamentally a language or framing problem? What does the vocabulary of the current experience communicate — and what should it communicate instead? What copy, label, or empty state, if rewritten, would reveal that the problem is solved? Rules: no feasibility, no cross-lens comparison, 1–2 ideas max. Output: [Writer] Idea name: one sentence.
+
+Agent 7 — Choreographer
+Description: "Choreographer lens — product ideation"
+Prompt: You are generating ideas from the Choreographer lens for a product design brainstorm. Product: [PRODUCT PURPOSE]. Problem: [PROBLEM]. Three constraint frames (1–2 ideas total): Capture / Review / Transition. Your lens: What if the solution exists entirely in motion, gesture, or transition? What behavior — not surface — would solve this? What does the user feel, not read, that tells them the problem is gone? Rules: no feasibility, no cross-lens comparison, 1–2 ideas max. Output: [Choreographer] Idea name: one sentence.
+
+After all 7 agents complete — compile. Merge all outputs into a single raw idea list. One line per idea, preserving lens tag. Do not evaluate, filter, or reorder. Target: 10–14 distinct ideas. Return the compiled list as your complete output.
+
+===END OUTER AGENT PROMPT===
+
+When the outer agent completes and returns the compiled list, proceed to Step 3.
 
 ---
 
@@ -214,31 +222,52 @@ Then output this to the user and stop:
 
 ---
 
-## [SONNET] Step 6 — Feasibility Pass
+## [SONNET] Step 6 — Feasibility Pass (outer background agent)
 
-Evaluate each selected idea in turn within this pass.
+Spawn ONE outer background agent with `run_in_background: true`. This agent runs all 3 evaluators for all selected ideas in parallel and returns compiled per-idea feasibility data. You receive one notification when complete.
 
-For each idea, apply:
+Before spawning: substitute [IDEA LIST] with each selected idea (name + concept sentence, one per line), and [SYSTEM INVARIANTS] with the core system invariants from project-context.md.
 
-**Engineer**
-What complexity does this introduce? What already exists in the codebase that could support this? What would need to be built from scratch? Are there platform constraints (tech stack, dependencies, APIs) that affect viability?
-State: LOW / MEDIUM / HIGH implementation complexity, with one sentence of rationale.
+**Outer agent**
+Description: `"Feasibility pass"`
+Prompt (substitute [IDEA LIST] and [SYSTEM INVARIANTS] before sending):
 
-**QA**
-What must not break if this is implemented? What existing behavior is at risk? What are the edge cases that would need coverage?
-State 2–3 specific invariants to protect.
+===BEGIN OUTER AGENT PROMPT===
 
-**Heurist**
-Does the interaction model implied by this idea have friction? Where would users get confused or stuck? Does it match the mental models users already have?
-State any concerns. If the interaction model is underspecified, flag it.
+You are orchestrating an engineering feasibility pass for product feature ideas.
 
-**Output per idea:**
-```
-**[Idea Name]**
-Implementation complexity: [LOW / MEDIUM / HIGH] — [one sentence]
+Selected ideas:
+[IDEA LIST]
+(Format: Idea Name — one sentence concept)
+
+System invariants: [SYSTEM INVARIANTS]
+
+For each selected idea, spawn 3 evaluator agents. If multiple ideas are selected, spawn ALL agents for ALL ideas in a SINGLE Agent tool call message with run_in_background: true. Do not sequence by idea.
+
+Engineer agent (per idea):
+Description: "Engineer feasibility — [IDEA NAME]"
+Prompt: You are evaluating implementation feasibility of a feature idea. Idea: [IDEA NAME] — [IDEA CONCEPT]. Assess: What complexity does this introduce? What already exists in the codebase that could support this? What would need to be built from scratch? Are there platform constraints (tech stack, dependencies, APIs) that affect viability? State: LOW / MEDIUM / HIGH implementation complexity, then one sentence of rationale. Output: Implementation complexity: [LOW/MEDIUM/HIGH] — [one sentence]
+
+QA agent (per idea):
+Description: "QA feasibility — [IDEA NAME]"
+Prompt: You are evaluating QA and invariant risk of a feature idea. System invariants: [SYSTEM INVARIANTS]. Idea: [IDEA NAME] — [IDEA CONCEPT]. Assess: What must not break if this is implemented? What existing behavior is at risk? What edge cases need coverage? State 2–3 specific invariants to protect. Output: What must not break: [2–3 invariants, one per line]
+
+Heurist agent (per idea):
+Description: "Heurist feasibility — [IDEA NAME]"
+Prompt: You are evaluating usability and interaction friction of a feature idea. Idea: [IDEA NAME] — [IDEA CONCEPT]. Assess: Does the interaction model implied by this idea have friction? Where would users get confused or stuck? Does it match mental models users already have? If underspecified, flag explicitly. Output: Heuristic concerns: [specific concern, or "None identified"]
+
+After all agents complete — compile per idea:
+
+[Idea Name]
+Implementation complexity: [LOW/MEDIUM/HIGH] — [one sentence]
 What must not break: [2–3 invariants]
 Heuristic concerns: [or "None identified"]
-```
+
+Return the compiled feasibility data for all ideas as your complete output.
+
+===END OUTER AGENT PROMPT===
+
+When the outer agent completes and returns the compiled feasibility data, proceed to Step 7.
 
 ---
 

@@ -150,15 +150,24 @@ Skip entirely if the outcome is a data model or system change with no new surfac
 
 First, determine which disciplines apply to this surface. Then run in two phases:
 
-**Phase A — spawn in parallel** (if applicable, send all in a single message with `run_in_background: true`):
+**Phase A — outer background agent** (if any Phase A disciplines apply):
 
-- **Typesetter** — if the surface introduces new text elements, a new typographic level, or a new type scale. Give it the Designer's visual hierarchy output. Task: produce a type system specification — scale, roles, string length constraints.
+First determine which disciplines apply: Typesetter (new text elements or typographic level), Choreographer (state transitions involving motion), Materialist (new depth, elevation, shadows, or surface finish). If none apply, skip Phase A entirely and proceed to Phase B.
 
-- **Choreographer** — if the surface has state transitions that involve motion. Give it the Designer's transition descriptions. Task: apply the motion test (*what does the user misunderstand without this?*), remove what fails, specify what remains with timing and easing.
+Spawn ONE outer background agent with `run_in_background: true`. The outer agent spawns all applicable inner discipline agents simultaneously, waits for all to complete, and returns compiled Phase A output. You receive one notification when Phase A is complete.
 
-- **Materialist** — if the surface introduces new depth relationships, elevation, shadows, or surface finish. Give it the Designer's surface description. Task: evaluate whether material choices are intentional and coherent.
+Outer agent description: `"Design sub-team Phase A — [surface name]"`
+Outer agent prompt: Include the Designer's relevant outputs, then spawn all applicable inner agents in a SINGLE Agent tool call message with run_in_background: true. Compile all outputs and return.
 
-Wait for all Phase A agents to complete before proceeding.
+Inner agents to spawn (include only those that apply):
+
+- Typesetter — Description: "Typesetter — [surface name]". Give it the Designer's visual hierarchy output. Task: produce a type system specification — scale, roles, string length constraints.
+
+- Choreographer — Description: "Choreographer — [surface name]". Give it the Designer's transition descriptions. Task: apply the motion test (what does the user misunderstand without this?), remove what fails, specify what remains with timing and easing.
+
+- Materialist — Description: "Materialist — [surface name]". Give it the Designer's surface description. Task: evaluate whether material choices are intentional and coherent.
+
+When Phase A outer agent completes, proceed to Phase B.
 
 **Phase B — run sequentially after Phase A:**
 
