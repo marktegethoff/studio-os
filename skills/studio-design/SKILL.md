@@ -55,6 +55,20 @@ Problem: $ARGUMENTS
 
 ---
 
+## [HAIKU] Step 0 — PM brief check
+
+Before design begins: check for a validated product brief from the PM.
+
+Look for `artifacts/product_brief_*.md` or equivalent in the project. If one exists for this problem, load it — the problem statement, success definition, and key unknowns it contains govern what the design must solve.
+
+If no brief exists and this represents a new product direction (not a refinement of an existing shipped surface), surface this before continuing:
+
+> **Product brief missing.** Design is most effective when the problem has been validated. Consider running `studio-pm` before this workflow to define who has the problem, why it matters, and what success looks like. To proceed without a brief, confirm explicitly.
+
+If the user confirms to proceed, continue. Design against a clear problem statement from the arguments — but note the absence of a validated brief.
+
+---
+
 ## [HAIKU] Steps 1–3 — Context loading
 
 ### Step 1 — Philosophy validation

@@ -37,6 +37,17 @@ Decision hierarchy: Structural correctness → Conceptual clarity → System coh
 
 ---
 
+## [HAIKU] Step 0.5 — PM brief check
+
+Before ideation begins: check for a validated product brief from the PM.
+
+Look for `artifacts/product_brief_*.md` or equivalent in the project. If one exists for this problem, load it — the validated problem statement, customer context, and success definition it contains sharpen the ideation space and prevent generating solutions to the wrong problem.
+
+If no brief exists, note it. Ideation can proceed — but flag it:
+> **No PM brief found.** Ideation is running against an unvalidated problem. Results may need re-anchoring once the customer problem is defined. To run problem validation first: `studio-pm [problem statement]`.
+
+---
+
 ## [HAIKU] Step 1 — Problem Gate
 
 Input: $ARGUMENTS
