@@ -30,7 +30,7 @@ These three gates are sequential in the workflow: PM → CD → DE. On direction
 - **Engineering** — engineer, qa
 - **Ongoing** — audit, research-sweep
 
-**10 workflow skills** that orchestrate agents in sequence for common work patterns.
+**11 workflow skills** that orchestrate agents in sequence for common work patterns.
 
 ---
 
@@ -77,6 +77,7 @@ The `project-context.md` file is loaded at the start of every workflow. It conta
 /studio-review <artifact>        Review workflow
 /studio-solve <problem>          Convergence loop for hard problems
 /studio-experiment <hypothesis>  Experiment workflow
+/lt-review <artifact>            Full Leadership Team review — PM + CD + DE
 ```
 
 Individual agents can also be invoked directly by name — for example, `use the writer agent to evaluate this empty state copy`.

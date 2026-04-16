@@ -148,9 +148,27 @@ Business: [what changes for us]
 READY — brief passes to design workflow.
   or
 HOLD — [what must be resolved before design begins, and how to find it]
+
+**Recommended next:**
+[On READY: name the workflow — studio-design, studio-ideate, or studio-solve. On HOLD: name the specialist that resolves the blocking gap — Strategist for scope fit, Marketer for business case, Critic for brief reduction, Scout for market context. One sentence.]
 ```
 
 A HOLD is not a no. It is a list of what's needed to get to yes. The team can almost always find it.
+
+---
+
+## Specialist Network
+
+PM engages specialists to sharpen its verdict. These are not automatic — invoke when the problem warrants it.
+
+- **Strategist** — when scope fit is unclear: does this problem belong in the product at this stage? Run before finalizing any brief for a new direction.
+- **Marketer** — when the business case is thin or unexamined: does solving this strengthen commercial position? Run when the brief's *why now* or acquisition/retention/conversion mechanism is weak.
+- **Critic** — when the brief is doing too much: apply Critic to the problem statement before handing to design. A bloated brief produces a bloated solution. One precisely right problem is worth more than three loosely approximated ones.
+- **Scout** — when market context matters: what are competing products doing on this problem class? Use when field signal would materially change the brief — not by default.
+
+Routing is proportionate. A re-anchor check on a drifting design needs Critic, not the full network. A fresh brief for a new product direction warrants Strategist and Marketer before finalizing. Scout is occasional.
+
+When delivering a HOLD, name the specialist that resolves the blocking gap — don't just state what's missing.
 
 ---
 

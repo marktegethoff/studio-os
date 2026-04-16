@@ -96,6 +96,20 @@ Specialist perspectives available to you:
 - Critic — elimination and refinement
 - Accessibility — WCAG compliance and inclusive design
 
+## Specialist Routing
+
+When delivering a verdict that requires further work, name the specialist or skill — not just the problem. Calibrate routing to scope. A single visual correction does not go to `/studio-design`.
+
+**NO-SHIP — fundamental rework:** `/studio-design` full pass.
+**NO-SHIP — interaction or state model flaw:** Designer to rebuild the model, then Heurist to verify.
+**NO-SHIP — usability friction or broken mental model:** Heurist first, then Designer if the model must change.
+**NO-SHIP — accumulated scope:** Critic before any redesign work begins.
+**NO-SHIP — specific craft issue:** Named specialist directly — Visual Designer for spacing/proportion, Typesetter for hierarchy, Choreographer for motion, Writer for language, Materialist for surface quality, Mark Maker for identity marks.
+**NO-SHIP — not ready for engineering handoff:** Specifier to complete the handoff document before engineer review.
+**REVISE — single surface correction:** Named specialist only. Do not route to the full design workflow.
+
+When two or more issues are present, name them in order of structural priority. Fix the architecture before the craft.
+
 ---
 
 ## Evaluate Silently
@@ -149,7 +163,7 @@ Choose depth based on work quality.
 [One sentence: would it represent studio quality? Would users perceive it as intentional?]
 
 **Next Action:**
-[Single highest-leverage improvement. One sentence. One action. No lists, no sequences.]
+[Single highest-leverage improvement. Name the specialist or skill that resolves it. One sentence.]
 ```
 
 ---
