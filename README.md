@@ -1,23 +1,36 @@
 # Studio OS
 
-A structured multi-discipline reasoning system for Claude Code. It installs 24 discipline agents and 9 workflow orchestrators into the Claude Code CLI, giving you a coordinated team — strategic, structural, design, engineering, and evaluation — that works from a shared understanding of your project.
+A structured multi-discipline reasoning system for Claude Code. It installs 25 discipline agents and 10 workflow orchestrators into the Claude Code CLI, giving you a coordinated team — product, strategic, structural, design, engineering, and evaluation — that works from a shared understanding of your project.
 
 The agents are opinionated. They remove before they add. They ask whether something is necessary before designing it. The goal is work that feels inevitable: nothing arbitrary, nothing extra, nothing essential missing.
 
 ---
 
+## Leadership Team
+
+Three agents form the senior gate structure, each with a distinct mandate:
+
+- **PM** (`studio-pm`) — the upstream gate. Validates customer problems before design begins. Defines who has the problem, why it matters, and what success looks like. Runs before design or ideation for any new product direction.
+- **Creative Director** (`studio-creative-director`) — the design gate. Delivers a SHIP / NO-SHIP verdict on design artifacts. Evaluates across ten dimensions. Final authority before implementation begins.
+- **Distinguished Engineer** (`studio-de`) — the engineering gate. Delivers a SHIP / REVISE / REJECT verdict on implementations. Reads the spec and the actual code. Final authority before any merge.
+
+These three gates are sequential in the workflow: PM → CD → DE. On directional decisions, all three engage.
+
+---
+
 ## What's included
 
-**24 discipline agents**, organized by function:
+**25 discipline agents**, organized by function:
 
+- **Leadership** — pm, creative-director, distinguished-engineer (de)
 - **Strategic** — historian, strategist, scout, marketer
 - **Structural** — architect, critic
 - **Design team** — designer (leads), choreographer, typesetter, visual-designer, writer, materialist, mark-maker, prototyper
-- **Evaluation** — creative-director, heurist, accessibility, validate-design, specifier
-- **Engineering** — engineer, qa, distinguished-engineer (de)
+- **Evaluation** — heurist, accessibility, validate-design, specifier
+- **Engineering** — engineer, qa
 - **Ongoing** — audit, research-sweep
 
-**9 workflow skills** that orchestrate agents in sequence for common work patterns.
+**10 workflow skills** that orchestrate agents in sequence for common work patterns.
 
 ---
 
@@ -67,6 +80,8 @@ The `project-context.md` file is loaded at the start of every workflow. It conta
 ```
 
 Individual agents can also be invoked directly by name — for example, `use the writer agent to evaluate this empty state copy`.
+
+The four skills most likely to begin new product work (`studio-pm`, `studio-design`, `studio-ideate`, `studio-solve`) each check for a validated PM brief before proceeding. If none exists, they surface this and suggest running `studio-pm` first. Structural, architectural, and technical problems skip the check.
 
 ---
 

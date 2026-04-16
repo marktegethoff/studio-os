@@ -53,6 +53,20 @@ Maximum iterations: 3. If the gate does not pass by iteration 3, the command rep
 
 ---
 
+## [HAIKU] Step 0 — PM brief check
+
+If this is a product direction problem — what to build, who to build for, or what outcome to target — check for a validated PM brief before the loop begins.
+
+Look for `artifacts/product_brief_*.md` or equivalent in the project. If one exists for this problem, load it. A validated brief constrains the solution space and makes the convergence loop more precise.
+
+If no brief exists and this is a product direction problem, surface it:
+
+> **Product brief missing.** You are about to run a convergence loop against an unvalidated problem. Consider running `studio-pm` first to define who has the problem, why it matters, and what success looks like. To proceed without a brief, confirm explicitly.
+
+If this is a structural, architectural, or systems problem — not a customer or product direction problem — skip this step and proceed.
+
+---
+
 ## [HAIKU] Before iteration 1 — Context loading
 
 **Check prior work.**
