@@ -1,6 +1,8 @@
-# Studio OS Workshop Kit
+# Workshop Kit: Sketch to Prototype
 
-A structured design workshop experience: hand-drawn sketches → functional HTML prototypes.
+Draw an idea. Take a photo. Walk away with something you can click.
+
+This kit is for anyone who designs — researchers, strategists, UX designers, visual designers, service designers, design systems practitioners, and everyone in between. You don't need to know how to code. You don't need to be comfortable in the terminal. You just need an idea and something to draw on.
 
 ---
 
@@ -8,13 +10,15 @@ A structured design workshop experience: hand-drawn sketches → functional HTML
 
 ```
 workshop/
-  CLAUDE.md           — Workshop brief and instructions (Claude reads this automatically)
-  install.sh          — One-time agent installation script
+  CLAUDE.md           — Workshop instructions (Claude reads this automatically)
+  install.sh          — One-time setup script
   README.md           — This file
+  FACILITATOR.md      — Run-of-show guide for workshop hosts
   agents/
-    workshop-critic.md    — Removes what doesn't belong
-    workshop-designer.md  — Defines how things should work before building
-    workshop-writer.md    — Evaluates and writes interface copy
+    workshop-critic.md    — Tells you exactly what to cut
+    workshop-designer.md  — Works out how something should behave before you build it
+    workshop-writer.md    — Evaluates and sharpens words in your design
+    workshop-visual.md    — Improves visual hierarchy, spacing, and weight
 ```
 
 ---
@@ -23,30 +27,26 @@ workshop/
 
 1. **Fill in the challenge brief** in `CLAUDE.md` — replace the `[CHALLENGE BRIEF HERE]` placeholder with the actual design problem.
 
-2. **Send the kit folder** to each participant (via shared drive, email, or whatever your team uses).
+2. **Send the kit folder** to each participant (via shared drive or email).
 
 3. **Confirm Claude Code is installed** on every participant's machine.
 
 ---
 
-## Step 1 — Install (participants do this at session start)
+## Step 1 — Set up (do this at the start of the session)
 
-Open Terminal and run:
+Open Terminal and run these two commands. The first makes the setup script runnable. The second runs it.
 
 ```bash
-cd path/to/workshop-kit
 chmod +x install.sh
 ./install.sh
 ```
 
-This copies the three workshop agents to `~/.claude/agents/` where Claude Code can find them.
+This copies the workshop collaborators to the place Claude Code looks for them. It takes about 10 seconds.
 
-**On Windows (Git Bash or PowerShell):**
+**If you'd prefer to do this manually (Windows or if the script doesn't run):**
 ```bash
-# Create the agents directory if it doesn't exist
 mkdir -p "$HOME/.claude/agents"
-
-# Copy the agent files
 cp agents/*.md "$HOME/.claude/agents/"
 ```
 
@@ -61,61 +61,61 @@ cd path/to/workshop-kit
 claude
 ```
 
-**Important:** Claude Code must be started from inside the `workshop-kit` folder. This is how it finds the `CLAUDE.md` file with the workshop brief.
+Claude Code must be started from inside the workshop folder. That's how it finds the workshop instructions.
 
-Verify everything is working — type this in Claude Code:
+To verify it's working, type this:
 ```
 what agents do I have available?
 ```
 
-You should see the three workshop agents listed.
+You should see the four workshop collaborators listed.
 
 ---
 
 ## Step 3 — Take your first sketch
 
-Draw your idea on paper. It can be rough — stick figures, boxes, arrows. The sketch is the input, not the output.
+Draw your idea on paper. It doesn't need to be good — it needs to exist. Boxes and arrows work. So do scribbles.
 
-Take a photo with your phone or use a scanner app. Get it onto your computer.
+Take a photo with your phone or scan it. Get the image onto your computer.
 
 ---
 
 ## Step 4 — Build your first prototype
 
-Drag the photo into the Claude Code window (or use `/upload`).
+Drag your photo into the Claude Code window (or type the file path).
 
-Then describe what you drew:
+Then say what you drew:
 > "This is a sketch of [what you're designing]. Here's the idea: [one sentence]."
 
-Claude Code will:
-1. Describe what it sees in your sketch and confirm the interpretation
+Claude will:
+1. Describe what it sees and confirm the interpretation
 2. Build a `prototype.html` file in your workshop folder
-3. Tell you to open it in your browser
+3. Tell you how to open it in your browser
 
-Open `prototype.html` in your browser. That's your first prototype.
+Open `prototype.html`. That's your first prototype.
 
 ---
 
 ## Step 5 — Iterate
 
-Don't type changes — sketch them.
+Don't type corrections — sketch them.
 
-Draw the next version, or draw additional screens. Take another photo.
-Feed it back in with a note about what you want to change.
+Draw what you want to change. Take another photo. Feed it back in.
 
 The loop: **draw → photo → prototype → draw again**
 
 ---
 
-## The discipline agents
+## Your collaborators
 
-Three agents are available during the workshop. Invoke them by name.
+Four specialists are available during the workshop. Invoke them by name when you want a different perspective.
 
-| Agent | Invoke with | Use when |
-|-------|-------------|----------|
-| @workshop-designer | "designer" or "@workshop-designer" | You want to think through how something should work before sketching |
-| @workshop-critic | "critic" or "@workshop-critic" | You want to cut what doesn't belong |
-| @workshop-writer | "writer" or "@workshop-writer" | You need help with copy in your prototype |
+| Collaborator | Invoke with | Reach for it when |
+|---|---|---|
+| @workshop-designer | "designer" | You're not sure how something should behave |
+| @workshop-critic | "critic" | Something feels like too much |
+| @workshop-writer | "writer" | The words in your design need work |
+| @workshop-visual | "visual" | The layout feels flat or unbalanced |
 
 **Example:**
 > "I have three buttons on this screen. @workshop-critic — what should be removed?"
@@ -125,39 +125,26 @@ Three agents are available during the workshop. Invoke them by name.
 ## Troubleshooting
 
 **"Claude doesn't know the workshop challenge"**
-You're not running Claude Code from the workshop-kit folder. Navigate there first:
+You're not running Claude Code from the workshop folder. Navigate there first:
 ```bash
 cd path/to/workshop-kit
 claude
 ```
 
-**"The prototype doesn't look right in the browser"**
-Try a different browser. If elements are missing, it may be a rendering issue — ask Claude Code to rebuild with simpler HTML.
+**"The prototype looks wrong in the browser"**
+Try a different browser. If things are missing, ask Claude Code to rebuild with simpler HTML.
 
 **"I can't drag an image into Claude Code"**
-Use the desktop app (not the terminal CLI) — it supports image drag-and-drop. Alternatively, reference the image by file path:
-> "Please read the file at /path/to/my-sketch.jpg and treat it as my design sketch."
+Use the desktop app — it supports image drag-and-drop. Or give the file path directly:
+> "The sketch is at /path/to/my-sketch.jpg — treat it as my design."
 
-**"The agents aren't showing up"**
-Run the install script again. Make sure you're running it from the workshop-kit folder.
+**"The collaborators aren't showing up"**
+Run the setup script again. Make sure you're running it from the workshop folder.
 
 ---
 
 ## At the end of the session
 
-Every participant will have a `prototype.html` in their workshop folder.
+Everyone will have a `prototype.html` in their workshop folder.
 
-The facilitator will ask each person to screen-share their prototype for 2 minutes.
-No commentary on quality. The point is to see how differently each person interpreted the same challenge.
-
-Same brief. Different sketches. Different prototypes. That's the result.
-
----
-
-## Customizing this kit
-
-**To change the challenge:** Edit the `[CHALLENGE BRIEF HERE]` section in `CLAUDE.md`.
-
-**To add an agent:** Drop any `.md` agent file into the `agents/` folder and re-run `install.sh`.
-
-**To change the output format:** Edit the `HTML Output Rules` section in `CLAUDE.md`.
+The facilitator will ask each person to share their screen for two minutes. No commentary on quality — the point is to see how differently each person interpreted the same challenge. Same brief, different sketches, different prototypes. That divergence is the result.

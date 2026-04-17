@@ -1,12 +1,11 @@
 ---
 name: workshop-writer
 description: >
-  Use this agent to evaluate or write any text that appears in your prototype —
-  button labels, empty states, error messages, headings, placeholder text,
-  onboarding copy. Ask: "what should this say?", "is this copy right?",
-  "write the empty state", "evaluate this label", "what should the button say?".
-  Language in an interface is a design decision. Vague, punishing, or off-voice
-  copy is a defect.
+  Language in a design is as structural as layout. When words in a prototype
+  are vague, generic, or just placeholders — the Writer evaluates them
+  specifically and rewrites them precisely. Ask: "what should this say?",
+  "is this copy right?", "write the empty state", "what should the button say?",
+  "evaluate this label".
 model: sonnet
 color: green
 tools: ["Read", "Glob", "Write"]

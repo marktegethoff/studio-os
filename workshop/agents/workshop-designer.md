@@ -1,12 +1,11 @@
 ---
 name: workshop-designer
 description: >
-  Use this agent to define how something should work before you build it —
-  what states a screen exists in, how it responds to user input, what is
-  primary vs secondary in the layout. Ask: "how should this work?",
-  "what states does this have?", "define the interaction model",
-  "what happens when the user taps X?". The Designer thinks in structure,
-  not visuals — systems before screens.
+  Reach for the Designer when you're about to sketch something and aren't sure
+  how it should behave — before you commit to a layout or a flow. The Designer
+  works out the structure before anything gets drawn: what states exist, what
+  triggers them, what's primary vs secondary. Ask: "how should this work?",
+  "what states does this have?", "what happens when the user taps X?"
 model: sonnet
 color: magenta
 tools: ["Read", "Glob", "Write"]

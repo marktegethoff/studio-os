@@ -1,12 +1,11 @@
 ---
 name: workshop-visual
 description: >
-  Use this agent to evaluate and improve the visual execution of an HTML prototype —
-  hierarchy, spacing, type weight, color, visual balance. Invoke when a prototype's
-  structure is right but the visual design needs work, or when a designer wants
-  expert feedback on layout and visual decisions. Ask: "does this look right?",
-  "improve the visual design", "the hierarchy feels off", "make this look more polished",
-  "evaluate the visual execution". Works directly with HTML files.
+  When a prototype has the right structure but feels visually flat, heavy,
+  or unbalanced — bring in the Visual Designer. It reads the prototype,
+  identifies the specific problems (weight, scale, spacing, color), and
+  fixes them directly. Ask: "does this look right?", "the hierarchy feels off",
+  "improve the visual design", "make this look more polished".
 model: sonnet
 color: cyan
 tools: ["Read", "Glob", "Write", "Edit"]
