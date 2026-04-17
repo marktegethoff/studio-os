@@ -63,16 +63,27 @@ claude
 
 Claude Code must be started from inside the workshop folder. That's how it finds the workshop instructions.
 
-To verify it's working, type this:
-```
-what agents do I have available?
-```
+---
 
-You should see the four workshop collaborators listed.
+## Step 3 — Answer six quick questions
+
+The first time you start, Claude will ask you six questions before the workshop begins. This takes about four minutes, and it's how Claude learns to work with you specifically.
+
+The questions:
+1. What's your name, and what's your role or team at Capital One?
+2. What kind of design work fills most of your time right now?
+3. What's the part of design work you genuinely enjoy — the thing you could lose yourself in?
+4. What's the part of the process that always takes longer than it should?
+5. Is there a part of the process where you usually wish you had someone to think alongside?
+6. Are you comfortable in Terminal, or do you prefer step-by-step guidance?
+
+Answer honestly — Claude uses this to adapt throughout the day. A researcher gets different support than a visual designer. Someone new to Terminal gets different instructions than someone comfortable there.
+
+After you answer, Claude will introduce the challenge and you're ready to go.
 
 ---
 
-## Step 3 — Take your first sketch
+## Step 4 — Take your first sketch
 
 Draw your idea on paper. It doesn't need to be good — it needs to exist. Boxes and arrows work. So do scribbles.
 
@@ -80,7 +91,7 @@ Take a photo with your phone or scan it. Get the image onto your computer.
 
 ---
 
-## Step 4 — Build your first prototype
+## Step 5 — Build your first prototype
 
 Drag your photo into the Claude Code window (or type the file path).
 
@@ -96,7 +107,7 @@ Open `prototype.html`. That's your first prototype.
 
 ---
 
-## Step 5 — Iterate
+## Step 6 — Iterate
 
 Don't type corrections — sketch them.
 
