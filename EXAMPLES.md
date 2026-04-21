@@ -1,4 +1,4 @@
-# Case Studies
+# Examples
 
 These are illustrative scenarios, not documented engagements. They are constructed to show how XD OS workflows, agent sequencing, and human-agent collaboration work in practice — the kinds of problems the system is designed for, the kinds of decisions it surfaces, and the dynamics that emerge when structured reasoning meets real product judgment.
 

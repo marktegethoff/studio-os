@@ -91,6 +91,8 @@ Agents shared across roles (critic, historian, strategist, and others) are insta
 /xd-design        Full design workflow
 /xd-discovery     Problem framing and research
 /xd-ideate        Divergent exploration before committing
+/xd-prototype     Get to a testable prototype fast
+/xd-prepare-handoff   Prototype to production-ready handoff package
 /xd-implement     Engineering workflow
 /xd-simplify      Codebase coherence workflow
 /xd-review        Review an artifact
@@ -115,6 +117,8 @@ Each workflow leaves behind artifacts that the next session can read. Over time 
 | `/xd-discovery` | Problem brief, assumptions map, research synthesis |
 | `/xd-design` | Interaction model, copy, engineering spec |
 | `/xd-ideate` | Divergence output, facilitated reduction, feasibility verdicts |
+| `/xd-prototype` | Test question, build criteria, test criteria, findings routing |
+| `/xd-prepare-handoff` | All states + flows, synthetic data, UAT scenarios, build spec |
 | `/xd-implement` | Implemented feature, DE verdict, QA results |
 | `/xd-simplify` | Audit findings, simplification plan, DE-reviewed code |
 | `/xd-experiment` | Hypothesis, test design, measurement plan |
@@ -143,7 +147,7 @@ The point of this system is not to inherit someone else's judgment. It is to bui
 
 See [PHILOSOPHY.md](PHILOSOPHY.md) for the reasoning behind the defaults.
 
-See [CASE-STUDIES.md](CASE-STUDIES.md) for illustrative examples of the system in use.
+See [EXAMPLES.md](EXAMPLES.md) for illustrative examples of the system in use.
 
 ---
 
