@@ -89,10 +89,15 @@ Full review sequence: `/xd-review`
 | Artifact | Produces | How to invoke |
 |---|---|---|
 | Engineering handoff spec | Complete spec for implementation, no ambiguity | `xd-specifier` |
+| Build spec (DS translation) | Token-to-component mapping + complete handoff package | `/xd-prepare-handoff` |
 | Implementation | Working SwiftUI code from a confirmed spec | `xd-ios` |
 | Test scenarios | Boundary cases, regression checks, invariant verification | `qa` |
+| UAT scenarios | User-action test cases verifying build matches design intent | `/xd-prepare-handoff` |
+| Synthetic data | Realistic content for all states and flows | `/xd-prepare-handoff` |
 
 Full engineering sequence (spec check → invariants → implement → QA): `/xd-implement`
+
+Full prototype-to-production sequence: `/xd-prototype` → `/xd-prepare-handoff` → `/xd-implement`
 
 ---
 
@@ -102,6 +107,8 @@ Workflows sequence multiple disciplines in order:
 
 - `/xd-discovery` — User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer
 - `/design` — Philosophy → Historian → Strategist → Architect → Critic → Designer → Sub-team → Accessibility → Specifier
+- `/xd-prototype` — Scope → [Build criteria + Test criteria] → Prototype review → Findings routing
+- `/xd-prepare-handoff` — Artifact load → [State inventory + Flow audit] → Designer fills gaps → [Synthetic data + UAT scenarios] → Build spec → LT sign-off
 - `/xd-measure` — Metrics Definer → PM gate → Architect (instrumentation feasibility)
 - `/xd-implement` — Spec check → Invariants → Engineer → QA
 - `/xd-solve` — Convergence loop (max 3 iterations) until inevitable

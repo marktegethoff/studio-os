@@ -7,7 +7,6 @@ Run the XD OS engineering workflow for a feature or task.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for spec and invariant checks · [SONNET] for implementation
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -25,7 +24,7 @@ If neither exists, ask: "No project context found. Run `xd-init` to set up XD OS
 
 ---
 
-## [HAIKU] Steps 1–2 — Pre-flight checks
+## Steps 1–2 — Pre-flight checks
 
 ### Step 1 — Verify specification
 
@@ -47,15 +46,7 @@ Apply the system invariants loaded from project-context.md.
 
 For the feature being implemented, confirm it does not violate any invariant. If any invariant is violated, stop and state which one.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Steps 1–2 complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Steps 3–5 — Implementation
+## Steps 3–5 — Implementation
 
 ### Step 3 — State "What must not break"
 

@@ -7,8 +7,6 @@ Divergent brainstorm for a product problem or opportunity.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for problem gate + context · [SONNET] for divergence, synthetic users, feasibility · [OPUS] for facilitated reduction (Design Director) + DE verdict
-**Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -37,7 +35,7 @@ Decision hierarchy: Structural correctness → Conceptual clarity → System coh
 
 ---
 
-## [HAIKU] Step 0.5 — PM brief check
+## Step 0.5 — PM brief check
 
 Before ideation begins: check for a validated product brief from the PM.
 
@@ -48,7 +46,7 @@ If no brief exists, note it. Ideation can proceed — but flag it:
 
 ---
 
-## [HAIKU] Step 1 — Problem Gate
+## Step 1 — Problem Gate
 
 Input: $ARGUMENTS
 
@@ -74,13 +72,7 @@ Capture this as **[PROBLEM]** — you will embed it in the outer agent prompt in
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Problem gate complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Step 2 — Divergence (outer background agent)
+## Step 2 — Divergence (outer background agent)
 
 Spawn ONE outer background agent with `run_in_background: true`. This agent reads project context, orchestrates all 7 discipline lenses in parallel, compiles the raw idea list, and returns it. You receive one notification when divergence is complete.
 
@@ -140,13 +132,7 @@ When the outer agent completes and returns the compiled list, proceed to Step 3.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Divergence complete. Switch to **[OPUS]** (`claude-opus-4-6`) for facilitated reduction.
-> Reply **"continue"** when ready.
-
----
-
-## [OPUS] Step 3 — Facilitated Reduction
+## Step 3 — Facilitated Reduction (xd-design-director)
 
 The Design Director chairs this step. Strategist and Critic participate.
 
@@ -178,15 +164,7 @@ Differentiator: [what makes this non-obvious — why isn't this the first thing 
 Risk: [the one thing most likely to kill this idea]
 ```
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Reduction complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) for synthetic user evaluation.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Step 4 — Synthetic User Desirability
+## Step 4 — Synthetic User Desirability
 
 Evaluate the surviving ideas against the user archetypes defined in project-context.md.
 
@@ -202,13 +180,7 @@ Note any ideas that don't land with any archetype — they may need reframing or
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Synthetic user evaluation complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) for user selection presentation.
-> Reply **"continue"** when ready.
-
----
-
-## [HAIKU] Step 5 — Your Selection
+## Step 5 — Your Selection
 
 Present the idea cards with desirability notes beneath each, in this format:
 
@@ -233,7 +205,7 @@ Then output this to the user and stop:
 
 ---
 
-## [SONNET] Step 6 — Feasibility Pass (outer background agent)
+## Step 6 — Feasibility Pass (outer background agent)
 
 Spawn ONE outer background agent with `run_in_background: true`. This agent runs all 3 evaluators for all selected ideas in parallel and returns compiled per-idea feasibility data. You receive one notification when complete.
 
@@ -280,15 +252,7 @@ Return the compiled feasibility data for all ideas as your complete output.
 
 When the outer agent completes and returns the compiled feasibility data, proceed to Step 7.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Feasibility data collected. Switch to **[OPUS]** (`claude-opus-4-6`) for DE verdict.
-> Reply **"continue"** when ready.
-
----
-
-## [OPUS] Step 7 — DE Verdict
+## Step 7 — DE Verdict (de)
 
 The Distinguished Engineer evaluates each selected idea against the feasibility data.
 

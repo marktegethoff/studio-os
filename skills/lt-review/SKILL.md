@@ -7,7 +7,6 @@ Run a full Leadership Team review against an artifact.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for classification · [OPUS] for each LT agent · [SONNET] for synthesis
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -27,7 +26,7 @@ This is a heavyweight review. Use it at gates that warrant all three perspective
 
 ---
 
-## [HAIKU] Step 1 — Artifact classification
+## Step 1 — Artifact classification
 
 Load project context: `.claude/memory/project-context.md` (fallback: `memory/project-context.md`).
 
@@ -49,7 +48,7 @@ State the classification and which LT members will review before proceeding.
 
 ---
 
-## [OPUS] Step 2 — LT reviews (parallel background agents)
+## Step 2 — LT reviews (parallel background agents)
 
 Spawn applicable LT agents simultaneously with `run_in_background: true`.
 
@@ -66,15 +65,7 @@ Pass to each agent: artifact description, file paths, PM brief (if loaded), proj
 
 Wait for all agents to complete. You will receive one notification per agent.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> LT reviews complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) for synthesis.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Step 3 — Synthesis
+## Step 3 — Synthesis
 
 Synthesize all LT verdicts into one output. Do not repeat full verdicts — extract positions, find convergences, cascade to a single next action.
 

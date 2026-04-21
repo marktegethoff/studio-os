@@ -7,7 +7,6 @@ Find the essential, categorically right solution to a hard problem.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for pre-loop context · [SONNET] for iteration work · [OPUS] for Design Director + calibration gate each iteration
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -53,7 +52,7 @@ Maximum iterations: 3. If the gate does not pass by iteration 3, the command rep
 
 ---
 
-## [HAIKU] Step 0 — PM brief check
+## Step 0 — PM brief check
 
 If this is a product direction problem — what to build, who to build for, or what outcome to target — check for a validated PM brief before the loop begins.
 
@@ -67,7 +66,7 @@ If this is a structural, architectural, or systems problem — not a customer or
 
 ---
 
-## [HAIKU] Before iteration 1 — Context loading
+## Before iteration 1 — Context loading
 
 **Check prior work.**
 If the project's decision log path is defined in project-context.md, scan it. Has this problem been solved before? If yes, what was the prior decision and why? Do not repeat work already done.
@@ -78,25 +77,17 @@ State the problem in one sentence. If it cannot be stated in one sentence, it is
 **State the constraints.**
 List every constraint that applies: system invariants loaded from project-context.md, prior decisions (if available), design laws. These are not negotiable during the loop. If a constraint needs to be challenged, surface it explicitly before the loop begins.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Pre-loop context complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before beginning iteration 1.
-> Reply **"continue"** when ready.
-
----
-
 ## Iteration structure
 
-Each iteration follows this sequence on [SONNET], then pauses for [OPUS] judgment.
+Each iteration follows this sequence, then pauses for Design Director (xd-design-director) judgment.
 
-### [SONNET] 1. Historian pass
+### 1. Historian pass (xd-historian)
 What has been tried before on this class of problem? What survived? What failed and why?
 Do not invent precedent. Do not generalize. Cite specific examples.
 
 This pass runs once — in iteration 1 only. Do not repeat the Historian pass in iterations 2 and 3.
 
-### [SONNET] 2. Design pass
+### 2. Design pass (xd-architect + xd-designer)
 Apply the Architect and Designer disciplines.
 Produce the simplest structure that satisfies the stated constraints.
 Maximum 2 directions. Recommend one. State why.
@@ -108,7 +99,7 @@ If the solution involves a surface (interaction model, visual hierarchy, motion,
 
 Apply only those the solution requires. Do not invoke all three by default. A structural decision that has no surface does not need craft disciplines.
 
-### [SONNET] 3. Critic pass — escalating by iteration
+### 3. Critic pass (xd-critic) — escalating by iteration
 
 **Iteration 1:** Remove everything unnecessary. What is left?
 **Iteration 2:** Of what remains, what is still not the simplest correct form? Remove again.
@@ -116,7 +107,7 @@ Apply only those the solution requires. Do not invoke all three by default. A st
 
 The critic's standard escalates each iteration. By iteration 3, the question is not "is this good?" It is: "would removing or changing anything make this worse?"
 
-### [SONNET] 3.5 — Marketer check
+### 3.5 — Marketer check (marketer)
 
 Apply the Marketer discipline: commercial pressure test.
 
@@ -126,15 +117,7 @@ Apply the Marketer discipline: commercial pressure test.
 
 This is not a veto — the loop continues regardless. But if the solution fails commercially, name it explicitly. The Design Director's verdict must account for both dimensions.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Iteration work complete. Switch to **[OPUS]** (`claude-opus-4-6`) for Design Director evaluation and calibration gate.
-> Reply **"continue"** when ready.
-
----
-
-### [OPUS] 4. Design Director evaluation
+### 4. Design Director evaluation (xd-design-director)
 
 Apply the ethos and decision hierarchy from project-context.md (or embedded above).
 
@@ -144,7 +127,7 @@ State a verdict: INEVITABLE / NOT YET / STRUCTURALLY WRONG.
 - **NOT YET:** something remains that is not in its essential form. Name it precisely. State what is wrong and what would make it right. Re-enter the loop.
 - **STRUCTURALLY WRONG:** the current direction cannot converge. The problem framing or a constraint is incorrect. Stop. Reframe before continuing.
 
-### [OPUS] 5. Calibration gate
+### 5. Calibration gate
 
 Answer each question explicitly (YES / NO). All five must pass. Any failure: identify which failed, why, and what must change.
 
@@ -152,13 +135,7 @@ Answer each question explicitly (YES / NO). All five must pass. Any failure: ide
 
 ## Between iterations
 
-If the gate does not pass and iterations remain:
-
-> **⏸ PAUSE — Model switch required.**
-> Judgment complete. Switch back to **[SONNET]** (`claude-sonnet-4-6`) to begin the next iteration.
-> Reply **"continue"** when ready.
-
-State explicitly before re-entering:
+If the gate does not pass and iterations remain, state explicitly before re-entering:
 - What the previous iteration produced
 - What was wrong with it (one sentence per flaw)
 - What the next iteration is trying to resolve

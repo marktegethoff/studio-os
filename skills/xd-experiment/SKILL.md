@@ -7,7 +7,6 @@ Run the XD OS experiment workflow for a hypothesis.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for memory check · [SONNET] for experiment design and evaluation
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -34,7 +33,7 @@ Decision hierarchy: Structural correctness → Conceptual clarity → System coh
 
 ---
 
-## [HAIKU] Step 0 — PM brief check
+## Step 0 — PM brief check
 
 If this hypothesis relates to a customer problem or product direction — what to build, who to build for, what behavior to change — check for a validated PM brief before designing the experiment.
 
@@ -48,21 +47,13 @@ If this is a technical, structural, or behavioral hypothesis — not a customer 
 
 ---
 
-## [HAIKU] Step 1 — Memory check
+## Step 1 — Memory check
 
 Check the project's decision log path (defined in project-context.md). Has this hypothesis already been tested? If yes, report the prior result and stop. Do not re-run experiments with known conclusions.
 
 If no decision log is defined, proceed to Step 2.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Memory check complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Steps 2–6 — Experiment
+## Steps 2–6 — Experiment
 
 ### Step 2 — Philosophy check
 

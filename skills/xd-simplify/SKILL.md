@@ -7,7 +7,6 @@ Run the XD OS simplification workflow.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for context loading · [SONNET] for audit + critic + architect + implementation · [OPUS] for Distinguished Engineer (both passes)
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -43,7 +42,7 @@ $ARGUMENTS
 
 ---
 
-## [HAIKU] Step 1 — Context Load
+## Step 1 — Context Load
 
 Read in order:
 1. The spec file for this area, if one exists. Check the spec path from project-context.md.
@@ -53,21 +52,13 @@ Read in order:
 
 State what was loaded and confirm the scope before proceeding.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Context loaded. Switch to **[SONNET]** (`claude-sonnet-4-6`) to begin the audit loop.
-> Reply **"continue"** when ready.
-
----
-
-## [Loop — SONNET + OPUS] Steps 2–5
+## Steps 2–5 — Audit Loop
 
 Maximum iterations: 3. Loop exits when the Distinguished Engineer's Plan Review returns PROCEED.
 
 ---
 
-### [SONNET] Step 2 — Code Audit
+### Step 2 — Code Audit
 
 Scan the files in scope for the following five categories. For each finding, name the file, the specific code, and which category it falls into.
 
@@ -85,7 +76,7 @@ Produce an audit report: one section per category, each finding specific and act
 
 ---
 
-### [SONNET] Step 3 — Critic Pass
+### Step 3 — Critic Pass (xd-critic)
 
 Of the audit findings, determine what should actually be simplified vs. what must stay.
 
@@ -99,7 +90,7 @@ Produce a simplification plan: a specific list of changes, each with the file, t
 
 ---
 
-### [SONNET] Step 4 — Architect Pass
+### Step 4 — Architect Pass (xd-architect)
 
 Evaluate the simplification plan from an architectural perspective.
 
@@ -110,15 +101,7 @@ For each proposed change:
 
 State which changes are architecturally sound, which need revision, and which should be dropped. Revise the simplification plan accordingly.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Audit loop pass complete. Switch to **[OPUS]** (`claude-opus-4-6`) for Distinguished Engineer Plan Review.
-> Reply **"continue"** when ready.
-
----
-
-### [OPUS] Step 5 — Distinguished Engineer: Plan Review
+### Step 5 — Distinguished Engineer: Plan Review (de)
 
 Apply the Distinguished Engineer discipline (Plan Review mode).
 
@@ -127,23 +110,17 @@ Read the actual files in scope before rendering a verdict.
 State the verdict: **PROCEED / REVISE PLAN / REJECT**.
 
 - **PROCEED:** Exit the loop. Move to implementation.
-- **REVISE PLAN:** Name exactly what must change. Switch back to [SONNET] for another loop iteration. State what the next iteration must resolve.
+- **REVISE PLAN:** Name exactly what must change. Re-enter the audit loop. State what the next iteration must resolve.
 - **REJECT:** The simplification direction is structurally wrong. Stop. State what reframing is required before this can proceed.
 
-If REVISE PLAN and iterations remain:
-
-> **⏸ PAUSE — Model switch required.**
-> Plan requires revision. Switch back to **[SONNET]** (`claude-sonnet-4-6`) to revise.
-> Reply **"continue"** when ready.
-
-State explicitly before re-entering the loop:
+If REVISE PLAN and iterations remain, state explicitly before re-entering the loop:
 - What the previous iteration produced
 - What was wrong with it (one sentence per flaw)
 - What the next iteration must resolve
 
 ---
 
-## [SONNET] Step 6 — Engineer: Implement
+## Step 6 — Engineer: Implement
 
 Apply the Engineer discipline.
 
@@ -156,7 +133,7 @@ Implement the converged simplification plan. Each change touches one behavior. V
 
 ---
 
-## [SONNET] Step 7 — Simplify Review
+## Step 7 — Simplify Review
 
 Review the changed code for reuse, quality, and efficiency. Apply the `simplify` skill if available.
 
@@ -166,7 +143,7 @@ Fix any issues found before QA.
 
 ---
 
-## [SONNET] Step 8 — QA
+## Step 8 — QA (qa)
 
 For each behavior simplified:
 1. **Test scenarios** — what must be tested; cover primary path, edge cases, failure modes.
@@ -181,15 +158,7 @@ Report:
 
 Do not proceed to Distinguished Engineer Code Review if any invariant fails.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Implementation and QA complete. Switch to **[OPUS]** (`claude-opus-4-6`) for Distinguished Engineer Code Review.
-> Reply **"continue"** when ready.
-
----
-
-## [OPUS] Step 9 — Distinguished Engineer: Code Review
+## Step 9 — Distinguished Engineer: Code Review (de)
 
 Apply the Distinguished Engineer discipline (Code Review mode).
 
@@ -197,7 +166,7 @@ Read the spec, the simplification plan, and the actual changed files.
 Render a final verdict: **SHIP / REVISE / REJECT**.
 
 - **SHIP:** The simplification is complete. State what was achieved.
-- **REVISE:** Name what must change before merging. Changes return to [SONNET] for the Engineer.
+- **REVISE:** Name what must change before merging. Changes return to the Engineer.
 - **REJECT:** The implementation does not reflect the plan or introduces new problems. State what must be done before this can proceed.
 
 ---

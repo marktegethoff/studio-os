@@ -53,6 +53,15 @@ Load the component file for the component being specified.
 Use token names in all specs — never raw values when a token exists.
 If a value has no token, flag it: "No token exists for this value — engineering will hardcode. Define the token or accept the debt."
 
+### Build Spec Mode (DS companion translation)
+
+When invoked in the context of `/xd-prepare-handoff`, or when the project has a static DS companion used for prototyping:
+
+- Map every design token in the spec to its production component name
+- Flag tokens that exist in the DS companion but have no production component equivalent — engineering must build the component or use the closest equivalent; name the gap explicitly
+- Flag tokens that exist in production but are not in the DS companion — note the discrepancy; route to DS governance if the project has a `xd-design-systems` agent
+- Produce a component mapping table as a section of the spec: DS Token → Production Component → Notes
+
 ---
 
 ## XD Standard

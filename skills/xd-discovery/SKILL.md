@@ -7,7 +7,6 @@ Run the XD OS discovery workflow for a problem or opportunity.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for context loading · [SONNET] for synthesis and brief writing
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -42,7 +41,7 @@ Problem or feature area: $ARGUMENTS
 
 ---
 
-## [HAIKU] Step 0 — Context loading
+## Step 0 — Context loading
 
 Load project context. Read in order:
 1. `project-context.md` (`.claude/memory/` first, fallback `memory/`) — load user archetypes, product invariants, any prior decisions relevant to this problem space
@@ -57,7 +56,7 @@ Report what was found before proceeding.
 
 ---
 
-## [HAIKU] Step 1 — Research inventory
+## Step 1 — Research inventory
 
 Before synthesis: establish what research exists.
 
@@ -78,9 +77,9 @@ If the user has no materials, note the gap explicitly and proceed to Step 3 with
 
 ---
 
-## [SONNET] Steps 2–6 — Discovery work
+## Steps 2–6 — Discovery work
 
-### Step 2 — User Researcher
+### Step 2 — User Researcher (xd-user-researcher)
 
 Apply the User Researcher discipline.
 
@@ -95,7 +94,7 @@ If no research materials were provided:
 - State explicitly: "No research materials provided. Findings below are based on team knowledge and should be treated as Low confidence until validated."
 - Document what the team believes about user behavior as a starting hypothesis, clearly labeled as assumption rather than observation
 
-### Step 3 — Journey Mapper
+### Step 3 — Journey Mapper (xd-journey-mapper)
 
 Apply the Journey Mapper discipline.
 
@@ -119,7 +118,7 @@ Rank the moments that matter most — which stages or transitions most determine
 
 Close with: "Design brief anchor: the [n] moments above are where design attention should concentrate."
 
-### Step 4 — Assumption Mapper
+### Step 4 — Assumption Mapper (assumption-mapper)
 
 Apply the Assumption Mapper discipline.
 
@@ -159,7 +158,7 @@ Evaluate the PM's response:
 - **If modified scope:** restate the narrowed problem and confirm with the user before proceeding.
 - **If stopped:** summarize the discovery output as a record of why this problem was deprioritized. Do not write a brief. Offer to write the assumption register as a file for future reference.
 
-### Step 6 — Brief Writer
+### Step 6 — Brief Writer (brief-writer)
 
 Apply the Brief Writer discipline.
 

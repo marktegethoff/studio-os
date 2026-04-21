@@ -7,7 +7,6 @@ Run the XD OS measurement workflow for a feature.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for context loading · [SONNET] for metrics definition
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -38,7 +37,7 @@ Feature: $ARGUMENTS
 
 ---
 
-## [HAIKU] Step 0 — Context loading
+## Step 0 — Context loading
 
 Load project context. Read in order:
 1. `project-context.md` (`.claude/memory/` first, fallback `memory/`) — load product invariants, existing instrumentation, any prior measurement decisions
@@ -54,7 +53,7 @@ If the user provides the problem statement directly, proceed. Note the absence o
 
 ---
 
-## [HAIKU] Step 1 — Instrumentation inventory
+## Step 1 — Instrumentation inventory
 
 Before defining new metrics, establish what is already being tracked.
 
@@ -72,7 +71,7 @@ Wait for the user's response. Use the existing instrumentation to inform baselin
 
 ---
 
-## [SONNET] Steps 2–5 — Measurement work
+## Steps 2–5 — Measurement work
 
 ### Step 2 — Metrics Definer
 
@@ -125,7 +124,7 @@ Apply the Metrics Definer discipline.
 
 ---
 
-### Step 3 — PM gate evaluation
+### Step 3 — PM gate evaluation (pm)
 
 Evaluate the PM's response:
 
@@ -134,7 +133,7 @@ Evaluate the PM's response:
 - **If lagging indicator revised:** restate the revised metric and confirm before proceeding.
 - **If stopped:** summarize the measurement plan as a draft for future reference. Do not mark as complete.
 
-### Step 4 — Architect: instrumentation feasibility
+### Step 4 — Architect: instrumentation feasibility (xd-architect)
 
 Apply the Architect discipline — scoped to the instrumentation requirements produced by the Metrics Definer.
 

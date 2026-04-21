@@ -7,7 +7,6 @@ Run the XD OS review workflow for an implementation or artifact.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [SONNET] for critique · [HAIKU] for checklist verification · [SONNET] for verdict
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -40,7 +39,7 @@ Calibration gate:
 
 ---
 
-## [SONNET] Steps 1–2 — Critique
+## Steps 1–2 — Critique
 
 ### Step 1 — Philosophy check
 
@@ -48,13 +47,13 @@ Apply the ethos, brand principles, decision hierarchy, and calibration gate load
 
 State whether each gate passes. If any fails, identify specifically what fails and why.
 
-### Step 2 — Critic
+### Step 2 — Critic (xd-critic)
 
 Apply the Critic discipline: for each element, ask whether it is necessary, in its simplest correct form, and whether it adds complexity without value.
 
 List everything that should be removed or simplified.
 
-### Step 2.5 — Heurist (conditional)
+### Step 2.5 — Heurist (xd-heurist, conditional)
 
 Run if the artifact includes an interactive surface. Skip for data models, service layer, or non-interactive changes.
 
@@ -66,15 +65,7 @@ Evaluate:
 
 Flag violations with severity (P0–P3). P0 findings block ship.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Steps 1–2.5 complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) before continuing.
-> Reply **"continue"** when ready.
-
----
-
-## [HAIKU] Steps 3–6 — Verification
+## Steps 3–6 — Verification
 
 ### Step 3 — Invariant verification
 
@@ -95,7 +86,7 @@ If no decision log is defined, skip this step.
 
 ---
 
-### Step 6 — Commercial check
+### Step 6 — Commercial check (marketer)
 
 Apply the Marketer discipline: commercial viability.
 
@@ -105,15 +96,7 @@ Apply the Marketer discipline: commercial viability.
 
 State a commercial verdict. If the artifact passes philosophy but fails commercially — or vice versa — name the conflict explicitly. The tension is information, not a blocker.
 
----
-
-> **⏸ PAUSE — Model switch required.**
-> Steps 3–6 complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Output — Verdict
+## Output — Verdict
 
 ```
 # Review: [Artifact Name]

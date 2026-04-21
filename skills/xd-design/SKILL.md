@@ -7,7 +7,6 @@ Run the full XD OS design workflow for a problem or feature.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for context loading · [SONNET] for design work
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -55,7 +54,7 @@ Problem: $ARGUMENTS
 
 ---
 
-## [HAIKU] Step 0 — PM brief check
+## Step 0 — PM brief check
 
 Before design begins: check for a validated product brief from the PM.
 
@@ -69,7 +68,7 @@ If the user confirms to proceed, continue. Design against a clear problem statem
 
 ---
 
-## [HAIKU] Steps 1–3 — Context loading
+## Steps 1–3 — Context loading
 
 ### Step 1 — Philosophy validation
 
@@ -81,7 +80,7 @@ If the problem statement fails the gate, say so and stop.
 
 Also check the project's decision log (path defined in `project-context.md`). If available, scan for prior decisions that constrain this problem. Do not repeat rejected approaches.
 
-### Step 2 — Historian
+### Step 2 — Historian (xd-historian)
 
 Apply the Historian discipline (embedded above).
 
@@ -94,17 +93,9 @@ Answer:
 
 State any prior decisions from the ledger (if available) that constrain this problem. Do not repeat rejected approaches.
 
----
+## Steps 4–9 — Design work
 
-> **⏸ PAUSE — Model switch required.**
-> Steps 1–3 complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
-> Reply **"continue"** when ready.
-
----
-
-## [SONNET] Steps 4–9 — Design work
-
-### Step 4 — Strategist
+### Step 4 — Strategist (xd-strategist)
 
 Apply the Strategist discipline (embedded above).
 
@@ -127,7 +118,7 @@ State the commercial position in 3–4 sentences. If it conflicts with the Strat
 
 ---
 
-### Step 5 — Architect
+### Step 5 — Architect (xd-architect)
 
 Apply the Architect discipline (embedded above).
 
@@ -136,7 +127,7 @@ Define:
 - System boundaries
 - Integration points
 
-### Step 6 — Critic
+### Step 6 — Critic (xd-critic)
 
 Apply the Critic discipline (embedded above).
 
@@ -147,7 +138,7 @@ Remove:
 
 State what was removed and why.
 
-### Step 7 — Designer
+### Step 7 — Designer (xd-designer)
 
 Apply the Designer discipline (embedded above).
 
@@ -189,7 +180,7 @@ When Phase A outer agent completes, proceed to Phase B.
 
 - **Visual Designer** — always runs last, after all Phase A and Phase B agents complete. Evaluate spacing, proportion, alignment, and visual weight distribution across the full surface using all sub-team outputs. Prescribe specific corrections. Skip only if zero sub-team disciplines were invoked.
 
-### Step 7.7 — Heurist (conditional)
+### Step 7.7 — Heurist (xd-heurist, conditional)
 
 Run if the surface involves user interaction. Skip for data model or system-only changes with no new surface work.
 
@@ -216,7 +207,7 @@ Findings at this step may require returning to the Designer. If so, state precis
 
 ---
 
-### Step 8 — Accessibility
+### Step 8 — Accessibility (xd-accessibility)
 
 Apply the Accessibility discipline (embedded above).
 
@@ -225,7 +216,7 @@ Verify:
 - 44pt minimum touch targets
 - Screen reader labeling (use Writer output for VoiceOver strings if Writer ran)
 
-### Step 9 — Specifier
+### Step 9 — Specifier (xd-specifier)
 
 If this design will proceed to engineering, produce a complete engineering handoff specification:
 - All component states (default + every variant)
