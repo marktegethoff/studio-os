@@ -153,6 +153,6 @@ See [EXAMPLES.md](EXAMPLES.md) for illustrative examples of the system in use.
 
 ## Credits
 
-Built by [Standard Works](https://standardworks.co).
+Built by [Mark Tegethoff](https://github.com/marktegethoff).
 
 The `luck` durability diagnostic was developed by [Soleio](https://github.com/soleio/luck). It is not included in this repository.
