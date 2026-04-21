@@ -2,13 +2,13 @@
 Last updated: [date]
 Project: [project name]
 
-This file is loaded by `studio-validate-design` to validate mockups against the project's design system. Define all rules here before running validation.
+This file is loaded by `xd-validate-design` to validate mockups against the project's design system. Define all rules here before running validation.
 
 ---
 
 ## How This File Works
 
-Each section maps to a validation check. When `studio-validate-design` runs, it applies each rule defined here as a checklist item. Undefined sections are skipped.
+Each section maps to a validation check. When `xd-validate-design` runs, it applies each rule defined here as a checklist item. Undefined sections are skipped.
 
 Rules should be exact, not approximate. "Use the primary blue" is not a rule. "Primary interactive elements use `--color-action: #0066CC`" is a rule.
 

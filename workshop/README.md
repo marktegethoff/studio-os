@@ -17,7 +17,7 @@ workshop/
   agents/
     workshop-critic.md    — Tells you exactly what to cut
     workshop-designer.md  — Works out how something should behave before you build it
-    workshop-writer.md    — Evaluates and sharpens words in your design
+    workshop-xd-writer.md    — Evaluates and sharpens words in your design
     workshop-visual.md    — Improves visual hierarchy, spacing, and weight
 ```
 
@@ -125,7 +125,7 @@ Four specialists are available during the workshop. Invoke them by name when you
 |---|---|---|
 | @workshop-designer | "designer" | You're not sure how something should behave |
 | @workshop-critic | "critic" | Something feels like too much |
-| @workshop-writer | "writer" | The words in your design need work |
+| @workshop-xd-writer | "xd-writer" | The words in your design need work |
 | @workshop-visual | "visual" | The layout feels flat or unbalanced |
 
 **Example:**

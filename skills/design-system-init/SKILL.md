@@ -1,5 +1,5 @@
 ---
-description: Scaffold a design system skill for this project. Creates the directory structure and token file templates at `.claude/skills/design-system/`. Run once per project after `studio-init`.
+description: Scaffold a design system skill for this project. Creates the directory structure and token file templates at `.claude/skills/design-system/`. Run once per project after `xd-init`.
 argument-hint: ""
 ---
 
@@ -272,4 +272,4 @@ Next steps:
 4. Define system invariants in `SKILL.md`
 5. Add component files to `components/` as you build them
 
-Once populated, Studio OS agents will load this skill automatically when working on this project.
+Once populated, XD OS agents will load this skill automatically when working on this project.

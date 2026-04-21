@@ -1,6 +1,6 @@
 # User Archetypes
 
-Behavioral archetypes for this project — usage patterns and design implications, not demographic profiles. Written by studio-init and updated as the product's understanding of its users evolves.
+Behavioral archetypes for this project — usage patterns and design implications, not demographic profiles. Written by xd-init and updated as the product's understanding of its users evolves.
 
 Use when evaluating feature decisions, designing experiments, or assessing whether a design serves the actual user population.
 
@@ -39,7 +39,7 @@ Aim for 2–4 archetypes. More than 4 usually indicates unclear product focus.
 
 ## Archetypes
 
-*(Run `studio-init` to populate with archetypes for this project. Or add them manually using the template above.)*
+*(Run `xd-init` to populate with archetypes for this project. Or add them manually using the template above.)*
 
 ---
 

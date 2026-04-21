@@ -1,6 +1,6 @@
 # Philosophy
 
-Studio OS is built on a set of convictions about how design and product work should be done. They are not rules. They are a position — one you are invited to challenge, adapt, and make your own.
+XD OS is built on a set of convictions about how design and product work should be done. They are not rules. They are a position — one you are invited to challenge, adapt, and make your own.
 
 ---
 
@@ -70,7 +70,7 @@ The studio builds friction into structural decisions not because friction is goo
 
 These convictions emerged from specific work, specific failures, and specific things we learned the hard way. They are not universal laws.
 
-You should use Studio OS as a starting point, not a destination. Read the agents. Use them for a few projects. Notice where the principles serve you and where they don't. Notice what you add, what you override, what you want back when it's gone.
+You should use XD OS as a starting point, not a destination. Read the agents. Use them for a few projects. Notice where the principles serve you and where they don't. Notice what you add, what you override, what you want back when it's gone.
 
 Then write your own philosophy. Not as a derivative of this one — as a statement of what *you* have learned about how work should be done.
 
@@ -78,4 +78,4 @@ The point of a philosophy is not to inherit one. It is to have one.
 
 ---
 
-*Studio OS was built by [Standard Works](https://standardworks.co). The ethos is ours. The methodology is for everyone.*
+*XD OS was built by [Standard Works](https://standardworks.co). The ethos is ours. The methodology is for everyone.*

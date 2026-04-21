@@ -5,7 +5,7 @@ CLAUDE_DIR="$HOME/.claude"
 STUDIO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ""
-echo "Studio OS — install"
+echo "XD OS — install"
 echo "-------------------"
 echo ""
 
@@ -82,11 +82,11 @@ fi
 echo ""
 
 # Done
-echo "Studio OS installed."
+echo "XD OS installed."
 echo ""
 echo "Next: open a Claude Code session in your project and run:"
 echo ""
-echo "  /studio-init"
+echo "  /xd-init"
 echo ""
 echo "This sets up project-specific context so all agents calibrate to your product."
 echo ""

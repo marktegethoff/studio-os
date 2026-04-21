@@ -1,0 +1,527 @@
+#!/usr/bin/env bash
+set -e
+
+CLAUDE_DIR="$HOME/.claude"
+STUDIO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# ─── Core agents — always installed; names are reserved ──────────────────────
+# Role packages cannot shadow these names. Any attempt to install a file
+# matching a Core name will warn and abort.
+CORE_AGENTS=(
+  "competitive-analyst.md"
+  "luck.md"
+  "xd-audit.md"
+  "xd-design-director.md"
+  "xd-de.md"
+  "xd-heurist.md"
+  "xd-pm.md"
+)
+
+CORE_SKILLS=(
+  "lt-review"
+  "studio"
+  "xd-discovery"
+  "xd-measure"
+  "xd-review"
+  "xd-solve"
+)
+
+# ─── Role agent sets ──────────────────────────────────────────────────────────
+
+DESIGN_AGENTS=(
+  "choreographer.md"
+  "design-systems-governance.md"
+  "mark-maker.md"
+  "materialist.md"
+  "prototyper.md"
+  "specifier.md"
+  "xd-accessibility.md"
+  "xd-critic.md"
+  "xd-designer.md"
+  "xd-historian.md"
+  "xd-strategist.md"
+  "xd-validate-design.md"
+  "typesetter.md"
+  "visual-designer.md"
+  "writer.md"
+)
+
+DESIGN_SKILLS=(
+  "xd-design"
+  "xd-ideate"
+  "xd-prototype"
+  "xd-simplify"
+  "xd-simulate"
+  "validate-design"
+)
+
+PM_AGENTS=(
+  "assumption-mapper.md"
+  "brief-writer.md"
+  "journey-mapper.md"
+  "metrics-definer.md"
+  "xd-critic.md"
+  "xd-historian.md"
+  "xd-marketer.md"
+  "xd-research-sweep.md"
+  "xd-scout.md"
+  "xd-strategist.md"
+  "user-researcher.md"
+)
+
+PM_SKILLS=(
+  "xd-experiment"
+  "xd-ideate"
+)
+
+ENGINEERING_AGENTS=(
+  "specifier.md"
+  "xd-architect.md"
+  "xd-engineer.md"
+  "xd-qa.md"
+  "xd-research-sweep.md"
+)
+
+ENGINEERING_SKILLS=(
+  "xd-implement"
+  "xd-simplify"
+)
+
+# ─── Helpers ──────────────────────────────────────────────────────────────────
+
+check_claude() {
+  if ! command -v claude &> /dev/null; then
+    echo "Claude Code CLI not found."
+    echo "Install it first: https://claude.ai/code"
+    exit 1
+  fi
+}
+
+header() {
+  echo ""
+  echo "XD OS"
+  echo "────────────────────────────────"
+}
+
+is_core_agent() {
+  local filename=$1
+  for core in "${CORE_AGENTS[@]}"; do
+    [ "$filename" = "$core" ] && return 0
+  done
+  return 1
+}
+
+install_core() {
+  mkdir -p "$CLAUDE_DIR/agents"
+  mkdir -p "$CLAUDE_DIR/skills"
+
+  for filename in "${CORE_AGENTS[@]}"; do
+    local src="$STUDIO_DIR/agents/$filename"
+    [ -f "$src" ] && cp "$src" "$CLAUDE_DIR/agents/$filename"
+  done
+
+  for skill in "${CORE_SKILLS[@]}"; do
+    local src_dir="$STUDIO_DIR/skills/$skill"
+    if [ -d "$src_dir" ] && [ -f "$src_dir/SKILL.md" ]; then
+      mkdir -p "$CLAUDE_DIR/skills/$skill"
+      cp "$src_dir/SKILL.md" "$CLAUDE_DIR/skills/$skill/SKILL.md"
+    fi
+  done
+}
+
+install_role_agents() {
+  local agents_arr=("${!1}")
+  local skills_arr=("${!2}")
+
+  for filename in "${agents_arr[@]}"; do
+    # Guard: never overwrite Core agents
+    if is_core_agent "$filename"; then continue; fi
+    local src="$STUDIO_DIR/agents/$filename"
+    [ -f "$src" ] && cp "$src" "$CLAUDE_DIR/agents/$filename"
+  done
+
+  for skill in "${skills_arr[@]}"; do
+    local src_dir="$STUDIO_DIR/skills/$skill"
+    if [ -d "$src_dir" ] && [ -f "$src_dir/SKILL.md" ]; then
+      mkdir -p "$CLAUDE_DIR/skills/$skill"
+      cp "$src_dir/SKILL.md" "$CLAUDE_DIR/skills/$skill/SKILL.md"
+    fi
+  done
+}
+
+install_memory() {
+  local memory_src="$STUDIO_DIR/memory"
+  local memory_dest="$CLAUDE_DIR/agents/memory"
+  mkdir -p "$memory_dest"
+  for file in "$memory_src/"*.md; do
+    [ -f "$file" ] || continue
+    local filename dest
+    filename=$(basename "$file")
+    dest="$memory_dest/$filename"
+    [ ! -f "$dest" ] && cp "$file" "$dest"
+  done
+}
+
+count_installed() {
+  local count=0
+  local agents_arr=("${!1}")
+  for filename in "${agents_arr[@]}"; do
+    [ -f "$CLAUDE_DIR/agents/$filename" ] && count=$((count + 1))
+  done
+  echo "$count"
+}
+
+# ─── Personal profile interview ───────────────────────────────────────────────
+
+run_profile_interview() {
+  local discipline=${1:-A}
+  echo ""
+  echo "About you"
+  echo "---------"
+  echo ""
+
+  # Role options vary by discipline
+  declare -a roles
+  case "$discipline" in
+    D) roles=("UX Designer" "Product Designer" "Service Designer" "Content Designer / Content Strategist" "UX Researcher" "Design Systems Designer") ;;
+    P) roles=("Product Manager" "Program Manager" "Product Strategist" "UX Researcher" "Business Analyst") ;;
+    E) roles=("Front-end Engineer" "Full-stack Engineer" "iOS Engineer" "Backend Engineer" "Data Engineer") ;;
+    *) roles=("Designer" "Product Manager" "Engineer" "Researcher" "Strategist") ;;
+  esac
+
+  echo "What kind of work do you do?"
+  echo ""
+  local i=1
+  for role in "${roles[@]}"; do
+    printf "  %s  %s\n" "$i" "$role"
+    i=$((i + 1))
+  done
+  printf "  %s  Other — type it\n" "$i"
+  echo ""
+  printf "Enter a number, or type your own role (S to skip): "
+  read -r role_input
+
+  if [ "$role_input" = "S" ] || [ "$role_input" = "s" ]; then
+    echo ""
+    echo "Skipped. You can add a profile later with:  ./studio setup --me"
+    return
+  fi
+
+  local role_value=""
+  if [[ "$role_input" =~ ^[0-9]+$ ]] && [ "$role_input" -le "${#roles[@]}" ]; then
+    role_value="${roles[$((role_input - 1))]}"
+  elif [[ "$role_input" =~ ^[0-9]+$ ]]; then
+    # "Other" — prompt for text
+    printf "Type your role: "
+    read -r role_value
+  else
+    role_value="$role_input"
+  fi
+
+  # Skills
+  echo ""
+  echo "What are your strongest skills? (Enter numbers separated by spaces, or press Enter to skip)"
+  echo ""
+  local skill_opts=("Visual design" "Interaction design" "User research" "Systems thinking" "Content and copy" "Service design / journey mapping" "Data and analytics" "Strategy and vision")
+  local i=1
+  for s in "${skill_opts[@]}"; do
+    printf "  %s  %s\n" "$i" "$s"
+    i=$((i + 1))
+  done
+  echo ""
+  printf "Enter numbers (e.g. 1 3 5): "
+  read -r skills_input
+
+  local skills_value=""
+  if [ -n "$skills_input" ] && [ "$skills_input" != "S" ] && [ "$skills_input" != "s" ]; then
+    local selected=()
+    for num in $skills_input; do
+      if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#skill_opts[@]}" ]; then
+        selected+=("${skill_opts[$((num - 1))]}")
+      fi
+    done
+    [ "${#selected[@]}" -gt 0 ] && skills_value=$(IFS=", "; echo "${selected[*]}")
+  fi
+
+  # Experience
+  echo ""
+  echo "Where are you in your practice?"
+  echo ""
+  echo "  1  Early career — building the craft"
+  echo "  2  Mid-level — established practice, growing scope"
+  echo "  3  Senior — independent, shaping direction"
+  echo "  4  Lead / Principal — setting direction, mentoring others"
+  echo ""
+  printf "Enter a number (S to skip): "
+  read -r exp_input
+
+  local exp_value=""
+  case "$exp_input" in
+    1) exp_value="Early career — building the craft" ;;
+    2) exp_value="Mid-level — established practice, growing scope" ;;
+    3) exp_value="Senior — independent, shaping direction" ;;
+    4) exp_value="Lead / Principal — setting direction, mentoring others" ;;
+  esac
+
+  # Write profile
+  local profile_dir="$CLAUDE_DIR/memory"
+  mkdir -p "$profile_dir"
+  local profile_file="$profile_dir/user-profile.md"
+  local today
+  today=$(date +%Y-%m-%d)
+
+  {
+    echo "# User Profile"
+    echo "Last updated: $today"
+    echo ""
+    if [ -n "$role_value" ]; then
+      echo "## Role"
+      echo "$role_value"
+      echo ""
+    fi
+    if [ -n "$skills_value" ]; then
+      echo "## Skills"
+      echo "$skills_value"
+      echo ""
+    fi
+    if [ -n "$exp_value" ]; then
+      echo "## Experience"
+      echo "$exp_value"
+      echo ""
+    fi
+  } > "$profile_file"
+
+  # Confirmation
+  echo ""
+  echo "Got it."
+  echo ""
+  [ -n "$role_value" ]   && printf "  Role:        %s\n" "$role_value"
+  [ -n "$skills_value" ] && printf "  Skills:      %s\n" "$skills_value"
+  [ -n "$exp_value" ]    && printf "  Experience:  %s\n" "$exp_value"
+  echo ""
+  echo "Agents will use this to calibrate how they work with you."
+  echo "Update it any time:  ./studio setup --me"
+}
+
+# ─── Commands ─────────────────────────────────────────────────────────────────
+
+cmd_setup() {
+  check_claude
+  header
+  echo "Setting up your AI collaborators."
+  echo ""
+  echo "Always included:  PM · Design Director · Distinguished Engineer"
+  echo "                  Heurist · Audit · Luck · Competitive Analyst"
+  echo ""
+  echo "What's your primary discipline?"
+  echo ""
+  echo "  [D]  Design"
+  echo "  [P]  Product"
+  echo "  [E]  Engineering"
+  echo "  [A]  All disciplines"
+  echo "  [M]  Let me choose"
+  echo ""
+  printf "→ "
+  read -r choice
+
+  install_core
+  install_memory
+
+  local discipline="A"
+  case "$choice" in
+    D|d)
+      discipline="D"
+      install_role_agents DESIGN_AGENTS[@] DESIGN_SKILLS[@]
+      ;;
+    P|p)
+      discipline="P"
+      install_role_agents PM_AGENTS[@] PM_SKILLS[@]
+      ;;
+    E|e)
+      discipline="E"
+      install_role_agents ENGINEERING_AGENTS[@] ENGINEERING_SKILLS[@]
+      ;;
+    A|a)
+      install_role_agents DESIGN_AGENTS[@] DESIGN_SKILLS[@]
+      install_role_agents PM_AGENTS[@] PM_SKILLS[@]
+      install_role_agents ENGINEERING_AGENTS[@] ENGINEERING_SKILLS[@]
+      ;;
+    M|m)
+      cmd_choose_agents
+      ;;
+    *)
+      echo ""
+      echo "Unrecognised choice. Run ./studio setup to try again."
+      exit 1
+      ;;
+  esac
+
+  run_profile_interview "$discipline"
+
+  echo ""
+  echo "────────────────────────────────"
+  echo "XD OS is ready."
+  echo ""
+  echo "Open Claude Code in your project and run:"
+  echo ""
+  echo "  /studio project"
+  echo ""
+  echo "This sets up project-specific context so agents calibrate to your product."
+  echo ""
+  echo "Note: your settings aren't locked — anyone with Claude Code access can view"
+  echo "or change them. For enforced settings, use Claude Code's enterprise controls."
+  echo ""
+}
+
+cmd_add() {
+  check_claude
+  header
+
+  local has_design=false has_pm=false has_eng=false
+  [ -f "$CLAUDE_DIR/agents/xd-designer.md" ] && has_design=true
+  [ -f "$CLAUDE_DIR/agents/user-researcher.md" ] && has_pm=true
+  [ -f "$CLAUDE_DIR/agents/xd-engineer.md" ] && has_eng=true
+
+  local installed_label=""
+  $has_design && installed_label="${installed_label}Design  "
+  $has_pm     && installed_label="${installed_label}Product  "
+  $has_eng    && installed_label="${installed_label}Engineering"
+
+  if [ -n "$installed_label" ]; then
+    echo "Installed: ${installed_label%  }"
+    echo ""
+  fi
+
+  echo "Add a discipline:"
+  echo ""
+  $has_design || echo "  [D]  Design      — Designer, Typesetter, Choreographer..."
+  $has_pm     || echo "  [P]  Product     — Researcher, Journey Mapper, Brief Writer..."
+  $has_eng    || echo "  [E]  Engineering — Engineer, QA, Architect, Specifier..."
+  echo "  [M]  Choose individually"
+  echo ""
+  echo "────────────────────────────────"
+  echo "  [U]  Update installed collaborators to latest"
+  echo ""
+  printf "→ "
+  read -r choice
+
+  case "$choice" in
+    D|d) install_role_agents DESIGN_AGENTS[@] DESIGN_SKILLS[@];       echo ""; echo "Design collaborators added." ;;
+    P|p) install_role_agents PM_AGENTS[@] PM_SKILLS[@];               echo ""; echo "Product collaborators added." ;;
+    E|e) install_role_agents ENGINEERING_AGENTS[@] ENGINEERING_SKILLS[@]; echo ""; echo "Engineering collaborators added." ;;
+    M|m) cmd_choose_agents ;;
+    U|u) cmd_update ;;
+    *)   echo ""; echo "Unrecognised choice." ;;
+  esac
+  echo ""
+}
+
+cmd_update() {
+  check_claude
+  echo ""
+  echo "Updating..."
+
+  install_core
+
+  # Reinstall only agents already present at destination
+  for filename in "${DESIGN_AGENTS[@]}" "${PM_AGENTS[@]}" "${ENGINEERING_AGENTS[@]}"; do
+    local dest="$CLAUDE_DIR/agents/$filename"
+    local src="$STUDIO_DIR/agents/$filename"
+    [ -f "$dest" ] && [ -f "$src" ] && cp "$src" "$dest"
+  done
+
+  for skill in "${DESIGN_SKILLS[@]}" "${PM_SKILLS[@]}" "${ENGINEERING_SKILLS[@]}"; do
+    local dest_dir="$CLAUDE_DIR/skills/$skill"
+    local src_dir="$STUDIO_DIR/skills/$skill"
+    [ -d "$dest_dir" ] && [ -f "$src_dir/SKILL.md" ] && cp "$src_dir/SKILL.md" "$dest_dir/SKILL.md"
+  done
+
+  echo "Done. Memory files were not changed."
+  echo ""
+}
+
+cmd_setup_me() {
+  check_claude
+  echo ""
+  local profile_file="$CLAUDE_DIR/memory/user-profile.md"
+  if [ -f "$profile_file" ]; then
+    echo "Current profile:"
+    echo ""
+    grep -v "^#" "$profile_file" | grep -v "^Last updated" | grep -v "^$" | sed 's/^/  /'
+    echo ""
+    echo "Updating below. Press Enter to keep current values."
+  fi
+  run_profile_interview "A"
+}
+
+cmd_choose_agents() {
+  echo ""
+  echo "Choose individually:"
+  echo ""
+
+  # Deduplicated list of all non-Core role agents
+  declare -a all_agents
+  declare -A seen
+  for filename in "${DESIGN_AGENTS[@]}" "${PM_AGENTS[@]}" "${ENGINEERING_AGENTS[@]}"; do
+    if [ -z "${seen[$filename]+_}" ] && ! is_core_agent "$filename"; then
+      all_agents+=("$filename")
+      seen[$filename]=1
+    fi
+  done
+
+  local i=1
+  for filename in "${all_agents[@]}"; do
+    local name="${filename%.md}"
+    local tag=""
+    [ -f "$CLAUDE_DIR/agents/$filename" ] && tag=" (installed)"
+    printf "  %2d  %s%s\n" "$i" "$name" "$tag"
+    i=$((i + 1))
+  done
+
+  echo ""
+  printf "Enter numbers to install (e.g. 1 3 7): "
+  read -r selection
+
+  local added=0
+  for num in $selection; do
+    if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#all_agents[@]}" ]; then
+      local filename="${all_agents[$((num - 1))]}"
+      local src="$STUDIO_DIR/agents/$filename"
+      if [ -f "$src" ]; then
+        cp "$src" "$CLAUDE_DIR/agents/$filename"
+        echo "  Added: ${filename%.md}"
+        added=$((added + 1))
+      fi
+    fi
+  done
+  [ "$added" -eq 0 ] && echo "  Nothing added."
+}
+
+usage() {
+  echo ""
+  echo "Usage: ./studio <command>"
+  echo ""
+  echo "  setup         Install XD OS — collaborators and personal profile"
+  echo "  setup --me    Update your personal profile"
+  echo "  add           Add a discipline to an existing install"
+  echo "  update        Update all installed collaborators to latest versions"
+  echo ""
+  echo "In Claude Code, run /studio project to set up a new project."
+  echo ""
+}
+
+# ─── Entry point ──────────────────────────────────────────────────────────────
+
+case "${1:-}" in
+  setup)
+    if [ "${2:-}" = "--me" ]; then
+      cmd_setup_me
+    else
+      cmd_setup
+    fi
+    ;;
+  add)    cmd_add ;;
+  update) cmd_update ;;
+  "")     cmd_setup ;;
+  *)      usage ;;
+esac

@@ -7,7 +7,7 @@ Next review: when a section feels wrong, not on a schedule
 
 ## How This File Works
 
-This file is read at session start by studio-designer and studio-creative-director.
+This file is read at session start by designer and design-director.
 It is stable — not updated by agents, not swept by research, not a log of decisions.
 
 It captures what endures across eras, not what is current.

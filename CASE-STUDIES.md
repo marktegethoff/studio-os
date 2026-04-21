@@ -1,6 +1,6 @@
 # Case Studies
 
-These are illustrative scenarios, not documented engagements. They are constructed to show how Studio OS workflows, agent sequencing, and human-agent collaboration work in practice — the kinds of problems the system is designed for, the kinds of decisions it surfaces, and the dynamics that emerge when structured reasoning meets real product judgment.
+These are illustrative scenarios, not documented engagements. They are constructed to show how XD OS workflows, agent sequencing, and human-agent collaboration work in practice — the kinds of problems the system is designed for, the kinds of decisions it surfaces, and the dynamics that emerge when structured reasoning meets real product judgment.
 
 They are plausible. They are not evidence. Evidence comes from use.
 
@@ -10,15 +10,15 @@ They are plausible. They are not evidence. Evidence comes from use.
 
 **Problem:** A mid-stage B2B analytics product has a 40% drop-off between signup and first dashboard creation. The existing onboarding is a five-step wizard with tooltips, product tours, and a sample dataset. Users who complete onboarding retain well. Most don't complete it.
 
-**Workflow used:** `/studio-design onboarding drop-off — users abandon before creating their first dashboard`
+**Workflow used:** `/xd-design onboarding drop-off — users abandon before creating their first dashboard`
 
 ---
 
 ### How the workflow ran
 
-**Context loading.** The project-context file — written during `/studio-init` — established: the product serves operations teams at mid-market companies, the core invariant is "time-to-first-insight must decrease with every release," and previous attempts at guided tours were rejected as patronizing. But the file also carried the team's philosophy: they had defined their brand principle as "respect the operator's time — never make them feel like a student." This wasn't a tagline. It was a decision filter that shaped every agent's reasoning downstream.
+**Context loading.** The project-context file — written during `/xd-init` — established: the product serves operations teams at mid-market companies, the core invariant is "time-to-first-insight must decrease with every release," and previous attempts at guided tours were rejected as patronizing. But the file also carried the team's philosophy: they had defined their brand principle as "respect the operator's time — never make them feel like a student." This wasn't a tagline. It was a decision filter that shaped every agent's reasoning downstream.
 
-This is where team culture enters the system. A different company — one whose brand principle was "guide users to mastery" — would have gotten a different design from the same agents running the same workflow against the same problem. The `/studio-init` interview captures these positions precisely so that agents don't default to generic best practices. They reason from *your* principles.
+This is where team culture enters the system. A different company — one whose brand principle was "guide users to mastery" — would have gotten a different design from the same agents running the same workflow against the same problem. The `/xd-init` interview captures these positions precisely so that agents don't default to generic best practices. They reason from *your* principles.
 
 **Historian** researched onboarding precedent. Found that the most durable pattern in B2B tools is not tutorials but *immediate productive use* — putting the user in a real task with real data before asking them to learn the system. Noted that wizard-style onboarding has consistently underperformed in retention studies for tools with complex data models.
 
@@ -38,7 +38,7 @@ The product lead's second pushback came here — about the sample dataset. Her t
 
 When the product lead saw this model, something clicked: "This isn't an onboarding redesign. We're removing onboarding entirely." That reframe — from *improving a feature* to *eliminating a category* — was something she said she wouldn't have reached on her own, not because she lacked the ability, but because she was too close to the existing system to see it as optional. The agent sequence got her there by building the case across four handoffs: the historian questioned the pattern, the strategist exposed the misalignment, the architect named the seam, and the critic removed the unnecessary. By the time the designer presented the model, the conclusion felt obvious. That's the value of the sequence — no single agent made the leap, but the accumulated reasoning made the leap inevitable for the person making the decision.
 
-**Writer** authored the empty state and first-run copy, calibrated to the team's voice guidelines captured in project context: direct, peer-to-peer, no condescension. The empty state message: the product name, one sentence describing what it does, and a "Connect data source" action. No welcome message, no feature list, no "Let's get you set up!" enthusiasm. The first-run annotations use the user's actual metric names, not generic labels. A team with a warmer, more conversational brand voice would have gotten different copy from the same writer agent — the structure would remain, but the tone would shift to match their culture.
+**Writer** authored the empty state and first-run copy, calibrated to the team's voice guidelines captured in project context: direct, peer-to-peer, no condescension. The empty state message: the product name, one sentence describing what it does, and a "Connect data source" action. No welcome message, no feature list, no "Let's get you set up!" enthusiasm. The first-run annotations use the user's actual metric names, not generic labels. A team with a warmer, more conversational brand voice would have gotten different copy from the same xd-writer agent — the structure would remain, but the tone would shift to match their culture.
 
 **Heurist** evaluated for friction. Found one issue: users who connect a data source with limited data would see a sparse pre-built dashboard, which could undermine confidence. Recommended a minimum-data threshold — if the connected source has fewer than N records, show an honest message about what's possible rather than a half-empty dashboard.
 
@@ -48,7 +48,7 @@ When the product lead saw this model, something clicked: "This isn't an onboardi
 
 ---
 
-### What the studio removed
+### What was removed
 
 - Five-step onboarding wizard
 - Product tour with tooltip overlays
@@ -57,7 +57,7 @@ When the product lead saw this model, something clicked: "This isn't an onboardi
 - Welcome email sequence tied to onboarding steps
 - "Getting Started" documentation section
 
-### What the studio produced
+### What was produced
 
 - Two first-run states within the core product
 - Auto-generated dashboard from real user data
@@ -79,11 +79,11 @@ The memory system recorded the rejected approach (guided tours, sample data) wit
 
 **Problem:** A healthcare coordination app needs to add notifications. Clinicians use the app to manage patient handoffs between shifts. The team's initial brief: "Add push notifications for new handoffs, status changes, and messages."
 
-**Workflow used:** `/studio-solve notification system for clinician handoff coordination`
+**Workflow used:** `/xd-solve notification system for clinician handoff coordination`
 
-The team chose `/studio-solve` because notifications in healthcare are a high-stakes structural decision — the wrong model creates alert fatigue in a context where missed alerts have real consequences.
+The team chose `/xd-solve` because notifications in healthcare are a high-stakes structural decision — the wrong model creates alert fatigue in a context where missed alerts have real consequences.
 
-Their `/studio-init` interview had captured something specific: the company was founded by former nurses, and their organizational philosophy was "clinical tools should feel like they were built by someone who's been on the floor." This wasn't a marketing statement — it was an engineering constraint. It meant every design decision would be evaluated against the question: *would a clinician who's been on shift for ten hours experience this as helpful or as noise?* That filter, loaded from `project-context.md`, shaped every agent's reasoning throughout the convergence loop.
+Their `/xd-init` interview had captured something specific: the company was founded by former nurses, and their organizational philosophy was "clinical tools should feel like they were built by someone who's been on the floor." This wasn't a marketing statement — it was an engineering constraint. It meant every design decision would be evaluated against the question: *would a clinician who's been on shift for ten hours experience this as helpful or as noise?* That filter, loaded from `project-context.md`, shaped every agent's reasoning throughout the convergence loop.
 
 ---
 
@@ -97,9 +97,9 @@ Their `/studio-init` interview had captured something specific: the company was 
 
 **Marketer** evaluated the notification model against user expectations and competitive positioning. Noted that most competing tools over-notify and that "quiet by default" is a defensible position in a market where clinicians actively resent their tools. But the marketer also connected this to the company's founding philosophy — "built by someone who's been on the floor" becomes tangible when your tool is the one that *doesn't* buzz during a procedure. Recommended leaning into restraint as a product principle — fewer notifications as a feature, not a limitation. The company's culture didn't just permit this recommendation; it demanded it.
 
-**Creative Director** reviewed the iteration. Verdict: the two-tier model (critical, actionable) is structurally sound, but the definitions need precision. "Critical" and "actionable" are ambiguous in clinical context — every notification a clinician receives feels critical to someone. Pushed for definitions grounded in *time-sensitivity and patient impact*, not subjective severity. Sent back for refinement.
+**Design Director** reviewed the iteration. Verdict: the two-tier model (critical, actionable) is structurally sound, but the definitions need precision. "Critical" and "actionable" are ambiguous in clinical context — every notification a clinician receives feels critical to someone. Pushed for definitions grounded in *time-sensitivity and patient impact*, not subjective severity. Sent back for refinement.
 
-The CTO resisted here. He felt the two-tier model was solid and wanted to move to implementation. "We're overthinking the labels. Engineers can figure out which bucket each event goes in." The creative director's response was precise: the labels aren't for engineers — they're the *decision framework* that determines what interrupts a clinician mid-procedure. If "critical" is ambiguous, every future product decision about which tier an event belongs to becomes a judgment call with no anchor. The CTO's pushback was practical and reasonable. But the creative director identified that shipping ambiguous definitions would create a different kind of cost — not in this sprint, but in every sprint after, as the team debates what counts as "critical" with no shared definition. The CTO agreed to one more iteration. Later, he pointed to this as the moment that saved the team months of internal arguments: "We would have shipped it, and then fought about tier classification on every new feature for a year."
+The CTO resisted here. He felt the two-tier model was solid and wanted to move to implementation. "We're overthinking the labels. Engineers can figure out which bucket each event goes in." The Design Director's response was precise: the labels aren't for engineers — they're the *decision framework* that determines what interrupts a clinician mid-procedure. If "critical" is ambiguous, every future product decision about which tier an event belongs to becomes a judgment call with no anchor. The CTO's pushback was practical and reasonable. But the Design Director identified that shipping ambiguous definitions would create a different kind of cost — not in this sprint, but in every sprint after, as the team debates what counts as "critical" with no shared definition. The CTO agreed to one more iteration. Later, he pointed to this as the moment that saved the team months of internal arguments: "We would have shipped it, and then fought about tier classification on every new feature for a year."
 
 ---
 
@@ -107,19 +107,19 @@ The CTO resisted here. He felt the two-tier model was solid and wanted to move t
 
 **Designer** refined the tier definitions. Tier 1: *time-critical* — a patient handoff requires acknowledgment and the receiving clinician hasn't opened it within the escalation window. Tier 2: *shift-relevant* — a handoff assigned to you has a status change, or a colleague sent you a message. The distinction is not severity but *whether delayed response creates risk*.
 
-The CTO had an immediate reaction: "That's it. That's the question we've been trying to articulate." The shift from severity to time-sensitivity resolved a tension the team had been circling for weeks without naming. In early planning meetings, they'd debated whether a colleague's message was "important enough" to push — a question with no right answer because importance is subjective. "Does delayed response create risk?" has a clear answer for every event type. The designer didn't invent this framing from nothing — it emerged because the creative director's pushback in Iteration 1 forced precision, and the CTO's resistance to that pushback clarified *why* precision mattered. The human's pushback wasn't an obstacle. It was a necessary input that the convergence loop converted into a better outcome.
+The CTO had an immediate reaction: "That's it. That's the question we've been trying to articulate." The shift from severity to time-sensitivity resolved a tension the team had been circling for weeks without naming. In early planning meetings, they'd debated whether a colleague's message was "important enough" to push — a question with no right answer because importance is subjective. "Does delayed response create risk?" has a clear answer for every event type. The designer didn't invent this framing from nothing — it emerged because the Design Director's pushback in Iteration 1 forced precision, and the CTO's resistance to that pushback clarified *why* precision mattered. The human's pushback wasn't an obstacle. It was a necessary input that the convergence loop converted into a better outcome.
 
-**Writer** defined the notification language, drawing from the voice principles in project context: clinical precision, no software jargon, written as one clinician would speak to another. Tier 1 notifications name the patient and the action needed — no preamble, no "You have a new..." framing, no app-name branding in the notification. Tier 2 notifications name the colleague and the context. All copy tested against a 2-second comprehension standard: can a clinician glance at this during a procedure and understand what's needed? The voice principles meant the writer agent produced copy that reads like a colleague's shorthand, not like software speaking to a user.
+**Writer** defined the notification language, drawing from the voice principles in project context: clinical precision, no software jargon, written as one clinician would speak to another. Tier 1 notifications name the patient and the action needed — no preamble, no "You have a new..." framing, no app-name branding in the notification. Tier 2 notifications name the colleague and the context. All copy tested against a 2-second comprehension standard: can a clinician glance at this during a procedure and understand what's needed? The voice principles meant the xd-writer agent produced copy that reads like a colleague's shorthand, not like software speaking to a user.
 
 **Critic** examined the escalation window concept. Found it introduces a new system parameter that requires calibration per unit (ICU escalation windows differ from general medicine). Questioned whether this complexity is necessary in v1 or whether a fixed, conservative default serves the same purpose. Recommended shipping with a single default and adding unit-specific configuration only after observing real usage patterns.
 
 This time the CTO pushed back and *won*. He agreed with the fixed default for v1, but insisted on building the data model to support per-unit configuration from the start — not the UI, not the settings screen, just the underlying schema. "The migration cost of adding this later is real. I've done it before." The critic accepted this. It wasn't premature configurability — it was structural foresight from someone with domain-specific implementation experience. The agents don't override human expertise. When the CTO brought specific technical knowledge about migration costs that the critic couldn't evaluate, the recommendation adjusted. The final spec included the extensible schema with a hardcoded default — the CTO's position, refined by the critic's constraint.
 
-**Creative Director** reviewed. The two-tier model with time-sensitivity definitions is clear. The fixed escalation default is the right call for v1 — it reduces implementation complexity and avoids premature configurability. The extensible schema is a reasonable engineering hedge that doesn't compromise the design. The shift-activity pull model for non-actionable events is sound. Verdict: **ship**.
+**Design Director** reviewed. The two-tier model with time-sensitivity definitions is clear. The fixed escalation default is the right call for v1 — it reduces implementation complexity and avoids premature configurability. The extensible schema is a reasonable engineering hedge that doesn't compromise the design. The shift-activity pull model for non-actionable events is sound. Verdict: **ship**.
 
 ---
 
-### What the studio removed
+### What was removed
 
 - Informational notification tier (moved to pull-based shift activity view)
 - Per-unit escalation window configuration (deferred to v2 with usage data)
@@ -127,7 +127,7 @@ This time the CTO pushed back and *won*. He agreed with the fixed default for v1
 - Notification preferences screen (two tiers don't need a preferences UI)
 - Badge counts (replaced with tier-specific visual treatment)
 
-### What the studio produced
+### What was produced
 
 - Two-tier notification model: time-critical and shift-relevant
 - Time-sensitivity definitions grounded in patient impact, not subjective severity
@@ -138,9 +138,9 @@ This time the CTO pushed back and *won*. He agreed with the fixed default for v1
 
 ### Why it worked
 
-The convergence loop caught a problem that a single pass would have missed. The first iteration produced a reasonable three-tier model — most teams would have shipped it. The critic's challenge (does the informational tier need to exist?) and the creative director's push for precise definitions (not "critical" but "time-critical, defined by delayed-response risk") transformed a conventional notification system into one calibrated to how clinicians actually work.
+The convergence loop caught a problem that a single pass would have missed. The first iteration produced a reasonable three-tier model — most teams would have shipped it. The critic's challenge (does the informational tier need to exist?) and the Design Director's push for precise definitions (not "critical" but "time-critical, defined by delayed-response risk") transformed a conventional notification system into one calibrated to how clinicians actually work.
 
-The CTO's involvement shaped the outcome in two distinct ways. His first pushback — wanting to ship after Iteration 1 — was practical but premature. The creative director held the line, and the CTO later recognized that the precision gained in Iteration 2 would have cost months of internal debate if left unresolved. His second pushback — insisting on an extensible schema — was domain expertise the agents lacked. The critic adjusted. This is the dynamic that makes the multi-agent team effective: agents apply structured pressure that surfaces the right questions, but they yield to human expertise when the human brings knowledge the system doesn't have. The CTO didn't need the agents to tell him what to build. He needed them to help him decide what *not* to build, and to articulate the decision framework clearly enough that his team could apply it without him in the room.
+The CTO's involvement shaped the outcome in two distinct ways. His first pushback — wanting to ship after Iteration 1 — was practical but premature. The Design Director held the line, and the CTO later recognized that the precision gained in Iteration 2 would have cost months of internal debate if left unresolved. His second pushback — insisting on an extensible schema — was domain expertise the agents lacked. The critic adjusted. This is the dynamic that makes the system effective: agents apply structured pressure that surfaces the right questions, but they yield to human expertise when the human brings knowledge the system doesn't have. The CTO didn't need the agents to tell him what to build. He needed them to help him decide what *not* to build, and to articulate the decision framework clearly enough that his team could apply it without him in the room.
 
 The marketer's input reframed restraint as a competitive advantage rather than a missing feature — an insight that shaped the product narrative, not just the design.
 
@@ -148,33 +148,13 @@ The memory system recorded the decision to defer per-unit configuration (UI only
 
 ---
 
-## What these cases demonstrate
-
-**Sequencing matters.** The historian and strategist run before the designer — not because designers can't think strategically, but because separating research from synthesis produces better synthesis. The critic runs before and after design work, ensuring reduction happens at both the problem and solution level.
-
-**Agents have boundaries.** The designer defines interaction models but defers copy to the writer, visual execution to the visual designer, and motion to the choreographer. This constraint prevents any single perspective from dominating and ensures each craft dimension gets dedicated attention.
-
-**Memory compounds.** Each session's decisions — approved, rejected, and deferred — are recorded with reasoning. The next session starts with that context. Over weeks, the project-context file becomes a precise description of the product's design logic, not a generic brief.
-
-**Removal is the primary operation.** In both cases, the most important design decisions were eliminations: the onboarding wizard, the sample dataset, the informational notification tier, the preferences screen. The studio's "remove first" principle isn't aspirational — it's structural. The critic agent exists to enforce it.
-
-**Convergence produces different results than single passes.** The notification system's final form — two tiers defined by time-sensitivity, not severity — only emerged through the creative director sending the first iteration back. A single design pass would have shipped a three-tier system with ambiguous definitions. The convergence loop caught what felt reasonable but wasn't precise.
-
-**Pushback is a feature, not a failure.** In both cases, the human's resistance to agent recommendations produced better outcomes than agreement would have. The product lead's defense of the sample dataset forced the critic to articulate the distinction between artifacts and outcomes — a thinking tool she carried forward. The CTO's insistence on shipping after Iteration 1 created the contrast that made Iteration 2's precision visible. His insistence on an extensible schema brought implementation knowledge the agents didn't have. The agents are not designed to override the human. They are designed to hold positions clearly enough that the human's pushback becomes productive — either the agent's reasoning persuades, or the human's expertise refines the recommendation. Both paths improve the outcome.
-
-**The a-ha moments belong to the human.** The agents don't produce insights. They produce the conditions for insight. The product lead's realization — "we're not redesigning onboarding, we're removing it" — was hers. The agents built the case across four handoffs, but the synthesis happened in her head. The CTO's recognition that "does delayed response create risk?" resolved weeks of ambiguous debate was his. The designer named the framing; the CTO recognized its power. This is the point of a multi-agent team: not to think for you, but to structure the thinking so that the conclusions you reach are sharper than the ones you'd reach alone.
-
-**Culture is a design input, not decoration.** The same Studio OS agents, running the same workflows, produce materially different outputs for different teams — because `/studio-init` captures the team's philosophy, brand principles, and voice as structured decision filters, not as style guidelines applied at the end. The analytics team's "respect the operator's time" principle eliminated the onboarding wizard before design even started. The healthcare team's "built by someone who's been on the floor" philosophy made "quiet by default" an inevitability, not a choice. A venture-backed growth-stage company with a principle like "guide users to mastery" would have gotten a different onboarding model — perhaps a more progressive one — from the same agents. A healthcare competitor whose philosophy centered on "comprehensive clinical awareness" might have kept the three-tier notification model. The structure of the system stays the same. The decisions it produces change because the inputs change. This is the point of the `/studio-init` interview: not to fill out a template, but to give every agent a precise understanding of *who this team is and what they believe*, so that the work reflects the team's judgment — amplified and structured — rather than generic best practices.
-
----
-
-## Case Study 5: Exploring a New Feature Direction with `/studio-ideate`
+## Case Study 3: Exploring a New Feature Direction with `/xd-ideate`
 
 **Problem:** A product team building a project management tool for async remote teams has noticed that users who return to the product after a gap — two or more days away — frequently log in, scan the screen for a moment, and close the app without taking any action. The team's session data confirms it: re-entry sessions under 90 seconds have a 60% same-day churn rate. Users who take an action in the first 90 seconds retain at twice the rate.
 
 The team's initial brief to the studio: "We need to add a Today view — a dashboard that shows what needs attention."
 
-**Workflow used:** `/studio-ideate users who return after a gap don't know where to start and often leave without acting`
+**Workflow used:** `/xd-ideate users who return after a gap don't know where to start and often leave without acting`
 
 ---
 
@@ -202,20 +182,20 @@ This reframe changed the terms. The question became: what makes re-entry disorie
 
 The full list: twelve ideas across seven lenses.
 
-**Facilitated Reduction.** The Creative Director chaired with Strategist and Critic participating.
+**Facilitated Reduction.** The Design Director chaired with Strategist and Critic participating.
 
 *Strategist:* The change event graph (Architect) was marked TENSIONS — structurally interesting but introduces significant backend complexity that may be disproportionate to the re-entry problem alone. The global dashboard pattern (conventional Today view) was marked OUTSIDE — it solves the wrong problem by adding breadth when users need direction.
 
 *Critic:* The attention gradient (Designer) was eliminated as decorative — it adds visual complexity without solving the orientation problem directly. Users don't need help noticing weight; they need help knowing what to do. The assigned-to-me filter (Scout) was flagged as already existing in most tools — including this one. If users had it and weren't using it for re-entry, adding it again solves nothing.
 
-*Creative Director:* Four survived. The team lead asked why the change event graph hadn't been eliminated with the others — the Strategist had flagged it. The Creative Director held the position: the graph is TENSIONS, not OUTSIDE. Whether it's the right investment is a scoping question, not a quality question. It solves a real problem structurally. It's included because ideas that are expensive aren't wrong; they're deferred to feasibility. The four surviving ideas:
+*Design Director:* Four survived. The team lead asked why the change event graph hadn't been eliminated with the others — the Strategist had flagged it. The Design Director held the position: the graph is TENSIONS, not OUTSIDE. Whether it's the right investment is a scoping question, not a quality question. It solves a real problem structurally. It's included because ideas that are expensive aren't wrong; they're deferred to feasibility. The four surviving ideas:
 
 1. **Re-entry framing** — a brief temporal orientation ("you were here / since then / here's what's first") surfaced at login, using copy as the primary mechanism, not a new surface.
 2. **Session restoration** — return the user to their last context, with a lightweight "since you left" indicator showing change count.
 3. **Personal work lens** — a persistent "my work" view that becomes the default landing for returning users, ordered by recency of change on items assigned to them.
 4. **Change event graph** — a structural layer that makes "since I last saw this" queryable across the product.
 
-The team lead pushed back on including Re-entry framing. "That's a copy change, not a feature. Our roadmap isn't going to make room for a copywriting decision." The Creative Director disagreed — the framing isn't a copy change, it's an orientation model. The copy is the mechanism, but the decision is about where and how users are oriented at re-entry. If the team treats it as a copywriting task, it will be handed to a writer after design is complete and applied as a veneer. It belongs in the ideation because it may be the right solution — and the right solution might be something product and engineering teams routinely overlook because it doesn't look like a feature. The team lead let it stand.
+The team lead pushed back on including Re-entry framing. "That's a copy change, not a feature. Our roadmap isn't going to make room for a copywriting decision." The Design Director disagreed — the framing isn't a copy change, it's an orientation model. The copy is the mechanism, but the decision is about where and how users are oriented at re-entry. If the team treats it as a copywriting task, it will be handed to a writer after design is complete and applied as a veneer. It belongs in the ideation because it may be the right solution — and the right solution might be something product and engineering teams routinely overlook because it doesn't look like a feature. The team lead let it stand.
 
 **Synthetic User Desirability.** The project-context file defined three archetypes: the Executor (works through assigned tasks in priority order), the Orchestrator (manages multiple workstreams and tracks dependencies), and the Async Collaborator (works across time zones, catches up on batches of changes).
 
@@ -253,12 +233,12 @@ Heuristic concerns: "since I last saw this" requires tracking per-user, per-item
 
 ---
 
-### What the studio produced
+### What was produced
 
 - **Re-entry framing** — cleared for immediate prototyping. A temporal orientation state at login, copy-driven, triggered by 24+ hour gaps. Validate the hypothesis before engineering investment.
 - **Change event graph** — cleared for architectural investigation. Three specific questions to answer before prototyping begins.
 
-### What the studio deferred
+### What was deferred
 
 - Session restoration — right for the Executor archetype, but doesn't address the Async Collaborator's orientation problem. Revisit if re-entry framing validation shows Executors are underserved.
 - Personal work lens — table-stakes; already exists in partial form. Improve before adding a new surface.
@@ -269,7 +249,7 @@ The problem gate prevented the team from spending the session debating Today vie
 
 The seven-lens divergence produced a range the team hadn't imagined. The team had been debating between a dashboard and a notification model for two weeks. Neither appeared in the final selection. Re-entry framing (Writer lens) and the change event graph (Architect lens) were outside the team's initial frame entirely. The constraint frames — capture, review, transition — forced each discipline to think specifically about the moment of return, not generically about "what users need."
 
-The Creative Director's insistence on keeping Re-entry framing over the team lead's objection ("that's a copy decision") was the most consequential moment in the session. The team lead had correctly identified that copy decisions don't get roadmap priority. The Creative Director's response — that orientation is the mechanism, and copy is how it's delivered — reframed the idea as an orientation model rather than a writing task. It passed feasibility as LOW complexity and was the first idea cleared for prototyping. The team lead acknowledged afterward that if the idea had been labeled "copy change," it would have been deferred indefinitely.
+The Design Director's insistence on keeping Re-entry framing over the team lead's objection ("that's a copy decision") was the most consequential moment in the session. The team lead had correctly identified that copy decisions don't get roadmap priority. The Design Director's response — that orientation is the mechanism, and copy is how it's delivered — reframed the idea as an orientation model rather than a writing task. It passed feasibility as LOW complexity and was the first idea cleared for prototyping. The team lead acknowledged afterward that if the idea had been labeled "copy change," it would have been deferred indefinitely.
 
 The DE's verdict on the change event graph — INVESTIGATE rather than PROTOTYPE — was the right gate. The structural idea is sound; the unknowns are real. The team now has three specific questions to answer, rather than an open-ended architectural exploration. That specificity determines what the next session does, and what it doesn't.
 
@@ -277,21 +257,15 @@ The re-entry framing prototype will validate whether orientation is the problem.
 
 ---
 
-## Case Study 3: Building a Real Product with Studio OS
-
-*Coming soon.* A documented account of Studio OS applied to an actual product — real decisions, real pushback, real outcomes. Not constructed. Not illustrative. The thing itself.
-
----
-
 ## Case Study 4: Managing Code Drift Under Agent-Driven Development
 
-**Problem:** A product team has been using `studio-implement` to ship features over several weeks. The service layer has grown without a unifying pass — a helper added during a bug fix that was never removed, a protocol defined for a single caller, a pattern duplicated between two services because the agent didn't locate the existing implementation. The code works. No bugs have surfaced. But a new feature request requires extending the service layer, and the engineer who opens the files doesn't recognize the convention in one service as the same convention under a different name in the adjacent one.
+**Problem:** A product team has been using `/xd-implement` to ship features over several weeks. The service layer has grown without a unifying pass — a helper added during a bug fix that was never removed, a protocol defined for a single caller, a pattern duplicated between two services because the agent didn't locate the existing implementation. The code works. No bugs have surfaced. But a new feature request requires extending the service layer, and the engineer who opens the files doesn't recognize the convention in one service as the same convention under a different name in the adjacent one.
 
 There is no crisis. There is drift. Drift compounds.
 
 ---
 
-**Workflow used (Scenario 1):** `/studio-simplify services/`
+**Workflow used (Scenario 1):** `/xd-simplify services/`
 
 ---
 
@@ -329,9 +303,9 @@ One risk flagged: `decodeEventPayload()` had a subtle difference in its null-han
 
 ---
 
-### Scenario 2: DE standalone after `studio-implement`
+### Scenario 2: DE standalone after `/xd-implement`
 
-A separate feature — a new search indexing behavior — was implemented via `studio-implement`. QA passed. The spec was satisfied. The engineer invoked the Distinguished Engineer for the final code review before merging.
+A separate feature — a new search indexing behavior — was implemented via `/xd-implement`. QA passed. The spec was satisfied. The engineer invoked the Distinguished Engineer for the final code review before merging.
 
 The DE read the spec. The spec defined one method: `index(_ record: Record)`.
 
@@ -377,3 +351,29 @@ The audit found the problems. The Critic sorted them. But the consequential work
 The engineer's pushback — "it's just a loop" — was reasonable from inside the feature. The DE's response didn't argue about the loop. It named the mechanism: public interfaces create contracts; contracts constrain future implementations; the spec hadn't authorized this contract because batch behavior wasn't ready to be specified. That reframe shifted the question from "is this code correct?" to "is this the right moment to commit this interface?" It wasn't.
 
 The `RecordFilterable` moment from Scenario 1 was the more instructive lesson for the team: the audit surfaced a problem, the Critic deferred to human context, and the DE added documentation so a future agent run wouldn't reopen the question. The system remembered what the audit couldn't know — because a human said so, and the plan captured it.
+
+---
+
+## Case Study 5: Building a Real Product with XD OS
+
+*Coming soon.* A documented account of XD OS applied to an actual product — real decisions, real pushback, real outcomes. Not constructed. Not illustrative. The thing itself.
+
+---
+
+## What these cases demonstrate
+
+**Sequencing matters.** The historian and strategist run before the designer — not because designers can't think strategically, but because separating research from synthesis produces better synthesis. The critic runs before and after design work, ensuring reduction happens at both the problem and solution level.
+
+**Agents have boundaries.** The designer defines interaction models but defers copy to the xd-writer, visual execution to the visual designer, and motion to the xd-choreographer. This constraint prevents any single perspective from dominating and ensures each craft dimension gets dedicated attention. In a team setting, this mirrors how disciplines naturally divide — the agent structure reinforces the division rather than collapsing it.
+
+**Memory compounds.** Each session's decisions — approved, rejected, and deferred — are recorded with reasoning. The next session starts with that context. Over weeks, the project-context file becomes a precise description of the product's design logic, not a generic brief. On a team, this means the tenth session doesn't relitigate what the third session settled.
+
+**Removal is the primary operation.** In both cases, the most important design decisions were eliminations: the onboarding wizard, the sample dataset, the informational notification tier, the preferences screen. The "remove first" principle isn't aspirational — it's structural. The critic agent exists to enforce it.
+
+**Convergence produces different results than single passes.** The notification system's final form — two tiers defined by time-sensitivity, not severity — only emerged through the Design Director sending the first iteration back. A single design pass would have shipped a three-tier system with ambiguous definitions. The convergence loop caught what felt reasonable but wasn't precise.
+
+**Pushback is a feature, not a failure.** In both cases, the human's resistance to agent recommendations produced better outcomes than agreement would have. The product lead's defense of the sample dataset forced the critic to articulate the distinction between artifacts and outcomes — a thinking tool she carried forward. The CTO's insistence on shipping after Iteration 1 created the contrast that made Iteration 2's precision visible. His insistence on an extensible schema brought implementation knowledge the agents lacked. The agents are not designed to override the human. They are designed to hold positions clearly enough that the human's pushback becomes productive — either the agent's reasoning persuades, or the human's expertise refines the recommendation. Both paths improve the outcome.
+
+**The a-ha moments belong to the human.** The agents don't produce insights. They produce the conditions for insight. The product lead's realization — "we're not redesigning onboarding, we're removing it" — was hers. The agents built the case across four handoffs, but the synthesis happened in her head. The CTO's recognition that "does delayed response create risk?" resolved weeks of ambiguous debate was his. The designer named the framing; the CTO recognized its power. This is the point of structured multi-agent work: not to think for you, but to structure the thinking so that the conclusions you reach are sharper than the ones you'd reach alone.
+
+**Culture is a design input, not decoration.** The same XD OS agents, running the same workflows, produce materially different outputs for different teams — because `/xd-init` captures the team's philosophy, brand principles, and voice as structured decision filters, not as style guidelines applied at the end. The analytics team's "respect the operator's time" principle eliminated the onboarding wizard before design even started. The healthcare team's "built by someone who's been on the floor" philosophy made "quiet by default" an inevitability, not a choice. A venture-backed growth-stage company with a principle like "guide users to mastery" would have gotten a different onboarding model — perhaps a more progressive one — from the same agents. A healthcare competitor whose philosophy centered on "comprehensive clinical awareness" might have kept the three-tier notification model. The structure of the system stays the same. The decisions it produces change because the inputs change. This is the point of the `/xd-init` interview: not to fill out a template, but to give every agent a precise understanding of *who this team is and what they believe*, so that the work reflects the team's judgment — amplified and structured — rather than generic best practices.

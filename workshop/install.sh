@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Studio OS Workshop Kit — Installation Script
+# XD OS Workshop Kit — Installation Script
 # Run this once at the start of the workshop session.
 
 set -e
@@ -9,7 +9,7 @@ AGENTS_DIR="$HOME/.claude/agents"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ""
-echo "Studio OS Workshop Kit — Installing agents..."
+echo "XD OS Workshop Kit — Installing agents..."
 echo ""
 
 # Create agents directory if it doesn't exist

@@ -1,4 +1,4 @@
-# Design Preferences — studio-designer
+# Design Preferences — designer
 Last updated: [date]
 Review trigger: every 6 sessions or on explicit audit
 
@@ -6,7 +6,7 @@ Review trigger: every 6 sessions or on explicit audit
 
 ## How This File Works
 
-Written by studio-designer at the end of each session.
+Written by designer at the end of each session.
 Captures decisions with reasoning — not just what was approved, but why.
 The agent uses this as context, not as constraint.
 

@@ -1,18 +1,21 @@
-# Studio OS
+# XD OS
 
-This project runs on **Studio OS**, a structured multi-discipline reasoning system for design and product work.
+This project runs on **XD OS**, a structured multi-discipline reasoning system for design and product work.
 
 Studio disciplines, workflow skills, and memory are installed to `~/.claude/`:
 
-- Agents: `~/.claude/agents/` (23 discipline agents)
-- Skills: `~/.claude/skills/` (7 workflow orchestrators)
-- Memory: `memory/` (design foundations, preferences, archetypes, references)
+- Agents: `~/.claude/agents/` — discipline specialists (Core + Role tiers)
+- Skills: `~/.claude/skills/` — workflow orchestrators
+- Memory: `memory/` — design foundations, preferences, archetypes, references
 
 Project-specific context lives in `.claude/memory/project-context.md`.
+Your role on this project lives in `.claude/memory/role-context.md`.
+
+**Placement rule:** CLAUDE.md carries always-on rules. Skills carry on-demand workflows. Agents carry single-discipline expertise. Never place workflow logic in CLAUDE.md.
 
 ---
 
-## Studio Ethos
+## XD Ethos
 
 Success criterion: work must feel **inevitable** — nothing arbitrary, nothing extra, nothing essential missing.
 
@@ -81,23 +84,26 @@ Avoid: enthusiasm · marketing language · exaggeration · verbosity
 
 ---
 
-## Studio Commands
+## XD Commands
 
 ```
-/studio                        Entry point — orient and route
-/studio-init                   Set up project context
-/studio-design <problem>       Full design workflow
-/studio-implement <feature>    Engineering workflow
-/studio-review <artifact>      Review workflow
-/studio-solve <problem>        Convergence loop for hard problems
-/studio-experiment <hypothesis> Experiment workflow
+/xd                         Entry point — orient, route, show artifact menu
+/xd-init                    Set up project context + role calibration
+/xd-discovery <problem>     Discovery workflow — research → journey → assumptions → brief
+/design <problem>        Full design workflow
+/xd-measure <feature>       Measurement planning — metrics → instrumentation → feasibility
+/xd-implement <feature>     Engineering workflow
+/xd-review <artifact>       Review workflow
+/xd-solve <problem>         Convergence loop for hard problems
+/xd-experiment <hypothesis> Experiment workflow
+/lt-review <artifact>           PM + Design Director + DE combined verdict
 ```
 
-Discipline agents can also be invoked directly by name.
+Discipline agents are invoked by name in conversation. Run `/xd` to see what each produces.
 
 ---
 
-## Studio Memory
+## XD Memory
 
 Before proposing major changes, consult `.claude/memory/` for:
 - `project-context.md` — product purpose, invariants, system model

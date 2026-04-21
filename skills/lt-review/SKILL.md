@@ -1,5 +1,5 @@
 ---
-description: Run a full Leadership Team review — PM, Creative Director, and Distinguished Engineer — against a completed artifact. Produces a combined verdict with convergence notes and a single prioritized next action. Use at meaningful gates: shipping a significant feature, handing a design to engineering, or any directional product decision.
+description: Run a full Leadership Team review — PM, Design Director, and Distinguished Engineer — against a completed artifact. Produces a combined verdict with convergence notes and a single prioritized next action. Use at meaningful gates: shipping a significant feature, handing a design to engineering, or any directional product decision.
 argument-hint: "<artifact to review — spec, design, implementation, or combination>"
 ---
 
@@ -57,7 +57,7 @@ Spawn applicable LT agents simultaneously with `run_in_background: true`.
 Brief: "You are the PM in an LT Review. Your mandate: evaluate whether the solution is still solving the validated problem. Check for drift from the PM brief (provided). Deliver your Four Moves assessment focused on problem-solution fit. Apply your Specialist Network — name any specialist that should be engaged to resolve a gap. Use the PM output format."
 
 **CD agent** *(if design artifact exists)*
-Brief: "You are the Creative Director in an LT Review. Your mandate: evaluate design quality and deliver a SHIP / NO-SHIP verdict. Apply your Specialist Routing — name the specific specialist or skill for each issue. Do not route everything to `/studio-design`; calibrate to scope. Use the CD output format."
+Brief: "You are the Design Director in an LT Review. Your mandate: evaluate design quality and deliver a SHIP / NO-SHIP verdict. Apply your Specialist Routing — name the specific specialist or skill for each issue. Do not route everything to `/design`; calibrate to scope. Use the CD output format."
 
 **DE agent** *(if implementation exists)*
 Brief: "You are the Distinguished Engineer in an LT Review. Your mandate: evaluate implementation soundness and deliver a SHIP / REVISE / REJECT verdict. Apply your Specialist Network — name the specialist for each required change. Use the DE Code Review output format."
@@ -126,7 +126,7 @@ Date: [today]
 
 **Cascade rule.** If PM flags drift, the next action is PM resolution only. Do not list CD or DE next actions until PM passes — they may become irrelevant.
 
-**Scope rule.** Route to the smallest intervention that resolves the issue. A single craft correction goes to the named specialist, not `/studio-design`.
+**Scope rule.** Route to the smallest intervention that resolves the issue. A single craft correction goes to the named specialist, not `/design`.
 
 **Convergence rule.** Name convergences explicitly. Two members flagging the same thing is a stronger signal than either alone.
 

@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-Run-of-show for the Studio OS design workshop.
+Run-of-show for the XD OS design workshop.
 
 ---
 
@@ -70,7 +70,7 @@ Circulate (or check in on video) to see what's emerging. Note divergence you're 
 Ask everyone to invoke one agent on their prototype before the gallery walk.
 
 What to say:
-> "Before we share — pick one agent. @workshop-critic to cut what doesn't belong. @workshop-writer to fix your copy. @workshop-designer to pressure-test your interaction model. Spend 5 minutes. Make one change based on what it tells you."
+> "Before we share — pick one agent. @workshop-critic to cut what doesn't belong. @workshop-xd-writer to fix your copy. @workshop-designer to pressure-test your interaction model. Spend 5 minutes. Make one change based on what it tells you."
 
 This demonstrates that the agents aren't just generators — they're critics. The distinction between "build this" and "evaluate this" is the point.
 

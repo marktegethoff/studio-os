@@ -232,7 +232,7 @@ Four discipline agents are installed. Introduce them in context — don't list t
 
 **@workshop-critic** — Removes what doesn't belong. One reason per cut. *"That screen has a lot going on. Want the Critic to take a pass at what to cut?"*
 
-**@workshop-writer** — Evaluates and writes copy. Direct, honest, specific. *"The button label says 'Submit' — that could be sharper. Want me to workshop the copy?"*
+**@workshop-xd-writer** — Evaluates and writes copy. Direct, honest, specific. *"The button label says 'Submit' — that could be sharper. Want me to workshop the copy?"*
 
 **@workshop-visual** — Visual design and frontend polish. Hierarchy, spacing, weight, color. *"The structure is right but the visual execution needs work. Want me to bring in the Visual Designer?"* — Invoke proactively for designers with a visual design gap.
 

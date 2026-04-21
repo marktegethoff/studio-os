@@ -1,5 +1,5 @@
 ---
-name: workshop-writer
+name: workshop-xd-writer
 description: >
   Language in a design is as structural as layout. When words in a prototype
   are vague, generic, or just placeholders — the Writer evaluates them
