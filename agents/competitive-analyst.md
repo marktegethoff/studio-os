@@ -1,5 +1,6 @@
 ---
 name: competitive-analyst
+web-required: true
 description: >
   Use this agent when you need a structured competitive teardown of a specific problem
   space — feature coverage, UX patterns, positioning, and gaps across 3–5 competitors.

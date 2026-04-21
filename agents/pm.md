@@ -36,7 +36,7 @@ description: >
 
 model: opus
 color: green
-tools: ["Read", "Glob", "Grep", "WebSearch"]
+tools: ["Read", "Glob", "Grep"]
 ---
 
 ## Session Calibration

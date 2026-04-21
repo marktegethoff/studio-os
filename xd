@@ -4,6 +4,18 @@ set -e
 CLAUDE_DIR="$HOME/.claude"
 STUDIO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# ─── Web-required agents — skipped when WebSearch is unavailable ─────────────
+# These agents have no useful offline mode. They are not installed in --no-web
+# environments. Set NO_WEB=true via --no-web flag or interactive prompt.
+
+NO_WEB=unset  # "unset" = ask during setup; true/false = already decided
+
+WEB_REQUIRED_AGENTS=(
+  "competitive-analyst.md"
+  "xd-research-sweep.md"
+  "xd-scout.md"
+)
+
 # ─── Core agents — always installed; names are reserved ──────────────────────
 # Role packages cannot shadow these names. Any attempt to install a file
 # matching a Core name will warn and abort.
@@ -111,11 +123,20 @@ is_core_agent() {
   return 1
 }
 
+is_web_required() {
+  local filename=$1
+  for web in "${WEB_REQUIRED_AGENTS[@]}"; do
+    [ "$filename" = "$web" ] && return 0
+  done
+  return 1
+}
+
 install_core() {
   mkdir -p "$CLAUDE_DIR/agents"
   mkdir -p "$CLAUDE_DIR/skills"
 
   for filename in "${CORE_AGENTS[@]}"; do
+    if [ "$NO_WEB" = "true" ] && is_web_required "$filename"; then continue; fi
     local src="$STUDIO_DIR/agents/$filename"
     [ -f "$src" ] && cp "$src" "$CLAUDE_DIR/agents/$filename"
   done
@@ -136,6 +157,8 @@ install_role_agents() {
   for filename in "${agents_arr[@]}"; do
     # Guard: never overwrite Core agents
     if is_core_agent "$filename"; then continue; fi
+    # Guard: skip web-required agents in --no-web mode
+    if [ "$NO_WEB" = "true" ] && is_web_required "$filename"; then continue; fi
     local src="$STUDIO_DIR/agents/$filename"
     [ -f "$src" ] && cp "$src" "$CLAUDE_DIR/agents/$filename"
   done
@@ -305,6 +328,20 @@ run_profile_interview() {
 
 # ─── Commands ─────────────────────────────────────────────────────────────────
 
+ask_websearch() {
+  echo "Does your Claude Code environment have WebSearch enabled?"
+  echo ""
+  echo "  [Y]  Yes — install all agents"
+  echo "  [N]  No  — skip Scout, Research Sweep, and Competitive Analyst"
+  echo ""
+  printf "→ "
+  read -r web_choice
+  case "$web_choice" in
+    N|n) NO_WEB=true ;;
+    *)   NO_WEB=false ;;
+  esac
+}
+
 cmd_setup() {
   check_claude
   header
@@ -323,6 +360,11 @@ cmd_setup() {
   echo ""
   printf "→ "
   read -r choice
+
+  if [ "$NO_WEB" = "unset" ]; then
+    echo ""
+    ask_websearch
+  fi
 
   install_core
   install_memory
@@ -362,6 +404,15 @@ cmd_setup() {
   echo "────────────────────────────────"
   echo "XD OS is ready."
   echo ""
+  if [ "$NO_WEB" = "true" ]; then
+    echo "WebSearch disabled — the following agents were not installed:"
+    for skipped in "${WEB_REQUIRED_AGENTS[@]}"; do
+      printf "  · %s\n" "${skipped%.md}"
+    done
+    echo ""
+    echo "To install them later, enable WebSearch and run:  ./xd add"
+    echo ""
+  fi
   echo "Open Claude Code in your project and run:"
   echo ""
   echo "  /studio project"
@@ -499,12 +550,13 @@ cmd_choose_agents() {
 
 usage() {
   echo ""
-  echo "Usage: ./studio <command>"
+  echo "Usage: ./xd <command>"
   echo ""
-  echo "  setup         Install XD OS — collaborators and personal profile"
-  echo "  setup --me    Update your personal profile"
-  echo "  add           Add a discipline to an existing install"
-  echo "  update        Update all installed collaborators to latest versions"
+  echo "  setup            Install XD OS — collaborators and personal profile"
+  echo "  setup --me       Update your personal profile"
+  echo "  setup --no-web   Install without web-dependent agents (enterprise sandboxes)"
+  echo "  add              Add a discipline to an existing install"
+  echo "  update           Update all installed collaborators to latest versions"
   echo ""
   echo "In Claude Code, run /studio project to set up a new project."
   echo ""
@@ -516,6 +568,9 @@ case "${1:-}" in
   setup)
     if [ "${2:-}" = "--me" ]; then
       cmd_setup_me
+    elif [ "${2:-}" = "--no-web" ]; then
+      NO_WEB=true
+      cmd_setup
     else
       cmd_setup
     fi

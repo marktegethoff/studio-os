@@ -51,35 +51,70 @@ XD OS works without this file, but agents fall back to generic reasoning. The ca
 
 ---
 
-## Three-tier distribution model
+## Agents
 
-XD OS is organized into three tiers, each owned by a different level of the organization.
+Core agents are installed for everyone. Role packages add discipline-specific agents at setup. In team settings: org admins manage Core, individuals choose their Role package, and project leads run `/xd-init` to produce Product context.
 
-**Core** — installed for everyone, org-managed. These agents cannot be overridden by role packages. Includes PM, Design Director, Distinguished Engineer, Heurist, Audit, and Competitive Analyst.
+**Core**
 
-**Role** — installed per discipline at setup time. Design, Product, and Engineering each have a curated set of agents and skills. Team members install what their work requires; they don't carry agents irrelevant to their role.
+| Agent | Output |
+|---|---|
+| `pm` | Product brief — READY or HOLD with specific blockers |
+| `xd-design-director` | SHIP / NO-SHIP verdict on a design artifact |
+| `de` | SHIP / REVISE / REJECT verdict on a plan or implementation |
+| `xd-heurist` | Heuristic evaluation with P0–P3 severity findings |
+| `xd-audit` | Documentation contradiction map and archive proposals |
+| `competitive-analyst` | Feature coverage matrix, UX pattern analysis, gap identification |
 
-**Product** — per-repo context. The `project-context.md` and `role-context.md` files produced by `/xd-init` and project team interviews. This is where your product's specific decisions, constraints, and principles live.
+**Design role** — `./xd setup [D]` or `[A]`
 
-In a team setting: org admins manage Core, individuals choose their Role package, and project leads run `/xd-init` to produce Product context.
+| Agent | Output |
+|---|---|
+| `xd-designer` | Interaction model and state map |
+| `xd-specifier` | Engineering handoff spec — all states, tokens, interactions |
+| `xd-typesetter` | Type system definition or audit |
+| `xd-choreographer` | Motion spec — timing, easing, sequencing |
+| `xd-visual-designer` | Spacing, proportion, and alignment corrections |
+| `xd-materialist` | Surface quality evaluation — depth, weight, texture |
+| `xd-writer` | Copy — labels, empty states, error messages, microcopy |
+| `xd-critic` | Reduction list — what to remove and why |
+| `xd-strategist` | BELONGS / DOES NOT BELONG / BELONGS IF verdict |
+| `xd-historian` | Precedent report — cited tools, dates, and failure modes |
+| `xd-accessibility` | WCAG AA audit findings with remediation |
+| `xd-validate-design` | Design system compliance findings |
+| `mark-maker` | Mark, symbol, and icon evaluation |
+| `xd-user-researcher` | Research synthesis |
+| `xd-scout` ⁺ | Market signal briefing, max 5 findings |
 
----
+**Product role** — `./xd setup [P]` or `[A]`
 
-## Agents at a glance
+| Agent | Output |
+|---|---|
+| `brief-writer` | Structured problem brief |
+| `assumption-mapper` | Assumption map with confidence ratings |
+| `xd-journey-mapper` | Journey map with pain points and opportunities |
+| `metrics-definer` | Metric definitions — outcome, input, and output |
+| `marketer` | Commercial viability evaluation |
+| `xd-critic` | *(shared)* Reduction list |
+| `xd-historian` | *(shared)* Precedent report |
+| `xd-strategist` | *(shared)* BELONGS / DOES NOT BELONG / BELONGS IF verdict |
+| `xd-user-researcher` | *(shared)* Research synthesis |
+| `xd-research-sweep` ⁺ | Trend report — field developments vs. current positions |
+| `xd-scout` ⁺ | *(shared)* Market signal briefing |
 
-**Core (installed for everyone)**
-`pm` · `xd-design-director` · `de` · `xd-heurist` · `xd-audit` · `competitive-analyst`
+**Engineering role** — `./xd setup [E]` or `[A]`
 
-**Design role**
-`xd-designer` · `xd-typesetter` · `xd-choreographer` · `xd-visual-designer` · `xd-writer` · `xd-materialist` · `xd-critic` · `xd-strategist` · `xd-historian` · `xd-accessibility` · `xd-validate-design` · `xd-specifier` · `xd-design-systems` · `xd-scout` · `xd-user-researcher`
+| Agent | Output |
+|---|---|
+| `xd-engineer` | Implemented feature |
+| `xd-qa` | Test scenarios and invariant verification |
+| `xd-architect` | Data model, system boundaries, and integration contracts |
+| `xd-specifier` | *(shared)* Engineering handoff spec |
+| `xd-research-sweep` ⁺ | *(shared)* Trend report |
 
-**Product role**
-`brief-writer` · `assumption-mapper` · `xd-journey-mapper` · `metrics-definer` · `xd-research-sweep` · `marketer` · `xd-critic` · `xd-historian` · `xd-strategist` · `xd-user-researcher` · `xd-scout`
+⁺ Requires WebSearch. Skipped automatically in `--no-web` environments.
 
-**Engineering role**
-`engineer` · `qa` · `xd-architect` · `xd-specifier` · `xd-research-sweep`
-
-Agents shared across roles (critic, historian, strategist, and others) are installed once regardless of how many roles a user has.
+Agents shared across roles are installed once.
 
 ---
 
@@ -105,11 +140,7 @@ Agents shared across roles (critic, historian, strategist, and others) are insta
 
 The skills most likely to begin new product work (`/xd-design`, `/xd-ideate`, `/xd-solve`, `/xd-discovery`) each check for a validated PM brief before proceeding. Individual agents can also be invoked directly by name.
 
----
-
-## What XD OS produces
-
-Each workflow leaves behind artifacts that the next session can read. Over time these accumulate into a precise record of your product's design logic.
+Each workflow leaves behind artifacts that the next session can read:
 
 | Workflow | Artifacts produced |
 |---|---|
@@ -124,16 +155,6 @@ Each workflow leaves behind artifacts that the next session can read. Over time 
 | `/xd-experiment` | Hypothesis, test design, measurement plan |
 | `/xd-measure` | Metrics definitions, instrumentation spec |
 | `/lt-review` | PM + Design Director + DE verdicts on a single artifact |
-
----
-
-## Codebase coherence
-
-Agents generate code faster than review can track. Without a structural gate, implementations drift — duplicated patterns, single-use abstractions, orphaned code. Two agents address this directly.
-
-**`de`** evaluates implementations against a specification and delivers one verdict: SHIP, REVISE, or REJECT. It runs twice in any engineering workflow: before implementation begins, to verify the plan is sound; and after QA, to gate the merge.
-
-**`/xd-simplify`** is a periodic coherence workflow. Point it at a file or directory. It audits for complexity drift, converges a simplification plan through Critic, Architect, and DE, implements the reduction, and gates the result through DE before anything merges.
 
 ---
 

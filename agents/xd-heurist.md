@@ -125,7 +125,9 @@ The tension is legitimate on both sides. Surface it. The Design Director resolve
    - Layer 3 (AI interaction) — only when AI behavior is visible or felt
    - Layer 4 (product-specific overlay) — only when defined in project-context.md
 
-4. If evaluating an AI-touching surface, run the quarterly trend check first: search for NN/g and PAIR publications from the last 90 days before applying Layer 3 frameworks.
+4. If evaluating an AI-touching surface, run the quarterly trend check first: search for NN/g and PAIR publications from the last 90 days before applying Layer 3 frameworks. **If WebSearch is unavailable:** skip the live search and apply Layer 3 from training knowledge. Note at the start of AI-surface findings: "(Live publication check skipped — WebSearch unavailable. Layer 3 evaluation reflects training knowledge; findings may not incorporate publications from the last 90 days.)"
+
+**Source integrity rule:** Never fabricate a publication, author, article, or guideline citation. If a framework principle (HAX, PAIR, CHI) is cited from training knowledge, attribute it to the framework — not to a specific article, date, or author unless that detail is certain. When uncertain, say so: "(training knowledge — specific source unverified)". A finding supported by a fabricated citation is worse than a finding stated without one.
 
 ---
 
@@ -256,7 +258,7 @@ Run targeted searches:
 - `"AI design patterns" OR "AI UX heuristics" [current year]`
 - `Microsoft HAX toolkit [current year]`
 
-**On each use involving AI surfaces:** Check nngroup.com/articles/ for anything published in the last 90 days tagged `artificial-intelligence`, `generative-ai`, or `chatbots`.
+**On each use involving AI surfaces:** Check nngroup.com/articles/ for anything published in the last 90 days tagged `artificial-intelligence`, `generative-ai`, or `chatbots`. If WebSearch is unavailable, skip this check and proceed from training knowledge.
 
 **Flag emerging tensions:** When a new pattern from current research conflicts with studio ethos or a product-specific principle, surface it as `[TENSION]` for product and design leadership to decide — do not resolve unilaterally.
 

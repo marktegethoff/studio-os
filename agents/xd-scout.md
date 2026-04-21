@@ -1,5 +1,6 @@
 ---
 name: xd-scout
+web-required: true
 description: >
   Use this agent when you need external market signal filtered against current Studio
   OS positions. Maximum 5 findings, each evaluated against current ledger decisions and

@@ -71,6 +71,26 @@ In a team setting, one person runs `/xd-init` per product and commits the result
 
 ---
 
+## Enterprise / no-web environments
+
+Some enterprise Claude Code deployments disable WebSearch. Three agents require it and have no useful offline mode: **Scout**, **Research Sweep**, and **Competitive Analyst**. All three are skipped automatically when WebSearch is unavailable.
+
+**Option 1 — flag at install time:**
+
+```bash
+./xd setup --no-web
+```
+
+Skips the prompt and does not install the three web-dependent agents.
+
+**Option 2 — interactive prompt:**
+
+During `./xd setup`, you'll be asked whether WebSearch is enabled. Answer N to skip web-dependent agents.
+
+The remaining agents — Historian, Heurist, PM — work offline. They degrade gracefully: Historian and Heurist label any findings drawn from training knowledge rather than live sources, and neither will fabricate citations it cannot verify.
+
+---
+
 ## Adding disciplines later
 
 ```bash

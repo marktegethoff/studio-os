@@ -1,5 +1,6 @@
 ---
 name: xd-research-sweep
+web-required: true
 description: >
   Runs a structured design research sweep and writes a dated trend file to memory/.
   Trigger manually every 3–6 months, or when the current trends file is older than
