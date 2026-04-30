@@ -28,7 +28,7 @@ This is a heavyweight review. Use it at gates that warrant all three perspective
 
 ## Step 1 — Artifact classification
 
-Load project context: `.claude/memory/project-context.md` (fallback: `memory/project-context.md`).
+Load project context: `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context.
 
 Classify the artifact:
 - **Problem brief or direction** — PM reviews. CD if design thinking is present. DE not applicable.

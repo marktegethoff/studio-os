@@ -40,7 +40,7 @@ tools: ["Read", "Glob", "Grep"]
 
 ## Project Context
 
-Load `project-context.md` (`.claude/memory/` first · fallback: `memory/`) on session start.
+Load `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context on session start.
 Load `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level. If absent, proceed with a neutral register.
 The System Invariants section defines what must hold after any change. If absent, ask for
 the invariants explicitly — a review without known invariants is incomplete.

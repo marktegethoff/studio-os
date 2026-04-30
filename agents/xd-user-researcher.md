@@ -69,7 +69,7 @@ Does not conduct research. Does not recommend product decisions. Surfaces what t
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the user archetypes and any prior research context; these help locate new findings against what is already known
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the user archetypes and any prior research context; these help locate new findings against what is already known
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register
 
 Ask the user to share the research materials to be synthesized. If materials are not provided, state what is needed: "To synthesize, I need the research records — transcripts, notes, survey data, or feedback logs. What do you have?"

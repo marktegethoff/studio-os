@@ -17,8 +17,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 Feature: $ARGUMENTS
 
 Load project context on session start. Read in order:
-1. `.claude/memory/project-context.md` (project-local) — System Invariants, System Model, Engineering Context (spec path)
-2. Fallback: `memory/project-context.md` (plugin root)
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — System Invariants, System Model, Engineering Context (spec path)
 
 If neither exists, ask: "No project context found. Run `xd-init` to set up XD OS for this project, or provide the system invariants before continuing."
 

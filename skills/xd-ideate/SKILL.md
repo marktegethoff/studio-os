@@ -17,8 +17,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 Problem: $ARGUMENTS
 
 Load project context on session start. Read in order:
-1. `.claude/memory/project-context.md` (project-local) — Ethos, System Invariants, User Archetypes, Decision Log path
-2. Fallback: `memory/project-context.md` (plugin root)
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — Ethos, System Invariants, User Archetypes, Decision Log path
 
 If neither exists, ask: "No project context found. Run `/xd-init` to set up XD OS for this project, or describe the product purpose, system invariants, and user archetypes before continuing."
 
@@ -86,7 +85,7 @@ Prompt (substitute [PROBLEM] before sending):
 
 You are orchestrating a divergent product design brainstorm for a XD OS project.
 
-First, read the project context file (try `.claude/memory/project-context.md` first, then `memory/project-context.md` as fallback). Extract: product purpose, core system invariants, and user archetypes. You will embed this as [PRODUCT PURPOSE] and [SYSTEM INVARIANTS] in the inner agent prompts below.
+First, read the project context file (try `studio_os/project-context.md` first, then `.claude/memory/project-context.md`, then `memory/project-context.md` as fallback). Extract: product purpose, core system invariants, and user archetypes. You will embed this as [PRODUCT PURPOSE] and [SYSTEM INVARIANTS] in the inner agent prompts below.
 
 Problem: [PROBLEM]
 

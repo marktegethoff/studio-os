@@ -28,7 +28,7 @@ tools: ["Read", "Glob", "Grep", "WebSearch", "WebFetch"]
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — product purpose, brand principles, system invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product purpose, brand principles, system invariants
 2. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 
 If files are absent, proceed without them.
@@ -78,7 +78,7 @@ Fixes must feel like they were always there. Bolted-on solutions — visible aff
 ## Session Calibration
 
 On session start, read in order:
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — brand principles, product purpose, system invariants, primitives; also load any product-specific evaluation overlays defined there
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — brand principles, product purpose, system invariants, primitives; also load any product-specific evaluation overlays defined there
 2. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
 3. `memory/design-foundations.md` — timeless craft knowledge (if present)
 4. If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it — the invariants section defines system laws that heuristic recommendations must not violate.

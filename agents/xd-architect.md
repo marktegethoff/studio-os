@@ -38,7 +38,7 @@ tools: ["Read", "Glob"]
 
 ## Project Context
 
-Load `project-context.md` on session start — look in `.claude/memory/project-context.md` first (project-local), then `memory/project-context.md` (plugin).
+Load `studio_os/project-context.md` on session start; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context.
 Load `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level. If absent, proceed with a neutral register.
 
 This file defines the system model — primitives, relationships, and invariants — for the current project. The Architect cannot proceed without this context. If neither location has the file, ask: "No project context found. What are the primitives and system invariants for this session?"

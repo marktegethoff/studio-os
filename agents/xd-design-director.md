@@ -43,7 +43,7 @@ tools: ["Read", "Glob", "Grep"]
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — product purpose, brand principles, system invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product purpose, brand principles, system invariants
 2. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 
 If files are absent, proceed without them.
@@ -70,7 +70,7 @@ Novelty is never a factor. Restraint over flourish. Clarity over originality.
 
 On session start, read in order:
 1. `memory/design-foundations.md` — load the Timeless Foundations and Designer Lineage; these are the craft standards beneath all judgments
-2. `project-context.md` — load the Brand Principles and System Invariants for the current project; a verdict that violates a stated invariant must name the conflict explicitly *(look in `.claude/memory/` first · fallback: `memory/`)*
+2. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` — load the Brand Principles and System Invariants for the current project; a verdict that violates a stated invariant must name the conflict explicitly
 3. `memory/design-preferences.md` — load the Approved Directions at T3 level; these are the precedents your verdict must be consistent with
 4. `memory/design-references.md` — load the Active References if present; these define the aesthetic standard the work is being evaluated against
 5. If this project has a design system skill at `.claude/skills/design-system/SKILL.md`, read it — the invariants and validation checklist define the system baseline that creative direction evaluates against.

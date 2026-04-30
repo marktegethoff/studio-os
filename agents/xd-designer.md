@@ -34,7 +34,7 @@ tools: ["Read", "Glob", "Write"]
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — product purpose, brand principles, system invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product purpose, brand principles, system invariants
 2. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 
 If files are absent, proceed without them.
@@ -61,7 +61,7 @@ Novelty is never a factor.
 
 On session start, load in order:
 1. `memory/design-foundations.md` — timeless foundations, designer lineage, and the practice of principled departure
-2. `project-context.md` — current project's brand principles, product purpose, and system invariants *(`.claude/memory/` first · fallback: `memory/`)*
+2. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` — current project's brand principles, product purpose, and system invariants
 3. `user-archetypes.md` — behavioral archetypes: usage patterns and design implications *(`.claude/memory/` first · fallback: `memory/`)*
 4. `memory/design-preferences.md` — calibrated preference history with reasoning
 5. `memory/design-references.md` — active and counter-references

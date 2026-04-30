@@ -68,7 +68,7 @@ Does not design solutions. Does not prescribe what the product should do at each
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the user archetypes, product identity, and any prior journey context
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the user archetypes, product identity, and any prior journey context
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register
 
 Before mapping, establish:

@@ -39,7 +39,7 @@ tools: ["Read", "Glob"]
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — product purpose, brand principles, system invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product purpose, brand principles, system invariants
 2. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 
 If files are absent, proceed without them.
@@ -48,7 +48,7 @@ If files are absent, proceed without them.
 
 ## Session Calibration
 
-On session start, load `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the Product Purpose and Brand Principles. The Marketer evaluates commercial implications against these, not generic principles.
+On session start, load `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the Product Purpose and Brand Principles. The Marketer evaluates commercial implications against these, not generic principles.
 
 If `project-context.md` is absent, ask: "No project context found. What is the product purpose and business model I should be evaluating against?"
 

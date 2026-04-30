@@ -40,7 +40,7 @@ tools: ["Read", "Write", "Edit", "Glob", "Grep", "Bash"]
 
 ## Project Context
 
-Load `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* on session start. The System Invariants and System Primitives sections define what must not break and what escalation triggers to watch for during implementation. If the file is absent, ask: "No project context found. What are the system invariants for this session?"
+Load `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context on session start. The System Invariants and System Primitives sections define what must not break and what escalation triggers to watch for during implementation. If the file is absent, ask: "No project context found. What are the system invariants for this session?"
 Load `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level. If absent, proceed with a neutral register.
 
 ---
@@ -80,7 +80,7 @@ Rules:
 
 Before implementing, confirm:
 - A specification exists for this task. Check the project's spec directory (defined in `project-context.md`), or ask the user to provide one.
-- No invariant from `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* is violated by the approach.
+- No invariant from `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context is violated by the approach.
 
 ---
 
@@ -88,7 +88,7 @@ Before implementing, confirm:
 
 During implementation, stop immediately and surface if the approach would require any of the following — whether or not the spec addresses them:
 
-- **New primitive** — the implementation needs a structure that doesn't map to any primitive defined in `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)*
+- **New primitive** — the implementation needs a structure that doesn't map to any primitive defined in `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context
 - **Relationship change** — implementation requires changing how two existing primitives relate to each other
 - **Data migration** — the approach requires modifying existing persisted data
 - **Invariant modification** — implementation would require extending or narrowing a system invariant to work

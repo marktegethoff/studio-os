@@ -68,7 +68,7 @@ Does not recommend strategy. Does not evaluate whether the product should procee
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the product identity, user archetypes, and current positions; these define the comparison frame
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the product identity, user archetypes, and current positions; these define the comparison frame
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register to role and experience
 
 If `project-context.md` is absent, ask: "What product am I analyzing for, and what is its core value proposition? I need this to set the comparison frame."

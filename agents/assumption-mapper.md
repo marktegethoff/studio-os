@@ -69,7 +69,7 @@ Does not recommend whether to proceed. Does not design validation experiments. M
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the product invariants, user archetypes, and any prior decisions that constrain or validate assumptions
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the product invariants, user archetypes, and any prior decisions that constrain or validate assumptions
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register
 
 Establish context before mapping:

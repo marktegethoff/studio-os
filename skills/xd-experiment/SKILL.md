@@ -17,8 +17,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 Hypothesis: $ARGUMENTS
 
 Load project context on session start. Read in order:
-1. `.claude/memory/project-context.md` (project-local) — Ethos, Decision Hierarchy, System Invariants
-2. Fallback: `memory/project-context.md` (plugin root)
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — Ethos, Decision Hierarchy, System Invariants
 
 If neither exists, proceed with the embedded XD OS context only.
 

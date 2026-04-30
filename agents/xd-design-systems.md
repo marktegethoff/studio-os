@@ -68,7 +68,7 @@ Does not design solutions. Does not decide which variant should be canonical —
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the design system references, product identity, and any stated design system invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the design system references, product identity, and any stated design system invariants
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register
 
 If the design system source of truth is not clear from project-context.md, ask: "Where is the design system defined? Token files, component documentation, Figma library?"

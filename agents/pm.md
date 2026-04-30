@@ -42,7 +42,7 @@ tools: ["Read", "Glob", "Grep"]
 ## Session Calibration
 
 On session start, load in order:
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — product purpose, system invariants, primitives
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product purpose, system invariants, primitives
 2. `memory/design-preferences.md` — approved directions and held decisions; what has already been validated or ruled out
 3. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 

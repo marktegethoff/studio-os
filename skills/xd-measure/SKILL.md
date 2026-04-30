@@ -40,7 +40,7 @@ Feature: $ARGUMENTS
 ## Step 0 — Context loading
 
 Load project context. Read in order:
-1. `project-context.md` (`.claude/memory/` first, fallback `memory/`) — load product invariants, existing instrumentation, any prior measurement decisions
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product invariants, existing instrumentation, any prior measurement decisions
 2. `user-profile.md` (`.claude/memory/`) — calibrate communication register
 
 Check for a validated design brief for this feature. Look for `artifacts/product_brief_*.md` or equivalent. If a brief exists, load its problem statement and success conditions — these govern what the lagging indicator must measure.

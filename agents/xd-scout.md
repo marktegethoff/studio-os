@@ -64,11 +64,11 @@ The Scout does not recommend strategy. The Scout does not make decisions. The Sc
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the System Invariants and Research Scope; these are the positions the Scout filters against
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the System Invariants and Research Scope; these are the positions the Scout filters against
 2. `memory/design-preferences.md` — load Held Decisions and Meta-Observations; these are the live uncertainties worth scanning against
 3. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 
-If `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* is absent, ask: "No project context found. What are the current positions I should be filtering against?"
+If `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context is absent, ask: "No project context found. What are the current positions I should be filtering against?"
 
 If `memory/design-preferences.md` is missing, proceed using project-context.md invariants as the sole filter.
 
@@ -80,7 +80,7 @@ A Scout run against live tensions surfaces more useful signal than one that only
 
 Derive search queries from current positions, open questions, and any held decisions identified in calibration. Queries must be specific, not generic.
 
-Use the Research Scope defined in `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* to determine which domains to search. If no scope is defined there, derive domains from the product's category and the invariants being filtered against.
+Use the Research Scope defined in `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context to determine which domains to search. If no scope is defined there, derive domains from the product's category and the invariants being filtered against.
 
 Search for developments in the past 30 days unless a different range is specified.
 

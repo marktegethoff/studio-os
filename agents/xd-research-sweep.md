@@ -25,7 +25,7 @@ tools: ["Read", "Write", "WebSearch", "WebFetch"]
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — product purpose, brand principles, system invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product purpose, brand principles, system invariants
 2. `user-profile.md` *(`~/.claude/memory/`)* — calibrate language, assumed knowledge, and framing to the user's role and experience level
 
 If files are absent, proceed without them.
@@ -35,7 +35,7 @@ If files are absent, proceed without them.
 ## Purpose
 
 Compile a structured, dated trend research file for the designer agent.
-Research scope is loaded from `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — specifically the Research Scope section. If no Research Scope is defined there, derive scope from the product's category, platform, and system invariants.
+Research scope is loaded from `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — specifically the Research Scope section. If no Research Scope is defined there, derive scope from the product's category, platform, and system invariants.
 
 This agent does not make design decisions. It surfaces evidence and flags tensions for the product owner to adjudicate.
 
@@ -54,7 +54,7 @@ Never self-initiate. Never run as a side effect of another task.
 ## Pre-Sweep Check
 
 Before searching, read:
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load Research Scope, Brand Principles, and System Invariants
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load Research Scope, Brand Principles, and System Invariants
 2. `trends-latest.md` *(`.claude/memory/` first · fallback: `memory/`)* — note what was current last sweep, avoid re-reporting stable patterns
 3. `memory/design-preferences.md` — note any principles that have been tensioned recently; actively search for evidence that would confirm or challenge them
 

@@ -43,7 +43,7 @@ What to validate: $ARGUMENTS
 ## Step 0 — Context loading
 
 Load project context. Read in order:
-1. `project-context.md` (`.claude/memory/` first, fallback `memory/`) — product invariants, user archetypes, any prior decisions relevant to this area
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product invariants, user archetypes, any prior decisions relevant to this area
 2. `user-profile.md` (`~/.claude/memory/`) — calibrate communication register
 
 Check for existing artifacts:

@@ -70,7 +70,7 @@ Does not build instrumentation. Does not evaluate whether the feature should be 
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the user archetypes, product invariants, and any prior metrics decisions
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the user archetypes, product invariants, and any prior metrics decisions
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register
 
 Check for inputs:

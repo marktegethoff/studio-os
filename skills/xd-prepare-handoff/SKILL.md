@@ -46,7 +46,7 @@ Feature or component: $ARGUMENTS
 
 Load all relevant artifacts before proceeding. Read in order:
 
-1. `project-context.md` (`.claude/memory/` first, fallback `memory/`) — product invariants, brand system, system boundaries
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product invariants, brand system, system boundaries
 2. `user-profile.md` (`~/.claude/memory/`) — calibrate communication register
 3. Design system context: `.claude/skills/design-system/SKILL.md` if it exists — load token vocabulary and component library
 4. Prototype artifacts: look for prototype files, wireframes, or mockups for this feature

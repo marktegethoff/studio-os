@@ -66,7 +66,7 @@ Does not design. Does not evaluate whether the problem is worth solving (that is
 
 On session start, load in order:
 
-1. `project-context.md` *(`.claude/memory/` first · fallback: `memory/`)* — load the user archetypes, product invariants, and any prior decisions relevant to this problem space
+1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — load the user archetypes, product invariants, and any prior decisions relevant to this problem space
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register
 
 Check for required inputs before proceeding:
