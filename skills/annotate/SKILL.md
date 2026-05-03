@@ -260,14 +260,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   .ann-q-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.05); }
   .ann-q-item:last-child { border-bottom: none; padding-bottom: 0; }
   .ann-q-row { display: flex; align-items: flex-start; gap: 6px; }
-  .ann-q-type-tag {
-    font-size: 9px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.05em; color: rgba(0,0,0,0.28);
-    background: rgba(0,0,0,0.05); border-radius: 3px;
-    padding: 2px 5px; flex-shrink: 0; margin-top: 1px;
-  }
   .ann-q-text { flex: 1; font-size: 12px; line-height: 1.5; color: rgba(0,0,0,0.65); }
-  .ann-q-cb { width: 14px; height: 14px; margin-top: 2px; flex-shrink: 0; accent-color: #1a1a1a; cursor: pointer; }
   .ann-q-answer-wrap { margin-top: 6px; }
   .ann-q-answer-input {
     width: 100%; height: 26px; padding: 0 8px; box-sizing: border-box;
@@ -740,11 +733,9 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   function buildQuestionItem(q) {
     var item = mk('div', 'ann-q-item');
     var row  = mk('div', 'ann-q-row');
-    var tags = { binary: 'Yes/No', open: 'Open', single: 'Single', multi: 'Multi' };
-    var tag  = mk('span', 'ann-q-type-tag', tags[q.type] || q.type);
-    var txt  = mk('span', 'ann-q-text', q.text);
+    var txt = mk('span', 'ann-q-text', q.text);
 
-    row.appendChild(tag); row.appendChild(txt);
+    row.appendChild(txt);
 
     if (q.removable !== false) {
       var rm = mk('button', 'ann-icon-btn ann-danger', '×');
