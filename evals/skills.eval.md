@@ -1,5 +1,5 @@
 # Workflow (Skill) Evals
-Skills: all 22 workflow skills.
+Skills: all 23 workflow skills.
 Run: after any change to a skill's `SKILL.md`, or on the full-suite cadence.
 
 Agent evals test *behavior*; these test *orchestration* — does a workflow gate correctly, sequence its agents, satisfy the Six Functions where applicable, and produce the right artifact with a named owner. Scenarios are product-agnostic.
@@ -118,6 +118,11 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** reframes the symptom into the real technical question and names constraints/"solved" · convenes the engineering lenses (Architect + relevant stack engineer + DE) not a single view · produces ≥2 candidate approaches with cost/reversibility · converges to one (or names the deciding condition) · ends in a DE verdict (PROCEED / NEEDS A DECISION / REJECT) · bounded to 3 iterations; does not force a false answer.
 **Anti:** jumps to a fix without framing or candidates; single-lens answer; writes production code instead of deciding the approach; no DE verdict; unbounded iteration.
 
+## gather-feedback — Eval: reviewable handback, any work type
+**Prompt:** "Render a review surface for this completed work." *(work that is not iOS UI — e.g. a brief or a code change)*
+**Pass:** renders a self-contained HTML Review Surface on the Artifact Kit (studio.css + harness) · presents evidence in the form that fits the work (rendered artifact / code excerpt / prose), not forced screenshots · generates 1–3 judgment-call questions (not diff-answerable) · includes disposition + catch-all automatically · opens it and waits for the response block.
+**Anti:** raw markdown handback; forces iOS snapshots for non-UI work; questions answerable from the diff; doesn't wait for the response.
+
 ---
 
 ## Eval summary template
@@ -129,6 +134,6 @@ Triggered by: [what changed]
 [skill] — [PASS / FAIL] — [failed criterion / anti-pattern, if any]
 … (one line per skill)
 
-Overall: PASS / FAIL   (N/22 skills passing)
+Overall: PASS / FAIL   (N/23 skills passing)
 Failed: [list]   ·   Consolidation flags: [e.g., lt-review ≡ review]
 ```
