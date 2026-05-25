@@ -43,8 +43,7 @@ tools: ["Read", "Glob"]
 ## Design System
 
 If the project defines a design system, read its brand/color tokens before mark work.
-Amber (#C4652A) is reserved exclusively for the Log mark period and CommitButton active state — no other use is permitted.
-This is a closed constraint; it cannot be reassigned by creative direction.
+Where a design system reserves a color for a single sanctioned context (a mark accent, a signal color), treat that reservation as a closed constraint — honor it exactly. A reserved color is not the mark-maker's to reassign, and creative direction does not override it.
 
 ---
 

@@ -44,7 +44,7 @@ A well-designed, branded one-pager for Studio OS, hosted on **GitHub Pages** (`d
 
 Functional anatomy (**problem → solution → proof → action**), modeled on the *function* of [impeccable.style](https://impeccable.style/) — a peer Claude Code skill plugin — not its visuals:
 
-- **Hero** — name the pain (AI design without discipline; "slop") + the line: *a product-agnostic design studio that keeps AI as instrument, not author.*
+- **Hero** — name the pain (design-by-default; AI "slop") + the studio's value in *its own* terms: multi-discipline rigor, gated judgment, work that feels inevitable. (Do **not** use Log's "AI as instrument, not author" — that's a product invariant, not a studio principle.)
 - **Foundation** — the ethos: work must feel inevitable (Standard Works).
 - **The studio** — 35 disciplines, the Six Functions, the PM → CD → DE gates.
 - **Workflows** — the slash commands (`/design`, `/discover`, `/implement`, `/critique`, `/review`, `/solve`…).
@@ -63,12 +63,15 @@ impeccable names its failure modes ("Gallery of Shame": purple gradients, cardoc
 
 A human-readable changelog (impeccable surfaces one prominently). Pairs with the release/version discipline (#3): each version bump appends a short entry. Distinct from the decision ledger — this is "what changed for users," not "why we decided."
 
-### Considered, not pursuing (off-mission)
+## 10. Standalone CLI / generator ("Live Mode") — *to explore*
 
-Logged so they're not re-proposed. Studio OS is a *reasoning system inside Claude Code* — features are earned against that, not borrowed because a peer has them:
+A standalone tool that generates — variants, or the studio's design vocabulary applied to produce output — usable outside a Claude Code session and by others. Mark wants this; plenty exist in-market but it could still earn its place.
 
-- **Browser/Chrome extension** — Studio OS doesn't operate on web pages; out of scope.
-- **Standalone CLI / generator ("Live Mode" variant generation)** — the studio reasons and specifies; it is deliberately *not* a generator (AI as instrument, not author). A live-variant generator contradicts the core position.
+Not a rejection — an open question: today the studio *reasons, critiques, and specifies* rather than generating. A generator is a genuine expansion of what Studio OS is, so it deserves a Strategist/PM pass on shape before any build: does the studio itself generate, or does a separate "Live Mode" companion generate *under* the studio's disciplines and gates? Settle the position, then scope.
+
+### Considered, not pursuing (for now)
+
+- **Browser/Chrome extension** — Studio OS doesn't operate on web pages; out of scope for now.
 
 ---
 

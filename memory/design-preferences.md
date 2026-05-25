@@ -69,10 +69,4 @@ Preferences that have appeared 3+ times and may warrant elevation to the skill f
 
 Agent-surfaced patterns across sessions:
 
-- Explicit guardrail: implicit approval must never be treated as genuine approval. The agent must create deliberate friction on Tier 2+ decisions.
-
-- Sprint mode is valid but must be declared explicitly and logged as lower-confidence. The agent never infers sprint mode from session pace.
-
-- Sycophancy is the primary failure mode to guard against. The preference file must never become a list of safe choices. Strong opinions held loosely — the agent knows what evidence would change its position.
-
-- The cost of rework is real even when you're not the one writing the code. AI tooling creates a felt sense of speed that can mask poor decisions. More friction on structural decisions is correct precisely because the tooling makes fast feel free.
+*(Builds over time. Do not seed with agent system observations — this section is for product-specific design patterns only.)*
