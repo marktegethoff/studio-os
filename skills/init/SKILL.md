@@ -317,6 +317,18 @@ If the user opts in, write a map of handle → persona to `.claude/memory/agent-
 
 For each requested specialist: ask for the stack, 2–4 reference figures/sources (its lineage), and the one or two boundaries it must not blur. Generate `agents/<stack>-engineer.md` from `templates/engineer-specialist.template.md`, then register it in `STRUCTURE.md` and add its eval to `evals/engineering-agents.eval.md` (the coverage rule: no agent ships without an eval).
 
+### Step D — Brand identity (for the studio's rendered surfaces)
+
+The Artifact Kit (`artifacts/kit/studio.css`) and the skills that render HTML (artifacts, the `gather-feedback` review surface, the `annotate` overlay) ship with the **Standard Works** identity by default — Neue Haas Grotesk, black on warm white, monochrome. If the user runs their own studio brand, let them put it in:
+
+> "The studio's rendered surfaces use the Standard Works visual brand by default. Do you have your own studio brand to use instead? If so I'll capture it; otherwise we keep Standard Works."
+
+If the user has a brand, capture:
+- **Type** — a font source (a Typekit/Adobe Fonts or Google Fonts `@import`/link, or a local `@font-face`) and the family names for display, text, and mono.
+- **Color** — background, text, rule/border, and a single muted accent (the studio palette stays restrained — "color is earned").
+
+Write these as a `:root` override to `.claude/memory/brand.css` and have artifacts load it **after** `studio.css` (it overrides the kit's CSS variables — fonts and `--accent`/palette — without touching the component classes). Default, if the user has no brand: Standard Works, unchanged. This is the same configurable pattern as the palette, personas, and engineering specialists — ship a default, let each install put in its own.
+
 ---
 
 ## Post-write

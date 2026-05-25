@@ -14,6 +14,8 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[Artifact] — [subject]</title>
   <link rel="stylesheet" href="../kit/studio.css">
+  <!-- optional: a studio/product brand override (fonts + --accent/palette), captured at /studio-os:init Step D -->
+  <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head><body>
   <div class="wrap">
     <header class="header">
