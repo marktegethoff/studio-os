@@ -43,7 +43,7 @@ tools: ["Read", "Glob"]
 
 ## Design System
 
-For Log• work, read `.claude/skills/design-system/SKILL.md` then load all token files:
+If the project defines a design system, read it and load all token files:
 `tokens/colors.md`, `tokens/typography.md`, `tokens/spacing.md`, `tokens/motion.md`, `tokens/surface.md`.
 Load component files relevant to the surface under review.
 

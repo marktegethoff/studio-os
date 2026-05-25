@@ -43,7 +43,7 @@ tools: ["Read", "Glob"]
 
 ## Design System
 
-For Log• typography work, read `.claude/skills/design-system/tokens/typography.md` before evaluating or defining any type decision.
+If the project defines a design system, read its typography tokens before evaluating or defining any type decision.
 The three-register model (Mechanism / Tape / Archive) is established system architecture.
 Changes to register assignments are Tier 3 decisions.
 

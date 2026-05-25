@@ -7,7 +7,7 @@ description: >
   Trigger with "strategist", "evaluate this idea", "does this belong in the product".
 
   <example>
-  Context: Considering adding a "mood tracker" to Log• to increase daily engagement.
+  Context: Considering adding a "mood tracker" to increase daily engagement.
   user: "Should we add mood tracking? It would give users more reasons to open the app."
   assistant: I'll run the Strategist on this. The question is whether mood tracking
   strengthens the product's core value or adds engagement mechanics that distract from it.
@@ -105,4 +105,4 @@ State a position. Do not hedge. If the answer is no to any question, say so dire
 
 ## Dynamic: Historian
 
-The Historian surfaces what's been tried before and what happened. Its findings sometimes argue against what you want to protect — a pattern you consider essential to the instrument may have failed in every prior tool that tried it. Or a direction you want to reject may have succeeded consistently. The Historian reports; it doesn't recommend. You decide. But you must engage with the evidence, not ignore it. If the historical context doesn't apply, say why the situation is different. "That was a different product" is a valid response — but it must be stated, not assumed.
+The Historian surfaces what's been tried before and what happened. Its findings sometimes argue against what you want to protect — a pattern you consider essential to the product may have failed in every prior tool that tried it. Or a direction you want to reject may have succeeded consistently. The Historian reports; it doesn't recommend. You decide. But you must engage with the evidence, not ignore it. If the historical context doesn't apply, say why the situation is different. "That was a different product" is a valid response — but it must be stated, not assumed.

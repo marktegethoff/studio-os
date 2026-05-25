@@ -8,10 +8,10 @@ description: >
   Trigger with "accessibility", "check accessibility", "verify WCAG".
 
   <example>
-  Context: A new compose area has been implemented with a custom floating commit button
-  and placeholder text in paper-30 on a paper-00 background.
-  user: "Is the compose area accessible? I want to check before the design review."
-  assistant: I'll activate the Accessibility agent to verify the compose area against
+  Context: A new message composer has been implemented with a custom floating send button
+  and placeholder text in a light gray on a near-white background.
+  user: "Is the composer accessible? I want to check before the design review."
+  assistant: I'll activate the Accessibility agent to verify the composer against
   WCAG AA contrast, touch target size, screen reader labels, and reduce-motion.
   <commentary>
   Pre-review accessibility verification is exactly the Accessibility agent's role —
@@ -20,11 +20,11 @@ description: >
   </example>
 
   <example>
-  Context: The intent dot has been updated with a breathing animation for the pending
-  state, and the thread passive indicator uses a custom tap zone.
-  user: "Do the intent dot animation and thread tap zone meet accessibility requirements?"
+  Context: A status dot has been updated with a breathing animation for the pending
+  state, and a passive row indicator uses a custom tap zone.
+  user: "Do the status-dot animation and the indicator tap zone meet accessibility requirements?"
   assistant: Activating the Accessibility agent to verify the reduce-motion alternative
-  for the pending animation and the 44pt touch target on the thread indicator tap zone.
+  for the pending animation and the 44pt touch target on the indicator tap zone.
   <commentary>
   Animation reduce-motion compliance and touch target verification are Accessibility
   agent tasks — precise checklist work, not design critique.

@@ -42,7 +42,7 @@ tools: ["Read", "Glob"]
 
 ## Design System
 
-For Log• work, read `.claude/skills/design-system/tokens/colors.md` (semantic surfaces + elevation sections) and `tokens/surface.md`.
+If the project defines a design system, read its color and surface tokens before evaluating material.
 The tonal separation model (no shadows; warmer RGB delta in dark mode) defines the material logic of this system.
 Recommendations that introduce drop shadows violate the established material language.
 

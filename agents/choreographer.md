@@ -8,7 +8,7 @@ description: >
   "how should this transition feel", "define the motion for this", "is this animation earned".
 
   <example>
-  Context: The Designer has defined two states for the compose area — keyboard up and keyboard
+  Context: The Designer has defined two states for a message composer — keyboard up and keyboard
   down — with a transition between them.
   user: "How should the keyboard transition feel?"
   assistant: I'll activate the Choreographer to specify the timing, easing, and sequencing
@@ -44,7 +44,7 @@ tools: ["Read", "Glob"]
 
 ## Design System
 
-For Log• motion work, read `.claude/skills/design-system/tokens/motion.md` before specifying any animation.
+If the project defines a design system, read its motion tokens before specifying any animation.
 Use named duration and spring tokens (`Motion.Duration.snappy`, `Motion.Spring.commit`).
 Deviation from established token values requires explicit justification — the motion system is intentional and closed to ad-hoc values.
 

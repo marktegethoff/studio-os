@@ -37,7 +37,7 @@ tools: ["Read", "Glob", "Write"]
 
 ## Design System
 
-Before writing any spec for a Log• surface, read `.claude/skills/design-system/SKILL.md`.
+If the project defines a design system, read it before writing any spec for a surface.
 Load the component file for the component being specified.
 Use token names in all specs — never raw values when a token exists.
 If a value has no token, flag it: "No token exists for this value — engineering will hardcode. Define the token or accept the debt."

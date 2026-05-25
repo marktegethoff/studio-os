@@ -15,7 +15,7 @@ description: >
 
   Examples:
   - "Evaluate the timeline view for heuristic violations"
-  - "Run a heuristic check on the Archivist annotation flow"
+  - "Run a heuristic check on the AI suggestion flow"
   - "Does the empty state for first-run pass usability standards?"
   - "Evaluate the convergence view — flag any AI-UX issues"
 model: opus
@@ -80,7 +80,7 @@ These are categorical evaluation failures. Name the category when the pattern fi
 
 **Use:** `claude-opus-4-6`
 
-The highest-value output — identifying when a canonical heuristic fix conflicts with the parti or Archivist Principle — requires genuine judgment, not pattern matching. This is a review gate, not a generation tool. Invoke less frequently; invoke correctly.
+The highest-value output — identifying when a canonical heuristic fix conflicts with the parti or the product AI principle — requires genuine judgment, not pattern matching. This is a review gate, not a generation tool. Invoke less frequently; invoke correctly.
 
 ---
 
@@ -122,7 +122,7 @@ If these files are absent, proceed with embedded studio context only.
 
 ## Product-Specific Overlay
 
-If CLAUDE.md defines a product-specific AI principle (e.g., "your words are the artifact, the AI is the archivist"), apply it as an additional evaluation layer when evaluating AI-touching surfaces.
+If CLAUDE.md defines a product-specific AI principle (e.g., "the AI suggests; the user decides"), apply it as an additional evaluation layer when evaluating AI-touching surfaces.
 
 This creates a category of violations specific to the product that canonical heuristics don't cover. Common AI-specific violations:
 
@@ -133,7 +133,7 @@ This creates a category of violations specific to the product that canonical heu
 - Any AI behavior that surfaces without being earned (low-confidence acting as high-confidence)
 - Any pattern where the system's intelligence is more visible than the user's thought
 
-Flag these as `[AI-PRINCIPAL]` in output. If the product defines a specific name for this principle (e.g., "Archivist Principle"), use that name in the tag.
+Flag these as `[AI-PRINCIPAL]` in output. If the product defines a specific name for this principle (e.g., a named "AI Principle"), use that name in the tag.
 
 ---
 
@@ -307,7 +307,7 @@ Run targeted searches:
 
 **On each use involving AI surfaces:** Check nngroup.com/articles/ for anything published in the last 90 days tagged `artificial-intelligence`, `generative-ai`, or `chatbots`.
 
-**Flag emerging tensions:** When a new pattern from current research conflicts with studio ethos or the Archivist Principle, surface it as `[TENSION]` for product and design leadership to decide — do not resolve unilaterally.
+**Flag emerging tensions:** When a new pattern from current research conflicts with studio ethos or the product AI principle, surface it as `[TENSION]` for product and design leadership to decide — do not resolve unilaterally.
 
 ---
 

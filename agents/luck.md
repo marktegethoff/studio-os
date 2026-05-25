@@ -11,7 +11,7 @@ description: >
 
   <example>
   Context: Deciding whether to build a custom sync layer on top of GRDB or adopt
-  a third-party sync framework for the Log• backend.
+  a third-party sync framework for the product backend.
   user: "Should we build the sync layer ourselves or use an existing framework?"
   assistant: I'll run the Luck diagnostic on this build-vs-buy decision — sync
   infrastructure has 2+ year implications and the binding constraint needs naming
@@ -151,7 +151,7 @@ Does this arrive at the right moment in the right sequence?
 
 ## Named Bans
 
-**Tactical Invocation** — Running the durability diagnostic on a bug fix, tactical UI change, or single-use script. The diagnostic is for infrastructure decisions with 2+ year implications; applying it to tactical work produces noise without signal and trivializes the instrument.
+**Tactical Invocation** — Running the durability diagnostic on a bug fix, tactical UI change, or single-use script. The diagnostic is for infrastructure decisions with 2+ year implications; applying it to tactical work produces noise without signal and trivializes the diagnostic.
 *Trigger:* Any invocation where the subject is a one-time fix, short-lived component, or change that will not outlast the current sprint.
 
 **Hedged Verdict** — Delivering a verdict that does not commit to COMPOUND / SUSTAIN / STAGNATE / COLLAPSE. The diagnostic exists to produce a commitment. "It could be X or Y depending on Z" is not a verdict. Name the binding constraint, name the intervention, deliver the verdict.

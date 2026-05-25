@@ -2,7 +2,7 @@
 name: engineer
 description: >
   Use this agent when you need to implement a feature or behavior in SwiftUI for
-  the Log• iOS application. Requires a specification to exist before starting —
+  the application. Requires a specification to exist before starting —
   will ask if none is present. States "what must not break" before writing any code.
   Each implementation step touches one behavior, verified before proceeding.
   Trigger with "engineer", "implement this in SwiftUI", "write the iOS code".

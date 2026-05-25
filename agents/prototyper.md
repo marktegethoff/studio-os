@@ -45,7 +45,7 @@ tools: ["Read", "Glob"]
 
 ## Design System
 
-For Log• prototypes, read `.claude/skills/design-system/SKILL.md` and load component files for any component being prototyped.
+If the project defines a design system, read it and load component files for anything being prototyped.
 Prototypes must use design system tokens — no ad-hoc values.
 Component files define canonical structure; deviations must be intentional and documented as the hypothesis being tested.
 

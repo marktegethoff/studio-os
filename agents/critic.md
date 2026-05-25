@@ -8,7 +8,7 @@ description: >
 
   <example>
   Context: A proposed thread detail view has accumulated many panels: header, entry list,
-  archivist summary, related threads, and an export option.
+  an AI summary, related items, and an export option.
   user: "Is this too much? The thread detail view has five distinct sections now."
   assistant: I'll activate the Critic. Five sections in a detail view is a signal of
   accumulated scope. The Critic will evaluate each element and identify what should be removed.

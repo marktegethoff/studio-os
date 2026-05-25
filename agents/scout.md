@@ -22,10 +22,10 @@ description: >
 
   <example>
   Context: Apple Intelligence and FoundationModels are evolving rapidly.
-  user: "What's new in on-device AI that might be relevant to the archivist?"
+  user: "What's new in on-device AI that might be relevant to the product's AI?"
   assistant: Activating the Scout to scan for recent on-device AI developments —
   Apple Intelligence, FoundationModels, Core ML — and filter findings against the
-  archivist's intelligence ceiling (level 3.5) and the AI-assists-but-does-not-author
+  product's AI ceiling and the AI-assists-but-does-not-author
   invariant.
   <commentary>
   Technology field scanning filtered against a specific system invariant is Scout

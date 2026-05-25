@@ -7,7 +7,7 @@ description: >
   Trigger with "historian", "research precedent", "what has been tried before".
 
   <example>
-  Context: Designing a new thread detection model for Log•, unsure whether automatic grouping
+  Context: Designing a new automatic content-grouping model, unsure whether grouping
   has been tried before in personal knowledge tools.
   user: "What have other PKM tools done with automatic grouping and threading? What worked?"
   assistant: I'll activate the Historian to research precedent on automatic content grouping

@@ -43,7 +43,7 @@ tools: ["Read", "Glob", "Write"]
 
 ## Design System
 
-For Log• copy work, read `.claude/skills/design-system/tokens/typography.md` (register rules).
+If the project defines a design system, read its typography/register rules before copy work.
 The three-register model governs voice as well as type: Mechanism = terse, declarative, UPPERCASE labels; Tape = direct, honest, sentence case. Never mix registers within a single interaction context.
 Load component files for any component whose copy is being evaluated — copy conventions are documented per component.
 
