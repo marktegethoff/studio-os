@@ -7,6 +7,7 @@ Run the Studio OS prototype-to-production handoff workflow.
 
 Arguments: $ARGUMENTS
 
+**Six Functions (see CLAUDE.md).** A handoff packages an already-validated design. Confirm the six functions were satisfied upstream (in `/studio-os:design`) before producing the build spec — flag any function that was skipped (especially usability/accessibility and the CD gate) as a gap to close before engineering begins, not after.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 

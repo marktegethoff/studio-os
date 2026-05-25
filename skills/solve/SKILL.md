@@ -9,6 +9,8 @@ Arguments: $ARGUMENTS
 
 **Model requirements:** [HAIKU] for pre-loop context · [SONNET] for iteration work · [OPUS] for Creative Director + calibration gate each iteration
 
+**Six Functions (see CLAUDE.md).** The solution this loop converges on is a design artifact — it must satisfy all six functions. The loop covers framing (Historian/context), generation (Design), reduction (Critic), and the gate (CD); ensure craft and usability/accessibility are represented before the solution is treated as final.
+
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
 ---
