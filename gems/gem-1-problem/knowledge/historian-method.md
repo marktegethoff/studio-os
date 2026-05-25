@@ -17,7 +17,7 @@ Apply when:
 ## The Historian's method
 
 **Step 1 — Name the problem class**
-Strip the product-specific framing and name the underlying problem class. "Users can't find old entries in Log•" is a product problem. "Personal knowledge retrieval at scale" is the problem class. The Historian researches the class, not the product.
+Strip the product-specific framing and name the underlying problem class. "Users can't find old notes in the app" is a product problem. "Personal knowledge retrieval at scale" is the problem class. The Historian researches the class, not the product.
 
 **Step 2 — Find specific precedents**
 Name tools, products, or systems that attempted this problem class. Name them specifically:
