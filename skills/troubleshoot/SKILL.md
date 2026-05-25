@@ -1,5 +1,5 @@
 ---
-description: Converge multiple engineering lenses on a hairy technical problem — a performance wall, an architecture fork, a gnarly cross-stack bug, a build-vs-buy call. The engineering counterpart to /solve: runs a bounded convergence loop through the Architect, the relevant stack engineers, and the Distinguished Engineer until the right technical approach is inevitable. Use when a technical problem has no obvious right answer or prior attempts haven't converged.
+description: "Converge multiple engineering lenses on a hairy technical problem — a performance wall, an architecture fork, a gnarly cross-stack bug, a build-vs-buy call. The engineering counterpart to /solve: runs a bounded convergence loop through the Architect, the relevant stack engineers, and the Distinguished Engineer until the right technical approach is inevitable. Use when a technical problem has no obvious right answer or prior attempts haven't converged."
 argument-hint: "<the technical problem to solve>"
 ---
 

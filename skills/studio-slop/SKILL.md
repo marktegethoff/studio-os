@@ -1,5 +1,5 @@
 ---
-description: The Slop Test — the studio's quality floor. Checks a piece of studio output (an agent response, an artifact, a spec, a verdict) for competent-looking-but-vacuous content — discipline vocabulary applied without discipline judgment. Built to run on top of a passing eval suite: the evals confirm the agent did the right thing; the Slop Test confirms the output actually says something.
+description: "The Slop Test — the studio's quality floor. Checks a piece of studio output (an agent response, an artifact, a spec, a verdict) for competent-looking-but-vacuous content — discipline vocabulary applied without discipline judgment. Built to run on top of a passing eval suite: the evals confirm the agent did the right thing; the Slop Test confirms the output actually says something."
 argument-hint: "<the output to test — paste it, or point to a file>"
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: Run a full Leadership Team review — PM, Design Director, and Distinguished Engineer — against a completed artifact. Produces a combined verdict with convergence notes and a single prioritized next action. Use at meaningful gates: shipping a significant feature, handing a design to engineering, or any directional product decision.
+description: "Run a full Leadership Team review — PM, Design Director, and Distinguished Engineer — against a completed artifact. Produces a combined verdict with convergence notes and a single prioritized next action. Use at meaningful gates: shipping a significant feature, handing a design to engineering, or any directional product decision."
 argument-hint: "<artifact to review — spec, design, implementation, or combination>"
 ---
 
