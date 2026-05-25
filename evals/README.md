@@ -52,12 +52,12 @@ Triggered by: [what changed]
 
 ROSTER RESULT
   Core:        pm ✓ · cd ✓ · de ✓ · heurist ✓ · auditor ✓ · luck ✓ · competitive-analyst ✓ · surveyor ✓
-  Engineering: architect ✓ · engineer ✓ · qa ✓ · specifier ✓
+  Engineering: architect ✓ · engineer ✓ · ios-engineer ✓ · web-engineer ✓ · qa ✓ · specifier ✓
   Design:      designer ✓ · visual-designer ✓ · choreographer ✓ · typesetter ✓ · materialist ✓ · mark-maker ✓ · writer ✓ · prototyper ✓ · accessibility ✓ · design-validator ✓ · critic ✓ · systematist ✓
   PM/Discovery: strategist ✓ · scout ✓ · historian ✓ · marketer ✓ · user-researcher ✓ · journey-mapper ✓ · brief-writer ✓ · metrics-definer ✓ · assumption-mapper ✓
   (✓ pass · ✗ fail · ◐ partial)
 
-OVERALL: PASS / FAIL   (N/33 agents passing)
+OVERALL: PASS / FAIL   (N/35 agents passing)
 
 FAILURES (ranked by severity)
 1. [agent] — [eval] — [criterion that failed] → fix: [specific section/edit]
