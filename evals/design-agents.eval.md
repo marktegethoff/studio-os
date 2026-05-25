@@ -133,7 +133,7 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 **Anti-patterns:**
 - Writing the spec with only the happy-path state (content present → active)
-- Using raw color values instead of token names (e.g., "#C4652A" instead of a named token)
+- Using raw color values instead of token names (e.g., "#3B82F6" instead of a named token)
 - Missing accessibility spec entirely
 - "Presumably shows cached state" — State Assumption ban
 

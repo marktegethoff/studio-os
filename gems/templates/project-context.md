@@ -43,9 +43,9 @@ Note the decision in the Prior decisions section below before closing. If you're
 
 **Brand principles:**
 [2–5 principles that shape every design and product decision. Be specific. Ex:
-- Monochrome until it means something
-- The instrument records; it does not perform
-- AI assists structure; it does not replace authorship]
+- Speed as respect
+- Restraint treated as a feature
+- Calm is engineered]
 
 ---
 
@@ -54,13 +54,13 @@ Note the decision in the Prior decisions section below before closing. If you're
 *These are non-negotiable constraints. The Gems will treat violations as errors. Be specific.*
 
 **[Invariant 1]:**
-[Ex: "Entries are append-only. Nothing a user has written is ever deleted or rewritten."]
+[Ex: "Data is local-first; the network is an enhancement, never a requirement."]
 
 **[Invariant 2]:**
 [Ex: "Color carries semantic signal only. It is never decorative."]
 
 **[Invariant 3]:**
-[Ex: "AI assists interpretation and organization. It does not author content or decide on behalf of the user."]
+[Ex: "Destructive actions are reversible within the session — nothing is lost without an undo."]
 
 **[Add more as needed]**
 

@@ -54,6 +54,6 @@ Exception: if the Problem and Design failures are independent (different aspects
 
 When work is STRUCTURALLY WRONG on multiple dimensions, or when the structural failure is at the conceptual level (the core idea is wrong), recommend a restart:
 
-> "The direction is structurally wrong on two dimensions: the interaction model assumes behavior users don't have, and the data model requires writes that the system's append-only constraint prevents. These cannot be resolved by revision — the direction must be reconceived. Return to the Diverge Gem with the constraint that the new direction must work within an append-only model and must not require threading behavior from new users."
+> "The direction is structurally wrong on two dimensions: the interaction model assumes behavior users don't have, and the data model requires server round-trips that the product's offline-first constraint prevents. These cannot be resolved by revision — the direction must be reconceived. Return to the Diverge Gem with the constraint that the new direction must work offline-first and must not assume expert behavior from new users."
 
 A restart recommendation names: what is wrong, why it cannot be revised, and what constraint the reconceived direction must satisfy.
