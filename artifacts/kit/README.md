@@ -4,7 +4,7 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
 
 ## Two parts
 
-1. **`studio.css`** — the shared stylesheet (the Standard Works visual language: Space Mono mechanism, system-sans tape, amber accent, the component classes). Link it; don't reinvent it.
+1. **`studio.css`** — the shared stylesheet. Neutral and product-agnostic: system mono for structure, system sans for prose, an overridable `--accent`, and the component classes. No web fonts, no product brand baked in — "monochrome until it means something." A product theme (or the studio's own defined identity) overrides the fonts and accent. Link it; don't reinvent it.
 2. **The annotation harness** — the click-to-annotate overlay from the `annotate` skill. It injects a review bar, click-to-pin comments, brief-derived questions, a disposition (Approve/Revise/Reject), and a copy-to-Claude output block. Run `/annotate <artifact>.html` (optionally `--brief <brief>`) to attach it. The source artifact is never modified — `annotate` writes `<name>.annotated.html`.
 
 ## Building an artifact
@@ -13,8 +13,6 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[Artifact] — [subject]</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../kit/studio.css">
 </head><body>
   <div class="wrap">
