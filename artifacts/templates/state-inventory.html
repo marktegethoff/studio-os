@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State Inventory — [surface]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit/studio.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <span class="eyebrow">Studio OS · State Inventory · owned by designer / specifier</span>
+    <h1>[Surface]<span style="color:var(--amber)">.</span></h1>
+    <p class="header-sub">Exhaustive enumeration of a surface's states — the antidote to happy-path-only specs.</p>
+  </header>
+
+  <section class="section">
+    <h2>States</h2>
+    <table>
+      <tr><th>State</th><th>When it occurs</th><th>What the user sees</th><th>Exit</th></tr>
+      <tr><td>Empty</td><td>[no data yet]</td><td>[empty container — not a tutorial]</td><td>[how it leaves empty]</td></tr>
+      <tr><td>Loading</td><td>[fetch in flight]</td><td>[skeleton / placeholder]</td><td>[resolves to…]</td></tr>
+      <tr><td>Populated</td><td>[data present]</td><td>[the main state]</td><td>[—]</td></tr>
+      <tr><td>Partial / paginated</td><td>[more available]</td><td>[—]</td><td>[—]</td></tr>
+      <tr><td>Error</td><td>[fetch/action failed]</td><td>[honest, recoverable]</td><td>[retry path]</td></tr>
+      <tr><td>Offline</td><td>[no connection]</td><td>[—]</td><td>[—]</td></tr>
+      <tr><td>Edge / overflow</td><td>[very long / very many]</td><td>[—]</td><td>[—]</td></tr>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>What the Next Gate Confirms</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">✓ Every state has a designed appearance and a designed exit — none deferred to "engineering will handle it."</div></div>
+      <div class="item"><div class="it-desc">✓ Empty states describe an empty container, not a feature tutorial (Tutorial Dependency ban).</div></div>
+      <div class="item"><div class="it-desc">✓ Error and offline states are recoverable, not dead ends.</div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Studio OS · State Inventory · run /annotate to review</p></footer>
+</div>
+</body>
+</html>

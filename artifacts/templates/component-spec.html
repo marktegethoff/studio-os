@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Component Spec — [component]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../kit/studio.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <span class="eyebrow">Studio OS · Component Spec · owned by specifier</span>
+    <h1>[Component]<span style="color:var(--amber)">.</span></h1>
+    <p class="header-sub">Every state, token, and accessibility trait in one place — the handoff that removes implementation guessing.</p>
+    <div class="header-meta"><span>[date]</span><span>Spec status: complete / gaps flagged</span></div>
+  </header>
+
+  <section class="section">
+    <h2>States</h2>
+    <table>
+      <tr><th>State</th><th>Trigger</th><th>Appearance (named tokens only)</th></tr>
+      <tr><td>Default</td><td>[—]</td><td>[tokens]</td></tr>
+      <tr><td>Active / content present</td><td>[—]</td><td>[tokens]</td></tr>
+      <tr><td>Pressed</td><td>[—]</td><td>[tokens]</td></tr>
+      <tr><td>Disabled</td><td>[—]</td><td>[tokens]</td></tr>
+      <tr><td>Loading / pending</td><td>[—]</td><td>[tokens]</td></tr>
+      <tr><td>Error</td><td>[—]</td><td>[tokens]</td></tr>
+    </table>
+    <p style="font-size:0.8rem">Any state the design did not cover is flagged explicitly below — engineering must not guess it.</p>
+  </section>
+
+  <section class="section">
+    <h2>Tokens</h2>
+    <table>
+      <tr><th>Property</th><th>Token</th></tr>
+      <tr><td>Background</td><td><code>[token]</code></td></tr>
+      <tr><td>Foreground</td><td><code>[token]</code></td></tr>
+      <tr><td>Type</td><td><code>[token]</code></td></tr>
+      <tr><td>Radius / spacing</td><td><code>[token]</code></td></tr>
+    </table>
+    <p style="font-size:0.8rem">No raw hex or pt values where a token exists.</p>
+  </section>
+
+  <section class="section">
+    <h2>Accessibility</h2>
+    <div class="grid2">
+      <div class="dcard"><span class="k">Label</span><span class="v">[accessibility label]</span></div>
+      <div class="dcard"><span class="k">Trait / role</span><span class="v">[button / etc.]</span></div>
+      <div class="dcard"><span class="k">Touch target</span><span class="v">≥ 44pt</span></div>
+      <div class="dcard"><span class="k">Contrast</span><span class="v">WCAG AA confirmed</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Gaps <span class="pill">resolve before build</span></h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[Unspecified state/behavior] — "Specify or acknowledge the risk; engineering will guess otherwise."</div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Studio OS · Component Spec · run /annotate to review</p></footer>
+</div>
+</body>
+</html>
