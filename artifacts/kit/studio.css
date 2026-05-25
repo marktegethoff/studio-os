@@ -3,72 +3,75 @@
    scratch. Pair with the annotation harness (see kit/README.md) so every artifact
    is reviewable and returns agent-friendly feedback in one paste.
 
-   Load: <link rel="stylesheet" href="../kit/studio.css">  (no web fonts required)
+   This carries the STANDARD WORKS identity (the studio's own brand — not any
+   product's): Neue Haas Grotesk (refined grotesk sans), black on warm white,
+   monochrome with at most a single earned accent, generous margins, no decoration.
+   Source of truth: ~/Standard Works/Apps/Standard-Works/brand-system.html.
+   The Typekit @import below loads Neue Haas Grotesk; without it, the kit falls back
+   to Helvetica Neue (a classic grotesk) and still holds. */
 
-   This is a NEUTRAL, product-agnostic default. It imposes no product's brand:
-   system font stacks, "monochrome until it means something." Everything below the
-   first block is structure; everything IN the first block (:root) is overridable —
-   a product theme (or the studio's own defined identity) sets fonts and --accent.
-   The --accent default here is a neutral placeholder, NOT a studio brand color and
-   NOT any product's brand fonts or colors. Define the studio's real identity, or
-   let each product theme it. */
+@import url("https://use.typekit.net/bul1epr.css");
 
 :root {
-  --bg:#0D0B09; --bg-1:#131110; --bg-2:#1A1714; --bg-3:#201D1A;
-  --border:#272320; --border-2:#323030;
-  --text-1:#F0EDE8; --text-2:#9A9088; --text-3:#5A5450;
-  /* --accent: neutral placeholder; override per product / per studio identity. (--amber kept as an alias for template compatibility.) */
-  --accent:#9A9088; --amber:var(--accent); --amber-bg:#201D1A;
-  --green:#5A8A5A; --red:#A8553A; --cyan:#3A8FA8; --magenta:#A84A8A; --strat:#7A72B0;
-  --font-body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --font-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  /* Standard Works — light (primary atmosphere: black on white) */
+  --bg:#FAFAF8; --bg-1:#FFFFFF; --bg-2:#EAE7DF; --bg-3:#D4CEC5;
+  --border:#C8C2B9; --border-2:#D4CEC5;
+  --text-1:#0D0D0D; --text-2:#6B6560; --text-3:#8C867E;
+  /* Accent: monochrome by default — color is earned. Override --accent for a muted, purposeful accent (never a bright tech color). --amber kept as an alias for template compatibility. */
+  --accent:#0D0D0D; --amber:var(--accent); --amber-bg:#EAE7DF;
+  /* Status colors — muted, for verdict/severity only, never decoration */
+  --green:#3E6B4F; --red:#9B3D2E; --cyan:#2E5F6B; --magenta:#7A3A6B; --strat:#5A5480;
+  /* Type — Neue Haas Grotesk (display for headings, text for prose); Courier for technical labels */
+  --font-display:'neue-haas-grotesk-display','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-body:'neue-haas-grotesk-text','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-mono:'Courier New',Courier,ui-monospace,monospace;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text-1);font-family:var(--font-body);line-height:1.65;-webkit-font-smoothing:antialiased}
-.wrap{max-width:900px;margin:0 auto;padding:0 2.5rem}
+.wrap{max-width:880px;margin:0 auto;padding:0 3rem}
 
-/* Type — mechanism (mono) for structure, tape (sans) for prose */
-h1{font-family:var(--font-mono);font-size:2.6rem;font-weight:700;letter-spacing:-0.03em;line-height:1.05}
-h2{font-family:var(--font-mono);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:1.75rem}
-h3{font-family:var(--font-mono);font-size:1rem;font-weight:700;color:var(--text-1);margin-bottom:0.5rem}
+/* Type — grotesk hierarchy through weight/size/spacing, never decoration. Mono (Courier) for small technical labels only. */
+h1{font-family:var(--font-display);font-size:2.6rem;font-weight:600;letter-spacing:-0.02em;line-height:1.06}
+h2{font-family:var(--font-mono);font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-2);margin-bottom:1.75rem}
+h3{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--text-1);margin-bottom:0.5rem;letter-spacing:-0.01em}
 h4{font-size:0.9rem;font-weight:600;color:var(--text-1);margin-bottom:0.25rem}
-p{color:var(--text-2);margin-bottom:1rem;max-width:72ch;line-height:1.7}
+p{color:var(--text-2);margin-bottom:1rem;max-width:68ch;line-height:1.7}
 strong{color:var(--text-1);font-weight:600}
 em{color:var(--text-2);font-style:italic}
-a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
-code{font-family:var(--font-mono);font-size:0.8em;background:var(--bg-2);color:var(--text-2);padding:0.1em 0.4em;border-radius:3px;border:1px solid var(--border)}
-.eyebrow{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:1.5rem}
+a{color:var(--text-1);text-decoration:underline;text-underline-offset:2px} a:hover{color:var(--text-2)}
+code{font-family:var(--font-mono);font-size:0.82em;background:var(--bg-2);color:var(--text-1);padding:0.1em 0.4em;border-radius:2px;border:1px solid var(--border)}
+.eyebrow{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:1.5rem}
 
-/* Header + sections */
+/* Header + sections — generous margin, strong left alignment */
 .header{padding:6rem 0 3rem}
-.header-sub{font-size:1.1rem;color:var(--text-2);max-width:64ch;margin-top:1.25rem}
+.header-sub{font-size:1.1rem;color:var(--text-2);max-width:60ch;margin-top:1.25rem}
 .header-meta{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-3);margin-top:2.5rem;display:flex;gap:1.5rem;flex-wrap:wrap}
-.section{padding:4rem 0;border-top:1px solid var(--border)}
+.section{padding:3.5rem 0;border-top:1px solid var(--border)}
 
-/* Callout — amber-left emphasis block (problem statement, the one thing, etc.) */
-.callout{background:var(--amber-bg);border:1px solid #3A1A08;border-left:3px solid var(--amber);padding:1.75rem 2rem;border-radius:0 5px 5px 0;margin:1.5rem 0}
+/* Callout — accent-left emphasis block */
+.callout{background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.75rem 2rem;border-radius:0 3px 3px 0;margin:1.5rem 0}
 .callout p{color:var(--text-1);margin-bottom:0;font-size:1.05rem;line-height:1.7;max-width:none}
 
 /* Grids + definition cards */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
-.dcard{background:var(--bg-1);border:1px solid var(--border);border-radius:4px;padding:1rem 1.2rem}
+.dcard{background:var(--bg-1);border:1px solid var(--border);border-radius:3px;padding:1rem 1.2rem}
 .dcard .k{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:0.35rem}
 .dcard .v{font-size:0.85rem;color:var(--text-1);line-height:1.5}
-.dcard .v em{color:var(--amber);font-style:normal;font-family:var(--font-mono);font-size:0.8rem}
+.dcard .v em{color:var(--text-1);font-style:normal;font-family:var(--font-mono);font-size:0.8rem}
 
-/* Item list — labelled rows (deliverables, options, criteria) */
+/* Item list */
 .itemlist{display:flex;flex-direction:column;gap:0.6rem;margin:1rem 0}
-.item{background:var(--bg-1);border:1px solid var(--border);border-radius:4px;padding:0.8rem 1.1rem}
+.item{background:var(--bg-1);border:1px solid var(--border);border-radius:3px;padding:0.8rem 1.1rem}
 .item .it-name{font-family:var(--font-mono);font-size:0.74rem;color:var(--text-1);font-weight:700}
 .item .it-name .owner{color:var(--text-3);font-weight:400;font-size:0.62rem;margin-left:0.4rem}
 .item .it-desc{font-size:0.8rem;color:var(--text-2);margin-top:0.2rem;line-height:1.5}
 
-/* Tier / phase blocks (process, sequence) */
-.tier{border:1px solid var(--border);border-radius:5px;padding:1.1rem 1.4rem;margin-bottom:0.5rem;background:var(--bg-1)}
-.tier .tlabel{font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem;color:var(--amber)}
+/* Tier / phase blocks */
+.tier{border:1px solid var(--border);border-radius:3px;padding:1.1rem 1.4rem;margin-bottom:0.5rem;background:var(--bg-1)}
+.tier .tlabel{font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem;color:var(--text-2)}
 .tier .tbody{font-size:0.82rem;color:var(--text-2);line-height:1.6}
 .tier .tbody strong{color:var(--text-1)}
 
@@ -77,9 +80,9 @@ code{font-family:var(--font-mono);font-size:0.8em;background:var(--bg-2);color:v
 .tag{font-family:var(--font-mono);font-size:0.62rem;padding:0.2rem 0.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:2px;color:var(--text-2)}
 .tag.new{border-color:var(--green);color:var(--green)}
 .tag.ret{color:var(--text-3);text-decoration:line-through;opacity:0.6}
-.pill{display:inline-block;font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:var(--amber-bg);border:1px solid #3A1A08;padding:0.1rem 0.45rem;border-radius:2px}
+.pill{display:inline-block;font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-2);background:var(--bg-2);border:1px solid var(--border);padding:0.1rem 0.45rem;border-radius:2px}
 
-/* Two-column compare (draw-from / avoid, before / after) */
+/* Two-column compare */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
 .compare h4{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.7rem}
 .compare .pos h4{color:var(--green)} .compare .neg h4{color:var(--red)}
@@ -93,14 +96,14 @@ th,td{text-align:left;padding:0.55rem 0.7rem;border-bottom:1px solid var(--borde
 th{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3)}
 td strong{color:var(--text-1)}
 
-/* ASCII / wireframe block — monospaced, styled, not raw text */
-pre.ascii{background:#0A0908;border:1px solid var(--border-2);border-radius:5px;color:var(--text-1);font-family:var(--font-mono);font-size:0.72rem;line-height:1.5;padding:1.5rem 1.75rem;white-space:pre;overflow:auto;max-width:none;margin:1.5rem 0}
+/* ASCII / wireframe block */
+pre.ascii{background:var(--bg-2);border:1px solid var(--border);border-radius:3px;color:var(--text-1);font-family:var(--font-mono);font-size:0.72rem;line-height:1.5;padding:1.5rem 1.75rem;white-space:pre;overflow:auto;max-width:none;margin:1.5rem 0}
 
-/* Status colors for verdicts/severity */
-.s-pass,.s-ship{color:var(--green)} .s-revise,.s-warn{color:var(--amber)} .s-fail,.s-reject{color:var(--red)}
+/* Status colors */
+.s-pass,.s-ship{color:var(--green)} .s-revise,.s-warn{color:var(--accent)} .s-fail,.s-reject{color:var(--red)}
 
 /* Footer */
-.footer{padding:4rem 0;border-top:1px solid var(--border)}
+.footer{padding:3.5rem 0;border-top:1px solid var(--border)}
 .footer p{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-3)}
 
-@media(max-width:720px){.grid2,.grid3,.compare{grid-template-columns:1fr}h1{font-size:1.9rem}.wrap{padding:0 1.3rem}}
+@media(max-width:720px){.grid2,.grid3,.compare{grid-template-columns:1fr}h1{font-size:1.9rem}.wrap{padding:0 1.5rem}}

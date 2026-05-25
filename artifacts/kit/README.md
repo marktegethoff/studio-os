@@ -4,7 +4,7 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
 
 ## Two parts
 
-1. **`studio.css`** — the shared stylesheet. Neutral and product-agnostic: system mono for structure, system sans for prose, an overridable `--accent`, and the component classes. No web fonts, no product brand baked in — "monochrome until it means something." A product theme (or the studio's own defined identity) overrides the fonts and accent. Link it; don't reinvent it.
+1. **`studio.css`** — the shared stylesheet, carrying the **Standard Works identity** (the studio's own brand — not any product's): Neue Haas Grotesk (refined grotesk sans) via Typekit with a Helvetica Neue fallback, black on warm white, Courier for technical labels, monochrome with at most a single earned accent (`--accent`), generous margins, no decoration. Source of truth: `~/Standard Works/Apps/Standard-Works/brand-system.html`. A *product* that needs its artifacts themed to its own brand overrides `--accent`/fonts; by default everything carries Standard Works. Link it; don't reinvent it.
 2. **The annotation harness** — the click-to-annotate overlay from the `annotate` skill. It injects a review bar, click-to-pin comments, brief-derived questions, a disposition (Approve/Revise/Reject), and a copy-to-Claude output block. Run `/annotate <artifact>.html` (optionally `--brief <brief>`) to attach it. The source artifact is never modified — `annotate` writes `<name>.annotated.html`.
 
 ## Building an artifact
