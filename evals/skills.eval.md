@@ -1,5 +1,5 @@
 # Workflow (Skill) Evals
-Skills: all 26 workflow skills.
+Skills: all 27 workflow skills.
 Run: after any change to a skill's `SKILL.md`, or on the full-suite cadence.
 
 Agent evals test *behavior*; these test *orchestration* — does a workflow gate correctly, sequence its agents, satisfy the Six Functions where applicable, and produce the right artifact with a named owner. Scenarios are product-agnostic.
@@ -138,6 +138,11 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** detects mechanically (supersession / contradiction / stale-pending / orphan) · routes each to the owning gate (CD/DE/PM) for a judged recommendation with reasoning · presents recommendations for the user to decide · changes nothing without approval (no auto-resolution).
 **Anti:** resolves a decision itself; collapses detect/judge/decide into one step; treats supersession as a failure rather than a fact.
 
+## studio-slop — Eval: catches competent-looking emptiness
+**Prompt:** "Run the Slop Test on this." *(provide two outputs: one that drops discipline vocabulary with no specific/falsifiable claim, and one with a real specific claim + counter-argument)*
+**Pass:** identifies the core claim of each (or "none found") · flags the hollow one as SLOP, naming the specific markers fired (vocabulary-without-judgment, generic, format-without-substance, hedging, prompt-restatement, unfalsifiable, citation-without-lesson) with quoted spans · passes the substantive one as CLEAN · names the single change that would make the slop output substantive.
+**Anti:** passes the hollow output because it "looks like good studio work" (the exact failure the test exists to catch); flags the substantive output as slop; vague "feels thin" with no marker named.
+
 ---
 
 ## Eval summary template
@@ -149,6 +154,6 @@ Triggered by: [what changed]
 [skill] — [PASS / FAIL] — [failed criterion / anti-pattern, if any]
 … (one line per skill)
 
-Overall: PASS / FAIL   (N/26 skills passing)
+Overall: PASS / FAIL   (N/27 skills passing)
 Failed: [list]   ·   Consolidation flags: [e.g., lt-review ≡ review]
 ```
