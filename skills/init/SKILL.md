@@ -94,7 +94,7 @@ Ask:
 ### Section 4 — User Archetypes
 
 Ask:
-9. Who are the primary users? Describe 2–3 behavioral archetypes — not demographics, but usage patterns. (e.g., "Daily logger: writes 3–5 entries a day, uses threads heavily" vs. "Burst writer: large volumes during projects, then quiet for weeks".)
+9. Who are the primary users? Describe 2–3 behavioral archetypes — not demographics, but usage patterns. (e.g., "Daily user: short, frequent sessions, relies on quick capture" vs. "Burst user: heavy use during projects, then quiet for weeks".)
 
 ---
 

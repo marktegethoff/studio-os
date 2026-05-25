@@ -31,7 +31,7 @@ Simulates entry accumulation over time.
 
 Example scenarios: 10 entries/day for a year · sporadic entries over 5 years · project bursts with hundreds of entries
 
-Evaluates: timeline navigation · search retrieval · archivist classification
+Evaluates: navigation at scale · retrieval quality · classification accuracy
 
 Built-in scenarios: first_week · first_month · two_year_usage · research_project · travel_journal
 

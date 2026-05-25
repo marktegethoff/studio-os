@@ -165,7 +165,7 @@ For each raw idea: does this strengthen the product's core value proposition? Do
 Eliminate any idea marked OUTSIDE. Flag TENSIONS ideas for Critic scrutiny.
 
 **Critic pass**
-Of the remaining ideas: what is redundant (two ideas solving the same problem)? What is decorative (adds surface without structural value)? What is premature (solves a problem Log• doesn't have yet)?
+Of the remaining ideas: what is redundant (two ideas solving the same problem)? What is decorative (adds surface without structural value)? What is premature (solves a problem the product doesn't have yet)?
 Eliminate aggressively. Be ruthless — weak ideas waste the user's time.
 
 **Creative Director — selection to 3–5**
