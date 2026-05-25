@@ -295,6 +295,30 @@ Agents reading this file should:
 
 ---
 
+## Phase 4 — Personalization (optional)
+
+After context and role are set, offer to personalize the studio to this user/product. Each step is optional — offer it, accept "skip," and move on. These use the same mechanism: ship a curated default, let each install extend it.
+
+### Step A — Reference palette
+
+> "Studio OS ships a curated reference palette agents draw on (in `design-references.md`). Want to add your own? Name products whose design you admire (positive) and ones to design away from (anti-references). For each: product → the one-line lesson → stance."
+
+Append the user's entries to `.claude/memory/design-references.md` (create from the shipped default if absent). Do not replace the defaults — extend them. Cite the *method and what the field learned*, never just the output.
+
+### Step B — Display personas
+
+> "Each agent has a stable handle (e.g. `cd`) and a display name it speaks under (Creative Director). You can give any agent a persona name — by default drawn from its own intellectual lineage (CD → Rams, DE → Knuth/Hopper, PM → Christensen, Critic → Rams, Historian → ...). Want to set personas, use the lineage defaults, or skip?"
+
+If the user opts in, write a map of handle → persona to `.claude/memory/agent-personas.md`. The canonical handle never changes (routing depends on it); the persona is cosmetic — what the agent calls itself.
+
+### Step C — Engineering specialists
+
+> "The engineer family ships a stack-neutral base plus `ios-engineer` and `web-engineer`. Add a specialist for your stack? (e.g. backend, android, fullstack, data, ml.) I'll generate it from the specialist template with references you choose."
+
+For each requested specialist: ask for the stack, 2–4 reference figures/sources (its lineage), and the one or two boundaries it must not blur. Generate `agents/<stack>-engineer.md` from `templates/engineer-specialist.template.md`, then register it in `STRUCTURE.md` and add its eval to `evals/engineering-agents.eval.md` (the coverage rule: no agent ships without an eval).
+
+---
+
 ## Post-write
 
 After both files are written, confirm:
@@ -305,7 +329,7 @@ After both files are written, confirm:
 > - `.claude/memory/project-context.md` — product context (shareable with your team)
 > - `.claude/memory/role-context.md` — your role on this project (personal, don't commit)
 >
-> Start with `/design <problem>`, `/studio-os:discover <problem>`, or `/studio <goal>`."
+> Start with `/studio-os:studio <goal>` to orient, or jump in with `/studio-os:design <problem>` or `/studio-os:discover <problem>`. Run `/studio-os:studio` any time to see the roles, gates, and what each workflow produces."
 
 If a design system skill does not yet exist at `.claude/skills/design-system/`, add:
 
@@ -313,4 +337,4 @@ If a design system skill does not yet exist at `.claude/skills/design-system/`, 
 
 If `user-profile.md` was not found during Phase 1 context check, add:
 
-> "No personal profile found. Run `xd setup --me` to create one — it helps Studio OS calibrate its communication style and assumed knowledge across all your projects."
+> "No personal profile found. Create one at `~/.claude/memory/user-profile.md` — it helps Studio OS calibrate its communication style and assumed knowledge across all your projects."
