@@ -17,7 +17,7 @@ The agent→tier mapping below is authoritative (per-agent `tier:` frontmatter i
 
 The Standard Works philosophy (`PHILOSOPHY.md`), universal method (`memory/design-foundations.md`, decision tiers, the Scene Test), the senior gates, and cross-cutting agents. Adopting Studio OS means adopting Core.
 
-**Agents (8):** `pm` · `cd` · `de` · `heurist` · `audit` · `luck` · `competitive-analyst` · `sweep`
+**Agents (8):** `pm` · `cd` · `de` · `heurist` · `auditor` · `luck` · `competitive-analyst` · `surveyor`
 
 The gate sequence is **PM → CD → DE**: problem gate, design gate, engineering gate.
 
@@ -29,7 +29,7 @@ Installed per the user's practice. Product-agnostic — every example is drawn f
 
 **Engineering (4):** `architect` · `engineer` · `qa` · `specifier`
 
-**Design (12):** `designer` · `visual-designer` · `choreographer` · `typesetter` · `materialist` · `mark-maker` · `writer` · `prototyper` · `accessibility` · `validate-design` · `critic` · `design-systems`
+**Design (12):** `designer` · `visual-designer` · `choreographer` · `typesetter` · `materialist` · `mark-maker` · `writer` · `prototyper` · `accessibility` · `design-validator` · `critic` · `systematist`
 
 **PM & Discovery (9):** `strategist` · `scout` · `historian` · `marketer` · `user-researcher` · `journey-mapper` · `brief-writer` · `metrics-definer` · `assumption-mapper`
 

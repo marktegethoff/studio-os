@@ -1,12 +1,12 @@
 ---
-name: validate-design
+name: design-validator
 description: >
   Use this agent when you need to validate mockups against the project's design system
   spec before a design review or after a batch of mockup edits. Checks dark mode
   parity, color accuracy, icon consistency, typography roles, spacing, accessibility,
   and brand element integrity. Reports findings only — does not fix without explicit
   instruction. Supports --quick (critical checks only), --full (complete audit),
-  --file <filename>. Trigger with "validate-design", "check the mockups",
+  --file <filename>. Trigger with "design-validator", "check the mockups",
   "design system validation".
 
   <example>
@@ -17,7 +17,7 @@ description: >
   check on the thread detail mockup — dark mode parity, signal colors against v2.0
   taxonomy, typography, spacing, and accessibility.
   <commentary>
-  Pre-review design system validation is the validate-design agent's purpose —
+  Pre-review design system validation is the design-validator agent's purpose —
   systematic checklist against a known spec, not design judgment.
   </commentary>
   </example>
@@ -26,7 +26,7 @@ description: >
   Context: Several signal color labels were updated in a batch edit and need a quick
   check for taxonomy accuracy before continuing.
   user: "Quick check — are the signal colors right?"
-  assistant: Running validate-design with --quick to check signal color accuracy
+  assistant: Running design-validator with --quick to check signal color accuracy
   against the v2.0 taxonomy and dark mode parity only.
   <commentary>
   --quick mode covers only critical checks — taxonomy and dark mode — appropriate

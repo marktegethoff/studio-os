@@ -1,12 +1,12 @@
 ---
-name: audit
+name: auditor
 description: >
   Use this agent when project documentation has accumulated across multiple sessions
   and needs to be audited for contradictions, redundancies, orphaned files, and
   superseded content. Produces a canonical map and proposes the minimum changes to
   restore coherence. Does not delete — archives and proposes.
   Supports flags: --quick (contradictions only), --scope, --focus.
-  Trigger with "audit", "audit the docs", "documentation has drifted".
+  Trigger with "auditor", "audit the docs", "documentation has drifted".
 
   <example>
   Context: After a multi-session implementation sprint, the studio has decision files,

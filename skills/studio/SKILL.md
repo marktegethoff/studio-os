@@ -77,10 +77,10 @@ Full design sequence (strategy → structure → design → accessibility → sp
 |---|---|---|
 | Usability findings | Friction, broken mental models, gesture dead-ends | `heurist` |
 | Accessibility audit | WCAG AA contrast, touch targets, VoiceOver, motion | `accessibility` |
-| Design system compliance | Mockup checked against token and type spec | `validate-design` |
+| Design system compliance | Mockup checked against token and type spec | `design-validator` |
 | Ship/no-ship verdict (design) | 10-dimension critique + verdict | `cd` |
 | Ship/no-ship verdict (code) | Code quality judgment + merge readiness | `de` |
-| Documentation coherence | Contradictions, orphaned files, superseded content | `audit` |
+| Documentation coherence | Contradictions, orphaned files, superseded content | `auditor` |
 
 Full review sequence: `/critique`
 

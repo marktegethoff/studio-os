@@ -1,9 +1,9 @@
 ---
-name: sweep
+name: surveyor
 description: >
   Runs a structured design research sweep and writes a dated trend file to memory/.
   Trigger manually every 3–6 months, or when the current trends file is older than
-  6 months. Trigger with "sweep", "run a trend sweep",
+  6 months. Trigger with "surveyor", "run a trend sweep",
   "update design trends", "/sweep".
   <example>
   user: "/sweep"

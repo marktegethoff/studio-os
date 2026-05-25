@@ -44,7 +44,7 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 | `design-director` | Opus | Design ship/no-ship gate |
 | `de` | Opus | Engineering merge gate |
 | `heurist` | Opus | Usability evaluation |
-| `audit` | Sonnet | Documentation coherence |
+| `auditor` | Sonnet | Documentation coherence |
 | `luck` | Sonnet | Durability diagnostic for infrastructure decisions |
 | `competitive-analyst` | Sonnet | Structured competitive teardown |
 
@@ -69,9 +69,9 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 Individual. Installed via a recommended menu, not enforced packages. Additive — install more disciplines at any time. Re-runnable without penalty.
 
 **Design set (12 agents):**
-`designer` · `strategist` · `historian` · `critic` · `accessibility` · `validate-design` · `typesetter` · `choreographer` · `materialist` · `visual-designer` · `writer` · `design-systems`
+`designer` · `strategist` · `historian` · `critic` · `accessibility` · `design-validator` · `typesetter` · `choreographer` · `materialist` · `visual-designer` · `writer` · `systematist`
 
-Skills: `design` · `ideate` · `simulate` · `validate-design` · `prototype`
+Skills: `design` · `ideate` · `simulate` · `design-validator` · `prototype`
 
 **PM set (10 agents):**
 `strategist` · `scout` · `historian` · `marketer` · `critic` · `user-researcher` · `journey-mapper` · `brief-writer` · `metrics-definer` · `assumption-mapper`
@@ -79,7 +79,7 @@ Skills: `design` · `ideate` · `simulate` · `validate-design` · `prototype`
 Skills: `experiment` · `ideate` · `discovery` · `measure`
 
 **Engineering set (5 agents):**
-`engineer` · `qa` · `architect` · `specifier` · `sweep`
+`engineer` · `qa` · `architect` · `specifier` · `surveyor`
 
 Skills: `implement` · `simplify` · `architect`
 
@@ -111,7 +111,7 @@ Structured competitive teardown on demand. Takes a problem space and 3–5 named
 
 ### Design Role additions
 
-**`design-systems`** (Sonnet)
+**`systematist`** (Sonnet)
 Cross-product design system health. Audits pattern proliferation, token drift, component naming inconsistency. Evaluates whether the design system is growing coherently or fragmenting. Distinct from Validate Design (which checks a single mockup against spec). This evaluates the health of the system itself. Load-bearing at multi-product scale.
 
 ### PM Role additions

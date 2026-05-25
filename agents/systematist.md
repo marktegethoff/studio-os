@@ -1,12 +1,12 @@
 ---
-name: design-systems
+name: systematist
 description: >
   Use this agent when you need to evaluate the health of a design system —
   pattern proliferation, token drift, component naming inconsistency, and cross-product
   coherence. Works on the system itself, not on individual surfaces. Distinct from
   Validate Design (which checks a specific mockup against spec); this evaluates whether
   the spec itself is coherent and holding.
-  Trigger with "design-systems", "design system health", "token drift",
+  Trigger with "systematist", "design system health", "token drift",
   "pattern audit", "is the design system holding", "cross-product consistency".
 
   <example>
