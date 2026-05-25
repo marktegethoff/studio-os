@@ -23,18 +23,18 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 **Testing:** Scout returns findings filtered against stated studio positions — not raw market signal.
 
 **Prompt:**
-> "Scout the field — are any note-taking apps challenging the append-only model? We're committed to append-only entries with amendments; I want to know if that's becoming unusual."
+> "Scout the field — are any note-taking apps moving away from local-first storage? We're committed to local-first; I want to know if that's becoming unusual."
 
 **Pass criteria:**
 - [ ] Scout performs actual research (web searches) — does not answer from training knowledge
-- [ ] Findings are specifically filtered against the append-only position
+- [ ] Findings are specifically filtered against the local-first position
 - [ ] Maximum 5 findings returned — not an exhaustive survey
-- [ ] Each finding names the specific product, the specific change, and why it tensions (or confirms) the append-only position
-- [ ] No product strategy recommendation is made ("you should reconsider append-only")
+- [ ] Each finding names the specific product, the specific change, and why it tensions (or confirms) the local-first position
+- [ ] No product strategy recommendation is made ("you should reconsider local-first")
 
 **Anti-patterns:**
 - Returning 10+ findings without prioritization
-- Reporting general trends about PKM evolution not related to edit models
+- Reporting general category trends not related to the stated position
 - Recommending that the product reconsider its position based on findings
 - Treating "many apps allow editing" as a single finding (Signal Inflation)
 

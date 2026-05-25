@@ -21,9 +21,9 @@ Apply when:
 Name the product's core purpose in one sentence. Not what it does — what it is.
 
 Examples:
-- "A recording instrument for thought"
-- "A clarity tool for people who think by writing"
-- "A structured capture system for active thinkers"
+- "A budgeting app that makes saving effortless"
+- "A code editor that stays out of the way"
+- "A calendar that protects focus time"
 
 Ask: does solving this problem deepen that core purpose, or expand away from it?
 

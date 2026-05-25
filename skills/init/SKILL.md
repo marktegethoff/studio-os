@@ -78,7 +78,7 @@ Ask:
 
 Ask:
 4. Does this studio have a named ethos or operating philosophy? (e.g., a studio name, a set of principles, a named approach to design.)
-5. What are the brand principles? (How the product should feel, behave, or be perceived. Aim for 3–7 principles. Examples: "stillness over performance", "the mechanism and the tape".)
+5. What are the brand principles? (How the product should feel, behave, or be perceived. Aim for 3–7 principles. Examples: "calm over clever", "earn every element", "fast by default".)
 
 ---
 

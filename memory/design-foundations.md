@@ -55,7 +55,7 @@ Density is not bad; inappropriate density is. Type set too tightly feels anxious
 WCAG AA requires 4.5:1 contrast ratio for body text, 3:1 for large text and UI elements. These ratios are the floor, not the ceiling. A surface that barely passes still fails the user. Contrast is a tool for communication: high contrast directs attention; low contrast recedes. Understanding the mechanics makes the decisions intentional rather than accidental.
 
 **Semantic use**
-Color that carries meaning creates a communication layer. Color for decoration adds noise — but still occupies cognitive space. The principle "monochrome until it means something" is not aesthetic restraint; it is communication strategy. When every element uses color, color means nothing. When color appears rarely, its appearance is an event.
+Color that carries meaning creates a communication layer. Color for decoration adds noise — but still occupies cognitive space. The principle that color is earned — monochrome by default, color only where it carries meaning — is not aesthetic restraint; it is communication strategy. When every element uses color, color means nothing. When color appears rarely, its appearance is an event.
 
 **Emotional tone**
 Hue affects perception before language. Warm colors advance; cool colors recede. Desaturated palettes feel restrained and considered; saturated palettes feel energetic and immediate. High-chroma accent colors attract attention regardless of size. These are not conventions — they are psychophysics. Working with them is working with the viewer; fighting them requires enough intentionality to justify the friction.

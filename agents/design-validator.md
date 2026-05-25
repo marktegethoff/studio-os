@@ -10,12 +10,12 @@ description: >
   "design system validation".
 
   <example>
-  Context: A new thread detail mockup has been created with updated signal color labels
-  and a dark mode frame. Design review is tomorrow.
-  user: "Validate the thread detail mockup before the review."
-  assistant: I'll activate the Validate Design agent to run a full design system
-  check on the thread detail mockup — dark mode parity, signal colors against v2.0
-  taxonomy, typography, spacing, and accessibility.
+  Context: A new settings-screen mockup has been created with updated accent-color
+  labels and a dark mode frame. Design review is tomorrow.
+  user: "Validate the settings mockup before the review."
+  assistant: I'll activate the design-validator to run a full design system
+  check on the settings mockup — dark mode parity, accent colors against the token
+  spec, typography, spacing, and accessibility.
   <commentary>
   Pre-review design system validation is the design-validator agent's purpose —
   systematic checklist against a known spec, not design judgment.
@@ -23,13 +23,13 @@ description: >
   </example>
 
   <example>
-  Context: Several signal color labels were updated in a batch edit and need a quick
-  check for taxonomy accuracy before continuing.
-  user: "Quick check — are the signal colors right?"
-  assistant: Running design-validator with --quick to check signal color accuracy
-  against the v2.0 taxonomy and dark mode parity only.
+  Context: Several accent-color tokens were updated in a batch edit and need a quick
+  check for token accuracy before continuing.
+  user: "Quick check — are the accent colors right?"
+  assistant: Running design-validator with --quick to check accent-color accuracy
+  against the token spec and dark mode parity only.
   <commentary>
-  --quick mode covers only critical checks — taxonomy and dark mode — appropriate
+  --quick mode covers only critical checks — tokens and dark mode — appropriate
   when the scope is narrow and time is short.
   </commentary>
   </example>

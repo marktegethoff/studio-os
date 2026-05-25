@@ -20,7 +20,7 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
   <div class="wrap">
     <header class="header">
       <span class="eyebrow">Studio OS · [artifact type]</span>
-      <h1>[Title]<span style="color:var(--amber)">.</span></h1>
+      <h1>[Title]<span style="color:var(--accent)">.</span></h1>
       <p class="header-sub">[one-line framing]</p>
     </header>
     <!-- sections using .section / .callout / .itemlist / .dcard / .tier / table / pre.ascii -->
