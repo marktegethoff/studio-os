@@ -4,7 +4,7 @@ description: >
   Use this agent when you need to define success metrics before a feature is implemented.
   Produces: lagging indicator, leading indicators, instrumentation requirements, baselines,
   targets, counter-metrics, and a review cadence. Runs upstream of engineering — not after
-  launch. Works as part of studio-os:measure or independently when a feature's success
+  launch. Works as part of studio:measure or independently when a feature's success
   conditions need to be formalized.
   Trigger with "metrics-definer", "define success metrics", "how do we measure this",
   "what does done look like", "measurement plan", "what metrics should we track".

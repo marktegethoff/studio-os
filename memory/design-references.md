@@ -2,7 +2,7 @@
 
 The studio's curated palette of products whose public design stories embody the values — and the anti-references to contrast against. **Agents draw aesthetic examples and lineage from this file** rather than from any one product the studio happens to be building. Cite the *method and what the field learned*, never just the output.
 
-This is a **configurable layer.** Ship the curated default below; `/studio-os:init` (setup) prompts each user to add their own positive and negative real-world examples so the palette is vivid and personal to their taste. Personal additions live in the consuming project's `.claude/memory/design-references.md` and extend (never silently replace) this default.
+This is a **configurable layer.** Ship the curated default below; `/studio:init` (setup) prompts each user to add their own positive and negative real-world examples so the palette is vivid and personal to their taste. Personal additions live in the consuming project's `.claude/memory/design-references.md` and extend (never silently replace) this default.
 
 Format: Product → Observation → Lesson → Stance.
 Stance: Positive / Negative / Mixed / Admire-the-move.

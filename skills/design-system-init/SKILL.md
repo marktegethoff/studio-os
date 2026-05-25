@@ -1,5 +1,5 @@
 ---
-description: Scaffold a design system skill for this project. Creates the directory structure and token file templates at `.claude/skills/design-system/`. Run once per project after `studio-os:init`.
+description: Scaffold a design system skill for this project. Creates the directory structure and token file templates at `.claude/skills/design-system/`. Run once per project after `studio:init`.
 argument-hint: ""
 ---
 

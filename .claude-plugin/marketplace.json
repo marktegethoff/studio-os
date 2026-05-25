@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "studio-os",
+      "name": "studio",
       "source": "./",
       "description": "A product-agnostic design studio for Claude Code: discipline agents, gated workflows, and an artifact system that keep AI as instrument, not author.",
       "version": "1.0.0"

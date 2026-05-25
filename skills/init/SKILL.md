@@ -341,7 +341,7 @@ After both files are written, confirm:
 > - `.claude/memory/project-context.md` — product context (shareable with your team)
 > - `.claude/memory/role-context.md` — your role on this project (personal, don't commit)
 >
-> Start with `/studio-os:studio <goal>` to orient, or jump in with `/studio-os:design <problem>` or `/studio-os:discover <problem>`. Run `/studio-os:studio` any time to see the roles, gates, and what each workflow produces."
+> Start with `/studio:studio <goal>` to orient, or jump in with `/studio:design <problem>` or `/studio:discover <problem>`. Run `/studio:studio` any time to see the roles, gates, and what each workflow produces."
 
 If a design system skill does not yet exist at `.claude/skills/design-system/`, add:
 

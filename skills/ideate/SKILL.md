@@ -10,7 +10,7 @@ Arguments: $ARGUMENTS
 **Model requirements:** [HAIKU] for problem gate + context · [SONNET] for compilation, synthetic users, feasibility synthesis · [OPUS] for facilitated reduction (Creative Director) + DE verdict
 **Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase, not one per inner agent.
 
-**Six Functions (see CLAUDE.md).** Ideas produced here feed `/studio-os:design`, where the six functions apply in full. Ideation's own divergence already spans multiple lenses; it does not itself produce a final design artifact, so it is not held to the six-function floor — but it must hand off a problem framed well enough that design can satisfy them.
+**Six Functions (see CLAUDE.md).** Ideas produced here feed `/studio:design`, where the six functions apply in full. Ideation's own divergence already spans multiple lenses; it does not itself produce a final design artifact, so it is not held to the six-function floor — but it must hand off a problem framed well enough that design can satisfy them.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 

@@ -59,7 +59,7 @@ The base Escalation Protocol applies unchanged.
 
 ## Adding a specialist at setup
 
-`/studio-os:init` can offer: "Add an engineering specialist for your stack?" → asks for the
+`/studio:init` can offer: "Add an engineering specialist for your stack?" → asks for the
 stack name, 2–4 reference figures/sources (the specialist's lineage), and the one or two
 boundaries it must not blur → generates `agents/<stack>-engineer.md` from this template and
 registers it in `STRUCTURE.md` + the engineering eval. This is the same personalization

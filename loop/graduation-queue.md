@@ -24,6 +24,6 @@ Two streams feed this queue:
 
 ## Review (monthly)
 
-For each open item: promote / defer / drop. Promotions become a brief (`/studio-os:shape`) or a scoped task (`/studio-os:scope`). Deferrals get a re-look date. Drops get a one-line reason so the same idea isn't re-litigated. Record the review date below.
+For each open item: promote / defer / drop. Promotions become a brief (`/studio:shape`) or a scoped task (`/studio:scope`). Deferrals get a re-look date. Drops get a one-line reason so the same idea isn't re-litigated. Record the review date below.
 
 **Last reviewed:** [date]

@@ -34,10 +34,10 @@ Studio OS is a Claude Code plugin.
 
 ```bash
 claude plugin marketplace add marktegethoff/studio-os
-claude plugin install studio-os@standard-works
+claude plugin install studio@standard-works
 ```
 
-Update any time with `claude plugin update studio-os`. Agents and skills are namespaced (`studio-os:designer`, `/studio-os:design`) so they never collide with your own.
+Update any time with `claude plugin update studio-os`. Agents and skills are namespaced (`studio:designer`, `/studio:design`) so they never collide with your own.
 
 **Develop / edit-live** (the source becomes the install — edits go live with `/reload-plugins`):
 
@@ -50,7 +50,7 @@ claude --plugin-dir /path/to/studio-os
 Then, in any project, set up product context:
 
 ```
-/studio-os:init
+/studio:init
 ```
 
 This interviews you for your product's purpose, principles, invariants, and stack, and writes `.claude/memory/project-context.md` — the Product tier. Studio OS works without it, but agents fall back to generic reasoning. The calibration is the point.
@@ -60,26 +60,26 @@ This interviews you for your product's purpose, principles, invariants, and stac
 ## Workflow skills
 
 ```
-/studio-os:studio        Entry point — orient and route
-/studio-os:init          Set up project context
-/studio-os:shape         Interview-driven brief shaping
-/studio-os:discover      Problem framing and research
-/studio-os:ideate        Divergent exploration before committing
-/studio-os:design        Full design workflow
-/studio-os:prototype     Get to a testable prototype fast
-/studio-os:handoff       Prototype → production-ready package
-/studio-os:implement     Engineering workflow
-/studio-os:measure       Define and evaluate metrics
-/studio-os:experiment    Experiment design and evaluation
-/studio-os:simulate      Long-horizon behavior simulation
-/studio-os:solve         Convergence loop for hard problems
-/studio-os:review        Leadership-team review — PM + CD + DE
-/studio-os:critique      Single-pass quality review
-/studio-os:simplify      Codebase coherence workflow
-/studio-os:scope         Scope a task tight enough to delegate
+/studio:studio        Entry point — orient and route
+/studio:init          Set up project context
+/studio:shape         Interview-driven brief shaping
+/studio:discover      Problem framing and research
+/studio:ideate        Divergent exploration before committing
+/studio:design        Full design workflow
+/studio:prototype     Get to a testable prototype fast
+/studio:handoff       Prototype → production-ready package
+/studio:implement     Engineering workflow
+/studio:measure       Define and evaluate metrics
+/studio:experiment    Experiment design and evaluation
+/studio:simulate      Long-horizon behavior simulation
+/studio:solve         Convergence loop for hard problems
+/studio:review        Leadership-team review — PM + CD + DE
+/studio:critique      Single-pass quality review
+/studio:simplify      Codebase coherence workflow
+/studio:scope         Scope a task tight enough to delegate
 ```
 
-Discipline agents can also be invoked directly by name. Run `/studio-os:studio` to see what each produces.
+Discipline agents can also be invoked directly by name. Run `/studio:studio` to see what each produces.
 
 Each workflow leaves behind artifacts the next session can read — briefs, journeys, interaction models, specs, metrics plans — each rendered as a well-designed HTML document with a built-in feedback harness.
 

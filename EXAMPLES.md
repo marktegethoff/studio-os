@@ -10,15 +10,15 @@ They are plausible. They are not evidence. Evidence comes from use.
 
 **Problem:** A mid-stage B2B analytics product has a 40% drop-off between signup and first dashboard creation. The existing onboarding is a five-step wizard with tooltips, product tours, and a sample dataset. Users who complete onboarding retain well. Most don't complete it.
 
-**Workflow used:** `/studio-os:design onboarding drop-off — users abandon before creating their first dashboard`
+**Workflow used:** `/studio:design onboarding drop-off — users abandon before creating their first dashboard`
 
 ---
 
 ### How the workflow ran
 
-**Context loading.** The project-context file — written during `/studio-os:init` — established: the product serves operations teams at mid-market companies, the core invariant is "time-to-first-insight must decrease with every release," and previous attempts at guided tours were rejected as patronizing. But the file also carried the team's philosophy: they had defined their brand principle as "respect the operator's time — never make them feel like a student." This wasn't a tagline. It was a decision filter that shaped every agent's reasoning downstream.
+**Context loading.** The project-context file — written during `/studio:init` — established: the product serves operations teams at mid-market companies, the core invariant is "time-to-first-insight must decrease with every release," and previous attempts at guided tours were rejected as patronizing. But the file also carried the team's philosophy: they had defined their brand principle as "respect the operator's time — never make them feel like a student." This wasn't a tagline. It was a decision filter that shaped every agent's reasoning downstream.
 
-This is where team culture enters the system. A different company — one whose brand principle was "guide users to mastery" — would have gotten a different design from the same agents running the same workflow against the same problem. The `/studio-os:init` interview captures these positions precisely so that agents don't default to generic best practices. They reason from *your* principles.
+This is where team culture enters the system. A different company — one whose brand principle was "guide users to mastery" — would have gotten a different design from the same agents running the same workflow against the same problem. The `/studio:init` interview captures these positions precisely so that agents don't default to generic best practices. They reason from *your* principles.
 
 **Historian** researched onboarding precedent. Found that the most durable pattern in B2B tools is not tutorials but *immediate productive use* — putting the user in a real task with real data before asking them to learn the system. Noted that wizard-style onboarding has consistently underperformed in retention studies for tools with complex data models.
 
@@ -79,11 +79,11 @@ The memory system recorded the rejected approach (guided tours, sample data) wit
 
 **Problem:** A healthcare coordination app needs to add notifications. Clinicians use the app to manage patient handoffs between shifts. The team's initial brief: "Add push notifications for new handoffs, status changes, and messages."
 
-**Workflow used:** `/studio-os:solve notification system for clinician handoff coordination`
+**Workflow used:** `/studio:solve notification system for clinician handoff coordination`
 
-The team chose `/studio-os:solve` because notifications in healthcare are a high-stakes structural decision — the wrong model creates alert fatigue in a context where missed alerts have real consequences.
+The team chose `/studio:solve` because notifications in healthcare are a high-stakes structural decision — the wrong model creates alert fatigue in a context where missed alerts have real consequences.
 
-Their `/studio-os:init` interview had captured something specific: the company was founded by former nurses, and their organizational philosophy was "clinical tools should feel like they were built by someone who's been on the floor." This wasn't a marketing statement — it was an engineering constraint. It meant every design decision would be evaluated against the question: *would a clinician who's been on shift for ten hours experience this as helpful or as noise?* That filter, loaded from `project-context.md`, shaped every agent's reasoning throughout the convergence loop.
+Their `/studio:init` interview had captured something specific: the company was founded by former nurses, and their organizational philosophy was "clinical tools should feel like they were built by someone who's been on the floor." This wasn't a marketing statement — it was an engineering constraint. It meant every design decision would be evaluated against the question: *would a clinician who's been on shift for ten hours experience this as helpful or as noise?* That filter, loaded from `project-context.md`, shaped every agent's reasoning throughout the convergence loop.
 
 ---
 
@@ -148,13 +148,13 @@ The memory system recorded the decision to defer per-unit configuration (UI only
 
 ---
 
-## Case Study 3: Exploring a New Feature Direction with `/studio-os:ideate`
+## Case Study 3: Exploring a New Feature Direction with `/studio:ideate`
 
 **Problem:** A product team building a project management tool for async remote teams has noticed that users who return to the product after a gap — two or more days away — frequently log in, scan the screen for a moment, and close the app without taking any action. The team's session data confirms it: re-entry sessions under 90 seconds have a 60% same-day churn rate. Users who take an action in the first 90 seconds retain at twice the rate.
 
 The team's initial brief to the studio: "We need to add a Today view — a dashboard that shows what needs attention."
 
-**Workflow used:** `/studio-os:ideate users who return after a gap don't know where to start and often leave without acting`
+**Workflow used:** `/studio:ideate users who return after a gap don't know where to start and often leave without acting`
 
 ---
 
@@ -259,13 +259,13 @@ The re-entry framing prototype will validate whether orientation is the problem.
 
 ## Case Study 4: Managing Code Drift Under Agent-Driven Development
 
-**Problem:** A product team has been using `/studio-os:implement` to ship features over several weeks. The service layer has grown without a unifying pass — a helper added during a bug fix that was never removed, a protocol defined for a single caller, a pattern duplicated between two services because the agent didn't locate the existing implementation. The code works. No bugs have surfaced. But a new feature request requires extending the service layer, and the engineer who opens the files doesn't recognize the convention in one service as the same convention under a different name in the adjacent one.
+**Problem:** A product team has been using `/studio:implement` to ship features over several weeks. The service layer has grown without a unifying pass — a helper added during a bug fix that was never removed, a protocol defined for a single caller, a pattern duplicated between two services because the agent didn't locate the existing implementation. The code works. No bugs have surfaced. But a new feature request requires extending the service layer, and the engineer who opens the files doesn't recognize the convention in one service as the same convention under a different name in the adjacent one.
 
 There is no crisis. There is drift. Drift compounds.
 
 ---
 
-**Workflow used (Scenario 1):** `/studio-os:simplify services/`
+**Workflow used (Scenario 1):** `/studio:simplify services/`
 
 ---
 
@@ -303,9 +303,9 @@ One risk flagged: `decodeEventPayload()` had a subtle difference in its null-han
 
 ---
 
-### Scenario 2: DE standalone after `/studio-os:implement`
+### Scenario 2: DE standalone after `/studio:implement`
 
-A separate feature — a new search indexing behavior — was implemented via `/studio-os:implement`. QA passed. The spec was satisfied. The engineer invoked the Distinguished Engineer for the final code review before merging.
+A separate feature — a new search indexing behavior — was implemented via `/studio:implement`. QA passed. The spec was satisfied. The engineer invoked the Distinguished Engineer for the final code review before merging.
 
 The DE read the spec. The spec defined one method: `index(_ record: Record)`.
 
@@ -376,4 +376,4 @@ The `RecordFilterable` moment from Scenario 1 was the more instructive lesson fo
 
 **The a-ha moments belong to the human.** The agents don't produce insights. They produce the conditions for insight. The product lead's realization — "we're not redesigning onboarding, we're removing it" — was hers. The agents built the case across four handoffs, but the synthesis happened in her head. The CTO's recognition that "does delayed response create risk?" resolved weeks of ambiguous debate was his. The designer named the framing; the CTO recognized its power. This is the point of structured multi-agent work: not to think for you, but to structure the thinking so that the conclusions you reach are sharper than the ones you'd reach alone.
 
-**Culture is a design input, not decoration.** The same Studio OS agents, running the same workflows, produce materially different outputs for different teams — because `/studio-os:init` captures the team's philosophy, brand principles, and voice as structured decision filters, not as style guidelines applied at the end. The analytics team's "respect the operator's time" principle eliminated the onboarding wizard before design even started. The healthcare team's "built by someone who's been on the floor" philosophy made "quiet by default" an inevitability, not a choice. A venture-backed growth-stage company with a principle like "guide users to mastery" would have gotten a different onboarding model — perhaps a more progressive one — from the same agents. A healthcare competitor whose philosophy centered on "comprehensive clinical awareness" might have kept the three-tier notification model. The structure of the system stays the same. The decisions it produces change because the inputs change. This is the point of the `/studio-os:init` interview: not to fill out a template, but to give every agent a precise understanding of *who this team is and what they believe*, so that the work reflects the team's judgment — amplified and structured — rather than generic best practices.
+**Culture is a design input, not decoration.** The same Studio OS agents, running the same workflows, produce materially different outputs for different teams — because `/studio:init` captures the team's philosophy, brand principles, and voice as structured decision filters, not as style guidelines applied at the end. The analytics team's "respect the operator's time" principle eliminated the onboarding wizard before design even started. The healthcare team's "built by someone who's been on the floor" philosophy made "quiet by default" an inevitability, not a choice. A venture-backed growth-stage company with a principle like "guide users to mastery" would have gotten a different onboarding model — perhaps a more progressive one — from the same agents. A healthcare competitor whose philosophy centered on "comprehensive clinical awareness" might have kept the three-tier notification model. The structure of the system stays the same. The decisions it produces change because the inputs change. This is the point of the `/studio:init` interview: not to fill out a template, but to give every agent a precise understanding of *who this team is and what they believe*, so that the work reflects the team's judgment — amplified and structured — rather than generic best practices.

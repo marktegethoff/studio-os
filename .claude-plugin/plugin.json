@@ -1,5 +1,5 @@
 {
-  "name": "studio-os",
+  "name": "studio",
   "displayName": "Studio OS",
   "description": "A product-agnostic design studio for Claude Code. Discipline agents, gated workflows, and an artifact system that keep AI as instrument, not author. Built by Standard Works.",
   "version": "1.0.0",

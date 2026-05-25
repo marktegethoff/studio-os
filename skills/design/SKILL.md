@@ -11,7 +11,7 @@ Arguments: $ARGUMENTS
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
-**Minimum team (the Six Functions — see CLAUDE.md).** A design artifact is never produced by fewer than the six required functions. This workflow covers five of them — framing/structure, generation, craft (Phase A), reduction, and usability/accessibility. The sixth, **the Gate (CD)**, is applied before ship via the `cd` agent or `/studio-os:review`. The **Designer owns the deliverable** (the interaction model); the other disciplines inform it.
+**Minimum team (the Six Functions — see CLAUDE.md).** A design artifact is never produced by fewer than the six required functions. This workflow covers five of them — framing/structure, generation, craft (Phase A), reduction, and usability/accessibility. The sixth, **the Gate (CD)**, is applied before ship via the `cd` agent or `/studio:review`. The **Designer owns the deliverable** (the interaction model); the other disciplines inform it.
 
 ---
 

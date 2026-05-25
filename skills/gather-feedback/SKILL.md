@@ -15,8 +15,8 @@ The Review Surface is a designed HTML artifact (built on the Artifact Kit — `a
 
 ## When to use
 
-- After `/studio-os:implement` finishes (auto-fired).
-- After `/studio-os:design` produces a spec, to review before locking.
+- After `/studio:implement` finishes (auto-fired).
+- After `/studio:design` produces a spec, to review before locking.
 - Any time a tasteful visual handback beats a chat summary.
 
 ---
