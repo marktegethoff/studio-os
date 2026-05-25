@@ -11,15 +11,17 @@ Arguments: $ARGUMENTS
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
+**Minimum team (the Six Functions — see CLAUDE.md).** A design artifact is never produced by fewer than the six required functions. This workflow covers five of them — framing/structure, generation, craft (Phase A), reduction, and usability/accessibility. The sixth, **the Gate (CD)**, is applied before ship via the `cd` agent or `/studio-os:review`. The **Designer owns the deliverable** (the interaction model); the other disciplines inform it.
+
 ---
 
 ## Project Context
 
 Read project context at session start, in order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from the project's decision ledger by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. This skill provides the discipline. If no project context is found, proceed with general design principles and state this clearly.
 

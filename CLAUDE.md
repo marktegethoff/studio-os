@@ -49,6 +49,21 @@ Novelty is never a deciding factor.
 
 ---
 
+## Minimum Team — the Six Functions
+
+No design artifact is produced by fewer than **six functions**, each represented by at least one agent. The number is not arbitrary — these are the six irreducible functions an artifact requires to be correct, made well, and fit to ship. A workflow may run more (the full `/studio-os:design` pass runs nine), never fewer. This framework governs **every artifact-producing workflow** — design, ideate, solve, handoff — not just one.
+
+1. **Framing / Structure** — fix what is being solved and how it is organized before generation begins. An artifact built on an unframed problem solves the wrong thing well. *(architect · strategist · brief-writer)*
+2. **Generation** — make the thing: the interaction model, surface, or artifact itself. Without a maker there is nothing to evaluate. *(designer)*
+3. **Craft** — execute the discipline where quality actually lives: type, motion, space, material, language, or mark. Structure correct but craft absent is a wireframe, not a design. *(typesetter · visual-designer · choreographer · materialist · writer · mark-maker)*
+4. **Reduction** — remove what is not earned and pressure-test what remains. Accumulation is the default; without reduction the artifact bloats. *(critic)*
+5. **Usability & Accessibility** — verify it works for real people, including those with access needs. Elegant but unusable or exclusionary is a failure, not a trade-off. *(heurist · accessibility)*
+6. **The Gate** — render the final ship / no-ship, synthesizing the rest into one verdict. Without a gate, work ships on consensus or fatigue, not judgment. *(cd)*
+
+**Ownership.** Exactly one agent owns each deliverable — the Designer owns the interaction model, the Specifier owns the spec. Shared authorship diffuses responsibility; a single owner ensures coherence and accountability.
+
+---
+
 ## Process Sequence
 
 Understand → Reduce → Structure → Decide → Refine → Remove Again
