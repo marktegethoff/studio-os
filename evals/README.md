@@ -6,9 +6,9 @@ Behavioral evals for every agent in the roster. Each eval is a prompt + pass cri
 
 ## Coverage
 
-All 33 agents are covered across 8 files:
+All **33 agents + 21 skills** are covered across 9 files:
 
-| File | Agents |
+| File | Covers |
 |---|---|
 | `leadership-agents.eval.md` | pm · strategist · critic · marketer · auditor · luck · surveyor |
 | `cd.eval.md` | cd |
@@ -18,6 +18,16 @@ All 33 agents are covered across 8 files:
 | `discovery-agents.eval.md` | journey-mapper · user-researcher · brief-writer · metrics-definer · assumption-mapper |
 | `analysis-agents.eval.md` | scout · competitive-analyst |
 | `historian.eval.md` | historian |
+| `skills.eval.md` | all 21 workflow skills (orchestration evals) |
+
+### Coverage rule — no agent or skill ships without an eval
+
+**Every agent and every skill must have eval coverage. Adding one without an eval is incomplete work.** When you add or substantially change an agent or skill:
+1. Add or update its eval in the appropriate file above (agents → the matching group file; skills → `skills.eval.md`).
+2. If it's a net-new discipline group, add a new `*-agents.eval.md` and list it here.
+3. The full-suite run reconciles the live roster (`agents/*.md`) and skill set (`skills/*/`) against this coverage table and **flags any agent or skill with no eval** as a suite failure.
+
+This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enforced on the Phase 3 scheduled-eval cadence.
 
 ---
 

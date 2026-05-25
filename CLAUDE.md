@@ -64,6 +64,12 @@ No design artifact is produced by fewer than **six functions**, each represented
 
 ---
 
+## Eval Coverage
+
+**No agent or skill ships without an eval.** Every agent in `agents/` and every skill in `skills/` must have behavioral (agent) or orchestration (skill) eval coverage in `evals/`. Adding or substantially changing one without adding/updating its eval is incomplete work. The full-suite run reconciles the live roster and skill set against the coverage table in `evals/README.md` and flags any uncovered agent or skill as a failure. This is enforced on the scheduled-eval cadence.
+
+---
+
 ## Process Sequence
 
 Understand → Reduce → Structure → Decide → Refine → Remove Again
