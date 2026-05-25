@@ -116,7 +116,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   .ann-bar {
     position: fixed; top: 0; left: 0; right: 0; height: 48px;
     display: flex; align-items: center; padding: 0 16px; z-index: 9000;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: rgba(255,255,255,0.82);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
@@ -133,7 +133,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     cursor: pointer; font-family: inherit; border-radius: 4px;
     transition: background 0.12s, color 0.12s;
   }
-  .ann-seg-btn.active { background: #fff; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0,0,0,0.10); }
+  .ann-seg-btn.active { background: #FAFAF8; color: #0D0D0D; box-shadow: 0 1px 3px rgba(0,0,0,0.10); }
   .ann-bar-center {
     position: absolute; left: var(--bar-cx, 50%); transform: translateX(-50%);
     display: flex; align-items: center; gap: 8px; pointer-events: none;
@@ -148,24 +148,24 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   .ann-bar-right { margin-left: auto; }
   .ann-cta {
     height: 28px; padding: 0 14px; border-radius: 5px;
-    background: #1a1a1a; color: #fff; font-size: 12.5px; font-weight: 500;
+    background: #0D0D0D; color: #fff; font-size: 12.5px; font-weight: 500;
     border: none; cursor: pointer; font-family: inherit;
   }
   .ann-hovered { outline: 1px dashed rgba(0,0,0,0.30) !important; outline-offset: 2px; cursor: crosshair !important; }
   .ann-pin {
     position: fixed; width: 18px; height: 18px; border-radius: 50%;
-    background: #1a1a1a; color: #fff; font-size: 10px; font-weight: 500;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0D0D0D; color: #fff; font-size: 10px; font-weight: 500;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.28); z-index: 8000;
     pointer-events: none; transition: opacity 0.15s ease-in-out;
   }
   .ann-popover {
     position: fixed; width: 280px; border-radius: 8px; padding: 14px 16px 12px;
-    background: #fff; border: 1px solid rgba(0,0,0,0.09);
+    background: #FAFAF8; border: 1px solid rgba(0,0,0,0.09);
     box-shadow: 0 4px 16px rgba(0,0,0,0.11), 0 1px 3px rgba(0,0,0,0.07);
     z-index: 9500; display: none;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     animation: ann-popIn 0.12s ease-out;
   }
   @keyframes ann-popIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
@@ -177,10 +177,10 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     width: 100%; height: 72px; resize: none; padding: 8px 10px;
     font-size: 13px; line-height: 1.45; background: #fafafa;
     border: 1px solid rgba(0,0,0,0.12); border-radius: 5px;
-    margin-bottom: 10px; font-family: inherit; color: #1a1a1a; outline: none;
+    margin-bottom: 10px; font-family: inherit; color: #0D0D0D; outline: none;
     box-sizing: border-box;
   }
-  .ann-popover textarea:focus { border-color: rgba(0,0,0,0.28); background: #fff; }
+  .ann-popover textarea:focus { border-color: rgba(0,0,0,0.28); background: #FAFAF8; }
   .ann-popover-actions { display: flex; justify-content: space-between; align-items: center; gap: 7px; }
   .ann-popover-actions-right { display: flex; gap: 7px; }
   .ann-btn-remove {
@@ -189,7 +189,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     border: 1px solid rgba(155,29,32,0.22); border-radius: 4px;
     cursor: pointer; display: none; transition: background 0.1s, color 0.1s;
   }
-  .ann-btn-remove:hover { background: rgba(155,29,32,0.07); color: #9b1d20; }
+  .ann-btn-remove:hover { background: rgba(155,29,32,0.07); color: #9B3D2E; }
   .ann-btn-remove.visible { display: block; }
   .ann-btn-discard {
     height: 28px; padding: 0 12px; background: transparent;
@@ -197,7 +197,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     border: 1px solid rgba(0,0,0,0.12); border-radius: 4px; cursor: pointer;
   }
   .ann-btn-save {
-    height: 28px; padding: 0 14px; background: #1a1a1a; color: #fff;
+    height: 28px; padding: 0 14px; background: #0D0D0D; color: #fff;
     font-size: 12px; font-weight: 500; border: none; border-radius: 4px;
     cursor: pointer; font-family: inherit;
   }
@@ -210,24 +210,24 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   }
   .ann-panel {
     position: fixed; top: 48px; right: 0; bottom: 0; width: 360px;
-    background: #fff; border-left: 1px solid rgba(0,0,0,0.09);
+    background: #FAFAF8; border-left: 1px solid rgba(0,0,0,0.09);
     box-shadow: -4px 0 20px rgba(0,0,0,0.07);
     padding: 20px 20px 24px; z-index: 8500;
     display: flex; flex-direction: column; overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     transform: translateX(100%);
     transition: transform 220ms cubic-bezier(0.16,1,0.3,1);
   }
   .ann-panel.open { transform: translateX(0); }
   .ann-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; flex-shrink: 0; }
-  .ann-panel-heading { font-size: 14px; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em; }
+  .ann-panel-heading { font-size: 14px; font-weight: 600; color: #0D0D0D; letter-spacing: -0.01em; }
   .ann-panel-close {
     width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.06);
     border: none; cursor: pointer; font-size: 15px; color: rgba(0,0,0,0.40);
     display: flex; align-items: center; justify-content: center;
     font-family: inherit; transition: background 0.1s, color 0.1s;
   }
-  .ann-panel-close:hover { background: rgba(0,0,0,0.10); color: #1a1a1a; }
+  .ann-panel-close:hover { background: rgba(0,0,0,0.10); color: #0D0D0D; }
   .ann-panel-sub { font-size: 12px; color: rgba(0,0,0,0.42); line-height: 1.5; margin-bottom: 14px; flex-shrink: 0; }
   .ann-section-label {
     font-size: 10.5px; font-weight: 600; text-transform: uppercase;
@@ -239,7 +239,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   .ann-list-row:last-child { border-bottom: none; }
   .ann-list-num {
     width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
-    background: #1a1a1a; color: #fff; font-size: 9px; font-weight: 700;
+    background: #0D0D0D; color: #fff; font-size: 9px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; margin-top: 1px;
   }
   .ann-list-text { flex: 1; font-size: 12px; color: rgba(0,0,0,0.60); line-height: 1.45; overflow: hidden; }
@@ -252,8 +252,8 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     display: flex; align-items: center; justify-content: center;
     color: rgba(0,0,0,0.28); transition: background 0.1s, color 0.1s;
   }
-  .ann-icon-btn:hover { background: rgba(0,0,0,0.07); color: #1a1a1a; }
-  .ann-icon-btn.ann-danger:hover { background: rgba(155,29,32,0.08); color: #9b1d20; }
+  .ann-icon-btn:hover { background: rgba(0,0,0,0.07); color: #0D0D0D; }
+  .ann-icon-btn.ann-danger:hover { background: rgba(155,29,32,0.08); color: #9B3D2E; }
   .ann-list-empty { font-size: 12px; color: rgba(0,0,0,0.32); padding: 4px 0 8px; font-style: italic; }
   .ann-divider { height: 1px; background: rgba(0,0,0,0.07); margin: 10px 0; flex-shrink: 0; }
   .ann-q-section { flex-shrink: 0; }
@@ -264,23 +264,23 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
   .ann-q-answer-wrap { margin-top: 6px; }
   .ann-q-answer-input {
     width: 100%; height: 26px; padding: 0 8px; box-sizing: border-box;
-    font-size: 12px; font-family: inherit; color: #1a1a1a;
+    font-size: 12px; font-family: inherit; color: #0D0D0D;
     border: 1px solid rgba(0,0,0,0.12); border-radius: 4px;
     background: #fafafa; outline: none;
   }
-  .ann-q-answer-input:focus { border-color: rgba(0,0,0,0.28); background: #fff; }
+  .ann-q-answer-input:focus { border-color: rgba(0,0,0,0.28); background: #FAFAF8; }
   .ann-q-answer-input::placeholder { color: rgba(0,0,0,0.28); }
   .ann-q-options { margin-top: 5px; }
   .ann-q-option { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(0,0,0,0.60); margin-bottom: 4px; cursor: pointer; line-height: 1.4; }
   .ann-q-option:last-child { margin-bottom: 0; }
-  .ann-q-option input { cursor: pointer; accent-color: #1a1a1a; flex-shrink: 0; }
+  .ann-q-option input { cursor: pointer; accent-color: #0D0D0D; flex-shrink: 0; }
   .ann-q-add { display: flex; gap: 6px; margin-top: 8px; align-items: center; }
   .ann-q-add input {
     flex: 1; height: 28px; padding: 0 9px; font-size: 12px; font-family: inherit;
     border: 1px solid rgba(0,0,0,0.12); border-radius: 5px;
-    background: #fafafa; color: #1a1a1a; outline: none;
+    background: #fafafa; color: #0D0D0D; outline: none;
   }
-  .ann-q-add input:focus { border-color: rgba(0,0,0,0.28); background: #fff; }
+  .ann-q-add input:focus { border-color: rgba(0,0,0,0.28); background: #FAFAF8; }
   .ann-q-add input::placeholder { color: rgba(0,0,0,0.28); }
   .ann-q-add-btn {
     width: 28px; height: 28px; flex-shrink: 0; border-radius: 5px;
@@ -290,7 +290,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     font-family: inherit; padding: 0 0 1px;
     transition: background 0.1s, color 0.1s, border-color 0.1s;
   }
-  .ann-q-add-btn:hover { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  .ann-q-add-btn:hover { background: #0D0D0D; color: #fff; border-color: #0D0D0D; }
   #ann-q-list.ann-q-list-filled + .ann-q-add { border-top: 1px solid rgba(0,0,0,0.07); margin-top: 6px; padding-top: 8px; }
   .ann-disp-section { flex-shrink: 0; }
   .ann-disp-btns { display: flex; gap: 5px; }
@@ -301,37 +301,37 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
     transition: background 0.12s, color 0.12s, border-color 0.12s;
   }
   .ann-disp-btn:hover { border-color: rgba(0,0,0,0.28); color: rgba(0,0,0,0.70); }
-  .ann-disp-btn.d-approve.active { background: #2d6a4f; color: #fff; border-color: #2d6a4f; }
-  .ann-disp-btn.d-revise.active  { background: #92400e; color: #fff; border-color: #92400e; }
-  .ann-disp-btn.d-reject.active  { background: #9b1d20; color: #fff; border-color: #9b1d20; }
+  .ann-disp-btn.d-approve.active { background: #3E6B4F; color: #fff; border-color: #3E6B4F; }
+  .ann-disp-btn.d-revise.active  { background: #8C6D3B; color: #fff; border-color: #8C6D3B; }
+  .ann-disp-btn.d-reject.active  { background: #9B3D2E; color: #fff; border-color: #9B3D2E; }
   .ann-disp-note {
     display: none; width: 100%; height: 52px; resize: none; margin-top: 8px;
     padding: 7px 9px; font-size: 12px; font-family: inherit; line-height: 1.5;
-    color: #1a1a1a; border: 1px solid rgba(0,0,0,0.12); border-radius: 5px;
+    color: #0D0D0D; border: 1px solid rgba(0,0,0,0.12); border-radius: 5px;
     background: #fafafa; outline: none; box-sizing: border-box;
   }
-  .ann-disp-note:focus { border-color: rgba(0,0,0,0.28); background: #fff; }
+  .ann-disp-note:focus { border-color: rgba(0,0,0,0.28); background: #FAFAF8; }
   .ann-disp-note::placeholder { color: rgba(0,0,0,0.28); }
   .ann-disp-note.visible { display: block; }
   .ann-output-section { flex: 1; min-height: 0; display: flex; flex-direction: column; }
   .ann-output-block {
     background: #f7f7f7; border-radius: 5px;
-    font-family: ui-monospace, SFMono-Regular, 'Menlo', monospace;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 11px; line-height: 1.65; padding: 12px 14px;
     overflow-y: auto; white-space: pre-wrap; word-break: break-word;
     color: #222; flex: 1; min-height: 0; margin-bottom: 12px;
   }
   .ann-copy-btn {
-    width: 100%; height: 40px; background: #1a1a1a; color: #fff;
+    width: 100%; height: 40px; background: #0D0D0D; color: #fff;
     font-size: 13px; font-weight: 500; border: none; border-radius: 5px;
     cursor: pointer; font-family: inherit; flex-shrink: 0; transition: background 0.1s;
   }
-  .ann-copy-btn.ann-copied { background: #2d6a4f; }
-  .ann-copy-btn.ann-failed { background: #9b1d20; }
+  .ann-copy-btn.ann-copied { background: #3E6B4F; }
+  .ann-copy-btn.ann-failed { background: #9B3D2E; }
   .ann-toast {
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-    background: #1a1a1a; color: #fff; font-size: 12px; font-weight: 500;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0D0D0D; color: #fff; font-size: 12px; font-weight: 500;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding: 8px 16px; border-radius: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.20);
     z-index: 9999; pointer-events: none;
     animation: ann-toastIn 0.2s ease-out, ann-toastOut 0.3s ease-in 3s forwards;
@@ -758,7 +758,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
         var rad = document.createElement('input');
         rad.type = 'radio'; rad.name = 'annqr-' + q.id; rad.value = opt;
         rad.checked = q.answer === opt;
-        rad.style.accentColor = '#1a1a1a';
+        rad.style.accentColor = '#0D0D0D';
         (function(question, radio, option) {
           radio.addEventListener('change', function() { question.answer = option; persistQ(); updateBadge(); renderOutput(); });
         })(q, rad, opt);
@@ -785,7 +785,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
         var rad = document.createElement('input');
         rad.type = 'radio'; rad.name = 'annqr-' + q.id; rad.value = opt;
         rad.checked = q.answer === opt;
-        rad.style.accentColor = '#1a1a1a';
+        rad.style.accentColor = '#0D0D0D';
         (function(question, radio, option) {
           radio.addEventListener('change', function() { question.answer = option; persistQ(); updateBadge(); renderOutput(); });
         })(q, rad, opt);
@@ -802,7 +802,7 @@ Inject the block below verbatim. **Replace `// __BRIEF_QS__` with the complete `
         var chk  = document.createElement('input');
         chk.type = 'checkbox'; chk.value = opt;
         chk.checked = cur.indexOf(opt) !== -1;
-        chk.style.accentColor = '#1a1a1a';
+        chk.style.accentColor = '#0D0D0D';
         (function(question, checkbox, option) {
           checkbox.addEventListener('change', function() {
             var a = Array.isArray(question.answer) ? question.answer.slice() : [];
