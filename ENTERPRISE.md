@@ -1,4 +1,4 @@
-# XD OS — Enterprise Architecture
+# Studio OS — Enterprise Architecture
 
 *Sprint: 2026-04-20. Decisions from a full-day architecture session covering distribution model, agent strategy, install UX, and personalization.*
 
@@ -6,7 +6,7 @@
 
 ## Context
 
-XD OS was designed as a single-developer system. This document defines the architecture for scaling to enterprise teams — 100+ designers and product managers working alongside engineers across multiple products and user personas.
+Studio OS was designed as a single-developer system. This document defines the architecture for scaling to enterprise teams — 100+ designers and product managers working alongside engineers across multiple products and user personas.
 
 The target audience is product managers and designers who are building directly alongside engineering counterparts. These are people using Claude Code as a primary tool but whose primary discipline is not software engineering.
 
@@ -14,7 +14,7 @@ The target audience is product managers and designers who are building directly 
 
 ## The Three-Tier Distribution Model
 
-Every XD OS installation operates across three concentric tiers. Each tier has a defined owner, enforcement model, and update mechanism.
+Every Studio OS installation operates across three concentric tiers. Each tier has a defined owner, enforcement model, and update mechanism.
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -43,12 +43,12 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 | `pm` | Opus | Problem validation gate — upstream of all design |
 | `design-director` | Opus | Design ship/no-ship gate |
 | `de` | Opus | Engineering merge gate |
-| `xd-heurist` | Opus | Usability evaluation |
+| `heurist` | Opus | Usability evaluation |
 | `audit` | Sonnet | Documentation coherence |
 | `luck` | Sonnet | Durability diagnostic for infrastructure decisions |
 | `competitive-analyst` | Sonnet | Structured competitive teardown |
 
-**Skills (6):** `studio` · `lt-review` · `xd-discovery` · `xd-measure` · `xd-review` · `xd-solve`
+**Skills (6):** `studio` · `lt-review` · `discovery` · `measure` · `review` · `solve`
 
 **Hooks (5, org-enforced):**
 
@@ -69,19 +69,19 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 Individual. Installed via a recommended menu, not enforced packages. Additive — install more disciplines at any time. Re-runnable without penalty.
 
 **Design set (12 agents):**
-`designer` · `xd-strategist` · `xd-historian` · `xd-critic` · `xd-accessibility` · `xd-validate-design` · `xd-typesetter` · `xd-choreographer` · `xd-materialist` · `xd-visual-designer` · `xd-writer` · `xd-design-systems`
+`designer` · `strategist` · `historian` · `critic` · `accessibility` · `validate-design` · `typesetter` · `choreographer` · `materialist` · `visual-designer` · `writer` · `design-systems`
 
-Skills: `design` · `xd-ideate` · `xd-simulate` · `validate-design` · `xd-prototype`
+Skills: `design` · `ideate` · `simulate` · `validate-design` · `prototype`
 
 **PM set (10 agents):**
-`xd-strategist` · `xd-scout` · `xd-historian` · `marketer` · `xd-critic` · `xd-user-researcher` · `xd-journey-mapper` · `brief-writer` · `metrics-definer` · `assumption-mapper`
+`strategist` · `scout` · `historian` · `marketer` · `critic` · `user-researcher` · `journey-mapper` · `brief-writer` · `metrics-definer` · `assumption-mapper`
 
-Skills: `xd-experiment` · `xd-ideate` · `xd-discovery` · `xd-measure`
+Skills: `experiment` · `ideate` · `discovery` · `measure`
 
 **Engineering set (5 agents):**
-`engineer` · `qa` · `xd-architect` · `xd-specifier` · `xd-research-sweep`
+`engineer` · `qa` · `architect` · `specifier` · `sweep`
 
-Skills: `xd-implement` · `xd-simplify` · `xd-architect`
+Skills: `implement` · `simplify` · `architect`
 
 *Note: Strategist and Historian appear in both Design and PM sets — identical files, same path, no conflict.*
 
@@ -111,15 +111,15 @@ Structured competitive teardown on demand. Takes a problem space and 3–5 named
 
 ### Design Role additions
 
-**`xd-design-systems`** (Sonnet)
+**`design-systems`** (Sonnet)
 Cross-product design system health. Audits pattern proliferation, token drift, component naming inconsistency. Evaluates whether the design system is growing coherently or fragmenting. Distinct from Validate Design (which checks a single mockup against spec). This evaluates the health of the system itself. Load-bearing at multi-product scale.
 
 ### PM Role additions
 
-**`xd-user-researcher`** (Sonnet)
-Synthesizes qualitative research — interview transcripts, usability test results, feedback sessions — into product-relevant patterns. Maps findings to feature decisions. Does not conduct research; synthesizes records of research already done. The most-used PM workflow with no current home in XD OS.
+**`user-researcher`** (Sonnet)
+Synthesizes qualitative research — interview transcripts, usability test results, feedback sessions — into product-relevant patterns. Maps findings to feature decisions. Does not conduct research; synthesizes records of research already done. The most-used PM workflow with no current home in Studio OS.
 
-**`xd-journey-mapper`** (Sonnet)
+**`journey-mapper`** (Sonnet)
 Maps the user's end-to-end journey before any surface design begins. Surfaces entry points, context switches, adjacent moments, and friction points. Produces a journey artifact that constrains and focuses the Designer's scope. Fills the seam between PM problem validation and Designer interaction modeling.
 
 **`brief-writer`** (Sonnet)
@@ -135,14 +135,14 @@ Surfaces build assumptions, user assumptions, and technical assumptions before t
 
 ## New Skills (v2 additions)
 
-**`xd-discovery`**
+**`discovery`**
 The upstream workflow that precedes `design`. Currently absent — discovery is informal and unstructured.
 
 Sequence: User Researcher (synthesize research) → Journey Mapper (map full context) → Assumption Mapper (surface risks) → PM gate (validate the brief) → Brief Writer (produce handoff artifact)
 
 Output: a completed brief, ready to pass directly into `design`.
 
-**`xd-measure`**
+**`measure`**
 Success metrics defined before implementation begins, not retrofitted after.
 
 Sequence: Metrics Definer (define success conditions) → PM gate (validate against the validated problem) → Architect (confirm instrumentation is feasible in the current data model)
@@ -159,14 +159,14 @@ Output: a measurement plan committed alongside the spec.
 studio setup          — first-time install: Core + role selection + personal profile
 studio add            — add a discipline after initial setup
 studio update         — update installed collaborators to latest versions
-studio project        — set up a new project (replaces xd-init)
+studio project        — set up a new project (replaces init)
 studio setup --me     — update your personal profile
 ```
 
 ### First-install menu
 
 ```
-XD OS
+Studio OS
 ────────────────────────────────
 Setting up your AI collaborators.
 
@@ -185,7 +185,7 @@ What's your primary discipline?
 ### Add disciplines (studio add)
 
 ```
-XD OS
+Studio OS
 ────────────────────────────────
 Installed: Design (12 collaborators)
 
@@ -205,14 +205,14 @@ The horizontal rule separates expanding (add a discipline) from maintaining (upd
 For teams on Claude Code Pro or Teams (not enterprise managed):
 
 ```
-XD OS is ready.
+Studio OS is ready.
 
 Your settings aren't locked — anyone on the team with Claude Code
 access can view or change them. If your team needs enforced
 settings, this is done through Claude Code's enterprise controls.
 ```
 
-Hooks function identically in non-managed mode. The only difference: a determined user could edit `settings.json` to remove them. For teams that have chosen to adopt XD OS, this is an acceptable behavioral constraint rather than a technical one. Enterprise licensing enables `allowManagedHooksOnly` for full enforcement.
+Hooks function identically in non-managed mode. The only difference: a determined user could edit `settings.json` to remove them. For teams that have chosen to adopt Studio OS, this is an acceptable behavioral constraint rather than a technical one. Enterprise licensing enables `allowManagedHooksOnly` for full enforcement.
 
 ---
 
@@ -345,7 +345,7 @@ Total setup time: under 15 minutes.
 
 ## CLAUDE.md Placement Rule
 
-One sentence, added to the XD OS Integration section of every project CLAUDE.md:
+One sentence, added to the Studio OS Integration section of every project CLAUDE.md:
 
 > CLAUDE.md carries always-on rules. Skills carry on-demand workflows. Agents carry single-discipline expertise. Never place workflow logic in CLAUDE.md.
 
@@ -357,7 +357,7 @@ One sentence, added to the XD OS Integration section of every project CLAUDE.md:
 |---|---|---|
 | 1 | Redesign install script — `xd setup`, role menu, Core name guard | None |
 | 2 | Author 7 new agents | None (parallel with step 1) |
-| 3 | Author `xd-discovery` + `xd-measure` skills | Step 2 (agents must exist) |
+| 3 | Author `discovery` + `measure` skills | Step 2 (agents must exist) |
 | 4 | Add personal profile interview to `xd setup` | Step 1 |
 | 5 | Update `xd project` — three-phase interview, role-context.md output | Steps 1–2 |
 | 6 | Delete 12 duplicate single-discipline skill wrappers | None |

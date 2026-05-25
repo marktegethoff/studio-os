@@ -1,6 +1,6 @@
 # Installation
 
-XD OS requires Claude Code CLI. If you haven't installed it:
+Studio OS requires Claude Code CLI. If you haven't installed it:
 
 ```
 https://claude.ai/code
@@ -13,7 +13,7 @@ https://claude.ai/code
 From the repo root:
 
 ```bash
-./xd setup
+./install.sh
 ```
 
 This asks for your primary discipline, installs the relevant agents and skills to `~/.claude/`, and runs a short interview to build your personal profile at `~/.claude/memory/user-profile.md`.
@@ -43,14 +43,14 @@ Select **All disciplines** to install everything. Agents shared across roles are
 
 ## Personal profile
 
-During `./xd setup` you'll be asked three questions: your role, your strongest skills, and where you are in your practice. The answers are written to `~/.claude/memory/user-profile.md`.
+During `./install.sh` you'll be asked three questions: your role, your strongest skills, and where you are in your practice. The answers are written to `~/.claude/memory/user-profile.md`.
 
 Agents read this file to calibrate how they work with you — the level of explanation they provide, how they frame tradeoffs, which aspects of a problem they foreground.
 
 Update your profile any time:
 
 ```bash
-./xd setup --me
+./install.sh --me
 ```
 
 ---
@@ -60,14 +60,14 @@ Update your profile any time:
 After installing, open a Claude Code session in your project and run:
 
 ```
-/xd-init
+/studio-os:init
 ```
 
 This runs an interview that captures your product's purpose, brand principles, system invariants, user archetypes, and tech stack. It writes `.claude/memory/project-context.md` — the file all agents load to calibrate themselves to your specific product.
 
-XD OS works without this file, but agents fall back to generic reasoning. The interview takes about 10 minutes and makes every subsequent session more useful.
+Studio OS works without this file, but agents fall back to generic reasoning. The interview takes about 10 minutes and makes every subsequent session more useful.
 
-In a team setting, one person runs `/xd-init` per product and commits the resulting `project-context.md` to the repo. Everyone else gets it on pull.
+In a team setting, one person runs `/studio-os:init` per product and commits the resulting `project-context.md` to the repo. Everyone else gets it on pull.
 
 ---
 
@@ -78,14 +78,14 @@ Some enterprise Claude Code deployments disable WebSearch. Three agents require 
 **Option 1 — flag at install time:**
 
 ```bash
-./xd setup --no-web
+./install.sh --no-web
 ```
 
 Skips the prompt and does not install the three web-dependent agents.
 
 **Option 2 — interactive prompt:**
 
-During `./xd setup`, you'll be asked whether WebSearch is enabled. Answer N to skip web-dependent agents.
+During `./install.sh`, you'll be asked whether WebSearch is enabled. Answer N to skip web-dependent agents.
 
 The remaining agents — Historian, Heurist, PM — work offline. They degrade gracefully: Historian and Heurist label any findings drawn from training knowledge rather than live sources, and neither will fabricate citations it cannot verify.
 
@@ -138,21 +138,21 @@ cp memory/*.md ~/.claude/agents/memory/
 
 ## Uninstall
 
-XD OS installs only to `~/.claude/agents/`, `~/.claude/skills/`, and `~/.claude/memory/`. Remove those files to uninstall. Nothing is installed system-wide.
+Studio OS installs only to `~/.claude/agents/`, `~/.claude/skills/`, and `~/.claude/memory/`. Remove those files to uninstall. Nothing is installed system-wide.
 
-To remove all XD OS agents and skills:
+To remove all Studio OS agents and skills:
 
 ```bash
 # Core agents
 rm -f ~/.claude/agents/pm.md
 rm -f ~/.claude/agents/de.md
 rm -f ~/.claude/agents/competitive-analyst.md
-rm -f ~/.claude/agents/xd-design-director.md
-rm -f ~/.claude/agents/xd-heurist.md
-rm -f ~/.claude/agents/xd-audit.md
+rm -f ~/.claude/agents/studio-os:design-director.md
+rm -f ~/.claude/agents/studio-os:heurist.md
+rm -f ~/.claude/agents/studio-os:audit.md
 
-# Role agents (xd-prefixed and others)
-rm -f ~/.claude/agents/xd-*.md
+# Role agents (prefixed and others)
+rm -f ~/.claude/agents/studio-os:*.md
 rm -f ~/.claude/agents/engineer.md
 rm -f ~/.claude/agents/qa.md
 rm -f ~/.claude/agents/marketer.md
@@ -161,7 +161,7 @@ rm -f ~/.claude/agents/assumption-mapper.md
 rm -f ~/.claude/agents/metrics-definer.md
 
 # Skills
-rm -rf ~/.claude/skills/xd-*
-rm -rf ~/.claude/skills/lt-review
+rm -rf ~/.claude/skills/studio-os:*
+rm -rf ~/.claude/skills/studio-os:review
 rm -rf ~/.claude/skills/design-system-init
 ```

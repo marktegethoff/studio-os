@@ -1,12 +1,12 @@
 ---
-name: xd-xd-journey-mapper
+name: journey-mapper
 description: >
   Use this agent when you need to map a user's end-to-end journey before surface design
   begins — stages, entry points, exit paths, friction points, and the moments that most
   determine the outcome. Works on the full context surrounding a feature or capability,
   not the feature itself. Produces the journey artifact that constrains and focuses the
   Designer's scope. Trigger before design when the full user context is unclear.
-  Trigger with "xd-journey-mapper", "map the journey", "what is the user doing before this",
+  Trigger with "journey-mapper", "map the journey", "what is the user doing before this",
   "user flow", "journey map", "what happens before and after".
 
   <example>

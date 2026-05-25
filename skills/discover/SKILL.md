@@ -1,9 +1,9 @@
 ---
-description: Run the XD OS discovery workflow for a problem or opportunity. Activates User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer in sequence. Use before design begins — especially for new product directions, underperforming features, or problems where the user's actual behavior is unclear.
+description: Run the Studio OS discovery workflow for a problem or opportunity. Activates User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer in sequence. Use before design begins — especially for new product directions, underperforming features, or problems where the user's actual behavior is unclear.
 argument-hint: "<problem or feature area to investigate>"
 ---
 
-Run the XD OS discovery workflow for a problem or opportunity.
+Run the Studio OS discovery workflow for a problem or opportunity.
 
 Arguments: $ARGUMENTS
 
@@ -12,7 +12,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ---
 
-## Embedded XD OS Context
+## Embedded Studio OS Context
 
 ### Purpose
 Discovery produces a validated product brief. The brief is the artifact that gates design. Design must not begin without it.

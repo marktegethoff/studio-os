@@ -1,9 +1,9 @@
 ---
-description: Set up XD OS for a new project. Runs a three-phase interview — org context check, product interview, role calibration — then writes project-context.md and role-context.md to .claude/memory/. Re-runnable to update context when the project evolves.
+description: Set up Studio OS for a new project. Runs a three-phase interview — org context check, product interview, role calibration — then writes project-context.md and role-context.md to .claude/memory/. Re-runnable to update context when the project evolves.
 argument-hint: "[optional: --update to refresh an existing context]"
 ---
 
-Set up XD OS for this project.
+Set up Studio OS for this project.
 
 Arguments: $ARGUMENTS
 
@@ -11,10 +11,10 @@ Arguments: $ARGUMENTS
 
 ## Purpose
 
-XD OS discipline agents load two context files to calibrate themselves:
+Studio OS discipline agents load two context files to calibrate themselves:
 
 - `project-context.md` — the product, its invariants, user archetypes, and engineering context. Shared across the team; often committed to the repo.
-- `role-context.md` — your specific role on this project and how you're using XD OS here. Personal; lives in `.claude/memory/`, not committed.
+- `role-context.md` — your specific role on this project and how you're using Studio OS here. Personal; lives in `.claude/memory/`, not committed.
 
 Without these, agents fall back to generic reasoning. With both, they calibrate to the specific product *and* to you.
 
@@ -94,7 +94,7 @@ Ask:
 ### Section 4 — User Archetypes
 
 Ask:
-9. Who are the primary users? Describe 2–3 behavioral archetypes — not demographics, but usage patterns. (e.g., "Daily logger: writes 3–5 entries a day, uses threads heavily" vs. "Burst xd-writer: large volumes during projects, then quiet for weeks".)
+9. Who are the primary users? Describe 2–3 behavioral archetypes — not demographics, but usage patterns. (e.g., "Daily logger: writes 3–5 entries a day, uses threads heavily" vs. "Burst writer: large volumes during projects, then quiet for weeks".)
 
 ---
 
@@ -241,7 +241,7 @@ Accept free-form answers. If the user names a role not in the example list, acce
 
 **Question 2:**
 
-> "What will you primarily use XD OS for on this project?"
+> "What will you primarily use Studio OS for on this project?"
 
 Give examples:
 
@@ -253,7 +253,7 @@ Accept free-form answers.
 
 **Question 3:**
 
-> "Is there anything about this project that XD OS should know about your specific context — your constraints, your team structure, or what you're responsible for?"
+> "Is there anything about this project that Studio OS should know about your specific context — your constraints, your team structure, or what you're responsible for?"
 
 This is open-ended. A one-line answer is fine. If the user says nothing to add, accept it and move on.
 
@@ -277,7 +277,7 @@ Last updated: [date]
 ## Role
 
 **Title:** [role as stated]
-**Primary contribution:** [what they're using XD OS for on this project]
+**Primary contribution:** [what they're using Studio OS for on this project]
 
 ## Project-specific context
 
@@ -299,13 +299,13 @@ Agents reading this file should:
 
 After both files are written, confirm:
 
-> "Setup complete. XD OS is calibrated to [product name] and your role as [role].
+> "Setup complete. Studio OS is calibrated to [product name] and your role as [role].
 >
 > Two context files written:
 > - `.claude/memory/project-context.md` — product context (shareable with your team)
 > - `.claude/memory/role-context.md` — your role on this project (personal, don't commit)
 >
-> Start with `/design <problem>`, `/xd-discovery <problem>`, or `/studio <goal>`."
+> Start with `/design <problem>`, `/studio-os:discover <problem>`, or `/studio <goal>`."
 
 If a design system skill does not yet exist at `.claude/skills/design-system/`, add:
 
@@ -313,4 +313,4 @@ If a design system skill does not yet exist at `.claude/skills/design-system/`, 
 
 If `user-profile.md` was not found during Phase 1 context check, add:
 
-> "No personal profile found. Run `xd setup --me` to create one — it helps XD OS calibrate its communication style and assumed knowledge across all your projects."
+> "No personal profile found. Run `xd setup --me` to create one — it helps Studio OS calibrate its communication style and assumed knowledge across all your projects."

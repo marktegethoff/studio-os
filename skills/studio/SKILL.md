@@ -1,15 +1,15 @@
 ---
-description: Activate XD OS and orient the user. Routes to the appropriate workflow or discipline based on what the user is working on or what artifact they need. Use as the entry point when unsure which workflow to invoke or what can be produced.
+description: Activate Studio OS and orient the user. Routes to the appropriate workflow or discipline based on what the user is working on or what artifact they need. Use as the entry point when unsure which workflow to invoke or what can be produced.
 argument-hint: "[optional: initial intent, problem statement, or artifact type]"
 ---
 
-Activate XD OS and orient the user.
+Activate Studio OS and orient the user.
 
 Arguments: $ARGUMENTS
 
 ---
 
-## XD OS
+## Studio OS
 
 A structured multi-discipline reasoning system for design and product work.
 
@@ -17,9 +17,9 @@ A structured multi-discipline reasoning system for design and product work.
 
 ---
 
-## What XD OS produces
+## What Studio OS produces
 
-XD OS is organized around artifacts — specific outputs that move work forward. When someone asks for a deliverable, route to the discipline or workflow that produces it.
+Studio OS is organized around artifacts — specific outputs that move work forward. When someone asks for a deliverable, route to the discipline or workflow that produces it.
 
 ### Discovery and research artifacts
 

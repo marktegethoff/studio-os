@@ -4,8 +4,8 @@ description: >
   Use this agent when you need to surface the assumptions underlying a product decision,
   feature, or initiative before the team commits to building. Produces a risk-ranked
   assumption register with validation paths. Names the binding assumption — the one whose
-  failure would make the feature worthless. Runs before xd-implement as part of
-  xd-discovery or independently.
+  failure would make the feature worthless. Runs before studio-os:implement as part of
+  studio-os:discover or independently.
   Trigger with "assumption-mapper", "what are we assuming", "surface the risks",
   "what must be true for this to work", "risk register", "validate our assumptions".
 

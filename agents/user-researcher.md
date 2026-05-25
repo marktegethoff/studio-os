@@ -1,11 +1,11 @@
 ---
-name: xd-xd-user-researcher
+name: user-researcher
 description: >
   Use this agent when you need to synthesize qualitative research — interview transcripts,
   usability session notes, survey responses, feedback logs — into product-relevant patterns.
   Does not conduct research; works with research that has already been done. Maps findings
   to product decisions and surfaces contradictions in the data.
-  Trigger with "xd-user-researcher", "synthesize these interviews", "what patterns are in
+  Trigger with "user-researcher", "synthesize these interviews", "what patterns are in
   this research", "what did users say about", "analyze this feedback".
 
   <example>

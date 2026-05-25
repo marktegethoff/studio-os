@@ -10,7 +10,7 @@ description: >
   "ready to hand off to design".
 
   <example>
-  Context: A PM has run through xd-discovery — problem validated, journey mapped,
+  Context: A PM has run through studio-os:discover — problem validated, journey mapped,
   assumptions surfaced. Now ready to hand the work to a designer.
   user: "Discovery is complete. Write the design brief for the notification redesign."
   assistant: I'll activate the Brief Writer to produce the design brief — problem

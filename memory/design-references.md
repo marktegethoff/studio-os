@@ -6,7 +6,7 @@ Last updated: [date]
 ## How This File Works
 
 Written by designer at session close when products or work are referenced.
-Written by xd-research-sweep when new case studies are identified.
+Written by sweep when new case studies are identified.
 
 Format: Product → Observation → Lesson → Stance → Date
 

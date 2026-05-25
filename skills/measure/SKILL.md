@@ -1,9 +1,9 @@
 ---
-description: Run the XD OS measurement workflow for a feature. Activates Metrics Definer → PM gate → Architect in sequence. Produces a complete measurement plan — lagging indicator, leading indicators, instrumentation requirements, baselines, counter-metrics, and review cadence — before implementation begins. Use after a design brief exists and before engineering begins.
+description: Run the Studio OS measurement workflow for a feature. Activates Metrics Definer → PM gate → Architect in sequence. Produces a complete measurement plan — lagging indicator, leading indicators, instrumentation requirements, baselines, counter-metrics, and review cadence — before implementation begins. Use after a design brief exists and before engineering begins.
 argument-hint: "<feature or change to define success metrics for>"
 ---
 
-Run the XD OS measurement workflow for a feature.
+Run the Studio OS measurement workflow for a feature.
 
 Arguments: $ARGUMENTS
 
@@ -12,7 +12,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ---
 
-## Embedded XD OS Context
+## Embedded Studio OS Context
 
 ### Purpose
 Measurement planning before implementation ensures the team knows what they're building toward and how they'll know if they got there. A feature launched without a measurement plan cannot be evaluated — only guessed at.
