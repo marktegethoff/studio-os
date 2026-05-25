@@ -23,6 +23,7 @@ After restarting Claude Code in your Log project:
 - `/studio-os:studio` orients (roles, gates, outputs).
 - A gate agent (`cd`) and a workflow (`/studio-os:design`) load and behave as before — **no behavioral regression**.
 - Run the **eval suite** (`evals/README.md`) for the full pass.
+- All 27 skills invoke by exact name. If a session doesn't *auto-surface* every skill (the listing can truncate at this count), raise the budget in `~/.claude/settings.json`: `"skillListingBudgetFraction": 0.02`.
 - Restore if needed: `cp -R ~/.claude/_studio-os-backup-2026-05-25/agents/* ~/.claude/agents/`.
 
 ## Promote (your call)
