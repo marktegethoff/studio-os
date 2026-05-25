@@ -40,14 +40,14 @@ Feature: $ARGUMENTS
 ## Step 0 — Context loading
 
 Load project context. Read in order:
-1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product invariants, existing instrumentation, any prior measurement decisions
+1. `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. `user-profile.md` (`.claude/memory/`) — calibrate communication register
 
 Check for a validated design brief for this feature. Look for `artifacts/product_brief_*.md` or equivalent. If a brief exists, load its problem statement and success conditions — these govern what the lagging indicator must measure.
 
 If no brief exists, surface this:
 
-> **Design brief not found.** A measurement plan is most effective when anchored to a validated problem statement. Consider running `xd-discovery` first to produce a brief — or confirm the problem statement and success conditions explicitly before continuing.
+> **Design brief not found.** A measurement plan is most effective when anchored to a validated problem statement. Consider running `discover` first to produce a brief — or confirm the problem statement and success conditions explicitly before continuing.
 
 If the user provides the problem statement directly, proceed. Note the absence of a formal brief.
 
@@ -133,7 +133,7 @@ Evaluate the PM's response:
 - **If lagging indicator revised:** restate the revised metric and confirm before proceeding.
 - **If stopped:** summarize the measurement plan as a draft for future reference. Do not mark as complete.
 
-### Step 4 — Architect: instrumentation feasibility (xd-architect)
+### Step 4 — Architect: instrumentation feasibility (architect)
 
 Apply the Architect discipline — scoped to the instrumentation requirements produced by the Metrics Definer.
 

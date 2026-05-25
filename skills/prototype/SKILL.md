@@ -1,9 +1,9 @@
 ---
-description: Run the XD OS testable prototype workflow. Scopes the test question, establishes minimum fidelity, defines build and test criteria in parallel, and routes findings. Speed-to-testable is the constraint — not polish. Use when you need to learn something fast before committing to build.
+description: Run the testable prototype workflow. Scopes the test question, establishes minimum fidelity, defines build and test criteria in parallel, and routes findings. Speed-to-testable is the constraint — not polish. Use when you need to learn something fast before committing to build.
 argument-hint: "<what you're trying to learn or validate>"
 ---
 
-Run the XD OS testable prototype workflow.
+Run the testable prototype workflow.
 
 Arguments: $ARGUMENTS
 
@@ -12,9 +12,20 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ---
 
-## Embedded XD OS Context
+## Project Context
 
-### Purpose
+Read project context in this order:
+
+1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. Read `CLAUDE.md` — the Prototype Environment section describes the prototype tooling, location, and conventions for this project.
+3. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name.
+4. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+
+The project provides the specifics. You provide the discipline.
+
+---
+
+## Purpose
 
 A prototype exists to answer a question. Not to demonstrate polish. Not to show stakeholders what the product will look like. To answer a specific question about user behavior, interaction feasibility, or design direction — cheaply and quickly.
 
@@ -30,7 +41,7 @@ The prototype workflow enforces this discipline. It scopes the test question bef
 
 **XD QA / Test Criteria:** Defines how the test will be evaluated — what the prototype must do in testing to produce usable learning. Runs in parallel with build criteria.
 
-**Findings Router:** After testing, routes findings to the appropriate discipline. Findings that confirm the design → xd-specifier. Findings that challenge the design → Designer for revision. Findings that challenge the problem framing → PM + Brief Writer.
+**Findings Router:** After testing, routes findings to the appropriate discipline. Findings that confirm the design → specifier. Findings that challenge the design → Designer for revision. Findings that challenge the problem framing → PM + Brief Writer.
 
 ---
 
@@ -42,11 +53,7 @@ What to validate: $ARGUMENTS
 
 ## Step 0 — Context loading
 
-Load project context. Read in order:
-1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product invariants, user archetypes, any prior decisions relevant to this area
-2. `user-profile.md` (`~/.claude/memory/`) — calibrate communication register
-
-Check for existing artifacts:
+Project context was loaded above. Check for existing artifacts:
 - Prior brief or discovery output for this area
 - Existing design specs or wireframes
 - Prior prototype iterations (if this is a revision, note what was tested and what was learned)
@@ -103,6 +110,36 @@ Define the minimum prototype required to answer the test question.
 
 **Fidelity recommendation:** [Lo-fi / Mid-fi / Hi-fi] — name the minimum fidelity required to answer this question, with reasoning.
 
+**Snapshot test requirement (Canvas experiments):**
+
+For any new Canvas experiment file under `Log Canvas/Log Canvas/Experiments/` or `Log Canvas/Log Canvas/Screens/`, also create a snapshot test at `Log Canvas/Log CanvasTests/<Name>SnapshotTests.swift` covering at minimum:
+
+- `<name>_light` — light mode, primary state
+- `<name>_dark` — dark mode, primary state
+
+Snapshot names must start with the experiment name in camelCase + underscore. Default size `CGSize(width: 390, height: 844)`. Use the helper at `Log Canvas/Log CanvasTests/Support/SnapshotHelper.swift`:
+
+```swift
+import XCTest
+import SwiftUI
+
+final class <Name>SnapshotTests: XCTestCase {
+    func test_<name>_light() {
+        assertSnapshot(of: <Name>(...), named: "<name>_light",
+                       size: CGSize(width: 390, height: 844),
+                       colorScheme: .light)
+    }
+
+    func test_<name>_dark() {
+        assertSnapshot(of: <Name>(...), named: "<name>_dark",
+                       size: CGSize(width: 390, height: 844),
+                       colorScheme: .dark)
+    }
+}
+```
+
+These PNGs feed `/gather-feedback`'s Review Surface.
+
 ### Step 2B — Test criteria (QA)
 
 Define how the test will be evaluated.
@@ -119,8 +156,22 @@ Define how the test will be evaluated.
 
 ---
 
-> **⏸ PAUSE — Prototype review before testing.**
+## Step 2.5 — Visual review (auto-fire `/gather-feedback`)
+
+After the prototype is built, before testing begins, render the Review Surface for visual review. This replaces the text-only "is the prototype ready" check with the designed HTML review.
+
+Ask the user:
+
+> "Prototype built. **Render review surface?** Default: yes — opens a designed HTML review in your browser with snapshots (when available), summary, and structured questions covering: does the build match the criteria, does it include anything extra to remove, is it ready for testing.
 >
+> Reply **'skip'** to confirm readiness in chat instead. Reply **anything else** (or just 'continue') to render the review."
+
+Wait for the user's response.
+
+**If user replies 'skip':**
+
+Run the original text-only check:
+
 > Before the prototype goes to users, confirm:
 >
 > 1. Does the built prototype include everything in the build criteria?
@@ -129,6 +180,25 @@ Define how the test will be evaluated.
 >
 > Reply to **confirm the prototype is ready**, or flag what needs adjustment.
 
+**If user replies anything else (default path):**
+
+Read the `/gather-feedback` skill at `.claude/skills/gather-feedback/SKILL.md` and follow its steps. Pass the prototype context (test question, build criteria, fidelity, files produced) into the manifest construction. Use this question set in the manifest:
+
+1. *Does the build match the build criteria?* (choice: matches / partial / extra) — corresponds to readiness check #1 and #2 combined
+2. *Is the test criteria accessible to whoever runs the test?* (text)
+3. *(Always-present catch-all is appended automatically)*
+
+After `/gather-feedback` parses the response block, treat its disposition as the readiness verdict:
+
+- **APPROVE** → prototype is ready; proceed to Step 3 (Findings routing)
+- **REVISE** → apply notes from answers, re-run Step 2.5 once revisions are made
+- **REJECT** → prototype is not ready; stop and rescope (return to Step 1)
+
+---
+
+> **⏸ PAUSE — Prototype readiness verdict.**
+> Disposition (Approve / Revise / Reject) drives the next step.
+
 ---
 
 ## Step 3 — Findings routing
@@ -136,18 +206,18 @@ Define how the test will be evaluated.
 After testing is complete, route findings based on outcome.
 
 **If the test question is answered affirmatively (design direction confirmed):**
-→ Route to `xd-specifier` for All States / All Flows completeness work before engineering handoff.
-→ Recommend: `/xd-prepare-handoff [feature area]`
+→ Route to `specifier` for All States / All Flows completeness work before engineering handoff.
+→ Recommend: `/handoff [feature area]`
 
 **If the test question is answered negatively (design direction challenged):**
 → Route to `Designer` for revision.
 → Name specifically what in the design must change based on the failure signal.
-→ A revised prototype may be needed before `/xd-prepare-handoff`.
+→ A revised prototype may be needed before `/handoff`.
 
 **If findings are ambiguous:**
 → Name which aspect of the test criteria produced ambiguity.
 → Recommend whether a second prototype iteration is warranted or whether the ambiguity can be resolved through design judgment alone.
-→ Do not route to `/xd-prepare-handoff` until the test question has a usable answer.
+→ Do not route to `/handoff` until the test question has a usable answer.
 
 **If the prototype reveals the test question was wrong:**
 → Route back to Step 1 with the revised framing.
@@ -181,5 +251,5 @@ Date: [today]
 [After testing: outcome + routing decision]
 
 ## Next step
-[Confirmed → /xd-prepare-handoff | Revised → back to Designer | Ambiguous → [specific next action]]
+[Confirmed → /handoff | Revised → back to Designer | Ambiguous → [specific next action]]
 ```

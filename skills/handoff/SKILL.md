@@ -46,15 +46,15 @@ Feature or component: $ARGUMENTS
 
 Load all relevant artifacts before proceeding. Read in order:
 
-1. `studio_os/project-context.md`; if not found, check `.claude/memory/project-context.md` or `memory/project-context.md`; if absent, read `CLAUDE.md` for product context — product invariants, brand system, system boundaries
+1. `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. `user-profile.md` (`~/.claude/memory/`) — calibrate communication register
 3. Design system context: `.claude/skills/design-system/SKILL.md` if it exists — load token vocabulary and component library
 4. Prototype artifacts: look for prototype files, wireframes, or mockups for this feature
 5. Prior spec artifacts: check for any existing specs that this handoff should extend or supersede
-6. Prior test findings: load the `/xd-prototype` output for this feature if it exists — the test question, findings, and routing decision inform the completeness work
+6. Prior test findings: load the `/prototype` output for this feature if it exists — the test question, findings, and routing decision inform the completeness work
 
 Report what was found. Flag missing artifacts:
-- If no prototype exists: "No prototype artifacts found. `/xd-prototype` should run before `/xd-prepare-handoff`."
+- If no prototype exists: "No prototype artifacts found. `/prototype` should run before `/handoff`."
 - If no design system context: "No design system skill found. Build spec will use design tokens without component mapping — note this gap."
 
 ---

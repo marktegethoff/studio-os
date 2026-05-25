@@ -1,46 +1,34 @@
 ---
-description: Run the full XD OS design workflow for a problem or feature. Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
+description: Run the full design workflow for a problem or feature. Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
 ---
 
-Run the full XD OS design workflow for a problem or feature.
+Run the full design workflow for a problem or feature.
 
 Arguments: $ARGUMENTS
 
+**Model requirements:** [HAIKU] for context loading · [SONNET] for design work
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
 ---
 
-## Embedded XD OS Context
+## Project Context
 
-### Ethos
-Work must feel inevitable. Nothing arbitrary. Nothing extra. Nothing essential missing.
-Clarity over originality · Coherence over expression · Restraint over flourish.
+Read project context at session start, in order:
 
-### Brand Principles
-Load from `project-context.md`. If not available, ask the user to state 3–5 principles before continuing.
+1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
+3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
-### Decision Hierarchy
-Evaluate decisions in this order:
-1. Structural correctness
-2. Conceptual clarity
-3. System coherence
-4. Reduction of parts
-5. Craft precision
-6. Visual refinement
+The project provides the specifics. This skill provides the discipline. If no project context is found, proceed with general design principles and state this clearly.
 
-Novelty is never a deciding factor.
+---
 
-### System Invariants
-Load from `project-context.md`. If not available, ask the user to state the non-negotiable constraints before continuing.
+## Disciplines
 
-### System Model
-Load from `project-context.md`. If not available, ask the user to describe the core data model and key entities before continuing.
-
-### Disciplines
 **Historian:** What similar systems existed? What patterns endured? What mistakes to avoid?
-**Strategist:** Does this strengthen the clarity instrument? Does it improve long-term value?
+**Strategist:** Does this strengthen the product's core value? Does it improve long-term user value?
 **Architect:** Data model, system boundaries, scalability, integration points.
 **Critic:** Remove unnecessary features, simplify flows, eliminate decoration.
 **Designer:** Interaction model (states + transitions), visual hierarchy, 2–3 options max.
@@ -54,33 +42,37 @@ Problem: $ARGUMENTS
 
 ---
 
-## Step 0 — PM brief check
+## [HAIKU] Step 0 — Brief check
 
-Before design begins: check for a validated product brief from the PM.
+Before design begins: check for a validated product brief for this problem.
 
-Look for `artifacts/product_brief_*.md` or equivalent in the project. If one exists for this problem, load it — the problem statement, success definition, and key unknowns it contains govern what the design must solve.
+Look for a brief in these locations (in order):
+1. `studio_os/artifacts/product_brief_*.md` (if `studio_os/` exists)
+2. Any brief path specified in `CLAUDE.md`
+
+If a matching brief exists, load it — the problem statement, success definition, and key unknowns it contains govern what the design must solve.
 
 If no brief exists and this represents a new product direction (not a refinement of an existing shipped surface), surface this before continuing:
 
-> **Product brief missing.** Design is most effective when the problem has been validated. Consider running `pm` before this workflow to define who has the problem, why it matters, and what success looks like. To proceed without a brief, confirm explicitly.
+> **Product brief missing.** Design is most effective when the problem has been validated. Consider running `/shape` before this workflow to define who has the problem, why it matters, and what success looks like. To proceed without a brief, confirm explicitly.
 
 If the user confirms to proceed, continue. Design against a clear problem statement from the arguments — but note the absence of a validated brief.
 
 ---
 
-## Steps 1–3 — Context loading
+## [HAIKU] Steps 1–3 — Context loading
 
 ### Step 1 — Philosophy validation
 
-Apply the embedded ethos, brand principles, and decision hierarchy above.
+Apply the project context loaded above (ethos, principles, decision hierarchy, invariants).
 
 Apply the calibration gate: Is this necessary? Is this the simplest correct solution? Would removing something improve it?
 
 If the problem statement fails the gate, say so and stop.
 
-Also check the project's decision log (path defined in `project-context.md`). If available, scan for prior decisions that constrain this problem. Do not repeat rejected approaches.
+Also check: load relevant decision files from `studio_os/ledger/decisions/` by name based on what constrains this problem. Do not scan the full directory. Do not repeat previously rejected approaches.
 
-### Step 2 — Historian (xd-historian)
+### Step 2 — Historian
 
 Apply the Historian discipline (embedded above).
 
@@ -93,15 +85,23 @@ Answer:
 
 State any prior decisions from the ledger (if available) that constrain this problem. Do not repeat rejected approaches.
 
-## Steps 4–9 — Design work
+---
 
-### Step 4 — Strategist (xd-strategist)
+> **⏸ PAUSE — Model switch required.**
+> Steps 1–3 complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
+> Reply **"continue"** when ready.
+
+---
+
+## [SONNET] Steps 4–9 — Design work
+
+### Step 4 — Strategist
 
 Apply the Strategist discipline (embedded above).
 
 Answer:
-- Does this strengthen the product's core purpose as defined in project-context.md?
-- Does it improve long-term value for users?
+- Does this strengthen the product's core value?
+- Does it improve long-term user value?
 
 If the answer to either is no, state why and reduce scope before continuing.
 
@@ -110,7 +110,7 @@ If the answer to either is no, state why and reduce scope before continuing.
 If the arguments include `--commercial`, apply the Marketer discipline.
 
 - Does this differentiate the product or close a table-stakes gap?
-- Does it serve the users who pay?
+- Does it serve paying users or improve conversion?
 - Is this an acquisition or retention feature — and is that the right priority right now?
 - Is the commercial timing right?
 
@@ -118,7 +118,7 @@ State the commercial position in 3–4 sentences. If it conflicts with the Strat
 
 ---
 
-### Step 5 — Architect (xd-architect)
+### Step 5 — Architect
 
 Apply the Architect discipline (embedded above).
 
@@ -127,7 +127,7 @@ Define:
 - System boundaries
 - Integration points
 
-### Step 6 — Critic (xd-critic)
+### Step 6 — Critic
 
 Apply the Critic discipline (embedded above).
 
@@ -138,7 +138,7 @@ Remove:
 
 State what was removed and why.
 
-### Step 7 — Designer (xd-designer)
+### Step 7 — Designer
 
 Apply the Designer discipline (embedded above).
 
@@ -166,11 +166,11 @@ Outer agent prompt: Include the Designer's relevant outputs, then spawn all appl
 
 Inner agents to spawn (include only those that apply):
 
-- Typesetter — Description: "Typesetter — [surface name]". Give it the Designer's visual hierarchy output. Task: produce a type system specification — scale, roles, string length constraints.
+- Typesetter — Description: "Typesetter — [surface name]". Prompt: Give it the Designer's visual hierarchy output. Task: produce a type system specification — scale, roles, string length constraints.
 
-- Choreographer — Description: "Choreographer — [surface name]". Give it the Designer's transition descriptions. Task: apply the motion test (what does the user misunderstand without this?), remove what fails, specify what remains with timing and easing.
+- Choreographer — Description: "Choreographer — [surface name]". Prompt: Give it the Designer's transition descriptions. Task: apply the motion test (what does the user misunderstand without this?), remove what fails, specify what remains with timing and easing.
 
-- Materialist — Description: "Materialist — [surface name]". Give it the Designer's surface description. Task: evaluate whether material choices are intentional and coherent.
+- Materialist — Description: "Materialist — [surface name]". Prompt: Give it the Designer's surface description. Task: evaluate whether material choices are intentional and coherent.
 
 When Phase A outer agent completes, proceed to Phase B.
 
@@ -180,7 +180,7 @@ When Phase A outer agent completes, proceed to Phase B.
 
 - **Visual Designer** — always runs last, after all Phase A and Phase B agents complete. Evaluate spacing, proportion, alignment, and visual weight distribution across the full surface using all sub-team outputs. Prescribe specific corrections. Skip only if zero sub-team disciplines were invoked.
 
-### Step 7.7 — Heurist (xd-heurist, conditional)
+### Step 7.7 — Heurist (conditional)
 
 Run if the surface involves user interaction. Skip for data model or system-only changes with no new surface work.
 
@@ -195,19 +195,19 @@ Findings at this step may require returning to the Designer. If so, state precis
 ---
 
 > **⏸ PAUSE — Prototype required.**
-> Design is complete. Before accessibility review or xd-specifier output:
+> Design is complete. Before accessibility review or specifier output:
 >
-> 1. Build a prototype in your team's design tool (Figma, your canvas project, or equivalent).
-> 2. Verify the design renders correctly across relevant states and appearance modes.
-> 3. If the design needs adjustment, iterate in the prototype. Do not write to production files.
+> 1. Build a prototype in the project's prototype environment. Check `CLAUDE.md` for location (e.g., `Log Canvas/Log Canvas/Experiments/` for a native iOS project, or a static HTML file for web).
+> 2. Verify the design at key states — especially light and dark mode for native.
+> 3. If the design needs adjustment, iterate in the prototype. Do not write to production source files.
 >
-> **Do not write production code until the prototype is confirmed.**
+> **Do not write to production source files until the prototype confirms the design.**
 >
-> Reply **"prototype confirmed"** when ready to proceed to Accessibility + Specifier.
+> Reply **"prototype confirmed"** when the prototype is verified and ready to proceed to Accessibility + Specifier.
 
 ---
 
-### Step 8 — Accessibility (xd-accessibility)
+### Step 8 — Accessibility
 
 Apply the Accessibility discipline (embedded above).
 
@@ -216,7 +216,7 @@ Verify:
 - 44pt minimum touch targets
 - Screen reader labeling (use Writer output for VoiceOver strings if Writer ran)
 
-### Step 9 — Specifier (xd-specifier)
+### Step 9 — Specifier
 
 If this design will proceed to engineering, produce a complete engineering handoff specification:
 - All component states (default + every variant)
@@ -226,7 +226,25 @@ If this design will proceed to engineering, produce a complete engineering hando
 - Motion/transition parameters (from Choreographer output if applicable)
 - Accessibility: VoiceOver labels, traits, reading order
 
-If this is exploratory design only (no immediate engineering handoff), skip this step but note explicitly: "Specifier not run — spec required before xd-implement."
+If this is exploratory design only (no immediate engineering handoff), skip this step but note explicitly: "Specifier not run — spec required before /implement."
+
+---
+
+## Step 9.5 — Review offer (optional, pre-engineering gate)
+
+If the Specifier ran and the design is ready for engineering handoff, offer an LT review as a final gate.
+
+Ask:
+
+> "**Run an LT review before engineering begins?** PM + Design Director review the spec for problem-solution fit and design quality. Use for significant new surfaces or direction changes.
+>
+> Reply **'review'** to run it, **'skip'** to proceed to output."
+
+**If user replies 'review':**
+
+Read the `review` skill at `~/.claude/skills/review/SKILL.md` and follow its steps from Step 1, passing the design artifact (interaction model + spec) as context. DE does not apply — no implementation exists yet. After the review completes, return here and proceed to Output.
+
+**If user replies 'skip'** (or the Specifier was skipped): proceed to Output.
 
 ---
 
@@ -257,4 +275,4 @@ Date: [today]
 [Only genuine blockers — omit if none]
 ```
 
-If the project has a design artifacts directory (defined in `project-context.md`), offer to write the design artifact there.
+If `studio_os/artifacts/` exists, offer to write this to `studio_os/artifacts/design.md`. Otherwise write to `docs/design/` or the project's artifact location specified in `CLAUDE.md`.
