@@ -115,15 +115,27 @@ Workflows sequence multiple disciplines in order:
 
 ## Routing
 
-If $ARGUMENTS is empty:
+If $ARGUMENTS is empty, **orient the user**: render the compact menu below, then ask the routing question. Always show the menu — never reply with only a greeting.
 
-Greet briefly. Ask:
+> **Studio OS** — a multi-discipline studio for design and product work. Pick a path:
+>
+> **Workflows** (sequence multiple disciplines):
+> - `/discover` — research → journey → assumptions → brief
+> - `/design` — full design pass (strategy → structure → design → accessibility → spec)
+> - `/measure` — metrics + instrumentation feasibility
+> - `/implement` — spec check → invariants → build → QA
+> - `/critique` — review → ship/no-ship verdict
+> - `/solve` — convergence loop for a hard problem
+> - `/review` — PM + CD + DE combined verdict
+> - also: `/experiment` · `/ideate` · `/simplify`
+>
+> Or name an **artifact** (journey map, wireframe, motion spec, data model, copy deck, accessibility audit…) or a **discipline** (designer, architect, critic, cd, de…) and I'll route you.
+>
+> **What are you working on — or what do you need to produce?**
 
-> What are you working on — or what do you need to produce?
+Then route on the reply:
 
-Listen, then route:
-
-- Artifact type named (e.g., "I need a journey map", "wireframes for this flow") → look up the artifact in the tables above and route to the correct discipline or workflow
+- Artifact type named (e.g. "I need a journey map", "wireframes for this flow") → look it up in the tables above and route to the correct discipline or workflow
 - Design problem or new feature → suggest `/design <problem>`
 - Problem unclear, user behavior uncertain → suggest `/discover <problem area>`
 - "What if" hypothesis → suggest `/experiment <hypothesis>`
@@ -133,6 +145,4 @@ Listen, then route:
 - Hard problem, no obvious answer → suggest `/solve <problem>`
 - Specific discipline named → invoke it directly
 
-If $ARGUMENTS is not empty, treat it as initial intent and route directly without asking.
-
-Keep greeting to one sentence. Ask one question. Do not list all commands unprompted.
+If $ARGUMENTS is not empty, treat it as initial intent and route directly — skip the menu and the question.
