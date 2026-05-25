@@ -6,34 +6,73 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../kit/studio.css">
+<style>
+  /* Interactive controls — local to this artifact type */
+  .mc-stage{background:var(--bg-1);border:1px solid var(--border);border-radius:6px;padding:2.5rem;display:flex;align-items:center;justify-content:center;min-height:200px;overflow:hidden}
+  .mc-box{width:88px;height:88px;border-radius:8px;background:var(--amber);will-change:transform,opacity}
+  .mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;margin:1.25rem 0}
+  .mc-ctrl{display:flex;flex-direction:column;gap:0.35rem}
+  .mc-ctrl label{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);display:flex;justify-content:space-between}
+  .mc-ctrl label .val{color:var(--amber)}
+  .mc-ctrl input[type=range]{width:100%;accent-color:var(--amber)}
+  .mc-ctrl select{background:var(--bg-2);color:var(--text-1);border:1px solid var(--border);border-radius:4px;padding:0.35rem 0.5rem;font-family:var(--font-mono);font-size:0.75rem}
+  .mc-btns{display:flex;gap:0.5rem;margin:1rem 0}
+  .mc-btn{font-family:var(--font-mono);font-size:0.72rem;padding:0.5rem 1rem;border-radius:5px;border:1px solid var(--border-2);background:var(--bg-2);color:var(--text-1);cursor:pointer}
+  .mc-btn.primary{background:var(--amber);border-color:var(--amber);color:#fff}
+  .mc-note{font-size:0.78rem;color:var(--text-3)}
+</style>
 </head>
 <body>
 <div class="wrap">
   <header class="header">
     <span class="eyebrow">Studio OS · Motion Spec · owned by choreographer</span>
     <h1>[Transition]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Timing, easing, and sequencing — only for motion that is earned. Every transition includes its reduce-motion alternative.</p>
+    <p class="header-sub">Timing, easing, and sequencing — only for motion that is earned. Tweak the controls; the preview and the spec values update live. Every transition includes its reduce-motion alternative.</p>
   </header>
 
   <section class="section">
     <h2>Is the Motion Earned?</h2>
-    <div class="callout"><p>[What does this motion communicate that the user would otherwise misunderstand? If the honest answer is "nothing," the verdict is <strong>instant</strong> and the spec ends here. Gratuitous motion is a defect.]</p></div>
+    <div class="callout"><p>[What does this motion communicate that the user would otherwise misunderstand? If the honest answer is "nothing," the verdict is <strong>instant</strong>. Gratuitous motion is a defect.]</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Live Preview</h2>
+    <div class="mc-stage"><div class="mc-box" id="mc-box"></div></div>
+    <div class="mc-btns">
+      <button class="mc-btn primary" id="mc-play">▶ Play</button>
+      <button class="mc-btn" id="mc-transition">Transition: slide + fade ▾</button>
+    </div>
+    <div class="mc-grid">
+      <div class="mc-ctrl"><label>Duration <span class="val" id="mc-dur-v">320ms</span></label><input type="range" id="mc-dur" min="0" max="1200" step="10" value="320"></div>
+      <div class="mc-ctrl"><label>Easing</label>
+        <select id="mc-ease">
+          <option value="cubic-bezier(0.16,1,0.3,1)">easeOutExpo (0.16,1,0.3,1)</option>
+          <option value="cubic-bezier(0.4,0,0.2,1)">standard (0.4,0,0.2,1)</option>
+          <option value="ease-out">ease-out</option>
+          <option value="linear">linear</option>
+          <option value="cubic-bezier(0.34,1.56,0.64,1)">overshoot (0.34,1.56,0.64,1)</option>
+        </select></div>
+      <div class="mc-ctrl"><label>Distance <span class="val" id="mc-dist-v">24px</span></label><input type="range" id="mc-dist" min="0" max="120" step="2" value="24"></div>
+      <div class="mc-ctrl"><label>Delay <span class="val" id="mc-delay-v">0ms</span></label><input type="range" id="mc-delay" min="0" max="600" step="10" value="0"></div>
+    </div>
   </section>
 
   <section class="section">
     <h2>Specification</h2>
     <table>
       <tr><th>Property</th><th>Value</th></tr>
-      <tr><td>Duration</td><td>[ms]</td></tr>
-      <tr><td>Easing</td><td>[curve]</td></tr>
-      <tr><td>Sequence</td><td>[what moves, in what order, with what stagger]</td></tr>
+      <tr><td>Duration</td><td><code id="spec-dur">320ms</code></td></tr>
+      <tr><td>Easing</td><td><code id="spec-ease">cubic-bezier(0.16,1,0.3,1)</code></td></tr>
+      <tr><td>Distance</td><td><code id="spec-dist">24px</code></td></tr>
+      <tr><td>Delay</td><td><code id="spec-delay">0ms</code></td></tr>
       <tr><td>Trigger</td><td>[what starts it]</td></tr>
     </table>
+    <p class="mc-note">These values are live — they reflect the controls above. Lock them when the motion feels right.</p>
   </section>
 
   <section class="section">
     <h2>Reduce-Motion Alternative <span class="pill">required</span></h2>
-    <p>[What happens when the user has reduce-motion enabled — typically an instant cross-fade or no animation. Never omit.]</p>
+    <p>[With reduce-motion enabled: typically an instant cross-fade or no animation. Never omit.]</p>
   </section>
 
   <section class="section">
@@ -46,5 +85,37 @@
 
   <footer class="footer"><p>Studio OS · Motion Spec · run /annotate to review</p></footer>
 </div>
+
+<script>
+(function(){
+  var box=document.getElementById('mc-box');
+  var dur=document.getElementById('mc-dur'),ease=document.getElementById('mc-ease'),dist=document.getElementById('mc-dist'),delay=document.getElementById('mc-delay');
+  var modes=['slide + fade','fade','scale','slide'],mi=0;
+  function v(){return {dur:+dur.value,ease:ease.value,dist:+dist.value,delay:+delay.value,mode:modes[mi]};}
+  function sync(){var s=v();
+    document.getElementById('mc-dur-v').textContent=s.dur+'ms';
+    document.getElementById('mc-dist-v').textContent=s.dist+'px';
+    document.getElementById('mc-delay-v').textContent=s.delay+'ms';
+    document.getElementById('spec-dur').textContent=s.dur+'ms';
+    document.getElementById('spec-ease').textContent=s.ease;
+    document.getElementById('spec-dist').textContent=s.dist+'px';
+    document.getElementById('spec-delay').textContent=s.delay+'ms';
+  }
+  function play(){var s=v();
+    box.style.transition='none';
+    var fromT=s.mode==='scale'?'scale(0.6)':s.mode==='fade'?'none':'translateY('+s.dist+'px)';
+    box.style.transform=fromT; box.style.opacity=(s.mode==='slide')?'1':'0';
+    box.getBoundingClientRect();
+    setTimeout(function(){
+      box.style.transition='transform '+s.dur+'ms '+s.ease+' '+s.delay+'ms, opacity '+s.dur+'ms '+s.ease+' '+s.delay+'ms';
+      box.style.transform='translateY(0) scale(1)'; box.style.opacity='1';
+    },20);
+  }
+  [dur,ease,dist,delay].forEach(function(el){el.addEventListener('input',function(){sync();play();});});
+  document.getElementById('mc-play').addEventListener('click',play);
+  document.getElementById('mc-transition').addEventListener('click',function(){mi=(mi+1)%modes.length;this.textContent='Transition: '+modes[mi]+' ▾';play();});
+  sync(); play();
+})();
+</script>
 </body>
 </html>

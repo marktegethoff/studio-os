@@ -51,6 +51,19 @@ Templates live in `artifacts/templates/`. Each is owned by the agent that produc
 | Heuristic report | heurist | P0–P3 findings |
 | Decision record | architect / any | an HTML view over a ledger entry |
 
+## Interactivity — controls where they're earned
+
+An artifact carries interactive UI controls **when manipulating it is the point** — never as decoration (that would violate the studio's own anti-gratuitous rule). Two kinds of artifact:
+
+- **Instruments** — the reviewer needs to *tweak and feel* the thing. These ship live controls:
+  - `motion-spec` — duration/easing/distance/delay sliders + a live preview; the controls drive the spec values.
+  - `component-spec` — a state switcher that renders each state live.
+  - `ascii-wireframe`, `flow-diagram` — state/path toggles (extendable per surface).
+  - `copy-deck` — strings are editable in place with live character counts (extendable).
+- **Documents** — the artifact is read and judged (`design-brief`, `user-journey`, `user-narrative`, `risk-register`, `metrics-plan`, `competitive-teardown`, `heuristic-report`, `decision-record`). Their interaction is the **annotation harness** (`/annotate`) — click-to-comment, questions, disposition, copy-to-Claude. No invented controls.
+
+When building a new template, ask: would the reviewer want to *change a value and see the effect*? If yes, it's an instrument — add the minimal controls that answer that, styled with the kit. If no, it's a document — the harness is its interaction.
+
 ## The rule
 
 **If an artifact is primarily for agent context, it still ships with a well-designed HTML version for human review, and it still carries the annotation harness.** A handoff between an agent and a human is not raw text. (This mirrors the `gather-feedback` skill, which renders completed work as a reviewable page and waits for the response block.)
