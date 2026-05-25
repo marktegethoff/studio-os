@@ -38,6 +38,38 @@ With this many skills a session can truncate its auto-surfaced list (every skill
 
 `init` carries personalization, but verify the agent display-name / persona override path (stable handles `cd`/`de`/`pm` + spelled-out display) is complete and documented end-to-end at setup.
 
+## 7. Single-page marketing site — *not built*
+
+A well-designed, branded one-pager for Studio OS, hosted on **GitHub Pages** (`docs/` or a `gh-pages` branch), linking to the repo (`github.com/marktegethoff/studio-os`) with the one-line marketplace install as the CTA. Branded in the **Standard Works** identity — Neue Haas Grotesk, black on warm white, Courier for technical labels, monochrome with at most one earned accent — the same system as the artifact kit (`artifacts/kit/studio.css`), so it reads as one house.
+
+Functional anatomy (**problem → solution → proof → action**), modeled on the *function* of [impeccable.style](https://impeccable.style/) — a peer Claude Code skill plugin — not its visuals:
+
+- **Hero** — name the pain (AI design without discipline; "slop") + the line: *a product-agnostic design studio that keeps AI as instrument, not author.*
+- **Foundation** — the ethos: work must feel inevitable (Standard Works).
+- **The studio** — 35 disciplines, the Six Functions, the PM → CD → DE gates.
+- **Workflows** — the slash commands (`/design`, `/discover`, `/implement`, `/critique`, `/review`, `/solve`…).
+- **Artifacts** — the designed-HTML kit + annotation harness (the real differentiator — show, don't tell).
+- **Proof** — the quality floor (Slop Test) and/or a before/after.
+- **Get Started** — `claude plugin marketplace add …` → `claude plugin install studio@standard-works`.
+- **Footer** — repo link, version, Standard Works.
+
+**Dogfooding option:** build it through the studio's own `/design` workflow — the studio designing its own storefront is itself a proof point. This is the public face of "a 10/10 I'd be proud to market," so it likely deserves higher priority than its slot here.
+
+## 8. Named anti-pattern catalog — *extends the Slop Test*
+
+impeccable names its failure modes ("Gallery of Shame": purple gradients, cardocalypse). Studio OS already lists anti-patterns in `CLAUDE.md` / the ethos and has the Slop Test — turn them into a **named, citable catalog** agents reference by name (`critic`, `cd`, `studio-slop`). Each entry: the name, the tell, why it fails, the correction. Doubles as the "proof" section of the marketing site (#7). Working reference first; visual gallery second.
+
+## 9. `CHANGELOG.md` — *user-facing release notes*
+
+A human-readable changelog (impeccable surfaces one prominently). Pairs with the release/version discipline (#3): each version bump appends a short entry. Distinct from the decision ledger — this is "what changed for users," not "why we decided."
+
+### Considered, not pursuing (off-mission)
+
+Logged so they're not re-proposed. Studio OS is a *reasoning system inside Claude Code* — features are earned against that, not borrowed because a peer has them:
+
+- **Browser/Chrome extension** — Studio OS doesn't operate on web pages; out of scope.
+- **Standalone CLI / generator ("Live Mode" variant generation)** — the studio reasons and specifies; it is deliberately *not* a generator (AI as instrument, not author). A live-variant generator contradicts the core position.
+
 ---
 
 ## Done (reference)
