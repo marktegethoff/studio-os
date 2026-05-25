@@ -27,13 +27,14 @@ The gate sequence is **PM → CD → DE**: problem gate, design gate, engineerin
 
 Installed per the user's practice. Product-agnostic — every example is drawn from the public reference palette, never from one product.
 
-**Engineering (4):** `architect` · `engineer` · `qa` · `specifier`
+**Engineering (6, extensible):** `architect` · `engineer` (stack-neutral base) · `ios-engineer` · `web-engineer` · `qa` · `specifier`
+The engineer family is a base discipline (`engineer`) plus stack specialists that inherit it. More are added per install at setup from `templates/engineer-specialist.template.md` (e.g. `backend-engineer`, `android-engineer`, `fullstack-engineer`, `data-engineer`, `ml-engineer`), each with its own references — the same personalization mechanism as the reference palette and display personas.
 
 **Design (12):** `designer` · `visual-designer` · `choreographer` · `typesetter` · `materialist` · `mark-maker` · `writer` · `prototyper` · `accessibility` · `design-validator` · `critic` · `systematist`
 
 **PM & Discovery (9):** `strategist` · `scout` · `historian` · `marketer` · `user-researcher` · `journey-mapper` · `brief-writer` · `metrics-definer` · `assumption-mapper`
 
-**Total active roster: 33** (8 Core + 25 Role).
+**Total active roster: 35 shipped** (8 Core + 27 Role), extensible — engineer specialists are added per install.
 
 ---
 
