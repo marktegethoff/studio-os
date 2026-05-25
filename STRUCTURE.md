@@ -50,7 +50,9 @@ A project that adopts Studio OS holds two kinds of project-specific material —
 
 ```
 <project>/
-├── app/                   the product's SOURCE — the single code root (default `app/`; see code_root below)
+├── code/                  all product SOURCE under one root — subfolder per codebase
+│   ├── ios/                 (e.g. the iOS app)
+│   └── web/                 (e.g. web client; also design-system/, api/, …)
 ├── .claude/memory/        CONTEXT the studio reads   (input)
 │   └── project-context.md   brand · invariants · primitives · purpose · code_root — the anchor
 ├── decisions/             the ledger — every choice + its rationale
@@ -59,7 +61,7 @@ A project that adopts Studio OS holds two kinds of project-specific material —
 └── reviews/               gate verdicts (PM · CD · DE)
 ```
 
-**Code lives in one repeatable place.** All product source sits under a single top-level **code root**, default `app/`, recorded as `code_root:` in `project-context.md` so the studio always knows where the code is. Greenfield projects use `app/`. A project whose ecosystem fixes its own layout (e.g. an Xcode project rooted at `Log/`) keeps that native folder and simply declares it as `code_root` — the contract is "one declared root," not a forced rename that would break tooling. Either way the code is in a known, single place, never scattered beside the studio folders.
+**Code lives in one repeatable place.** All product source sits under a single top-level **code root**, declared as `code_root` in `project-context.md` so the studio always knows where it is. The name adapts to the project type: `code/` with one subfolder per codebase (`code/ios/`, `code/web/`, `code/design-system/`) for a multi-codebase product; a plain `app/` is fine for a single-codebase app. The invariant is **one declared root**, never source scattered across the project root. The `organize` skill relocates existing codebases under the root when reconciling a project, handling tooling paths carefully (e.g. an Xcode project moving to `code/ios/`).
 
 **Output folders are flat and type-named** at the root — each names itself, so there is no container folder to invent (`studio/`, `record/`, `output/` were all rejected for exactly that reason). Keep the set small and durable: a new top-level folder is earned only by a durable artifact category, never a one-off. The engine (agents, skills, kit, evals) is never copied in — it loads from the global plugin. The `organize` skill scaffolds this layout in a new project and reconciles an existing one.
 
