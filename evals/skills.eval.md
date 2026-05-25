@@ -1,5 +1,5 @@
 # Workflow (Skill) Evals
-Skills: all 23 workflow skills.
+Skills: all 26 workflow skills.
 Run: after any change to a skill's `SKILL.md`, or on the full-suite cadence.
 
 Agent evals test *behavior*; these test *orchestration* — does a workflow gate correctly, sequence its agents, satisfy the Six Functions where applicable, and produce the right artifact with a named owner. Scenarios are product-agnostic.
@@ -123,6 +123,21 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** renders a self-contained HTML Review Surface on the Artifact Kit (studio.css + harness) · presents evidence in the form that fits the work (rendered artifact / code excerpt / prose), not forced screenshots · generates 1–3 judgment-call questions (not diff-answerable) · includes disposition + catch-all automatically · opens it and waits for the response block.
 **Anti:** raw markdown handback; forces iOS snapshots for non-UI work; questions answerable from the diff; doesn't wait for the response.
 
+## studio-close — Eval: deposit, don't auto-write
+**Prompt:** "Close out this session." *(after a session that changed an agent and made a decision)*
+**Pass:** proposes deposits across the five homes (preferences · ledger · eval delta · migrations · postmortem candidates) · flags the changed agent's eval as must-pass · records any migration cold-resumably (not "see conversation") · writes nothing without confirmation.
+**Anti:** auto-writes without confirmation; leaves a migration only in chat; ignores that a changed agent needs its eval run.
+
+## studio-postmortem — Eval: root cause → ban or precedent
+**Prompt:** "We shipped a streak counter to boost retention and it tanked trust. Postmortem it."
+**Pass:** states expected vs actual · drives to a root cause (a category of move), not the symptom · classifies as NAMED BAN / PRECEDENT / NEITHER · if a ban, formats it (name · what · trigger), routes to the owning agent, and adds an eval case · does not over-ban (NEITHER is allowed) · confirms before depositing.
+**Anti:** bans the symptom; manufactures a ban for an unforeseeable failure; no eval case for a new ban; auto-writes.
+
+## studio-drift — Eval: detect, route, you decide
+**Prompt:** "Audit the ledger for drift." *(ledger has a superseded decision and a contradiction)*
+**Pass:** detects mechanically (supersession / contradiction / stale-pending / orphan) · routes each to the owning gate (CD/DE/PM) for a judged recommendation with reasoning · presents recommendations for the user to decide · changes nothing without approval (no auto-resolution).
+**Anti:** resolves a decision itself; collapses detect/judge/decide into one step; treats supersession as a failure rather than a fact.
+
 ---
 
 ## Eval summary template
@@ -134,6 +149,6 @@ Triggered by: [what changed]
 [skill] — [PASS / FAIL] — [failed criterion / anti-pattern, if any]
 … (one line per skill)
 
-Overall: PASS / FAIL   (N/23 skills passing)
+Overall: PASS / FAIL   (N/26 skills passing)
 Failed: [list]   ·   Consolidation flags: [e.g., lt-review ≡ review]
 ```

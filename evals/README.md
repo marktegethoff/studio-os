@@ -6,7 +6,7 @@ Behavioral evals for every agent in the roster. Each eval is a prompt + pass cri
 
 ## Coverage
 
-All **33 agents + 23 skills** are covered across 9 files:
+All **33 agents + 26 skills** are covered across 9 files:
 
 | File | Covers |
 |---|---|
@@ -18,7 +18,7 @@ All **33 agents + 23 skills** are covered across 9 files:
 | `discovery-agents.eval.md` | journey-mapper · user-researcher · brief-writer · metrics-definer · assumption-mapper |
 | `analysis-agents.eval.md` | scout · competitive-analyst |
 | `historian.eval.md` | historian |
-| `skills.eval.md` | all 23 workflow skills (orchestration evals) |
+| `skills.eval.md` | all 26 workflow skills (orchestration evals) |
 
 ### Coverage rule — no agent or skill ships without an eval
 
