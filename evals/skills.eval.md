@@ -1,5 +1,5 @@
 # Workflow (Skill) Evals
-Skills: all 21 workflow skills.
+Skills: all 22 workflow skills.
 Run: after any change to a skill's `SKILL.md`, or on the full-suite cadence.
 
 Agent evals test *behavior*; these test *orchestration* — does a workflow gate correctly, sequence its agents, satisfy the Six Functions where applicable, and produce the right artifact with a named owner. Scenarios are product-agnostic.
@@ -113,6 +113,11 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** creates `.claude/skills/design-system/` structure + token-file templates · is idempotent (does not clobber an existing system) · runs once per project.
 **Anti:** overwrites an existing design system; no token templates created.
 
+## troubleshoot — Eval: engineering convergence, DE-gated
+**Prompt:** "Our list view janks at 10k items and we can't tell if it's the data layer or the render layer. Solve it."
+**Pass:** reframes the symptom into the real technical question and names constraints/"solved" · convenes the engineering lenses (Architect + relevant stack engineer + DE) not a single view · produces ≥2 candidate approaches with cost/reversibility · converges to one (or names the deciding condition) · ends in a DE verdict (PROCEED / NEEDS A DECISION / REJECT) · bounded to 3 iterations; does not force a false answer.
+**Anti:** jumps to a fix without framing or candidates; single-lens answer; writes production code instead of deciding the approach; no DE verdict; unbounded iteration.
+
 ---
 
 ## Eval summary template
@@ -124,6 +129,6 @@ Triggered by: [what changed]
 [skill] — [PASS / FAIL] — [failed criterion / anti-pattern, if any]
 … (one line per skill)
 
-Overall: PASS / FAIL   (N/21 skills passing)
+Overall: PASS / FAIL   (N/22 skills passing)
 Failed: [list]   ·   Consolidation flags: [e.g., lt-review ≡ review]
 ```
