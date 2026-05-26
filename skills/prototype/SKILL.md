@@ -16,10 +16,10 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. Read `CLAUDE.md` — the Prototype Environment section describes the prototype tooling, location, and conventions for this project.
-3. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name.
-4. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand, and the **Engineering** block (`stack`, and `prototype`: the project's prototype environment — where experiments live, and how to build and snapshot them). Load once; do not re-read mid-session.
+2. If the project declares its prototype environment in `CLAUDE.md` instead, read that section for tooling, location, and conventions.
+3. If this work involves a prior decision, load the relevant file from the project's decision ledger (`decisions/`) by name.
+4. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. You provide the discipline.
 
@@ -39,7 +39,7 @@ The prototype workflow enforces this discipline. It scopes the test question bef
 
 **PM:** Validates the test question before any design work begins. This is the quality gate between scope and execution. A poorly scoped test question produces learning that cannot be acted on.
 
-**XD QA / Test Criteria:** Defines how the test will be evaluated — what the prototype must do in testing to produce usable learning. Runs in parallel with build criteria.
+**QA / Test Criteria:** Defines how the test will be evaluated — what the prototype must do in testing to produce usable learning. Runs in parallel with build criteria.
 
 **Findings Router:** After testing, routes findings to the appropriate discipline. Findings that confirm the design → specifier. Findings that challenge the design → Designer for revision. Findings that challenge the problem framing → PM + Brief Writer.
 
@@ -110,35 +110,7 @@ Define the minimum prototype required to answer the test question.
 
 **Fidelity recommendation:** [Lo-fi / Mid-fi / Hi-fi] — name the minimum fidelity required to answer this question, with reasoning.
 
-**Snapshot test requirement (Canvas experiments):**
-
-For any new Canvas experiment file under `Log Canvas/Log Canvas/Experiments/` or `Log Canvas/Log Canvas/Screens/`, also create a snapshot test at `Log Canvas/Log CanvasTests/<Name>SnapshotTests.swift` covering at minimum:
-
-- `<name>_light` — light mode, primary state
-- `<name>_dark` — dark mode, primary state
-
-Snapshot names must start with the experiment name in camelCase + underscore. Default size `CGSize(width: 390, height: 844)`. Use the helper at `Log Canvas/Log CanvasTests/Support/SnapshotHelper.swift`:
-
-```swift
-import XCTest
-import SwiftUI
-
-final class <Name>SnapshotTests: XCTestCase {
-    func test_<name>_light() {
-        assertSnapshot(of: <Name>(...), named: "<name>_light",
-                       size: CGSize(width: 390, height: 844),
-                       colorScheme: .light)
-    }
-
-    func test_<name>_dark() {
-        assertSnapshot(of: <Name>(...), named: "<name>_dark",
-                       size: CGSize(width: 390, height: 844),
-                       colorScheme: .dark)
-    }
-}
-```
-
-These PNGs feed `/gather-feedback`'s Review Surface.
+**Verification artifacts:** produce whatever the project's prototype environment defines (snapshot tests, previews, or a click-through) so the prototype is reviewable — following the `prototype` setup declared in project-context: where experiments live, how to snapshot them, and which helper to use. These artifacts feed `/gather-feedback`'s Review Surface.
 
 ### Step 2B — Test criteria (QA)
 

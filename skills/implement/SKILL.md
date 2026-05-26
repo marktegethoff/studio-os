@@ -17,11 +17,11 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand, and the **Engineering** block: `stack`, `code_root`, `build`, `test` (the project's own commands and paths). Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from the project's decision ledger (`decisions/`) by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
-The project provides the specifics. You provide the discipline.
+The project declares its stack, paths, and build/test commands in **one place** — project-context. This skill never hardcodes them. The project provides the specifics; you provide the discipline.
 
 ---
 
@@ -37,51 +37,16 @@ The bounded retry rule: if a deterministic verification fails, exactly **one** a
 ---
 
 ## Engineer Discipline
-Purpose: implement native iOS behaviors.
-Responsibilities: SwiftUI views, gesture models, offline sync, performance.
 
-Rules:
+The stack discipline is **not embedded here** — it lives in the project's **engineer specialist**, selected by the `stack` field in project-context (e.g. `ios-engineer`, `web-engineer`, or the stack-neutral `engineer` base). Apply that specialist in Step 2; it carries the platform's conventions — view/preview requirements, the test/snapshot setup and its helper, framework guarantees, and the artifact paths that produce review PNGs.
+
+Universal rules (every stack):
 - Each step touches one behavior. Verify before proceeding.
-- SwiftUI previews required on all new view files. Cover primary render state. Add variants for meaningful states.
-- Do not introduce unnecessary abstractions. Three similar lines is better than a premature helper.
-- Do not add error handling for scenarios that cannot happen. Trust GRDB and SwiftUI guarantees internally.
+- Do not introduce unnecessary abstractions. Three similar lines beat a premature helper.
+- Do not add error handling for scenarios that cannot happen. Trust the platform's guarantees internally.
+- Produce the verification artifacts the specialist defines (tests, snapshots, previews) so `/gather-feedback` can render the result.
 
-### Snapshot Test Requirement (production views)
-
-For any new production view file under `Log/Log/Views/`, also create a snapshot test file at `Log/LogTests/<ViewName>SnapshotTests.swift` covering at minimum two variants:
-
-- `<viewName>_light` — light mode, primary state
-- `<viewName>_dark` — dark mode, primary state
-
-Add 1–2 additional state variants when the view has meaningful internal state (focused, empty, loading, error). Snapshot names must start with the view name in camelCase, followed by underscore — this is how the runner script locates the produced PNGs.
-
-Default snapshot size for full-screen views: `CGSize(width: 390, height: 844)`. For component-sized views, choose a size that matches their natural rendering (cells at row width × intrinsic height, etc.).
-
-Use the existing helper at `Log/LogTests/Support/SnapshotHelper.swift`:
-
-```swift
-import XCTest
-import SwiftUI
-@testable import Log
-
-final class <ViewName>SnapshotTests: XCTestCase {
-    func test_<viewName>_light() {
-        assertSnapshot(of: <ViewName>(...), named: "<viewName>_light",
-                       size: CGSize(width: 390, height: 844),
-                       colorScheme: .light)
-    }
-
-    func test_<viewName>_dark() {
-        assertSnapshot(of: <ViewName>(...), named: "<viewName>_dark",
-                       size: CGSize(width: 390, height: 844),
-                       colorScheme: .dark)
-    }
-}
-```
-
-This test produces PNGs that `/gather-feedback` displays in the Review Surface.
-
-### QA Engineer Discipline
+### QA Discipline
 Purpose: validate behavior.
 Responsibilities: test scenarios, regression tests, invariant verification.
 
@@ -137,7 +102,7 @@ If the brief's SPEC field points to a file, check whether the spec includes a co
 
 If the handoff is incomplete:
 
-> "Spec at `<path>` is missing `<section>`. The iOS Engineer will need to make visual judgment calls. Either accept the risk or run `/design` to complete the spec first."
+> "Spec at `<path>` is missing `<section>`. The engineer will need to make visual judgment calls. Either accept the risk or run `/design` to complete the spec first."
 
 Do not block if the user accepts the risk. But name the gap.
 
@@ -159,7 +124,7 @@ State this list explicitly so the user sees what you understand the contract to 
 
 ## [SONNET · Ag] Step 2 — Engineering
 
-Apply the iOS Engineer discipline (embedded above).
+Apply the project's engineer specialist (per `stack` in project-context — e.g. `ios-engineer`, `web-engineer`, or the `engineer` base).
 
 Each step touches one behavior. Verify before proceeding.
 
@@ -171,26 +136,12 @@ When implementation is complete (code written, files saved), proceed to Step 3.
 
 ## [Det] Step 3 — Build verify
 
-Determine which build to run based on changed files. Use `git diff --name-only HEAD` to identify modifications:
+Run the project's declared **build** command(s) — the `build` field in project-context. If the project declares more than one build target (e.g. app + prototype), determine which to run from the changed files via `git diff --name-only HEAD` mapped against `code_root`, and run the matching target(s).
 
-- If any file under `Log Canvas/` was modified, run **build-canvas**.
-- If any file under `Log/Log/` (production app) was modified, run **build-app**.
-- If both were modified, run both — Canvas first.
+Invoke the declared command(s) via the Bash tool, exactly as project-context declares them.
 
-Invoke via the Bash tool, exactly:
-
-**build-canvas:**
-```
-.claude/scripts/build-canvas.sh
-```
-
-**build-app:**
-```
-.claude/scripts/build-app.sh
-```
-
-If the script exits 0, the build passed — proceed.
-If the script exits non-zero, the build failed — proceed to Step 3a.
+If the command exits 0, the build passed — proceed.
+If it exits non-zero, the build failed — proceed to Step 3a.
 
 Do not interpret partial output as success. Trust the exit code only.
 
@@ -208,7 +159,7 @@ Then return to Step 3b.
 
 ## [Det] Step 3b — Build re-verify
 
-Re-invoke the same build script that failed in Step 3.
+Re-invoke the same declared build command that failed in Step 3.
 
 If the script exits 0, the build passed — proceed to Step 4.
 
@@ -228,21 +179,12 @@ End the skill. Do not attempt a third fix.
 
 ## [Det] Step 4 — Test verify (conditional)
 
-Run the test target only if production code was modified. Use `git diff --name-only HEAD` again:
+Run the project's declared **test** command only if production code was modified — check `git diff --name-only HEAD` against `code_root` (excluding any preview/example-only paths the project names).
 
-- If any file under `Log/Log/` (excluding `Log/Log/Views/Previews/` if isolated) was modified, run **test-app**.
-- Otherwise, skip Step 4 and proceed to Step 5.
+Invoke the declared `test` command via the Bash tool, exactly as project-context declares it.
 
-Invoke via the Bash tool, exactly:
-
-```
-.claude/scripts/test-app.sh
-```
-
-This runs the `LogTests` target on the latest available iPhone simulator.
-
-If the script exits 0, tests passed — proceed.
-If the script exits non-zero, tests failed — proceed to Step 4a.
+If it exits 0, tests passed — proceed.
+If it exits non-zero, tests failed — proceed to Step 4a.
 
 ---
 
@@ -261,7 +203,7 @@ If you cannot determine which case applies from the diagnostics, **stop** and es
 
 ## [Det] Step 4b — Test re-verify
 
-Re-invoke `.claude/scripts/test-app.sh`.
+Re-invoke the same declared test command.
 
 If exit 0, tests passed — proceed to Step 5.
 
@@ -287,16 +229,15 @@ If you identify a behavior that is not currently covered by tests and the brief 
 
 For each gate in the brief's GATES list, verify it programmatically where possible.
 
-The script `.claude/scripts/gate-check.sh` supports four gate types. Map brief gates to script gates:
+If the project declares a gate-check mechanism in project-context (e.g. a gate-check script with named gate types), map each brief gate to it. Portable gate types most projects can support:
 
-| Brief gate language                                         | Script invocation                                    |
-|-------------------------------------------------------------|------------------------------------------------------|
-| "No production view files modified"                         | `.claude/scripts/gate-check.sh no-production-views`  |
-| "No Canvas edits" / "Production-only change"                | `.claude/scripts/gate-check.sh no-canvas-edits`      |
-| "Brand tokens only" / "No hardcoded hex"                    | `.claude/scripts/gate-check.sh no-hardcoded-hex`     |
-| "Not on main branch" / any branch protection                | `.claude/scripts/gate-check.sh branch-not-main`      |
+| Brief gate language                               | Gate type           |
+|---------------------------------------------------|---------------------|
+| "Not on main branch" / branch protection           | branch-not-main     |
+| "Brand tokens only" / "No hardcoded color"          | no-hardcoded-color  |
+| Scope boundary (a path that must not be modified)   | path-not-modified   |
 
-For each applicable gate in the brief, invoke the corresponding script. Each script exits 0 on pass, 1 on violation.
+For each applicable gate, invoke the project's gate-check with the matching type. Each invocation exits 0 on pass, non-zero on violation.
 
 For gates that do not map to a script (spec-specific invariants, behavioral guarantees), verify them manually and state your verification method explicitly in the report.
 
