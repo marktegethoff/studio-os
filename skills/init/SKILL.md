@@ -1,6 +1,6 @@
 ---
-description: Set up Studio OS for a new project. Runs a three-phase interview — org context check, product interview, role calibration — then writes project-context.md and role-context.md to .claude/memory/. Re-runnable to update context when the project evolves.
-argument-hint: "[optional: --update to refresh an existing context]"
+description: Set up Studio OS for a new project. Runs a five-phase flow — org context check, product interview (which generates the engineer specialist on demand if one for your stack does not yet exist), role calibration, personalization, and the paired-scaffold execution that creates code/app + code/canvas + code/shared with the by-reference dependency wired. Writes project-context.md (with the engineering manifest) and role-context.md to .claude/memory/. Re-runnable with --update to refresh context, promote shape, or convert manual → complete.
+argument-hint: "[optional: --update [--generator=xcodegen] to refresh / promote / convert]"
 ---
 
 Set up Studio OS for this project.
@@ -101,9 +101,26 @@ Ask:
 ### Section 5 — Tech Stack and Engineering Context
 
 Ask:
-10. What is the primary platform and tech stack? (e.g., Web / React / Postgres; iOS / SwiftUI; cross-platform / Flutter; backend / Go / Postgres.)
-11. Where does the specification live? (e.g., `docs/specs/`, `docs/decisions/`, `specs/`.)
+10. What is the primary platform and tech stack? Use the canonical stack tag (e.g. `swift`, `web`, `android`, `react-native`, `flutter`, `backend`, `data`, `ml`, `fullstack`). The tag drives which engineer specialist is selected.
+11. Where does the specification live? (e.g., `specs/`, `docs/specs/`, `docs/decisions/`.)
 12. Where does the decision log live? (e.g., `decisions/`, `docs/decisions/`, `adr/`.)
+
+After capturing the stack tag, **check for the matching specialist file** at `agents/<stack>-engineer.md`:
+
+- If it exists (e.g. `swift-engineer`, `web-engineer`): record the tag and continue.
+- If it does not exist, this is a **first-class specialist-generation moment**, not a fallback. Announce it explicitly:
+
+> "There isn't a `<stack>-engineer` in the roster yet. I'll generate one from the specialist template now — it carries the universal engineering discipline and adds <stack>-specific depth. This will take a few short questions."
+
+Then conduct the on-demand interview from `templates/engineer-specialist.template.md`:
+
+13a. Name 2–4 reference figures or sources that define craft on this stack (the specialist's intellectual lineage — the method and what the field learned, not just the output).
+13b. Name the one or two boundaries this specialist must not blur (e.g. server vs. client state for web; main-thread vs. background for mobile; schema vs. query for data).
+13c. Capture the Scaffold Blueprint inputs (Layout, Sharing Mechanism, Resource Handling, Scaffold Commands) — the four sections required by spec §B of the paired-scaffold capability. The template's Android worked example shows the contract held across a mechanically different sharing mechanism (Gradle project-inclusion); use it as a reference when the stack you're generating uses a third-instance mechanism.
+
+Generate `agents/<stack>-engineer.md` from the template with the answers, then register it in `STRUCTURE.md` (engineering roster line) and `evals/engineering-agents.eval.md` (the coverage rule: no agent ships without an eval). Confirm with the user that the specialist is ready, then continue.
+
+**Why this is first-class, not a fallback.** Demand surfaces a stack → on-demand generation serves it → real runs validate it → validated ones graduate to the default bundle. The marketplace itself is the validation pipeline; visibility at this moment is what makes growth honest.
 
 ---
 
@@ -198,9 +215,30 @@ Novelty is never a deciding factor.
 
 ## Engineering Context
 
-**Platform:** [platform and stack]
-**Spec path:** [path]
-**Decision log:** [path]
+The manifest below is parsed by every skill that touches code. Missing
+keys are an error — re-run `/studio:init --update` to fix. The contract
+block is required; the scaffold block records one-time state set by the
+scaffold flow (Phase 5).
+
+```yaml
+# contract block — every skill reads
+stack: [canonical stack tag, e.g. swift | web | android | react-native | flutter | backend | data | ml | fullstack]
+code_root: [repo-relative path; default: code/ — declare . only if the project predates the canonical layout]
+shared_module_name: [the IMPORT name, e.g. AppDesignSystem or @project/design-system; omit for app-only]
+sharing_mechanism: [spm-local | pnpm-workspace | npm-workspace | yarn-workspace | gradle-project; omit for app-only]
+platform: [Apple stacks only: ios | macos | multiplatform]
+package_manager: [Web stacks only: pnpm | npm | yarn]
+canvas_framework: [Web stacks only: storybook | ladle]
+spec_path: [path; default: specs/]
+decisions_path: [path; default: decisions/]
+
+# scaffold block — one-time state, written by Phase 5
+scaffold_state: [none | manual | complete]
+generation_tool: [xcodegen | none]
+```
+
+Stack-specific keys (`platform`, `package_manager`, `canvas_framework`) are
+omitted when not applicable to the declared `stack`.
 
 ---
 
@@ -311,11 +349,21 @@ Append the user's entries to `.claude/memory/design-references.md` (create from 
 
 If the user opts in, write a map of handle → persona to `.claude/memory/agent-personas.md`. The canonical handle never changes (routing depends on it); the persona is cosmetic — what the agent calls itself.
 
-### Step C — Engineering specialists
+### Step C — Additional engineering specialists
 
-> "The engineer family ships a stack-neutral base plus `ios-engineer` and `web-engineer`. Add a specialist for your stack? (e.g. backend, android, fullstack, data, ml.) I'll generate it from the specialist template with references you choose."
+> "The engineer family ships a stack-neutral base plus `swift-engineer`
+> (all Apple platforms) and `web-engineer`. Your primary stack's specialist
+> was already generated in Phase 2 if it didn't exist yet. Add a specialist
+> for *another* stack you'll work with on this project (e.g. backend,
+> android, fullstack, data, ml)? Otherwise skip."
 
-For each requested specialist: ask for the stack, 2–4 reference figures/sources (its lineage), and the one or two boundaries it must not blur. Generate `agents/<stack>-engineer.md` from `templates/engineer-specialist.template.md`, then register it in `STRUCTURE.md` and add its eval to `evals/engineering-agents.eval.md` (the coverage rule: no agent ships without an eval).
+For each additional specialist: same on-demand generation procedure as
+Phase 2 Section 5 — ask the stack, the 2–4 reference figures/sources (its
+lineage), the one or two boundaries it must not blur, and the Scaffold
+Blueprint inputs (Layout, Sharing Mechanism, Resource Handling, Scaffold
+Commands). Generate `agents/<stack>-engineer.md` from
+`templates/engineer-specialist.template.md`, register in `STRUCTURE.md`
+and `evals/engineering-agents.eval.md`.
 
 ### Step D — Brand identity (for the studio's rendered surfaces)
 
@@ -331,17 +379,192 @@ Write these as a `:root` override to `.claude/memory/brand.css` and have artifac
 
 ---
 
+## Phase 5 — Scaffold Execution
+
+This phase creates the paired workspace — `code/app` + `code/canvas` +
+`code/shared` (the by-reference module) — per the paired-scaffold
+capability spec. Each step is gated on the previous; failure leaves the
+project in a clean prior state, never silently advances. The full spec
+lives at `specs/paired-scaffold-capability.md`.
+
+### Pre-flight (Step 0)
+
+Read `.claude/memory/project-context.md`'s `## Engineering Context`
+manifest. If `scaffold_state` is already present:
+
+> "A scaffold is already present (`scaffold_state: <state>`). Would you like to:
+> 1. Use the existing scaffold and skip Phase 5
+> 2. Promote the shape (e.g. `app-only → triple`) via `/studio:init --update`
+> 3. Convert from `manual → complete` via `/studio:init --update --generator=xcodegen` (Swift only)"
+
+Wait for the user's choice. Otherwise continue to Step 1.
+
+### Step 1 — Declare stack (specialist matched in Phase 2)
+
+The stack tag was already captured and the specialist was generated (if
+absent) during Phase 2 Section 5. Read the tag from the manifest and
+load `agents/<stack>-engineer.md`. From the specialist, read the
+**Scaffold Blueprint** section — Layout, Sharing Mechanism, Resource
+Handling, and the `scaffold-commands` block (the unambiguous parse anchor
+per spec §B). This is the blueprint Phase 5 executes.
+
+### Step 2 — Declare shape
+
+Ask:
+
+> "Does this project have a shared front-end module that spans multiple
+> surfaces (e.g. a design system, a shared component library)? Will you
+> prototype this project in a canvas (Storybook for web; a Canvas Xcode
+> project for Swift)?"
+
+Map the answer:
+
+- both → `triple` (the default for a multi-surface project with prototyping)
+- canvas only, no SHARED → `collapse` (no design system, or it's external)
+- neither → `app-only`
+
+If `triple`, in the same exchange, ask:
+
+> "What is the shared module's import name? (e.g. `AppDesignSystem` for
+> Swift, `@project/design-system` for web.)"
+
+Record as `shared_module_name` in the manifest. For Swift the package
+name equals the import name; for web the package name is the full string
+including the scope.
+
+### Step 3 — Create and initialize
+
+Create the role directories from the specialist's Layout section:
+
+- `<code_root>/app/` — always.
+- `<code_root>/canvas/` — when shape is `triple` or `collapse`.
+- `<code_root>/shared/` — when shape is `triple`.
+
+Initialize the shared module per the specialist's blueprint:
+
+- **Swift:** write `<code_root>/shared/Package.swift` declaring the
+  `<shared_module_name>` library target. Create `Sources/<shared_module_name>/`,
+  `Sources/<shared_module_name>/Resources/`, and a stub `index` file (an
+  empty Swift file documenting the package's role).
+- **Web:** write `<code_root>/shared/package.json` with `name:
+  <shared_module_name>`, an `exports` field stub, and the workspace
+  metadata. Write the root `<code_root>/package.json` declaring
+  `workspaces: ["app", "canvas", "shared"]` (or `pnpm-workspace.yaml`
+  when `package_manager: pnpm`).
+- **Other stacks (on-demand specialists):** follow the Layout section of
+  the just-generated specialist; the contract holds across mechanisms.
+
+### Step 4 — Wire the by-reference dependency
+
+This is the load-bearing step — the INCLUDED-BY-REFERENCE invariant is
+encoded here. The exact form depends on the sharing mechanism:
+
+- **Web (`pnpm-workspace` / `npm-workspace` / `yarn-workspace`):**
+  - Write `app/package.json` and `canvas/package.json` each declaring
+    `"<shared_module_name>": "workspace:*"` in dependencies.
+  - Run the package manager's install command from `code_root`
+    (e.g. `pnpm install`). Symlinks complete the wiring.
+- **Swift (`spm-local`):**
+  - **Default path** (`generation_tool: xcodegen`): write
+    `code/app/project.yml` and `code/canvas/project.yml` each declaring
+    the package `path: ../shared` and the `<shared_module_name>`
+    dependency on the main target. Execute the specialist's `generate`
+    `scaffold-commands` entry in both directories.
+  - **Escape hatch** (`generation_tool: none`, manual path): offer the
+    user the choice when the declarative generator isn't desired. Set
+    `scaffold_state: manual`, `generation_tool: none`, and emit:
+
+    > "Add a local Swift Package dependency on `../shared` to:
+    > 1. `code/app/<App>.xcodeproj`
+    > 2. `code/canvas/<App>Canvas.xcodeproj`
+    >
+    > Reply `done` when the dependency is in place."
+
+    On reply, re-run Step 6 (verify).
+- **Other stacks:** follow the Sharing Mechanism section of the
+  specialist (e.g. Gradle's `include(":shared")` +
+  `implementation(project(":shared"))` for Android).
+
+### Step 5 — Write the manifest
+
+Update `.claude/memory/project-context.md`'s `## Engineering Context`
+section with the contract block + scaffold block per spec §A:
+
+```yaml
+stack: <from Phase 2>
+code_root: <default: code/, or . if legacy>
+shared_module_name: <if triple; the import name>
+sharing_mechanism: <one of: spm-local | pnpm-workspace | npm-workspace | yarn-workspace | gradle-project>
+platform: <Apple only: ios | macos | multiplatform>
+package_manager: <web only: pnpm | npm | yarn>
+canvas_framework: <web only: storybook | ladle>
+spec_path: <default: specs/>
+decisions_path: <default: decisions/>
+
+scaffold_state: <set after Step 6: complete on success; manual on escape hatch; none if not yet scaffolded>
+generation_tool: <xcodegen | none>
+```
+
+### Step 6 — Verify
+
+Run the verify-build commands derived from the specialist's
+`scaffold-commands` block:
+
+- **Web:** `<package_manager> --filter canvas dev` resolves the shared
+  import; `<package_manager> --filter app build` exits 0.
+- **Swift:** `swift build --package-path code/shared` exits 0;
+  `xcodebuild -project code/app/<App>.xcodeproj -scheme <App> build`
+  exits 0.
+
+On success: set `scaffold_state: complete` in the manifest.
+
+On failure: report the failing command + its first 20 lines of error
+output + the path to the file most likely involved. Leave
+`scaffold_state` at its prior value (do not silently mark complete).
+Common failure recovery is `/studio:init --update`.
+
+---
+
+## --update mode (Phase 5 transitions)
+
+`/studio:init --update` covers two cases per spec §D and §E:
+
+- **Shape promotion** (§E):
+  - `app-only → collapse` — add canvas; create `code/canvas/`; wire it.
+  - `app-only → triple` — add canvas + shared; create both; wire both;
+    ask for `shared_module_name` if not yet set.
+  - `collapse → triple` — add shared; create `code/shared/`; offer to
+    move any front-end primitives currently in `app` to `shared` with
+    per-file confirmation; wire both dependencies.
+  - Shape demotion is **not supported** — demotion is a discipline
+    question, not a scaffold question.
+- **Manual → complete conversion** (§D, Swift only):
+  - `--update --generator=xcodegen` reads the hand-wired dependency
+    from `.pbxproj`, writes equivalent `project.yml` files for `app`
+    and `canvas`, runs `xcodegen generate`, runs Step 6 verify, sets
+    `scaffold_state: complete` + `generation_tool: xcodegen`.
+
+After either transition, re-run Step 5 (manifest update) and Step 6
+(verify).
+
+---
+
 ## Post-write
 
-After both files are written, confirm:
+After context, role, personalization, and scaffold are all complete,
+confirm:
 
 > "Setup complete. Studio OS is calibrated to [product name] and your role as [role].
 >
-> Two context files written:
-> - `.claude/memory/project-context.md` — product context (shareable with your team)
+> Written:
+> - `.claude/memory/project-context.md` — product context + engineering manifest (shareable with your team)
 > - `.claude/memory/role-context.md` — your role on this project (personal, don't commit)
+> - `code/app/`, `code/canvas/`, `code/shared/` — the paired scaffold ([shape: triple | collapse | app-only])
 >
 > Start with `/studio:studio <goal>` to orient, or jump in with `/studio:design <problem>` or `/studio:discover <problem>`. Run `/studio:studio` any time to see the roles, gates, and what each workflow produces."
+
+If Phase 5 was skipped (existing scaffold) or shape is `app-only`, omit
+the `code/` lines from the summary.
 
 If a design system skill does not yet exist at `.claude/skills/design-system/`, add:
 
