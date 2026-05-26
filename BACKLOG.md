@@ -69,6 +69,12 @@ A standalone tool that generates — variants, or the studio's design vocabulary
 
 Not a rejection — an open question: today the studio *reasons, critiques, and specifies* rather than generating. A generator is a genuine expansion of what Studio OS is, so it deserves a Strategist/PM pass on shape before any build: does the studio itself generate, or does a separate "Live Mode" companion generate *under* the studio's disciplines and gates? Settle the position, then scope.
 
+## 11. Stack-neutralize the workflow skills — *Log/iOS coupling (high priority)*
+
+`implement` (~28 refs), `prototype` (~10), and lighter `scope` / `init` / `gather-feedback` / `simplify` hardcode Log's stack: "native iOS behaviors", SwiftUI/GRDB, `@testable import Log`, `Log/LogTests/`, `Log Canvas/`, and `build-app` / `build-canvas` / `test-app`. The engineer **agents** were already de-coupled (stack-neutral `engineer` + `ios-engineer` / `web-engineer`), but these **skills** were never updated to match — they still embed the iOS discipline inline. This breaks "product-agnostic" directly.
+
+Fix: `implement` / `prototype` become stack-neutral orchestration. Stack specifics live in the engineer specialist (chosen from the project's declared stack) and in `project-context.md` (the project's own build/test commands + `code_root`), never in the skill body. The skill says "apply the project's engineer discipline / run the project's declared build+test", not "SwiftUI… run build-app". Remove all Log paths. Needs a small decision on where build/test commands are declared (project-context.md), then a rewrite of the two heavy skills + light cleanup of the others.
+
 ### Considered, not pursuing (for now)
 
 - **Browser/Chrome extension** — Studio OS doesn't operate on web pages; out of scope for now.
