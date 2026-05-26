@@ -17,9 +17,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. You provide the discipline.
 
@@ -33,7 +33,7 @@ Remove first. The question is not "does this work?" — it is "does this need to
 - Three similar lines > premature helper
 - No error handling for scenarios that cannot happen
 - No abstractions for hypothetical future requirements
-- SwiftUI previews required on all view files
+- Previews (or stack-equivalent: stories, fixtures) required on all view files
 - Each change touches one behavior; verify before proceeding
 
 ---
@@ -47,7 +47,7 @@ $ARGUMENTS
 ## [HAIKU] Step 1 — Context Load
 
 Read in order:
-1. The spec file for this area, if one exists — check `studio_os/specs/` or the spec path defined in CLAUDE.md. If none exists, note it — the simplification will proceed without a contract baseline.
+1. The spec file for this area, if one exists — check `specs/` or the spec path defined in CLAUDE.md. If none exists, note it — the simplification will proceed without a contract baseline.
 2. `CLAUDE.md` — the gotchas section defines known patterns that must not be violated.
 3. The files in scope (or the files in the named directory). Read before auditing.
 
@@ -79,7 +79,7 @@ Scan the files in scope for the following five categories. For each finding, nam
 
 **Convention drift** — patterns that deviate from established conventions in `CLAUDE.md` gotchas, the project's established file patterns, or prior spec implementations. Inconsistency that will confuse a future agent or engineer.
 
-**Scope creep** — code introduced beyond what any spec in `studio_os/specs/` authorized. Features or behaviors not traceable to a decision.
+**Scope creep** — code introduced beyond what any spec in `specs/` authorized. Features or behaviors not traceable to a decision.
 
 Produce an audit report: one section per category, each finding specific and actionable.
 

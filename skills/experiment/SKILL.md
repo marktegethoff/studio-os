@@ -18,9 +18,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. You provide the discipline.
 
@@ -47,7 +47,7 @@ Hypothesis: $ARGUMENTS
 
 If this hypothesis relates to a customer problem or product direction — what to build, who to build for, what behavior to change — check for a validated PM brief before designing the experiment.
 
-Look for `studio_os/artifacts/product_brief_*.md`. If one exists, load it. The brief sharpens what the experiment is trying to prove and prevents testing hypotheses that serve the wrong problem.
+Look for `specs/product_brief_*.md`. If one exists, load it. The brief sharpens what the experiment is trying to prove and prevents testing hypotheses that serve the wrong problem.
 
 If no brief exists and this is a customer-facing hypothesis, note it:
 
@@ -59,7 +59,7 @@ If this is a technical, structural, or behavioral hypothesis — not a customer 
 
 ## [HAIKU] Step 1 — Memory check
 
-Using project context loaded above, check for prior experiment results. If `studio_os/simulation/counterfactual/` exists, read all files there. If `studio_os/memory_index/index.md` exists, read it. If this hypothesis has already been tested, report the prior result and stop. Do not re-run experiments with known conclusions.
+Using project context loaded above, check for prior experiment results. If `specs/experiments/` exists, read all files there. If `.claude/memory/index.md` exists, read it. If this hypothesis has already been tested, report the prior result and stop. Do not re-run experiments with known conclusions.
 
 If no memory exists, proceed to Step 2.
 
@@ -141,4 +141,4 @@ IF [condition] THEN [outcome] BECAUSE [reasoning]
 [What changes, if anything — or "No changes required"]
 ```
 
-If `studio_os/simulation/counterfactual/` exists in the project, offer to write this to `studio_os/simulation/counterfactual/[hypothesis-slug].md`. Otherwise offer to write to the project's artifact location specified in CLAUDE.md.
+If `specs/experiments/` exists in the project, offer to write this to `specs/experiments/[hypothesis-slug].md`. Otherwise offer to write to the project's artifact location specified in CLAUDE.md.

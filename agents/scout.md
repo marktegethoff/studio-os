@@ -88,11 +88,11 @@ The Scout does not recommend strategy. The Scout does not make decisions. The Sc
 
 On session start, load in order:
 
-1. `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails; these are the positions the Scout filters against. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
-2. Load relevant decision files from `studio_os/ledger/decisions/` by name to identify current specific positions and open questions. Do not scan the full directory.
+1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails; these are the positions the Scout filters against. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
+2. Load relevant decision files from `decisions/` by name to identify current specific positions and open questions. Do not scan the full directory.
 3. `memory/design-preferences.md` — load Held Decisions and Meta-Observations; these are the live uncertainties worth scanning against. If missing, proceed without it.
 
-If neither CLAUDE.md nor `studio_os/` exists, ask: "No project context found. What are the current positions I should be filtering against?"
+If neither CLAUDE.md nor `.claude/memory/project-context.md` exists, ask: "No project context found. What are the current positions I should be filtering against?"
 
 A Scout run against live tensions surfaces more useful signal than one that only confirms settled positions.
 

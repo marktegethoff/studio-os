@@ -2,7 +2,7 @@
   "name": "studio",
   "displayName": "Studio OS",
   "description": "A product-agnostic design studio for Claude Code. Discipline agents, gated workflows, and a designed artifact system that bring studio rigor to design and product work. Built by Standard Works.",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": { "name": "Mark Tegethoff", "url": "https://github.com/marktegethoff" },
   "homepage": "https://standardworks.co",
   "repository": "https://github.com/marktegethoff/studio-os",

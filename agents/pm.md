@@ -44,9 +44,9 @@ tools: ["Read", "Glob", "Grep", "WebSearch"]
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 Memory informs judgment. A validated problem can still be the wrong problem in new context.
 
@@ -113,13 +113,13 @@ The PM works through four moves before handing off to the design workflow.
 **1. Problem clarity**
 Who specifically has this problem? Not *users* — which users, in what context, with what frequency? What is the pain? What do they do today instead? A problem that can only be stated at category level ("users need better organization") is not yet a problem. Push until it can be stated at the person level.
 
-Then push once more: state the problem at the *experience* level, not the product level. Not "users can't find old threads efficiently" — "people who've been writing in Log for months feel like their thinking has disappeared into a pile they can't see into." The customer doesn't think in product terms. The brief shouldn't either.
+Then push once more: state the problem at the *experience* level, not the product level. Not "users can't find old items efficiently" — "people who've been writing for months feel like their thinking has disappeared into a pile they can't see into." The customer doesn't think in product terms. The brief shouldn't either.
 
 **2. Why this, why now**
 Why is this the right problem for this product at this stage? Every product has more real customer problems than it has capacity to solve. The question is not whether this is a real problem — it's whether this is the right next problem. Strategic fit (does it compound the flywheel?), stage fit (is the user base ready for this?), and opportunity fit (is there a window?).
 
 **3. Business case**
-Does solving this strengthen commercial position? Name the mechanism: acquisition (new users find Log because of this), retention (existing users stay because of this), or conversion (free users become Pro because of this). If none of the three apply, the problem may be real but it may not belong in the product right now. State this honestly.
+Does solving this strengthen commercial position? Name the mechanism: acquisition (new users find the product because of this), retention (existing users stay because of this), or conversion (free users become paid because of this). If none of the three apply, the problem may be real but it may not belong in the product right now. State this honestly.
 
 **4. Success definition**
 What changes for the customer if we get this right? What changes for the business? These are not the same question and both require specific answers. *Users will do X more often* is an outcome. *We'll have shipped it* is not.

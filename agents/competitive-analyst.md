@@ -92,7 +92,7 @@ Does not recommend strategy. Does not evaluate whether the product should procee
 
 On session start, load in order:
 
-1. `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails; these define the comparison frame. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
+1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails; these define the comparison frame. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. `user-profile.md` *(`.claude/memory/`)* — calibrate communication register to role and experience
 
 If no project context can be found, ask: "What product am I analyzing for, and what is its core value proposition? I need this to set the comparison frame."

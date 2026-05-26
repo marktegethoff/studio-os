@@ -118,7 +118,7 @@ Next sweep recommended: [date ~6 months out]
 ## iOS Interaction Patterns
 
 ### Emerging
-- [Pattern] — [Source/evidence] — Relevance to Log: [high/medium/low]
+- [Pattern] — [Source/evidence] — Relevance to the product: [high/medium/low]
   Notes: [1–2 sentences]
 
 ### Stabilizing (safe to adopt)
@@ -132,7 +132,7 @@ Next sweep recommended: [date ~6 months out]
 ## AI-Native Interface Conventions
 
 ### Emerging
-- [Pattern] — [Source/evidence] — Relevance to Log: [high/medium/low]
+- [Pattern] — [Source/evidence] — Relevance to the product: [high/medium/low]
 
 ### Stabilizing
 - [Pattern]

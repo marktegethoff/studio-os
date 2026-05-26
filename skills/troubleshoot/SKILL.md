@@ -29,7 +29,7 @@ Not for: routine implementation (use `/implement`), a spec'd feature (use `/impl
 Convene at least the three that make a technical decision sound; add stack engineers by the problem's surface:
 
 - **Architect** — structure, boundaries, data model, the system-level consequence of each option.
-- **Stack engineer(s)** — the relevant specialist(s) from the engineer family (`ios-engineer`, `web-engineer`, or a setup-added specialist) for what is actually feasible and idiomatic on this stack. More than one when the problem crosses stacks.
+- **Stack engineer(s)** — the relevant specialist(s) from the engineer family (`swift-engineer`, `web-engineer`, or a setup-added specialist) for what is actually feasible and idiomatic on this stack. More than one when the problem crosses stacks.
 - **Distinguished Engineer** — the gate: simplicity, durability, what compounds vs. what becomes debt. Renders the verdict.
 - *Optional:* `luck` for 2+ year durability calls · `qa` for "how would we even verify this" · `specifier` when the output must become an implementable spec.
 

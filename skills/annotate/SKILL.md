@@ -31,7 +31,7 @@ Read the file at the provided path. If it does not exist, stop and report the er
 
 **If `--brief <path>` is provided:** Read the file at that path.
 
-**If no `--brief` is given:** Look for a file matching `studio_os/artifacts/product_brief_*.md` in the current working directory tree. If exactly one is found, read it silently. If multiple are found, ask which to use. If none is found, proceed with no brief.
+**If no `--brief` is given:** Look for a file matching `specs/product_brief_*.md` in the current working directory tree. If exactly one is found, read it silently. If multiple are found, ask which to use. If none is found, proceed with no brief.
 
 **If `--questions [...]` is provided:** Add those as open-ended questions in addition to any brief-derived questions.
 

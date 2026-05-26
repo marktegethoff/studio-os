@@ -49,7 +49,7 @@ Problem: $ARGUMENTS
 Before design begins: check for a validated product brief for this problem.
 
 Look for a brief in these locations (in order):
-1. `studio_os/artifacts/product_brief_*.md` (if `studio_os/` exists)
+1. `specs/product_brief_*.md` (the canonical brief location)
 2. Any brief path specified in `CLAUDE.md`
 
 If a matching brief exists, load it — the problem statement, success definition, and key unknowns it contains govern what the design must solve.
@@ -72,7 +72,7 @@ Apply the calibration gate: Is this necessary? Is this the simplest correct solu
 
 If the problem statement fails the gate, say so and stop.
 
-Also check: load relevant decision files from `studio_os/ledger/decisions/` by name based on what constrains this problem. Do not scan the full directory. Do not repeat previously rejected approaches.
+Also check: load relevant decision files from `decisions/` by name based on what constrains this problem. Do not scan the full directory. Do not repeat previously rejected approaches.
 
 ### Step 2 — Historian
 
@@ -199,7 +199,7 @@ Findings at this step may require returning to the Designer. If so, state precis
 > **⏸ PAUSE — Prototype required.**
 > Design is complete. Before accessibility review or specifier output:
 >
-> 1. Build a prototype in the project's prototype environment. Check `CLAUDE.md` for location (e.g., `Log Canvas/Log Canvas/Experiments/` for a native iOS project, or a static HTML file for web).
+> 1. Build a prototype in the project's prototype environment — the `canvas/` target under the manifest's `code_root` (per the paired-scaffold capability). For projects without a canvas, fall back to whatever the project's `CLAUDE.md` specifies.
 > 2. Verify the design at key states — especially light and dark mode for native.
 > 3. If the design needs adjustment, iterate in the prototype. Do not write to production source files.
 >
@@ -277,4 +277,4 @@ Date: [today]
 [Only genuine blockers — omit if none]
 ```
 
-If `studio_os/artifacts/` exists, offer to write this to `studio_os/artifacts/design.md`. Otherwise write to `docs/design/` or the project's artifact location specified in `CLAUDE.md`.
+If `specs/` exists, offer to write this to `specs/design.md`. Otherwise write to `docs/design/` or the project's artifact location specified in `CLAUDE.md`.

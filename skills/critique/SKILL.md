@@ -17,9 +17,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. This skill provides the discipline.
 
@@ -86,7 +86,7 @@ Verify:
 
 ### Step 5 — Ledger check
 
-If `studio_os/ledger/decisions/` exists, load relevant decision files by name based on what the artifact touches. Do not scan the full directory. Confirm the artifact does not contradict any prior decision. Flag conflicts — do not silently accept them. If no ledger exists, skip this step.
+If `decisions/` exists, load relevant decision files by name based on what the artifact touches. Do not scan the full directory. Confirm the artifact does not contradict any prior decision. Flag conflicts — do not silently accept them. If no ledger exists, skip this step.
 
 ---
 

@@ -40,7 +40,7 @@ Feature: $ARGUMENTS
 ## Step 0 — Context loading
 
 Load project context. Read in order:
-1. `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
+1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. `user-profile.md` (`.claude/memory/`) — calibrate communication register
 
 Check for a validated design brief for this feature. Look for `artifacts/product_brief_*.md` or equivalent. If a brief exists, load its problem statement and success conditions — these govern what the lagging indicator must measure.

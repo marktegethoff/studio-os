@@ -42,10 +42,10 @@ tools: ["Read", "Glob", "Grep"]
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
 2. Read `CLAUDE.md` for operational config: iOS standards, prototype environment, git rules, known implementation gotchas.
-3. If this work involves a prior decision or spec, load the relevant file from `studio_os/ledger/decisions/` or `studio_os/artifacts/` by name.
-4. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+3. If this work involves a prior decision or spec, load the relevant file from `decisions/` or `specs/` by name.
+4. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 ---
 

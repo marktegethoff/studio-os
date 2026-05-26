@@ -1,5 +1,5 @@
 ---
-description: Interview-driven brief shaping. Asks one question at a time to validate who has the problem, what they do today, and what success looks like. Output is a locked product brief written to studio_os/artifacts/product_brief_<slug>.md. Run before /design or /implement for any new product direction.
+description: Interview-driven brief shaping. Asks one question at a time to validate who has the problem, what they do today, and what success looks like. Output is a locked product brief written to specs/product_brief_<slug>.md. Run before /design or /implement for any new product direction.
 argument-hint: "<rough problem area or feature idea>"
 ---
 
@@ -15,9 +15,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. This skill provides the discipline.
 
@@ -29,7 +29,7 @@ A brief exists to answer one question before design begins: are we solving the r
 
 This skill interviews you. It does not fill out a form. It asks one question at a time and waits for your answer before proceeding. It stops when the problem can be stated in one sentence with clear success conditions.
 
-**Output:** a locked brief written to `studio_os/artifacts/product_brief_<slug>.md` (or the path defined in CLAUDE.md). The brief is the constraint that makes `/design` precise.
+**Output:** a locked brief written to `specs/product_brief_<slug>.md` (or the path defined in CLAUDE.md). The brief is the constraint that makes `/design` precise.
 
 ---
 
@@ -51,7 +51,7 @@ Problem area: $ARGUMENTS
 
 ## Step 0 — Check for prior brief
 
-Before beginning: look for an existing brief in `studio_os/artifacts/product_brief_*.md` (or the path defined in CLAUDE.md).
+Before beginning: look for an existing brief in `specs/product_brief_*.md` (or the path defined in CLAUDE.md).
 
 If one exists for this problem area: surface it.
 
@@ -210,10 +210,10 @@ Present the brief. Ask:
 On confirmation:
 
 1. Determine the slug from the problem name (lowercase, hyphens, no spaces).
-2. Write the brief to `studio_os/artifacts/product_brief_<slug>.md` (or the path defined in CLAUDE.md).
+2. Write the brief to `specs/product_brief_<slug>.md` (or the path defined in CLAUDE.md).
 3. Confirm the write:
 
-> "Brief locked: `studio_os/artifacts/product_brief_<slug>.md`
+> "Brief locked: `specs/product_brief_<slug>.md`
 >
 > **Recommended next:** `/design [problem name]` — the brief is the constraint."
 

@@ -122,7 +122,7 @@ When you do prototype, you are ruthless about fidelity. High fidelity takes long
 - Prototype audit (is this testing the right thing?)
 - Evaluation design (how will this prototype be assessed — by whom, under what conditions?)
 
-**Out of scope:** Building the prototype (iOS Engineer for native; LogCanvas for design prototypes). Evaluating the results (Heurist for usability; Creative Director for design quality).
+**Out of scope:** Building the prototype (the project's stack engineer for production; the project's canvas environment for design prototypes). Evaluating the results (Heurist for usability; Creative Director for design quality).
 
 ---
 

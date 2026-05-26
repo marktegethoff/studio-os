@@ -19,9 +19,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. This skill provides the discipline.
 
@@ -60,7 +60,7 @@ Maximum iterations: 3. If the gate does not pass by iteration 3, the command rep
 
 If this is a product direction problem — what to build, who to build for, or what outcome to target — check for a validated PM brief before the loop begins.
 
-Look for `studio_os/artifacts/product_brief_*.md`. If one exists for this problem, load it. A validated brief constrains the solution space and makes the convergence loop more precise.
+Look for `specs/product_brief_*.md`. If one exists for this problem, load it. A validated brief constrains the solution space and makes the convergence loop more precise.
 
 If no brief exists and this is a product direction problem, surface it:
 
@@ -73,7 +73,7 @@ If this is a structural, architectural, or systems problem — not a customer or
 ## [HAIKU] Before iteration 1 — Context loading
 
 **Check prior work.**
-If `studio_os/ledger/decisions/` exists (or the ledger path defined in CLAUDE.md), read the decision files. Has this problem been solved before? Do not repeat work already done.
+If `decisions/` exists (or the ledger path defined in CLAUDE.md), read the decision files. Has this problem been solved before? Do not repeat work already done.
 
 **Frame the problem precisely.**
 State the problem in one sentence. If it cannot be stated in one sentence, it is not ready for solving — decompose it first. Name the tension: what two valid things are in conflict, and why resolving one makes the other harder?
@@ -194,7 +194,7 @@ Iterations: [N]
 [Yes/No — does this decision need to be recorded?]
 ```
 
-If a ledger entry is required and a ledger path exists (check CLAUDE.md or `studio_os/ledger/decisions/`), write it there before ending the session.
+If a ledger entry is required and a ledger path exists (check CLAUDE.md or `decisions/`), write it there before ending the session.
 
 ---
 

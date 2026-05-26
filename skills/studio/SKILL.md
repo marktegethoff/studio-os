@@ -89,7 +89,7 @@ Full review sequence: `/critique`
 | Artifact | Produces | How to invoke |
 |---|---|---|
 | Engineering handoff spec | Complete spec for implementation, no ambiguity | `specifier` |
-| Implementation | Working SwiftUI code from a confirmed spec | `engineer` |
+| Implementation | Working code from a confirmed spec | `engineer` (or the stack specialist) |
 | Test scenarios | Boundary cases, regression checks, invariant verification | `qa` |
 
 Full engineering sequence (spec check → invariants → implement → QA): `/implement`

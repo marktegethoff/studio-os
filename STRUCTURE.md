@@ -27,8 +27,8 @@ The gate sequence is **PM → CD → DE**: problem gate, design gate, engineerin
 
 Installed per the user's practice. Product-agnostic — every example is drawn from the public reference palette, never from one product.
 
-**Engineering (6, extensible):** `architect` · `engineer` (stack-neutral base) · `ios-engineer` · `web-engineer` · `qa` · `specifier`
-The engineer family is a base discipline (`engineer`) plus stack specialists that inherit it. More are added per install at setup from `templates/engineer-specialist.template.md` (e.g. `backend-engineer`, `android-engineer`, `fullstack-engineer`, `data-engineer`, `ml-engineer`), each with its own references — the same personalization mechanism as the reference palette and display personas.
+**Engineering (6, extensible):** `architect` · `engineer` (stack-neutral base) · `swift-engineer` · `web-engineer` · `qa` · `specifier`
+The engineer family is a base discipline (`engineer`) plus stack specialists that inherit it. `swift-engineer` covers all Apple platforms (the `platform` manifest key — `ios` | `macos` | `multiplatform` — selects within it). More are added per install at setup from `templates/engineer-specialist.template.md` (e.g. `android-engineer`, `backend-engineer`, `fullstack-engineer`, `data-engineer`, `ml-engineer`), each with its own references — the same personalization mechanism as the reference palette and display personas.
 
 **Design (12):** `designer` · `visual-designer` · `choreographer` · `typesetter` · `materialist` · `mark-maker` · `writer` · `prototyper` · `accessibility` · `design-validator` · `critic` · `systematist`
 

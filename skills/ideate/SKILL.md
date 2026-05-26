@@ -20,9 +20,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. You provide the discipline.
 
@@ -52,7 +52,7 @@ The project provides the specifics. You provide the discipline.
 
 Before ideation begins: check for a validated product brief.
 
-Look for briefs in `studio_os/artifacts/product_brief_*.md` or the brief path defined in CLAUDE.md. If one exists for this problem, load it — the validated problem statement, customer context, and success definition it contains sharpen the ideation space and prevent generating solutions to the wrong problem.
+Look for briefs in `specs/product_brief_*.md` or the brief path defined in CLAUDE.md. If one exists for this problem, load it — the validated problem statement, customer context, and success definition it contains sharpen the ideation space and prevent generating solutions to the wrong problem.
 
 If no brief exists, note it. Ideation can proceed — but flag it:
 > **No PM brief found.** Ideation is running against an unvalidated problem. Results may need re-anchoring once the customer problem is defined. To run problem validation first: `/pm [problem statement]`.
@@ -77,7 +77,7 @@ Output this message to the user and stop:
 If the input is a genuine problem statement or opportunity area, proceed.
 
 **Prior work check.**
-If `studio_os/ledger/decisions/` exists, read it to identify any prior decisions that constrain or have already addressed this problem space. Note them. Do not repeat work already done.
+If `decisions/` exists, read it to identify any prior decisions that constrain or have already addressed this problem space. Note them. Do not repeat work already done.
 
 State in one sentence: what is the core problem or opportunity? What does a good solution need to accomplish?
 
@@ -199,7 +199,7 @@ Risk: [the one thing most likely to kill this idea]
 
 Evaluate the surviving ideas against synthetic user personas.
 
-**Loading personas:** If user personas are defined in CLAUDE.md or in a project artifacts file (e.g., `studio_os/artifacts/personas*.md`), load and use them. Otherwise, generate 3 concise personas from the problem statement — one power user deeply invested in the core workflow, one casual user who engages episodically, and one user at a transition point (e.g., returning after time away, or discovering the product anew). Name each briefly and capture their primary goal in one sentence.
+**Loading personas:** If user personas are defined in CLAUDE.md or in a project artifacts file (e.g., `specs/personas*.md`), load and use them. Otherwise, generate 3 concise personas from the problem statement — one power user deeply invested in the core workflow, one casual user who engages episodically, and one user at a transition point (e.g., returning after time away, or discovering the product anew). Name each briefly and capture their primary goal in one sentence.
 
 **Output: desirability signal per idea**
 Three sentences per idea, no more: (1) which persona it lands with and why, (2) whether the problem is real for them or projected, (3) how they would describe it to someone else. Keep output comparable across all ideas.

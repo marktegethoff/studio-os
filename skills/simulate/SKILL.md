@@ -18,9 +18,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name. Do not scan the full directory.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. You provide the discipline.
 
@@ -67,7 +67,7 @@ Apply the drum simulation model (embedded above): simulate data accumulation and
 
 Apply the system invariants from project context loaded above. For each simulated behavior, confirm no invariant is violated under load or over time.
 
-Also check: if `studio_os/memory_index/index.md` exists in the project, read it for prior simulation results relevant to this scenario.
+Also check: if `.claude/memory/index.md` exists in the project, read it for prior simulation results relevant to this scenario.
 
 ---
 

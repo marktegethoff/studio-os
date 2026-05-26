@@ -15,9 +15,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 Read project context in this order:
 
-1. Read `studio_os/project-context.md` — invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `studio_os/ledger/decisions/` by name.
-3. If `studio_os/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read `.claude/memory/project-context.md` — invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+2. If this work involves a prior decision, load the relevant file from `decisions/` by name.
+3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 The project provides the specifics. This skill provides the discipline.
 
@@ -91,9 +91,9 @@ End the skill. Do not assemble a partial brief.
 Apply the auto-extract rule: propose a default based on the spec or task type.
 
 - **Production code**: list the files you expect to create/modify, drawn from the spec
-- **Canvas experiment**: `Log Canvas/Log Canvas/Experiments/<Name>.swift`
+- **Canvas experiment**: `<canvas_path>/Experiments/<Name>.<ext>` (per the manifest's `code_root` + canonical `canvas/` name)
 - **Hook**: `.claude/hooks/<name>.sh` + `.claude/settings.json` registration
-- **Documentation/decision**: `studio_os/<path>/<file>.md`
+- **Documentation/decision**: a flat-folder location per the canonical layout — `decisions/<file>.md`, `specs/<file>.md`, `design/<file>.md`, or `reviews/<file>.md`
 
 Ask:
 
@@ -197,9 +197,9 @@ On brief confirmation, ask the user which path the work should take:
 
 > "Brief locked. Two paths:
 >
-> **`/prototype`** — validate visually in Canvas first. Recommended when: new feature, novel interaction, anything where 'feels right' matters more than correctness, or scope/direction needs visual confirmation before production work. Output goes to `Log Canvas/Log Canvas/Experiments/`.
+> **`/prototype`** — validate visually in Canvas first. Recommended when: new feature, novel interaction, anything where 'feels right' matters more than correctness, or scope/direction needs visual confirmation before production work. Output goes to the project's `canvas/Experiments/` (per the manifest's `code_root`).
 >
-> **`/implement`** — go straight to production. Recommended when: clearly-spec'd change, small fix, infrastructure work, or refining something already validated in Canvas. Output goes to `Log/Log/Views/` (or wherever the brief's OUTPUT points).
+> **`/implement`** — go straight to production. Recommended when: clearly-spec'd change, small fix, infrastructure work, or refining something already validated in Canvas. Output goes to the project's production target (per the manifest's `code_root/app/`, or wherever the brief's OUTPUT points).
 >
 > Which?"
 
@@ -218,7 +218,7 @@ On path selection, state:
 >
 > **Recommended next:** `<chosen path>` — the brief is the input."
 
-If the user chose `/prototype`, **note in the brief**: the OUTPUT field should point to `Log Canvas/Log Canvas/Experiments/<Name>.swift` (not production paths). Update if needed.
+If the user chose `/prototype`, **note in the brief**: the OUTPUT field should point to the project's `canvas/Experiments/<Name>.<ext>` (not production paths). Update if needed.
 
 The brief stays in conversation context. The next execution skill reads it from there.
 

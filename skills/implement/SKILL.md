@@ -38,7 +38,7 @@ The bounded retry rule: if a deterministic verification fails, exactly **one** a
 
 ## Engineer Discipline
 
-The stack discipline is **not embedded here** — it lives in the project's **engineer specialist**, selected by the `stack` field in project-context (e.g. `ios-engineer`, `web-engineer`, or the stack-neutral `engineer` base). Apply that specialist in Step 2; it carries the platform's conventions — view/preview requirements, the test/snapshot setup and its helper, framework guarantees, and the artifact paths that produce review PNGs.
+The stack discipline is **not embedded here** — it lives in the project's **engineer specialist**, selected by the `stack` field in project-context (e.g. `swift-engineer`, `web-engineer`, or the stack-neutral `engineer` base). Apply that specialist in Step 2; it carries the platform's conventions — view/preview requirements, the test/snapshot setup and its helper, framework guarantees, and the artifact paths that produce review PNGs.
 
 Universal rules (every stack):
 - Each step touches one behavior. Verify before proceeding.
@@ -124,7 +124,7 @@ State this list explicitly so the user sees what you understand the contract to 
 
 ## [SONNET · Ag] Step 2 — Engineering
 
-Apply the project's engineer specialist (per `stack` in project-context — e.g. `ios-engineer`, `web-engineer`, or the `engineer` base).
+Apply the project's engineer specialist (per `stack` in project-context — e.g. `swift-engineer`, `web-engineer`, or the `engineer` base).
 
 Each step touches one behavior. Verify before proceeding.
 

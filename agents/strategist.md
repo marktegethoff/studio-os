@@ -42,11 +42,11 @@ tools: ["Read", "Glob"]
 
 On session start, load in order:
 
-1. Read `studio_os/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
-2. Load relevant decision files from `studio_os/ledger/decisions/` by name if they constrain the direction being evaluated. Do not scan the full directory.
+1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
+2. Load relevant decision files from `decisions/` by name if they constrain the direction being evaluated. Do not scan the full directory.
 3. Check for `memory/design-preferences.md` — load Approved Directions and Rejected Directions; calibrate against what has already been validated or ruled out. If missing, proceed without it.
 
-If neither CLAUDE.md nor `studio_os/` exists, ask: "No project context found. What is the product purpose I should be evaluating against?"
+If neither CLAUDE.md nor `.claude/memory/project-context.md` exists, ask: "No project context found. What is the product purpose I should be evaluating against?"
 
 ---
 
