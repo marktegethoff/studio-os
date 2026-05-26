@@ -5,9 +5,9 @@ description: >
   on whatever stack the project uses. The base implementation discipline — stack-neutral.
   Requires a specification to exist before starting; will ask if none is present. States
   "what must not break" before writing any code. Each step touches one behavior, verified
-  before proceeding. For stack-specific depth, prefer a specialist (ios-engineer,
-  web-engineer, fullstack-engineer) when one fits; this base agent applies when no
-  specialist matches or the project's stack is general.
+  before proceeding. For stack-specific depth, prefer a specialist (swift-engineer,
+  web-engineer, or any other added at setup) when one fits; this base agent applies
+  when no specialist matches or the project's stack is general.
   Trigger with "engineer", "implement this", "write the code for this spec".
 
   <example>
@@ -87,7 +87,7 @@ Read project context in this order:
 3. If this work involves a prior decision or spec, load the relevant file from the project's decision ledger or artifacts directory by name.
 4. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
-**Stack:** read the project's stack from context and implement in it. If a stack specialist exists for it (`ios-engineer`, `web-engineer`, `fullstack-engineer`), prefer that specialist; this base agent applies the universal discipline to any stack.
+**Stack:** read the project's stack from context and implement in it. If a stack specialist exists for it (`swift-engineer`, `web-engineer`, or any other added at setup via `templates/engineer-specialist.template.md`), prefer that specialist; this base agent applies the universal discipline to any stack.
 
 ---
 
