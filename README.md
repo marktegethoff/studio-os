@@ -2,7 +2,7 @@
 
 *Standard Works · Studio OS*
 
-Product work with AI drifts without structure — agents generate without gates, design begins before the problem is validated, code ships without a spec. Studio OS installs a design studio into Claude Code: **33 discipline agents** and a set of **workflow skills** that gate each stage before the next can begin.
+Product work with AI drifts without structure — agents generate without gates, design begins before the problem is validated, code ships without a spec. Studio OS installs a design studio into Claude Code: **35 discipline agents** and a set of **workflow skills** that gate each stage before the next can begin.
 
 Product-agnostic by design. Built for product and design teams working alongside engineering — useful for a solo practitioner, designed for a team.
 
@@ -22,7 +22,7 @@ Three agents form the senior gate structure, run in sequence:
 
 When a verdict requires further work, each gate names the specific agent or skill that resolves it — not just the problem.
 
-The studio is organized in three tiers — **Core** (universal craft + the Standard Works philosophy), **Role** (discipline agents), and **Product** (one product's context, which lives in your project, not here). See [STRUCTURE.md](STRUCTURE.md) for the full tier map and the 33-agent roster.
+The studio is organized in three tiers — **Core** (universal craft + the Standard Works philosophy), **Role** (discipline agents), and **Product** (one product's context, which lives in your project, not here). See [STRUCTURE.md](STRUCTURE.md) for the full tier map and the 35-agent roster.
 
 ---
 
@@ -53,7 +53,7 @@ Then, in any project, set up product context:
 /studio:init
 ```
 
-This interviews you for your product's purpose, principles, invariants, and stack, and writes `.claude/memory/project-context.md` — the Product tier. Studio OS works without it, but agents fall back to generic reasoning. The calibration is the point.
+This interviews you for your product's purpose, principles, invariants, and stack; scaffolds production and canvas projects with a shared module included by reference; and writes `.claude/memory/project-context.md` — the Product tier. A lint enforces that the shared module is never copied, never published, never forked. Studio OS works without `init`, but agents fall back to generic reasoning. The calibration is the point.
 
 ---
 
@@ -79,7 +79,7 @@ This interviews you for your product's purpose, principles, invariants, and stac
 /studio:scope         Scope a task tight enough to delegate
 ```
 
-Discipline agents can also be invoked directly by name. Run `/studio:studio` to see what each produces.
+Discipline agents can also be invoked directly by name — including engineer specialists (`swift-engineer` for all Apple platforms, `web-engineer` for the web, plus any stack via on-demand generation at `/studio:init`). Run `/studio:studio` to see what each produces.
 
 Each workflow leaves behind artifacts the next session can read — briefs, journeys, interaction models, specs, metrics plans — each rendered as a well-designed HTML document with a built-in feedback harness.
 
@@ -100,3 +100,5 @@ See [PHILOSOPHY.md](PHILOSOPHY.md) for the reasoning behind the defaults, and [E
 Built by [Mark Tegethoff](https://github.com/marktegethoff) at [Standard Works](https://standardworks.co).
 
 The `luck` durability diagnostic was developed by [Soleio](https://github.com/soleio/luck).
+
+Release history: [CHANGELOG.md](CHANGELOG.md).
