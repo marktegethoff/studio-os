@@ -1,0 +1,16 @@
+# Banned product tokens — plain substring, case-sensitive.
+# Scope: agents/** + skills/**.
+# Seed per paired-scaffold-capability spec §C; append per-product on
+# onboarding ("/studio:init" or after a de-contamination pass surfaces a new
+# leak). One token per line. Lines beginning with # are comments.
+#
+# Note on "Log": the bare token matches dictionary words ("Logical", verb
+# usage like "Log the entry"). This is intentional — when a real word fires
+# the lint, rephrase the prose ("Logical" → "Structural"; "Log the session
+# header" → "Record the session header"). The seam is enforced; ambiguity
+# is the prose's problem, not the lint's.
+
+Log
+Log Canvas
+LogApp
+studio_os/

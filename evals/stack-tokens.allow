@@ -1,0 +1,15 @@
+# Stack-token allow lists, keyed by frontmatter `stack:` value.
+# Format: `<stack>: token1, token2, ...` (comma-separated; tokens may include spaces).
+# One stack per line; comments and blanks are ignored.
+#
+# R2 rule (bidirectional, per spec §C):
+#   • A file with `stack: <X>` in YAML frontmatter MAY contain tokens from the X list.
+#   • A file with no `stack:` frontmatter MUST NOT contain any token from any list.
+#   • A file with `stack: <X>` MUST NOT contain tokens from a DIFFERENT stack's list
+#     (cross-stack contamination).
+#
+# Future stacks add their own list when the specialist ships (Android: Kotlin,
+# Gradle, Compose, etc.; React Native, Flutter, …).
+
+swift: SwiftUI, xcodebuild, swift build, SPM, Bundle.module, xcodeproj, UIKit, AppKit, XcodeGen, Package.swift
+web: React, Next.js, pnpm, npm, Storybook, Ladle, TypeScript, DOM, package.json, tsconfig

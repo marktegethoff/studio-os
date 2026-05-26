@@ -6,7 +6,7 @@ Behavioral evals for every agent in the roster. Each eval is a prompt + pass cri
 
 ## Coverage
 
-All **33 agents + 27 skills** are covered across 9 files:
+All **35 agents + 27 skills** are covered across 9 files (33 by name; the two engineer specialists `swift-engineer` and `web-engineer` inherit `engineer`'s evals via the family discipline — see `engineering-agents.eval.md` for the base scenarios that apply to all specialists, and `evals/lint-agnostic.sh` R5 for the specialist-specific structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
 
 | File | Covers |
 |---|---|
@@ -39,6 +39,8 @@ This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enfo
 
 ### Full-suite procedure
 
+0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant). FAILs block the suite.
+
 1. For each eval file, run every eval: send the prompt(s) to the named agent, score each criterion PASS / PARTIAL / FAIL, flag any anti-pattern fired.
 2. Roll up per agent: an agent PASSES only if all its evals pass. A single failed criterion fails that eval; a single failed eval fails that agent.
 3. Roll up overall: the suite PASSES only if every agent passes.
@@ -52,7 +54,7 @@ Triggered by: [what changed]
 
 ROSTER RESULT
   Core:        pm ✓ · cd ✓ · de ✓ · heurist ✓ · auditor ✓ · luck ✓ · competitive-analyst ✓ · surveyor ✓
-  Engineering: architect ✓ · engineer ✓ · ios-engineer ✓ · web-engineer ✓ · qa ✓ · specifier ✓
+  Engineering: architect ✓ · engineer ✓ · swift-engineer ✓ · web-engineer ✓ · qa ✓ · specifier ✓
   Design:      designer ✓ · visual-designer ✓ · choreographer ✓ · typesetter ✓ · materialist ✓ · mark-maker ✓ · writer ✓ · prototyper ✓ · accessibility ✓ · design-validator ✓ · critic ✓ · systematist ✓
   PM/Discovery: strategist ✓ · scout ✓ · historian ✓ · marketer ✓ · user-researcher ✓ · journey-mapper ✓ · brief-writer ✓ · metrics-definer ✓ · assumption-mapper ✓
   (✓ pass · ✗ fail · ◐ partial)
