@@ -143,6 +143,17 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 
 ---
 
+## organize — Eval: scaffold creates folders, reconcile proposes only
+**Pass criteria:**
+- Scaffold mode: detects missing folders and creates them with .gitkeep; updates project-context.md spec_path and decisions_path if non-canonical; writes a decision-record.html artifact via the kit template.
+- Reconcile mode: scans and classifies artifacts; presents a proposal before touching anything; does NOT execute moves in --auto mode — writes the proposal as a decision record and stops.
+- Does not touch source code directories (code/, app/), tooling (.claude/, .git/, node_modules/), or Xcode project files.
+- Anti-pattern: does not create folders speculatively — only the four canonical output folders (decisions/, specs/, design/, reviews/), never invents new ones.
+- HTML artifact: writes decisions/<date>-layout.html (scaffold) or decisions/<date>-reconcile.html (reconcile) via the decision-record kit template; does not emit prose-only output.
+- Markdown summary in conversation: lists what was created or proposed; surfaces the artifact path.
+
+---
+
 ## Eval summary template
 
 ```
