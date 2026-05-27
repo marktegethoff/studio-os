@@ -201,6 +201,27 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ---
 
+## Heurist — Eval 10: Artifact production via kit template
+
+**Testing:** Heurist renders its heuristic report as HTML using the kit template, writes it to disk, and surfaces a markdown summary — not a prose-only findings list.
+
+**Prompt:**
+> "Evaluate the notification panel for heuristic violations — especially the dismiss and settings paths."
+
+**Pass criteria:**
+- [ ] Produces an HTML file using `artifacts/templates/heuristic-report.html`
+- [ ] Writes to disk at `reviews/<slug>-heuristics.html`
+- [ ] Does not emit ad-hoc HTML or a prose-only findings list in the response
+- [ ] Surfaces a short markdown summary: file path, P0 count, binding finding
+- [ ] Offers `/studio:annotate <file-path>` after writing
+
+**Anti-patterns:**
+- Producing findings only as prose in the response (Prose-Only Artifact)
+- Inventing custom HTML structure instead of using the kit template (Ad-Hoc HTML)
+- Skipping the annotation offer
+
+---
+
 ## Eval summary template
 
 ```
@@ -216,6 +237,7 @@ Heurist Eval 6 — User error as design error:    PASS / FAIL
 Accessibility Eval 7 — WCAG AA violations:      PASS / FAIL
 Design Validator Eval 8 — Token mismatch:       PASS / FAIL
 Systematist Eval 9 — Drift over preference:     PASS / FAIL
+Heurist Eval 10 — HTML via template:            PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]

@@ -123,6 +123,32 @@ For each eval: send the prompt(s) · score each criterion PASS / PARTIAL / FAIL 
 
 ---
 
+## Artifact Production — Eval 6: HTML output via kit template
+
+**Testing:** Each agent renders its artifact as HTML using the assigned kit template, writes it to disk, and surfaces a markdown summary — not prose buried in the response.
+
+**Prompts:**
+> [Journey Mapper] "Map the journey for a new user completing their first task in a project management app."
+> [User Researcher] "Synthesize patterns from these 8 interview notes about notification fatigue."
+> [Brief Writer] "Write the design brief for: people who want to track their reading progress without leaving the book."
+> [Metrics Definer] "Define success metrics for a new onboarding flow."
+> [Assumption Mapper] "Surface the assumptions behind adding a 'smart suggestions' feature to a text editor."
+
+**Pass criteria (all five agents):**
+- [ ] Produces an HTML file using the correct kit template (`user-journey.html`, `user-narrative.html`, `design-brief.html`, `metrics-plan.html`, `risk-register.html` respectively)
+- [ ] Writes the file to disk at the expected path (e.g., `specs/<slug>-journey.html`)
+- [ ] Does not emit ad-hoc HTML or a prose-only artifact in the response
+- [ ] Surfaces a short markdown summary in conversation: file path, headline, key findings
+- [ ] Offers `/studio:annotate <file-path>` after writing
+
+**Anti-patterns:**
+- Producing the artifact only as prose in the response (Prose-Only Artifact)
+- Inventing custom HTML structure instead of using the kit template (Ad-Hoc HTML)
+- Writing to disk without the markdown conversation summary
+- Skipping the annotation offer
+
+---
+
 ## Eval summary template
 
 ```
@@ -134,6 +160,7 @@ User Researcher Eval 2 — Sample/confidence:  PASS / FAIL
 Brief Writer Eval 3 — Validation/scope:      PASS / FAIL
 Metrics Definer Eval 4 — Outcome/counter:    PASS / FAIL
 Assumption Mapper Eval 5 — Binding assumption:PASS / FAIL
+Artifact Production Eval 6 — HTML via template:PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]

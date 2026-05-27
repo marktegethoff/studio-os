@@ -2,7 +2,16 @@
 
 ## 1.2.0 — 2026-05-26
 
-*Stub — populated during the v1.2.0 auto run; final entry written before commit completes.*
+**HTML-first artifact delivery.** Every artifact-producing skill now writes a designed HTML file to disk rather than emitting markdown prose in conversation. Artifacts are first-class reviewable objects: named, pathed, and offered to the annotation chain immediately.
+
+- **10 skills emit HTML artifacts**: shape, scope, discover, design, critique, review, measure, ideate, handoff, experiment — each mapped to a specific kit template and disk path. A `--text` flag is available on all ten to skip emission and return a markdown summary only.
+- **5 new kit templates**: `critique-report.html`, `lt-review.html`, `task-brief.html`, `ideation-output.html`, `experiment-plan.html` — added to `artifacts/templates/` and catalogued in `artifacts/kit/README.md`.
+- **R6 lint rule**: Every agent or skill file with an `artifact:` frontmatter key must reference its named template in the body. Enforced by `evals/lint-agnostic.sh`.
+- **Template proposal mechanism**: Agent-proposed templates land in `artifacts/proposals/<slug>.md` pending human approval; the no-fit procedure and reuse-first discipline are documented in the kit README.
+- **12 agents gain `## Artifact` sections**: journey-mapper, designer, user-researcher, writer, architect, brief-writer, metrics-definer, assumption-mapper, specifier, choreographer, competitive-analyst, heurist — each declares its template and disk path.
+- **Auto mode (`--auto`)**: All 15 PAUSE-containing skills gain `## Auto Mode` sections with a 6-point safety contract. All PAUSEs are marked `(skipped in --auto)` and carry a checkpoint name.
+- **Model-switch cleanup**: Removed `**Model requirements:**` lines and `[HAIKU]/[SONNET]/[OPUS]` section-header prefixes from 7 skills. The `implement` skill retains `[Det]`/`[Ag]` structural tags.
+- **Eval coverage extended**: All five agent eval files gain artifact production eval entries (discovery-agents E6, design-agents E9, analysis-agents E5, engineering-agents E7, surface-agents E10). All 10 Phase B skills gain HTML artifact production criteria in `evals/skills.eval.md`.
 
 ## 1.1.1 — 2026-05-26
 

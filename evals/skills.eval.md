@@ -18,28 +18,28 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 
 ## shape — Eval: one question at a time, validated brief
 **Prompt:** "Help me shape a brief for a notifications feature."
-**Pass:** asks ONE question at a time · validates who has the problem, what they do today, what success looks like · outputs a locked `product_brief_<slug>.md`.
-**Anti:** asks everything at once; produces a brief without validating the problem.
+**Pass:** asks ONE question at a time · validates who has the problem, what they do today, what success looks like · outputs a locked `product_brief_<slug>.html` via the design-brief kit template; markdown summary surfaces in conversation.
+**Anti:** asks everything at once; produces a brief without validating the problem; writes prose only without the HTML artifact.
 
 ## scope — Eval: the five-field task brief
 **Prompt:** "Scope this task so I can hand it to /implement."
-**Pass:** produces SPEC · OUTPUT · GATES · VERIFY · ESCALATE · tight enough to delegate unattended.
-**Anti:** vague brief; missing GATES or VERIFY.
+**Pass:** produces SPEC · OUTPUT · GATES · VERIFY · ESCALATE · tight enough to delegate unattended · writes HTML artifact (task-brief template → specs/task_brief_<slug>.html); markdown summary surfaces in conversation.
+**Anti:** vague brief; missing GATES or VERIFY; writes prose only without the HTML artifact.
 
 ## discover — Eval: PM gate before the brief
 **Prompt:** "Run discovery on why users abandon onboarding."
-**Pass:** runs researcher → journey → assumptions → PM gate → brief, in sequence · PM gate precedes the brief · produces a validated brief.
-**Anti:** skips the PM gate; jumps to solutions.
+**Pass:** runs researcher → journey → assumptions → PM gate → brief, in sequence · PM gate precedes the brief · produces a validated brief · writes HTML artifact (user-journey template → specs/discovery_<slug>.html); markdown summary surfaces in conversation.
+**Anti:** skips the PM gate; jumps to solutions; writes prose only without the HTML artifact.
 
 ## ideate — Eval: problem in, not solution
 **Prompt:** "Ideate on adding a Kanban board." *(a solution, not a problem)*
-**Pass:** refuses the solution-in-disguise and asks for the problem · diverges across lenses · reduces to 3–5 then 1–2 · does not commit to build.
-**Anti:** accepts the solution as input; converges to one idea immediately.
+**Pass:** refuses the solution-in-disguise and asks for the problem · diverges across lenses · reduces to 3–5 then 1–2 · does not commit to build · writes HTML artifact (ideation-output template → specs/ideation_<slug>.html); markdown summary surfaces in conversation.
+**Anti:** accepts the solution as input; converges to one idea immediately; writes prose only without the HTML artifact.
 
 ## design — Eval: brief gate + Six Functions + owner + phase
 **Prompt:** "Design the entry detail surface." *(no brief provided)*
-**Pass:** requires a validated brief (PM gate) before proceeding · establishes phase (exploratory / in progress / refinement) and applies phase gates (refinement skips Steps 1–4; exploratory skips sub-team / accessibility / specifier) · activates the six functions (framing, generation, craft, reduction, usability/accessibility, and the CD gate) at in progress · the Designer owns the interaction model.
-**Anti:** starts without a brief; fewer than the six functions; no named deliverable owner; runs full nine-step pass on exploratory work; ignores phase.
+**Pass:** requires a validated brief (PM gate) before proceeding · establishes phase (exploratory / in progress / refinement) and applies phase gates (refinement skips Steps 1–4; exploratory skips sub-team / accessibility / specifier) · activates the six functions (framing, generation, craft, reduction, usability/accessibility, and the CD gate) at in progress · the Designer owns the interaction model · writes HTML artifact (phase-dependent: design-brief for exploratory; state-inventory + component-spec for in progress); markdown summary surfaces in conversation.
+**Anti:** starts without a brief; fewer than the six functions; no named deliverable owner; runs full nine-step pass on exploratory work; ignores phase; writes prose only without the HTML artifact.
 
 ## prototype — Eval: scope to the question
 **Prompt:** "Should I prototype the new gesture or just spec it?"
@@ -53,13 +53,13 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 
 ## critique — Eval: all nine disciplines, tension-prompted debate
 **Prompt:** "Critique this implemented surface."
-**Pass:** spawns all nine discipline specialists in parallel · each delivers findings from their mandate · synthesis names convergences and triages · assesses tension threshold (volume >8 / convergence / Critic tension) · offers debate round if threshold met · debate round has each agent respond to the others · final synthesis tracks hardened / changed / unresolved tensions · does NOT render SHIP / REVISE / REJECT.
-**Anti:** renders a ship verdict; skips disciplines; offers debate unconditionally without threshold check; vague findings per discipline.
+**Pass:** spawns all nine discipline specialists in parallel · each delivers findings from their mandate · synthesis names convergences and triages · assesses tension threshold (volume >8 / convergence / Critic tension) · offers debate round if threshold met · debate round has each agent respond to the others · final synthesis tracks hardened / changed / unresolved tensions · does NOT render SHIP / REVISE / REJECT · writes HTML artifact (critique-report template → reviews/critique_<slug>_<timestamp>.html); markdown summary surfaces in conversation.
+**Anti:** renders a ship verdict; skips disciplines; offers debate unconditionally without threshold check; vague findings per discipline; writes prose only without the HTML artifact.
 
 ## review — Eval: combined LT verdict, phase-aware, conflict-prompted debate
 **Prompt:** "Run a Leadership Team review on this artifact before we ship."
-**Pass:** establishes phase (pre-ship / checkpoint / post-ship audit) and threads it into every brief · runs PM + CD + DE in parallel · produces combined verdict with convergence notes · names ONE prioritized next action via cascade (PM > CD > DE) · assesses conflict threshold (split verdict on same element / convergent flags with incompatible routing / dependent verdicts) · offers debate round if conflict fires · debate round has each member respond to the others · final synthesis tracks hardened / changed / unresolved tensions.
-**Anti:** a single perspective; three disconnected verdicts with no synthesis; offers debate unconditionally; silences conflict via cascade instead of surfacing it; ignores phase.
+**Pass:** establishes phase (pre-ship / checkpoint / post-ship audit) and threads it into every brief · runs PM + CD + DE in parallel · produces combined verdict with convergence notes · names ONE prioritized next action via cascade (PM > CD > DE) · assesses conflict threshold (split verdict on same element / convergent flags with incompatible routing / dependent verdicts) · offers debate round if conflict fires · debate round has each member respond to the others · final synthesis tracks hardened / changed / unresolved tensions · writes HTML artifact (lt-review template → reviews/lt_review_<slug>_<timestamp>.html); markdown summary surfaces in conversation.
+**Anti:** a single perspective; three disconnected verdicts with no synthesis; offers debate unconditionally; silences conflict via cascade instead of surfacing it; ignores phase; writes prose only without the HTML artifact.
 
 ## implement — Eval: no spec, no start
 **Prompt:** "Implement the new compose behavior." *(no brief/spec provided)*
@@ -68,8 +68,8 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 
 ## handoff — Eval: complete production package
 **Prompt:** "Prepare this validated prototype for engineering."
-**Pass:** requires a validated prototype · produces all states + flows, synthetic data, UAT scenarios, and a build spec with design-system token translation.
-**Anti:** happy-path only; no DS token mapping; missing UAT.
+**Pass:** requires a validated prototype · produces all states + flows, synthetic data, UAT scenarios, and a build spec with design-system token translation · writes HTML artifact (state-inventory template → design/handoff_<slug>.html); markdown summary surfaces in conversation.
+**Anti:** happy-path only; no DS token mapping; missing UAT; writes prose only without the HTML artifact.
 
 ## simplify — Eval: DE gates plan and result
 **Prompt:** "Simplify the services layer."
@@ -78,13 +78,13 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 
 ## measure — Eval: outcome plan with counter-metric
 **Prompt:** "Define how we'll measure the new digest feature."
-**Pass:** requires a design brief · metrics-definer → PM gate → architect · produces leading + lagging indicators, a counter-metric, a baseline, and instrumentation requirements.
-**Anti:** vanity metric; no counter-metric or baseline.
+**Pass:** requires a design brief · metrics-definer → PM gate → architect · produces leading + lagging indicators, a counter-metric, a baseline, and instrumentation requirements · writes HTML artifact (metrics-plan template → specs/measurement_<slug>.html); markdown summary surfaces in conversation.
+**Anti:** vanity metric; no counter-metric or baseline; writes prose only without the HTML artifact.
 
 ## experiment — Eval: framed hypothesis, prior check
 **Prompt:** "Test whether inline replies increase task completion."
-**Pass:** frames the hypothesis as IF/THEN/BECAUSE · checks memory for prior results first · designs the experiment and evaluates short/medium/long-term.
-**Anti:** vague hypothesis; ignores prior results.
+**Pass:** frames the hypothesis as IF/THEN/BECAUSE · checks memory for prior results first · designs the experiment and evaluates short/medium/long-term · writes HTML artifact (experiment-plan template → specs/experiment_<slug>.html); markdown summary surfaces in conversation.
+**Anti:** vague hypothesis; ignores prior results; writes prose only without the HTML artifact.
 
 ## simulate — Eval: horizon, not a point
 **Prompt:** "Simulate how this list performs at 10,000 items over two years."

@@ -144,6 +144,27 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 
 ---
 
+## Architect — Eval 7: Artifact production via kit template
+
+**Testing:** Architect renders a flow diagram or decision record as HTML using the kit template, writes it to disk, and surfaces a markdown summary.
+
+**Prompt:**
+> "Define the data model and flow for thread membership in a note-taking app — can an entry belong to multiple threads?"
+
+**Pass criteria:**
+- [ ] Produces an HTML file using `artifacts/templates/flow-diagram.html` or `artifacts/templates/decision-record.html` as appropriate
+- [ ] Writes to disk at `design/<slug>-flow.html` or `decisions/<slug>-decision.html`
+- [ ] Does not emit ad-hoc HTML or a prose-only structural output in the response
+- [ ] Surfaces a short markdown summary: file path, headline, key constraint or decision
+- [ ] Offers `/studio:annotate <file-path>` after writing
+
+**Anti-patterns:**
+- Producing the structural output only as prose in the response (Prose-Only Artifact)
+- Inventing custom HTML structure instead of using the kit template (Ad-Hoc HTML)
+- Skipping the annotation offer
+
+---
+
 ## Eval summary template
 
 ```
@@ -156,6 +177,7 @@ Engineer Eval 3 — What must not break:          PASS / FAIL
 Engineer Eval 4 — Spec gap escalation:          PASS / FAIL
 DE Eval 5 — Read-first rule:                    PASS / FAIL
 QA Eval 6 — Invariant coverage:                 PASS / FAIL
+Architect Eval 7 — HTML via template:           PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]

@@ -101,16 +101,38 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ---
 
+## Competitive Analyst — Eval 5: Artifact production via kit template
+
+**Testing:** Competitive Analyst renders its teardown as HTML using the kit template, writes it to disk, and surfaces a markdown summary — not a prose-only response.
+
+**Prompt:**
+> "Run a competitive teardown on how productivity tools handle keyboard shortcuts — feature coverage, UX patterns, and where the gaps are."
+
+**Pass criteria:**
+- [ ] Produces an HTML file using `artifacts/templates/competitive-teardown.html`
+- [ ] Writes to disk at `specs/<slug>-competitive.html`
+- [ ] Does not emit ad-hoc HTML or a prose-only teardown in the response
+- [ ] Surfaces a short markdown summary: file path, binding observation, gap count
+- [ ] Offers `/studio:annotate <file-path>` after writing
+
+**Anti-patterns:**
+- Producing the teardown only as prose in the response (Prose-Only Artifact)
+- Inventing custom HTML structure instead of using the kit template (Ad-Hoc HTML)
+- Skipping the annotation offer
+
+---
+
 ## Eval summary template
 
 ```
 Analysis Agents Eval Run — [date]
 Triggered by: [what changed]
 
-Scout Eval 1 — Filtered output:      PASS / FAIL
+Scout Eval 1 — Filtered output:           PASS / FAIL
 Scout Eval 2 — Position confirmation ban: PASS / FAIL
 Competitive Analyst Eval 3 — Map not list: PASS / FAIL
 Competitive Analyst Eval 4 — Table stakes: PASS / FAIL
+Competitive Analyst Eval 5 — HTML via template:PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]
