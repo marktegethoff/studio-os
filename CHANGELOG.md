@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0 — 2026-05-27
+
+- **`/studio:organize` skill:** scaffold and reconcile the canonical project layout. Scaffold mode creates `decisions/`, `specs/`, `design/`, `reviews/` and writes a decision record. Reconcile mode scans, classifies, and proposes artifact moves — proposes only in `--auto` mode, never executes unattended.
+- **Anti-pattern catalog:** `memory/anti-patterns.md` — 10 named failure modes (Feature Accumulation, Settings Dumping, Dashboard Creep, Decoration Compensation, Modal Inflation, Empty State Neglect, Premature Skin, Explanation as Compensation, Navigation Debt, AI Attribution Collapse). `critic`, `cd`, and `studio-slop` updated to load and cite catalog entries by name.
+- **Skill description trim:** all 26 skill `description` fields trimmed to ≤150 chars. Reduces Claude Code skill-listing budget consumption by ~57%.
+
 ## 1.2.0 — 2026-05-26
 
 **HTML-first artifact delivery.** Every artifact-producing skill now writes a designed HTML file to disk rather than emitting markdown prose in conversation. Artifacts are first-class reviewable objects: named, pathed, and offered to the annotation chain immediately.
