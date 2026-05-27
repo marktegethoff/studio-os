@@ -39,7 +39,7 @@ description: >
 
 model: sonnet
 color: cyan
-tools: ["WebSearch", "WebFetch", "Read"]
+tools: ["WebSearch", "WebFetch", "Read", "Write"]
 artifact: competitive-teardown
 ---
 

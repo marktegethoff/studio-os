@@ -260,6 +260,12 @@ For partial surfaces (a row, a card, a header), don't pad to a full canvas — s
 
 State the canvas dimensions and the surface they represent below each wireframe. Once aspect is correct, declare scale: cols ≈ N pt and rows ≈ M pt. Hold scale across all states of one surface so proportion is comparable state-to-state.
 
+### Precision
+
+Low fidelity describes detail level, not accuracy. A 10-row sketch and a 60-row detailed wireframe have the same requirement: every box must close, every column must align, every character count must be exact. A wireframe that looks aligned but has a count-off is wrong — not approximate.
+
+**Font for rendering:** Menlo, Cascadia Code, or Consolas. Never Courier New — it does not render box-drawing characters at consistent column widths, producing visual misalignment even when character counts are exact.
+
 ### Character set
 
 Use only these. No `+`, `-`, `|` fallback. No emoji. No double-width or combining characters. Spaces only — never tabs.

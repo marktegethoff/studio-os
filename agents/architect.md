@@ -30,7 +30,7 @@ description: >
 
 model: sonnet
 color: blue
-tools: ["Read", "Glob"]
+tools: ["Read", "Glob", "Write"]
 artifacts: [flow-diagram, decision-record]
 ---
 

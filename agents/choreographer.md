@@ -31,7 +31,7 @@ description: >
 
 model: sonnet
 color: cyan
-tools: ["Read", "Glob"]
+tools: ["Read", "Glob", "Write"]
 artifact: motion-spec
 ---
 

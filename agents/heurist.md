@@ -20,7 +20,7 @@ description: >
   - "Evaluate the convergence view — flag any AI-UX issues"
 model: opus
 color: cyan
-tools: ["Read", "Glob", "Grep", "WebSearch", "WebFetch"]
+tools: ["Read", "Glob", "Grep", "WebSearch", "WebFetch", "Write"]
 artifact: heuristic-report
 ---
 
