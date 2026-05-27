@@ -1,5 +1,5 @@
 ---
-description: Generate a click-to-annotate review overlay for any HTML artifact or prototype — a designed feedback harness (in the studio brand) that lets a human click-to-comment, answer brief-derived questions, set a disposition, and return agent-friendly feedback in one paste. Produces a new file; the source is never modified. The review harness every studio artifact inherits.
+description: "Attach a reviewable annotation harness to any HTML artifact. Produces an annotated HTML file with inline feedback overlay."
 argument-hint: "<path/to/file.html> [--brief <path>] [--questions [\"Q1\",\"Q2\"]]"
 ---
 

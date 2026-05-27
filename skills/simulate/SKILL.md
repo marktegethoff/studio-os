@@ -1,6 +1,6 @@
 ---
 name: simulate
-description: Run the simulation workflow for a scenario. Evaluates long-term system behavior across navigation at scale, retrieval quality, classification accuracy, and surface feel using the drum simulation model. Use to stress-test features or answer usage-scale questions.
+description: "Long-horizon behavior simulation. Models how the system behaves under edge cases and extended use across time."
 argument-hint: "<scenario to simulate, e.g. two_year_usage>"
 ---
 

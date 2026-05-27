@@ -1,5 +1,5 @@
 ---
-description: "Run a full Leadership Team review — PM, Design Director, and Distinguished Engineer — against an artifact. Produces a combined verdict with convergence notes and a single prioritized next action. If LT members produce conflicting positions on the same element, prompts to run a debate round. Use at meaningful gates: shipping a significant feature, handing a design to engineering, or any directional product decision."
+description: "Leadership team review — PM, CD, and DE gate verdicts in sequence. Produces an LT review (HTML) with combined and member verdicts."
 argument-hint: "<artifact to review — spec, design, implementation, or combination>"
 artifact: lt-review
 ---

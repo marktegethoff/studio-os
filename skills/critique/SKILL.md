@@ -1,5 +1,5 @@
 ---
-description: Run the critique workflow on an artifact. Spawns all nine design discipline specialists in parallel — Critic, Heurist, Accessibility, Visual Designer, Typesetter, Materialist, Writer, Choreographer, Mark Maker — and synthesizes their findings. If the findings exceed a tension threshold, prompts to run a debate round where each specialist responds to the others. Improvement-focused: surfaces what to fix, not whether to ship. For a ship gate, use /studio:review.
+description: "Nine-discipline quality review of a design artifact. Produces a critique report (HTML) with improvement findings per discipline."
 argument-hint: "<artifact to critique — design, spec, implementation, or combination>"
 artifact: critique-report
 ---

@@ -1,5 +1,5 @@
 ---
-description: Divergent brainstorm workflow. Takes a problem statement (not a solution) and produces 1–2 feature ideas ready for /solve or /design. Runs full design team divergence via parallel agents across seven lenses and three constraint frames, facilitated reduction to 3–5 ideas, synthetic user desirability, user selection, and parallel engineering feasibility. Use when exploring an opportunity space before committing to a direction.
+description: "Divergent directions before committing. Produces an ideation output (HTML) with named directions, each with a forcing tradeoff."
 argument-hint: "<problem statement or opportunity area>"
 artifact: ideation-output
 ---

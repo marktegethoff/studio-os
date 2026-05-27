@@ -1,5 +1,5 @@
 ---
-description: Interview-driven brief shaping. Asks one question at a time to validate who has the problem, what they do today, and what success looks like. Output is a locked product brief written to specs/product_brief_<slug>.html. Run before /design or /implement for any new product direction.
+description: "Interview-driven brief shaping. Produces a design brief (HTML) from a structured problem interview."
 argument-hint: "<rough problem area or feature idea>"
 artifact: design-brief
 ---

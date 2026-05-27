@@ -1,5 +1,5 @@
 ---
-description: Run the engineering workflow for a task brief. Requires a task brief produced by /scope as input — the brief defines spec, output, gates, verification, and escalation. Implementation runs end-to-end as a hybrid blueprint (deterministic + agentic nodes); the human re-enters at code review.
+description: "Engineering workflow — spec through verified build. Reads project-context stack and runs declared build and test commands."
 argument-hint: "<optional — usually the brief is already in context from /scope>"
 ---
 

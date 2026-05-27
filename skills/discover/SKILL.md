@@ -1,5 +1,5 @@
 ---
-description: Run the Studio OS discovery workflow for a problem or opportunity. Activates User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer in sequence. Use before design begins — especially for new product directions, underperforming features, or problems where the user's actual behavior is unclear.
+description: "Problem framing, research, and assumption mapping. Produces a user journey and assumption register before design begins."
 argument-hint: "<problem or feature area to investigate>"
 artifact: user-journey
 ---

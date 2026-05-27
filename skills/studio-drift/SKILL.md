@@ -1,5 +1,5 @@
 ---
-description: Audit the decision ledger and system for drift and supersession, then route each candidate to the gate that owns it (CD / DE / PM) for a judged recommendation. Agents recommend; you decide — nothing is auto-resolved. Run on the monthly ledger-drift cadence, or any time the ledger feels out of sync with the work.
+description: "Drift diagnostic — detects when work has lost direction. Names what changed and what the corrective action is."
 argument-hint: "[optional: a path or area to focus the audit]"
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: Activate Studio OS and orient the user. Routes to the appropriate workflow or discipline based on what the user is working on or what artifact they need. Use as the entry point when unsure which workflow to invoke or what can be produced.
+description: "Entry point — orient, route, and show what each skill and agent produces. Run at the start of any session."
 argument-hint: "[optional: initial intent, problem statement, or artifact type]"
 ---
 

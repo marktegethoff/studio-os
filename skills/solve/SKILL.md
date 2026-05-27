@@ -1,5 +1,5 @@
 ---
-description: Find the essential, categorically right solution to a hard problem. Runs a convergence loop (max 3 iterations) through Historian → Design → Critic → Creative Director → Calibration Gate until the solution is inevitable. Use when previous attempts haven't converged or the problem has no obvious right answer.
+description: "Convergence loop for hard problems. Iterates perspectives until a recommendation emerges; stops when the argument is settled."
 argument-hint: "<hard problem to solve>"
 ---
 

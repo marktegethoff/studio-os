@@ -1,5 +1,5 @@
 ---
-description: Run the simplification workflow on a file, directory, or code area. Audits for complexity drift, converges on a simplification plan via Critic + Architect + Distinguished Engineer, then implements. Distinguished Engineer gates both the plan and the final result. Use after a feature ships, when code feels suspect, or on a periodic coherence pass.
+description: "Codebase coherence pass. Identifies duplication, dead code, and naming drift; produces a simplification plan before touching code."
 argument-hint: "<file, directory, or description of code area to simplify>"
 ---
 

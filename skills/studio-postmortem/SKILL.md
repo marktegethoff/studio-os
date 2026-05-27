@@ -1,5 +1,5 @@
 ---
-description: Production-feedback intake — turn a shipped failure or a wrong prediction into studio memory. Routes the lesson to a candidate Named Ban (a categorical prohibition) or a precedent (a reusable decision), so the same mistake isn't made twice. Run when something that shipped didn't work, or when a prediction proved wrong.
+description: "Post-ship retrospective. Captures what shipped, what broke, what was learned, and what the system should change."
 argument-hint: "<what shipped and how it failed>"
 ---
 

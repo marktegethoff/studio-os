@@ -1,5 +1,5 @@
 ---
-description: Interview-driven task scoping. Produces a task brief — five fields (SPEC, OUTPUT, GATES, VERIFY, ESCALATE) — that defines work tight enough to delegate to /implement or /prototype. The brief is the contract that lets execution run unattended. Run before any execution skill.
+description: "Task scoped tight enough to delegate. Produces a task brief (HTML) with acceptance criteria and explicit out-of-scope."
 argument-hint: "<rough task description>"
 artifact: task-brief
 ---

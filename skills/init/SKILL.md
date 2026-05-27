@@ -1,5 +1,5 @@
 ---
-description: Set up Studio OS for a new project. Runs a five-phase flow — org context check, product interview (which generates the engineer specialist on demand if one for your stack does not yet exist), role calibration, personalization, and the paired-scaffold execution that creates code/app + code/canvas + code/shared with the by-reference dependency wired. Writes project-context.md (with the engineering manifest) and role-context.md to .claude/memory/. Re-runnable with --update to refresh context, promote shape, or convert manual → complete.
+description: "Set up Studio OS for a new project. Runs product interview, role calibration, personalization, and scaffold execution."
 argument-hint: "[optional: --update [--generator=xcodegen] to refresh / promote / convert]"
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: Run the Studio OS prototype-to-production handoff workflow. Takes a tested prototype to a complete engineering-ready package — all states, all flows, synthetic data, UAT scenarios, and a build spec with DS token translation. Use after a prototype has been validated and before engineering begins.
+description: "Prototype to production-ready package. Produces a state inventory and component spec from a validated prototype."
 argument-hint: "<feature or component being handed off>"
 artifact: state-inventory
 ---
