@@ -9,9 +9,26 @@ Run the experiment workflow for a hypothesis.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for memory check · [SONNET] for experiment design and evaluation
-
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
+
+---
+
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
 
 ---
 
@@ -44,7 +61,7 @@ Hypothesis: $ARGUMENTS
 
 ---
 
-## [HAIKU] Step 0 — PM brief check
+## Step 0 — PM brief check
 
 If this hypothesis relates to a customer problem or product direction — what to build, who to build for, what behavior to change — check for a validated PM brief before designing the experiment.
 
@@ -58,7 +75,7 @@ If this is a technical, structural, or behavioral hypothesis — not a customer 
 
 ---
 
-## [HAIKU] Step 1 — Memory check
+## Step 1 — Memory check
 
 Using project context loaded above, check for prior experiment results. If `specs/experiments/` exists, read all files there. If `.claude/memory/index.md` exists, read it. If this hypothesis has already been tested, report the prior result and stop. Do not re-run experiments with known conclusions.
 
@@ -66,13 +83,12 @@ If no memory exists, proceed to Step 2.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Memory check complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
+> **⏸ PAUSE (skipped in --auto) — Memory check complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [SONNET] Steps 2–6 — Experiment
+## Steps 2–6 — Experiment
 
 ### Step 2 — Philosophy check
 

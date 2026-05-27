@@ -13,6 +13,25 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ---
 
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+
+---
+
 ## What this skill does
 
 Three senior gates review the artifact independently from their distinct mandates:
@@ -53,7 +72,7 @@ State the classification, the phase, and which LT members will review before pro
 
 ---
 
-> **⏸ PAUSE — Confirm scope and phase.**
+> **⏸ PAUSE (skipped in --auto) — Confirm scope and phase.**
 > Classification complete. Confirm which LT members should review and the phase (**pre-ship**, **checkpoint**, or **post-ship audit**), and provide any additional artifact context (file paths, spec location, relevant decisions).
 > Reply **"confirmed"** or adjust.
 
@@ -135,7 +154,7 @@ Phase: [Pre-ship / Checkpoint / Post-ship audit]
 
 ---
 
-> **⏸ PAUSE — Conflict threshold [MET / NOT MET].**
+> **⏸ PAUSE (skipped in --auto) — Conflict threshold [MET / NOT MET].**
 >
 > *If threshold NOT MET:* Round 1 is complete. Reply **"done"** to close, or ask follow-up questions.
 >

@@ -7,11 +7,28 @@ Find the essential, categorically right solution to a hard problem.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for pre-loop context · [SONNET] for iteration work · [OPUS] for Creative Director + calibration gate each iteration
-
 **Six Functions (see CLAUDE.md).** The solution this loop converges on is a design artifact — it must satisfy all six functions. The loop covers framing (Historian/context), generation (Design), reduction (Critic), and the gate (CD); ensure craft and usability/accessibility are represented before the solution is treated as final.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
+
+---
+
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
 
 ---
 
@@ -56,7 +73,7 @@ Maximum iterations: 3. If the gate does not pass by iteration 3, the command rep
 
 ---
 
-## [HAIKU] Step 0 — PM brief check
+## Step 0 — PM brief check
 
 If this is a product direction problem — what to build, who to build for, or what outcome to target — check for a validated PM brief before the loop begins.
 
@@ -83,8 +100,7 @@ List every constraint that applies: embedded invariants, prior ledger decisions 
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Pre-loop context complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before beginning iteration 1.
+> **⏸ PAUSE (skipped in --auto) — Pre-loop context complete.**
 > Reply **"continue"** when ready.
 
 ---
@@ -93,20 +109,20 @@ List every constraint that applies: embedded invariants, prior ledger decisions 
 
 Each iteration follows this sequence on [SONNET], then pauses for [OPUS] judgment.
 
-### [SONNET] 1. Historian pass
+### 1. Historian pass
 What has been tried before on this class of problem? What survived? What failed and why?
 Do not invent precedent. Do not generalize. Cite specific examples.
 
 This pass runs once — in iteration 1 only. Do not repeat the Historian pass in iterations 2 and 3.
 
-### [SONNET] 2. Design pass
+### 2. Design pass
 Apply the Architect and Designer disciplines (embedded above).
 Produce the simplest structure that satisfies the stated constraints.
 Maximum 2 directions. Recommend one. State why.
 
 If the solution involves a surface (interaction model, visual hierarchy, motion, copy): after the design pass, apply the relevant sub-team disciplines inline — Choreographer for motion, Typesetter for type hierarchy, Writer for language, Visual Designer for visual execution. Do not invoke all four by default; apply only those the solution requires.
 
-### [SONNET] 3. Critic pass — escalating by iteration
+### 3. Critic pass — escalating by iteration
 
 Apply the Critic discipline (embedded above).
 
@@ -118,7 +134,7 @@ The critic's standard escalates each iteration. By iteration 3, the question is 
 
 ---
 
-### [SONNET] 3.5 — Marketer check
+### 3.5 — Marketer check
 
 Apply the Marketer discipline: commercial pressure test.
 
@@ -132,13 +148,12 @@ This is not a veto — the loop continues regardless. But if the solution fails 
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Iteration work complete. Switch to **[OPUS]** (`claude-opus-4-6`) for Creative Director evaluation and calibration gate.
+> **⏸ PAUSE (skipped in --auto) — Iteration work complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-### [OPUS] 4. Creative Director evaluation
+### 4. Creative Director evaluation
 
 Apply the embedded ethos and decision hierarchy.
 
@@ -148,7 +163,7 @@ State a verdict: INEVITABLE / NOT YET / STRUCTURALLY WRONG.
 - **NOT YET:** something remains that is not in its essential form. Name it precisely. State what is wrong and what would make it right. Re-enter the loop.
 - **STRUCTURALLY WRONG:** the current direction cannot converge. The problem framing or a constraint is incorrect. Stop. Reframe before continuing.
 
-### [OPUS] 5. Calibration gate
+### 5. Calibration gate
 
 Apply the embedded calibration gate. Answer each question explicitly (YES / NO). All five must pass. Any failure: identify which failed, why, and what must change.
 
@@ -158,8 +173,7 @@ Apply the embedded calibration gate. Answer each question explicitly (YES / NO).
 
 If the gate does not pass and iterations remain:
 
-> **⏸ PAUSE — Model switch required.**
-> Judgment complete. Switch back to **[SONNET]** (`claude-sonnet-4-6`) to begin the next iteration.
+> **⏸ PAUSE (skipped in --auto) — Judgment complete.**
 > Reply **"continue"** when ready.
 
 State explicitly before re-entering:

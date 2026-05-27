@@ -7,9 +7,26 @@ Run the engineering blueprint against a task brief.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for brief validation · [SONNET] for implementation and QA
-
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
+
+---
+
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
 
 ---
 
@@ -58,7 +75,7 @@ Argument (optional): $ARGUMENTS
 
 ---
 
-## [HAIKU · Det] Step 0 — Task brief required
+## [Det] Step 0 — Task brief required
 
 Implementation requires a task brief produced by `/scope`. Without one, implementation runs without a verifiable contract.
 
@@ -96,7 +113,7 @@ If any field is malformed, stop and ask the user to revise via `/scope`.
 
 ---
 
-## [HAIKU · Ag] Step 0.5 — Engineering handoff check
+## [Ag] Step 0.5 — Engineering handoff check
 
 If the brief's SPEC field points to a file, check whether the spec includes a complete engineering handoff — component states, design token names, motion parameters, accessibility strings.
 
@@ -108,13 +125,13 @@ Do not block if the user accepts the risk. But name the gap.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Steps 0–0.5 complete; brief loaded. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
+> **⏸ PAUSE (skipped in --auto) — Brief loaded.**
+> Steps 0–0.5 complete.
 > Reply **"continue"** when ready.
 
 ---
 
-## [SONNET · Ag] Step 1 — Restate the contract
+## [Ag] Step 1 — Restate the contract
 
 Before writing any code, restate the brief's GATES as the "what must not break" list. These are the invariants. Implementation that violates a gate is implementation that failed.
 
@@ -122,7 +139,7 @@ State this list explicitly so the user sees what you understand the contract to 
 
 ---
 
-## [SONNET · Ag] Step 2 — Engineering
+## [Ag] Step 2 — Engineering
 
 Apply the project's engineer specialist (per `stack` in project-context — e.g. `swift-engineer`, `web-engineer`, or the `engineer` base).
 
@@ -147,7 +164,7 @@ Do not interpret partial output as success. Trust the exit code only.
 
 ---
 
-## [SONNET · Ag] Step 3a — Build fix (one attempt)
+## [Ag] Step 3a — Build fix (one attempt)
 
 The build failed. Read the filtered diagnostics from the script's stderr output. Identify the root cause. Make exactly **one focused fix**.
 
@@ -188,7 +205,7 @@ If it exits non-zero, tests failed — proceed to Step 4a.
 
 ---
 
-## [SONNET · Ag] Step 4a — Test fix (one attempt)
+## [Ag] Step 4a — Test fix (one attempt)
 
 Tests failed. Read the diagnostics. Determine whether the failure is:
 
@@ -211,7 +228,7 @@ If exit non-zero a second time, **stop** with the same blueprint-halted report f
 
 ---
 
-## [SONNET · Ag] Step 5 — QA scenarios
+## [Ag] Step 5 — QA scenarios
 
 Apply the QA Engineer discipline.
 
@@ -245,7 +262,7 @@ If any gate fails, **stop**. Report the violation. Do not attempt to fix gate vi
 
 ---
 
-## [SONNET · Ag] Step 7 — Report
+## [Ag] Step 7 — Report
 
 Produce a structured report against the brief:
 

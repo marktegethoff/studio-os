@@ -12,6 +12,25 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ---
 
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+
+---
+
 ## Project Context
 
 Read project context in this order:
@@ -62,7 +81,7 @@ Ask one question:
 
 ---
 
-> **⏸ PAUSE — Title and spec.**
+> **⏸ PAUSE (skipped in --auto) — Title and spec.**
 > Provide a one-line title and either a spec path or a brief inline description.
 
 ---
@@ -102,7 +121,7 @@ Ask:
 
 ---
 
-> **⏸ PAUSE — Output.**
+> **⏸ PAUSE (skipped in --auto) — Output.**
 > Confirm the proposed output, or list the exact files/artifacts expected.
 
 ---
@@ -122,7 +141,7 @@ Present the extracted gates:
 
 ---
 
-> **⏸ PAUSE — Gates.**
+> **⏸ PAUSE (skipped in --auto) — Gates.**
 > Confirm, add, or remove gates.
 
 ---
@@ -142,7 +161,7 @@ Ask:
 
 ---
 
-> **⏸ PAUSE — Verify.**
+> **⏸ PAUSE (skipped in --auto) — Verify.**
 > Confirm the verification method or add additional checks.
 
 ---
@@ -162,7 +181,7 @@ Ask:
 
 ---
 
-> **⏸ PAUSE — Escalation.**
+> **⏸ PAUSE (skipped in --auto) — Escalation.**
 > Confirm defaults or add task-specific escalation triggers.
 
 ---
@@ -187,7 +206,7 @@ Ask:
 
 ---
 
-> **⏸ PAUSE — Brief review.**
+> **⏸ PAUSE (skipped in --auto) — Brief review.**
 > Reply **'locked'** to confirm, or revise a field.
 
 ---
@@ -206,7 +225,7 @@ On brief confirmation, ask the user which path the work should take:
 
 ---
 
-> **⏸ PAUSE — Path selection.**
+> **⏸ PAUSE (skipped in --auto) — Path selection.**
 > Reply **`/prototype`** for Canvas validation first, or **`/implement`** for production direct. If unsure, the bias is toward prototype for anything new or visual.
 
 ---
