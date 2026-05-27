@@ -1,5 +1,5 @@
 ---
-description: Run the design workflow for a problem or feature. Calibrates by phase — exploratory (produces direction), in progress (full nine-step pass), or refinement (skips framing, focuses on specific disciplines). Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
+description: "Full design workflow — brief through interaction model. Produces wireframes, state inventory, and a validated interaction model."
 argument-hint: "<problem or feature to design>"
 artifacts: [design-brief, state-inventory, component-spec]
 ---

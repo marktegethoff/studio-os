@@ -87,6 +87,12 @@ These are failure modes the Critic categorically rejects — in evaluations it r
 
 ---
 
+## Anti-pattern catalog
+
+Load `memory/anti-patterns.md` before evaluating any design artifact. Cite entries by name when a pattern fires. The Named Bans above govern the Critic's own evaluation behavior; the catalog names failure modes in the work being evaluated — they are distinct in kind.
+
+---
+
 ## Discipline: Critic
 
 **Purpose:** reduce complexity to the essential form.

@@ -1,6 +1,6 @@
 ---
 name: experiment
-description: Run the experiment workflow for a hypothesis. Checks memory for prior results, frames the hypothesis precisely (IF/THEN/BECAUSE), designs the experiment, and evaluates across short/medium/long-term scenarios using the drum simulation model.
+description: "Experiment design and evaluation. Produces an experiment plan (HTML) with hypothesis, metric, and falsification condition."
 argument-hint: "<hypothesis to test>"
 artifact: experiment-plan
 ---

@@ -136,6 +136,22 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** identifies the core claim of each (or "none found") · flags the hollow one as SLOP, naming the specific markers fired (vocabulary-without-judgment, generic, format-without-substance, hedging, prompt-restatement, unfalsifiable, citation-without-lesson) with quoted spans · passes the substantive one as CLEAN · names the single change that would make the slop output substantive.
 **Anti:** passes the hollow output because it "looks like good studio work" (the exact failure the test exists to catch); flags the substantive output as slop; vague "feels thin" with no marker named.
 
+## studio-slop — Eval: catalog integration for design artifacts
+**Prompt:** "Run the Slop Test on this design artifact." *(provide a critique report that passes the seven slop markers — makes specific, falsifiable claims — but names no anti-pattern entries despite the work having a visible Settings Dumping instance)*
+**Pass:** loads `memory/anti-patterns.md` alongside the seven markers · identifies that the artifact has Settings Dumping and names it · reports it as a structural finding (the critique's claims are specific but wrong — they missed the failure mode) · verdict SLOP because passing the markers but missing catalog entries on a design artifact is still hollow.
+**Anti:** passes the artifact as CLEAN because the markers pass (ignores catalog integration); does not load `memory/anti-patterns.md` for design artifacts; reports the catalog finding as a marker violation instead of a separate catalog finding.
+
+---
+
+## organize — Eval: scaffold creates folders, reconcile proposes only
+**Pass criteria:**
+- Scaffold mode: detects missing folders and creates them with .gitkeep; updates project-context.md spec_path and decisions_path if non-canonical; writes a decision-record.html artifact via the kit template.
+- Reconcile mode: scans and classifies artifacts; presents a proposal before touching anything; does NOT execute moves in --auto mode — writes the proposal as a decision record and stops.
+- Does not touch source code directories (code/, app/), tooling (.claude/, .git/, node_modules/), or Xcode project files.
+- Anti-pattern: does not create folders speculatively — only the four canonical output folders (decisions/, specs/, design/, reviews/), never invents new ones.
+- HTML artifact: writes decisions/<date>-layout.html (scaffold) or decisions/<date>-reconcile.html (reconcile) via the decision-record kit template; does not emit prose-only output.
+- Markdown summary in conversation: lists what was created or proposed; surfaces the artifact path.
+
 ---
 
 ## Eval summary template

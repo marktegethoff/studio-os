@@ -1,5 +1,5 @@
 ---
-description: Render a Review Surface for completed work of any kind — a designed, self-contained HTML page (in the studio visual language) with a summary, the evidence, and structured questions; opens it in the browser; waits for the response block. The bidirectional handback from agents to humans without making them read raw markdown. Works for any work type, not only iOS snapshots.
+description: "Collect structured feedback on a design artifact from a named reviewer. Produces a feedback record in the reviews/ directory."
 argument-hint: "<optional — usually inferred from the prior workflow context>"
 ---
 

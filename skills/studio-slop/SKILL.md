@@ -1,5 +1,5 @@
 ---
-description: "The Slop Test — the studio's quality floor. Checks a piece of studio output (an agent response, an artifact, a spec, a verdict) for competent-looking-but-vacuous content — discipline vocabulary applied without discipline judgment. Built to run on top of a passing eval suite: the evals confirm the agent did the right thing; the Slop Test confirms the output actually says something."
+description: "Quality floor check. Tests studio output for the seven slop markers — competent-looking content with no substantive claim underneath."
 argument-hint: "<the output to test — paste it, or point to a file>"
 ---
 
@@ -24,6 +24,12 @@ Read the output and check each. Any marker firing is a finding; the verdict is S
 5. **Prompt restatement** — describes the problem back to the user, possibly reorganized, without advancing it. Motion mistaken for progress.
 6. **Unfalsifiable claim** — an assertion with no counter-argument and no failure condition. If it can't be wrong, it isn't a claim.
 7. **Citation without lesson** — name-drops a reference, figure, or precedent without the method or what to do differently because of it.
+
+---
+
+## Anti-pattern catalog
+
+For slop tests on design artifacts (specs, wireframes, interaction models, briefs), also load `memory/anti-patterns.md`. The seven slop markers test whether the output makes substantive claims; the anti-pattern catalog tests whether the claims identify real structural failures. Both gates apply. An output that passes the slop markers but names no anti-patterns where anti-patterns are present has substantive claims that are wrong, not hollow.
 
 ---
 

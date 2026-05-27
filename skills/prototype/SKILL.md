@@ -1,5 +1,5 @@
 ---
-description: Run the testable prototype workflow. Scopes the test question, establishes minimum fidelity, defines build and test criteria in parallel, and routes findings. Speed-to-testable is the constraint — not polish. Use when you need to learn something fast before committing to build.
+description: "Testable prototype from a validated interaction model. Produces a runnable prototype and a prototype brief."
 argument-hint: "<what you're trying to learn or validate>"
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: Run the Studio OS measurement workflow for a feature. Activates Metrics Definer → PM gate → Architect in sequence. Produces a complete measurement plan — lagging indicator, leading indicators, instrumentation requirements, baselines, counter-metrics, and review cadence — before implementation begins. Use after a design brief exists and before engineering begins.
+description: "Metrics plan and instrumentation. Produces a metrics plan (HTML) with lagging indicator, leading indicators, and counter-metrics."
 argument-hint: "<feature or change to define success metrics for>"
 artifact: metrics-plan
 ---

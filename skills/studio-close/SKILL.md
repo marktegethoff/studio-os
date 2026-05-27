@@ -1,5 +1,5 @@
 ---
-description: Close a Studio OS session — deposit what was learned so the system compounds instead of forgetting. Captures craft/process preferences, ledger decisions, eval deltas, and pending migrations. Run at the end of a working session, or fired automatically by the session-end deposit hook.
+description: "Close a studio session cleanly. Summarizes decisions made, artifacts produced, and the clear next action."
 argument-hint: "[optional: a one-line summary of the session]"
 ---
 

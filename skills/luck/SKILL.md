@@ -1,6 +1,6 @@
 ---
 name: luck
-description: Run the Luck durability diagnostic when evaluating whether a system, artifact, or decision will compound and persist — or collapse. Activate when designing infrastructure, making architectural choices with long-term consequences, evaluating "build vs. defer" decisions, or assessing cross-project artifacts. Do NOT invoke for tactical decisions (bug fixes, single-use UI changes). Triggered by /luck or when the user asks to evaluate durability, longevity, or whether something will compound.
+description: "Durability diagnostic for infrastructure decisions. Runs the seven-facet Luck model and returns COMPOUND / SUSTAIN / STAGNATE / COLLAPSE."
 ---
 
 # Luck — Durability Diagnostic
