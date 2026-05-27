@@ -143,9 +143,9 @@ State explicitly before re-entering the loop:
 
 ---
 
-## [SONNET] Step 6 — iOS Engineer: Implement
+## [SONNET] Step 6 — Engineer: Implement
 
-Apply the iOS Engineer discipline.
+Apply the engineer specialist for the project's stack. Read the stack declared in `project-context.md`; if a specialist exists (e.g., `swift-engineer`, `web-engineer`), use it. If none is declared, use the base `engineer`.
 
 Before writing any code:
 1. State "What must not break" — specific behaviors, file paths, user-visible outcomes.

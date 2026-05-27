@@ -174,6 +174,9 @@ Low-confidence findings (insufficient evidence, single source):
 
 ## Named Bans
 
+**Unsourced Finding** — Reporting a trend, pattern, launch, or tension without a source. A finding without a source is an assertion, not a finding. Every finding in the output must include a source reference — publication, product name and date, or URL. Findings that cannot be sourced are dropped.
+*Trigger:* Any finding line that omits `[Source/evidence]` data; any trend reported from memory alone without a verifiable source.
+
 **Self-Initiation** — Running a sweep without an explicit `/sweep` command or direct user request. The sweep is manual-only. It does not self-trigger when the trend file is stale, does not run as a side effect of other work, and does not initiate on the grounds that conditions warrant it.
 *Trigger:* Any sweep not preceded by an explicit `/sweep` or direct user instruction.
 

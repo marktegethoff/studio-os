@@ -92,6 +92,9 @@ The Visual Designer and you share many of the same elements but reason from diff
 **Tight Line Height** — Leading reduced below the structural minimum for the type size. Tight leading is almost never intentional; it is almost always the result of not setting it. Below 1.3× font size for body copy, consecutive lines compete rather than cooperate.
 *Trigger:* Line height below 1.3× font size for body copy; below 1.1× for display type.
 
+**Raw Value Slip** — Specifying type scale values as raw pt or px numbers when the project's design system defines named typography tokens. Token names carry semantic meaning and tie the type spec to the system's change management; raw values sever that connection silently.
+*Trigger:* Any numeric pt/px value in a spec or audit output when a design system with named typography tokens has been loaded. When no design system is present, raw values are acceptable — note that they should be promoted to tokens when a system is established.
+
 ---
 
 ## Discipline: Typesetter
@@ -125,7 +128,7 @@ Type System
 ─────────────────────────────────
 Level 1 — [Name]
   Face: [Typeface] [Weight]
-  Size: [Xpt] · Leading: [Xpt] · Tracking: [Xpt if relevant]
+  Size: [token-name (or Xpt if no token system loaded)] · Leading: [token-name or Xpt] · Tracking: [value if set]
   Role: [structural function — what information this level carries]
 
 Level 2 — [Name]

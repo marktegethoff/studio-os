@@ -137,18 +137,61 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ---
 
-## Systematist — Eval 7: Drift over preference
+## Accessibility — Eval 7: WCAG 2.1 AA violation identification
 
-**Testing:** Systematist audits a design system for measurable drift (token bypass, pattern proliferation, naming incoherence) — not aesthetic preference — and names the single source of truth.
+**Testing:** Accessibility calculates actual contrast ratios and tap target sizes against WCAG 2.1 AA thresholds — not just flags "low contrast" without specifics.
+
+**Prompt:**
+> "A card component uses #888888 text on a #FAFAFA background. The action button inside the card has a tap target of 28×28pt. Dark mode inverts to #777777 text on #1A1A1A. Is this accessible?"
+
+**Pass criteria:**
+- [ ] Accessibility calculates or estimates contrast ratios — does not say "low contrast may be an issue" without the ratio
+- [ ] Identifies light mode text (#888888 on #FAFAFA) as failing AA for normal text (needs 4.5:1; ratio is ~3.7:1)
+- [ ] Identifies the 28×28pt tap target as failing WCAG 2.5.5 (minimum 44×44pt)
+- [ ] Evaluates dark mode (#777777 on #1A1A1A) independently — does not assume light mode result carries over
+- [ ] Each finding names the specific WCAG criterion violated and a concrete remediation
+
+**Anti-patterns:**
+- "Low contrast may be an issue" without calculating or estimating the ratio
+- "Consider increasing the tap target size" without naming the 44pt minimum
+- Treating dark mode as automatically passing because it wasn't listed as a problem
+- Listing WCAG criterion numbers without applying them to the specific values given
+
+---
+
+## Design Validator — Eval 8: Token mismatch reporting
+
+**Testing:** Design Validator identifies token mismatches between mockup values and the design system spec, and reports without prescribing the fix.
+
+**Prompt:**
+> "The header uses `#1C1C1E` for the title text in dark mode. The design system defines the primary text token for dark mode as `#FFFFFF` with a fallback of `#F2F2F7`. The mockup also uses 16pt for body copy, but the design system specifies body-default as 17pt. Run a design system validation."
+
+**Pass criteria:**
+- [ ] Design Validator identifies the color mismatch: mockup value #1C1C1E does not match the token (#FFFFFF / #F2F2F7)
+- [ ] Design Validator identifies the type size mismatch: 16pt where the body-default token is 17pt
+- [ ] Reports findings only — does not prescribe "change to #FFFFFF"
+- [ ] Names which token is violated, not just that something is wrong
+
+**Anti-patterns:**
+- "The text color looks dark for dark mode" — names the observation but not the token violation
+- Prescribing "change this to #FFFFFF" rather than naming the token and the discrepancy
+- Combining find and fix in one step (reports prescriptions, not findings)
+- Missing the type size violation while catching the color violation
+
+---
+
+## Systematist — Eval 9: Drift over preference
+
+**Testing:** Systematist audits a design system for measurable drift (token bypass, pattern proliferation, naming incoherence) — not aesthetic preference — and identifies the decision required to reduce count.
 
 **Prompt:**
 > "Our codebase has three button components — PrimaryButton, ActionButton, and CTAButton — that look nearly identical. Spacing values are sometimes raw numbers, sometimes tokens. Is our design system healthy?"
 
 **Pass criteria:**
-- [ ] Systematist names pattern proliferation: three components doing one job is a defect, and identifies which should be the single source of truth
+- [ ] Systematist names pattern proliferation: three components doing one job is a defect, and surfaces the decision required (one of these three should be canonical)
 - [ ] Systematist names token drift: raw values bypassing tokens, and that the fix is to route them through the token system
 - [ ] Findings are measurable (counts of duplicates, instances of raw values), not aesthetic ("the buttons feel inconsistent")
-- [ ] Recommends consolidation to one component + one token source, not a fourth "unified" button
+- [ ] Identifies that the component count must reduce — does not propose a fourth "unified" button as the solution
 
 **Anti-patterns:**
 - "The buttons could look more consistent" — preference, not a drift finding
@@ -164,13 +207,15 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 Surface Agents Eval Run — [date]
 Triggered by: [what changed]
 
-Materialist Eval 1 — Material language:    PASS / FAIL
-Materialist Eval 2 — Incoherence escalation: PASS / FAIL
-Visual Designer Eval 3 — Value not direction: PASS / FAIL
-Mark Maker Eval 4 — Reduction and brevity: PASS / FAIL
-Heurist Eval 5 — Additive fix ban:         PASS / FAIL
-Heurist Eval 6 — User error as design error: PASS / FAIL
-Systematist Eval 7 — Drift over preference: PASS / FAIL
+Materialist Eval 1 — Material language:         PASS / FAIL
+Materialist Eval 2 — Incoherence escalation:    PASS / FAIL
+Visual Designer Eval 3 — Value not direction:   PASS / FAIL
+Mark Maker Eval 4 — Reduction and brevity:      PASS / FAIL
+Heurist Eval 5 — Additive fix ban:              PASS / FAIL
+Heurist Eval 6 — User error as design error:    PASS / FAIL
+Accessibility Eval 7 — WCAG AA violations:      PASS / FAIL
+Design Validator Eval 8 — Token mismatch:       PASS / FAIL
+Systematist Eval 9 — Drift over preference:     PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]

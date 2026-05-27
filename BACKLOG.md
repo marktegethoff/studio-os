@@ -18,9 +18,9 @@ Scaffold and reconcile the canonical project layout (see `STRUCTURE.md`): one `c
 - **Open question:** spec-first (brief + eval, then build) vs. prototype-on-LogApp (build, run reconcile as its first test, then harden).
 - Needs a brief + an eval per the coverage rule.
 
-## 2. Run the full eval suite live — *built, never run end-to-end*
+## 2. Run the full eval suite live — *done*
 
-`evals/` exists (per-area files + README runner) and was sampled behaviorally, but the whole suite has not been executed start-to-finish. Run it, reconcile the live roster/skill set against the coverage table, fix anything that surfaces.
+Full suite run 2026-05-26. Results: 28/35 agents PASS, 3 FAIL (cd, surveyor, historian), 2 PARTIAL (typesetter, systematist), 2 coverage gaps (accessibility, design-validator). All identified issues fixed in the same session. Full report: `evals/suite-run-2026-05-26.md`.
 
 ## 3. Release / version discipline — *done*
 

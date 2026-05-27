@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.1 — 2026-05-26
+
+First full eval suite run (Backlog #2). Fixed every issue surfaced:
+
+- **`cd`** — added Scope rule: engineering/implementation questions are routed to the Engineer, not verdicted.
+- **`historian`** — added user-stated scope exclusion rule: excluded material is honored, never folded in as context.
+- **`surveyor`** — added Unsourced Finding Named Ban: every finding requires a source; unsourced findings are dropped.
+- **`typesetter`** — added Raw Value Slip Named Ban; output template now models token-name syntax.
+- **`simplify` skill** — removed "iOS Engineer" stack-token; now routes to the project's declared specialist.
+- **`annotate` skill** — added routing note: non-HTML artifacts use `gather-feedback` instead.
+- **`surface-agents.eval.md`** — added eval scenarios for `accessibility` (WCAG AA violations) and `design-validator` (token mismatch), closing two coverage-rule gaps. Updated Systematist eval criterion to match agent's governance stance. Renumbered evals 7–9.
+
+Full suite report: `evals/suite-run-2026-05-26.md`.
+
 ## 1.1.0 — 2026-05-26
 
 - **Paired-scaffold capability.** `/studio:init` now scaffolds production

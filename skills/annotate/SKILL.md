@@ -7,6 +7,8 @@ argument-hint: "<path/to/file.html> [--brief <path>] [--questions [\"Q1\",\"Q2\"
 
 Generate a click-to-annotate overlay for any HTML prototype. Produces a new file — the source is never modified.
 
+**Non-HTML artifacts** (design briefs, specs, code reviews, prose documents): use `/studio:gather-feedback` instead. This skill requires an HTML file; non-HTML work cannot receive the overlay.
+
 ## Usage
 
 ```
