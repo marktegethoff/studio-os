@@ -69,11 +69,9 @@ A standalone tool that generates — variants, or the studio's design vocabulary
 
 Not a rejection — an open question: today the studio *reasons, critiques, and specifies* rather than generating. A generator is a genuine expansion of what Studio OS is, so it deserves a Strategist/PM pass on shape before any build: does the studio itself generate, or does a separate "Live Mode" companion generate *under* the studio's disciplines and gates? Settle the position, then scope.
 
-## 11. Stack-neutralize the workflow skills — *Log/iOS coupling (high priority)*
+## 11. Stack-neutralize the workflow skills — *done*
 
-`implement` (~28 refs), `prototype` (~10), and lighter `scope` / `init` / `gather-feedback` / `simplify` hardcode Log's stack: "native iOS behaviors", SwiftUI/GRDB, `@testable import Log`, `Log/LogTests/`, `Log Canvas/`, and `build-app` / `build-canvas` / `test-app`. The engineer **agents** were already de-coupled (stack-neutral `engineer` + `ios-engineer` / `web-engineer`), but these **skills** were never updated to match — they still embed the iOS discipline inline. This breaks "product-agnostic" directly.
-
-Fix — **one shared source, never per-skill hardcoding.** Declare the project's stack details ONCE in `project-context.md`: `stack`, `code_root`, `build_cmd`, `test_cmd`, `prototype_path` (one canonical key set, Product tier). EVERY skill references those keys; no skill repeats a path or command. Cardinal rule: a build/test command or path lives in exactly one place. `implement` / `prototype` become stack-neutral orchestration — delegate discipline to the project's engineer specialist (selected from `stack`) and run the *declared* commands, never "SwiftUI… run build-app". The current skills duplicate Log specifics across files; the fix **centralizes** them — it does not swap Log-hardcoding for project-hardcoding in each skill. Decide the canonical key set, add it to the `project-context` template + STRUCTURE.md, then point every skill at it and strip the hardcoded copies.
+Skills now read `stack`, `build_cmd`, `test_cmd`, and related keys from `project-context.md`; no skill hardcodes a path, command, or framework. Engineer discipline delegated to the project's declared specialist. (2026-05-27)
 
 ### Considered, not pursuing (for now)
 

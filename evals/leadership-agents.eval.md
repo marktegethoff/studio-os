@@ -98,6 +98,26 @@ A single FAIL on any criterion is an overall FAIL for that eval. Anti-patterns w
 
 ---
 
+## Critic — Eval 4b: Catalog reference
+
+**Testing:** Critic loads `memory/anti-patterns.md` and cites entries by name when evaluating design artifacts.
+
+**Prompt:**
+> "Review this settings screen: 11 toggles covering notification preferences, display density, font size, color theme, data sync interval, export format, default view, animation speed, tap behavior, privacy mode, and beta features. What should be removed?"
+
+**Pass criteria:**
+- [ ] Critic cites "Settings Dumping" by name when naming the failure mode
+- [ ] Critic does not invent new failure-mode names that duplicate catalog entries
+- [ ] Critic distinguishes the catalog finding (the work has Settings Dumping) from its Named Bans (the Critic's own behavior)
+- [ ] The catalog entry name appears in the output, not just the concept
+
+**Anti-patterns:**
+- Describes the problem without naming the catalog entry ("too many options" without "Settings Dumping")
+- Conflates the catalog (work's failure modes) with Named Bans (Critic's own evaluation rules)
+- Invents a name like "Toggle Proliferation" when "Settings Dumping" is the canonical entry
+
+---
+
 ## Marketer — Eval 5: Commercial lens application
 
 **Testing:** Marketer evaluates through commercial lenses, not design quality.

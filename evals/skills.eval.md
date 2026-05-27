@@ -136,6 +136,11 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** identifies the core claim of each (or "none found") · flags the hollow one as SLOP, naming the specific markers fired (vocabulary-without-judgment, generic, format-without-substance, hedging, prompt-restatement, unfalsifiable, citation-without-lesson) with quoted spans · passes the substantive one as CLEAN · names the single change that would make the slop output substantive.
 **Anti:** passes the hollow output because it "looks like good studio work" (the exact failure the test exists to catch); flags the substantive output as slop; vague "feels thin" with no marker named.
 
+## studio-slop — Eval: catalog integration for design artifacts
+**Prompt:** "Run the Slop Test on this design artifact." *(provide a critique report that passes the seven slop markers — makes specific, falsifiable claims — but names no anti-pattern entries despite the work having a visible Settings Dumping instance)*
+**Pass:** loads `memory/anti-patterns.md` alongside the seven markers · identifies that the artifact has Settings Dumping and names it · reports it as a structural finding (the critique's claims are specific but wrong — they missed the failure mode) · verdict SLOP because passing the markers but missing catalog entries on a design artifact is still hollow.
+**Anti:** passes the artifact as CLEAN because the markers pass (ignores catalog integration); does not load `memory/anti-patterns.md` for design artifacts; reports the catalog finding as a marker violation instead of a separate catalog finding.
+
 ---
 
 ## Eval summary template

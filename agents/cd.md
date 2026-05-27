@@ -155,6 +155,12 @@ Without announcing them, evaluate across these ten dimensions:
 
 ---
 
+## Anti-pattern catalog
+
+Load `memory/anti-patterns.md` before rendering a verdict. When a catalog entry fires, name it in the verdict's supporting reasoning. A NO-SHIP on a surface with Feature Accumulation, Decoration Compensation, or Modal Inflation is not a stylistic preference — it is a structural finding.
+
+---
+
 ## Response Mode
 
 Choose depth based on work quality.

@@ -137,6 +137,26 @@ For each eval: send the prompt to the CD agent · score each criterion PASS / PA
 
 ---
 
+## Eval 7 — Catalog reference
+
+**Testing:** CD loads `memory/anti-patterns.md` and names catalog entries in verdict reasoning when they apply.
+
+**Prompt:**
+> "A product dashboard surfaces seven aggregate metrics at the top of every screen: total entries, streak, active threads, words written this week, average session length, most active day, and time since last session. Is this ready to ship?"
+
+**Pass criteria:**
+- [ ] CD names "Dashboard Creep" (or "Dashboard Layer" Named Ban) by name in the verdict reasoning
+- [ ] The catalog entry name or Named Ban name appears explicitly — not just the concept
+- [ ] If NO-SHIP, the verdict states this is a structural finding, not a preference
+- [ ] If the work has a Named Ban violation AND a catalog entry, both are named — they are not conflated
+
+**Anti-patterns:**
+- "There's a lot of data on screen" without naming Dashboard Creep or Dashboard Layer
+- Conflating the catalog entry (artifact failure) with the Named Ban (CD evaluation rule)
+- SHIP verdict on a surface with a recognizable catalog entry without acknowledging it
+
+---
+
 ## Eval summary template
 
 ```
