@@ -1,5 +1,5 @@
 ---
-description: Run the full design workflow for a problem or feature. Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
+description: Run the design workflow for a problem or feature. Calibrates by phase — exploratory (produces direction), in progress (full nine-step pass), or refinement (skips framing, focuses on specific disciplines). Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
 ---
 
@@ -62,7 +62,23 @@ If the user confirms to proceed, continue. Design against a clear problem statem
 
 ---
 
+## [HAIKU] Step 0.5 — Phase determination
+
+Determine the design phase — this governs which steps run and at what depth:
+
+- **Exploratory** — output is a direction, not a finished design. Runs Philosophy → Historian → Strategist → Architect → Designer (with options) → Critic. Heurist runs lightly. Sub-team (Phase A/B), Accessibility, and Specifier are deferred. The goal is to converge on a direction worth designing in full.
+- **In progress** *(default)* — full nine-step pass. Every discipline runs at design standard. This is what the skill does when no phase is specified.
+- **Refinement** — design exists; refine specific aspects. Skip Philosophy / Historian / Strategist / Architect (assumed done). Start at Critic or Designer (state which). Run sub-team and Heurist on the refined surface. Accessibility and Specifier at production weight.
+
+If the phase is not stated in the arguments and not clear from context, ask before proceeding. Default is **in progress**.
+
+State the phase before proceeding to Step 1. Apply phase gates at the major step boundaries below.
+
+---
+
 ## [HAIKU] Steps 1–3 — Context loading
+
+**Phase gate:** If phase is **refinement**, skip to Step 6 (Critic) or Step 7 (Designer) — state which, and which prior outputs you are building on. Philosophy/Historian/Strategist/Architect are assumed complete.
 
 ### Step 1 — Philosophy validation
 
@@ -153,6 +169,8 @@ Apply the decision hierarchy to resolve trade-offs. Novelty is never a factor.
 
 ### Step 7.5 — Design sub-team (conditional, parallel)
 
+**Phase gate:** If phase is **exploratory**, skip the sub-team entirely. Craft refinement is premature when the direction itself is still being established. Note this in the output and proceed to Step 7.7 (Heurist, light pass).
+
 Skip entirely if the outcome is a data model or system change with no new surface work.
 
 First, determine which disciplines apply to this surface. Then run in two phases:
@@ -186,6 +204,8 @@ When Phase A outer agent completes, proceed to Phase B.
 
 Run if the surface involves user interaction. Skip for data model or system-only changes with no new surface work.
 
+**Phase gate:** If phase is **exploratory**, Heurist runs lightly — flag structural usability concerns (broken mental models, gesture dead-ends) only. Defer detailed friction analysis until the direction is committed.
+
 Evaluate the interaction model produced by the Designer (and refined by the sub-team) for:
 - Broken mental models — does this behave the way the user expects?
 - Invisible friction — what will users attempt that the design does not support?
@@ -197,7 +217,10 @@ Findings at this step may require returning to the Designer. If so, state precis
 ---
 
 > **⏸ PAUSE — Prototype required.**
-> Design is complete. Before accessibility review or specifier output:
+>
+> *If phase is **exploratory**:* skip the prototype gate, Accessibility, and Specifier. Proceed directly to Output. The artifact is a direction; prototype and spec come when the direction is committed and the work moves to **in progress**.
+>
+> *If phase is **in progress** or **refinement**:* design is complete. Before accessibility review or specifier output:
 >
 > 1. Build a prototype in the project's prototype environment — the `canvas/` target under the manifest's `code_root` (per the paired-scaffold capability). For projects without a canvas, fall back to whatever the project's `CLAUDE.md` specifies.
 > 2. Verify the design at key states — especially light and dark mode for native.
@@ -211,6 +234,8 @@ Findings at this step may require returning to the Designer. If so, state precis
 
 ### Step 8 — Accessibility
 
+**Phase gate:** If phase is **exploratory**, skip — Accessibility runs at production weight, not against directional sketches. Note: "Accessibility deferred — exploratory phase."
+
 Apply the Accessibility discipline (embedded above).
 
 Verify:
@@ -219,6 +244,8 @@ Verify:
 - Screen reader labeling (use Writer output for VoiceOver strings if Writer ran)
 
 ### Step 9 — Specifier
+
+**Phase gate:** If phase is **exploratory**, skip — the artifact is a direction, not a spec. Note in output: "Specifier deferred — exploratory phase. Run /studio:design in **in progress** mode once direction is committed."
 
 If this design will proceed to engineering, produce a complete engineering handoff specification:
 - All component states (default + every variant)
@@ -257,9 +284,10 @@ Present the design artifact in the response using this structure:
 ```
 # Design: [Problem Name]
 Date: [today]
+Phase: [Exploratory / In Progress / Refinement]
 
 ## Decision
-[One sentence: what was decided]
+[One sentence. For exploratory: the direction. For in progress / refinement: what was designed.]
 
 ## Structure
 [Data model or system changes]
@@ -268,13 +296,16 @@ Date: [today]
 [States, transitions, gestures]
 
 ## Design sub-team notes
-[Typesetter / Choreographer / Writer / Materialist / Visual Designer outputs — omit if none ran]
+[Typesetter / Choreographer / Writer / Materialist / Visual Designer outputs — omit if none ran. For exploratory, note: "Deferred to in progress phase."]
 
 ## What was removed
 [List with rationale]
+
+## Deferred to next phase
+[Exploratory only: what is intentionally not yet specified — craft details, accessibility, spec. Omit for in progress / refinement.]
 
 ## Open questions
 [Only genuine blockers — omit if none]
 ```
 
-If `specs/` exists, offer to write this to `specs/design.md`. Otherwise write to `docs/design/` or the project's artifact location specified in `CLAUDE.md`.
+If `specs/` exists, offer to write this to `specs/design.md`. Otherwise write to `docs/design/` or the project's artifact location specified in `CLAUDE.md`. For exploratory artifacts, write to `specs/direction_<slug>.md` to distinguish from finished design specs.

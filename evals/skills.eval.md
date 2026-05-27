@@ -4,8 +4,6 @@ Run: after any change to a skill's `SKILL.md`, or on the full-suite cadence.
 
 Agent evals test *behavior*; these test *orchestration* — does a workflow gate correctly, sequence its agents, satisfy the Six Functions where applicable, and produce the right artifact with a named owner. Scenarios are product-agnostic.
 
-> **Note:** `lt-review` and `review` overlap (both produce the PM+CD+DE verdict). Flagged as a consolidation candidate — eval both until merged.
-
 ---
 
 ## studio — Eval: orient and route, don't execute
@@ -38,10 +36,10 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** refuses the solution-in-disguise and asks for the problem · diverges across lenses · reduces to 3–5 then 1–2 · does not commit to build.
 **Anti:** accepts the solution as input; converges to one idea immediately.
 
-## design — Eval: brief gate + Six Functions + owner
+## design — Eval: brief gate + Six Functions + owner + phase
 **Prompt:** "Design the entry detail surface." *(no brief provided)*
-**Pass:** requires a validated brief (PM gate) before proceeding · activates the six functions (framing, generation, craft, reduction, usability/accessibility, and the CD gate) · the Designer owns the interaction model.
-**Anti:** starts without a brief; fewer than the six functions; no named deliverable owner.
+**Pass:** requires a validated brief (PM gate) before proceeding · establishes phase (exploratory / in progress / refinement) and applies phase gates (refinement skips Steps 1–4; exploratory skips sub-team / accessibility / specifier) · activates the six functions (framing, generation, craft, reduction, usability/accessibility, and the CD gate) at in progress · the Designer owns the interaction model.
+**Anti:** starts without a brief; fewer than the six functions; no named deliverable owner; runs full nine-step pass on exploratory work; ignores phase.
 
 ## prototype — Eval: scope to the question
 **Prompt:** "Should I prototype the new gesture or just spec it?"
@@ -53,20 +51,15 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 **Pass:** runs Historian → Design → Critic → CD → calibration · max 3 iterations · converges to an inevitable solution OR stops and names why.
 **Anti:** unbounded iteration; no convergence criterion.
 
-## critique — Eval: single-pass verdict
+## critique — Eval: all nine disciplines, tension-prompted debate
 **Prompt:** "Critique this implemented surface."
-**Pass:** runs Critic + Heurist · checks philosophy, invariants, accessibility, ledger conflicts · returns SHIP / REVISE / REJECT.
-**Anti:** vague feedback; no verdict.
+**Pass:** spawns all nine discipline specialists in parallel · each delivers findings from their mandate · synthesis names convergences and triages · assesses tension threshold (volume >8 / convergence / Critic tension) · offers debate round if threshold met · debate round has each agent respond to the others · final synthesis tracks hardened / changed / unresolved tensions · does NOT render SHIP / REVISE / REJECT.
+**Anti:** renders a ship verdict; skips disciplines; offers debate unconditionally without threshold check; vague findings per discipline.
 
-## review — Eval: combined LT verdict
+## review — Eval: combined LT verdict, phase-aware, conflict-prompted debate
 **Prompt:** "Run a Leadership Team review on this artifact before we ship."
-**Pass:** runs PM + CD + DE · produces a combined verdict with convergence notes · names ONE prioritized next action.
-**Anti:** a single perspective; three disconnected verdicts with no synthesis.
-
-## lt-review — Eval: combined LT verdict *(consolidation candidate with review)*
-**Prompt:** "/lt-review this artifact."
-**Pass:** same as review — PM + CD + DE combined verdict + single next action.
-**Anti:** diverges in behavior from `review` (if identical, merge them).
+**Pass:** establishes phase (pre-ship / checkpoint / post-ship audit) and threads it into every brief · runs PM + CD + DE in parallel · produces combined verdict with convergence notes · names ONE prioritized next action via cascade (PM > CD > DE) · assesses conflict threshold (split verdict on same element / convergent flags with incompatible routing / dependent verdicts) · offers debate round if conflict fires · debate round has each member respond to the others · final synthesis tracks hardened / changed / unresolved tensions.
+**Anti:** a single perspective; three disconnected verdicts with no synthesis; offers debate unconditionally; silences conflict via cascade instead of surfacing it; ignores phase.
 
 ## implement — Eval: no spec, no start
 **Prompt:** "Implement the new compose behavior." *(no brief/spec provided)*
@@ -154,6 +147,6 @@ Triggered by: [what changed]
 [skill] — [PASS / FAIL] — [failed criterion / anti-pattern, if any]
 … (one line per skill)
 
-Overall: PASS / FAIL   (N/27 skills passing)
-Failed: [list]   ·   Consolidation flags: [e.g., lt-review ≡ review]
+Overall: PASS / FAIL   (N/26 skills passing)
+Failed: [list]
 ```

@@ -1,145 +1,253 @@
 ---
-description: Run the review workflow for an implementation or artifact. Checks philosophy, runs Critic and Heurist, verifies invariants, accessibility, and ledger conflicts. Produces a SHIP / REVISE / REJECT verdict. For design artifacts, prefer the creative-director agent instead.
-argument-hint: "<artifact or implementation to review>"
+description: Run the critique workflow on an artifact. Spawns all nine design discipline specialists in parallel — Critic, Heurist, Accessibility, Visual Designer, Typesetter, Materialist, Writer, Choreographer, Mark Maker — and synthesizes their findings. If the findings exceed a tension threshold, prompts to run a debate round where each specialist responds to the others. Improvement-focused: surfaces what to fix, not whether to ship. For a ship gate, use /studio:review.
+argument-hint: "<artifact to critique — design, spec, implementation, or combination>"
 ---
 
-Run the review workflow for an implementation or artifact.
+Run the critique workflow on an artifact.
 
 Arguments: $ARGUMENTS
-
-**Model requirements:** [SONNET] for critique · [HAIKU] for checklist verification · [SONNET] for verdict
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
 ---
 
-## Project Context
+## What this skill does
 
-Read project context in this order:
+Nine design discipline specialists review the artifact independently in a silent first pass. If the findings cross a tension threshold, the skill offers a debate round — each specialist sees what the others found and responds: agreeing, pushing back, or building. In a real design studio, the argument is the mechanism that forces latent design decisions into the open.
 
-1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
-3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
-
-The project provides the specifics. This skill provides the discipline.
-
-### Calibration Gate
-1. Is this necessary?
-2. Is this the simplest correct solution?
-3. Would removing something improve it?
-4. Is this consistent with everything else?
+No verdict is rendered. This is an improvement pass, not a ship gate. Use `/studio:review` when a ship decision is needed.
 
 ---
 
-## Context
+## Step 1 — Context load
 
-Artifact: $ARGUMENTS
+Load project context: `.claude/memory/project-context.md`; if not found, check `memory/project-context.md`; if absent, read `CLAUDE.md` for product context.
 
----
+Load the artifact. If file paths are provided, read them. If a description is provided, confirm you have enough context to proceed.
 
-## [SONNET] Steps 1–2 — Critique
+Determine the design phase — this governs how all nine specialists frame their findings:
 
-### Step 1 — Philosophy check
+- **Exploratory** — work is a sketch, direction, or early iteration. Structural and conceptual findings take priority. Craft details are noted but flagged as premature to resolve. The question is whether the direction is right.
+- **In progress** — work is actively being designed. Full critique at design standard. Precision on craft is expected. Findings should be specific enough to act on.
+- **Production** — work is live or pre-ship. Full critique at production standard. Every finding carries an additional lens: cost of change. Findings that require breaking redesigns are surfaced differently from targeted fixes. Accessibility, token compliance, and copy are held to shipping standard.
 
-Apply the project ethos, brand principles, decision hierarchy, and calibration gate from project context loaded above.
+If the phase is not stated in the arguments or clear from context, ask before proceeding.
 
-State whether each gate passes. If any fails, identify specifically what fails and why.
-
-### Step 2 — Critic
-
-Apply the Critic discipline: for each element, ask whether it is necessary, in its simplest correct form, and whether it adds complexity without value.
-
-List everything that should be removed or simplified.
-
-### Step 2.5 — Heurist (conditional)
-
-Run if the artifact includes an interactive surface. Skip for data models, service layer, or non-interactive changes.
-
-Evaluate:
-- Broken mental models — does this behave the way the user expects?
-- Invisible friction — what will users attempt that the design does not support?
-- Gesture dead-ends — are there states users can reach but not exit?
-- AI behavior concerns (if applicable) — does any AI-driven element erode trust or attribution?
-
-Flag violations with severity (P0–P3). P0 findings block ship.
+State what was loaded, the phase, and confirm the artifact before proceeding.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Steps 1–2.5 complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) before continuing.
-> Reply **"continue"** when ready.
+> **⏸ PAUSE — Confirm artifact and phase.**
+> Context loaded. Confirm the artifact (or provide file paths / additional context) and the design phase: **exploratory**, **in progress**, or **production**.
+> Reply **"confirmed"** or clarify.
 
 ---
 
-## [HAIKU] Steps 3–6 — Verification
+## Step 2 — Round 1: Silent critique (parallel background agents)
 
-### Step 3 — Invariant verification
+Spawn all nine discipline specialists simultaneously with `run_in_background: true`.
 
-Apply the system invariants from project context loaded above. Verify each is satisfied. Flag any violation precisely — which invariant, where, what the consequence is.
+Pass to each agent: the artifact description, file paths, project context (governing principle, invariants, brand), and the design phase.
 
-### Step 4 — Accessibility
+**Phase framing to include in every brief:** "The design phase is [PHASE]. Calibrate accordingly: exploratory = structural/conceptual findings, deprioritize craft precision; in progress = full findings at design standard; production = full findings at shipping standard, and name the cost-of-change implication for any finding that requires a breaking redesign."
 
-Verify:
-- WCAG AA contrast on all text (4.5:1 body, 3:1 UI elements)
-- 44pt minimum touch targets on all interactive elements
-- Screen reader labels present on all interactive elements
-
-### Step 5 — Ledger check
-
-If `decisions/` exists, load relevant decision files by name based on what the artifact touches. Do not scan the full directory. Confirm the artifact does not contradict any prior decision. Flag conflicts — do not silently accept them. If no ledger exists, skip this step.
+Every discipline fires. A specialist with nothing to flag in their domain says so briefly — they still show up.
 
 ---
 
-### Step 6 — Commercial check
+**Critic**
+Brief: "You are the Critic in a design critique (Round 1 — silent pass). Apply the Critic discipline. Evaluate against the project's governing principle and ethos from the provided context. For every element, ask: is this necessary? Is this in its simplest correct form? Does this add complexity without value? List everything that should be removed or simplified, with a one-sentence rationale for each. If nothing should be removed, say so."
 
-Apply the Marketer discipline: commercial viability.
+**Heurist**
+Brief: "You are the Heurist in a design critique (Round 1 — silent pass). Apply the Heurist discipline. Evaluate against canonical heuristics (Nielsen, Tognazzini), Apple HIG, and AI interaction guidelines where relevant. Name broken mental models, invisible friction, gesture dead-ends, and any AI behavior that erodes trust. Rate each finding P0–P3. If no violations, say so."
 
-- Does this serve users who pay, or a segment that doesn't?
-- Is the effort proportionate to the commercial return?
-- Does it strengthen or weaken the product's market position?
+**Accessibility**
+Brief: "You are the Accessibility specialist in a design critique (Round 1 — silent pass). Apply the Accessibility discipline. Evaluate against WCAG 2.1 AA. Calculate or estimate contrast ratios; name the specific ratio and the threshold it must meet. Verify tap target sizes against the 44pt minimum. Check screen reader labels and reduce-motion alternatives. Name the specific WCAG criterion for each finding. If no issues, say so."
 
-State a commercial verdict. If the artifact passes philosophy but fails commercially — or vice versa — name the conflict explicitly. The tension is information, not a blocker.
+**Visual Designer**
+Brief: "You are the Visual Designer in a design critique (Round 1 — silent pass). Apply the Visual Designer discipline. Evaluate spacing, proportion, alignment, and visual weight distribution. State current values and target values — no directional language. Give the structural reason for each correction in one sentence. If no issues, say so."
+
+**Typesetter**
+Brief: "You are the Typesetter in a design critique (Round 1 — silent pass). Apply the Typesetter discipline. Evaluate the type system: scale, hierarchy, weight, and rhythm. Name the structural role each text level serves and whether it serves it. Use token names where the project's design system defines them — no raw pt/px values when tokens exist. If the artifact contains no typography, note it briefly."
+
+**Materialist**
+Brief: "You are the Materialist in a design critique (Round 1 — silent pass). Apply the Materialist discipline. Name the material language of the interface first — what material is this made of? Then evaluate individual surface decisions against that model. Name incoherence (mixed models) separately from surface-level corrections. If the artifact has no surface qualities to evaluate, note it briefly."
+
+**Writer**
+Brief: "You are the Writer in a design critique (Round 1 — silent pass). Apply the Writer discipline. Evaluate all language in the interface: microcopy, labels, empty states, system messages, VoiceOver strings. Identify copy that is vague, punishing, off-voice, or inconsistent. Quote the specific copy and state what is wrong with it. If the artifact contains no language, note it briefly."
+
+**Choreographer**
+Brief: "You are the Choreographer in a design critique (Round 1 — silent pass). Apply the Choreographer discipline. Evaluate motion and transitions: timing, easing, sequencing, rhythm. For each animation, name whether it is earned (communicates something the user would otherwise misunderstand) or gratuitous. If the artifact contains no motion, note it briefly."
+
+**Mark Maker**
+Brief: "You are the Mark Maker in a design critique (Round 1 — silent pass). Apply the Mark Maker discipline. Evaluate any marks present — wordmarks, symbols, icons, monograms — against reduction, legibility at minimum scale, and coherence with the brand system. If the artifact contains no marks, note it briefly."
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Steps 3–6 complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
-> Reply **"continue"** when ready.
+Wait for all nine agents to complete. You will receive one notification per agent.
 
 ---
 
-## [SONNET] Output — Verdict
+## Step 3 — Round 1 synthesis + tension assessment
+
+Collect all nine findings. Produce the Round 1 output (format below).
+
+Then assess the tension threshold. Check all three signals:
+
+1. **Volume** — total distinct findings (disciplines with substantive findings, not "nothing to flag") exceeds 8
+2. **Convergence** — 2 or more disciplines flag the same element or surface from different angles
+3. **Critic tension** — Critic recommends removal of something another discipline recommends improving (implicit disagreement about whether the element should exist at all)
+
+If any signal fires, the debate round is available. State which signal(s) fired and what tensions a second round would likely resolve.
+
+---
+
+## Round 1 output
 
 ```
-# Review: [Artifact Name]
+# Critique: [Artifact Name] — Round 1
 Date: [today]
+Phase: [Exploratory / In Progress / Production]
 
-## Philosophy verdict
-[PASS / FAIL — one sentence]
+## Convergences
+[Elements flagged by two or more disciplines. If none, omit.]
 
-## Removals recommended
-[List — or "None"]
+---
 
-## Usability
-[PASS / list violations with severity (P0–P3) — or "Not applicable (non-interactive)"]
+## Critic
+[Findings — or "Nothing to remove."]
 
-## Invariant status
-[All hold / list violations]
+## Heurist
+[Findings with severity (P0–P3) — or "No violations found."]
 
 ## Accessibility
-[PASS / list issues]
+[Findings with WCAG criterion — or "No issues found."]
 
-## Decision conflicts
-[None / list conflicts with ledger entries]
+## Visual Designer
+[Findings with current → target values — or "No issues found."]
 
-## Commercial
-[PASS / FAIL — one sentence]
+## Typesetter
+[Findings — or "No issues found."]
 
-## Overall verdict
-[SHIP / REVISE / REJECT]
-[One sentence rationale]
+## Materialist
+[Findings — or "No issues found." / "No surface qualities to evaluate."]
+
+## Writer
+[Findings — or "No issues found." / "No language present."]
+
+## Choreographer
+[Findings — or "No issues found." / "No motion present."]
+
+## Mark Maker
+[Findings — or "No issues found." / "No marks present."]
+
+---
+
+## Triage
+
+**Address now:**
+[P0 findings + blocking incoherence]
+
+**Address before ship:**
+[Craft corrections, copy, visual polish]
+
+**Consider:**
+[Judgment calls]
+```
+
+---
+
+> **⏸ PAUSE — Tension threshold [MET / NOT MET].**
+>
+> *If threshold NOT MET:* Round 1 is complete. Reply **"done"** to close, or ask follow-up questions.
+>
+> *If threshold MET:* [State which signal(s) fired. Name 1–2 specific tensions a debate round would likely resolve — e.g., "Critic recommends removing the secondary action; Writer recommends rewriting it. A debate round would force the question of whether it should exist at all."] A debate round will have each specialist respond to the others' findings.
+> Reply **"debate"** to run it, or **"done"** to close with Round 1.
+
+---
+
+## Step 4 — Round 2: Debate (parallel background agents)
+
+*Run only if the user replies "debate."*
+
+Spawn all nine discipline specialists again simultaneously with `run_in_background: true`.
+
+Pass to each agent: the artifact, project context, design phase, AND the full Round 1 findings from all disciplines.
+
+---
+
+**Critic**
+Brief: "You are the Critic in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where another discipline recommends improving something you flagged for removal, state your position clearly — removal or improvement are different paths and only one is correct. Where another finding reveals something you missed, acknowledge and extend it. Keep each response to two sentences."
+
+**Heurist**
+Brief: "You are the Heurist in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where a craft finding (typography, spacing, material) has a usability consequence the other specialist didn't name, name it. Where another finding contradicts your usability assessment, state why your read holds or where you concede. Keep each response to two sentences."
+
+**Accessibility**
+Brief: "You are the Accessibility specialist in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where a proposed improvement (visual, typographic, motion) would create or resolve an accessibility issue, name it. WCAG criteria are not negotiable — state that clearly where another discipline's fix would introduce a violation. Keep each response to two sentences."
+
+**Visual Designer**
+Brief: "You are the Visual Designer in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where a typographic, material, or motion finding has a spacing or proportion consequence, name the specific value impact. Where another finding proposes a change that introduces visual imbalance, state it with the specific value. Keep each response to two sentences."
+
+**Typesetter**
+Brief: "You are the Typesetter in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where a visual, material, or copy finding intersects with the type system, name the structural consequence. Where another discipline proposes a fix that would break the type hierarchy, state why. Keep each response to two sentences."
+
+**Materialist**
+Brief: "You are the Materialist in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where another discipline's finding implies a material decision that hasn't been named, name it. Where a proposed change would introduce material incoherence, state what model it violates. Keep each response to two sentences."
+
+**Writer**
+Brief: "You are the Writer in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where the Critic flags removal of a UI element that carries necessary language, make the case for whether the language can move or must go with the element. Where another finding would affect copy, name the copy consequence. Keep each response to two sentences."
+
+**Choreographer**
+Brief: "You are the Choreographer in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where a structural or material change would affect motion, name the motion consequence. Where a proposed removal would eliminate a transition that is doing necessary communicative work, state what that work is. Keep each response to two sentences."
+
+**Mark Maker**
+Brief: "You are the Mark Maker in a design critique (Round 2 — debate). You have the Round 1 findings from all nine disciplines. Your task: respond to the other findings. Where another finding would affect a mark's legibility, coherence, or brand integrity, state it precisely. Where a proposed change would improve or harm a mark's reduction, name it. Keep each response to two sentences."
+
+---
+
+Wait for all nine agents to complete.
+
+---
+
+## Step 5 — Final synthesis
+
+Produce the final output. Track the state of each significant finding across both rounds.
+
+```
+# Critique: [Artifact Name] — Final
+Date: [today]
+Phase: [Exploratory / In Progress / Production]
+
+## What hardened
+[Findings that survived challenge or were strengthened by the debate. These are the most credible findings.]
+
+## What changed
+[Findings that were revised, qualified, or reversed through the debate.]
+
+## Unresolved tensions
+[Points where disciplines remain in genuine disagreement. These are unresolved design decisions — not findings, but decisions that need to be made before the work can proceed. Name what each tension requires the team to decide.]
+
+---
+
+## Full findings (updated)
+
+[Repeat the per-discipline section format from Round 1, updated to reflect the debate. Mark changed findings with (revised). Mark hardened findings with (confirmed).]
+
+---
+
+## Triage
+
+**Address now:**
+[P0 findings + blocking incoherence + any unresolved tension that blocks downstream work]
+
+**Address before ship:**
+[Craft corrections, copy, visual polish]
+
+**Consider:**
+[Judgment calls]
+
+**Decide (unresolved tensions):**
+[Each tension as a decision question — one sentence each.]
 ```
 
 Report findings only. Do not make changes unless explicitly asked after the report.
-
-For design artifacts (mockups, interaction models, visual work), prefer the `creative-director` agent instead — it applies master-level taste judgment in addition to structural review, and silently draws on the full specialist team: Choreographer, Typesetter, Visual Designer, Writer, Materialist, Mark Maker, Prototyper, and Heurist.

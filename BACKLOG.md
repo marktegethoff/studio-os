@@ -26,9 +26,9 @@ Full suite run 2026-05-26. Results: 28/35 agents PASS, 3 FAIL (cd, surveyor, his
 
 `release.sh` — bumps `plugin.json` + `marketplace.json`, commits, tags. Guards: semver format, main branch, clean tree, CHANGELOG entry, tag not already existing. Prints push command; does not push automatically. `--plugin-dir` documented in README as dev escape hatch.
 
-## 4. Consolidate `lt-review` ≡ `review` — *duplicate*
+## 4. Consolidate `lt-review` ≡ `review` — *done*
 
-Both `skills/lt-review/` and `skills/review/` exist and overlap (leadership-team combined verdict). Pick one, redirect the other, update references. Reduction.
+`lt-review` deleted. `review` is the canonical name for the LT review (PM + CD + DE). `critique` remains as the distinct broader review — improvement-focused, not a ship gate. (2026-05-26)
 
 ## 5. Skill-listing budget friction — *27 skills*
 

@@ -48,7 +48,7 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 | `luck` | Sonnet | Durability diagnostic for infrastructure decisions |
 | `competitive-analyst` | Sonnet | Structured competitive teardown |
 
-**Skills (6):** `studio` · `lt-review` · `discovery` · `measure` · `review` · `solve`
+**Skills (5):** `studio` · `discovery` · `measure` · `review` · `solve`
 
 **Hooks (5, org-enforced):**
 
