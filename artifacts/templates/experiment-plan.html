@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment — [hypothesis name]</title>
+<link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <span class="eyebrow">Studio OS · Experiment Plan · owned by /studio:experiment</span>
+    <h1>[Hypothesis name]<span style="color:var(--accent)">.</span></h1>
+    <p class="header-sub">An experiment frames a falsifiable claim, designs the minimum test that can falsify it, and forecasts what success and failure look like at short, medium, and long horizons using the drum simulation model.</p>
+    <div class="header-meta">
+      <span>[date]</span><span>Owner: [role]</span><span>Status: Planned / Running / Concluded</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Hypothesis</h2>
+    <div class="grid2">
+      <div class="dcard"><span class="k">IF</span><span class="v">[The specific change introduced — a single intervention, not a bundle]</span></div>
+      <div class="dcard"><span class="k">THEN</span><span class="v">[The observable outcome — measurable, not aspirational]</span></div>
+      <div class="dcard"><span class="k">BECAUSE</span><span class="v">[The causal mechanism — why this change should produce this outcome]</span></div>
+      <div class="dcard"><span class="k">Falsifiable when</span><span class="v">[The specific evidence that would disprove the hypothesis]</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Experiment design</h2>
+    <table>
+      <tr><th>Variable</th><th>Value</th></tr>
+      <tr><td>Variant</td><td>[The treatment — what users in the experiment group see/get]</td></tr>
+      <tr><td>Control</td><td>[The baseline — what the control group sees/gets]</td></tr>
+      <tr><td>Population</td><td>[Who is eligible; who is excluded and why]</td></tr>
+      <tr><td>Sample size</td><td>[N per arm; powered to detect the minimum effect of interest]</td></tr>
+      <tr><td>Duration</td><td>[How long; rationale tied to the metric's natural cadence]</td></tr>
+      <tr><td>Assignment</td><td>[Randomization unit and method]</td></tr>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Drum simulation</h2>
+    <p>Three time horizons. For each, name the expected behavior under success and the failure mode that would force a pivot.</p>
+    <div class="grid2">
+      <div class="dcard"><span class="k">Short-term (days–weeks)</span><span class="v"><strong>Success:</strong> [What the metric looks like]<br><strong>Failure:</strong> [What forces a pause]</span></div>
+      <div class="dcard"><span class="k">Medium-term (weeks–months)</span><span class="v"><strong>Success:</strong> [System behavior]<br><strong>Failure:</strong> [Drift signal]</span></div>
+      <div class="dcard"><span class="k">Long-term (months+)</span><span class="v"><strong>Success:</strong> [Compounding behavior]<br><strong>Failure:</strong> [Decay or saturation]</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Success criteria</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[Primary metric and the threshold that constitutes a win]</div></div>
+      <div class="item"><div class="it-desc">[Secondary metrics that must move in the right direction or stay flat]</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Counter-metrics</h2>
+    <p>What must NOT degrade. Guardrails that, if breached, end the experiment regardless of primary outcome.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[Counter-metric 1 — and the breach threshold]</div></div>
+      <div class="item"><div class="it-desc">[Counter-metric 2]</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Decision rule</h2>
+    <div class="callout"><p>[Concrete: if primary moves +X% with no counter-metric breach, ship to all. If primary moves 0–X% or any counter breaches, [next action]. If primary moves negative, [rollback action].]</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Findings</h2>
+    <p>Filled in after the experiment concludes.</p>
+    <div class="callout"><p>[Observed results vs. hypothesis. Decision taken. Lessons for the next experiment.]</p></div>
+  </section>
+
+  <footer class="footer">
+    <p>Studio OS · Experiment Plan · run /studio:annotate on this file to return marked-up feedback in one paste</p>
+  </footer>
+
+</div>
+</body>
+</html>

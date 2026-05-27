@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Brief — [task name]</title>
+<link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <span class="eyebrow">Studio OS · Task Brief · owned by /studio:scope</span>
+    <h1>[Task name]<span style="color:var(--accent)">.</span></h1>
+    <p class="header-sub">A task brief tight enough to delegate unattended. Five fields — SPEC, OUTPUT, GATES, VERIFY, ESCALATE — that define the contract before <code>/studio:implement</code> or <code>/studio:prototype</code> runs.</p>
+    <div class="header-meta">
+      <span>[date]</span><span>Source brief: [path to product brief]</span><span>Status: Ready / Pending [open question]</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>SPEC</h2>
+    <p>What this task changes — the precise scope. Reference the design or product brief that authorizes it.</p>
+    <div class="callout"><p>[Specific behavior, file paths, or interaction to be built or modified. Not a feature description — a contract.]</p></div>
+  </section>
+
+  <section class="section">
+    <h2>OUTPUT</h2>
+    <p>What this task produces. Code, artifacts, or both. Named locations.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[File or artifact 1 — what it contains and where it lives]</div></div>
+      <div class="item"><div class="it-desc">[File or artifact 2]</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>GATES</h2>
+    <p>What must hold true for the work to be considered correct. Invariants, not aspirations.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[Invariant 1 — a specific behavior or state that cannot break]</div></div>
+      <div class="item"><div class="it-desc">[Invariant 2]</div></div>
+      <div class="item"><div class="it-desc">[Invariant 3]</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>VERIFY</h2>
+    <p>How to confirm the gates hold. Concrete commands, manual checks, or QA scenarios.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[Command or scenario 1]</div></div>
+      <div class="item"><div class="it-desc">[Command or scenario 2]</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>ESCALATE</h2>
+    <p>What forces a pause: ambiguity, scope creep, missing information, broken assumption. The execution path that stops the run and surfaces the issue.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">[Escalation trigger 1 — when this happens, stop and ask]</div></div>
+      <div class="item"><div class="it-desc">[Escalation trigger 2]</div></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Studio OS · Task Brief · run /studio:annotate on this file to return marked-up feedback in one paste</p>
+  </footer>
+
+</div>
+</body>
+</html>

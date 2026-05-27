@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LT Review — [artifact name]</title>
+<link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <span class="eyebrow">Studio OS · Leadership Team Review · owned by /studio:review</span>
+    <h1>[Artifact name]<span style="color:var(--accent)">.</span></h1>
+    <p class="header-sub">PM, Design Director, and Distinguished Engineer reviewed this artifact independently from their distinct mandates. The combined verdict and single next action are below; routing names the specialist who resolves each issue.</p>
+    <div class="header-meta">
+      <span>[date]</span><span>Phase: [Pre-ship / Checkpoint / Post-ship audit]</span><span>Round: [1 — Silent / Final — Debated]</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Combined verdict</h2>
+    <div class="callout"><p><strong>[SHIP / REVISE / HOLD / REJECT]</strong> — [one-sentence rationale]</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Member verdicts</h2>
+    <div class="grid2">
+      <div class="dcard"><span class="k">PM — problem-solution fit</span><span class="v"><strong>[READY / HOLD]</strong> — [2–3 sentences on whether the artifact still solves the validated problem]</span></div>
+      <div class="dcard"><span class="k">CD — design quality</span><span class="v"><strong>[SHIP / NO-SHIP]</strong> — [2–3 sentences on whether the artifact is crafted well enough to ship]</span></div>
+      <div class="dcard"><span class="k">DE — implementation soundness</span><span class="v"><strong>[SHIP / REVISE / REJECT]</strong> — [2–3 sentences on whether the artifact is built correctly]</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Convergences</h2>
+    <p>Where two or more members flag the same issue. Convergence across mandates is a strong signal.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-name">[Element]</div><div class="it-desc">[Which members flagged it and the substance of their alignment]</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Routing</h2>
+    <p>Each required change with the specialist or skill that resolves it, in cascade priority order: PM first, then CD, then DE. If PM flags drift, that is the only next action regardless of CD/DE verdicts.</p>
+    <table>
+      <tr><th>Issue</th><th>Specialist / Skill</th><th>Then what</th></tr>
+      <tr><td>[Issue]</td><td>[e.g., strategist / brief-writer / typesetter / specifier / /studio:design]</td><td>[The next move once the specialist completes]</td></tr>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Next action</h2>
+    <div class="callout"><p><strong>[Single most important thing.]</strong> [Names who does it. One sentence. PM issues take priority over all others.]</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Debate round</h2>
+    <p>Rendered only if conflict-prompted debate ran (split verdict on same element, convergent flags with incompatible routing, or dependent verdicts). The cascade rule silences orthogonal concerns; the debate round surfaces same-element disagreement.</p>
+    <div class="grid2">
+      <div class="dcard"><span class="k">Hardened</span><span class="v">[Positions that survived challenge or were strengthened — these carry the most weight]</span></div>
+      <div class="dcard"><span class="k">Changed</span><span class="v">[Positions that were revised, qualified, or reversed through the debate]</span></div>
+      <div class="dcard"><span class="k">Unresolved tensions</span><span class="v">[Decisions the team must make — phrased as questions; may require a higher decision-maker]</span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Studio OS · LT Review · run /studio:annotate on this file to return marked-up feedback in one paste</p>
+  </footer>
+
+</div>
+</body>
+</html>
