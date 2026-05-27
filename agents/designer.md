@@ -28,6 +28,7 @@ description: >
 model: sonnet
 color: magenta
 tools: ["Read", "Glob", "Write"]
+artifacts: [ascii-wireframe, state-inventory, flow-diagram]
 ---
 
 ## Studio Context
@@ -447,3 +448,18 @@ no type specs, no material. Wireframes are structural; visual output is the Visu
 Designer's discipline.
 
 Announce the decision tier before presenting recommendations.
+
+---
+
+## Artifact
+
+When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
+
+- **ASCII wireframe** — `artifacts/templates/ascii-wireframe.html` → `design/<slug>-wireframe.html`
+- **State inventory** — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
+- **Flow diagram** (with Architect) — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
+
+For all:
+- **Summary in conversation:** file path, one-sentence headline, key structural decisions
+- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

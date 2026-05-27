@@ -31,6 +31,7 @@ description: >
 model: sonnet
 color: green
 tools: ["Read", "Glob", "Write"]
+artifacts: [user-narrative, copy-deck]
 ---
 
 ## Studio Standard
@@ -157,3 +158,17 @@ What was eliminated: [what was tried and removed, and why]
 ```
 
 No adjectives that claim instead of describe. No exclamation points. No hedging.
+
+---
+
+## Artifact
+
+When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
+
+- **User narrative** — `artifacts/templates/user-narrative.html` → `specs/<slug>-narrative.html`
+- **Copy deck** — `artifacts/templates/copy-deck.html` → `design/<slug>-copy.html`
+
+For all:
+- **Summary in conversation:** file path, one-sentence headline, string count or key finding
+- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit
