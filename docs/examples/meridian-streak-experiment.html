@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiment — Streak Shield Recovery Path</title>
+<link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <span class="eyebrow">Meridian · Experiment Plan · owned by /studio:experiment</span>
+    <h1>Streak Shield Recovery Path<span style="color:var(--accent)">.</span></h1>
+    <p class="header-sub">An experiment frames a falsifiable claim, designs the minimum test that can falsify it, and forecasts what success and failure look like at short, medium, and long horizons using the drum simulation model.</p>
+    <div class="header-meta">
+      <span>2026-05-27</span><span>Owner: Product / Growth</span><span>Status: Planned</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Hypothesis</h2>
+    <div class="grid2">
+      <div class="dcard"><span class="k">IF</span><span class="v">We show a streak shield — one free recovery per 7-day period — to users who break their first tracked streak in days 8–14, surfaced immediately at the moment of break with a clear recovery path</span></div>
+      <div class="dcard"><span class="k">THEN</span><span class="v">30-day retention for that cohort increases by at least 12% relative to control</span></div>
+      <div class="dcard"><span class="k">BECAUSE</span><span class="v">The 61% abandonment cliff at days 8–14 is driven by perceived irrecoverable failure — users interpret a reset-to-zero as a definitive signal that they are not a "habit person," triggering exit rather than re-engagement; a bounded recovery path removes that interpretation without eliminating the cost of breaking habits</span></div>
+      <div class="dcard"><span class="k">Falsifiable when</span><span class="v">30-day retention lifts ≥12% for the streak-shield cohort AND week-3 daily active rate is not lower than control — both conditions required; retention gain without maintained engagement proves the shield reduces urgency rather than rescues commitment</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Experiment design</h2>
+    <table>
+      <tr><th>Variable</th><th>Value</th></tr>
+      <tr><td>Variant</td><td>On first tracked streak break in days 8–14: streak counter holds, shield indicator appears ("1 recovery available this week"), user prompted to resume tomorrow — streak continues if next day completed</td></tr>
+      <tr><td>Control</td><td>Current behavior: streak counter resets to zero on missed day, no acknowledgment or recovery path shown</td></tr>
+      <tr><td>Population</td><td>New users (account age ≤ 14 days) who complete at least one tracked habit on day 7 or earlier and miss a tracked day for the first time in the days 8–14 window; excludes users who already churned before day 8 and users in any concurrent experiment touching the streak surface</td></tr>
+      <tr><td>Sample size</td><td>Minimum 800 per arm (1,600 total) to detect a 12% retention lift at 80% power, α = 0.05; based on current new-user volume this requires two 30-day cohort intakes</td></tr>
+      <tr><td>Duration</td><td>30 days per cohort (matching the primary retention metric horizon), two sequential cohort intakes — 60 days total data collection before analysis</td></tr>
+      <tr><td>Assignment</td><td>User-level random assignment (50/50 split) at the moment the qualifying first streak break is detected; assignment persists for the full 30-day observation window</td></tr>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Drum simulation</h2>
+    <p>Three time horizons. For each, name the expected behavior under success and the failure mode that would force a pivot.</p>
+    <div class="grid2">
+      <div class="dcard"><span class="k">Short-term (days 8–14)</span><span class="v"><strong>Success:</strong> Shield cohort same-day or next-day resume rate is meaningfully higher than control's post-reset return rate; abandonment in the days 8–14 window drops below 40% vs. current 61%.<br><strong>Failure:</strong> Shield cohort abandons at the same rate as control — suggests the problem is genuine disengagement, not perceived irrecoverability; pause and investigate whether the shield UX was understood.</span></div>
+      <div class="dcard"><span class="k">Medium-term (days 15–30)</span><span class="v"><strong>Success:</strong> Shield cohort maintains ≥ control week-3 daily active rate; streak lengths in the shield group at day 30 are equal to or longer than control streaks at day 30 — evidence that users who were retained remained genuinely engaged.<br><strong>Failure:</strong> Shield cohort week-3 DAR drops below control — indicates the shield delayed exit without changing the underlying behavior pattern; the recovery path may have taught users that streaks are negotiable.</span></div>
+      <div class="dcard"><span class="k">Long-term (months+)</span><span class="v"><strong>Success:</strong> Day-60 and day-90 retention tracks higher for the shield cohort; shield users accumulate longer net streaks over a 90-day window, supporting rollout of shield as a permanent mechanic.<br><strong>Failure:</strong> Retained users plateau at week-5 or earlier at the same rate as control — shield postponed but did not prevent the same eventual disengagement, indicating a deeper onboarding or habit-formation gap the shield alone cannot address.</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Success criteria</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">30-day retention rate for shield cohort ≥ control + 12 percentage points (primary win threshold)</div></div>
+      <div class="item"><div class="it-desc">Week-3 daily active rate for shield cohort ≥ control week-3 daily active rate (engagement integrity check — must not degrade)</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Counter-metrics</h2>
+    <p>What must NOT degrade. Guardrails that, if breached, end the experiment regardless of primary outcome.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">Week-3 streak continuation rate in shield cohort must not fall more than 3 percentage points below control — a larger drop signals the shield is eroding the perceived cost of breaking habits, the core risk of the intervention</div></div>
+      <div class="item"><div class="it-desc">Shield usage rate must not exceed 60% of eligible cohort by week 4 — unusually high shield consumption would indicate users are deliberately using the recovery as a skipping mechanism rather than as an emergency buffer</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Decision rule</h2>
+    <div class="callout"><p>If 30-day retention lifts ≥12% AND week-3 streak continuation rate is within 3 points of control AND shield usage rate stays below 60%: ship streak shield to all new users, schedule a day-90 follow-up to confirm the retention gain holds. If 30-day retention lifts 5–11% with no counter-metric breach: do not ship; run a follow-on experiment testing a more prominent recovery path or pairing the shield with a push notification before concluding the mechanic is worth the complexity. If 30-day retention is flat or negative, or any counter-metric breaches: roll back immediately, treat the problem as a disengagement issue rather than a perceived-failure issue, and investigate onboarding and habit-selection quality as the next lever.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Findings</h2>
+    <p>Filled in after the experiment concludes.</p>
+    <div class="callout"><p>[Observed results vs. hypothesis. Decision taken. Lessons for the next experiment.]</p></div>
+  </section>
+
+  <footer class="footer">
+    <p>Studio OS · Experiment Plan · run /studio:annotate on this file to return marked-up feedback in one paste</p>
+  </footer>
+
+</div>
+</body>
+</html>

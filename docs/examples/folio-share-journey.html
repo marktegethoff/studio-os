@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Journey — Folio Client Share</title>
+<link rel="stylesheet" href="../kit/studio.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <span class="eyebrow">Studio OS · User Journey · owned by journey-mapper</span>
+    <h1>Folio — Client Share<span style="color:var(--amber)">.</span></h1>
+    <p class="header-sub">The end-to-end path from the moment the user's need arises to the outcome — the context that constrains and focuses design scope.</p>
+    <div class="header-meta"><span>2026-05-27</span><span>User: Senior architect — 8–15 years practice, curates per client, carries 6–12 active projects</span></div>
+  </header>
+
+  <section class="section">
+    <h2>Boundary</h2>
+    <div class="grid3">
+      <div class="dcard"><span class="k">Trigger</span><span class="v">A prospective client books a call — an email arrives, a calendar invite is accepted. The architect now has a deadline and a specific audience. The need to send relevant work arises outside the product entirely.</span></div>
+      <div class="dcard"><span class="k">Successful outcome</span><span class="v">The architect has a live link in the client's inbox, knows it has been opened, and walks into the pitch with confidence that the right work is in front of the right person.</span></div>
+      <div class="dcard"><span class="k">Failed outcome</span><span class="v">The architect either never sends anything (abandons mid-flow and falls back to email attachments), or sends a link they're not sure looks right — and has no way to know if it was ever opened before the call.</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Stages</h2>
+    <table>
+      <tr><th>Stage</th><th>Goal</th><th>Today</th><th>Friction (type)</th></tr>
+      <tr>
+        <td><strong>Trigger — registering the need</strong></td>
+        <td>Recognize that a curated share is needed for this specific client</td>
+        <td>Receives calendar invite or email reply. Mentally notes "need to send work." May write it on a to-do or leave the tab open. Does not open Folio yet — the impulse lives in email.</td>
+        <td><b>Orientation</b> — no prompt, reminder, or re-entry path connects the external event (booked call) to the share feature. The gap between impulse and product entry is undesigned.</td>
+      </tr>
+      <tr>
+        <td><strong>Selection — choosing the right projects</strong></td>
+        <td>Decide which 3–5 projects are relevant to this client's project type, scale, and taste</td>
+        <td>Opens Folio, browses all projects, attempts to mentally filter by relevance. No client context is carried in. May open the client's website in a separate tab for reference. Selection is done by memory and instinct.</td>
+        <td><b>Confidence</b> — no way to know if a project will resonate with this client's brief. Selection feels arbitrary. Architects frequently second-guess and restart.</td>
+      </tr>
+      <tr>
+        <td><strong>Curation — ordering and trimming</strong></td>
+        <td>Sequence the selection so the strongest work leads; remove anything that weakens the overall impression</td>
+        <td>Drags projects into a manual order. Re-opens individual project pages to check image quality and completeness. Discovers half-finished entries mid-flow and either patches them or drops the project. Curation and editing blur into one another.</td>
+        <td><b>Effort</b> — trimming a selection requires re-entering individual projects, fixing content, and returning. The task boundary is unclear; curation keeps expanding into editing work.</td>
+      </tr>
+      <tr>
+        <td><strong>Share — generating and sending the link</strong></td>
+        <td>Produce a shareable link and get it into the client's hands before the call</td>
+        <td>Finds the share control (not always where expected on first attempt). Generates a link. Copies it. Switches to email. Pastes it. Writes context around it. Sends. At no point sees what the client will see before sending.</td>
+        <td><b>Confidence</b> — cannot preview the client-facing view before sharing. No knowledge of link expiry, access settings, or whether the link is branded or generic. Sends into uncertainty.</td>
+      </tr>
+      <tr>
+        <td><strong>Confirmation — knowing it landed</strong></td>
+        <td>Confirm the link was received and opened before the pitch call</td>
+        <td>Waits. Sends a follow-up email asking if they received it. Checks sent items to confirm. Has no signal from Folio. Walks into the call not knowing if the client has seen anything.</td>
+        <td><b>Recovery</b> — if the wrong link was sent, or the link was never opened, there is no recovery path. No open notification, no way to resend, no fallback. The failed state is invisible until the call begins.</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Entry &amp; Exit Paths</h2>
+    <div class="compare">
+      <div class="pos"><h4>Entry</h4>
+        <div class="crow"><b>Email / calendar</b> — prospect confirms a call; architect is in their inbox, not in Folio. Carries the client's name, project type, and a rough sense of timeline. No Folio session is open.</div>
+        <div class="crow"><b>Direct re-entry</b> — architect remembers a past share attempt mid-week; returns to Folio to finish or update. Carries partial intent but has lost context from the earlier session.</div>
+        <div class="crow"><b>Post-editing impulse</b> — finishes updating a project and thinks "I should send this." Lowest-friction entry but least intentional — selection is driven by recency, not fit.</div>
+      </div>
+      <div class="neg"><h4>Exit</h4>
+        <div class="crow"><b>Success</b> — returns to email to prep talking points for the call. Carries the sent link and, if open-tracking exists, the confidence that the client has engaged. Goes into the pitch prepared.</div>
+        <div class="crow"><b>Failure / abandonment</b> — exits Folio mid-selection, reverts to attaching PDFs in email. Carries friction memory ("took too long, not worth it") — reinforces non-use. Share adoption stays at 23%.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Moments That Matter Most</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-name">1</div><div class="it-desc"><b>Trigger to first action — the gap between email and Folio.</b> The impulse to share arises in a different context than the tool that enables it. The 77% of users who don't adopt share are not failing at the feature — they never reach it. The trigger is mislocated: Folio waits for users to arrive rather than meeting them at the moment the need fires. Any surface improvement to the share flow that doesn't address this gap will leave the adoption ceiling in place.</div></div>
+      <div class="item"><div class="it-name">2</div><div class="it-desc"><b>Share — sending without seeing.</b> Architects do not send work they are uncertain about. The confidence gap at the moment of link generation — no client-facing preview, no access transparency, no knowledge of what the recipient will experience — is the proximate cause of abandonment for users who do reach the feature. A user who can see exactly what the client will see before they send will send. One who cannot will hesitate, second-guess, and often revert to attachments.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What the Design Gate Confirms</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">✓ Design attention concentrates on the ranked moments above.</div></div>
+      <div class="item"><div class="it-desc">✓ The trigger and both outcomes are honored — including a designed failure exit.</div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Studio OS · User Journey · run /annotate to review</p></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Component Spec — Vessel Comment Thread</title>
+<link rel="stylesheet" href="../kit/studio.css">
+<style>
+  .cs-stage{background:var(--bg-1);border:1px solid var(--border);border-radius:6px;padding:2.5rem;display:flex;align-items:center;justify-content:center;min-height:200px}
+  .cs-states{display:flex;flex-wrap:wrap;gap:0.4rem;margin:1rem 0}
+  .cs-sbtn{font-family:var(--font-mono);font-size:0.68rem;padding:0.4rem 0.8rem;border-radius:4px;border:1px solid var(--border-2);background:var(--bg-2);color:var(--text-2);cursor:pointer}
+  .cs-sbtn.active{background:var(--amber);border-color:var(--amber);color:#fff}
+  /* Comment component demo — anchored text annotation with unread indicator */
+  .cs-demo{font-family:var(--font-body);font-size:0.85rem;padding:0.6rem 0.8rem;border-radius:4px;border-left:3px solid var(--border);background:var(--bg-2);color:var(--text-1);transition:all .15s;max-width:320px}
+  .cs-demo[data-s=anchored-unread]{border-left-color:#D4A844;background:var(--bg-2);position:relative}
+  .cs-demo[data-s=anchored-unread]::after{content:'●';color:#D4A844;position:absolute;right:0.8rem;top:0.6rem;font-size:0.5rem}
+  .cs-demo[data-s=anchored-read]{border-left-color:var(--border);background:var(--bg-2);color:var(--text-2)}
+  .cs-demo[data-s=expanded]{border-left-color:var(--text-1);background:var(--bg-1);border:1px solid var(--border);border-left:3px solid var(--text-1);padding:1rem}
+  .cs-demo[data-s=composing-reply]{border-left-color:var(--amber);background:var(--bg-1);border:1px solid var(--border);border-left:3px solid var(--amber);padding:1rem}
+  .cs-demo[data-s=resolved-collapsed]{border-left-color:var(--border);background:var(--bg-3);color:var(--text-3);text-decoration:line-through;opacity:0.65}
+  .cs-demo[data-s=orphaned]{border-left-color:#D4A844;background:var(--bg-1);border:1px solid #D4A844;border-left:3px solid #D4A844;padding:0.8rem}
+  .cs-demo[data-s=orphaned]::before{content:'⚠ ';color:#D4A844;font-weight:700}
+  tr.cs-row-active td{background:var(--amber-bg)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <span class="eyebrow">Studio OS · Component Spec · owned by specifier</span>
+    <h1>Vessel Comment Thread<span style="color:var(--amber)">.</span></h1>
+    <p class="header-sub">Inline comment annotation anchored to text selection in a long-form document. Supports threaded replies, read/unread states, and resolution. Every state and token named — the handoff that removes guessing.</p>
+  </header>
+
+  <section class="section">
+    <h2>State Preview</h2>
+    <div class="cs-stage"><div class="cs-demo" id="cs-demo" data-s="anchored-unread">Sarah: You might want to reconsider this phrasing...</div></div>
+    <div class="cs-states" id="cs-states">
+      <button class="cs-sbtn active" data-s="anchored-unread">Anchored / Unread</button>
+      <button class="cs-sbtn" data-s="anchored-read">Anchored / Read</button>
+      <button class="cs-sbtn" data-s="expanded">Expanded</button>
+      <button class="cs-sbtn" data-s="composing-reply">Composing Reply</button>
+      <button class="cs-sbtn" data-s="resolved-collapsed">Resolved / Collapsed</button>
+      <button class="cs-sbtn" data-s="orphaned">Orphaned</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>States</h2>
+    <table id="cs-table">
+      <tr><th>State</th><th>Trigger</th><th>Appearance (named tokens only)</th></tr>
+      <tr data-s="anchored-unread">
+        <td><strong>Anchored / Unread</strong></td>
+        <td>Collaborator posts comment; author has not opened thread</td>
+        <td>Left border: <code>--amber</code> (#D4A844); background: <code>--bg-2</code>; amber dot indicator position: absolute, top-right corner, font-size 0.5rem</td>
+      </tr>
+      <tr data-s="anchored-read">
+        <td><strong>Anchored / Read</strong></td>
+        <td>Author has opened and read the thread; thread is closed</td>
+        <td>Left border: <code>--border</code>; background: <code>--bg-2</code>; text color: <code>--text-2</code>; dot indicator removed</td>
+      </tr>
+      <tr data-s="expanded">
+        <td><strong>Expanded</strong></td>
+        <td>Author or collaborator clicks/taps the comment anchor to open the thread panel</td>
+        <td>Left border: <code>--text-1</code> (3px); background: <code>--bg-1</code>; full border: <code>--border</code>; padding increased to 1rem; text color: <code>--text-1</code></td>
+      </tr>
+      <tr data-s="composing-reply">
+        <td><strong>Composing Reply</strong></td>
+        <td>Author focuses the reply input field within an expanded thread</td>
+        <td>Left border: <code>--amber</code> (3px); background: <code>--bg-1</code>; full border: <code>--border</code>; reply input field border: <code>--amber</code>; send button: background <code>--amber</code>, text #fff, enabled</td>
+      </tr>
+      <tr data-s="resolved-collapsed">
+        <td><strong>Resolved / Collapsed</strong></td>
+        <td>Author or moderator marks comment thread as resolved and collapses it</td>
+        <td>Left border: <code>--border</code>; background: <code>--bg-3</code>; text color: <code>--text-3</code>; text-decoration: line-through; opacity: 0.65; anchor text remains visible but muted</td>
+      </tr>
+      <tr data-s="orphaned">
+        <td><strong>Orphaned</strong></td>
+        <td>The text this comment anchors to is deleted from the document</td>
+        <td>Left border: #D4A844 (3px); full border: #D4A844 (1px solid); background: <code>--bg-1</code>; warning indicator: ⚠ prefix, color #D4A844; label text: "anchor lost"; border-radius: 4px</td>
+      </tr>
+    </table>
+    <p style="font-size:0.8rem">Unspecified states: animation duration for thread slide-in (request from engineering). Accessibility labels per state are defined in Accessibility section below.</p>
+  </section>
+
+  <section class="section">
+    <h2>Tokens</h2>
+    <table>
+      <tr><th>Property</th><th>Token</th></tr>
+      <tr><td>Unread indicator border</td><td><code>--amber</code> (#D4A844)</td></tr>
+      <tr><td>Read/default border</td><td><code>--border</code></td></tr>
+      <tr><td>Expanded/active border</td><td><code>--text-1</code></td></tr>
+      <tr><td>Background — unread/read anchor</td><td><code>--bg-2</code></td></tr>
+      <tr><td>Background — expanded thread</td><td><code>--bg-1</code></td></tr>
+      <tr><td>Background — resolved</td><td><code>--bg-3</code></td></tr>
+      <tr><td>Text — unread/expanded</td><td><code>--text-1</code></td></tr>
+      <tr><td>Text — read anchor</td><td><code>--text-2</code></td></tr>
+      <tr><td>Text — resolved</td><td><code>--text-3</code></td></tr>
+      <tr><td>Orphan warning color</td><td>#D4A844 (no token — engineering will hardcode)</td></tr>
+      <tr><td>Border radius</td><td><code>4px</code> (no token — standard UI radius)</td></tr>
+      <tr><td>Left border width</td><td><code>3px</code> (constant for all states)</td></tr>
+      <tr><td>Padding — anchor</td><td><code>0.6rem 0.8rem</code></td></tr>
+      <tr><td>Padding — expanded</td><td><code>1rem</code></td></tr>
+    </table>
+    <p style="font-size:0.8rem">No raw hex or pt values where a token exists. Orphan warning color (#D4A844) has no token — define as design system constant or accept hardcoded value.</p>
+  </section>
+
+  <section class="section">
+    <h2>Accessibility</h2>
+    <div class="grid2">
+      <div class="dcard">
+        <span class="k">ARIA Label</span>
+        <span class="v"><code>aria-label="[Author]: [first 20 chars of comment]"</code> — e.g., "Sarah: You might want to reconsider this…"</span>
+      </div>
+      <div class="dcard">
+        <span class="k">Role</span>
+        <span class="v"><code>role="note"</code> — indicates an annotation/comment structure</span>
+      </div>
+      <div class="dcard">
+        <span class="k">Keyboard Navigation</span>
+        <span class="v">Tab moves focus between comment anchors in document order. Enter or Space opens expanded thread. Tab within thread moves focus to reply input, then send button. Escape closes expanded thread, returns focus to anchor.</span>
+      </div>
+      <div class="dcard">
+        <span class="k">Unread Indicator</span>
+        <span class="v"><code>aria-live="polite"</code> on unread dot; announces "[Author] has posted a reply" when new comment added</span>
+      </div>
+      <div class="dcard">
+        <span class="k">Touch Target</span>
+        <span class="v">Comment anchor ≥ 44pt height; reply send button ≥ 44×44pt</span>
+      </div>
+      <div class="dcard">
+        <span class="k">Contrast</span>
+        <span class="v">Text on <code>--bg-2</code>: WCAG AA confirmed. Resolved state (<code>--text-3</code> on <code>--bg-3</code>): WCAG AA for muted/secondary content. Unread amber indicator (<code>--amber</code>): WCAG AA on both light and dark backgrounds.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Gaps <span class="pill">resolve before build</span></h2>
+    <div class="itemlist">
+      <div class="item">
+        <div class="it-name">Thread slide-in animation duration <span class="owner">Engineering decides</span></div>
+        <div class="it-desc">Expanded state does not specify transition/animation timing. Design shows instant appearance. Specify duration (e.g., 0.2s) or accept snap-open behavior. Engineering will guess otherwise.</div>
+      </div>
+      <div class="item">
+        <div class="it-name">Orphan warning color token <span class="owner">Design System decides</span></div>
+        <div class="it-desc">Orphaned state uses #D4A844 amber for warning indicator, but no design system token exists for "warning" or "orphan-indicator." Define as token or accept hardcoded value.</div>
+      </div>
+      <div class="item">
+        <div class="it-name">Resolved thread interaction <span class="owner">Design decides</span></div>
+        <div class="it-desc">Resolved state shows anchor as muted. Specify whether clicking a resolved anchor should expand the thread (read-only) or remain permanently collapsed. Current spec: behavior undefined. Spec it or acknowledge the risk.</div>
+      </div>
+      <div class="item">
+        <div class="it-name">Dark mode tokens <span class="owner">Design System decides</span></div>
+        <div class="it-desc">All token references assume light mode. Define dark mode variants for <code>--bg-1</code>, <code>--bg-2</code>, <code>--bg-3</code>, <code>--text-1</code>, <code>--text-2</code>, <code>--text-3</code>, and <code>--amber</code> in :root[data-theme="dark"] or @media (prefers-color-scheme: dark).</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Studio OS · Component Spec · run /annotate to review</p></footer>
+</div>
+
+<script>
+(function(){
+  var demo=document.getElementById('cs-demo');
+  var btns=document.querySelectorAll('#cs-states .cs-sbtn');
+  var rows=document.querySelectorAll('#cs-table tr[data-s]');
+  var labels={
+    'anchored-unread':'Sarah: You might want to reconsider this phrasing...',
+    'anchored-read':'Sarah: You might want to reconsider this phrasing...',
+    'expanded':'Sarah: You might want to reconsider this phrasing... [thread open]',
+    'composing-reply':'Reply field active — type your response...',
+    'resolved-collapsed':'Sarah: Resolved — archived.',
+    'orphaned':'⚠ Anchor lost — original text was deleted'
+  };
+  function set(s){
+    demo.setAttribute('data-s',s); demo.textContent=labels[s]||'[Component]';
+    btns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-s')===s);});
+    rows.forEach(function(r){r.classList.toggle('cs-row-active',r.getAttribute('data-s')===s);});
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.getAttribute('data-s'));});});
+})();
+</script>
+</body>
+</html>

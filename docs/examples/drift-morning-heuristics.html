@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heuristic Report — Drift Morning Playback</title>
+<link rel="stylesheet" href="../kit/studio.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <span class="eyebrow">Studio OS · Heuristic Report · owned by heurist</span>
+    <h1>Drift — Morning Playback<span style="color:var(--amber)">.</span></h1>
+    <p class="header-sub">Usability findings with severity, violation tags, and remediation — invisible friction made visible. Surface evaluated: the screen presented on app open before 10am — previous night's voice memo, AI-generated one-sentence summary, mood tag, and reflect prompt.</p>
+    <div class="header-meta"><span>2026-05-27</span><span>Evaluated against: canonical heuristics · HIG · AI-UX guidelines · studio ethos</span></div>
+  </header>
+
+  <section class="section">
+    <h2>Findings</h2>
+    <table>
+      <tr><th>Sev</th><th>Finding</th><th>Violation</th><th>Remediation</th></tr>
+      <tr>
+        <td><span class="s-fail">P0</span></td>
+        <td>Mood tag ("Anxious", "Restless", "Calm") cannot be corrected or dismissed once generated. An AI-assigned emotional label sits on the user's morning with no path to disagree. Wrong tags accumulate as silent record; trust erodes per encounter.</td>
+        <td>H3 User control and freedom · AI-UX correction · AI attribution</td>
+        <td>Make the tag tappable. One tap reveals alternatives and a dismiss action — no modal, no chrome added to the resting state. The mechanism appears only when the user reaches for it. Removal before addition: do not add a persistent "edit" affordance.</td>
+      </tr>
+      <tr>
+        <td><span class="s-fail">P0</span></td>
+        <td>AI-generated one-sentence summary is rendered in the same type, weight, and color as the user's own transcribed words. In feedback sessions users call the AI summary "what I said" — they cannot distinguish their voice from the model's paraphrase.</td>
+        <td>AI-UX attribution · H4 Consistency and standards</td>
+        <td>Demote the AI summary visually below the user's content and re-set it in the system's established AI register (lighter weight, secondary color, mono label "summary"). The user's words are the principal; the summary is a quiet annotation. Do not add an "AI" badge to the user's transcript — fix the summary, not the source.</td>
+      </tr>
+      <tr>
+        <td><span class="s-warn">P1</span></td>
+        <td>Reflect prompt is AI-generated from the previous night's memo but presented as if it were a static, hand-authored app prompt. No origin indicator. Users cannot tell whether the question was written by Drift's team or composed for them this morning.</td>
+        <td>H4 Consistency and standards · AI-UX transparency</td>
+        <td>Apply the same AI register used for the summary — one mono label, no decoration. Consistency means: every AI-authored surface in this app reads as AI-authored at a glance. If the system has no register yet, define it once and apply it here and to the summary in the same pass.</td>
+      </tr>
+      <tr>
+        <td><span class="s-warn">P1</span></td>
+        <td>Voice memo play button is 36×36pt. It is the primary action on the screen and the gesture the entire surface is organized around. Fails WCAG 2.5.5 minimum (44pt).</td>
+        <td>HIG touch target · WCAG 2.5.5</td>
+        <td>Raise to 44×44pt minimum. The visual mark can remain at current size; expand the hit region. No visible change to composition required.</td>
+      </tr>
+      <tr>
+        <td><span class="s-revise">P2</span></td>
+        <td>No indication of whether the mood tag was generated from the bedtime memo, the morning memo, or both. The model's input scope is invisible — users cannot reason about why the tag is what it is.</td>
+        <td>H1 Visibility of system status · AI-UX model transparency</td>
+        <td>When the tag is tapped (per P0 fix above), reveal source alongside alternatives — "from last night" / "from this morning" / "from both." The disclosure rides on the correction mechanism already being introduced; no new surface required.</td>
+      </tr>
+    </table>
+    <p style="font-size:0.8rem">P0 = blocks the task or breaks trust · P1 = major friction · P2 = minor · P3 = polish. Severity reflects user impact, never inflated to force attention.</p>
+  </section>
+
+  <section class="section">
+    <h2>Tensions</h2>
+    <div class="callout">
+      <p><strong>Correctable mood tag vs. the calm, passive register of the morning surface.</strong> The canonical fix for P0 (correction mechanism) introduces an interactive affordance onto a screen whose parti is quiet receipt — the user wakes, hears themselves, reads one sentence, sits with one question. Any visible "edit" chrome violates that posture. The proposed fix (tap-to-reveal, no resting affordance) reduces the cost but does not eliminate it: a user who does not discover the tap will continue to live with wrong tags. This is a parti-vs-heuristic trade and belongs to the Creative Director, not to this evaluator. Surfaced, not resolved.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What the Next Gate Confirms</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">✓ Every P0/P1 is resolved or explicitly accepted with reasoning before ship.</div></div>
+      <div class="item"><div class="it-desc">✓ Fixes favor removal or redesign over additive band-aids — no tooltip papers over a structural problem.</div></div>
+      <div class="item"><div class="it-desc">✓ AI register is defined once and applied consistently — summary, reflect prompt, and any future AI-authored surface share one visual vocabulary.</div></div>
+      <div class="item"><div class="it-desc">✓ P1 touch-target fix verified by accessibility before ship.</div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Studio OS · Heuristic Report · run /annotate to review</p></footer>
+</div>
+</body>
+</html>

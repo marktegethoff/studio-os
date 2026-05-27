@@ -1,28 +1,74 @@
-# Studio OS
+<div align="center"><em>Standard Works · Studio OS</em></div>
 
-*Standard Works · Studio OS*
+---
 
-Product work with AI drifts without structure — agents generate without gates, design begins before the problem is validated, code ships without a spec. Studio OS installs a design studio into Claude Code: **35 discipline agents** and a set of **workflow skills** that gate each stage before the next can begin.
+> Claude Code ships code without a spec. It designs without a brief. It builds before the problem is validated.
+> These aren't prompting failures — they're structural: the AI has no senior review, no gate between stages, no accumulated judgment about your product.
 
-Product-agnostic by design. Built for product and design teams working alongside engineering — useful for a solo practitioner, designed for a team.
+Studio OS installs a design studio into Claude Code: 35 discipline agents sequenced by role, with three senior gates that must clear before the next stage can begin.
 
-Nothing arbitrary, nothing extra, nothing essential missing.
+Product-agnostic. Useful for a solo practitioner; built for a team.
+
+---
+
+## What it produces
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/keel-weekly-review-wireframe.png"
+           alt="Keel weekly review wireframe" width="380" />
+      <br /><sub><b>The interaction model, decided before implementation begins.</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/meridian-streak-experiment.png"
+           alt="Meridian streak experiment plan" width="380" />
+      <br /><sub><b>A testable hypothesis, structured to falsify — not to confirm.</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/ledger-deduction-competitive.png"
+           alt="Ledger competitive teardown" width="380" />
+      <br /><sub><b>An open position in the category, surfaced before the brief is written.</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/vessel-comment-spec.png"
+           alt="Vessel comment thread component spec" width="380" />
+      <br /><sub><b>All six states documented and named before a line is written.</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="docs/screenshots/drift-morning-heuristics.png"
+           alt="Drift morning playback heuristic report" width="380" />
+      <br /><sub><b>The failure modes surfaced — and resolved — before code ships.</b></sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## How it works
 
-Each workflow skill orchestrates a sequence of discipline agents against a problem. Agents are not interchangeable — they are roles with defined scope, sequencing, and output contracts. A designer does not run before a strategist and architect have constrained the space. A specifier does not run before a designer has produced an interaction model.
+The differentiator is the gate structure. A designer does not run before a strategist and architect have constrained the space. A specifier does not run before a designer has produced an interaction model. Three senior agents hold the line between stages:
 
-Three agents form the senior gate structure, run in sequence:
-
-- **PM** (`pm`) — the problem gate. Validates the customer problem before design begins.
-- **Creative Director** (`cd`) — the design gate. SHIP / NO-SHIP before implementation begins.
-- **Distinguished Engineer** (`de`) — the engineering gate. SHIP / REVISE / REJECT before any merge.
+> **PM** — the problem gate. Before design begins.
+>
+> **Creative Director** — the design gate. SHIP / NO-SHIP before engineering begins.
+>
+> **Distinguished Engineer** — the engineering gate. SHIP / REVISE / REJECT before any merge.
 
 When a verdict requires further work, each gate names the specific agent or skill that resolves it — not just the problem.
 
-The studio is organized in three tiers — **Core** (universal craft + the Standard Works philosophy), **Role** (discipline agents), and **Product** (one product's context, which lives in your project, not here). See [STRUCTURE.md](STRUCTURE.md) for the full tier map and the 35-agent roster.
+<details>
+<summary>Studio structure — three tiers</summary>
+
+The studio is organized in three tiers: **Core** (universal craft + the Standard Works philosophy), **Role** (discipline agents), and **Product** (one product's context, which lives in your project, not here).
+
+See [STRUCTURE.md](STRUCTURE.md) for the full tier map and the 35-agent roster.
+
+</details>
 
 ---
 
@@ -47,58 +93,52 @@ claude --plugin-dir /path/to/studio-os
 
 **Fallback** (non-plugin contexts): `./install.sh` copies agents and skills into `~/.claude/`.
 
-Then, in any project, set up product context:
+**Then set up product context:**
 
 ```
 /studio:init
 ```
 
-This interviews you for your product's purpose, principles, invariants, and stack; scaffolds production and canvas projects with a shared module included by reference; and writes `.claude/memory/project-context.md` — the Product tier. A lint enforces that the shared module is never copied, never published, never forked. Studio OS works without `init`, but agents fall back to generic reasoning. The calibration is the point.
+This interviews you for your product's purpose, principles, invariants, and stack; scaffolds production and canvas projects with a shared module included by reference; and writes `.claude/memory/project-context.md` — the Product tier. A lint enforces that the shared module is never copied, never published, never forked. Studio OS works without `init` — agents reason without product context. The calibration is what makes the work specific to your product.
 
 ---
 
 ## Workflow skills
 
-```
-/studio:studio        Entry point — orient and route
-/studio:init          Set up project context
-/studio:shape         Interview-driven brief shaping
-/studio:discover      Problem framing and research
-/studio:ideate        Divergent exploration before committing
-/studio:design        Full design workflow
-/studio:prototype     Get to a testable prototype fast
-/studio:handoff       Prototype → production-ready package
-/studio:implement     Engineering workflow
-/studio:measure       Define and evaluate metrics
-/studio:experiment    Experiment design and evaluation
-/studio:simulate      Long-horizon behavior simulation
-/studio:solve         Convergence loop for hard problems
-/studio:review        Leadership-team review — PM + CD + DE
-/studio:critique      Single-pass quality review
-/studio:simplify      Codebase coherence workflow
-/studio:scope         Scope a task tight enough to delegate
-```
+Each workflow leaves behind an artifact the next session can read — a brief, a journey, an interaction model, a spec, a metrics plan — rendered as an HTML document with a built-in feedback harness.
 
-Discipline agents can also be invoked directly by name — including engineer specialists (`swift-engineer` for all Apple platforms, `web-engineer` for the web, plus any stack via on-demand generation at `/studio:init`). Run `/studio:studio` to see what each produces.
+| Command | Produces |
+|---|---|
+| `/studio:studio` | Entry point — orientation, routing, artifact menu |
+| `/studio:init` | Product context setup |
+| `/studio:shape` | Shaped brief from interview |
+| `/studio:discover` | Problem frame, research, and assumption map |
+| `/studio:ideate` | Divergent directions before committing |
+| `/studio:design` | Full design workflow |
+| `/studio:prototype` | Testable prototype |
+| `/studio:handoff` | Production-ready package from prototype |
+| `/studio:implement` | Engineering workflow |
+| `/studio:measure` | Metrics plan and instrumentation |
+| `/studio:experiment` | Experiment design and evaluation plan |
+| `/studio:simulate` | Long-horizon behavior simulation |
+| `/studio:solve` | Convergence loop for hard problems |
+| `/studio:review` | Leadership review — PM + CD + DE |
+| `/studio:critique` | Single-pass quality review |
+| `/studio:simplify` | Codebase coherence pass |
+| `/studio:scope` | Task scoped tight enough to delegate |
 
-Each workflow leaves behind artifacts the next session can read — briefs, journeys, interaction models, specs, metrics plans — each rendered as a well-designed HTML document with a built-in feedback harness.
+Discipline agents can be invoked directly by name. Run `/studio:studio` to see what each produces.
 
 ---
 
 ## Adapting it
 
-Studio OS reflects a specific position on how design and product work should be done — the Standard Works philosophy. You may not share all of it.
+Studio OS reflects a specific position on how design and product work should be done — the Standard Works philosophy.
 
 Use it for a few projects. Notice where the principles serve you and where they don't. Then change what needs to change — the agents, the workflows, the philosophy. The point of this system is not to inherit someone else's judgment. It is to build the infrastructure to exercise your own more rigorously.
 
-See [PHILOSOPHY.md](PHILOSOPHY.md) for the reasoning behind the defaults, and [EXAMPLES.md](EXAMPLES.md) for the system in use.
+[Philosophy](PHILOSOPHY.md) · [Examples](EXAMPLES.md)
 
 ---
 
-## Credits
-
-Built by [Mark Tegethoff](https://github.com/marktegethoff) at [Standard Works](https://standardworks.co).
-
-The `luck` durability diagnostic was developed by [Soleio](https://github.com/soleio/luck).
-
-Release history: [CHANGELOG.md](CHANGELOG.md).
+Built by [Mark Tegethoff](https://github.com/marktegethoff) at [Standard Works](https://standardworks.co). The `luck` durability diagnostic was developed by [Soleio](https://github.com/soleio/luck). [Changelog](CHANGELOG.md).
