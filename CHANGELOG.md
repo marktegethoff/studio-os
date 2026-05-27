@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 — 2026-05-26
+
+*Stub — populated during the v1.2.0 auto run; final entry written before commit completes.*
+
 ## 1.1.1 — 2026-05-26
 
 First full eval suite run (Backlog #2). Fixed every issue surfaced:
