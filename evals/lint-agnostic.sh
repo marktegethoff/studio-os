@@ -13,6 +13,10 @@
 #   R4   skills do not hardcode paths — skills/**                      (WARN)
 #   R5   specialist scaffold anchor   — agents/*-engineer.md           (FAIL)
 #        exactly one fenced ```scaffold-commands block; required keys present.
+#   R6   kit reference                 — agents/** + skills/**          (FAIL)
+#        any file with artifact:/artifacts: frontmatter must reference
+#        the named template(s) or artifacts/kit/studio.css; named
+#        templates must exist in artifacts/templates/.
 #   IBR  included-by-reference         — project-level                  (FAIL)
 #        the invariant the design exists to protect.
 #        Runs regardless of scaffold_state.
@@ -310,6 +314,74 @@ else
     done <<< "$keys"
   done
   [[ $r5_hits -eq 0 ]] && info "all ${#SPECIALIST_FILES[@]} specialists have valid scaffold-commands"
+fi
+
+# ── R6 — kit reference (artifact production) ──────────────────────────────────
+
+section "R6 · kit reference — agents/** + skills/**"
+
+# Parse the artifact: or artifacts: [a, b] frontmatter key from a file.
+# Emits one artifact name per output line.
+frontmatter_artifacts() {
+  awk '
+    BEGIN { in_fm = 0 }
+    NR == 1 && /^---[[:space:]]*$/ { in_fm = 1; next }
+    in_fm && /^---[[:space:]]*$/ { exit }
+    in_fm && /^artifact:[[:space:]]*/ {
+      sub(/^artifact:[[:space:]]*/, "")
+      sub(/[[:space:]]*$/, "")
+      gsub(/^["'\'']|["'\'']$/, "")
+      if (length($0)) print
+      next
+    }
+    in_fm && /^artifacts:[[:space:]]*\[/ {
+      sub(/^artifacts:[[:space:]]*\[/, "")
+      sub(/\][[:space:]]*$/, "")
+      n = split($0, arr, /,[[:space:]]*/)
+      for (i = 1; i <= n; i++) {
+        gsub(/[[:space:]]+/, "", arr[i])
+        gsub(/^["'\'']|["'\'']$/, "", arr[i])
+        if (length(arr[i])) print arr[i]
+      }
+    }
+  ' "$1"
+}
+
+r6_hits=0
+r6_files_checked=0
+ALL_ARTIFACT_FILES=("${AGENT_FILES[@]}" "${SKILL_FILES[@]}")
+for f in "${ALL_ARTIFACT_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  artifacts="$(frontmatter_artifacts "$f")"
+  [[ -z "$artifacts" ]] && continue
+  rel="$(rel_plugin "$f")"
+  r6_files_checked=$((r6_files_checked + 1))
+
+  has_kit_ref=0
+  grep -qF "artifacts/kit/studio.css" "$f" && has_kit_ref=1
+
+  while IFS= read -r artifact_name; do
+    [[ -z "$artifact_name" ]] && continue
+
+    template_rel="artifacts/templates/${artifact_name}.html"
+    template_abs="$PLUGIN_ROOT/$template_rel"
+
+    if ! grep -qF "$template_rel" "$f" && [[ $has_kit_ref -eq 0 ]]; then
+      fail "$rel — declares artifact: $artifact_name but body does not reference $template_rel or artifacts/kit/studio.css (R6.a)"
+      r6_hits=$((r6_hits + 1))
+    fi
+
+    if [[ ! -r "$template_abs" ]]; then
+      fail "$rel — declares artifact: $artifact_name but $template_rel does not exist (R6.b)"
+      r6_hits=$((r6_hits + 1))
+    fi
+  done <<< "$artifacts"
+done
+
+if [[ $r6_files_checked -eq 0 ]]; then
+  info "no files declare artifact: — R6 N/A"
+elif [[ $r6_hits -eq 0 ]]; then
+  info "all $r6_files_checked artifact-declaring files reference their kit templates"
 fi
 
 # ── project-level checks (R3 + IBR) ───────────────────────────────────────────

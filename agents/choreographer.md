@@ -31,7 +31,8 @@ description: >
 
 model: sonnet
 color: cyan
-tools: ["Read", "Glob"]
+tools: ["Read", "Glob", "Write"]
+artifact: motion-spec
 ---
 
 ## Studio Standard
@@ -147,3 +148,15 @@ Rationale: [what this motion communicates]
 ```
 
 If recommending removal, state it plainly. Do not soften.
+
+---
+
+## Artifact
+
+When you produce a motion spec, render it as HTML and write it to disk — do not emit it as prose buried in the response.
+
+- **Template:** `artifacts/templates/motion-spec.html`
+- **Output path:** `design/<slug>-motion.html` (slug from the surface or transition name, lowercase kebab-case, max 40 chars)
+- **Summary in conversation:** file path, one-sentence headline, verdict distribution (Necessary / Orienting / Remove counts)
+- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Keel · Weekly Review</title>
+<link rel="stylesheet" href="../kit/studio.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <span class="eyebrow">Keel · ASCII Wireframe · owned by designer</span>
+    <h1>Weekly Review<span style="color:var(--amber)">.</span></h1>
+    <p class="header-sub">Structural layout before any implementation code — the arrangement and hierarchy, not the visual treatment.</p>
+    <div class="header-meta"><span>2026-05-27</span><span>State: scanning — full open-work picture before any decisions</span></div>
+  </header>
+
+  <section class="section">
+    <h2>Layout</h2>
+    <pre class="ascii">state: scanning — week of Jun 2
+
+┌──────────────────────────────────────┐
+│ [A] Week of Jun 2          [B] ···   │
+├──────────────────────────────────────┤
+│                                      │
+│ [C] MERIDIAN STRATEGIES       4 open │
+│                                      │
+│  · Brand audit deck          [·] fri │
+│  · Stakeholder map v2        [·] fri │
+│  · Competitive scan          [·] wed │
+│  · Kick-off agenda           [✓] —   │
+│                                      │
+├──────────────────────────────────────┤
+│                                      │
+│ [D] HOLLOWAY &amp; PARK           2 open │
+│                                      │
+│  · Q2 retainer invoice       [·] thu │
+│  · Discovery session notes   [·] mon │
+│                                      │
+├──────────────────────────────────────┤
+│                                      │
+│ [E] CLOVER SYSTEMS            3 open │
+│                                      │
+│  · Sprint planning doc       [·] wed │
+│  · Eng handoff — auth flow   [·] fri │
+│  · Accessibility review      [·] fri │
+│                                      │
+├──────────────────────────────────────┤
+│                                      │
+│ [F] LONE PINE ADVISORY        1 open │
+│                                      │
+│  · Engagement letter draft   [·] mon │
+│                                      │
+├──────────────────────────────────────┤
+│                                      │
+│                  [G] Close week →    │
+│                                      │
+└──────────────────────────────────────┘
+
+phone full screen · 40 × 43
+aspect: 40 × 43 ≈ 2.15 : 1  (phone 19.5 : 9, matches device)
+scale:  1 col ≈ 10 pt · 1 row ≈ 20 pt
+
+[A] week label       primary   · current ISO week range; anchors orientation
+[B] overflow glyph   tertiary  · access archived weeks / settings
+[C] client header    secondary · name in caps + open count; tap to collapse
+[D] client header    secondary · same pattern; 2 open items
+[E] client header    secondary · same pattern; 3 open items
+[F] client header    secondary · same pattern; 1 open item
+[G] close week       primary   · commit action; dims until all items resolved
+
+item rows (under each client):
+  · name             secondary · deliverable label; max 24 chars before wrap
+  [·] status dot     meta      · open = hollow · closed = check · overdue = filled
+  due indicator      meta      · abbreviated day (mon–fri) or — if undated
+
+verification: top edge ─ = 38 · │ at col 0 and col 39 on every row
+· separator rows ├──────────────────────────────────────┤ = 38 dashes
+· all content rows 38 chars between pipes (counted per row)
+· aspect 40 × 43 correct for phone portrait 19.5:9</pre>
+    <p style="font-size:0.8rem">Verification: top-edge ─ count = 38 · │ columns at 0 and 39 on every content row · separator ─ count = 38 · client header rows corrected for visible width (HTML entity &amp;amp; renders as single char) · aspect 40 × 43 matches phone 19.5:9. No color, no tokens — structure only.</p>
+  </section>
+
+  <section class="section">
+    <h2>States</h2>
+    <p>One wireframe per meaningful state. The scanning state is shown above — it is the entry state every week.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-name">scanning</div><div class="it-desc">All clients expanded. Full open-work list visible. "Close week →" is present but dim — no action has been taken yet. This is the state shown above.</div></div>
+      <div class="item"><div class="it-name">item closed</div><div class="it-desc">Tapping an open item marks it done: [·] flips to [✓], row dims, client open count decrements. Row stays in place until week is closed — the consultant can see what got done, not just what remains.</div></div>
+      <div class="item"><div class="it-name">client collapsed</div><div class="it-desc">Tapping a client header collapses its item rows. Header and open count persist. Lets the consultant clear visual noise from clients already reviewed. "Close week →" activates only when all items across all clients are resolved or rolled.</div></div>
+      <div class="item"><div class="it-name">roll unfinished</div><div class="it-desc">Triggered from "Close week →" if any [·] items remain. A sheet lists every open item with a binary choice: roll to next week, or mark dropped. This decision point is deferred until the consultant has finished scanning — it does not interrupt the review.</div></div>
+      <div class="item"><div class="it-name">week closed</div><div class="it-desc">All items resolved or rolled. "Close week →" becomes "Week closed ✓". The week label advances to the next ISO week. Screen transitions to the new week's empty scanning state.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What the Next Step Confirms</h2>
+    <div class="itemlist">
+      <div class="item"><div class="it-desc">✓ Hierarchy reads correctly at the scan distance the user arrives with — client name and open count register first, item detail second.</div></div>
+      <div class="item"><div class="it-desc">✓ Every state is structurally accounted for (Specifier turns this into the spec; the State Inventory enumerates them).</div></div>
+      <div class="item"><div class="it-desc">✓ "Close week →" is always visible in the action zone — no Buried Primary. It is gated by item state, not hidden behind a secondary action.</div></div>
+      <div class="item"><div class="it-desc">✓ Status dot + due day give enough per-item signal for a fast scan without requiring the consultant to open anything. The surface respects the time pressure of a weekly review.</div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><p>Studio OS · ASCII Wireframe · run /annotate to review</p></footer>
+</div>
+</body>
+</html>

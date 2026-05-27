@@ -7,9 +7,26 @@ Run the simplification workflow.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for context loading · [SONNET] for audit + critic + architect + implementation · [OPUS] for Distinguished Engineer (both passes)
-
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
+
+---
+
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
 
 ---
 
@@ -44,7 +61,7 @@ $ARGUMENTS
 
 ---
 
-## [HAIKU] Step 1 — Context Load
+## Step 1 — Context Load
 
 Read in order:
 1. The spec file for this area, if one exists — check `specs/` or the spec path defined in CLAUDE.md. If none exists, note it — the simplification will proceed without a contract baseline.
@@ -55,19 +72,18 @@ State what was loaded and confirm the scope before proceeding.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Context loaded. Switch to **[SONNET]** (`claude-sonnet-4-6`) to begin the audit loop.
+> **⏸ PAUSE (skipped in --auto) — Context loaded.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [Loop — SONNET + OPUS] Steps 2–5
+## Steps 2–5
 
 Maximum iterations: 3. Loop exits when the Distinguished Engineer's Plan Review returns PROCEED.
 
 ---
 
-### [SONNET] Step 2 — Code Audit
+### Step 2 — Code Audit
 
 Scan the files in scope for the following five categories. For each finding, name the file, the specific code, and which category it falls into.
 
@@ -85,7 +101,7 @@ Produce an audit report: one section per category, each finding specific and act
 
 ---
 
-### [SONNET] Step 3 — Critic Pass
+### Step 3 — Critic Pass
 
 Of the audit findings, determine what should actually be simplified vs. what must stay.
 
@@ -99,7 +115,7 @@ Produce a simplification plan: a specific list of changes, each with the file, t
 
 ---
 
-### [SONNET] Step 4 — Architect Pass
+### Step 4 — Architect Pass
 
 Evaluate the simplification plan from an architectural perspective.
 
@@ -112,13 +128,12 @@ State which changes are architecturally sound, which need revision, and which sh
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Audit loop pass complete. Switch to **[OPUS]** (`claude-opus-4-6`) for Distinguished Engineer Plan Review.
+> **⏸ PAUSE (skipped in --auto) — Audit loop pass complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-### [OPUS] Step 5 — Distinguished Engineer: Plan Review
+### Step 5 — Distinguished Engineer: Plan Review
 
 Apply the Distinguished Engineer discipline (Plan Review mode).
 
@@ -132,8 +147,7 @@ State the verdict: **PROCEED / REVISE PLAN / REJECT**.
 
 If REVISE PLAN and iterations remain:
 
-> **⏸ PAUSE — Model switch required.**
-> Plan requires revision. Switch back to **[SONNET]** (`claude-sonnet-4-6`) to revise.
+> **⏸ PAUSE (skipped in --auto) — Plan requires revision.**
 > Reply **"continue"** when ready.
 
 State explicitly before re-entering the loop:
@@ -143,7 +157,7 @@ State explicitly before re-entering the loop:
 
 ---
 
-## [SONNET] Step 6 — Engineer: Implement
+## Step 6 — Engineer: Implement
 
 Apply the engineer specialist for the project's stack. Read the stack declared in `project-context.md`; if a specialist exists (e.g., `swift-engineer`, `web-engineer`), use it. If none is declared, use the base `engineer`.
 
@@ -156,7 +170,7 @@ Implement the converged simplification plan. Each change touches one behavior. V
 
 ---
 
-## [SONNET] Step 7 — Simplify Review
+## Step 7 — Simplify Review
 
 Review the changed code for reuse, quality, and efficiency. Apply the `simplify` skill to the changed files.
 
@@ -166,7 +180,7 @@ Fix any issues found before QA.
 
 ---
 
-## [SONNET] Step 8 — QA
+## Step 8 — QA
 
 Apply the QA Engineer discipline.
 
@@ -185,13 +199,12 @@ Do not proceed to Distinguished Engineer Code Review if any invariant fails.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Implementation and QA complete. Switch to **[OPUS]** (`claude-opus-4-6`) for Distinguished Engineer Code Review.
+> **⏸ PAUSE (skipped in --auto) — Implementation and QA complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [OPUS] Step 9 — Distinguished Engineer: Code Review
+## Step 9 — Distinguished Engineer: Code Review
 
 Apply the Distinguished Engineer discipline (Code Review mode).
 

@@ -33,6 +33,7 @@ description: >
 model: haiku
 color: blue
 tools: ["Read", "Glob", "Write"]
+artifacts: [component-spec, state-inventory]
 ---
 
 ## Design System
@@ -159,3 +160,17 @@ Default — [visual properties using token names]
 ```
 
 Omit sections that genuinely do not apply. Do not use "N/A" — if it doesn't apply, remove the section. Every included section must be complete.
+
+---
+
+## Artifact
+
+When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
+
+- **Component spec** — `artifacts/templates/component-spec.html` → `design/<slug>-spec.html`
+- **State inventory** (with Designer) — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
+
+For all:
+- **Summary in conversation:** file path, one-sentence headline, state count or component count
+- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

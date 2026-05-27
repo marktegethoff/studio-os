@@ -50,6 +50,57 @@ Templates live in `artifacts/templates/`. Each is owned by the agent that produc
 | Competitive teardown | competitive-analyst | read before a brief |
 | Heuristic report | heurist | P0–P3 findings |
 | Decision record | architect / any | an HTML view over a ledger entry |
+| Critique report | cd | nine-discipline findings; triage |
+| Leadership review | pm / cd / de | **gates ship / merge** |
+| Task brief | pm / architect | **gates `/implement`** |
+| Ideation output | strategist / designer | feeds `/shape` brief |
+| Experiment plan | metrics-definer | feeds validation |
+
+## Proposing a new template
+
+The kit's value depends on no ad-hoc HTML drift. Agents retain the judgment to recognize when an existing template doesn't fit — but they **do not invent HTML** and **do not modify the source kit**. The resolution is structural: agents **propose**; humans **approve**.
+
+**Proposal location:** `artifacts/proposals/<slug>.md` — one markdown file per proposal. Reviewed periodically; approved proposals graduate to `artifacts/templates/<slug>.html`.
+
+**No-fit procedure (for agents and skills):**
+
+1. Do not emit ad-hoc HTML. Do not modify the source kit.
+2. Write a proposal to `artifacts/proposals/<slug>.md` using the schema below.
+3. In `--auto` mode: render in the closest existing template (degraded but consistent), note the degradation in the markdown summary, and reference the proposal file.
+4. In interactive mode: pause and surface the proposal for human review before continuing.
+
+**Reuse-first discipline.** A proposal must justify reuse in the "Reuse hypothesis" field. A template that serves only one artifact is usually a sign the artifact is wrongly framed, not that a new template is needed. The proposal review applies this judgment.
+
+**Proposal schema:**
+
+```markdown
+---
+proposed_template: <kebab-case-slug>
+proposed_by: <skill or agent name>
+date: <YYYY-MM-DD>
+status: proposed | approved | rejected
+---
+
+## What this template would carry
+[1–3 sentences: artifact name, what it communicates, intended owner.]
+
+## Why existing templates don't fit
+[Name the closest existing template(s) and exactly what they fail to express.]
+
+## Required fields
+[Bulleted list of structural fields the template must support.]
+
+## Instrument or Document?
+[Per artifacts/kit/README.md interactivity rule. If Instrument, name the controls and what value they change.]
+
+## HTML sketch
+[Skeleton HTML using kit component classes. Not final — a structural draft.]
+
+## Reuse hypothesis
+[Where else this template would be reused. A template that serves only one artifact is a candidate for inlining, not a new template.]
+```
+
+**Lint note:** R6 does not enforce proposals — proposals are advisory and human-reviewed. However, a skill cannot ship an `artifact:` frontmatter key pointing at a proposed-but-not-approved template; the proposal must graduate to `artifacts/templates/` first.
 
 ## Interactivity — controls where they're earned
 
@@ -67,3 +118,5 @@ When building a new template, ask: would the reviewer want to *change a value an
 ## The rule
 
 **If an artifact is primarily for agent context, it still ships with a well-designed HTML version for human review, and it still carries the annotation harness.** A handoff between an agent and a human is not raw text. (This mirrors the `gather-feedback` skill, which renders completed work as a reviewable page and waits for the response block.)
+
+**R6 — Kit reference enforcement.** Every skill or agent file with an `artifact:` (or `artifacts:`) frontmatter key must reference either `artifacts/templates/<artifact>.html` or `artifacts/kit/studio.css` in its body, and the named template must exist in `artifacts/templates/`. Skills and agents without an `artifact:` key are exempt (orientation and control-plane files). The lint rule in `evals/lint-agnostic.sh` enforces R6 automatically — it fails CI on any artifact-key mismatch or missing template.

@@ -1,18 +1,37 @@
 ---
 description: Divergent brainstorm workflow. Takes a problem statement (not a solution) and produces 1–2 feature ideas ready for /solve or /design. Runs full design team divergence via parallel agents across seven lenses and three constraint frames, facilitated reduction to 3–5 ideas, synthetic user desirability, user selection, and parallel engineering feasibility. Use when exploring an opportunity space before committing to a direction.
 argument-hint: "<problem statement or opportunity area>"
+artifact: ideation-output
 ---
 
 Divergent brainstorm for a product problem or opportunity.
 
 Arguments: $ARGUMENTS
 
-**Model requirements:** [HAIKU] for problem gate + context · [SONNET] for compilation, synthetic users, feasibility synthesis · [OPUS] for facilitated reduction (Creative Director) + DE verdict
 **Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase, not one per inner agent.
 
 **Six Functions (see CLAUDE.md).** Ideas produced here feed `/studio:design`, where the six functions apply in full. Ideation's own divergence already spans multiple lenses; it does not itself produce a final design artifact, so it is not held to the six-function floor — but it must hand off a problem framed well enough that design can satisfy them.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
+
+---
+
+## Auto Mode
+
+If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+
+### Auto-mode safety contract (non-negotiable)
+
+Before performing any action in `--auto` mode, the orchestrator MUST verify:
+
+1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
+2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
+3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
+4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
+5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
+6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+
+If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
 
 ---
 
@@ -48,7 +67,7 @@ The project provides the specifics. You provide the discipline.
 
 ---
 
-## [HAIKU] Step 0.5 — PM brief check
+## Step 0.5 — PM brief check
 
 Before ideation begins: check for a validated product brief.
 
@@ -59,7 +78,7 @@ If no brief exists, note it. Ideation can proceed — but flag it:
 
 ---
 
-## [HAIKU] Step 1 — Problem Gate
+## Step 1 — Problem Gate
 
 Input: $ARGUMENTS
 
@@ -85,13 +104,12 @@ Capture this as **[PROBLEM]** — you will embed it verbatim into the outer agen
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Problem gate complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) before continuing.
+> **⏸ PAUSE (skipped in --auto) — Problem gate complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [SONNET] Step 2 — Divergence (outer background agent)
+## Step 2 — Divergence (outer background agent)
 
 Spawn ONE outer background agent with `run_in_background: true`. This agent orchestrates all 7 discipline lenses internally, compiles the raw idea list, and returns it. You will receive one notification when divergence is complete.
 
@@ -151,13 +169,12 @@ When the outer agent completes and returns the compiled list, proceed to Step 3.
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Divergence complete. Switch to **[OPUS]** (`claude-opus-4-6`) for facilitated reduction.
+> **⏸ PAUSE (skipped in --auto) — Divergence complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [OPUS] Step 3 — Facilitated Reduction
+## Step 3 — Facilitated Reduction
 
 The Creative Director chairs this step. Strategist and Critic participate.
 
@@ -189,13 +206,12 @@ Risk: [the one thing most likely to kill this idea]
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Reduction complete. Switch to **[SONNET]** (`claude-sonnet-4-6`) for synthetic user evaluation.
+> **⏸ PAUSE (skipped in --auto) — Reduction complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [SONNET] Step 4 — Synthetic User Desirability
+## Step 4 — Synthetic User Desirability
 
 Evaluate the surviving ideas against synthetic user personas.
 
@@ -208,13 +224,12 @@ Note any ideas that don't land with any persona — flag for elimination conside
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Synthetic user evaluation complete. Switch to **[HAIKU]** (`claude-haiku-4-5-20251001`) for user selection presentation.
+> **⏸ PAUSE (skipped in --auto) — Synthetic user evaluation complete.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [HAIKU] Step 5 — Your Selection
+## Step 5 — Your Selection
 
 Present the idea cards with desirability notes beneath each, in this format:
 
@@ -234,12 +249,12 @@ Then output this to the user and stop:
 
 ---
 
-> **⏸ PAUSE — Your turn.**
+> **⏸ PAUSE (skipped in --auto) — Your turn.**
 > Waiting for your selection and preference before continuing.
 
 ---
 
-## [SONNET] Step 6 — Feasibility Pass (outer background agent)
+## Step 6 — Feasibility Pass (outer background agent)
 
 Spawn ONE outer background agent with `run_in_background: true`. This agent runs all 3 evaluators (iOS Engineer, QA, Heurist) for all selected ideas in parallel and returns compiled per-idea feasibility data. You will receive one notification when complete.
 
@@ -288,13 +303,12 @@ When the outer agent completes and returns the compiled feasibility data, procee
 
 ---
 
-> **⏸ PAUSE — Model switch required.**
-> Feasibility data collected. Switch to **[OPUS]** (`claude-opus-4-6`) for DE verdict.
+> **⏸ PAUSE (skipped in --auto) — Feasibility data collected.**
 > Reply **"continue"** when ready.
 
 ---
 
-## [OPUS] Step 7 — DE Verdict
+## Step 7 — DE Verdict
 
 The Distinguished Engineer evaluates each selected idea against the feasibility data.
 
@@ -340,3 +354,20 @@ Date: [today]
 ```
 
 If no ideas clear feasibility, report honestly. Do not force a recommendation. State what the ideation revealed about the problem and what would need to be different for ideas to clear.
+
+---
+
+## Output
+
+Render the artifact as HTML using the kit template.
+
+1. Load `artifacts/templates/ideation-output.html` as the structural shell.
+2. Populate the artifact-specific fields: problem statement, cleared ideas (1–2 with PROTOTYPE or INVESTIGATE verdict, desirability and feasibility summary), recommended next step, deferred ideas with conditions for reconsideration.
+3. Write to `specs/ideation_<slug>.html` where slug is derived from the problem statement (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - Cleared idea names and verdicts
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

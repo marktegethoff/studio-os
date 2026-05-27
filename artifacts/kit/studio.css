@@ -97,7 +97,7 @@ th{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-trans
 td strong{color:var(--text-1)}
 
 /* ASCII / wireframe block */
-pre.ascii{background:var(--bg-2);border:1px solid var(--border);border-radius:3px;color:var(--text-1);font-family:var(--font-mono);font-size:0.72rem;line-height:1.5;padding:1.5rem 1.75rem;white-space:pre;overflow:auto;max-width:none;margin:1.5rem 0}
+pre.ascii{background:var(--bg-2);border:1px solid var(--border);border-radius:3px;color:var(--text-1);font-family:'Menlo','Cascadia Code','Consolas',ui-monospace,monospace;font-size:0.72rem;line-height:1.5;padding:1.5rem 1.75rem;white-space:pre;overflow-x:auto;max-width:none;margin:1.5rem 0;font-variant-ligatures:none;tab-size:2}
 
 /* Status colors */
 .s-pass,.s-ship{color:var(--green)} .s-revise,.s-warn{color:var(--accent)} .s-fail,.s-reject{color:var(--red)}

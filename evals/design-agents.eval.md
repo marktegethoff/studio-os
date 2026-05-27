@@ -179,20 +179,46 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ---
 
+## Artifact Production — Eval 9: HTML output via kit template
+
+**Testing:** Designer, Choreographer, Writer, and Specifier each render their artifact as HTML using the assigned kit template, write it to disk, and surface a markdown summary.
+
+**Prompts:**
+> [Designer] "Define the interaction model for the notification panel — all states and transitions."
+> [Choreographer] "Specify the motion for the message composer keyboard transition."
+> [Writer] "Produce the copy deck for the empty state in the timeline view."
+> [Specifier] "Write the component spec for the message input row."
+
+**Pass criteria (all four agents):**
+- [ ] Produces an HTML file using the correct kit template (`ascii-wireframe.html`/`state-inventory.html`, `motion-spec.html`, `copy-deck.html`, `component-spec.html` respectively)
+- [ ] Writes the file to disk at the expected path (e.g., `design/<slug>-wireframe.html`)
+- [ ] Does not emit ad-hoc HTML or a prose-only artifact in the response
+- [ ] Surfaces a short markdown summary in conversation: file path, headline, key decisions
+- [ ] Offers `/studio:annotate <file-path>` after writing
+
+**Anti-patterns:**
+- Producing the artifact only as prose in the response (Prose-Only Artifact)
+- Inventing custom HTML structure instead of using the kit template (Ad-Hoc HTML)
+- Writing to disk without the markdown conversation summary
+- Skipping the annotation offer
+
+---
+
 ## Eval summary template
 
 ```
 Design Agents Eval Run — [date]
 Triggered by: [what changed]
 
-Designer Eval 1 — Wireframe first:       PASS / FAIL
-Designer Eval 2 — Single correct answer: PASS / FAIL
-Choreographer Eval 3 — Earned motion:    PASS / FAIL
-Typesetter Eval 4 — Structural role:     PASS / FAIL
-Writer Eval 5 — No apologetic language:  PASS / FAIL
-Specifier Eval 6 — State counting:       PASS / FAIL
-Prototyper Eval 7 — Minimum prototype:   PASS / FAIL
-Designer Eval 8 — Scene Test:            PASS / FAIL
+Designer Eval 1 — Wireframe first:        PASS / FAIL
+Designer Eval 2 — Single correct answer:  PASS / FAIL
+Choreographer Eval 3 — Earned motion:     PASS / FAIL
+Typesetter Eval 4 — Structural role:      PASS / FAIL
+Writer Eval 5 — No apologetic language:   PASS / FAIL
+Specifier Eval 6 — State counting:        PASS / FAIL
+Prototyper Eval 7 — Minimum prototype:    PASS / FAIL
+Designer Eval 8 — Scene Test:             PASS / FAIL
+Artifact Production Eval 9 — HTML via template:PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]

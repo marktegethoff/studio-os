@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Critique — Compass Goal Check-In Card</title>
+<link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <span class="eyebrow">Studio OS · Critique · owned by /studio:critique</span>
+    <h1>Compass — Goal Check-In Card<span style="color:var(--accent)">.</span></h1>
+    <p class="header-sub">Nine design disciplines reviewed this artifact independently. Findings only — no ship verdict. For a ship decision, run <code>/studio:review</code>.</p>
+    <div class="header-meta">
+      <span>2026-05-27</span><span>Phase: In Progress</span><span>Round: 1 — Silent</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Convergences</h2>
+    <p>Elements flagged by two or more disciplines — the strongest signals in the report.</p>
+    <div class="itemlist">
+      <div class="item"><div class="it-name">Sparkline — remove or defer</div><div class="it-desc">PM and CD reach the same conclusion from different directions. PM: the sparkline is not load-bearing for the success condition (user rates their goal). CD: at ~80pt wide with 6 data points it reads as decoration, not signal. Neither role finds it earning its place on a prompt card. The Critic's accumulation finding adds a third voice — the card is carrying three information layers when its job is one.</div></div>
+      <div class="item"><div class="it-name">Rating control — structurally broken on two independent grounds</div><div class="it-desc">Heurist and Accessibility flag the same control for different but compounding failures. Heurist: tap targets are ~28pt against a 44pt minimum (WCAG 2.5.5). Accessibility: the control has no accessible label — a screen reader announces "button, button, button, button, button" with no group context. These are not the same finding. Fixing one does not fix the other. Both must be addressed before this card ships.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Triage</h2>
+    <div class="grid2">
+      <div class="dcard"><span class="k">Address now</span><span class="v">Rating control labels — "1" and "5" are undefined in context (effort? progress? mood?). Tap target expansion — current ~28pt fails WCAG 2.5.5; minimum 44pt. Accessible label — add role="group" with a fieldset label; remove the raw button sequence a screen reader currently announces.</span></div>
+      <div class="dcard"><span class="k">Address before ship</span><span class="v">Sparkline removal or deferral to a dedicated progress view. Coach comment placement — determine whether it belongs inline on the prompt card or in a conversation thread model. Card elevation — current 4pt blur / 1pt offset shadow fails to register at typical device brightness; the elevation model is doing structural work and not doing it.</span></div>
+      <div class="dcard"><span class="k">Consider</span><span class="v">Notes placeholder copy — "Add a note." describes the field rather than prompting reflection. A context-sensitive question ("What's making this harder than expected?") would do more work at zero additional cost.</span></div>
+      <div class="dcard"><span class="k">Decide (unresolved tensions)</span><span class="v">Should the coach comment live inline on the check-in card, or move to a dedicated conversation thread? Inline keeps context co-located with the rating prompt. Thread keeps the prompt card to a single job. Neither is obviously wrong — this is a product model decision, not a craft one.</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Critic</h2>
+    <div class="callout"><p>The card is carrying three information layers — rating prompt, historical sparkline, and coach comment — on a surface whose job is one: prompt the weekly rating. Each layer is individually defensible; together they accumulate into something heavier than the task warrants. The sparkline competes with the primary action. The coach comment introduces a second voice and a second reading mode (reflection vs. response). Remove the sparkline now. Decide whether the coach comment earns inline placement or belongs in a thread; do not leave both co-present by default. A prompt card should not require the user to read before they can act.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Heurist</h2>
+    <div class="callout"><p><strong>P0 — Tap target below minimum (WCAG 2.5.5).</strong> The 1–5 rating dots measure approximately 28pt. The required minimum is 44pt. On a weekly-use card where the primary action is this control, undersized targets create consistent friction at the highest-frequency interaction point. Expand targets before any further visual refinement — the touch area cannot be an afterthought in a later pass.<br><br><strong>P1 — No defined keyboard navigation order.</strong> Tab order through the card is undefined. The notes field, rating control, and submit action have no declared sequence. Users navigating without a pointer will encounter an unpredictable order. Define it explicitly.<br><br><strong>P2 — Rating scale provides no recognition cues.</strong> Icon-only filled circles with no labels require the user to recall what the poles mean in this context. Without labels, the scale could represent effort, confidence, progress, or mood — and the user has to remember which on each weekly visit. This is a recall burden on a prompt designed to reduce friction.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Accessibility</h2>
+    <div class="callout"><p><strong>Critical — Rating control has no accessible label (WCAG 1.3.1, 4.1.2).</strong> The five rating buttons have no individual labels and no group container. A screen reader currently announces: "button, button, button, button, button." There is no programmatic indication of the scale's meaning, the current value, or the range. Fix: wrap the control in a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code> that names the scale and its context (e.g., "Rate your progress on [goal name], 1 to 5"). Label each button with its value and meaning (e.g., "1 — not on track", "5 — fully on track").<br><br><strong>Moderate — Notes field accessible name.</strong> Verify that the notes <code>&lt;textarea&gt;</code> has an associated <code>&lt;label&gt;</code> element, not just a placeholder. Placeholder text is not a substitute for a label and disappears on input (WCAG 3.3.2).<br><br><strong>Moderate — Coach comment attribution.</strong> The coach comment has no role or landmark distinguishing it from user-authored content. Users relying on assistive technology cannot distinguish whose voice is present. A visually labeled attribution ("Coach note:") needs a programmatic equivalent.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Visual Designer</h2>
+    <div class="callout"><p><strong>Sparkline at card width is decorative, not informational.</strong> At ~80pt wide, six data points cannot be read as a trend — they register as a visual texture. The sparkline occupies a full card row while delivering no actionable signal at this render size. Current: sparkline rendered inline at card width. Target: remove from this surface; if history is needed, surface it in a dedicated progress view at sufficient width to be legible.<br><br><strong>Rating scale lacks visual hierarchy between selected and unselected states.</strong> The filled-circle approach creates equal visual weight across all five options. The selected state needs to be unambiguous at a glance, not a matter of careful comparison. Current: filled vs. unfilled circles. Target: selected state should carry a distinct color or size shift that reads instantly.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Typesetter</h2>
+    <div class="callout"><p><strong>Sparkline data labels are below the legible threshold.</strong> The numerics below the sparkline line are set at approximately 9pt. On 1x displays this is sub-legible. Minimum body type on screen is 11pt; data labels for secondary information should be no smaller than 10pt. This is a moot point if the sparkline is removed — but worth noting that the data labels were set at a size that presupposes a retina context that cannot be assumed.<br><br><strong>Coach comment and user notes share a type style.</strong> Both use the same weight, size, and color — creating attribution ambiguity. A user scanning the card cannot immediately identify which voice they are reading. The coach comment requires a distinct treatment: a lighter weight, a smaller size, or a background tint that signals "this is not yours." Attribution is structural, not decorative — the type system should make it legible without requiring the user to read the source label.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Materialist</h2>
+    <div class="callout"><p><strong>Elevation model is doing structural work and failing at it.</strong> The card uses a white surface on a white or near-white feed background, relying on a box shadow (4pt blur, 1pt offset) to signal elevation and separate the card from context. At typical device brightness settings — particularly on OLED displays in auto-brightness mode — this shadow is invisible. The card loses its boundary, and its separation from the feed collapses. Current: 4pt blur, 1pt offset, no color shift. Target: either increase shadow depth to a level that registers reliably (12–16pt blur, 2–3pt offset, with slight color cast), or shift the card surface to a tinted background that creates separation through color rather than shadow. Do not rely on shadow alone for structural separation on a white-on-white surface.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Writer</h2>
+    <div class="callout"><p><strong>Notes placeholder fails the prompt's job.</strong> "Add a note." describes the field. It tells the user what the field is, not why they should use it or what to put there. On a weekly check-in card designed to prompt reflection, the placeholder is the primary writing prompt — it should do that job. Current: "Add a note." Target: a question tied to the week's context, e.g., "What's making this harder than expected?" or "What shifted this week?" The specific question should be variable by goal state — a goal trending down warrants a different prompt than one holding steady. At minimum, replace the generic descriptor with a reflective question that creates forward motion.<br><br><strong>Rating scale poles are unlabeled in copy as well as visually.</strong> There is no microcopy defining what "1" and "5" mean for this goal type. This is a shared finding with the Designer — noted here because the fix is a writing problem, not just a design one. The labels need to be written, not just placed.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Choreographer</h2>
+    <div class="callout"><p>No motion is specified in the current wireframe. Two interactions will require motion decisions before ship: the rating selection state change (the transition between unselected and selected for a rating dot), and the card submission confirmation. The rating selection should feel immediate and tactile — a state change that confirms input without requiring the user to look for a separate confirmation signal. Recommend defining these two motion behaviors before visual refinement locks the component states; retrofitting motion after states are finalized is more costly than specifying it alongside them.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Mark Maker</h2>
+    <div class="callout"><p>No iconography or custom marks are present in the current wireframe beyond the rating-scale circles, which are functional controls rather than marks. If the rating scale evolves to use icons (e.g., directional arrows or expressive symbols) rather than neutral circles, the Mark Maker should be engaged at that point. No findings at this stage.</p></div>
+  </section>
+
+  <section class="section">
+    <h2>Debate round</h2>
+    <p>Rendered only if the tension threshold was met and a second round ran. Tracks which positions hardened, which changed, and which remain unresolved.</p>
+    <div class="grid2">
+      <div class="dcard"><span class="k">Hardened</span><span class="v">Sparkline removal: PM, CD, and Critic converged independently. No discipline argued for retention. The finding is unambiguous — remove or defer. Rating control failures: Heurist and Accessibility findings are independent and non-overlapping. Both hold. Both must be addressed.</span></div>
+      <div class="dcard"><span class="k">Changed</span><span class="v">No debate round ran. This section would populate if a tension threshold was met and disciplines were given a second pass with each other's findings visible.</span></div>
+      <div class="dcard"><span class="k">Unresolved tensions</span><span class="v">Coach comment placement. No discipline found the inline placement structurally sound, but the thread model introduces a product-level complexity (conversation threading) that is out of scope for a critique finding. This remains a product decision: accept the cost of inline ambiguity, or commit to a thread model before ship.</span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Studio OS · Critique · run /studio:annotate on this file to return marked-up feedback in one paste</p>
+  </footer>
+
+</div>
+</body>
+</html>

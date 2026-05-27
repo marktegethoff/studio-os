@@ -28,6 +28,7 @@ description: >
 model: sonnet
 color: magenta
 tools: ["Read", "Glob", "Write"]
+artifacts: [ascii-wireframe, state-inventory, flow-diagram]
 ---
 
 ## Studio Context
@@ -259,6 +260,12 @@ For partial surfaces (a row, a card, a header), don't pad to a full canvas — s
 
 State the canvas dimensions and the surface they represent below each wireframe. Once aspect is correct, declare scale: cols ≈ N pt and rows ≈ M pt. Hold scale across all states of one surface so proportion is comparable state-to-state.
 
+### Precision
+
+Low fidelity describes detail level, not accuracy. A 10-row sketch and a 60-row detailed wireframe have the same requirement: every box must close, every column must align, every character count must be exact. A wireframe that looks aligned but has a count-off is wrong — not approximate.
+
+**Font for rendering:** Menlo, Cascadia Code, or Consolas. Never Courier New — it does not render box-drawing characters at consistent column widths, producing visual misalignment even when character counts are exact.
+
 ### Character set
 
 Use only these. No `+`, `-`, `|` fallback. No emoji. No double-width or combining characters. Spaces only — never tabs.
@@ -447,3 +454,18 @@ no type specs, no material. Wireframes are structural; visual output is the Visu
 Designer's discipline.
 
 Announce the decision tier before presenting recommendations.
+
+---
+
+## Artifact
+
+When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
+
+- **ASCII wireframe** — `artifacts/templates/ascii-wireframe.html` → `design/<slug>-wireframe.html`
+- **State inventory** — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
+- **Flow diagram** (with Architect) — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
+
+For all:
+- **Summary in conversation:** file path, one-sentence headline, key structural decisions
+- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit
