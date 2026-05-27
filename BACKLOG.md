@@ -22,9 +22,9 @@ Scaffold and reconcile the canonical project layout (see `STRUCTURE.md`): one `c
 
 `evals/` exists (per-area files + README runner) and was sampled behaviorally, but the whole suite has not been executed start-to-finish. Run it, reconcile the live roster/skill set against the coverage table, fix anything that surfaces.
 
-## 3. Release / version discipline — *process gap*
+## 3. Release / version discipline — *done*
 
-The marketplace install is version-pinned: editing the repo does not propagate until the version bumps (`claude plugin update` reports "already latest"). Define a lightweight release step — bump `plugin.json` + `marketplace.json` version (semver), tag, push — so updates are reliable for any consumer. Document `--plugin-dir` as the dev-only escape hatch.
+`release.sh` — bumps `plugin.json` + `marketplace.json`, commits, tags. Guards: semver format, main branch, clean tree, CHANGELOG entry, tag not already existing. Prints push command; does not push automatically. `--plugin-dir` documented in README as dev escape hatch.
 
 ## 4. Consolidate `lt-review` ≡ `review` — *duplicate*
 
@@ -83,5 +83,6 @@ Fix — **one shared source, never per-skill hardcoding.** Declare the project's
 
 ## Done (reference)
 
+- Release / version discipline: `release.sh` with five guards (semver, main, clean tree, CHANGELOG entry, no existing tag); prints push command rather than auto-pushing. (2026-05-26)
 - Plugin rename to `studio:` prefix; single-source cutover (flat agents/skills retired); stray `skills/SKILL.md` discovery bug fixed; `CULTURE.md` migrated; flat project layout locked in `STRUCTURE.md`; promoted to `main`. (2026-05-25)
 - Scene Test wired into `cd` / `designer` agents + evals.
