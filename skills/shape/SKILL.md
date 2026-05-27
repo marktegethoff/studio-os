@@ -1,6 +1,7 @@
 ---
-description: Interview-driven brief shaping. Asks one question at a time to validate who has the problem, what they do today, and what success looks like. Output is a locked product brief written to specs/product_brief_<slug>.md. Run before /design or /implement for any new product direction.
+description: Interview-driven brief shaping. Asks one question at a time to validate who has the problem, what they do today, and what success looks like. Output is a locked product brief written to specs/product_brief_<slug>.html. Run before /design or /implement for any new product direction.
 argument-hint: "<rough problem area or feature idea>"
+artifact: design-brief
 ---
 
 Run the brief shaping workflow.
@@ -210,10 +211,10 @@ Present the brief. Ask:
 On confirmation:
 
 1. Determine the slug from the problem name (lowercase, hyphens, no spaces).
-2. Write the brief to `specs/product_brief_<slug>.md` (or the path defined in CLAUDE.md).
+2. Render the brief as HTML using the kit template (per Output section below) and write to `specs/product_brief_<slug>.html`.
 3. Confirm the write:
 
-> "Brief locked: `specs/product_brief_<slug>.md`
+> "Brief locked: `specs/product_brief_<slug>.html`
 >
 > **Recommended next:** `/design [problem name]` — the brief is the constraint."
 
@@ -232,3 +233,20 @@ On confirmation:
 **Strategist gate rule.** A brief that fails the Strategist gate is not written. Surface the conflict and stop. The PM identifies the problem; the Strategist confirms it belongs in the product.
 
 **Approval gate rule.** The brief is not locked until the user explicitly confirms. Do not write the file until Step 8 confirmation.
+
+---
+
+## Output
+
+Render the artifact as HTML using the kit template.
+
+1. Load `artifacts/templates/design-brief.html` as the structural shell.
+2. Populate the artifact-specific fields: problem statement, user, today's behavior, success conditions, out of scope, constraints, open questions.
+3. Write to `specs/product_brief_<slug>.html` where slug is derived from the problem name (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence problem statement
+   - Success conditions and key constraints
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

@@ -1,6 +1,7 @@
 ---
 description: "Run a full Leadership Team review — PM, Design Director, and Distinguished Engineer — against an artifact. Produces a combined verdict with convergence notes and a single prioritized next action. If LT members produce conflicting positions on the same element, prompts to run a debate round. Use at meaningful gates: shipping a significant feature, handing a design to engineering, or any directional product decision."
 argument-hint: "<artifact to review — spec, design, implementation, or combination>"
+artifact: lt-review
 ---
 
 Run a full Leadership Team review against an artifact.
@@ -225,3 +226,20 @@ Phase: [Pre-ship / Checkpoint / Post-ship audit]
 **Convergence rule.** Name convergences explicitly. Two members flagging the same thing is a stronger signal than either alone.
 
 **Applicability rule.** Do not invoke a member who has no artifact to review. PM always reviews. CD reviews if design exists. DE reviews if implementation exists.
+
+---
+
+## Output
+
+Render the artifact as HTML using the kit template.
+
+1. Load `artifacts/templates/lt-review.html` as the structural shell.
+2. Populate the artifact-specific fields: PM verdict, CD verdict (if design exists), DE verdict (if implementation exists), convergences, cascade routing, debate output if applicable, next action (single most important).
+3. Write to `reviews/lt_review_<slug>_<timestamp>.html` where slug is from the artifact name (lowercase kebab-case, max 40 chars) and timestamp is `YYYYMMDD`.
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - Each LT member's verdict in one word, convergences, next action
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

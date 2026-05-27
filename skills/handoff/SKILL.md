@@ -1,6 +1,7 @@
 ---
 description: Run the Studio OS prototype-to-production handoff workflow. Takes a tested prototype to a complete engineering-ready package — all states, all flows, synthetic data, UAT scenarios, and a build spec with DS token translation. Use after a prototype has been validated and before engineering begins.
 argument-hint: "<feature or component being handed off>"
+artifact: state-inventory
 ---
 
 Run the Studio OS prototype-to-production handoff workflow.
@@ -220,30 +221,15 @@ If a design system skill exists at `.claude/skills/design-system/SKILL.md`:
 
 ## Output
 
-```
-# Handoff Package: [Feature / Component]
-Date: [today]
-Validated prototype: [link or reference to prototype artifact]
+Render the artifact as HTML using the kit template.
 
-## State inventory
-[All states — designed / undesigned / intentionally omitted]
+1. Load `artifacts/templates/state-inventory.html` as the structural shell.
+2. Populate the artifact-specific fields: state inventory (all states — designed / undesigned / intentionally omitted), flow inventory, synthetic data, UAT scenarios (Given / When / Then / Pass if / Fail if), build spec, known gaps, sign-off status.
+3. Write to `design/handoff_<slug>.html` where slug is derived from the feature or component name (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - State count, flow count, any known gaps flagged
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
 
-## Flow inventory
-[All flows — designed / undesigned / intentionally deferred]
-
-## Synthetic data
-[Realistic content for each state]
-
-## UAT scenarios
-[Test cases — Given / When / Then / Pass if / Fail if]
-
-## Build spec
-[Complete engineering handoff document]
-
-## Known gaps
-[States and flows explicitly deferred — must not be implemented without a spec revision]
-
-## Sign-off
-Design Director: [confirmed / pending]
-PM: [confirmed / pending]
-```
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

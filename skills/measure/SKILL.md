@@ -1,6 +1,7 @@
 ---
 description: Run the Studio OS measurement workflow for a feature. Activates Metrics Definer → PM gate → Architect in sequence. Produces a complete measurement plan — lagging indicator, leading indicators, instrumentation requirements, baselines, counter-metrics, and review cadence — before implementation begins. Use after a design brief exists and before engineering begins.
 argument-hint: "<feature or change to define success metrics for>"
+artifact: metrics-plan
 ---
 
 Run the Studio OS measurement workflow for a feature.
@@ -217,29 +218,17 @@ Produce the final output:
 
 ## Output
 
-Present the complete measurement output in this structure:
+Render the artifact as HTML using the kit template.
 
-```
-# Measurement Plan: [Feature Name]
-Date: [today]
+1. Load `artifacts/templates/metrics-plan.html` as the structural shell.
+2. Populate the artifact-specific fields: lagging indicator, leading indicators, counter-metrics, instrumentation requirements (with feasibility verdict), review cadence, open questions (only genuine blockers).
+3. Write to `specs/measurement_<slug>.html` where slug is derived from the feature name (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - Lagging indicator and top leading indicators
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
 
-## Lagging indicator
-[Primary success metric]
-
-## Leading indicators
-[Early signals during rollout]
-
-## Counter-metrics
-[What must not degrade]
-
-## Instrumentation requirements
-[What needs to be built — with feasibility verdict]
-
-## Review cadence
-[Schedule and decision gate]
-
-## Open questions
-[Only genuine blockers before launch — omit if none]
-```
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
 
 If the project has a design artifacts directory, offer to write the measurement plan there. The plan should be linked from the design brief if one exists.

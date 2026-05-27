@@ -1,6 +1,7 @@
 ---
 description: Run the critique workflow on an artifact. Spawns all nine design discipline specialists in parallel — Critic, Heurist, Accessibility, Visual Designer, Typesetter, Materialist, Writer, Choreographer, Mark Maker — and synthesizes their findings. If the findings exceed a tension threshold, prompts to run a debate round where each specialist responds to the others. Improvement-focused: surfaces what to fix, not whether to ship. For a ship gate, use /studio:review.
 argument-hint: "<artifact to critique — design, spec, implementation, or combination>"
+artifact: critique-report
 ---
 
 Run the critique workflow on an artifact.
@@ -251,3 +252,20 @@ Phase: [Exploratory / In Progress / Production]
 ```
 
 Report findings only. Do not make changes unless explicitly asked after the report.
+
+---
+
+## Output
+
+Render the artifact as HTML using the kit template.
+
+1. Load `artifacts/templates/critique-report.html` as the structural shell.
+2. Populate the artifact-specific fields: per-discipline findings for all nine specialists, P0–P3 triage (address now / before ship / consider / decide), debate output if applicable (what hardened, what changed, unresolved tensions).
+3. Write to `reviews/critique_<slug>_<timestamp>.html` where slug is from the artifact name (lowercase kebab-case, max 40 chars) and timestamp is `YYYYMMDD`.
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - P0 count and top findings
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

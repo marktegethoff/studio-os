@@ -1,6 +1,7 @@
 ---
 description: Divergent brainstorm workflow. Takes a problem statement (not a solution) and produces 1–2 feature ideas ready for /solve or /design. Runs full design team divergence via parallel agents across seven lenses and three constraint frames, facilitated reduction to 3–5 ideas, synthetic user desirability, user selection, and parallel engineering feasibility. Use when exploring an opportunity space before committing to a direction.
 argument-hint: "<problem statement or opportunity area>"
+artifact: ideation-output
 ---
 
 Divergent brainstorm for a product problem or opportunity.
@@ -340,3 +341,20 @@ Date: [today]
 ```
 
 If no ideas clear feasibility, report honestly. Do not force a recommendation. State what the ideation revealed about the problem and what would need to be different for ideas to clear.
+
+---
+
+## Output
+
+Render the artifact as HTML using the kit template.
+
+1. Load `artifacts/templates/ideation-output.html` as the structural shell.
+2. Populate the artifact-specific fields: problem statement, cleared ideas (1–2 with PROTOTYPE or INVESTIGATE verdict, desirability and feasibility summary), recommended next step, deferred ideas with conditions for reconsideration.
+3. Write to `specs/ideation_<slug>.html` where slug is derived from the problem statement (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - Cleared idea names and verdicts
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

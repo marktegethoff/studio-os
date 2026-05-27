@@ -1,6 +1,7 @@
 ---
 description: Run the Studio OS discovery workflow for a problem or opportunity. Activates User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer in sequence. Use before design begins — especially for new product directions, underperforming features, or problems where the user's actual behavior is unclear.
 argument-hint: "<problem or feature area to investigate>"
+artifact: user-journey
 ---
 
 Run the Studio OS discovery workflow for a problem or opportunity.
@@ -210,26 +211,17 @@ Produce a complete design brief using the discovery output:
 
 ## Output
 
-Present the complete discovery output in this structure:
+Render the artifact as HTML using the kit template.
 
-```
-# Discovery: [Problem Area]
-Date: [today]
+1. Load `artifacts/templates/user-journey.html` as the structural shell.
+2. Populate the artifact-specific fields: research summary, journey stages with friction points and moments that matter, assumption register (binding assumption + full register), design brief, next step / open questions.
+3. Write to `specs/discovery_<slug>.html` where slug is derived from the problem area (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - Binding assumption and brief status (ready for /design or blocked by open question)
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
 
-## Research summary
-[Key patterns found — or confirmation that findings are based on team knowledge]
-
-## Journey map
-[Stages, friction points, moments that matter]
-
-## Assumption register
-[Binding assumption + full register]
-
-## Design brief
-[Complete brief from Brief Writer]
-
-## Next step
-[Ready for /design — or: blocked by [open question]]
-```
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
 
 If the project has a design artifacts directory, offer to write the brief there.

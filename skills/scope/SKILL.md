@@ -1,6 +1,7 @@
 ---
 description: Interview-driven task scoping. Produces a task brief — five fields (SPEC, OUTPUT, GATES, VERIFY, ESCALATE) — that defines work tight enough to delegate to /implement or /prototype. The brief is the contract that lets execution run unattended. Run before any execution skill.
 argument-hint: "<rough task description>"
+artifact: task-brief
 ---
 
 Run the task scoping interview.
@@ -236,6 +237,23 @@ If the user replies ambiguously (anything other than `/prototype` or `/implement
 
 **Five fields rule.** No additional fields. No "Notes," no "Background," no "Rationale." If something doesn't fit the five fields, it doesn't belong in the brief — it belongs in the spec.
 
-**Ephemeral rule.** Do not write the brief to disk. It lives in conversation context only.
+**Ephemeral rule.** The brief lives in conversation context as the execution contract for /implement or /prototype. It is also written to disk as an HTML artifact for human review — the two forms coexist. The HTML file is for visibility; the context version is what the execution skill reads.
 
 **Approval gate rule.** The brief is not "locked" until the user explicitly says so. Do not advance to Step 8 without confirmation.
+
+---
+
+## Output
+
+Render the artifact as HTML using the kit template.
+
+1. Load `artifacts/templates/task-brief.html` as the structural shell.
+2. Populate the artifact-specific fields: SPEC, OUTPUT, GATES, VERIFY, ESCALATE.
+3. Write to `specs/task_brief_<slug>.html` where slug is derived from the task name (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence task description
+   - OUTPUT and GATES fields
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

@@ -1,6 +1,7 @@
 ---
 description: Run the design workflow for a problem or feature. Calibrates by phase — exploratory (produces direction), in progress (full nine-step pass), or refinement (skips framing, focuses on specific disciplines). Activates Philosophy → Historian → Strategist → Architect → Critic → Designer → Heurist → Accessibility → Specifier in sequence. Use when designing new features, interaction models, or resolving design problems.
 argument-hint: "<problem or feature to design>"
+artifacts: [design-brief, state-inventory, component-spec]
 ---
 
 Run the full design workflow for a problem or feature.
@@ -279,33 +280,24 @@ Read the `review` skill at `~/.claude/skills/review/SKILL.md` and follow its ste
 
 ## Output
 
-Present the design artifact in the response using this structure:
+Render the artifact as HTML using the kit template, chosen by phase.
 
-```
-# Design: [Problem Name]
-Date: [today]
-Phase: [Exploratory / In Progress / Refinement]
+**Exploratory phase** — template: `design-brief`:
+1. Load `artifacts/templates/design-brief.html` as the structural shell.
+2. Populate: direction decision, structure, interaction model, what was removed, deferred items, open questions.
+3. Write to `specs/direction_<slug>.html` where slug is from the problem name (lowercase kebab-case, max 40 chars).
 
-## Decision
-[One sentence. For exploratory: the direction. For in progress / refinement: what was designed.]
+**In progress / Refinement phase** — templates: `state-inventory` (primary) + `component-spec` (if Specifier ran):
+1. Load `artifacts/templates/state-inventory.html` as the structural shell.
+2. Populate: all states and transitions, interaction model, sub-team craft notes (Typesetter / Choreographer / Writer / Materialist / Visual Designer — omit if none ran), what was removed, open questions.
+3. If Specifier ran, also write `artifacts/templates/component-spec.html` to `design/<slug>-spec.html`.
+4. Write to `design/<slug>.html` where slug is from the problem name.
 
-## Structure
-[Data model or system changes]
+For all phases:
+4. Surface a short markdown summary in conversation:
+   - File path(s)
+   - One-sentence decision or direction
+   - Key removals and open questions
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
 
-## Interaction model
-[States, transitions, gestures]
-
-## Design sub-team notes
-[Typesetter / Choreographer / Writer / Materialist / Visual Designer outputs — omit if none ran. For exploratory, note: "Deferred to in progress phase."]
-
-## What was removed
-[List with rationale]
-
-## Deferred to next phase
-[Exploratory only: what is intentionally not yet specified — craft details, accessibility, spec. Omit for in progress / refinement.]
-
-## Open questions
-[Only genuine blockers — omit if none]
-```
-
-If `specs/` exists, offer to write this to `specs/design.md`. Otherwise write to `docs/design/` or the project's artifact location specified in `CLAUDE.md`. For exploratory artifacts, write to `specs/direction_<slug>.md` to distinguish from finished design specs.
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

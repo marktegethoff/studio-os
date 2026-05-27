@@ -2,6 +2,7 @@
 name: experiment
 description: Run the experiment workflow for a hypothesis. Checks memory for prior results, frames the hypothesis precisely (IF/THEN/BECAUSE), designs the experiment, and evaluates across short/medium/long-term scenarios using the drum simulation model.
 argument-hint: "<hypothesis to test>"
+artifact: experiment-plan
 ---
 
 Run the experiment workflow for a hypothesis.
@@ -118,27 +119,15 @@ State the conclusion in one sentence. State what changes (if any) follow from it
 
 ## Output
 
-Present the result in the response using this structure:
+Render the artifact as HTML using the kit template.
 
-```
-# Experiment: [Hypothesis Name]
-Date: [today]
+1. Load `artifacts/templates/experiment-plan.html` as the structural shell.
+2. Populate the artifact-specific fields: hypothesis (IF/THEN/BECAUSE), experiment design and scenarios, findings, conclusion (CONFIRMED / FALSIFIED / INCONCLUSIVE), consequences.
+3. Write to `specs/experiment_<slug>.html` where slug is derived from the hypothesis (lowercase kebab-case, max 40 chars).
+4. Surface a short markdown summary in conversation:
+   - File path
+   - One-sentence headline
+   - Conclusion verdict and key consequences
+5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
 
-## Hypothesis
-IF [condition] THEN [outcome] BECAUSE [reasoning]
-
-## Experiment design
-[What confirms / falsifies / scenarios tested]
-
-## Findings
-[Evidence summary]
-
-## Conclusion
-[CONFIRMED / FALSIFIED / INCONCLUSIVE]
-[One sentence]
-
-## Consequences
-[What changes, if anything — or "No changes required"]
-```
-
-If `specs/experiments/` exists in the project, offer to write this to `specs/experiments/[hypothesis-slug].md`. Otherwise offer to write to the project's artifact location specified in CLAUDE.md.
+If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
