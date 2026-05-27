@@ -1,19 +1,19 @@
 {
   "name": "standard-works",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "owner": {
     "name": "Mark Tegethoff",
     "url": "https://github.com/marktegethoff"
   },
   "metadata": {
-    "description": "Standard Works — the marketplace for Studio OS and related tooling."
+    "description": "Standard Works \u2014 the marketplace for Studio OS and related tooling."
   },
   "plugins": [
     {
       "name": "studio",
       "source": "./",
       "description": "A product-agnostic design studio for Claude Code: discipline agents, gated workflows, and a designed artifact system that bring studio rigor to design and product work.",
-      "version": "1.1.0"
+      "version": "1.2.0"
     }
   ]
 }
