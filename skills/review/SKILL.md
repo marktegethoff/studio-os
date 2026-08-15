@@ -15,20 +15,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
-
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+Auto-mode default for the `tiebreak` node: resolve via the cascade rule (PM > CD > DE); overruled positions enter the dissent ledger. State this in the "Auto-mode decisions" section.
 
 ---
 
@@ -45,6 +34,48 @@ Each delivers its own verdict with routing recommendations. The synthesis produc
 If two or more members produce conflicting positions on the same element — one passing, one blocking; or convergent flags with incompatible routing — the skill offers a debate round to force the decision into the open. The cascade rule (PM > CD > DE) handles unrelated drift; the debate round handles same-element disagreement.
 
 This is a heavyweight review. Use it at gates that warrant all three perspectives. For incremental work, invoke the relevant LT member directly.
+
+## Graph
+
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: review
+cost: medium — up to two fan-outs of 3 LT agents plus up to 2 refutation passes (debate and refutation conditional)
+nodes:
+  scope      gate:artifact-classified-and-phase-confirmed
+  fan        task:brief the applicable LT members from shared inputs only
+  pm         agent:pm
+  cd         agent:cd
+  de         agent:de
+  verdicts   join
+  conflict   router(conflicts|aligned)
+  debate     task:re-run applicable LT members with each other's Round 1 verdicts, blind to each other's responses
+  tiebreak   human decides:break-the-leadership-tie
+  refute-cd  agent:critic
+  refute-de  agent:qa
+  final      task:final verdict — combined verdict, dissent ledger, refutation outcomes
+  emit       task:render lt-review HTML
+edges:
+  scope -> fan
+  fan -> {pm, cd, de}
+  {pm, cd, de} -> verdicts
+  verdicts -> conflict
+  conflict -> debate   if:conflicts
+  conflict -> refute-cd   if:aligned-and-cd-ship
+  conflict -> refute-de   if:aligned-and-de-ship
+  conflict -> final   if:aligned
+  debate -> tiebreak   if:still-split
+  debate -> refute-cd   if:resolved-and-cd-ship
+  debate -> refute-de   if:resolved-and-de-ship
+  debate -> final   if:resolved
+  tiebreak -> final
+  refute-cd -> final
+  refute-de -> final
+  final -> emit
+```
+
+The debate round and each refutation run at most once — bounded by structure, not a counter. The Round 1 fan-out is **blind**: members never see each other's unfinished output. A human tiebreak outranks refutation — once the human rules, the verdict goes to `final` directly. Dissent is preserved through `verdicts` and `final` as a dissent ledger — never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
 
 ---
 
@@ -68,13 +99,7 @@ If the phase is not stated and not clear from context, ask before proceeding.
 
 Load the PM brief if one exists (`artifacts/product_brief_*.md` or equivalent in the project). Surface it to all agents as context.
 
-State the classification, the phase, and which LT members will review before proceeding.
-
----
-
-> **⏸ PAUSE (skipped in --auto) — Confirm scope and phase.**
-> Classification complete. Confirm which LT members should review and the phase (**pre-ship**, **checkpoint**, or **post-ship audit**), and provide any additional artifact context (file paths, spec location, relevant decisions).
-> Reply **"confirmed"** or adjust.
+State the classification, the phase, and which LT members will review as a status line (`scope` node) and proceed. If the phase or classification is genuinely unclear from the arguments and context, ask — that is a clarification, not a checkpoint. Do not pause for confirmation.
 
 ---
 
@@ -93,9 +118,11 @@ Brief: "You are the Design Director in an LT Review. Your mandate: evaluate desi
 **DE agent** *(if implementation exists)*
 Brief: "You are the Distinguished Engineer in an LT Review. Your mandate: evaluate implementation soundness and deliver a SHIP / REVISE / REJECT verdict. Apply your Specialist Network — name the specialist for each required change. Use the DE Code Review output format."
 
-Pass to each agent: artifact description, file paths, PM brief (if loaded), project context, and the phase framing.
+Pass to each agent: artifact description, file paths, PM brief (if loaded), project context, and the phase framing. The fan-out is **blind** — each member is briefed from these shared inputs only, never from another member's unfinished output.
 
 Wait for all agents to complete. You will receive one notification per agent.
+
+The `verdicts` join waits for **all** applicable members. If an agent fails, report it by node id with the inputs it was given and note its mandate as missing — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
 
 ## Step 3 — Synthesis and conflict assessment
 
@@ -154,18 +181,13 @@ Phase: [Pre-ship / Checkpoint / Post-ship audit]
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Conflict threshold [MET / NOT MET].**
->
-> *If threshold NOT MET:* Round 1 is complete. Reply **"done"** to close, or ask follow-up questions.
->
-> *If threshold MET:* [State which signal(s) fired. Name the specific element(s) in conflict and what the disagreement is — e.g., "CD says SHIP on the secondary action; PM says HOLD because it serves a problem outside the validated scope. The disagreement is about whether the action belongs at all."] A debate round will have each LT member respond to the others' positions.
-> Reply **"debate"** to run it, or **"done"** to close with Round 1.
+The `conflict` router is mechanical: if any signal fires, run the debate round (Step 4) — state which signal(s) fired and the specific element(s) in conflict as a status line, then proceed; no pause. If no signal fires, proceed to the refutation check (Step 4.5).
 
 ---
 
 ## Step 4 — Debate round (parallel background agents)
 
-*Run only if the user replies "debate."*
+*Run only when the `conflict` router fires. Runs at most once.*
 
 Spawn all applicable LT members again simultaneously with `run_in_background: true`.
 
@@ -186,11 +208,30 @@ Brief: "You are the Distinguished Engineer in an LT Review (Round 2 — debate).
 
 Wait for all members to complete.
 
+If the debate resolves the conflict, proceed to Step 4.5. If the members remain split on the same element after the debate, escalate to the human (`tiebreak` node — decides: break the leadership tie):
+
+> **⏸ PAUSE (skipped in --auto) — Leadership tie.**
+> [Name the element, each member's post-debate position, and what ruling each way would mean — enough context to decide without scrolling back.]
+> Rule on the tie, or reply **"cascade"** to apply the default precedence (PM > CD > DE).
+
+A human ruling goes directly to the final synthesis — it outranks refutation. Overruled positions enter the dissent ledger.
+
 ---
 
-## Step 5 — Final synthesis
+## Step 4.5 — Refutation (conditional, bounded)
 
-Produce the final output. Track the state of positions across both rounds.
+A SHIP verdict must survive one adversarial pass before it stands (see Adversarial doctrine, `memory/orchestration.md`). Runs at most once per gate; skipped entirely when a human tiebreak has already ruled.
+
+- **If CD's standing verdict is SHIP** (`refute-cd` node): spawn the **critic** with: "The Design Director has ruled SHIP on this artifact. Your task is to refute that verdict — make the strongest case against shipping, not a second opinion. Name specific defects: what is unresolved, unearned, or incoherent. If you cannot build a credible case, say so plainly."
+- **If DE's standing verdict is SHIP** (`refute-de` node): spawn **qa** with the same framing against the implementation — strongest case against merging: untested invariants, missing regression coverage, boundary failures.
+
+If a refutation fails (no credible case), the SHIP stands — record "Refutation: failed — SHIP stands" in the output. If it succeeds, downgrade that member's verdict to REVISE with the named defects as routing items — the refutation cannot stall shipping further; it sends work back once, with specifics.
+
+---
+
+## Step 5 — Final synthesis (`final` node)
+
+Produce the final output. Track the state of positions across both rounds (or the single round, when no debate ran — omit the hardened/changed sections in that case and carry the Round 1 positions forward with the refutation and dissent sections).
 
 ```
 ## LT Review: [Artifact Name] — Final
@@ -220,6 +261,17 @@ Phase: [Pre-ship / Checkpoint / Post-ship audit]
 
 **Convergences:**
 [Where two or more members flag the same issue, post-debate.]
+
+---
+
+**Refutation:**
+[Outcome of each refutation pass that ran: "failed — SHIP stands" or "succeeded — downgraded to REVISE: <named defects>". Omit if none ran.]
+
+**Tiebreak:**
+[The human ruling, if one was made. Omit otherwise.]
+
+**Dissent ledger:**
+[Every overruled or unresolved position: which member disagreed, with what, and why it was overruled (cascade, tiebreak, or debate). A verdict with vanished dissent is Consensus Laundering — see memory/anti-patterns.md. If no dissent existed, state "None — genuine alignment."]
 
 ---
 
