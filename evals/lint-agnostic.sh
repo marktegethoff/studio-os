@@ -17,6 +17,17 @@
 #        any file with artifact:/artifacts: frontmatter must reference
 #        the named template(s) or artifacts/kit/studio.css; named
 #        templates must exist in artifacts/templates/.
+#   R7   graph block validation        — skills/**                      (FAIL)
+#        exactly one fenced ```graph block per graph-declaring skill;
+#        agents resolve; edges reference declared nodes; loops bounded;
+#        fan-out members independent; human nodes carry decides:.
+#   R7.b six-functions coverage        — skills per six-functions.map   (FAIL)
+#        artifact-producing graphs cover all six functions + slop gate.
+#   R7.c executor conformance          — skills/*/workflow.js           (FAIL)
+#        executor roster must include every graph agent; meta present.
+#   R8   auto-contract stub            — skills/**                      (FAIL)
+#        any skill mentioning --auto must reference the Auto-Mode
+#        Safety Contract in memory/orchestration.md (no inline forks).
 #   IBR  included-by-reference         — project-level                  (FAIL)
 #        the invariant the design exists to protect.
 #        Runs regardless of scaffold_state.
@@ -383,6 +394,244 @@ if [[ $r6_files_checked -eq 0 ]]; then
 elif [[ $r6_hits -eq 0 ]]; then
   info "all $r6_files_checked artifact-declaring files reference their kit templates"
 fi
+
+# ── R7 — graph block validation ───────────────────────────────────────────────
+
+section "R7 · graph blocks — skills/**"
+
+SIX_MAP="$SCRIPT_DIR/six-functions.map"
+
+# Parse the ```graph block of one SKILL.md. Emits structured lines:
+#   BLOCKS <n>        number of ```graph fences
+#   SKILL <name>      value of the skill: line
+#   COST 1            cost: line present
+#   ERR <message>     structural failure
+#   AGENT <name>      each agent: node
+#   GATESPEC <text>   each gate node's full spec (for R7.b gate/slop coverage)
+graph_scan() {
+  awk '
+    BEGIN { in_g = 0; blocks = 0; mode = ""; cost = 0; skillname = "" }
+    /^[[:space:]]*```graph[[:space:]]*$/ { blocks++; in_g = 1; mode = ""; next }
+    in_g && /^[[:space:]]*```[[:space:]]*$/ { in_g = 0; next }
+    !in_g { next }
+    {
+      line = $0
+      sub(/#.*$/, "", line)
+      if (line ~ /^[[:space:]]*$/) next
+
+      if (line ~ /^skill:[[:space:]]*/) {
+        skillname = line; sub(/^skill:[[:space:]]*/, "", skillname); sub(/[[:space:]]*$/, "", skillname)
+        next
+      }
+      if (line ~ /^cost:/) { cost = 1; next }
+      if (line ~ /^nodes:[[:space:]]*$/) { mode = "nodes"; next }
+      if (line ~ /^edges:[[:space:]]*$/) { mode = "edges"; next }
+
+      if (mode == "nodes") {
+        s = line; sub(/^[[:space:]]+/, "", s)
+        id = s; sub(/[[:space:]].*$/, "", id)
+        spec = s; sub(/^[^[:space:]]+[[:space:]]*/, "", spec)
+        if (id == "") next
+        declared[id] = 1
+        if (spec ~ /agent:/) {
+          a = spec; sub(/^.*agent:/, "", a); sub(/[[:space:]].*$/, "", a)
+          print "AGENT " a
+        } else if (spec ~ /^human/) {
+          if (spec !~ /decides:/) print "ERR human node \"" id "\" has no decides: annotation"
+        }
+        if (spec ~ /(^|[[:space:]])gate/) print "GATESPEC " id " " spec
+        next
+      }
+
+      if (mode == "edges") {
+        if (line ~ /loop/ && line !~ /loop[[:space:]]+max:[0-9]+/) {
+          print "ERR unbounded loop (loop without max:N): " line
+        }
+        e = line
+        sub(/^[[:space:]]+/, "", e)
+        gsub(/if:[^[:space:]]+/, "", e)
+        gsub(/loop[[:space:]]+max:[0-9]+/, "", e)
+        gsub(/[[:space:]]loop([[:space:]]|$)/, " ", e)
+        n = split(e, seg, /->/)
+        for (i = 1; i <= n; i++) {
+          s = seg[i]
+          gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
+          if (s == "") continue
+          if (s ~ /^\{/) {
+            gsub(/[{}]/, "", s)
+            m = split(s, mem, /,/)
+            grp = ""
+            for (j = 1; j <= m; j++) {
+              gsub(/^[[:space:]]+|[[:space:]]+$/, "", mem[j])
+              if (mem[j] == "") continue
+              eps[++ep_n] = mem[j]
+              grp = grp (grp == "" ? "" : "|") mem[j]
+              segid[i] = "GROUP"
+            }
+            groups[++grp_n] = grp
+          } else {
+            eps[++ep_n] = s
+            segid[i] = s
+          }
+        }
+        # simple consecutive single->single edges, for fan-out independence
+        for (i = 1; i < n; i++) {
+          if (segid[i] != "GROUP" && segid[i+1] != "GROUP" && segid[i] != "" && segid[i+1] != "") {
+            sedges[++se_n] = segid[i] "|" segid[i+1]
+          }
+          segid[i] = ""
+        }
+        segid[n] = ""
+        next
+      }
+    }
+    END {
+      print "BLOCKS " blocks
+      if (blocks == 0) exit
+      if (skillname != "") print "SKILL " skillname
+      else print "ERR graph block missing skill: line"
+      if (cost) print "COST 1"
+      else print "ERR graph block missing cost: line"
+      for (i = 1; i <= ep_n; i++) {
+        if (!(eps[i] in declared)) print "ERR edge references undeclared node \"" eps[i] "\""
+      }
+      for (g = 1; g <= grp_n; g++) {
+        m = split(groups[g], mem, /\|/)
+        for (a = 1; a <= m; a++) for (b = 1; b <= m; b++) {
+          if (a == b) continue
+          for (s = 1; s <= se_n; s++) {
+            if (sedges[s] == mem[a] "|" mem[b])
+              print "ERR fan-out members \"" mem[a] "\" and \"" mem[b] "\" have an edge between them — not independent"
+          }
+        }
+      }
+    }
+  ' "$1"
+}
+
+# Governed skills + function→agents lines from six-functions.map
+GOVERNED_SKILLS=""
+if [[ -r "$SIX_MAP" ]]; then
+  GOVERNED_SKILLS="$(grep -E '^skills:' "$SIX_MAP" | sed 's/^skills:[[:space:]]*//; s/,/ /g')"
+fi
+
+r7_hits=0
+r7_graphs=0
+for f in "${SKILL_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  rel="$(rel_plugin "$f")"
+  skill_dir="$(basename "$(dirname "$f")")"
+
+  scan="$(graph_scan "$f")"
+  blocks="$(printf '%s\n' "$scan" | awk '/^BLOCKS /{print $2; exit}')"
+  blocks="${blocks:-0}"
+
+  is_governed=0
+  for g in $GOVERNED_SKILLS; do [[ "$g" == "$skill_dir" ]] && is_governed=1; done
+
+  if [[ "$blocks" -eq 0 ]]; then
+    if [[ $is_governed -eq 1 ]]; then
+      fail "$rel — governed by six-functions.map but has no \`\`\`graph block (R7.b)"
+      r7_hits=$((r7_hits + 1))
+    fi
+    continue
+  fi
+  r7_graphs=$((r7_graphs + 1))
+
+  if [[ "$blocks" -gt 1 ]]; then
+    fail "$rel — found $blocks \`\`\`graph blocks; exactly one required (R7)"
+    r7_hits=$((r7_hits + 1))
+  fi
+
+  gskill="$(printf '%s\n' "$scan" | awk '/^SKILL /{print $2; exit}')"
+  if [[ -n "$gskill" && "$gskill" != "$skill_dir" ]]; then
+    fail "$rel — graph declares skill: $gskill but lives in skills/$skill_dir/ (R7)"
+    r7_hits=$((r7_hits + 1))
+  fi
+
+  while IFS= read -r e; do
+    [[ "$e" == ERR* ]] || continue
+    fail "$rel — ${e#ERR } (R7)"
+    r7_hits=$((r7_hits + 1))
+  done <<< "$scan"
+
+  # agents resolve
+  while IFS= read -r a; do
+    [[ "$a" == AGENT* ]] || continue
+    name="${a#AGENT }"
+    if [[ ! -r "$PLUGIN_ROOT/agents/$name.md" ]]; then
+      fail "$rel — graph names agent:$name but agents/$name.md does not exist (R7)"
+      r7_hits=$((r7_hits + 1))
+    fi
+  done <<< "$scan"
+
+  # R7.b — six-functions coverage + slop gate, governed skills only
+  if [[ $is_governed -eq 1 && -r "$SIX_MAP" ]]; then
+    graph_agents="$(printf '%s\n' "$scan" | awk '/^AGENT /{print $2}')"
+    gate_specs="$(printf '%s\n' "$scan" | awk '/^GATESPEC /{sub(/^GATESPEC /,""); print}')"
+    while IFS= read -r mline; do
+      [[ "$mline" =~ ^[[:space:]]*# ]] && continue
+      [[ "$mline" =~ ^skills: ]] && continue
+      [[ -z "${mline// }" ]] && continue
+      func="${mline%%:*}"
+      agents_csv="${mline#*:}"
+      covered=0
+      IFS=',' read -r -a fagents <<< "$agents_csv"
+      for raw_fa in "${fagents[@]}"; do
+        fa="${raw_fa#"${raw_fa%%[![:space:]]*}"}"; fa="${fa%"${fa##*[![:space:]]}"}"
+        [[ -z "$fa" ]] && continue
+        grep -qx -- "$fa" <<< "$graph_agents" && { covered=1; break; }
+        grep -q -- "$fa" <<< "$gate_specs" && { covered=1; break; }
+      done
+      if [[ $covered -eq 0 ]]; then
+        fail "$rel — graph does not cover six-functions \"$func\" (${agents_csv# }) (R7.b)"
+        r7_hits=$((r7_hits + 1))
+      fi
+    done < "$SIX_MAP"
+
+    if ! grep -qi -- "slop" <<< "$gate_specs"; then
+      fail "$rel — artifact-producing graph has no slop gate node (R7.b)"
+      r7_hits=$((r7_hits + 1))
+    fi
+  fi
+
+  # R7.c — executor conformance
+  wf="$(dirname "$f")/workflow.js"
+  if [[ -r "$wf" ]]; then
+    wrel="$(rel_plugin "$wf")"
+    if ! grep -q "export const meta" "$wf"; then
+      fail "$wrel — executor missing export const meta (R7.c)"
+      r7_hits=$((r7_hits + 1))
+    fi
+    while IFS= read -r a; do
+      [[ "$a" == AGENT* ]] || continue
+      name="${a#AGENT }"
+      if ! grep -qF -- "$name" "$wf"; then
+        fail "$wrel — executor roster missing graph agent \"$name\" (R7.c)"
+        r7_hits=$((r7_hits + 1))
+      fi
+    done <<< "$scan"
+  fi
+done
+if [[ $r7_hits -eq 0 ]]; then
+  info "$r7_graphs graph block(s) valid"
+fi
+
+# ── R8 — auto-contract stub ───────────────────────────────────────────────────
+
+section "R8 · auto-contract stub — skills/**"
+
+r8_hits=0
+for f in "${SKILL_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  grep -q -- "--auto" "$f" || continue
+  rel="$(rel_plugin "$f")"
+  if ! grep -q "Auto-Mode Safety Contract" "$f" || ! grep -qF "memory/orchestration.md" "$f"; then
+    fail "$rel — mentions --auto but does not reference the Auto-Mode Safety Contract in memory/orchestration.md (R8)"
+    r8_hits=$((r8_hits + 1))
+  fi
+done
+[[ $r8_hits -eq 0 ]] && info "all --auto skills reference the contract"
 
 # ── project-level checks (R3 + IBR) ───────────────────────────────────────────
 

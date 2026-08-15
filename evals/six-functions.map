@@ -1,0 +1,15 @@
+# Six Functions coverage map — consumed by lint-agnostic.sh R7.b
+# Transcribed from CLAUDE.md § Minimum Team — the Six Functions.
+# Format: <function>: <comma-separated agent names that can cover it>
+# The `skills:` line names the artifact-producing workflows the invariant governs.
+# A function is covered when any of its agents appears in the skill's graph block
+# (as an agent: node or named in a gate node's label).
+
+skills: design, ideate, solve, handoff
+
+framing: architect, strategist, brief-writer, pm
+generation: designer
+craft: typesetter, visual-designer, choreographer, materialist, writer, mark-maker
+reduction: critic
+usability: heurist, accessibility
+gate: cd
