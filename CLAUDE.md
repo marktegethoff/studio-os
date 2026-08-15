@@ -10,7 +10,7 @@ Studio disciplines, workflow skills, and memory install as a Claude Code plugin:
 
 Project-specific context (the Product tier) lives in `.claude/memory/project-context.md` in each consuming project — never in this repo.
 
-**Placement rule:** CLAUDE.md carries always-on rules. Skills carry on-demand workflows. Agents carry single-discipline expertise. Never place workflow logic in CLAUDE.md.
+**Placement rule:** CLAUDE.md carries always-on rules. Skills carry on-demand workflows. Agents carry single-discipline expertise. Never place workflow logic in CLAUDE.md. Multi-agent skills declare their topology in a `graph` block; orchestration doctrine (graph grammar, human-node economics, adversarial rules, the Auto-Mode Safety Contract) lives in `memory/orchestration.md`.
 
 ---
 

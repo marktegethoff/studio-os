@@ -84,6 +84,14 @@ Named failure modes in design and product work. Agents cite entries by name when
 
 ---
 
+### Consensus Laundering
+
+**Tell:** A synthesis of parallel discipline reviews reads as unanimous; no verdict names a disagreement, yet the individual reviews conflicted. The join smoothed the dissent away.
+**Why it fails:** The studio's quality comes from structured disagreement between disciplines. A synthesis that averages conflicting judgments discards exactly the signal the fan-out was paid for — the resulting verdict is confident, polished, and owned by no one. Consensus produced by omission is not agreement; it is slop with a byline.
+**Correction:** Joins preserve dissent. The verdict artifact carries a dissent ledger: which discipline disagreed, with what, and why it was overruled. A gate reads the dissents before ruling; an overruled dissent is a decision, a vanished one is a defect.
+
+---
+
 ## How agents use this catalog
 
 - Cite entries by name when identifying a failure mode: "This is Settings Dumping — the product has deferred 8 decisions to user preference."

@@ -39,7 +39,7 @@ This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enfo
 
 ### Full-suite procedure
 
-0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant). FAILs block the suite.
+0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant) and the orchestration invariants from `memory/orchestration.md` (R7 graph-block validity, R7.b Six Functions coverage via `six-functions.map`, R7.c executor conformance, R8 auto-contract stub). FAILs block the suite.
 
 1. For each eval file, run every eval: send the prompt(s) to the named agent, score each criterion PASS / PARTIAL / FAIL, flag any anti-pattern fired.
 2. Roll up per agent: an agent PASSES only if all its evals pass. A single failed criterion fails that eval; a single failed eval fails that agent.

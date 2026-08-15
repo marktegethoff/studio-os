@@ -21,6 +21,10 @@ The Standard Works philosophy (`PHILOSOPHY.md`), universal method (`memory/desig
 
 The gate sequence is **PM → CD → DE**: problem gate, design gate, engineering gate.
 
+### Orchestration
+
+Multi-agent skills are **graphs**: nodes (agents, gates, human decisions, routers, joins, tasks) and declared edges (sequence, conditional, fan-out/fan-in, bounded loops). Each graph-declaring skill carries one lint-validated ` ```graph ` block in its `SKILL.md` — the contract its prose steps and its `workflow.js` executor must match. The shared doctrine — grammar, human-node economics, adversarial rules, run state, the Auto-Mode Safety Contract — is Core method and lives in `memory/orchestration.md`. Linear and interview skills carry no graph block.
+
 ---
 
 ## Role — discipline agents, additive
