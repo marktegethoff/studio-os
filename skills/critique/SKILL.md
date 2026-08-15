@@ -14,20 +14,9 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
-
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+Auto-mode default for the `debate-call` node: if the tension threshold is met, run the debate round; state this in the "Auto-mode decisions" section.
 
 ---
 
@@ -36,6 +25,46 @@ If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), 
 Nine design discipline specialists review the artifact independently in a silent first pass. If the findings cross a tension threshold, the skill offers a debate round — each specialist sees what the others found and responds: agreeing, pushing back, or building. In a real design studio, the argument is the mechanism that forces latent design decisions into the open.
 
 No verdict is rendered. This is an improvement pass, not a ship gate. Use `/studio:review` when a ship decision is needed.
+
+## Graph
+
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: critique
+cost: high — up to two fan-outs of 9 discipline agents (debate round conditional)
+nodes:
+  context        gate:artifact-and-phase-confirmed
+  fan            task:brief the nine disciplines from shared inputs only
+  critic         agent:critic
+  heurist        agent:heurist
+  accessibility  agent:accessibility
+  visual         agent:visual-designer
+  typesetter     agent:typesetter
+  materialist    agent:materialist
+  writer         agent:writer
+  choreographer  agent:choreographer
+  mark-maker     agent:mark-maker
+  synthesis      join
+  threshold      router(met|not-met)
+  debate-call    human decides:spend-the-debate-round-or-close-with-round-1
+  debate         task:re-run all nine with Round 1 findings, blind to each other's responses
+  final          task:final synthesis — hardened, changed, unresolved dissents
+  emit           task:render critique-report HTML
+edges:
+  context -> fan
+  fan -> {critic, heurist, accessibility, visual, typesetter, materialist, writer, choreographer, mark-maker}
+  {critic, heurist, accessibility, visual, typesetter, materialist, writer, choreographer, mark-maker} -> synthesis
+  synthesis -> threshold
+  threshold -> emit   if:not-met
+  threshold -> debate-call   if:met
+  debate-call -> emit   if:done
+  debate-call -> debate   if:debate
+  debate -> final
+  final -> emit
+```
+
+The debate round runs at most once — bounded by structure, not by a counter. The Round 1 fan-out is **blind**: members never see each other's unfinished output (that independence is what produces genuine disagreement). Dissent is preserved through `synthesis` and `final` as unresolved tensions — never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
 
 ---
 
@@ -51,15 +80,7 @@ Determine the design phase — this governs how all nine specialists frame their
 - **In progress** — work is actively being designed. Full critique at design standard. Precision on craft is expected. Findings should be specific enough to act on.
 - **Production** — work is live or pre-ship. Full critique at production standard. Every finding carries an additional lens: cost of change. Findings that require breaking redesigns are surfaced differently from targeted fixes. Accessibility, token compliance, and copy are held to shipping standard.
 
-If the phase is not stated in the arguments or clear from context, ask before proceeding.
-
-State what was loaded, the phase, and confirm the artifact before proceeding.
-
----
-
-> **⏸ PAUSE (skipped in --auto) — Confirm artifact and phase.**
-> Context loaded. Confirm the artifact (or provide file paths / additional context) and the design phase: **exploratory**, **in progress**, or **production**.
-> Reply **"confirmed"** or clarify.
+If the phase is not stated in the arguments and not clear from context, ask before proceeding — that is a clarification, not a checkpoint. Otherwise state what was loaded, the artifact, and the phase as a status line (`context` node) and proceed. Do not pause for confirmation.
 
 ---
 
@@ -106,11 +127,13 @@ Brief: "You are the Mark Maker in a design critique (Round 1 — silent pass). A
 
 Wait for all nine agents to complete. You will receive one notification per agent.
 
+The `synthesis` join waits for **all** nine. If an agent fails, report it by node id with the inputs it was given and note its discipline as missing in the output — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+
 ---
 
 ## Step 3 — Round 1 synthesis + tension assessment
 
-Collect all nine findings. Produce the Round 1 output (format below).
+Collect all nine findings. Produce the Round 1 output (format below). Preserve disagreement: where disciplines conflict, name the conflict — do not average it away.
 
 Then assess the tension threshold. Check all three signals:
 
@@ -177,11 +200,12 @@ Phase: [Exploratory / In Progress / Production]
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Tension threshold [MET / NOT MET].**
->
-> *If threshold NOT MET:* Round 1 is complete. Reply **"done"** to close, or ask follow-up questions.
->
-> *If threshold MET:* [State which signal(s) fired. Name 1–2 specific tensions a debate round would likely resolve — e.g., "Critic recommends removing the secondary action; Writer recommends rewriting it. A debate round would force the question of whether it should exist at all."] A debate round will have each specialist respond to the others' findings.
+The threshold itself is mechanical (`threshold` router). If it is NOT MET, close with Round 1 and proceed to Output — state "Tension threshold not met" as a status line; no pause.
+
+If it is MET, the spend decision is the human's (`debate-call` node — decides: spend the debate round or close with Round 1):
+
+> **⏸ PAUSE (skipped in --auto) — Debate round available.**
+> [State which signal(s) fired. Name 1–2 specific tensions a debate round would likely resolve — e.g., "Critic recommends removing the secondary action; Writer recommends rewriting it. A debate round would force the question of whether it should exist at all."] A debate round re-runs all nine specialists (~9 agents of additional spend), each responding to the others' Round 1 findings.
 > Reply **"debate"** to run it, or **"done"** to close with Round 1.
 
 ---
