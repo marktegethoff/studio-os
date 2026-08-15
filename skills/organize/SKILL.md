@@ -114,15 +114,4 @@ If `--auto` appears in $ARGUMENTS:
 - **Scaffold mode:** create missing folders and update project-context.md without confirmation. Write the decision record. Safe — only creates, never moves or deletes.
 - **Reconcile mode:** scan and classify, write the proposal as a decision record artifact, then stop. Do NOT execute moves unattended.
 
-### Auto-mode safety contract (non-negotiable)
-
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.

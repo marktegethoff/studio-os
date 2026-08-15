@@ -1,22 +1,17 @@
----
-description: "[DEPRECATED — merged into /studio:feedback --overlay] Attach a reviewable annotation harness to any HTML artifact. Produces an annotated HTML file with inline feedback overlay."
-argument-hint: "<path/to/file.html> [--brief <path>] [--questions [\"Q1\",\"Q2\"]]"
----
+# Feedback — Overlay Mode
 
-> **⚠️ DEPRECATED.** Merged into `/studio:feedback --overlay` (see `skills/feedback/`). This copy retires to `archive/skills/` next release. Use `/studio:feedback` for all feedback collection.
-
-# Annotate
+The click-to-annotate harness, absorbed from `/studio:annotate`. Invoked via `/studio:feedback --overlay`.
 
 Generate a click-to-annotate overlay for any HTML prototype. Produces a new file — the source is never modified.
 
-**Non-HTML artifacts** (design briefs, specs, code reviews, prose documents): use `/studio:gather-feedback` instead. This skill requires an HTML file; non-HTML work cannot receive the overlay.
+**Non-HTML artifacts** (design briefs, specs, code reviews, prose documents): use `/studio:feedback --surface` instead. This skill requires an HTML file; non-HTML work cannot receive the overlay.
 
 ## Usage
 
 ```
-/annotate path/to/prototype.html
-/annotate path/to/prototype.html --brief path/to/brief.md
-/annotate path/to/prototype.html --questions ["Question 1", "Question 2"]
+/studio:feedback --overlay path/to/prototype.html
+/studio:feedback --overlay path/to/prototype.html --brief path/to/brief.md
+/studio:feedback --overlay path/to/prototype.html --questions ["Question 1", "Question 2"]
 ```
 
 ## What it produces

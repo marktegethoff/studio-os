@@ -1,7 +1,9 @@
 ---
-description: "Collect structured feedback on a design artifact from a named reviewer. Produces a feedback record in the reviews/ directory."
+description: "[DEPRECATED — merged into /studio:feedback --surface] Collect structured feedback on a design artifact from a named reviewer. Produces a feedback record in the reviews/ directory."
 argument-hint: "<optional — usually inferred from the prior workflow context>"
 ---
+
+> **⚠️ DEPRECATED.** Merged into `/studio:feedback --surface` (see `skills/feedback/`, the default mode). This copy retires to `archive/skills/` next release. Use `/studio:feedback` for all feedback collection.
 
 Render the Review Surface for completed work.
 

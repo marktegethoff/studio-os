@@ -1,7 +1,9 @@
 ---
 name: luck
-description: "Durability diagnostic for infrastructure decisions. Runs the seven-facet Luck model and returns COMPOUND / SUSTAIN / STAGNATE / COLLAPSE."
+description: "[DEPRECATED — folding into the luck agent next release] Durability diagnostic for infrastructure decisions. Runs the seven-facet Luck model and returns COMPOUND / SUSTAIN / STAGNATE / COLLAPSE."
 ---
+
+> **⚠️ DEPRECATED.** This skill retires next release. Invoke the `luck` **agent** by name instead — expertise lives in agents (placement rule); this wrapper added nothing the agent doesn't carry.
 
 # Luck — Durability Diagnostic
 

@@ -8,9 +8,9 @@ Divergent brainstorm for a product problem or opportunity.
 
 Arguments: $ARGUMENTS
 
-**Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase, not one per inner agent.
+**Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase, not one per inner agent. The outer agent is an execution detail; the graph below declares the logical fan-out.
 
-**Six Functions (see CLAUDE.md).** Ideas produced here feed `/studio:design`, where the six functions apply in full. Ideation's own divergence already spans multiple lenses; it does not itself produce a final design artifact, so it is not held to the six-function floor — but it must hand off a problem framed well enough that design can satisfy them.
+**Six Functions (see CLAUDE.md).** Ideate is an artifact-producing workflow and is governed by the six-function floor (`evals/six-functions.map`). The graph covers all six: framing (architect, strategist), generation (designer), craft (writer, choreographer), reduction (critic), usability (heurist), and the Gate (cd — the ship verdict rendered on the final directions before the artifact renders).
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -18,20 +18,67 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
+Auto-mode defaults for the surviving human nodes:
 
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
+- `confirm` node: proceed with the gate-passing problem statement as framed. A solution-shaped input still stops the run — that is the `problem` gate, not the pause.
+- `select` node: take the Creative Director's recommended 2–3 ideas from the reduction; state this in the "Auto-mode decisions" section.
+- `pick` node: take the DE-cleared ideas (PROTOTYPE or INVESTIGATE, max 2); if all ideas are DEFER, stop and surface the diagnosis.
 
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
+---
 
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+## Graph
+
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: ideate
+cost: high — one blind fan-out of 7 lens agents, one blind fan-out of 3 evaluators × selected ideas
+nodes:
+  context        task:project context + PM brief check
+  problem        gate:problem-shaped — refuse solutions-in-disguise
+  confirm        human decides:problem-framing
+  fan            task:brief the seven lenses from shared inputs only
+  historian      agent:historian
+  designer       agent:designer
+  architect      agent:architect
+  scout          agent:scout
+  marketer       agent:marketer
+  writer         agent:writer
+  choreographer  agent:choreographer
+  ideas          join
+  strategist     agent:strategist
+  critic         agent:critic
+  reduce         agent:cd owner:idea-cards
+  desirability   task:synthetic-user desirability signal per surviving idea
+  select         human decides:path
+  feas-fan       task:brief the three evaluators per selected idea from shared inputs only
+  engineer       agent:engineer
+  qa             agent:qa
+  heurist        agent:heurist
+  feasibility    join
+  verdict        agent:de owner:feasibility-verdicts
+  pick           human decides:direction
+  ship-gate      gate:cd — verdict on the final 1–2 directions
+  slop           gate:slop — seven markers of /studio:studio-slop
+  emit           task:render ideation-output HTML
+edges:
+  context -> problem
+  problem -> confirm
+  confirm -> fan
+  fan -> {historian, designer, architect, scout, marketer, writer, choreographer}
+  {historian, designer, architect, scout, marketer, writer, choreographer} -> ideas
+  ideas -> strategist -> critic -> reduce -> desirability -> select
+  select -> feas-fan
+  feas-fan -> {engineer, qa, heurist}
+  {engineer, qa, heurist} -> feasibility
+  feasibility -> verdict
+  verdict -> pick   if:any-cleared
+  pick -> ship-gate -> slop -> emit
+```
+
+Both fan-outs are **blind**: members are briefed from the shared inputs only and never see each other's unfinished output — that independence is what produces genuine disagreement. The `ideas` and `feasibility` joins preserve dissent: where lenses or evaluators conflict, the conflict travels forward named, never averaged away (see Consensus Laundering, `memory/anti-patterns.md`). The evaluator fan-out runs the three evaluator nodes once per selected idea. If all ideas are DEFER at `verdict`, the run stops with a diagnosis — there is no edge onward.
 
 ---
 
@@ -59,7 +106,7 @@ The project provides the specifics. You provide the discipline.
 **Choreographer:** Motion and transitions — sees solutions that exist in gesture or behavior space.
 **Strategist:** Does this strengthen the product's core value? Long-term user value?
 **Critic:** Remove unnecessary ideas. Elimination is a form of design.
-**Creative Director:** Quality bar and taste. Chairs the facilitated reduction.
+**Creative Director:** Quality bar and taste. Chairs the facilitated reduction and renders the ship verdict.
 **Engineer:** Implementation complexity and feasibility.
 **QA:** What must not break.
 **Heurist:** Interaction concerns, mental model friction.
@@ -67,7 +114,7 @@ The project provides the specifics. You provide the discipline.
 
 ---
 
-## Step 0.5 — PM brief check
+## Step 0.5 — PM brief check (`context` node)
 
 Before ideation begins: check for a validated product brief.
 
@@ -78,7 +125,7 @@ If no brief exists, note it. Ideation can proceed — but flag it:
 
 ---
 
-## Step 1 — Problem Gate
+## Step 1 — Problem Gate (`problem` node)
 
 Input: $ARGUMENTS
 
@@ -104,14 +151,18 @@ Capture this as **[PROBLEM]** — you will embed it verbatim into the outer agen
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Problem gate complete.**
-> Reply **"continue"** when ready.
+> **⏸ PAUSE (skipped in --auto) — Confirm the problem framing.** (`confirm` node — decides: problem-framing)
+> [State the one-sentence problem statement and what a good solution needs to accomplish.]
+> This framing guards the whole run — every lens, reduction, and verdict downstream inherits it.
+> Reply **"continue"** to proceed with this framing, or restate it.
 
 ---
 
 ## Step 2 — Divergence (outer background agent)
 
 Spawn ONE outer background agent with `run_in_background: true`. This agent orchestrates all 7 discipline lenses internally, compiles the raw idea list, and returns it. You will receive one notification when divergence is complete.
+
+The lens fan-out is **blind**: each inner agent is briefed from [PROBLEM] and [PROJECT_CONTEXT] only and never sees another lens's output.
 
 Before spawning: replace [PROBLEM] with the exact one-sentence problem statement from Step 1, and replace [PROJECT_CONTEXT] with the PROJECT_CONTEXT string extracted from project context above.
 
@@ -165,35 +216,34 @@ After all 7 agents complete — compile. Merge all outputs into a single raw ide
 
 ===END OUTER AGENT PROMPT===
 
-When the outer agent completes and returns the compiled list, proceed to Step 3.
+The `ideas` join waits for **all** seven lenses. If a lens agent fails, report it by node id with the inputs it was given and note its lens as missing in the output — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+
+When the outer agent completes and returns the compiled list, state "`ideas` join complete — N ideas from 7 lenses" as a status line and proceed to Step 3. Do not pause.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Divergence complete.**
-> Reply **"continue"** when ready.
-
----
-
-## Step 3 — Facilitated Reduction
+## Step 3 — Facilitated Reduction (`strategist` → `critic` → `reduce` nodes)
 
 The Creative Director chairs this step. Strategist and Critic participate.
 
-**Strategist pass**
+**Strategist pass** (`strategist` node)
 For each raw idea: does this strengthen the product's core value proposition? Does it improve long-term value for users, or does it add complexity for its own sake? Mark each: FITS / TENSIONS / OUTSIDE.
 
 Eliminate any idea marked OUTSIDE. Flag TENSIONS ideas for Critic scrutiny.
 
-**Critic pass**
+**Critic pass** (`critic` node)
 Of the remaining ideas: what is redundant (two ideas solving the same problem)? What is decorative (adds surface without structural value)? What is premature (solves a problem the product doesn't have yet)?
 Eliminate aggressively. Be ruthless — weak ideas waste the user's time.
 
-**Creative Director — selection to 3–5**
+**Creative Director — selection to 3–5** (`reduce` node — owner of the idea cards)
 From what survives: select the strongest 3–5 ideas. Fewer is acceptable if the quality bar isn't met — do not pad to reach 5. Apply taste. Ask for each:
 - Is this conceptually distinct from the others?
 - Is there something genuinely interesting here — a non-obvious angle?
 - Would this feel inevitable if done well?
 
-Eliminate the redundant, the obvious, and the forgettable.
+Eliminate the redundant, the obvious, and the forgettable. Where Strategist and Critic disagreed about an idea, keep the disagreement named on its card path — dissent travels forward; it is not averaged away.
+
+Also mark which 2–3 of the survivors the Creative Director would take to feasibility — this is the auto-mode default for the `select` node.
 
 **Format each surviving idea as an idea card:**
 
@@ -204,14 +254,11 @@ Differentiator: [what makes this non-obvious — why isn't this the first thing 
 Risk: [the one thing most likely to kill this idea]
 ```
 
----
-
-> **⏸ PAUSE (skipped in --auto) — Reduction complete.**
-> Reply **"continue"** when ready.
+State "Reduction complete — N idea cards" as a status line and proceed. Do not pause.
 
 ---
 
-## Step 4 — Synthetic User Desirability
+## Step 4 — Synthetic User Desirability (`desirability` node)
 
 Evaluate the surviving ideas against synthetic user personas.
 
@@ -222,14 +269,11 @@ Three sentences per idea, no more: (1) which persona it lands with and why, (2) 
 
 Note any ideas that don't land with any persona — flag for elimination consideration.
 
----
-
-> **⏸ PAUSE (skipped in --auto) — Synthetic user evaluation complete.**
-> Reply **"continue"** when ready.
+State "Desirability signal complete" as a status line and proceed. Do not pause.
 
 ---
 
-## Step 5 — Your Selection
+## Step 5 — Your Selection (`select` node)
 
 Present the idea cards with desirability notes beneath each, in this format:
 
@@ -242,21 +286,19 @@ Risk: [one sentence]
 Desirability: [three sentences from Step 4]
 ```
 
-Then output this to the user and stop:
-
-> **Select 2–3 ideas to take to feasibility.**
-> Which ideas interest you, and why? Your stated preference will shape how the feasibility pass evaluates them.
-
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Your turn.**
-> Waiting for your selection and preference before continuing.
+> **⏸ PAUSE (skipped in --auto) — Select ideas for feasibility.** (`select` node — decides: path)
+> Select 2–3 ideas to take to feasibility.
+> Which ideas interest you, and why? Your stated preference will shape how the feasibility pass evaluates them.
 
 ---
 
 ## Step 6 — Feasibility Pass (outer background agent)
 
-Spawn ONE outer background agent with `run_in_background: true`. This agent runs all 3 evaluators (iOS Engineer, QA, Heurist) for all selected ideas in parallel and returns compiled per-idea feasibility data. You will receive one notification when complete.
+Spawn ONE outer background agent with `run_in_background: true`. This agent runs all 3 evaluators (Engineer, QA, Heurist) for all selected ideas in parallel and returns compiled per-idea feasibility data. You will receive one notification when complete.
+
+The evaluator fan-out is **blind**: each evaluator is briefed from the selected ideas and [PROJECT_CONTEXT] only and never sees another evaluator's output.
 
 Before spawning: replace [IDEA LIST] with each selected idea (name + concept sentence, one per line), and replace [PROJECT_CONTEXT] with the PROJECT_CONTEXT string extracted from project context above.
 
@@ -299,16 +341,13 @@ Return the compiled feasibility data for all ideas as your complete output.
 
 ===END OUTER AGENT PROMPT===
 
-When the outer agent completes and returns the compiled feasibility data, proceed to Step 7.
+The `feasibility` join waits for **all** evaluators across all selected ideas. If an evaluator agent fails, report it by node id with the inputs it was given and note its evaluation as missing in the output — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+
+When the outer agent completes and returns the compiled feasibility data, state "`feasibility` join complete" as a status line and proceed to Step 7. Do not pause.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Feasibility data collected.**
-> Reply **"continue"** when ready.
-
----
-
-## Step 7 — DE Verdict
+## Step 7 — DE Verdict (`verdict` node — owner of the feasibility verdicts)
 
 The Distinguished Engineer evaluates each selected idea against the feasibility data.
 
@@ -328,21 +367,48 @@ Rationale: [one sentence — the most important factor driving this verdict]
 Next action: [the single specific action required before this moves forward]
 ```
 
-If all selected ideas receive DEFER: state clearly whether (a) the problem statement needs reframing — the ideation explored the wrong space — or (b) Step 2 should re-enter with a modified constraint. Do not proceed to Exit in this case; surface the diagnosis and stop.
+If all selected ideas receive DEFER: state clearly whether (a) the problem statement needs reframing — the ideation explored the wrong space — or (b) Step 2 should re-enter with a modified constraint. Do not proceed further in this case; surface the diagnosis and stop.
+
+---
+
+## Step 8 — Direction Pick (`pick` node)
+
+Present the cleared ideas (PROTOTYPE or INVESTIGATE) with their verdicts and desirability notes.
+
+---
+
+> **⏸ PAUSE (skipped in --auto) — Pick the final direction(s).** (`pick` node — decides: direction)
+> Pick the 1–2 directions that ship in the ideation output.
+> The Creative Director's gate and the artifact cover only what you pick; the rest is recorded as deferred.
+
+---
+
+## Step 9 — Creative Director Gate (`ship-gate` node)
+
+The cd agent renders the final verdict on the picked 1–2 directions before the artifact ships — the sixth function, the Gate. For each direction, ask: is it conceptually inevitable, distinct from the other, and worth the next phase's spend? The verdict synthesizes the whole run — divergence, reduction, desirability, feasibility, DE verdict — and includes a dissent ledger: which lens or evaluator disagreed, with what, and why it was overruled.
+
+- **SHIP** — the direction proceeds into the artifact.
+- **NO-SHIP** — the run stops with named defects; state what must change before re-entry. The artifact does not ship on consensus or fatigue.
+
+---
+
+## Step 10 — Slop Gate (`slop` node)
+
+Before rendering, run the seven markers of `/studio:studio-slop` against the assembled ideation output. Any marker that fires is fixed before emission — the quality floor is a structural property of the graph, not an opt-in pass.
 
 ---
 
 ## Exit
 
-Present the cleared ideas:
+Present the shipped directions:
 
 ```
 ## Ideation Result: [Problem Statement]
 Date: [today]
 
-### Ideas cleared for next phase
-[1–2 ideas with PROTOTYPE or INVESTIGATE verdict]
-[Brief framing of what each idea is and why it cleared]
+### Directions cleared to ship
+[The 1–2 picked directions with SHIP verdict]
+[Brief framing of what each direction is, why it cleared, and the CD's one-line verdict rationale]
 
 ### Recommended next step
 [/solve if the core concept needs convergence first]
@@ -350,10 +416,10 @@ Date: [today]
 [/prototype if PROTOTYPE verdict — build in the prototype environment immediately]
 
 ### Deferred ideas
-[Any ideas with DEFER verdict and what would need to change to reconsider]
+[Any ideas with DEFER verdict — or unpicked at Step 8 — and what would need to change to reconsider]
 ```
 
-If no ideas clear feasibility, report honestly. Do not force a recommendation. State what the ideation revealed about the problem and what would need to be different for ideas to clear.
+If no ideas clear feasibility, or the CD gate returns NO-SHIP, report honestly. Do not force a recommendation. State what the ideation revealed about the problem and what would need to be different for directions to clear.
 
 ---
 
@@ -362,12 +428,12 @@ If no ideas clear feasibility, report honestly. Do not force a recommendation. S
 Render the artifact as HTML using the kit template.
 
 1. Load `artifacts/templates/ideation-output.html` as the structural shell.
-2. Populate the artifact-specific fields: problem statement, cleared ideas (1–2 with PROTOTYPE or INVESTIGATE verdict, desirability and feasibility summary), recommended next step, deferred ideas with conditions for reconsideration.
+2. Populate the artifact-specific fields: problem statement, shipped directions (1–2 with the CD verdict, desirability and feasibility summary), recommended next step, deferred ideas with conditions for reconsideration.
 3. Write to `specs/ideation_<slug>.html` where slug is derived from the problem statement (lowercase kebab-case, max 40 chars).
 4. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
-   - Cleared idea names and verdicts
+   - Shipped direction names and verdicts
 5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
