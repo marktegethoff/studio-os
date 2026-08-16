@@ -1,7 +1,7 @@
 ---
-description: "Interview-driven brief shaping. Produces a design brief (HTML) from a structured problem interview."
-argument-hint: "<rough problem area or feature idea>"
-artifact: design-brief
+description: "Interview-driven brief shaping at two altitudes. Default: a design brief (HTML) from a structured problem interview. With --task: a five-field task brief tight enough to delegate (absorbed from /studio:scope)."
+argument-hint: "<rough problem area or feature idea> [--task]"
+artifacts: [design-brief, task-brief]
 ---
 
 Run the brief shaping workflow.
@@ -226,6 +226,35 @@ On confirmation:
 
 ---
 
+## Task mode (`--task`)
+
+One briefing skill, two altitudes. Default mode shapes the **product brief** (the interview below). `--task` shapes the **task brief** — a task scoped tight enough to run unattended. Same interview discipline: one question at a time, reflect before asking, auto-extract before asking the user to write what a spec already says.
+
+A task brief answers one question before execution begins: is this tight enough to delegate? Five fields, no prose:
+
+```
+SPEC      <path to spec, or inline description if infrastructure task>
+OUTPUT    <exact artifact, file, or commit expected>
+GATES     <what must not break — invariants, must-not-touch files>
+VERIFY    <how the agent confirms success — build, render, artifact written>
+ESCALATE  <triggers to stop and ask — ambiguity, gate violation, retry exhaustion>
+```
+
+**The task interview**, one question per pause (these are interview pauses — the conversation is the work):
+
+1. **Title + spec.** One-line title; spec path or 2–3 sentence inline description.
+2. **Read and assess.** Read the spec; confirm it has invariants and states/tokens as applicable, naming any gap. **Refusal rule:** no spec + not infrastructure → stop; recommend `/studio:design` (the brief assembles from a spec — without one there is nothing to verify against). Do not produce a half-brief.
+3. **Output.** Propose a default from the spec or task type (production files from the spec; canvas experiments to the manifest's `code_root` canvas path; hooks to `.claude/hooks/`; docs to the flat folders). Confirm or adjust.
+4. **Gates.** Auto-extract from the spec's "what must not break" plus project invariants. Confirm, add, remove.
+5. **Verify.** Propose per output type (build succeeds, preview renders, hook exit codes, artifact valid). Confirm or extend.
+6. **Escalate.** Defaults always included: spec ambiguity mid-implementation, build/test fails twice, any gate violation, scope expansion. Add task-specific triggers.
+7. **Lock.** Present the assembled brief; locked only on explicit confirmation.
+8. **Path fork.** `/studio:prototype` (validate visually first — the bias for anything new or visual) or `/studio:implement` (production direct). Ambiguous reply → re-ask, never auto-pick.
+
+**Five fields rule:** no additional fields — what doesn't fit belongs in the spec. **Ephemeral + artifact:** the brief lives in conversation context as the execution contract, and is written as HTML (load `artifacts/templates/task-brief.html` as the structural shell → `specs/task_brief_<slug>.html`) for review.
+
+---
+
 ## Rules
 
 **One question rule.** Ask one question per PAUSE. Do not bundle questions. The conversation is the discovery process.
@@ -253,6 +282,6 @@ Render the artifact as HTML using the kit template.
    - File path
    - One-sentence problem statement
    - Success conditions and key constraints
-5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

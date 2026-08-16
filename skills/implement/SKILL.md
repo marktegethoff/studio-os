@@ -48,7 +48,7 @@ Universal rules (every stack):
 - Each step touches one behavior. Verify before proceeding.
 - Do not introduce unnecessary abstractions. Three similar lines beat a premature helper.
 - Do not add error handling for scenarios that cannot happen. Trust the platform's guarantees internally.
-- Produce the verification artifacts the specialist defines (tests, snapshots, previews) so `/gather-feedback` can render the result.
+- Produce the verification artifacts the specialist defines (tests, snapshots, previews) so `/studio:feedback` can render the result.
 
 ### QA Discipline
 Purpose: validate behavior.
@@ -324,9 +324,9 @@ Read the `review` skill at `~/.claude/skills/review/SKILL.md` and follow its ste
 
 **If user replies 'gather' or anything else (default path):**
 
-Read the `/gather-feedback` skill at `.claude/skills/gather-feedback/SKILL.md` and follow its steps from Step 1. Pass the implementation context (task title, brief summary, build status, test status, files changed, summary, and 1–3 task-specific questions you'd ask the user) directly into the manifest construction step.
+Read the `feedback` skill (surface mode) at `skills/feedback/SKILL.md` and follow its steps from Step 1. Pass the implementation context (task title, brief summary, build status, test status, files changed, summary, and 1–3 task-specific questions you'd ask the user) directly into the manifest construction step.
 
-After `/gather-feedback` completes parsing the user's response block, return here for the disposition action defined by `/gather-feedback`'s Step 9. The `/gather-feedback` skill owns the disposition flow.
+After `/studio:feedback` (surface mode) completes parsing the user's response block, return here for the disposition action defined by `/gather-feedback`'s Step 9. The `/gather-feedback` skill owns the disposition flow.
 
 **If user replies 'skip':**
 
@@ -338,7 +338,7 @@ End the skill.
 
 ## End
 
-If `/gather-feedback` was skipped or has finished, the skill ends here. The user retains commit authority — no autonomous commits.
+If `/studio:feedback` was skipped or has finished, the skill ends here. The user retains commit authority — no autonomous commits.
 
 ---
 

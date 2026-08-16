@@ -81,6 +81,7 @@ Full design sequence (strategy → structure → design → accessibility → sp
 | Ship/no-ship verdict (design) | 10-dimension critique + verdict | `cd` |
 | Ship/no-ship verdict (code) | Code quality judgment + merge readiness | `de` |
 | Documentation coherence | Contradictions, orphaned files, superseded content | `auditor` |
+| Feedback record | Review Surface or click-to-annotate overlay on any artifact | `/feedback` |
 
 Full review sequence: `/critique`
 
@@ -98,7 +99,7 @@ Full engineering sequence (spec check → invariants → implement → QA): `/im
 
 ## Workflows
 
-Workflows sequence multiple disciplines in order:
+Multi-agent workflows are **declared graphs** — each carries a ` ```graph ` block naming its nodes (agents, gates, human decisions) and edges (sequence, fan-out/fan-in, bounded loops). Doctrine: `memory/orchestration.md`. Human pauses appear only where a real decision is made; everything else reports as status.
 
 - `/discover` — User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer
 - `/design` — Philosophy → Historian → Strategist → Architect → Critic → Designer → Sub-team → Accessibility → Specifier
@@ -110,6 +111,12 @@ Workflows sequence multiple disciplines in order:
 - `/ideate` — Divergent exploration → Facilitated reduction → Engineering feasibility
 - `/simplify` — Complexity audit → Simplification plan → DE gate → Implementation
 - `/review` — PM + Design Director + Distinguished Engineer combined verdict
+- `/shape` — interview-driven briefs at two altitudes (product; `--task` for task briefs)
+- `/feedback` — Review Surface (`--surface`) or annotation overlay (`--overlay`)
+
+### Deprecated (retiring next release)
+
+- `/scope` → `/shape --task` · `/annotate` + `/gather-feedback` → `/feedback` · `/simulate` → `/experiment` with a falsification condition + the `assumption-mapper` register · `/luck` (skill) → invoke the `luck` agent by name
 
 ---
 

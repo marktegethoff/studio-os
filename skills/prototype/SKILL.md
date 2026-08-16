@@ -171,7 +171,7 @@ Define how the test will be evaluated.
 
 ---
 
-## Step 2.5 — Visual review (auto-fire `/gather-feedback`)
+## Step 2.5 — Visual review (auto-fire `/studio:feedback`, `review` node)
 
 After the prototype is built, before testing begins, render the Review Surface for visual review. This replaces the text-only "is the prototype ready" check with the designed HTML review.
 

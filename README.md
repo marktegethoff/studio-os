@@ -120,12 +120,12 @@ Each workflow leaves behind an artifact the next session can read — a brief, a
 | `/studio:implement` | Engineering workflow |
 | `/studio:measure` | Metrics plan and instrumentation |
 | `/studio:experiment` | Experiment design and evaluation plan |
-| `/studio:simulate` | Long-horizon behavior simulation |
+| `/studio:simulate` | *(deprecated — retiring next release; use `/studio:experiment` + `assumption-mapper`)* |
 | `/studio:solve` | Convergence loop for hard problems |
 | `/studio:review` | Leadership review — PM + CD + DE |
 | `/studio:critique` | Single-pass quality review |
 | `/studio:simplify` | Codebase coherence pass |
-| `/studio:scope` | Task scoped tight enough to delegate |
+| `/studio:scope` | *(deprecated — merged into `/studio:shape --task`)* |
 
 Discipline agents can be invoked directly by name. Run `/studio:studio` to see what each produces.
 

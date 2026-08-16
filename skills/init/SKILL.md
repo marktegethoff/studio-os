@@ -367,7 +367,7 @@ and `evals/engineering-agents.eval.md`.
 
 ### Step D — Brand identity (for the studio's rendered surfaces)
 
-The Artifact Kit (`artifacts/kit/studio.css`) and the skills that render HTML (artifacts, the `gather-feedback` review surface, the `annotate` overlay) ship with the **Standard Works** identity by default — Neue Haas Grotesk, black on warm white, monochrome. If the user runs their own studio brand, let them put it in:
+The Artifact Kit (`artifacts/kit/studio.css`) and the skills that render HTML (artifacts, the `feedback` review surface, the `annotate` overlay) ship with the **Standard Works** identity by default — Neue Haas Grotesk, black on warm white, monochrome. If the user runs their own studio brand, let them put it in:
 
 > "The studio's rendered surfaces use the Standard Works visual brand by default. Do you have your own studio brand to use instead? If so I'll capture it; otherwise we keep Standard Works."
 

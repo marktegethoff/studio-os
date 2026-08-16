@@ -131,6 +131,6 @@ Render the artifact as HTML using the kit template.
    - File path
    - One-sentence headline
    - Conclusion verdict and key consequences
-5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
