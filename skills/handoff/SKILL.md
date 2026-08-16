@@ -16,20 +16,12 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
+Auto-mode defaults for the surviving human nodes:
 
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+- `gaps` node: do not invent designs for undesigned states — document every gap as a known gap and proceed; the package ships with the gap list.
+- `signoff` node: gate verdicts stand; flagged blockers are recorded as blockers, not waived.
 
 ---
 
@@ -56,6 +48,45 @@ The handoff workflow achieves completeness. It enumerates every state and flow t
 **Specifier (Build Spec mode):** Produces the complete engineering handoff document. If this project has a design system with a DS companion, maps design tokens to production component names. Removes all ambiguity before engineering begins.
 
 ---
+
+## Graph
+
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: handoff
+cost: medium — two paired blind fan-outs plus completeness, reduction, and gate chain
+nodes:
+  artifacts     task:load prototype, design-system context, prior specs and findings
+  states        agent:designer owner:state-inventory
+  flows         agent:journey-mapper owner:flow-inventory
+  gaps-join     join
+  gaps          human decides:gap-closure-or-scope
+  data          agent:writer owner:synthetic-data
+  uat           agent:qa owner:uat-scenarios
+  package-join  join
+  critic        agent:critic
+  spec          agent:specifier owner:build-spec
+  accessibility agent:accessibility
+  slop          gate:slop — seven markers of /studio:studio-slop
+  cd-gate       gate:cd — design completeness sign-off
+  pm-gate       gate:pm — UAT-vs-brief and release-gap sign-off
+  signoff       human decides:blocker-acceptance
+  emit          task:render state-inventory HTML
+edges:
+  artifacts -> {states, flows}
+  {states, flows} -> gaps-join
+  gaps-join -> gaps   if:undesigned-gaps
+  gaps-join -> {data, uat}   if:complete
+  gaps -> {data, uat}
+  {data, uat} -> package-join
+  package-join -> critic -> spec -> accessibility -> slop -> cd-gate -> pm-gate
+  pm-gate -> signoff   if:blockers-flagged
+  pm-gate -> emit   if:clean
+  signoff -> emit
+```
+
+Both paired fan-outs are **blind** — the two auditors (and later the data/UAT pair) work from the same shared artifacts, never from each other's unfinished output. Joins wait for both members; a failed member is reported by node id, never silently synthesized around. The `critic` node is the reduction function this workflow previously lacked: the package is pressure-tested — anything not earned is removed — before it is specified. The CD and PM gates are structural; the human is pulled in (`signoff`) only when a gate flags blockers. Dissents preserved throughout (see Consensus Laundering, `memory/anti-patterns.md`).
 
 ## Context
 
@@ -127,7 +158,9 @@ For each flow:
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Designer must fill gaps before completeness work continues.**
+If the audits surface no undesigned states or flows, state "Completeness audits clean (`gaps-join`)" as a status line and proceed directly to Steps 2A + 2B — no pause.
+
+> **⏸ PAUSE (skipped in --auto) — Gap closure.** *(`gaps` node — decides: gap-closure-or-scope; fires only when gaps exist)*
 >
 > State inventory and flow completeness audit are complete.
 >
@@ -190,6 +223,10 @@ Cover:
 
 ---
 
+## Step 2.5 — Reduction (`critic` node)
+
+Before the package is specified, the Critic pressure-tests it: which enumerated states are not earned (a state that cannot occur in practice is inventory bloat), which flows duplicate one another, which UAT scenarios test the same thing twice? Remove what is not earned, with a one-sentence rationale per removal. A handoff package accumulates by default; this is the reduction function. Preserve disagreement — if an auditor's inclusion argument stands against the removal, record it as a dissent rather than silently keeping or cutting.
+
 ## Step 3 — Build spec (Specifier)
 
 Apply the Specifier discipline in Build Spec mode.
@@ -220,21 +257,18 @@ If a design system skill exists at `.claude/skills/design-system/SKILL.md`:
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Design Director + PM sign-off required before engineering.**
->
-> Handoff package is complete. Before this goes to engineering:
->
-> **Design Director must confirm:**
-> - All states are designed and specified
-> - The spec is complete — no sections require engineering judgment
-> - No known gaps are blockers (or blockers are explicitly deferred with a date)
->
-> **PM must confirm:**
-> - UAT scenarios cover the success conditions from the design brief
-> - Known gaps are acceptable for this release
-> - Engineering can begin
->
-> Reply with **sign-off** or flag what must be resolved before handoff.
+## Step 3.5 — Accessibility, slop gate, and sign-off gates
+
+1. **Accessibility (`accessibility` node):** the accessibility agent verifies the spec's accessibility section — VoiceOver labels, traits, reading order for every interactive element — and the UAT accessibility scenarios. Findings are spec revisions, not notes.
+2. **Slop gate (`slop` node):** run the seven markers of `/studio:studio-slop` against the package. Quote and fix anything that fires. One status line.
+3. **CD gate (`cd-gate` node):** the `cd` agent confirms all states are designed and specified, the spec requires no engineering judgment, and no known gap is an undeferred blocker.
+4. **PM gate (`pm-gate` node):** the `pm` agent confirms UAT scenarios cover the brief's success conditions and the known gaps are acceptable for this release.
+
+If both gates pass clean, proceed to Output — no pause. If either gate flags blockers (`signoff` node — decides: blocker-acceptance):
+
+> **⏸ PAUSE (skipped in --auto) — Gate blockers.**
+> [Name each blocker, which gate flagged it, and what resolving vs. deferring it means.]
+> Resolve, defer with a date, or accept each blocker explicitly.
 
 ---
 
