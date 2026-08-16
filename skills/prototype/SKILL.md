@@ -14,20 +14,12 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
+Auto-mode defaults for the surviving human nodes:
 
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+- `question` node: proceed with the stated test question if it is specific, falsifiable, and actionable; otherwise stop — a prototype against an unscopeable question is waste.
+- `readiness` node: treat the build-criteria match check as the verdict (matches → ready; partial/extra → one revision pass).
 
 ---
 
@@ -64,6 +56,38 @@ The prototype workflow enforces this discipline. It scopes the test question bef
 
 ---
 
+## Graph
+
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: prototype
+cost: low — one blind pair (designer build criteria ∥ qa test criteria)
+nodes:
+  context     task:load project context + prior artifacts
+  scope       agent:pm
+  question    human decides:prototype-question
+  build       agent:designer owner:build-criteria
+  test        agent:qa owner:test-criteria
+  criteria    join
+  build-task  task:build the prototype in the project's prototype environment
+  review      task:render the Review Surface via /studio:feedback
+  readiness   human decides:readiness
+  routing     router(confirmed|challenged|ambiguous|question-wrong)
+  emit        task:output summary + routing recommendation
+edges:
+  context -> scope -> question
+  question -> {build, test}
+  {build, test} -> criteria
+  criteria -> build-task -> review -> readiness
+  readiness -> build-task   loop max:1
+  readiness -> scope   loop max:1
+  routing -> emit
+  readiness -> routing
+```
+
+The criteria pair is **blind** — both derive from the same confirmed test question, never from each other's unfinished output; the `criteria` join waits for both and reports a failed member by node id. A REVISE readiness verdict re-enters the build at most once; a REJECT rescopes at most once — further failures mean the question was wrong, which is the `routing` router's business, not another loop.
+
 ## Context
 
 What to validate: $ARGUMENTS
@@ -77,7 +101,7 @@ Project context was loaded above. Check for existing artifacts:
 - Existing design specs or wireframes
 - Prior prototype iterations (if this is a revision, note what was tested and what was learned)
 
-Report what was found before proceeding.
+State what was found as a status line (`context` node) and proceed. The `scope` node then applies the PM discipline to validate the test question before any design work — a poorly scoped question produces learning that cannot be acted on.
 
 ---
 
@@ -98,7 +122,7 @@ Name the **failure mode:** if the prototype answers no, what does that mean for 
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Test question confirmation required.**
+> **⏸ PAUSE (skipped in --auto) — Test question.** *(`question` node — decides: prototype-question)*
 >
 > Before build and test criteria are written, the test question must be confirmed.
 >
@@ -112,7 +136,7 @@ Name the **failure mode:** if the prototype answers no, what does that mean for 
 
 ## Steps 2A + 2B — Parallel: Build criteria + Test criteria
 
-Run both in parallel. They derive from the same confirmed test question.
+Run both in parallel (blind pair — each derives from the same confirmed test question, never from the other's unfinished output). The `criteria` join waits for both; report a failed member by node id per `memory/orchestration.md`.
 
 ### Step 2A — Build criteria (Designer)
 
@@ -129,7 +153,7 @@ Define the minimum prototype required to answer the test question.
 
 **Fidelity recommendation:** [Lo-fi / Mid-fi / Hi-fi] — name the minimum fidelity required to answer this question, with reasoning.
 
-**Verification artifacts:** produce whatever the project's prototype environment defines (snapshot tests, previews, or a click-through) so the prototype is reviewable — following the `prototype` setup declared in project-context: where experiments live, how to snapshot them, and which helper to use. These artifacts feed `/gather-feedback`'s Review Surface.
+**Verification artifacts:** produce whatever the project's prototype environment defines (snapshot tests, previews, or a click-through) so the prototype is reviewable — following the `prototype` setup declared in project-context: where experiments live, how to snapshot them, and which helper to use. These artifacts feed the `/studio:feedback` Review Surface.
 
 ### Step 2B — Test criteria (QA)
 
@@ -161,7 +185,7 @@ Wait for the user's response.
 
 **If user replies 'skip':**
 
-Run the original text-only check:
+Run the text-only check:
 
 > Before the prototype goes to users, confirm:
 >
@@ -173,13 +197,13 @@ Run the original text-only check:
 
 **If user replies anything else (default path):**
 
-Read the `/gather-feedback` skill at `.claude/skills/gather-feedback/SKILL.md` and follow its steps. Pass the prototype context (test question, build criteria, fidelity, files produced) into the manifest construction. Use this question set in the manifest:
+Read the `feedback` skill (`skills/feedback/SKILL.md`, surface mode) and follow its steps. Pass the prototype context (test question, build criteria, fidelity, files produced) into the manifest construction. Use this question set in the manifest:
 
 1. *Does the build match the build criteria?* (choice: matches / partial / extra) — corresponds to readiness check #1 and #2 combined
 2. *Is the test criteria accessible to whoever runs the test?* (text)
 3. *(Always-present catch-all is appended automatically)*
 
-After `/gather-feedback` parses the response block, treat its disposition as the readiness verdict:
+After the feedback surface parses the response block, treat its disposition as the readiness verdict:
 
 - **APPROVE** → prototype is ready; proceed to Step 3 (Findings routing)
 - **REVISE** → apply notes from answers, re-run Step 2.5 once revisions are made
@@ -187,8 +211,8 @@ After `/gather-feedback` parses the response block, treat its disposition as the
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Prototype readiness verdict.**
-> Disposition (Approve / Revise / Reject) drives the next step.
+> **⏸ PAUSE (skipped in --auto) — Readiness.** *(`readiness` node — decides: readiness)*
+> Disposition (Approve / Revise / Reject) drives the next step. Revise re-enters the build at most once; Reject rescopes at most once.
 
 ---
 

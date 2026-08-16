@@ -15,20 +15,12 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
+Auto-mode defaults for the surviving human nodes:
 
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+- `materials` node: proceed with found materials, or from team knowledge at Low confidence; state which.
+- `pm-call` node: the `pm-gate` agent verdict stands (validated / modified scope / stopped).
 
 ---
 
@@ -55,6 +47,35 @@ The discovery sequence answers three questions before committing to a design dir
 
 ---
 
+## Graph
+
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: discover
+cost: low — five sequential agents, no fan-out
+nodes:
+  context      task:load project context and inventory existing research
+  materials    human decides:research-inputs
+  research     agent:user-researcher
+  journey      agent:journey-mapper
+  assumptions  agent:assumption-mapper
+  pm-gate      gate:pm — problem-worth-solving
+  pm-call      human decides:confirm-modify-scope-or-stop
+  brief        agent:brief-writer owner:brief
+  emit         task:render user-journey HTML
+edges:
+  context -> materials
+  materials -> research
+  research -> journey -> assumptions -> pm-gate
+  pm-gate -> pm-call
+  pm-call -> brief   if:validated-or-scope-modified
+  pm-call -> emit    if:stopped
+  brief -> emit
+```
+
+A linear chain: each stage consumes the prior stage's output, so nothing here parallelizes — declaring that is the point. A failed node blocks everything downstream; report it by node id with its inputs and the blocked nodes — never fabricate a predecessor's output.
+
 ## Context
 
 Problem or feature area: $ARGUMENTS
@@ -72,28 +93,21 @@ Check for existing research materials. Look for:
 - Prior journey maps or assumption registers related to this problem
 - A prior brief for this problem area (if one exists, note it — the workflow may be a revision, not a first pass)
 
-Report what was found before proceeding.
+State what was found as a status line (`context` node) and proceed. Do not pause for a report.
 
 ---
 
-## Step 1 — Research inventory
+## Step 1 — Research inventory (`materials` node)
 
-Before synthesis: establish what research exists.
-
-Ask the user:
-> "What research do you have for this problem? Interviews, usability notes, support tickets, survey data, or feedback logs? Share what you have or paste relevant excerpts — or confirm if we're working from observation and team knowledge only."
-
-Wait for the user's response before proceeding to Step 2.
+Before synthesis: establish what research exists. This is the one input only the human can supply.
 
 If the user has materials, proceed to Step 2 with those materials as input.
 If the user has no materials, note the gap explicitly and proceed to Step 3 with the caveat that the journey map and assumption register will be based on team knowledge rather than observed user behavior. This changes the confidence level of findings.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Research materials needed.**
-> Share any interview notes, usability session records, support tickets, survey responses, or feedback logs for this problem area.
->
-> If you have none, reply **"no research materials"** and we'll proceed from team knowledge — with appropriate confidence levels.
+> **⏸ PAUSE (skipped in --auto) — Research materials.** *(`materials` node — decides: research-inputs)*
+> Share any interview notes, usability session records, support tickets, survey responses, or feedback logs for this problem area — or reply **"no research materials"** to proceed from team knowledge at Low confidence.
 
 ---
 
@@ -159,20 +173,21 @@ For the binding assumption and any Low confidence / High impact assumptions: nam
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — PM gate required.**
-> Discovery complete. Before the Brief Writer produces the handoff document, the PM must validate:
->
-> 1. Is the problem worth solving? Does it align with product strategy?
-> 2. Are there users we know have this problem, or are we still assuming?
-> 3. Is there anything in the research or assumption register that changes the go/no-go?
->
-> **Reply with PM validation** (confirm, modify scope, or stop) before the brief is written.
+### Step 4.5 — PM gate (`pm-gate` node)
+
+Run the `pm` agent against the discovery output with the three gate questions: (1) Is the problem worth solving — does it align with product strategy? (2) Are there users we know have this problem, or are we still assuming? (3) Does anything in the research or assumption register change the go/no-go? The agent returns **validated / modify scope / stop** with reasoning.
+
+---
+
+> **⏸ PAUSE (skipped in --auto) — PM call.** *(`pm-call` node — decides: confirm-modify-scope-or-stop)*
+> [Present the PM agent's verdict and reasoning, the binding assumption, and any Low-confidence findings the verdict rests on.]
+> Confirm the verdict, modify the scope, or stop before the brief is written.
 
 ---
 
 ### Step 5 — PM gate evaluation
 
-Evaluate the PM's response:
+Act on the confirmed verdict:
 
 - **If validated:** proceed to Step 6.
 - **If modified scope:** restate the narrowed problem and confirm with the user before proceeding.
@@ -239,7 +254,7 @@ Render the artifact as HTML using the kit template.
    - File path
    - One-sentence headline
    - Binding assumption and brief status (ready for /design or blocked by open question)
-5. Offer: "Run `/studio:annotate <file-path>` to attach the feedback harness."
+5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
 
