@@ -7,7 +7,7 @@ Find the essential, categorically right solution to a hard problem.
 
 Arguments: $ARGUMENTS
 
-**Six Functions (see CLAUDE.md).** The solution this loop converges on is a design artifact — it must satisfy all six functions. The loop covers framing (Historian/context), generation (Design), reduction (Critic), and the gate (CD); ensure craft and usability/accessibility are represented before the solution is treated as final.
+**Six Functions (see CLAUDE.md).** The solution this loop converges on is a design artifact — it must satisfy all six functions. The graph enforces all six: framing (Architect/context), generation (Design), craft (the conditional sub-team fan-out), reduction (Critic), usability (the Accessibility check on the exit path), and the Gate (CD's verdict, refuted once before it stands).
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -15,20 +15,12 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS, suppress all PAUSE checkpoints and proceed with reasonable defaults. State any decisions made on the user's behalf in the final output's "Auto-mode decisions" section. Use for overnight runs, scheduled invocations, or agent-orchestrated workflows.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
-### Auto-mode safety contract (non-negotiable)
+Auto-mode defaults for the surviving human nodes:
 
-Before performing any action in `--auto` mode, the orchestrator MUST verify:
-
-1. **Not on the main branch.** If `git rev-parse --abbrev-ref HEAD` returns `main` (or the repo's primary branch), the orchestrator MUST create a new branch named `auto/<skill>-<timestamp>` and switch to it before any writes. Prefer a `git worktree` if multiple `--auto` skills may run in parallel.
-2. **No push.** The orchestrator MUST NOT run `git push`, `git push --force`, `gh pr create`, or any remote-affecting command. All work stays local on the auto branch.
-3. **No tag.** The orchestrator MUST NOT run `release.sh` or `git tag` in `--auto` mode. Tagging is a deliberate human act after review.
-4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
-5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
-6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
+- `framing` node: proceed with the one-sentence framing and stated constraints; note them in the "Auto-mode decisions" section.
+- `exit-path` node: take the unresolved report's own recommendation (Defer / Escalate / Reframe).
 
 ---
 
@@ -60,6 +52,52 @@ All five must be YES / YES / YES / NO / YES to exit:
 Problem: $ARGUMENTS
 
 ---
+
+## Graph
+
+This skill's topology — the repo's canonical bounded evaluator-optimizer. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+
+```graph
+skill: solve
+cost: medium — sequential convergence loop, max 3 iterations; conditional craft fan-out per iteration
+nodes:
+  pm-brief      gate:validated-brief-for-product-direction-problems
+  framing       human decides:problem-framing-and-constraints
+  historian     agent:historian
+  architect     agent:architect
+  designer      agent:designer owner:solution
+  typesetter    agent:typesetter
+  choreographer agent:choreographer
+  writer        agent:writer
+  visual        agent:visual-designer
+  craft-join    join
+  critic        agent:critic
+  marketer      agent:marketer
+  cd            agent:cd
+  verdict       router(inevitable|not-yet|structurally-wrong|iterations-exhausted)
+  refute        agent:critic
+  accessibility agent:accessibility
+  exit-path     human decides:exit-path
+  slop          gate:slop — seven markers of /studio:studio-slop
+  emit          task:record the solution or the honest unresolved report
+edges:
+  pm-brief -> framing -> historian -> architect -> designer
+  designer -> {typesetter, choreographer, writer, visual}   if:surface-work
+  {typesetter, choreographer, writer, visual} -> craft-join
+  designer -> critic   if:no-surface-work
+  craft-join -> critic
+  critic -> marketer -> cd -> verdict
+  verdict -> architect   loop max:3
+  verdict -> refute   if:inevitable
+  verdict -> exit-path   if:iterations-exhausted
+  verdict -> emit   if:structurally-wrong
+  refute -> designer   loop max:1
+  refute -> accessibility   if:verdict-stands
+  accessibility -> slop -> emit
+  exit-path -> emit
+```
+
+The `verdict -> architect` edge is the NOT YET re-entry, bounded to three iterations total. An INEVITABLE verdict must survive one refutation pass (`refute` — the critic argues the strongest case *against* inevitability; at most one return to the designer) before the accessibility check, the slop gate, and emission. Only the sub-team disciplines the solution requires are spawned; the fan-out is **blind**. Dissents — including a marketer commercial objection the CD overrules — are preserved to the output, never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
 
 ## What this command does
 
@@ -100,8 +138,9 @@ List every constraint that applies: embedded invariants, prior ledger decisions 
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Pre-loop context complete.**
-> Reply **"continue"** when ready.
+> **⏸ PAUSE (skipped in --auto) — Framing.** *(`framing` node — decides: problem-framing-and-constraints)*
+> [State the one-sentence problem, the named tension, and every constraint. The framing guards the entire loop — a wrong framing converges on the wrong solution three times.]
+> Confirm the framing and constraints, tighten them, or reframe before the loop begins.
 
 ---
 
@@ -148,8 +187,7 @@ This is not a veto — the loop continues regardless. But if the solution fails 
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Iteration work complete.**
-> Reply **"continue"** when ready.
+State "Iteration N work complete (`designer` → `marketer` nodes)" as a status line and proceed to the Creative Director evaluation — no pause. Iteration progress is a report, not a decision.
 
 ---
 
@@ -167,14 +205,15 @@ State a verdict: INEVITABLE / NOT YET / STRUCTURALLY WRONG.
 
 Apply the embedded calibration gate. Answer each question explicitly (YES / NO). All five must pass. Any failure: identify which failed, why, and what must change.
 
+### 6. Refutation (`refute` node — runs only on INEVITABLE, at most once)
+
+An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, `memory/orchestration.md`). The Critic argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission.
+
 ---
 
 ## Between iterations
 
-If the gate does not pass and iterations remain:
-
-> **⏸ PAUSE (skipped in --auto) — Judgment complete.**
-> Reply **"continue"** when ready.
+If the gate does not pass and iterations remain, state "Verdict: NOT YET — re-entering (iteration N of 3)" as a status line and re-enter — no pause.
 
 State explicitly before re-entering:
 - What the previous iteration produced
@@ -213,6 +252,10 @@ If a ledger entry is required and a ledger path exists (check CLAUDE.md or `deci
 ---
 
 ## Exit: Unresolved at iteration 3
+
+> **⏸ PAUSE (skipped in --auto) — Exit path.** *(`exit-path` node — decides: exit-path)*
+> [Present what was reached, what remains wrong, and what would need to change.]
+> Choose: **Defer** (park it, record why) · **Escalate** (a constraint must be challenged — name whose call it is) · **Reframe** (the problem statement is wrong — restate it and re-run).
 
 ```
 ## Unresolved: [Problem Name]
