@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.4.0 — 2026-08-16
+
+**Graph engineering.** Multi-agent workflows are now declared execution graphs, not prose conventions. The implicit topologies that already existed — critique's 9-wide fan-out, design's craft sub-team, solve's 3-iteration convergence — are transcribed into one canonical, lint-validated contract per skill, then mechanized.
+
+- **Orchestration doctrine**: `memory/orchestration.md` (Core tier) — graph grammar (6 node types, 4 edge forms), human-node economics, adversarial doctrine, run-state node ledger, spend doctrine, executor/segment convention, and the Auto-Mode Safety Contract as the single source of truth (deduplicated from 16 skills to a 3-line stub each, ~430 lines removed).
+- **8 graph-declaring skills**: critique, review, design, ideate, solve, handoff, prototype, discover each carry one ` ```graph ` block (the contract) plus a `workflow.js` executor mirroring it — deterministic fan-outs, joins, bounded loops, and structured-output gate verdicts where the Workflow tool exists; the prose path everywhere else. Skills that are linear or interview-driven stay graph-free by design.
+- **Lint rules R7/R7.b/R7.c/R8** (`evals/lint-agnostic.sh`): graph-block validity (agents resolve, edges reference declared nodes, every loop bounded, fan-out members independent, every human node carries `decides:`), Six Functions coverage over artifact-producing graphs (driven by `evals/six-functions.map`) including a mandatory slop-gate node, executor conformance, and auto-contract stub presence.
+- **Human judgment repositioned**: ~76 PAUSE blocks audited. Workflow pauses drop to 15 across the 8 graph skills — each surviving pause is a real decision (direction selection, spend, irreversibility boundary, contested gate) with a lintable `decides:` annotation; progress reports became status lines. Interview skills keep their conversational pauses.
+- **Adversarial upgrades (anti-slop, structural)**: blind fan-outs (members never see each other's unfinished output); preserved dissent at joins with a dissent ledger in verdict artifacts (new anti-pattern: **Consensus Laundering**); a bounded refutation edge on every SHIP/INEVITABLE verdict (critic refutes CD, qa refutes DE — at most once, cannot stall shipping); the `/studio:studio-slop` seven markers as a gate node before emission in every artifact-producing graph. Ideate gains the CD ship gate and handoff gains the critic reduction pass — both closing real Six Functions gaps.
+- **Retirements (27 → 23 active skills, deprecate → archive next release)**: `simulate` retired (job → `/studio:experiment` + assumption-mapper); `luck` skill folded into the `luck` agent; `annotate` + `gather-feedback` merged into **`/studio:feedback`** (`--overlay` / `--surface`); `scope` merged into **`/studio:shape --task`**. All carry deprecation redirects in the router; nothing hard-deleted.
+- **Evals**: graph-conformance criteria for all 8 graph skills, new feedback/shape-task/refutation/dissent evals, coverage table reconciled (35 agents + 28 skills incl. 5 deprecated).
+
 ## 1.3.0 — 2026-05-27
 
 - **`/studio:organize` skill:** scaffold and reconcile the canonical project layout. Scaffold mode creates `decisions/`, `specs/`, `design/`, `reviews/` and writes a decision record. Reconcile mode scans, classifies, and proposes artifact moves — proposes only in `--auto` mode, never executes unattended.

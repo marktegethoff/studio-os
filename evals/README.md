@@ -6,7 +6,7 @@ Behavioral evals for every agent in the roster. Each eval is a prompt + pass cri
 
 ## Coverage
 
-All **35 agents + 27 skills** are covered across 9 files (33 by name; the two engineer specialists `swift-engineer` and `web-engineer` inherit `engineer`'s evals via the family discipline — see `engineering-agents.eval.md` for the base scenarios that apply to all specialists, and `evals/lint-agnostic.sh` R5 for the specialist-specific structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
+All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simulate, luck, annotate, gather-feedback, scope) are covered across 9 files (33 by name; the two engineer specialists `swift-engineer` and `web-engineer` inherit `engineer`'s evals via the family discipline — see `engineering-agents.eval.md` for the base scenarios that apply to all specialists, and `evals/lint-agnostic.sh` R5 for the specialist-specific structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
 
 | File | Covers |
 |---|---|
@@ -18,7 +18,7 @@ All **35 agents + 27 skills** are covered across 9 files (33 by name; the two en
 | `discovery-agents.eval.md` | journey-mapper · user-researcher · brief-writer · metrics-definer · assumption-mapper |
 | `analysis-agents.eval.md` | scout · competitive-analyst |
 | `historian.eval.md` | historian |
-| `skills.eval.md` | all 27 workflow skills (orchestration evals) |
+| `skills.eval.md` | all 28 workflow skills (orchestration + graph-conformance evals; deprecated skills marked inline) |
 
 ### Coverage rule — no agent or skill ships without an eval
 

@@ -112,9 +112,7 @@ Do not block if the user accepts the risk. But name the gap.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Brief loaded.**
-> Steps 0–0.5 complete.
-> Reply **"continue"** when ready.
+State "Brief loaded (Steps 0–0.5 complete)" as a status line and proceed — a report, not a decision (see human-node economics, `memory/orchestration.md`).
 
 ---
 

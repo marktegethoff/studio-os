@@ -5,7 +5,9 @@
 > Claude Code ships code without a spec. It designs without a brief. It builds before the problem is validated.
 > These aren't prompting failures — they're structural: the AI has no senior review, no gate between stages, no accumulated judgment about your product.
 
-Studio OS installs a design studio into Claude Code: 35 discipline agents sequenced by role, with three senior gates that must clear before the next stage can begin.
+Studio OS installs a design studio into Claude Code: 35 discipline agents wired into declared execution graphs, with three senior gates that must clear before the next stage can begin.
+
+Every multi-agent workflow is a **graph** — a lint-validated ` ```graph ` block naming its nodes (agents, gates, human decisions, routers, joins) and edges (sequence, blind fan-out/fan-in, bounded loops), with a `workflow.js` executor where Claude Code's Workflow tool is available and the prose path everywhere else. Human pauses exist only where a real decision is made; ship verdicts must survive a refutation pass; disagreement between disciplines is preserved to the gate, never averaged away. Doctrine lives in `memory/orchestration.md`.
 
 Product-agnostic. Useful for a solo practitioner; built for a team.
 

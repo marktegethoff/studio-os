@@ -70,8 +70,7 @@ If no memory exists, proceed to Step 2.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Memory check complete.**
-> Reply **"continue"** when ready.
+State "Memory check complete" as a status line and proceed.
 
 ---
 

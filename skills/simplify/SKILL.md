@@ -59,8 +59,7 @@ State what was loaded and confirm the scope before proceeding.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Context loaded.**
-> Reply **"continue"** when ready.
+State "Context loaded" as a status line and proceed — a report, not a decision (see human-node economics, `memory/orchestration.md`).
 
 ---
 
@@ -115,8 +114,7 @@ State which changes are architecturally sound, which need revision, and which sh
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Audit loop pass complete.**
-> Reply **"continue"** when ready.
+State "Audit pass complete" as a status line and proceed.
 
 ---
 
@@ -134,8 +132,7 @@ State the verdict: **PROCEED / REVISE PLAN / REJECT**.
 
 If REVISE PLAN and iterations remain:
 
-> **⏸ PAUSE (skipped in --auto) — Plan requires revision.**
-> Reply **"continue"** when ready.
+State "DE verdict: REVISE PLAN — re-entering (iteration N)" as a status line and re-enter — the loop is DE-driven and bounded; no pause.
 
 State explicitly before re-entering the loop:
 - What the previous iteration produced
@@ -186,8 +183,7 @@ Do not proceed to Distinguished Engineer Code Review if any invariant fails.
 
 ---
 
-> **⏸ PAUSE (skipped in --auto) — Implementation and QA complete.**
-> Reply **"continue"** when ready.
+State "Implementation and QA complete" as a status line and proceed to the DE Code Review — the review is the gate, not the pause.
 
 ---
 
