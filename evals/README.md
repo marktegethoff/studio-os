@@ -6,13 +6,13 @@ Behavioral evals for every agent in the roster. Each eval is a prompt + pass cri
 
 ## Coverage
 
-All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simulate, luck, annotate, gather-feedback, scope) are covered across 9 files (33 by name; the two engineer specialists `swift-engineer` and `web-engineer` inherit `engineer`'s evals via the family discipline — see `engineering-agents.eval.md` for the base scenarios that apply to all specialists, and `evals/lint-agnostic.sh` R5 for the specialist-specific structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
+All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simulate, luck, annotate, gather-feedback, scope) are covered across 9 files (34 by name; `swift-engineer` carries its own behavioral evals in `engineering-agents.eval.md` (Evals 8–10) in addition to inheriting `engineer`'s base scenarios; `web-engineer` still inherits the base scenarios via the family discipline — its own behavioral evals are owed when its platform doctrine lands; `evals/lint-agnostic.sh` R5 remains the structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
 
 | File | Covers |
 |---|---|
 | `leadership-agents.eval.md` | pm · strategist · critic · marketer · auditor · luck · surveyor |
 | `cd.eval.md` | cd |
-| `engineering-agents.eval.md` | architect · engineer · de · qa |
+| `engineering-agents.eval.md` | architect · engineer · swift-engineer · de · qa |
 | `design-agents.eval.md` | designer · choreographer · typesetter · writer · specifier · prototyper |
 | `surface-agents.eval.md` | materialist · visual-designer · mark-maker · accessibility · heurist · design-validator · systematist |
 | `discovery-agents.eval.md` | journey-mapper · user-researcher · brief-writer · metrics-definer · assumption-mapper |

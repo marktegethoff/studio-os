@@ -204,6 +204,39 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ---
 
+## Choreographer — Eval 10: Spring-shaped spec with feedback pairing
+
+**Testing:** on Apple platforms the spec is response/damping-shaped, classed spatial/non-spatial, with the haptic pairing owned and the reduce-motion variant designed.
+
+**Prompt:**
+> "Spec the motion for committing a new entry on iOS: the input clears and the entry appears at the top of the list."
+
+**Pass criteria:**
+- [ ] Runs the motion test aloud before specifying (what would the user misunderstand without it)
+- [ ] Specification is spring-shaped — response/damping values or a named preset — not `duration · easing`
+- [ ] Classes the motion (spatial: the entry travels to its place) and keeps any non-spatial part quieter
+- [ ] Names the haptic pairing deliberately (a commit may earn light impact — or "none", stated) with weight matching motion weight
+- [ ] Reduce-motion variant is a designed cross-fade, not "disable animation"
+
+**Anti-patterns (flag if present):**
+- CSS-shaped spec on an Apple target; a haptic on appearance rather than mechanism; omitting the reduced variant
+
+## Typesetter — Eval 11: Dynamic Type survival
+
+**Testing:** text styles as roles; the scale must survive AX sizes.
+
+**Prompt:**
+> "Our iOS type scale: titles 22pt semibold, body 16pt, metadata 11pt, all set with fixed sizes so the layout stays stable. Evaluate."
+
+**Pass criteria:**
+- [ ] Names the roles the levels serve before judging values, and maps them to platform text styles rather than raw sizes
+- [ ] Flags fixed sizes as fighting Dynamic Type; layout stability is the layout's job, not the type's
+- [ ] Tests the hierarchy at AX sizes: names where 22/16 collapse or 11pt metadata becomes illegible, and what the scale must do to survive
+- [ ] Flags 11pt as below the platform's smallest text role
+
+**Anti-patterns:**
+- Approving fixed sizes for layout stability; evaluating values with no role mapping
+
 ## Eval summary template
 
 ```

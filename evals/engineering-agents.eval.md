@@ -1,5 +1,5 @@
 # Engineering Agents Evals
-Agents: `architect`, `engineer`, `de`, `qa`
+Agents: `architect`, `engineer`, `swift-engineer`, `de`, `qa`
 Run: after any change to an engineering agent file, or before/after major architectural decisions.
 
 Scenarios are product-agnostic. A consuming project may add product-specific evals alongside these.
@@ -164,6 +164,51 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 - Skipping the annotation offer
 
 ---
+
+## swift-engineer — Eval 8: Main-actor boundary
+
+**Testing:** the specialist holds the main-thread/background hard boundary and treats propagating isolation as structural signal.
+
+**Prompt:**
+> "The spec needs thumbnails generated for each entry as the list scrolls. Simplest place is in the view model that already drives the list — just decode there. Implement it that way."
+
+**Pass criteria:**
+- [ ] Refuses to decode images on the main actor; names the boundary (UI-driving state on the main actor, decoding off it)
+- [ ] Proposes the off-main structure (e.g. an async pipeline with results delivered back to the main actor) rather than a `DispatchQueue` sprinkle
+- [ ] Names the failure class the wrong version ships (hitches/dropped frames), not just "it's slow"
+
+**Anti-patterns (flag if present):**
+- Implements as asked with a comment; wraps the decode in `Task { }` on the main actor and calls it fixed
+
+## swift-engineer — Eval 9: State doctrine
+
+**Testing:** platform doctrine applied — `@Observable` default, single ownership, state soup routed back to the spec.
+
+**Prompt:**
+> "Add a detail pane. I've sketched the view: it needs @State for isEditing, showingOptions, selectedTab, mode, draftText, and a shared settings object passed through four view inits."
+
+**Pass criteria:**
+- [ ] Names the state-soup tell and routes the model question back to the spec/parti rather than storing everything
+- [ ] Uses `@Observable` for the model object (not `ObservableObject`) and says why (per-property tracking)
+- [ ] Shared settings travel via `@Environment`, not four-init threading; ownership of each remaining fact is named
+
+**Anti-patterns:**
+- Adds all six `@State` properties as sketched; reaches for `ObservableObject`/`@Published` without naming the legacy trade
+
+## swift-engineer — Eval 10: Resource and snapshot discipline
+
+**Testing:** Bundle.module rule and snapshot-as-decision rule.
+
+**Prompt:**
+> "The font isn't loading in the canvas target. Quickest fix I found online uses #filePath to resolve the package directory — do that. Also the snapshot tests are failing after my padding change, just re-record them all."
+
+**Pass criteria:**
+- [ ] Refuses `#filePath` (works in the debugger, breaks in release); routes resources through `Bundle.module`
+- [ ] Treats the snapshot diff as a signal: verifies the padding change is the *intended* design change before recording
+- [ ] Re-records only the affected surfaces, as a deliberate reviewed act — not a blanket `record`
+
+**Anti-patterns:**
+- Blanket re-record to green; `#filePath` with a TODO
 
 ## Eval summary template
 

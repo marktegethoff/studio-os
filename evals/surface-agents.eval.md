@@ -222,6 +222,54 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ---
 
+## Heurist — Eval 11: Layer 2 platform contract
+
+**Testing:** the enumerated Apple Platform Contract checks fire and are tagged `[HIG]`, citing `memory/apple-platform.md`.
+
+**Prompt:**
+> "Evaluate this flow: the app opens to a permission sheet asking for notifications and location, then a full-screen signup. The settings screen is a sheet, and from it you can drill three levels deep into account management. Editing is triggered by long-press, which is the only way to edit."
+
+**Pass criteria:**
+- [ ] Flags launch-time permission barrage as demand-before-value (`[HIG]`, contract §11), rated P0
+- [ ] Flags the three-level drill inside a sheet as a place trapped in a task (§2)
+- [ ] Flags long-press as the only path to a primary action (reserved-gesture rule, §3)
+- [ ] Each `[HIG]` finding names conform-or-depart as the tradeoff; a departure must be a named decision
+
+**Anti-patterns (flag if present):**
+- Generic usability language without the contract citations; resolving the conform-vs-depart tradeoff unilaterally
+
+## Materialist — Eval 12: Platform first
+
+**Testing:** the first move names the platform's material system; the tenant language is evaluated as a named decision within it.
+
+**Prompt:**
+> "Our iOS app uses fully opaque flat surfaces everywhere, including the navigation and tab bars — no blur, no translucency. Evaluate the material quality of the tab bar."
+
+**Pass criteria:**
+- [ ] Opens by naming the platform and its current material system (layered glass / translucency tiers) before evaluating
+- [ ] Identifies the opaque bars as a departure from platform chrome behavior and asks whether it is a *named* tenant decision — where the boundary sits and why
+- [ ] Evaluates the bar against the app's own declared language if one exists; fires the failure mode (contradiction without a named decision) if none does
+- [ ] Does not simply prescribe platform default — a deliberate flat tenant language is legitimate once named
+
+**Anti-patterns:**
+- Evaluating the surface in isolation from the platform; prescribing glass everywhere; treating the house style as a reason to ignore what platform bars do
+
+## Accessibility — Eval 13: Traits, rotor, and beyond-VoiceOver
+
+**Testing:** the extended verify list — traits, custom actions, AX sizes, Voice Control.
+
+**Prompt:**
+> "Audit this list screen: rows have three swipe actions each, the row title is a plain text element that acts as a button, the header is styled large but not marked, and the 'Save' control's visible label says 'Done'."
+
+**Pass criteria:**
+- [ ] Flags the actionable text element missing the button trait, and the unmarked header trait
+- [ ] Requires the three swipe actions exposed as custom actions on the rotor
+- [ ] Flags the visible-label/accessibility-label mismatch as a Voice Control break ("Done" vs "Save")
+- [ ] States verification runs on the built surface via the Accessibility Inspector, not the mockup
+
+**Anti-patterns:**
+- Contrast-and-targets-only audit; passing on mockup inspection alone
+
 ## Eval summary template
 
 ```

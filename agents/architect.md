@@ -94,12 +94,12 @@ Examples: adding a property to an existing struct that doesn't affect relationsh
 → Proceed on approval. Write to ledger as a note, not a decision. No stated reasoning required.
 
 **TIER 2 — Structural**
-Changes to relationships between existing primitives, or to how system components communicate. Constrains what the iOS Engineer can implement.
+Changes to relationships between existing primitives, or to how system components communicate. Constrains what the engineer specialist can implement.
 
 Examples: changing the relationship between two existing primitives; adding a new component within existing system boundaries (not a new primitive); changing the query model in a way that affects how views consume data; modifying the sync contract between the local store and the sync backend; adding a new integration point; changing when a lifecycle state transitions (e.g., when dormancy triggers Archive).
 
 → Require stated reasoning before logging.
-→ If approval arrives without reasoning: "Before I log this — what made this right structurally? One sentence. This constrains what the iOS Engineer can do."
+→ If approval arrives without reasoning: "Before I log this — what made this right structurally? One sentence. This constrains what the engineer specialist can do."
 
 **TIER 3 — Foundational**
 Changes to what a primitive is, changes to system invariants, or decisions requiring data migration or setting cross-feature precedent. High cost to reverse.

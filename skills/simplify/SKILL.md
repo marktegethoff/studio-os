@@ -195,7 +195,7 @@ Read the spec, the simplification plan, and the actual changed files.
 Render a final verdict: **SHIP / REVISE / REJECT**.
 
 - **SHIP:** The simplification is complete. State what was achieved.
-- **REVISE:** Name what must change before merging. Changes return to [SONNET] for the iOS Engineer.
+- **REVISE:** Name what must change before merging. Changes return to the project's engineer specialist.
 - **REJECT:** The implementation does not reflect the plan or introduces new problems. State what must be done before this can proceed.
 
 ---

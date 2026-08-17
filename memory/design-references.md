@@ -1,6 +1,6 @@
 # Design References — the reference palette
 
-The studio's curated palette of products whose public design stories embody the values — and the anti-references to contrast against. **Agents draw aesthetic examples and lineage from this file** rather than from any one product the studio happens to be building. Cite the *method and what the field learned*, never just the output.
+The studio's curated palette of products whose public design stories embody the values — and the anti-references to contrast against. **Agents draw aesthetic examples and lineage from this file** rather than from any one product the studio happens to be building. Cite the *method and what the field learned*, never just the output. Date new entries (`(added YYYY-MM)`) so the palette can signal platform-era drift; the surveyor's sweep proposes a current-era exemplar when a platform generation turns (the palette currently owes an iOS 26-era entry — first candidate for the next sweep).
 
 This is a **configurable layer.** Ship the curated default below; `/studio:init` (setup) prompts each user to add their own positive and negative real-world examples so the palette is vivid and personal to their taste. Personal additions live in the consuming project's `.claude/memory/design-references.md` and extend (never silently replace) this default.
 
@@ -14,11 +14,11 @@ Stance: Positive / Negative / Mixed / Admire-the-move.
 | Product | Observation | Lesson | Stance |
 |---------|-------------|--------|--------|
 | iA Writer | Focus mode; typographic restraint treated as a feature, not a setting | Reading and writing comfort is a design output worth defending. |  Positive |
-| Things | Interaction craft, calm, the empty state done right | Calm is engineered. Every transition and empty state is a decision. | Positive |
+| Things | Interaction craft, calm, the empty state done right | Calm is engineered. Every transition and empty state is a decision. *Mechanism:* short considered springs, one accent verb, zero-state that teaches the first action. | Positive |
 | Linear | Keyboard-first, density matched to expert users, speed as respect | Bet on your user and design without compromise for that bet. Inappropriate density is the failure, not density. | Positive |
 | Darkroom | Pro depth without clutter; serious capability, quiet surface | Power and approachability are not a tradeoff when complexity is earned. | Positive |
-| Halide · Kino · Spectre (Lux) | Pro camera/video; manual control revealed progressively, defaults sane; a house style of "serious instrument, calm surface" across the whole catalog | Staged disclosure lets one product serve novice and pro without compromise — and a coherent house style travels across products. | Positive |
-| Tapbots (Ivory) | Mechanism made tactile; sound and motion as confirmation | Feedback can be felt. Motion and sound, used with restraint, are part of the instrument. | Positive |
+| Halide · Kino · Spectre (Lux) | Pro camera/video; manual control revealed progressively, defaults sane; a house style of "serious instrument, calm surface" across the whole catalog | Staged disclosure lets one product serve novice and pro without compromise — and a coherent house style travels across products. *Mechanism:* the daily case is zero-config; pro controls appear one gesture deep, in stable positions, never behind a mode. | Positive |
+| Tapbots (Ivory) | Mechanism made tactile; sound and motion as confirmation | Feedback can be felt. Motion and sound, used with restraint, are part of the instrument. *Mechanism:* haptic weight paired to motion weight on commits; sounds only on completed mechanism (sent, posted); both silent-mode honest. | Positive |
 | Teenage Engineering · Ableton | The instrument metaphor done literally and well | A tool can be an instrument — direct, expressive, learnable by use. | Positive |
 | Overcast · Instapaper · Kindle | Reading-first; progressive disclosure; the content is the UI | When the content is the product, the chrome should disappear. | Positive |
 | Lemonade | Claim-creation flow — humane sequencing of a dreaded task | Sequencing is design. A dreaded task becomes humane when paced for the person. | Positive |

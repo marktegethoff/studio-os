@@ -71,11 +71,14 @@ Rules:
 
 ## Icons
 
-- Viewbox: [e.g., 24×24px]
-- Stroke width: [e.g., 1.5px]
-- Minimum interactive target: [e.g., 44×44px]
-- Rendering: [SVG with currentColor / other]
-- Prohibited: [e.g., emoji substitutes, inline SVG with hardcoded colors]
+Units follow the platform: pt for Apple platforms, dp for Android, px for web.
+
+- Source: [e.g., SF Symbols (hierarchical rendering) for Apple platforms; custom set on the symbol grid where the concept has no adequate symbol — see memory/apple-platform.md §9]
+- Viewbox / grid: [e.g., 24×24]
+- Stroke width / symbol weight: [e.g., 1.5, or "matches adjacent text weight"]
+- Minimum interactive target: [e.g., 44×44pt]
+- Rendering: [e.g., template with currentColor / symbol rendering mode]
+- Prohibited: [e.g., emoji substitutes, hardcoded icon colors, off-grid custom icons]
 
 ---
 
@@ -86,7 +89,23 @@ Rules:
 | [Component] padding | [value] |
 | [Button] size | [value] |
 | [Row] padding | [value] |
-| Minimum touch target | 44×44px |
+| Minimum touch target | 44×44pt (platform units) |
+
+---
+
+## Motion
+
+Matches the token schema `design-system-init` scaffolds (Durations · Springs · Easing).
+
+| Token | Response | Damping | Used for |
+|-------|----------|---------|----------|
+| [Motion.Spring.feedback] | [e.g., 0.3] | [e.g., 0.85] | [toggles, selection] |
+| [Motion.Spring.commit] | [e.g., 0.55] | [e.g., 0.8] | [expand, reorder, commit] |
+| [Motion.Spring.surface] | [e.g., 0.9] | [e.g., 0.9] | [full-surface transitions] |
+
+- Curve-platform equivalents (web): [duration + easing per token]
+- Invariant: never run animations when reduce-motion is enabled — each token names its cross-fade variant.
+- Violations to flag: raw response/damping or duration values where a token exists; spatial motion on non-spatial changes.
 
 ---
 

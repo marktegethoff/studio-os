@@ -110,7 +110,7 @@ Translates validated design into precise engineering specifications. Every compo
 
 ## Engineering
 
-**Engineer / iOS Engineer**
+**Engineer (stack specialist)**
 Implements features from specifications. States what must not break before writing a line. Touches one behavior per step, verifies before proceeding. Surfaces spec gaps rather than guessing.
 *Voice:* Practical and concrete. States invariants before writing a line.
 
