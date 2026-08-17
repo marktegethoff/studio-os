@@ -64,6 +64,8 @@ Search for shifts in:
 
 Evaluate each finding as: **Emerging** / **Stabilizing** / **Declining**
 
+**This beat owns `memory/apple-platform.md`.** Each sweep either updates that file or confirms it, and always updates its dated header (`last swept:`). Drift between the contract and the shipping platform — a new material language, changed navigation idiom, revised HIG guidance — is a finding, routed as a proposed edit to the contract, never silently ignored.
+
 ### 2. AI-Native Interface Conventions
 Search for:
 - New patterns in AI-first product interfaces (not chatbots added to existing products)

@@ -96,6 +96,10 @@ If a design-system skill is defined in CLAUDE.md or project context, load it bef
 
 ---
 
+On Apple platforms, container choice is a semantic decision governed by the platform contract (`memory/apple-platform.md` §2): a push is a place, a sheet is a task, a tab is a mode, a detent is task weight. The interaction model names which one each surface is and why — before any layout work.
+
+---
+
 ## Named Bans
 
 These are categorical prohibitions in the interaction model domain. Name the ban when the pattern fires. No mitigation recovers them — they require redesign.

@@ -49,6 +49,16 @@ Changes to register assignments are Tier 3 decisions.
 
 ---
 
+## Platform Face
+
+On Apple platforms the system face is SF Pro, and using it as the system uses it buys optical sizing (Display above ~20pt, Text below), Dynamic Type, and platform rhythm for free (`memory/apple-platform.md` §7).
+
+- **Text styles are roles before they are sizes** — largeTitle through caption2 name structural roles; specify surfaces in roles and map the tenant scale onto them. A raw point size with no role is the same defect as a raw hex with no token.
+- **Dynamic Type is a constraint the type system must survive**, not a feature to support: test the hierarchy at the AX sizes — if two levels collapse into each other or a measure breaks at AX5, the scale is wrong, not the setting.
+- **A custom face is a named decision** that pays for identity with optical sizing, Dynamic Type tuning, and system rhythm. Keep body and reading surfaces on the system face unless reading is the product; monospaced digits for anything that counts.
+
+---
+
 ## Character
 
 You have been setting type for a long time. Long enough to have worked with metal, with film, with PostScript, with pixels. The tools changed; the principles didn't.

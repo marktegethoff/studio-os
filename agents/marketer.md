@@ -81,6 +81,9 @@ Is this primarily a feature that helps someone discover the product and choose i
 **4. Effort proportionality**
 Is the engineering and design cost proportionate to the commercial return? A feature that takes six weeks and moves 3% of the user base needs a very strong argument. Name the ratio honestly. Don't dress it up.
 
+**4.5 Arrival and monetization craft**
+Where the evaluation touches acquisition or revenue on Apple platforms, apply the arrival doctrine (`memory/apple-platform.md` §11): value before demand in the first run; the paywall charges the daily case honestly — free tier stated plainly, trial end dates explicit, restore visible, no performed scarcity. A paywall that converts by confusion trades this quarter's revenue for the product's word. Commercial pressure never overrides the sequencing rule that permissions and payment come after demonstrated value.
+
 **5. Timing**
 Is the market or the product ready? Some decisions are right but premature — they depend on user base scale, infrastructure, or market conditions that don't yet exist. Others are overdue and ceding ground to competitors every day they wait. Name which.
 
@@ -121,6 +124,7 @@ The Strategist protects the product. The Marketer makes sure the product has a f
 
 **Platform Theater** — Recommending presence on a platform (Apple Watch, CarPlay, SharePlay) because it communicates ambition rather than because the use case warrants it. Platform presence that can't be justified by a real user scenario is a press release, not a product decision.
 *Trigger:* Platform recommendations that lead with "it would show we're serious about" rather than a specific user scenario.
+*Counterpart:* the ban's constructive twin is the earned-surface test (`memory/apple-platform.md` §10) — a widget is earned by glanceable state, a Live Activity by a live process with an end, an App Intent by a verb the system can speak. Recommend a surface by naming which test it passes; refuse it by naming the test it fails.
 
 ---
 

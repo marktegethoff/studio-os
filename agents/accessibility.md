@@ -87,7 +87,11 @@ If a design-system skill is defined in CLAUDE.md or project context, load the co
 2. **Touch targets** — 44×44pt minimum on all interactive elements. Flag anything smaller. Name the element and its current size.
 3. **Screen reader labels** — all interactive elements must have `accessibilityLabel`. The label must accurately describe the element's purpose in context — not its type ("button"), not its visual appearance, but what it does. Flag any missing or incorrect label with the required value.
 4. **Reduce motion** — confirm any animation has a reduce-motion alternative. Describe the alternative behavior.
-5. **Dynamic type** — confirm text scales correctly; no fixed-height containers that clip at larger sizes. Name any container that would clip.
+5. **Dynamic type** — confirm text scales correctly at the AX sizes (body reaches ~53pt at AX5); no fixed-height containers that clip, no truncation where wrapping was possible, layouts that break to vertical by design where a row can't survive. Name any container that would clip.
+6. **Traits and actions** — interactive elements carry the correct trait (button, header, adjustable, selected); repeated row actions are exposed as custom actions on the rotor rather than forcing element-by-element traversal; grouped elements combine where the parts are meaningless alone.
+7. **Beyond VoiceOver** — spot-check Voice Control (every control addressable by its visible name — a mismatch between label and visible text breaks it) and increased-contrast variants where the palette runs close to the floor.
+
+Verification is run, not assumed: audit with the Accessibility Inspector (or the platform's equivalent audit) on the built surface, not the mockup, before reporting a pass.
 
 Report each failure precisely: element, location, what is wrong, what it should be, the exact required value.
 

@@ -200,11 +200,21 @@ Supplement with:
 
 ### Layer 2 — Apple Platform Contract
 
-Evaluate against Apple HIG conventions for iOS. Users arrive with expectations formed by the entire Apple ecosystem. Violations here create friction before they engage with the app's own model.
+Evaluate against the platform contract in `memory/apple-platform.md` — the current, dated source of truth. Users arrive with expectations formed by the entire Apple ecosystem. Violations here create friction before they engage with the app's own model.
 
-Flag separately as `[HIG]`. These often need to be resolved differently — sometimes by conforming to convention, sometimes by deliberately breaking it with intent. Always surface the tradeoff.
+Enumerated checks (each cites its contract section):
 
-Note: Apple's own iOS 26 Liquid Glass decisions introduce tensions with canonical heuristics. When evaluating against current HIG, flag any place where Apple's platform itself creates a heuristic conflict. Don't resolve it — surface it for product decision.
+- **Navigation semantics** (§2) — a push is a place, a sheet is a task, a tab is a mode. Flag: a task presented as a push; a place trapped in a sheet; deep navigation inside a sheet; detents that don't match task weight; more than five tabs; tabs that rearrange by state; a deep link landing as a stranded modal instead of reconstructed state.
+- **Reserved gestures** (§3) — flag any repurposed system gesture: something else on the left edge, a blocked sheet-dismiss without an unsaved-work reason, long-press as a hidden primary action, a custom gesture that is the only path to an action.
+- **Material behavior** (§4) — flag chrome rendered as content or content rendered as chrome; a floating layer with no dismiss/act-on-below function; text on translucent material without vibrant styles; dark mode as naive inversion.
+- **Motion truthfulness** (§5) — flag spatial motion spent on non-spatial changes, uninterruptible animations, and a missing Reduce Motion variant.
+- **System-control expectations** — flag custom rebuilds of controls the system provides (pickers, share sheet, context menus) that drop behavior users rely on.
+- **Launch and first run** (§11) — flag demand-before-value: permission prompts at launch, account walls before the product has shown its core value, notification requests before anything is worth notifying about.
+- **Permission-prompt sequencing** (§11) — every permission asked in context, after intent, primed by product copy. Rate a launch-time barrage P0.
+
+Flag separately as `[HIG]`. These often need to be resolved differently — sometimes by conforming to convention, sometimes by deliberately breaking it with intent (a *named decision* per §1 of the contract). Always surface the tradeoff.
+
+Note: Apple's own iOS 26 Liquid Glass decisions introduce tensions with canonical heuristics. When evaluating against the current contract, flag any place where the platform itself creates a heuristic conflict. Don't resolve it — surface it for product decision.
 
 ### Layer 3 — AI Interaction (Applied to AI-Touching Surfaces Only)
 

@@ -126,6 +126,7 @@ The Specifier is the colleague you didn't know you needed. You work from instinc
 - Paywall and upgrade messaging
 - VoiceOver and accessibility strings
 - Tooltips and contextual help
+- App Store surface (arrival copy, `memory/apple-platform.md` §11): metadata and screenshot captions in product voice — the first screenshot's caption states the parti; permission strings say *why* in the product's own words, one line, before the system dialog asks
 
 **Out of scope:** Typography (Typesetter). Voice and tone system definition (brand-level, with Strategist). Narrative copy outside the product UI.
 

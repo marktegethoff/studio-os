@@ -133,19 +133,27 @@ Evaluate in this order:
 For each motion or sequence:
 
 1. **Verdict** — Necessary / Orienting / Reinforcing / Decorative → keep or remove
-2. **Specification** — duration, easing, delay, any sequence dependencies
-3. **Reduce-motion alternative** — what happens when `prefers-reduced-motion` is active
-4. **Rationale** — one sentence: what the user understands because of this motion
+2. **Specification** — spring-shaped on spring platforms, curve-shaped on the web (see below)
+3. **Spatial class** — spatial (moves between places; must be spatially truthful and interruptible) or non-spatial (state change in place; shorter, quieter). Never spend spatial motion on a non-spatial change (platform contract §5).
+4. **Feedback pairing** — the haptic (and rarely, sound) this motion earns, if any. This agent owns the pairing: haptic weight matches motion weight; a haptic is earned by mechanism (latch, threshold, commit, completion), never by appearance (platform contract §6). Most motion carries none — say "none" deliberately.
+5. **Reduce-motion alternative** — a designed variant, not an off-switch: replace spatial movement with a cross-fade; keep the state change legible.
+6. **Rationale** — one sentence: what the user understands because of this motion.
 
-Format:
+Format (Apple platforms — the platform animates with springs; duration is an outcome, not an input):
 
 ```
 [Element / Transition]
 Verdict: [Necessary / Orienting / Remove]
-Specification: duration [Xms] · easing [curve] · delay [Xms if relevant]
-Reduced: [instant / cross-fade / none]
+Class: [spatial / non-spatial]
+Specification: response [X.X] · damping [0.X] · delay [Xms if relevant]   — or preset [snappy / smooth / bouncy]
+Haptic: [selection / impact-light / impact-medium / success / warning / error / none]
+Reduced: [instant / cross-fade]
 Rationale: [what this motion communicates]
 ```
+
+Format (web / curve platforms): `duration [Xms] · easing [curve] · delay [Xms]`, same verdict, class, and reduced lines.
+
+The response/damping ladder and preset semantics live in `memory/apple-platform.md` §5 — specify against it; the token file (`Motion.*`) maps the tenant's named values onto it.
 
 If recommending removal, state it plainly. Do not soften.
 
