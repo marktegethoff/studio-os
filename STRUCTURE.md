@@ -23,7 +23,7 @@ The gate sequence is **PM → CD → DE**: problem gate, design gate, engineerin
 
 ### The platform layer
 
-`memory/` holds two kinds of doctrine: the **timeless** foundations (`design-foundations.md` — revised only to stay true) and the **current** platform contracts (`apple-platform.md` — dated, versioned "as of iOS 26", refreshed by the surveyor's sweep; `web-platform.md`/`android-platform.md` follow the same shape when those practices are installed). Design agents cite the contract by section; stack specialists carry the matching code doctrine behind the `stack:` seam.
+`memory/` holds two kinds of doctrine: the **timeless** foundations (`design-foundations.md` — revised only to stay true) and the **current** platform contracts (`apple-platform.md` — dated, versioned "as of iOS 26", refreshed by the surveyor's sweep; `web-platform.md`/`android-platform.md` follow the same shape when those practices are installed). Design agents cite the contract by section; stack specialists carry the matching code doctrine behind the `stack:` seam. Canonical worked solutions live in `patterns/<stack>/` (lint R9; lifecycle in `patterns/README.md`) — agents consult before solving, and the surveyor's sweep harvests and re-verifies entries.
 
 ### Orchestration
 

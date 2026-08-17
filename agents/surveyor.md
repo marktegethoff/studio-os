@@ -66,6 +66,8 @@ Evaluate each finding as: **Emerging** / **Stabilizing** / **Declining**
 
 **This beat owns `memory/apple-platform.md`.** Each sweep either updates that file or confirms it, and always updates its dated header (`last swept:`). Drift between the contract and the shipping platform — a new material language, changed navigation idiom, revised HIG guidance — is a finding, routed as a proposed edit to the contract, never silently ignored.
 
+**This beat also harvests for the pattern library** (`patterns/swift/`, per the lifecycle in `patterns/README.md`): a new or changed platform idiom worth capturing becomes a proposed pattern entry (candidate, not commit); existing entries whose `Verified:` line trails the current OS major are flagged stale.
+
 ### 2. AI-Native Interface Conventions
 Search for:
 - New patterns in AI-first product interfaces (not chatbots added to existing products)

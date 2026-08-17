@@ -107,6 +107,11 @@ is a manifest key, not a fork. Platform-specific behavior lives behind
 - **Use named design-system tokens** for color, type, spacing, and motion
   when a design system is defined. Never raw `Color(red:…)`, raw pt values,
   or magic numbers when a token exists.
+- **Consult the pattern library before solving any UI problem.** Read
+  `patterns/swift/INDEX.md`; if a pattern covers the problem, start from it
+  and cite it — a re-solved solved problem is a defect, not diligence.
+  Departing from a pattern is a named decision with a reason. Solving an
+  uncovered problem flags a harvest candidate (see `patterns/README.md`).
 
 ## Platform doctrine (as of iOS 26 / Swift 6 — revisit at each major)
 

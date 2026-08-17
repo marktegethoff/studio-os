@@ -130,3 +130,5 @@ Design specs written against this contract land in Swift as follows — this sec
 - Semantic color → `.foregroundStyle(.primary/.secondary/.tertiary)`, background stacks, `.tint`.
 - Navigation semantics → `NavigationStack` (places), `.sheet` + `presentationDetents` (tasks), `TabView` (modes), `.fullScreenCover` (commitments).
 - Surfaces → WidgetKit, ActivityKit, App Intents.
+
+Canonical worked solutions — compilable snippets with provenance — live in `patterns/swift/` (start at `INDEX.md`). Specs cite patterns; engineers start from them.

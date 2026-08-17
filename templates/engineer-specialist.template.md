@@ -103,6 +103,9 @@ Cover each dimension with a *stance*, not a survey (see
 - **Token bridging** — how design-system tokens land in this stack's code
   (the design side's API-bridge section maps the vocabulary; the specialist
   owns the implementation half).
+- **Pattern library** — seed `patterns/<stack>/` with the stack's solved
+  problems per `patterns/README.md`, and carry the consult-before-solving
+  rule: a re-solved solved problem is a defect.
 
 The base Escalation Protocol applies unchanged.
 

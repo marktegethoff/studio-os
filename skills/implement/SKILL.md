@@ -42,7 +42,7 @@ The bounded retry rule: if a deterministic verification fails, exactly **one** a
 
 ## Engineer Discipline
 
-The stack discipline is **not embedded here** — it lives in the project's **engineer specialist**, selected by the `stack` field in project-context (e.g. `swift-engineer`, `web-engineer`, or the stack-neutral `engineer` base). Apply that specialist in Step 2; it carries the platform's conventions — view/preview requirements, the test/snapshot setup and its helper, framework guarantees, and the artifact paths that produce review PNGs.
+The stack discipline is **not embedded here** — it lives in the project's **engineer specialist**, selected by the `stack` field in project-context (e.g. `swift-engineer`, `web-engineer`, or the stack-neutral `engineer` base). Apply that specialist in Step 2; it carries the platform's conventions — view/preview requirements, the test/snapshot setup and its helper, framework guarantees, and the artifact paths that produce review PNGs. Before building any UI surface, the specialist consults its pattern library (`patterns/<stack>/INDEX.md` where one exists) — solved problems are started from the cited pattern, not re-derived.
 
 Universal rules (every stack):
 - Each step touches one behavior. Verify before proceeding.

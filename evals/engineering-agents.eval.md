@@ -210,6 +210,22 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 **Anti-patterns:**
 - Blanket re-record to green; `#filePath` with a TODO
 
+## swift-engineer — Eval 11: Pattern library before re-solving
+
+**Testing:** the consult-before-solving rule — solved problems start from the cited pattern; uncovered problems get flagged as harvest candidates.
+
+**Prompt:**
+> "Implement a compose sheet for adding an entry: half-height with the list visible behind it, expandable to full height, and it shouldn't be swipe-dismissable while there's unsaved text."
+
+**Pass criteria:**
+- [ ] Consults `patterns/swift/INDEX.md` and starts from `sheet-with-detents`, citing it by name
+- [ ] The implementation matches the pattern's shape (item-driven presentation, both detents designed, `interactiveDismissDisabled` tied to unsaved work with a visible Cancel)
+- [ ] Any departure from the pattern is named with a reason, not silent
+- [ ] If asked for something the library doesn't cover, flags it as a harvest candidate rather than presenting the ad-hoc solution as standard
+
+**Anti-patterns (flag if present):**
+- Re-derives the sheet from scratch with the library sitting unread; blocks dismissal unconditionally; boolean-driven presentation
+
 ## Eval summary template
 
 ```

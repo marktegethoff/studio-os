@@ -28,6 +28,9 @@
 #   R8   auto-contract stub            — skills/**                      (FAIL)
 #        any skill mentioning --auto must reference the Auto-Mode
 #        Safety Contract in memory/orchestration.md (no inline forks).
+#   R9   pattern-entry structure       — patterns/**                    (FAIL)
+#        every entry carries Problem/Standard/Verified + Solution/
+#        Why this shape/Prevents sections (per patterns/README.md).
 #   IBR  included-by-reference         — project-level                  (FAIL)
 #        the invariant the design exists to protect.
 #        Runs regardless of scaffold_state.
@@ -632,6 +635,32 @@ for f in "${SKILL_FILES[@]}"; do
   fi
 done
 [[ $r8_hits -eq 0 ]] && info "all --auto skills reference the contract"
+
+# ── R9 — pattern-entry structure ──────────────────────────────────────────────
+
+section "R9 · pattern entries — patterns/**"
+
+r9_hits=0
+r9_entries=0
+PATTERN_FILES=()
+while IFS= read -r line; do PATTERN_FILES+=("$line"); done < <(find "$PLUGIN_ROOT/patterns" -type f -name '*.md' -not -name 'README.md' -not -name 'INDEX.md' -not -path '*/archive/*' 2>/dev/null | sort)
+
+for f in "${PATTERN_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  rel="$(rel_plugin "$f")"
+  r9_entries=$((r9_entries + 1))
+  for req in "^Problem:" "^Standard:" "^Verified:" "^## Solution" "^## Why this shape" "^## Prevents"; do
+    if ! grep -qE "$req" "$f"; then
+      fail "$rel — pattern entry missing required section \"${req#^}\" (R9)"
+      r9_hits=$((r9_hits + 1))
+    fi
+  done
+done
+if [[ $r9_entries -eq 0 ]]; then
+  info "no pattern entries — R9 N/A"
+elif [[ $r9_hits -eq 0 ]]; then
+  info "$r9_entries pattern entr$( [[ $r9_entries -eq 1 ]] && echo y || echo ies ) valid"
+fi
 
 # ── project-level checks (R3 + IBR) ───────────────────────────────────────────
 
