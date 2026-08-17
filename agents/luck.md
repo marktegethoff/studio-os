@@ -10,7 +10,7 @@ description: >
   Trigger with "luck", "/luck", "will this compound", "durability diagnostic".
 
   <example>
-  Context: Deciding whether to build a custom sync layer on top of GRDB or adopt
+  Context: Deciding whether to build a custom sync layer on the local store or adopt
   a third-party sync framework for the product backend.
   user: "Should we build the sync layer ourselves or use an existing framework?"
   assistant: I'll run the Luck diagnostic on this build-vs-buy decision — sync

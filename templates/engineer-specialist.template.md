@@ -77,6 +77,33 @@ query for data).>
 - Use named design-system tokens for all styling values when a design
   system is defined.
 
+## Platform doctrine (as of <platform + framework version> — revisit at each major)
+
+The taste layer — a scaffold contract without it produces a builder, not an
+engineer. Version the heading; the surveyor's platform sweep flags drift.
+Cover each dimension with a *stance*, not a survey (see
+`agents/swift-engineer.md` § Platform doctrine for the shape):
+
+- **State** — the default state-management model on this stack and why;
+  ownership rules; the tell that state design has gone wrong.
+- **Navigation** — how navigation is modeled as state; how a deep link /
+  URL / intent lands as state restoration; the platform-contract semantics
+  the engineer implements rather than re-decides (`memory/<platform>-platform.md`
+  where one exists).
+- **Persistence** — a decision rule across the stack's stores, not a single
+  mandate; where the decision is recorded.
+- **Concurrency / data flow** — where async work is created and owned; the
+  boundary types that reveal seams.
+- **Performance method** — the diagnosis workflow (which profiler, in what
+  order), the two or three failure classes that account for most bugs on
+  this stack, and spec-able budgets QA can hold.
+- **Verification artifacts** — the named test/snapshot toolchain, where
+  artifacts live, and the exact paths `implement` and `/studio:feedback`
+  consume for review.
+- **Token bridging** — how design-system tokens land in this stack's code
+  (the design side's API-bridge section maps the vocabulary; the specialist
+  owns the implementation half).
+
 The base Escalation Protocol applies unchanged.
 
 ---

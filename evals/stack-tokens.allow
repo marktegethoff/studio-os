@@ -11,5 +11,5 @@
 # Future stacks add their own list when the specialist ships (Android: Kotlin,
 # Gradle, Compose, etc.; React Native, Flutter, …).
 
-swift: SwiftUI, xcodebuild, swift build, SPM, Bundle.module, xcodeproj, UIKit, AppKit, XcodeGen, Package.swift
+swift: SwiftUI, xcodebuild, swift build, SPM, Bundle.module, xcodeproj, UIKit, AppKit, XcodeGen, Package.swift, SwiftData, NavigationStack, @Observable, ObservableObject, Sendable, swift-snapshot-testing, GRDB
 web: React, Next.js, pnpm, npm, Storybook, Ladle, TypeScript, DOM, package.json, tsconfig

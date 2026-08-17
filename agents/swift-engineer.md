@@ -108,6 +108,61 @@ is a manifest key, not a fork. Platform-specific behavior lives behind
   when a design system is defined. Never raw `Color(red:…)`, raw pt values,
   or magic numbers when a token exists.
 
+## Platform doctrine (as of iOS 26 / Swift 6 — revisit at each major)
+
+This section is versioned deliberately; the surveyor's platform sweep flags drift.
+
+**State.** `@Observable` is the default model object — it tracks per-property
+access, so views rebuild only for what they read; `ObservableObject` is legacy
+surface area maintained, not chosen. Ownership is explicit: `@State` for what
+the view owns (including `@Observable` models it creates), `@Binding` for what
+it borrows, `@Environment` for what the subtree shares. "State has one owner"
+is enforceable: if two views can write the same fact through different paths,
+the model is wrong. A view whose body needs more than a handful of `@State`
+properties is a parti problem, not a storage problem — route it back to the spec.
+
+**Navigation.** Navigation is state: one model owns the `NavigationStack`
+path (and the presented-sheet/tab selection), views ask it to navigate, and a
+deep link is state restoration — construct the destination state, don't replay
+taps. Sheet vs. push vs. tab follows the platform contract
+(`memory/apple-platform.md` §2); the engineer implements the semantic the
+designer named, and flags a spec that presents a place as a task.
+
+**Persistence.** A decision rule, not a mandate: SwiftData when the model
+graph is app-local and its schema is young; GRDB when SQL, migrations, and
+query control are load-bearing; Core Data only for compatibility with an
+existing store. The decision is recorded in the ledger; mixing two stores for
+one model graph is an escalation, not a convenience.
+
+**Concurrency.** Structured by default: a `Task` is created at the boundary
+that owns its lifetime (view appears / user acts), not sprinkled where code
+happens to be async. `Sendable` boundaries are design information — a type
+that can't cross an actor line is telling you where the seam is. `Task.detached`
+is a code smell outside genuinely detached work.
+
+**Performance method** (the discipline behind "the fastest UI is the UI the
+framework didn't have to rebuild"):
+- **Identity first.** Most SwiftUI performance bugs are identity bugs —
+  unstable `id`s or branches that change structural identity force rebuilds
+  and break animation. Check identity before profiling anything.
+- **Body cost.** View bodies are called often and must be cheap: no
+  allocation-heavy work, no formatting, no fetches in `body`; computed once,
+  stored, passed down.
+- **Measure, then conclude.** A hitch is diagnosed in Instruments (SwiftUI +
+  Time Profiler + Hangs), not by intuition. The frame budget is 8ms on
+  ProMotion displays; a "small" body that blows it is a bug with a number.
+- **Budgets are spec-able:** launch to first content, scroll at 120Hz on the
+  oldest supported device, memory ceiling for media surfaces. QA can hold a
+  budget; nobody can hold "feels fast."
+
+**Verification artifacts (the review-PNG contract).** Snapshot tests use
+**swift-snapshot-testing** (pointfreeco), living with the production target
+under `Tests/SnapshotTests/`, one per load-bearing surface state, recorded on
+a pinned simulator + OS so diffs mean design change, not environment change.
+The PNGs under `__Snapshots__/` are the artifact paths `implement` and
+`/studio:feedback` consume for the Review Surface. `record` mode is a
+deliberate, reviewed act — a re-record commit contains only intended diffs.
+
 The base Escalation Protocol applies unchanged: a new primitive, relationship
 change, data migration, invariant modification, or boundary change stops
 implementation and routes to the Architect.
