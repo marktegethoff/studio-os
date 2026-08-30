@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.2 — 2026-08-30
+
+**The tier rule becomes enforceable.** 1.5.1 fixed the bare-path defect by hand; this release makes it structural, and in doing so found the half of the defect that 1.5.1 missed.
+
+- **Lint R10** (`evals/lint-agnostic.sh`): every memory citation in `agents/` and `skills/` must name its tier — Core (the plugin's `memory/`), Product (`.claude/memory/`), or User (`~/.claude/memory/`). Lines carrying `.claude/memory/` are exempt: those are the deliberate fallback chains that degrade gracefully across project layouts.
+- **13 violations R10 caught immediately.** The 1.5.1 pass qualified only the four Core files and left the Product tier bare — including the `design-preferences.md` and `design-references.md` citations in `cd`, `designer`, `scout`, `strategist` and `surveyor` that produced the original symptom. Also fixed: the surveyor's trend-file write path, the design-validator's design-system lookup, and `init`'s plugin-level `project-context.md` fallback.
+
+**Release note.** `claude plugin update` keys on the version *number*, so content changed under an existing version never reaches the installed cache — the updater reports "already at the latest version" while serving the old copy. Any content change after a release needs a version bump, or an uninstall/reinstall, to propagate.
+
 ## 1.5.1 — 2026-08-30
 
 **Memory citations name their tier.** A bare `memory/X.md` citation resolves only when the working directory is the plugin root — so it silently missed in every consuming project, and the plugin's own repo was the one place the defect was invisible. Found via a project whose `designer` had never written to `design-preferences.md`: the agent was not failing to write, it was aimed at a path the file has never occupied.
