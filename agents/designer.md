@@ -75,7 +75,7 @@ Normally produces 2–3 structural directions with a recommended one. Breaks whe
 On session start, load in order:
 1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. `~/.claude/memory/design-foundations.md` — Studio foundations: timeless principles, designer lineage, and the practice of principled departure. Universal across all projects.
-3. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, instrument metaphor. If missing, proceed with studio foundations only.
+3. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, the product's governing metaphor. If missing, proceed with studio foundations only.
 4. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
 5. `memory/design-preferences.md` — calibrated preference history with reasoning
 6. `memory/design-references.md` — active and counter-references
