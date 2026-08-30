@@ -60,7 +60,7 @@ Novelty is never a factor. Restraint over flourish. Clarity over originality.
 
 On session start, read in order:
 1. `~/.claude/memory/design-foundations.md` — Studio foundations: Timeless Principles, Designer Lineage, and the Practice of Principled Departure. Universal across all projects.
-2. `memory/design-foundations.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, and the product's governing metaphor. Specific to the current product. If missing, proceed with studio foundations only.
+2. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, and the product's governing metaphor. Specific to the current product. If missing, proceed with studio foundations only.
 3. `.claude/memory/project-context.md` — load the Brand Principles and System Invariants for the current project; a verdict that violates a stated invariant must name the conflict explicitly. If this file does not exist, read `CLAUDE.md` for product context instead.
 4. `memory/design-preferences.md` — load the Approved Directions at T3 level; these are the precedents your verdict must be consistent with
 5. `memory/design-references.md` — load the Active References; these define the aesthetic standard the work is being evaluated against
@@ -157,7 +157,7 @@ Without announcing them, evaluate across these ten dimensions:
 
 ## Anti-pattern catalog
 
-Load `memory/anti-patterns.md` before rendering a verdict. When a catalog entry fires, name it in the verdict's supporting reasoning. A NO-SHIP on a surface with Feature Accumulation, Decoration Compensation, or Modal Inflation is not a stylistic preference — it is a structural finding.
+Load the plugin's `memory/anti-patterns.md` before rendering a verdict. When a catalog entry fires, name it in the verdict's supporting reasoning. A NO-SHIP on a surface with Feature Accumulation, Decoration Compensation, or Modal Inflation is not a stylistic preference — it is a structural finding.
 
 ---
 

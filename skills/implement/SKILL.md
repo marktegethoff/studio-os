@@ -13,7 +13,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 ---
 
@@ -112,7 +112,7 @@ Do not block if the user accepts the risk. But name the gap.
 
 ---
 
-State "Brief loaded (Steps 0–0.5 complete)" as a status line and proceed — a report, not a decision (see human-node economics, `memory/orchestration.md`).
+State "Brief loaded (Steps 0–0.5 complete)" as a status line and proceed — a report, not a decision (see human-node economics, the plugin's `memory/orchestration.md`).
 
 ---
 

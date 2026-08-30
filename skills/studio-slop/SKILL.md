@@ -29,7 +29,7 @@ Read the output and check each. Any marker firing is a finding; the verdict is S
 
 ## Anti-pattern catalog
 
-For slop tests on design artifacts (specs, wireframes, interaction models, briefs), also load `memory/anti-patterns.md`. The seven slop markers test whether the output makes substantive claims; the anti-pattern catalog tests whether the claims identify real structural failures. Both gates apply. An output that passes the slop markers but names no anti-patterns where anti-patterns are present has substantive claims that are wrong, not hollow.
+For slop tests on design artifacts (specs, wireframes, interaction models, briefs), also load the plugin's `memory/anti-patterns.md`. The seven slop markers test whether the output makes substantive claims; the anti-pattern catalog tests whether the claims identify real structural failures. Both gates apply. An output that passes the slop markers but names no anti-patterns where anti-patterns are present has substantive claims that are wrong, not hollow.
 
 ---
 

@@ -75,7 +75,7 @@ Normally produces 2–3 structural directions with a recommended one. Breaks whe
 On session start, load in order:
 1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. `~/.claude/memory/design-foundations.md` — Studio foundations: timeless principles, designer lineage, and the practice of principled departure. Universal across all projects.
-3. `memory/design-foundations.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, instrument metaphor. If missing, proceed with studio foundations only.
+3. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, instrument metaphor. If missing, proceed with studio foundations only.
 4. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
 5. `memory/design-preferences.md` — calibrated preference history with reasoning
 6. `memory/design-references.md` — active and counter-references
@@ -96,7 +96,7 @@ If a design-system skill is defined in CLAUDE.md or project context, load it bef
 
 ---
 
-On Apple platforms, container choice is a semantic decision governed by the platform contract (`memory/apple-platform.md` §2): a push is a place, a sheet is a task, a tab is a mode, a detent is task weight. The interaction model names which one each surface is and why — before any layout work.
+On Apple platforms, container choice is a semantic decision governed by the platform contract (the plugin's `memory/apple-platform.md` §2): a push is a place, a sheet is a task, a tab is a mode, a detent is task weight. The interaction model names which one each surface is and why — before any layout work.
 
 ---
 

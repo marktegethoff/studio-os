@@ -16,7 +16,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode defaults for the surviving human nodes:
 
@@ -51,7 +51,7 @@ The handoff workflow achieves completeness. It enumerates every state and flow t
 
 ## Graph
 
-This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: handoff
@@ -86,7 +86,7 @@ edges:
   signoff -> emit
 ```
 
-Both paired fan-outs are **blind** — the two auditors (and later the data/UAT pair) work from the same shared artifacts, never from each other's unfinished output. Joins wait for both members; a failed member is reported by node id, never silently synthesized around. The `critic` node is the reduction function this workflow previously lacked: the package is pressure-tested — anything not earned is removed — before it is specified. The CD and PM gates are structural; the human is pulled in (`signoff`) only when a gate flags blockers. Dissents preserved throughout (see Consensus Laundering, `memory/anti-patterns.md`).
+Both paired fan-outs are **blind** — the two auditors (and later the data/UAT pair) work from the same shared artifacts, never from each other's unfinished output. Joins wait for both members; a failed member is reported by node id, never silently synthesized around. The `critic` node is the reduction function this workflow previously lacked: the package is pressure-tested — anything not earned is removed — before it is specified. The CD and PM gates are structural; the human is pulled in (`signoff`) only when a gate flags blockers. Dissents preserved throughout (see Consensus Laundering, the plugin's `memory/anti-patterns.md`).
 
 ## Context
 

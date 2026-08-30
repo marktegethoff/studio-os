@@ -75,7 +75,7 @@ Progress reports are not decisions. "Context loaded," "reduction complete," "jud
 The studio's quality comes from structured disagreement between disciplines. The graph makes that disagreement structural rather than temperamental:
 
 - **Blind fan-out.** Members of a fan-out never see each other's unfinished output. Independence is what produces genuine disagreement; agents that read each other converge early and produce consensus slop. Brief each member from the shared inputs only.
-- **Preserved dissent at joins.** A join synthesizes, but named dissents travel forward to the gate. Verdict artifacts include a dissent ledger: which discipline disagreed, with what, and why it was overruled. Averaging disagreement away is **Consensus Laundering** (see `memory/anti-patterns.md`).
+- **Preserved dissent at joins.** A join synthesizes, but named dissents travel forward to the gate. Verdict artifacts include a dissent ledger: which discipline disagreed, with what, and why it was overruled. Averaging disagreement away is **Consensus Laundering** (see the plugin's `memory/anti-patterns.md`).
 - **Refutation edge on ship verdicts.** A SHIP from CD (design) or DE (engineering) gets one bounded adversarial pass: the critic (design) or qa (engineering) is prompted explicitly to *refute* the verdict — strongest case against, not a second opinion. SHIP stands only if the refutation fails. `loop max:1` — the refutation cannot stall shipping; it can only send work back once with named defects.
 - **The slop gate is topology.** Every artifact-producing graph carries a `gate` node running the seven markers of `/studio:studio-slop` before its output `task` node. The quality floor is a structural property of the graph, not an opt-in skill.
 
@@ -135,4 +135,4 @@ Graph-declaring skills additionally maintain the run-state node ledger (see Run 
 
 Skills that support `--auto` carry exactly this, in place of the full contract:
 
-> If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+> If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.

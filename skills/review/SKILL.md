@@ -15,7 +15,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode default for the `tiebreak` node: resolve via the cascade rule (PM > CD > DE); overruled positions enter the dissent ledger. State this in the "Auto-mode decisions" section.
 
@@ -37,7 +37,7 @@ This is a heavyweight review. Use it at gates that warrant all three perspective
 
 ## Graph
 
-This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: review
@@ -75,7 +75,7 @@ edges:
   final -> emit
 ```
 
-The debate round and each refutation run at most once — bounded by structure, not a counter. The Round 1 fan-out is **blind**: members never see each other's unfinished output. A human tiebreak outranks refutation — once the human rules, the verdict goes to `final` directly. Dissent is preserved through `verdicts` and `final` as a dissent ledger — never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
+The debate round and each refutation run at most once — bounded by structure, not a counter. The Round 1 fan-out is **blind**: members never see each other's unfinished output. A human tiebreak outranks refutation — once the human rules, the verdict goes to `final` directly. Dissent is preserved through `verdicts` and `final` as a dissent ledger — never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`).
 
 ---
 
@@ -122,7 +122,7 @@ Pass to each agent: artifact description, file paths, PM brief (if loaded), proj
 
 Wait for all agents to complete. You will receive one notification per agent.
 
-The `verdicts` join waits for **all** applicable members. If an agent fails, report it by node id with the inputs it was given and note its mandate as missing — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+The `verdicts` join waits for **all** applicable members. If an agent fails, report it by node id with the inputs it was given and note its mandate as missing — never silently synthesize around the hole (see Failure reporting, the plugin's `memory/orchestration.md`).
 
 ## Step 3 — Synthesis and conflict assessment
 
@@ -220,7 +220,7 @@ A human ruling goes directly to the final synthesis — it outranks refutation. 
 
 ## Step 4.5 — Refutation (conditional, bounded)
 
-A SHIP verdict must survive one adversarial pass before it stands (see Adversarial doctrine, `memory/orchestration.md`). Runs at most once per gate; skipped entirely when a human tiebreak has already ruled.
+A SHIP verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). Runs at most once per gate; skipped entirely when a human tiebreak has already ruled.
 
 - **If CD's standing verdict is SHIP** (`refute-cd` node): spawn the **critic** with: "The Design Director has ruled SHIP on this artifact. Your task is to refute that verdict — make the strongest case against shipping, not a second opinion. Name specific defects: what is unresolved, unearned, or incoherent. If you cannot build a credible case, say so plainly."
 - **If DE's standing verdict is SHIP** (`refute-de` node): spawn **qa** with the same framing against the implementation — strongest case against merging: untested invariants, missing regression coverage, boundary failures.

@@ -14,7 +14,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode defaults for the surviving human nodes:
 
@@ -58,7 +58,7 @@ The prototype workflow enforces this discipline. It scopes the test question bef
 
 ## Graph
 
-This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: prototype
@@ -136,7 +136,7 @@ Name the **failure mode:** if the prototype answers no, what does that mean for 
 
 ## Steps 2A + 2B — Parallel: Build criteria + Test criteria
 
-Run both in parallel (blind pair — each derives from the same confirmed test question, never from the other's unfinished output). The `criteria` join waits for both; report a failed member by node id per `memory/orchestration.md`.
+Run both in parallel (blind pair — each derives from the same confirmed test question, never from the other's unfinished output). The `criteria` join waits for both; report a failed member by node id per the plugin's `memory/orchestration.md`.
 
 ### Step 2A — Build criteria (Designer)
 

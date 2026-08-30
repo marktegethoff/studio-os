@@ -114,4 +114,4 @@ If `--auto` appears in $ARGUMENTS:
 - **Scaffold mode:** create missing folders and update project-context.md without confirmation. Write the decision record. Safe — only creates, never moves or deletes.
 - **Reconcile mode:** scan and classify, write the proposal as a decision record artifact, then stop. Do NOT execute moves unattended.
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.

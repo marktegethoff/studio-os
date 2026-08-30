@@ -14,7 +14,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode default for the `debate-call` node: if the tension threshold is met, run the debate round; state this in the "Auto-mode decisions" section.
 
@@ -28,7 +28,7 @@ No verdict is rendered. This is an improvement pass, not a ship gate. Use `/stud
 
 ## Graph
 
-This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: critique
@@ -64,7 +64,7 @@ edges:
   final -> emit
 ```
 
-The debate round runs at most once — bounded by structure, not by a counter. The Round 1 fan-out is **blind**: members never see each other's unfinished output (that independence is what produces genuine disagreement). Dissent is preserved through `synthesis` and `final` as unresolved tensions — never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
+The debate round runs at most once — bounded by structure, not by a counter. The Round 1 fan-out is **blind**: members never see each other's unfinished output (that independence is what produces genuine disagreement). Dissent is preserved through `synthesis` and `final` as unresolved tensions — never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`).
 
 ---
 
@@ -127,7 +127,7 @@ Brief: "You are the Mark Maker in a design critique (Round 1 — silent pass). A
 
 Wait for all nine agents to complete. You will receive one notification per agent.
 
-The `synthesis` join waits for **all** nine. If an agent fails, report it by node id with the inputs it was given and note its discipline as missing in the output — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+The `synthesis` join waits for **all** nine. If an agent fails, report it by node id with the inputs it was given and note its discipline as missing in the output — never silently synthesize around the hole (see Failure reporting, the plugin's `memory/orchestration.md`).
 
 ---
 

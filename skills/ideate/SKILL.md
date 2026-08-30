@@ -18,7 +18,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode defaults for the surviving human nodes:
 
@@ -30,7 +30,7 @@ Auto-mode defaults for the surviving human nodes:
 
 ## Graph
 
-This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: ideate
@@ -78,7 +78,7 @@ edges:
   pick -> ship-gate -> slop -> emit
 ```
 
-Both fan-outs are **blind**: members are briefed from the shared inputs only and never see each other's unfinished output — that independence is what produces genuine disagreement. The `ideas` and `feasibility` joins preserve dissent: where lenses or evaluators conflict, the conflict travels forward named, never averaged away (see Consensus Laundering, `memory/anti-patterns.md`). The evaluator fan-out runs the three evaluator nodes once per selected idea. If all ideas are DEFER at `verdict`, the run stops with a diagnosis — there is no edge onward.
+Both fan-outs are **blind**: members are briefed from the shared inputs only and never see each other's unfinished output — that independence is what produces genuine disagreement. The `ideas` and `feasibility` joins preserve dissent: where lenses or evaluators conflict, the conflict travels forward named, never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`). The evaluator fan-out runs the three evaluator nodes once per selected idea. If all ideas are DEFER at `verdict`, the run stops with a diagnosis — there is no edge onward.
 
 ---
 
@@ -216,7 +216,7 @@ After all 7 agents complete — compile. Merge all outputs into a single raw ide
 
 ===END OUTER AGENT PROMPT===
 
-The `ideas` join waits for **all** seven lenses. If a lens agent fails, report it by node id with the inputs it was given and note its lens as missing in the output — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+The `ideas` join waits for **all** seven lenses. If a lens agent fails, report it by node id with the inputs it was given and note its lens as missing in the output — never silently synthesize around the hole (see Failure reporting, the plugin's `memory/orchestration.md`).
 
 When the outer agent completes and returns the compiled list, state "`ideas` join complete — N ideas from 7 lenses" as a status line and proceed to Step 3. Do not pause.
 
@@ -341,7 +341,7 @@ Return the compiled feasibility data for all ideas as your complete output.
 
 ===END OUTER AGENT PROMPT===
 
-The `feasibility` join waits for **all** evaluators across all selected ideas. If an evaluator agent fails, report it by node id with the inputs it was given and note its evaluation as missing in the output — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+The `feasibility` join waits for **all** evaluators across all selected ideas. If an evaluator agent fails, report it by node id with the inputs it was given and note its evaluation as missing in the output — never silently synthesize around the hole (see Failure reporting, the plugin's `memory/orchestration.md`).
 
 When the outer agent completes and returns the compiled feasibility data, state "`feasibility` join complete" as a status line and proceed to Step 7. Do not pause.
 

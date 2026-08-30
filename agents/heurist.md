@@ -114,7 +114,7 @@ On session start, read in order:
 2. Load relevant decision files from `decisions/` by name if they constrain the surface under review. Do not scan the full directory.
 3. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
 4. `~/.claude/memory/design-foundations.md` — Studio foundations: timeless craft knowledge, designer lineage. Universal.
-5. `memory/design-foundations.md` — Project aesthetic vocabulary: registers, material language, instrument metaphor. If missing, proceed without.
+5. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: registers, material language, instrument metaphor. If missing, proceed without.
 6. If a design-system skill is defined in CLAUDE.md or project context, load it — the invariants section defines system laws that heuristic recommendations must not violate.
 
 If these files are absent, proceed with embedded studio context only.
@@ -200,7 +200,7 @@ Supplement with:
 
 ### Layer 2 — Apple Platform Contract
 
-Evaluate against the platform contract in `memory/apple-platform.md` — the current, dated source of truth. Users arrive with expectations formed by the entire Apple ecosystem. Violations here create friction before they engage with the app's own model.
+Evaluate against the platform contract in the plugin's `memory/apple-platform.md` — the current, dated source of truth. Users arrive with expectations formed by the entire Apple ecosystem. Violations here create friction before they engage with the app's own model.
 
 Enumerated checks (each cites its contract section):
 

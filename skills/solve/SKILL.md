@@ -15,7 +15,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode defaults for the surviving human nodes:
 
@@ -55,7 +55,7 @@ Problem: $ARGUMENTS
 
 ## Graph
 
-This skill's topology — the repo's canonical bounded evaluator-optimizer. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+This skill's topology — the repo's canonical bounded evaluator-optimizer. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: solve
@@ -97,7 +97,7 @@ edges:
   exit-path -> emit
 ```
 
-The `verdict -> architect` edge is the NOT YET re-entry, bounded to three iterations total. An INEVITABLE verdict must survive one refutation pass (`refute` — the critic argues the strongest case *against* inevitability; at most one return to the designer) before the accessibility check, the slop gate, and emission. Only the sub-team disciplines the solution requires are spawned; the fan-out is **blind**. Dissents — including a marketer commercial objection the CD overrules — are preserved to the output, never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
+The `verdict -> architect` edge is the NOT YET re-entry, bounded to three iterations total. An INEVITABLE verdict must survive one refutation pass (`refute` — the critic argues the strongest case *against* inevitability; at most one return to the designer) before the accessibility check, the slop gate, and emission. Only the sub-team disciplines the solution requires are spawned; the fan-out is **blind**. Dissents — including a marketer commercial objection the CD overrules — are preserved to the output, never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`).
 
 ## What this command does
 
@@ -207,7 +207,7 @@ Apply the embedded calibration gate. Answer each question explicitly (YES / NO).
 
 ### 6. Refutation (`refute` node — runs only on INEVITABLE, at most once)
 
-An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, `memory/orchestration.md`). The Critic argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission.
+An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). The Critic argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission.
 
 ---
 

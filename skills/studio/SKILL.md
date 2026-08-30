@@ -99,7 +99,7 @@ Full engineering sequence (spec check → invariants → implement → QA): `/im
 
 ## Workflows
 
-Multi-agent workflows are **declared graphs** — each carries a ` ```graph ` block naming its nodes (agents, gates, human decisions) and edges (sequence, fan-out/fan-in, bounded loops). Doctrine: `memory/orchestration.md`. Human pauses appear only where a real decision is made; everything else reports as status.
+Multi-agent workflows are **declared graphs** — each carries a ` ```graph ` block naming its nodes (agents, gates, human decisions) and edges (sequence, fan-out/fan-in, bounded loops). Doctrine: the plugin's `memory/orchestration.md`. Human pauses appear only where a real decision is made; everything else reports as status.
 
 - `/discover` — User Researcher → Journey Mapper → Assumption Mapper → PM gate → Brief Writer
 - `/design` — Philosophy → Historian → Strategist → Architect → Critic → Designer → Sub-team → Accessibility → Specifier

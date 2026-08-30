@@ -97,7 +97,7 @@ The platform face is **SF Pro** — with optical sizing (Display above ~20pt, Te
 
 - **SF Symbols first.** They match SF Pro's weights and baselines, scale with Dynamic Type, and carry rendering modes (monochrome / hierarchical / palette / multicolor) — hierarchical is the studio default for depth without color noise.
 - Symbol weight matches adjacent text weight; symbols align to text via the type baseline, not optical guessing.
-- **A custom symbol is earned** only where the concept has no adequate symbol or the mark *is* the brand — and it is drawn on the symbol grid, exported with variable weights, and behaves like a symbol (Dynamic Type, rendering modes). A custom icon set that ignores the grid reads foreign on the platform (`memory/design-system.md`'s icon rules govern the tenant set).
+- **A custom symbol is earned** only where the concept has no adequate symbol or the mark *is* the brand — and it is drawn on the symbol grid, exported with variable weights, and behaves like a symbol (Dynamic Type, rendering modes). A custom icon set that ignores the grid reads foreign on the platform (the plugin's `memory/design-system.md`'s icon rules govern the tenant set).
 
 ## 10. Platform surfaces
 

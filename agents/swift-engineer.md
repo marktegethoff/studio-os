@@ -130,7 +130,7 @@ properties is a parti problem, not a storage problem — route it back to the sp
 path (and the presented-sheet/tab selection), views ask it to navigate, and a
 deep link is state restoration — construct the destination state, don't replay
 taps. Sheet vs. push vs. tab follows the platform contract
-(`memory/apple-platform.md` §2); the engineer implements the semantic the
+(the plugin's `memory/apple-platform.md` §2); the engineer implements the semantic the
 designer named, and flags a spec that presents a place as a task.
 
 **Persistence.** A decision rule, not a mandate: SwiftData when the model

@@ -14,7 +14,7 @@ When you reach a PAUSE block: stop, output the pause text to the user, and wait 
 
 ## Auto Mode
 
-If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
+If `--auto` appears in $ARGUMENTS: read and apply the **Auto-Mode Safety Contract** from the plugin's `memory/orchestration.md` before any action. Never bypass a guard to make a run succeed. Graph-declaring skills maintain the run-state node ledger per the same file.
 
 Auto-mode defaults for the surviving human nodes:
 
@@ -25,7 +25,7 @@ Auto-mode defaults for the surviving human nodes:
 
 ## Graph
 
-This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+This skill's topology. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
 
 ```graph
 skill: design
@@ -72,7 +72,7 @@ edges:
   heurist -> emit   if:exploratory
 ```
 
-The Phase A fan-out is **blind**: typesetter, choreographer, and materialist never see each other's unfinished output. The writer joins `visual` by its own edge (its input dependency on the typesetter is the `typesetter -> writer` conditional, not group membership). The heurist may return work to the designer at most once (`loop max:1`). Dissent surfaced by any discipline travels to the `ship` gate — never averaged away (see Consensus Laundering, `memory/anti-patterns.md`).
+The Phase A fan-out is **blind**: typesetter, choreographer, and materialist never see each other's unfinished output. The writer joins `visual` by its own edge (its input dependency on the typesetter is the `typesetter -> writer` conditional, not group membership). The heurist may return work to the designer at most once (`loop max:1`). Dissent surfaced by any discipline travels to the `ship` gate — never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`).
 
 ---
 
@@ -265,7 +265,7 @@ When Phase A outer agent completes, proceed to Phase B.
 
 - **Visual Designer** — always runs last, after all Phase A and Phase B agents complete (the `visual` join). Evaluate spacing, proportion, alignment, and visual weight distribution across the full surface using all sub-team outputs. Prescribe specific corrections. Skip only if zero sub-team disciplines were invoked.
 
-The Phase A fan-out is **blind** — each craft agent is briefed from the Designer's outputs only, never from another sub-team member's unfinished work. The `visual` join waits for **all** spawned members; if one fails, report it by node id with the inputs it was given and note its discipline as missing — never silently synthesize around the hole (see Failure reporting, `memory/orchestration.md`).
+The Phase A fan-out is **blind** — each craft agent is briefed from the Designer's outputs only, never from another sub-team member's unfinished work. The `visual` join waits for **all** spawned members; if one fails, report it by node id with the inputs it was given and note its discipline as missing — never silently synthesize around the hole (see Failure reporting, the plugin's `memory/orchestration.md`).
 
 ### Step 7.7 — Heurist (conditional)
 

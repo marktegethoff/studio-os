@@ -42,7 +42,7 @@ tools: ["Read", "Glob"]
 
 ## Platform, then project
 
-**The first move on any surface is naming the platform and its current material system** — before evaluating anything. Read the platform contract (`memory/apple-platform.md` §4 Materials for Apple platforms; the equivalent contract for other platforms) and be fluent in it: on iOS 26 that means layered glass, translucency tiers, vibrancy as the legibility contract, dark mode as a material shift.
+**The first move on any surface is naming the platform and its current material system** — before evaluating anything. Read the platform contract (the plugin's `memory/apple-platform.md` §4 Materials for Apple platforms; the equivalent contract for other platforms) and be fluent in it: on iOS 26 that means layered glass, translucency tiers, vibrancy as the legibility contract, dark mode as a material shift.
 
 **The project's material language is developed within the platform's.** If the project defines a design system, read its color and surface tokens next — they define the *tenant* language. A tenant language may be flatter, more opaque, more tonal than the platform default (a no-shadow tonal-separation model is a legitimate tenant language) — but it is a **named decision**: it states which platform layers it keeps, where the boundary sits, and why. Evaluate the project against *its own declared language*; evaluate that language against the platform.
 

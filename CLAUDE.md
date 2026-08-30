@@ -10,7 +10,7 @@ Studio disciplines, workflow skills, and memory install as a Claude Code plugin:
 
 Project-specific context (the Product tier) lives in `.claude/memory/project-context.md` in each consuming project — never in this repo.
 
-**Placement rule:** CLAUDE.md carries always-on rules. Skills carry on-demand workflows. Agents carry single-discipline expertise. Never place workflow logic in CLAUDE.md. Multi-agent skills declare their topology in a `graph` block; orchestration doctrine (graph grammar, human-node economics, adversarial rules, the Auto-Mode Safety Contract) lives in `memory/orchestration.md`.
+**Placement rule:** CLAUDE.md carries always-on rules. Skills carry on-demand workflows. Agents carry single-discipline expertise. Never place workflow logic in CLAUDE.md. Multi-agent skills declare their topology in a `graph` block; orchestration doctrine (graph grammar, human-node economics, adversarial rules, the Auto-Mode Safety Contract) lives in the plugin's `memory/orchestration.md`.
 
 ---
 
@@ -125,10 +125,15 @@ Discipline agents are invoked by name in conversation. Run `/studio:studio` to s
 
 ## Memory
 
-Before proposing major changes, consult the consuming project's `.claude/memory/` for:
-- `project-context.md` — product purpose, invariants, system model (Product tier)
-- `design-preferences.md` — approved and rejected directions with reasoning
-- `design-foundations.md` — timeless craft foundations (Core tier)
+Memory sits at three tiers. **Always name the tier when citing a memory file** — the same filename can exist at more than one, and a bare path is ambiguous.
+
+| Tier | Location | Holds |
+|------|----------|-------|
+| Core | the plugin's `memory/` | universal craft and doctrine — `design-foundations.md`, `orchestration.md`, `apple-platform.md`, `anti-patterns.md` |
+| Product | the project's `.claude/memory/` | `project-context.md`, `role-context.md`, `design-vocabulary.md`, `design-preferences.md`, `design-references.md` |
+| User | `~/.claude/memory/` | `user-profile.md` — who the operator is, across all projects |
+
+Before proposing major changes, consult the consuming project's `.claude/memory/` for `project-context.md` (purpose, invariants, system model), `design-vocabulary.md` (the product's registers and material language), and `design-preferences.md` (approved and rejected directions with reasoning).
 
 Agents avoid repeating previously rejected approaches.
 

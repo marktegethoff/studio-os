@@ -153,7 +153,7 @@ Rationale: [what this motion communicates]
 
 Format (web / curve platforms): `duration [Xms] · easing [curve] · delay [Xms]`, same verdict, class, and reduced lines.
 
-The response/damping ladder and preset semantics live in `memory/apple-platform.md` §5 — specify against it; the token file (`Motion.*`) maps the tenant's named values onto it.
+The response/damping ladder and preset semantics live in the plugin's `memory/apple-platform.md` §5 — specify against it; the token file (`Motion.*`) maps the tenant's named values onto it.
 
 If recommending removal, state it plainly. Do not soften.
 
