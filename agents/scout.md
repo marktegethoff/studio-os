@@ -90,7 +90,7 @@ On session start, load in order:
 
 1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails; these are the positions the Scout filters against. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. Load relevant decision files from `decisions/` by name to identify current specific positions and open questions. Do not scan the full directory.
-3. `memory/design-preferences.md` — load Held Decisions and Meta-Observations; these are the live uncertainties worth scanning against. If missing, proceed without it.
+3. the project's `.claude/memory/design-preferences.md` — load Held Decisions and Meta-Observations; these are the live uncertainties worth scanning against. If missing, proceed without it.
 
 If neither CLAUDE.md nor `.claude/memory/project-context.md` exists, ask: "No project context found. What are the current positions I should be filtering against?"
 

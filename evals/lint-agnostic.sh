@@ -662,6 +662,33 @@ elif [[ $r9_hits -eq 0 ]]; then
   info "$r9_entries pattern entr$( [[ $r9_entries -eq 1 ]] && echo y || echo ies ) valid"
 fi
 
+# ── R10 — memory citations name their tier ────────────────────────────────────
+#
+# A bare `memory/X.md` resolves only when the working directory is the plugin
+# root, so it silently misses in every consuming project. Every citation must
+# name its tier:
+#   Core     the plugin's `memory/X.md`
+#   Product  `.claude/memory/X.md`
+#   User     `~/.claude/memory/X.md`
+#
+# Exempt: lines that also carry `.claude/memory/` are the deliberate fallback
+# chains (".claude/memory/X; if not found, check memory/X"), which degrade
+# gracefully across project layouts by design.
+
+section "R10 · memory citations name their tier — agents/** + skills/**"
+
+r10_hits=0
+for f in "${AGENT_FILES[@]}" "${SKILL_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  rel="$(rel_plugin "$f")"
+  while IFS= read -r hit; do
+    [[ -n "$hit" ]] || continue
+    fail "$rel:${hit%%:*} — bare \`memory/…\` citation does not name its tier (R10)"
+    r10_hits=$((r10_hits + 1))
+  done < <(grep -n '`memory/' "$f" 2>/dev/null | grep -v "plugin's \`memory/" | grep -v '\.claude/memory/')
+done
+[[ $r10_hits -eq 0 ]] && info "all memory citations name their tier"
+
 # ── project-level checks (R3 + IBR) ───────────────────────────────────────────
 
 if [[ -n "$PROJECT_ROOT" ]]; then

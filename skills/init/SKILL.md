@@ -39,7 +39,7 @@ Before starting the product interview, check whether a shared project context al
 
 Check for:
 1. `.claude/memory/project-context.md` — already set up for this project
-2. `project-context.md` in `memory/` — plugin-level fallback
+2. the plugin's `memory/project-context.md` — plugin-level fallback
 
 If `project-context.md` already exists:
 

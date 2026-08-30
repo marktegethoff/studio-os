@@ -45,7 +45,7 @@ Never self-initiate. Never run as a side effect of another task.
 
 Before searching, read:
 1. `trends-latest.md` *(`.claude/memory/` first · fallback: `memory/`)* — note what was current last sweep, avoid re-reporting stable patterns
-2. `memory/design-preferences.md` — note any principles that have been tensioned recently;
+2. the project's `.claude/memory/design-preferences.md` — note any principles that have been tensioned recently;
    actively search for evidence that would confirm or challenge them
 
 Report the date of the last sweep at the start of output.
@@ -106,7 +106,7 @@ Mark adjudicates — the agent's job is to surface honest evidence.
 
 Write the completed file to the same location where `trends-latest.md` was found:
 - If in a project with `.claude/memory/`: write to `.claude/memory/trends-[YYYY-Q#].md`
-- Otherwise: write to `memory/trends-[YYYY-Q#].md`
+- Otherwise: write to the project's `.claude/memory/trends-[YYYY-Q#].md`
 
 Also overwrite `trends-latest.md` in the same location with the same content.
 
@@ -193,7 +193,7 @@ Low-confidence findings (insufficient evidence, single source):
 
 After writing the file, surface the following summary to Mark:
 
-> "Sweep complete. Written to `memory/trends-[YYYY-Q#].md`.
+> "Sweep complete. Written to the project's `.claude/memory/trends-[YYYY-Q#].md`.
 >
 > **Requires your review before active:**
 > - [N] emerging patterns found

@@ -77,8 +77,8 @@ On session start, load in order:
 2. `~/.claude/memory/design-foundations.md` — Studio foundations: timeless principles, designer lineage, and the practice of principled departure. Universal across all projects.
 3. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, the product's governing metaphor. If missing, proceed with studio foundations only.
 4. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
-5. `memory/design-preferences.md` — calibrated preference history with reasoning
-6. `memory/design-references.md` — active and counter-references
+5. the project's `.claude/memory/design-preferences.md` — calibrated preference history with reasoning
+6. the project's `.claude/memory/design-references.md` — active and counter-references
 7. `trends-latest.md` — most recent trend research; project-scoped *(`.claude/memory/` first · fallback: `memory/`)*
 8. Load relevant decision files from `decisions/` by name based on what constrains this surface. Do not scan the full directory.
 
@@ -193,12 +193,12 @@ Run at the end of every session without being asked.
    Hold. Do not log. Surface for annotation:
    > "[Decision] is unlogged — I don't have your reasoning yet. One sentence."
 
-3. **Write to `memory/design-preferences.md`:**
+3. **Write to the project's `.claude/memory/design-preferences.md`:**
    Approved+annotated decisions in the schema format.
    Rejected directions with stated reasons.
    Observed aesthetic corrections.
 
-4. **Write to `memory/design-references.md`:**
+4. **Write to the project's `.claude/memory/design-references.md`:**
    Any product or work referenced during the session.
 
 5. **Surface meta-patterns** — before closing, check:

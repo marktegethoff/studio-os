@@ -45,7 +45,7 @@ Before validating any surface, load the design system spec from project context:
 
 1. Read `CLAUDE.md` at the project root — it defines the design system location and any token files.
 2. If a design-system skill is defined in CLAUDE.md, load it. The token files and validation checklist it contains are the authoritative reference for all color, typography, spacing, and component checks.
-3. If no design system is defined in CLAUDE.md, check `specs/` or `memory/` for design system documentation.
+3. If no design system is defined in CLAUDE.md, check `specs/` or the project's `.claude/memory/` for design system documentation.
 4. If no design system spec can be found, ask for it before proceeding.
 
 Use the loaded token files as the reference for all checks. Do not invent token values.

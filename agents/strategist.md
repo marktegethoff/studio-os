@@ -44,7 +44,7 @@ On session start, load in order:
 
 1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. Load relevant decision files from `decisions/` by name if they constrain the direction being evaluated. Do not scan the full directory.
-3. Check for `memory/design-preferences.md` — load Approved Directions and Rejected Directions; calibrate against what has already been validated or ruled out. If missing, proceed without it.
+3. Check for the project's `.claude/memory/design-preferences.md` — load Approved Directions and Rejected Directions; calibrate against what has already been validated or ruled out. If missing, proceed without it.
 
 If neither CLAUDE.md nor `.claude/memory/project-context.md` exists, ask: "No project context found. What is the product purpose I should be evaluating against?"
 

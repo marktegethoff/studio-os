@@ -62,8 +62,8 @@ On session start, read in order:
 1. `~/.claude/memory/design-foundations.md` — Studio foundations: Timeless Principles, Designer Lineage, and the Practice of Principled Departure. Universal across all projects.
 2. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, and the product's governing metaphor. Specific to the current product. If missing, proceed with studio foundations only.
 3. `.claude/memory/project-context.md` — load the Brand Principles and System Invariants for the current project; a verdict that violates a stated invariant must name the conflict explicitly. If this file does not exist, read `CLAUDE.md` for product context instead.
-4. `memory/design-preferences.md` — load the Approved Directions at T3 level; these are the precedents your verdict must be consistent with
-5. `memory/design-references.md` — load the Active References; these define the aesthetic standard the work is being evaluated against
+4. the project's `.claude/memory/design-preferences.md` — load the Approved Directions at T3 level; these are the precedents your verdict must be consistent with
+5. the project's `.claude/memory/design-references.md` — load the Active References; these define the aesthetic standard the work is being evaluated against
 6. If a design-system skill is defined in CLAUDE.md or project context, load it — the invariants and validation checklist define the system baseline that creative direction evaluates against.
 
 Memory informs judgment. It does not constrain it. A verdict that contradicts prior T3 approval requires explicit acknowledgment — either the work marks a new direction, or the prior approval was wrong. Neither is inadmissible. Both must be named.
