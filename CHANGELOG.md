@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.1 — 2026-08-30
+
+**Memory citations name their tier.** A bare `memory/X.md` citation resolves only when the working directory is the plugin root — so it silently missed in every consuming project, and the plugin's own repo was the one place the defect was invisible. Found via a project whose `designer` had never written to `design-preferences.md`: the agent was not failing to write, it was aimed at a path the file has never occupied.
+
+- **58 Core citations qualified** as `the plugin's memory/…` — `orchestration.md` (37), `apple-platform.md` (10), `anti-patterns.md` (10), `design-system.md` (1). Prose qualification over path syntax, generalizing the pattern `cd.md` already used: the reader is an LLM with search tools, and agents in particular have no anchor for a relative path, since their body is injected as a system prompt with no knowledge of its own file location.
+- **Project-tier `design-foundations.md` renamed to `design-vocabulary.md`** at its three sites (`heurist`, `designer`, `cd`). One filename previously carried three meanings across three tiers — universal craft in the plugin, a home-tier copy, and the product's aesthetic registers in the project. The plugin's own prose already called the third "project aesthetic vocabulary"; the name now matches. Consuming projects rename their file to match.
+- **CLAUDE.md Memory section** replaced with a three-tier table (Core / Product / User) and the governing rule: always name the tier, because the same filename can exist at more than one. It previously placed Core-tier `design-foundations.md` in the consuming project, contradicting line 9.
+- **Left alone deliberately**: the `project-context.md` fallback chains (`.claude/memory/…; if not found, check memory/…; if absent, read CLAUDE.md`) are graceful degradation across project layouts, not strays; `evals/` lint matchers are substring-based and prefixing would break them.
+
 ## 1.5.0 — 2026-08-17
 
 **Apple platform taste.** The studio's iOS judgment moves from lineage citations to operational doctrine, mirroring the stack seam that already works: one dated platform contract on the design side, deepened code doctrine behind the `stack:` seam, and evals that test both.
