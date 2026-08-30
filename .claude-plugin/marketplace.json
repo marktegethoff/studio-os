@@ -1,6 +1,6 @@
 {
   "name": "standard-works",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "owner": {
     "name": "Mark Tegethoff",
     "url": "https://github.com/marktegethoff"
@@ -13,7 +13,7 @@
       "name": "studio",
       "source": "./",
       "description": "A product-agnostic design studio for Claude Code: discipline agents, gated workflows, and a designed artifact system that bring studio rigor to design and product work.",
-      "version": "1.5.1"
+      "version": "1.5.2"
     }
   ]
 }
