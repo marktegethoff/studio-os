@@ -161,6 +161,8 @@ Default — [visual properties using token names]
 
 Omit sections that genuinely do not apply. Do not use "N/A" — if it doesn't apply, remove the section. Every included section must be complete.
 
+**Complete is not long.** A component spec is one page (Artifact Standard, CLAUDE.md). Completeness means every state is *named* with its delta from default — one line each — not that every state is described in full. Values the design system already carries (a token's hex, a type recipe, a platform default) are cited by token name, never copied in. Every code name, token, or number you cite is verified against the source at the time of writing; an inherited citation you did not check is a gap, not a fact.
+
 ---
 
 ## Artifact

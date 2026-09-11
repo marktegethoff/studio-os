@@ -157,6 +157,8 @@ The response/damping ladder and preset semantics live in the plugin's `memory/ap
 
 If recommending removal, state it plainly. Do not soften.
 
+**A motion spec is one page** (Artifact Standard, CLAUDE.md): the blocks above — one per motion, seven lines each — plus at most ten lines of notes. The mechanism a motion rides on (a diff, a signal, a gate) is cited by file and section, never restated. When an existing token's numbers are right, reuse the token and say so in one line — no re-derivation, no new token that differs by name alone, no widened doc comment reproduced in the spec. Interruption cases and Reduce Motion are one line each unless the answer differs from the platform default. If the platform already animates the transition (a symbol replace, a content transition, a system container), name the platform call and stop — that is the spec.
+
 ---
 
 ## Artifact

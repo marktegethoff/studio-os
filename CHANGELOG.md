@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.6.0 — 2026-09-10
+
+**The Artifact Standard: one page, fixes not sections.** A consuming project (Log•) produced two ~24 KB design/motion documents for a three-dot gutter glyph that contradicted each other on a deleted type and carried a wrong discriminator, while the ledger's 2–6 KB decisions never had the problem. Length was the exhaust of the review loop — each reviewer round added a section addressed to the next reviewer — and the documents ended up consistent with their reviewers and inconsistent with each other.
+
+- **`CLAUDE.md` — Artifact Standard.** A design, motion, spec, or decision document is ≈60 lines: provenance · structure · states · what must not break · the device/acceptance check. Review rounds produce fixes, never sections. Cite, never restate. Verify every cited name against source. One document per subject. Wireframes only for what prose cannot carry.
+- **`designer`:** one wireframe per surface (plus one per layout-changing transition), not one per state; verification performed, not narrated; alternatives get ≤5 lines; the challenge exchange stays in conversation and is never transcribed into the artifact; the artifact is one page.
+- **`choreographer`:** a motion spec is one page — the per-motion block plus ≤10 lines of notes; mechanisms cited, never restated; reuse a token whose numbers are right; if the platform animates it (symbol replace, content transition), name the call and stop.
+- **`specifier`:** complete is not long — every state named with its delta, values cited by token, citations verified.
+- **`cd` / `de`:** "Fixes, not sections" — a required change edits a line, never adds a section; an artifact grown past a page through review is itself a REVISE finding.
+- **Eval:** `design-agents.eval.md` Designer Eval 12 (One page) covers the standard on a Tier 3 prompt.
+
+Graph-node compatibility: rules only — no frontmatter, artifact declarations, output-format blocks, or skill graph blocks changed; `lint-agnostic.sh` 0 FAIL.
+
 ## 1.5.2 — 2026-08-30
 
 **The tier rule becomes enforceable.** 1.5.1 fixed the bare-path defect by hand; this release makes it structural, and in doing so found the half of the defect that 1.5.1 missed.

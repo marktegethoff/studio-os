@@ -258,3 +258,26 @@ Failed criteria: [list]
 Anti-patterns fired: [list]
 Notes: [anything unexpected in the responses]
 ```
+
+---
+
+## Designer — Eval 12: One page (Artifact Standard)
+
+**Testing:** Designer's artifact obeys the Artifact Standard (CLAUDE.md) — one page, fixes not sections, cite not restate — on a Tier 3 surface where the temptation to over-document is strongest.
+
+**Prompt:**
+> "Design the pending state of a list row's leading marker while the system is still classifying the row (a few hundred ms to a few seconds). Existing marks: a dash for a note, a ring for an open task. TIER 3 — this touches the system's mark vocabulary."
+
+**Pass criteria:**
+- [ ] The artifact fits on one page (≈60 lines): provenance · scene in ≤2 lines · wireframe(s) · state list · hierarchy · what must not break · device check
+- [ ] The recommended direction gets the wireframe; each rejected alternative gets ≤5 lines naming its structure and why it loses
+- [ ] Verification is one line per wireframe, not a narrated checklist
+- [ ] The challenge exchange is not transcribed into the artifact — position + the one counter-argument that would change it, in two lines
+- [ ] Inherited laws (the existing marks' geometry, prior decisions) are cited by name, never restated
+- [ ] States that differ by a glyph or an ink are lines in the state list, not additional wireframes
+
+**Anti-patterns:**
+- A "Hard-constraint checklist," "Verdict table," or "Challenge exchange" section inside the artifact
+- Re-deriving a prior document's geometry or rationale instead of citing it
+- A second wireframe that shows the same layout under a different state name
+- Appending sections to satisfy an anticipated reviewer rather than reducing the design

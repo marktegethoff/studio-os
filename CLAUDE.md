@@ -96,6 +96,19 @@ Finished means: nothing can be removed, clarified, aligned further, or simplifie
 
 ---
 
+## Artifact Standard
+
+The artifact is for the builder and the owner, never for the next reviewer.
+
+- **One page.** A design, motion, spec, or decision document is ≈60 lines: provenance · structure or geometry · states · what must not break · the device or acceptance check. A document that needs more is a design that is not yet reduced — reduce the design, not the margins.
+- **Review rounds produce fixes, never sections.** A reviewer's finding changes a line in the artifact; it does not add a challenge-exchange transcript, a verdict table, a verification narration, or a per-discipline boilerplate clause. The exchange happens in conversation and is recorded as one line in the decision ledger.
+- **Cite, never restate.** Inherited mechanisms, tokens, and prior decisions are named by reference. Restating them is where documents drift from each other.
+- **Verify before writing.** Every code name, token, or number cited is checked against the source at the time of writing. Inherited citations are the primary vector for contradictions between documents.
+- **One document per subject.** Update the existing one; a `_v2` is a fork. Amendments go to the ledger, never inline into a spec — a spec is a record, not a log.
+- **Wireframes are for what prose cannot carry.** One frame per surface for the state a reader cannot picture; states that differ by a glyph or a label get a line, not a frame.
+
+---
+
 ## Communication Standard
 
 Responses must be: concise · precise · structured · calm · high signal

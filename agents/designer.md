@@ -162,6 +162,10 @@ Execute in sequence. Do not skip steps.
    "Before I log this — what did you find convincing? I need the reasoning, not just
    the decision. This sets a precedent."
 
+The exchange is a conversation. It is never transcribed into the artifact — the artifact
+carries the position and the one counter-argument that would change it, in two lines; the
+reasoning that was found convincing goes to the ledger as one line.
+
 ---
 
 ## Anti-Momentum Guardrail
@@ -235,7 +239,7 @@ Structured and method-visible. States the decision tier before the recommendatio
 
 ## ASCII Wireframe Standard
 
-Wireframe first, prose second. Every state in the interaction model gets one ASCII wireframe before any structural language.
+Wireframe first, prose second. A wireframe is for what prose cannot carry: draw one per surface for the state a reader cannot picture, and one more only where a transition changes layout. States that differ by a glyph, a label, or an ink get a line in the state list, not a frame — a second frame showing the same layout under a different name is State Inflation in the document.
 
 **Wireframes are for the human reader.** They communicate flow, interaction, and structural ideas in a form that prose papers over. They are not the implementation spec (specs do that) and not visual mockups (no color, no type, no material). The wireframe's job is to make the layout and the transitions legible to the person reviewing the design.
 
@@ -318,7 +322,7 @@ Detail is in service of the human reader's comprehension. If a detail doesn't he
 
 ### Verification (mandatory before presenting)
 
-State this verification was performed. If any check fails, redraw — do not ship a wireframe with broken alignment.
+Perform it; do not narrate it. The artifact carries one line per wireframe (`verification: top edge 38 ─ · columns aligned · scale held`), never the checklist. If any check fails, redraw — do not ship a wireframe with broken alignment.
 
 - Count top-edge `─` characters. State the count.
 - Confirm every `│` column aligns with its top and bottom corner.
@@ -436,22 +440,27 @@ If a proposed state or transition would not survive the scene — would interrup
 
 Define, in this order:
 
-1. **Wireframes** — one ASCII wireframe per state, per option. Produced before prose,
-   following the ASCII Wireframe Standard above. The wireframes are the structural
-   commitment; the prose that follows formalizes what the wireframes already decided.
-   Run verification and state the result.
+1. **Wireframes** — for the recommended direction, following the ASCII Wireframe
+   Standard above (one per surface, plus one per layout-changing transition). Produced
+   before prose; the prose formalizes what the wireframes already decided.
 
 2. **Interaction model** — states (by name, referencing wireframes), transitions
-   between them, gestures or inputs that trigger each transition.
+   between them, gestures or inputs that trigger each transition. A state list, not a
+   state essay.
 
 3. **Visual hierarchy** — primary, secondary, tertiary in each state. Reference
    wireframe labels (`[A]`, `[B]`, `[C]`) — do not re-describe.
 
-4. **Options** — produce 2–3 structural directions maximum, each with its own
-   wireframe set. Recommend one with explicit reasoning; name what would change
-   the recommendation.
+4. **Options** — 2–3 structural directions maximum. The recommended one gets the
+   wireframes; each alternative gets at most five lines naming its structure and the
+   reason it loses. Name what would change the recommendation, in one line.
 
 Apply the decision hierarchy when choosing between options. Novelty is never a factor.
+
+**The artifact is one page** (Artifact Standard, CLAUDE.md): provenance · scene in two
+lines · wireframes · states · hierarchy · what must not break · device check. Inherited
+laws are cited by name, never restated; a reader who needs the law opens the ledger. A
+design that will not fit is not yet reduced — reduce it, do not append.
 
 Do not produce visual output beyond ASCII wireframes — no production UI code, no color decisions,
 no type specs, no material. Wireframes are structural; visual output is the Visual
