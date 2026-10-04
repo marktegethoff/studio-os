@@ -3,71 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>LT Review — [artifact name]</title>
 <link rel="stylesheet" href="../kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Leadership Team Review · owned by /studio:review</span>
-    <h1>[Artifact name]<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">PM, Design Director, and Distinguished Engineer reviewed this artifact independently from their distinct mandates. The combined verdict and single next action are below; routing names the specialist who resolves each issue.</p>
-    <div class="header-meta">
-      <span>[date]</span><span>Phase: [Pre-ship / Checkpoint / Post-ship audit]</span><span>Round: [1 — Silent / Final — Debated]</span>
+  <!-- Title block. Fill every cell: an empty cell renders as a black block. -->
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>LT review: [artifact name]</h1>
+      <p class="sub">PM, Design Director, and Distinguished Engineer reviewed this artifact independently from their distinct mandates. The combined verdict and single next action follow. Routing names the specialist who resolves each issue.</p>
     </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">lt-review</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">/studio:review</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">[direct, or the calling workflow]</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">[YYYY-MM-DD]</span></div>
+    <div class="c"><span class="l">Phase</span><span class="v">[Pre-ship / Checkpoint / Post-ship audit]</span></div>
+    <div class="c"><span class="l">Round</span><span class="v">[1 — silent / Final — debated]</span></div>
+    <div class="c wide"><span class="l">Gate result</span><span class="v">[SHIP / REVISE / HOLD / REJECT] · [n] changes required</span></div>
+    <div class="c wide"><span class="l">Members</span><span class="v">[PM · CD · DE — those that apply]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[1]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft / Final]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Combined verdict</h2>
-    <div class="callout"><p><strong>[SHIP / REVISE / HOLD / REJECT]</strong> — [one-sentence rationale]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Member verdicts</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">PM — problem-solution fit</span><span class="v"><strong>[READY / HOLD]</strong> — [2–3 sentences on whether the artifact still solves the validated problem]</span></div>
-      <div class="dcard"><span class="k">CD — design quality</span><span class="v"><strong>[SHIP / NO-SHIP]</strong> — [2–3 sentences on whether the artifact is crafted well enough to ship]</span></div>
-      <div class="dcard"><span class="k">DE — implementation soundness</span><span class="v"><strong>[SHIP / REVISE / REJECT]</strong> — [2–3 sentences on whether the artifact is built correctly]</span></div>
+  <!-- A · Combined verdict. Chip class: pass for SHIP, hold for REVISE or HOLD, fail for REJECT. -->
+  <section class="pnl" aria-labelledby="ltr-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="ltr-a-h">Combined verdict</h2><span class="ref">cites B · C · E</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="a1"><span class="id">A1</span><div class="t">
+          <p class="lead">[One sentence: why the gate reads this way. Name the member and the cause.] <span class="wc">[n]/25 words</span></p>
+          <div class="meas over" style="--val:[n];--lim:0;--max:[max]">
+            <div class="mh"><span>Changes required</span><span class="mv">[n] · SHIP needs 0</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side"><span class="verdict hold">[SHIP / REVISE / HOLD / REJECT]</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">SHIP: all applicable members pass. REVISE: a member requires a change. HOLD: PM flags drift. REJECT: a structural problem needs a restart.</div>
   </section>
 
-  <section class="section">
-    <h2>Convergences</h2>
-    <p>Where two or more members flag the same issue. Convergence across mandates is a strong signal.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">[Element]</div><div class="it-desc">[Which members flagged it and the substance of their alignment]</div></div>
+  <!-- B · Member verdicts. Chip class: PM pass for READY, hold for HOLD. CD pass for SHIP, fail for NO-SHIP. DE pass for SHIP, hold for REVISE, fail for REJECT.
+       A member with nothing to review reads "— Not applicable" with the class na. A failed member reads "Missing: node [id] failed". -->
+  <section class="pnl" aria-labelledby="ltr-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="ltr-b-h">Member verdicts</h2><span class="ref">PM · CD · DE</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="b1"><span class="id">B1</span><span class="t">[Two or three sentences: does the artifact still solve the validated problem?] <span class="wc">[n]/25 words</span><small>Problem-solution fit. Final: [Unchanged / the updated position].</small></span><span class="side"><span class="verdict pass">PM · [READY / HOLD]</span></span></li>
+        <li id="b2"><span class="id">B2</span><span class="t">[Two or three sentences: is the design crafted well enough to ship?] <span class="wc">[n]/25 words</span><small>Design quality. Final: [Unchanged / the updated position].</small></span><span class="side"><span class="verdict pass">CD · [SHIP / NO-SHIP]</span></span></li>
+        <li id="b3"><span class="id">B3</span><span class="t">[Two or three sentences: is the implementation built correctly?] <span class="wc">[n]/25 words</span><small>Implementation soundness. Final: [Unchanged / the updated position].</small></span><span class="side"><span class="verdict pass">DE · [SHIP / REVISE / REJECT]</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">The count shows the longest sentence against the 25-word limit.</div>
   </section>
 
-  <section class="section">
-    <h2>Routing</h2>
-    <p>Each required change with the specialist or skill that resolves it, in cascade priority order: PM first, then CD, then DE. If PM flags drift, that is the only next action regardless of CD/DE verdicts.</p>
-    <table>
-      <tr><th>Issue</th><th>Specialist / Skill</th><th>Then what</th></tr>
-      <tr><td>[Issue]</td><td>[e.g., strategist / brief-writer / typesetter / specifier / /studio:design]</td><td>[The next move once the specialist completes]</td></tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>Next action</h2>
-    <div class="callout"><p><strong>[Single most important thing.]</strong> [Names who does it. One sentence. PM issues take priority over all others.]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Debate round</h2>
-    <p>Rendered only if conflict-prompted debate ran (split verdict on same element, convergent flags with incompatible routing, or dependent verdicts). The cascade rule silences orthogonal concerns; the debate round surfaces same-element disagreement.</p>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Hardened</span><span class="v">[Positions that survived challenge or were strengthened — these carry the most weight]</span></div>
-      <div class="dcard"><span class="k">Changed</span><span class="v">[Positions that were revised, qualified, or reversed through the debate]</span></div>
-      <div class="dcard"><span class="k">Unresolved tensions</span><span class="v">[Decisions the team must make — phrased as questions; may require a higher decision-maker]</span></div>
+  <!-- C · Refutation. One row for each SHIP that stood after the verdicts: CD is refuted by critic, DE by qa.
+       Outcome class: ok for failed, no for succeeded, na for did not run. Keep a row for every SHIP that stood. -->
+  <section class="pnl" aria-labelledby="ltr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="ltr-c-h">Refutation</h2><span class="ref">adversary_model = [model]</span></div>
+    <div class="pnl-b">
+      <div class="tbox"><table>
+        <thead><tr><th>#</th><th>Refuter</th><th>Target</th><th>Model used</th><th>Outcome</th><th>Defect and evidence</th></tr></thead>
+        <tbody>
+          <tr id="c1"><td class="m">C1</td><td>critic</td><td>CD · SHIP</td><td class="m">[model] [(fallback)]</td><td><span class="ok">[✓ Failed · SHIP stands]</span></td><td>[Named defect and the evidence for it — or "None found."]</td></tr>
+          <tr id="c2"><td class="m">C2</td><td>qa</td><td>DE · SHIP</td><td class="m">[model] [(fallback)]</td><td><span class="na">[— Did not run · SHIP unrefuted]</span></td><td>[Named defect and the evidence for it — or "None found."]</td></tr>
+        </tbody>
+      </table></div>
+      <div class="meas over" style="--val:[n];--lim:[target];--max:[max]">
+        <div class="mh"><span>C[n] evidence · [what the refuter counted]</span><span class="mv">[n] of [total] · target [target]</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+      </div>
     </div>
+    <div class="pnl-f">A succeeded refutation downgrades that SHIP to REVISE. A refutation that did not run leaves the SHIP unrefuted. With no SHIP due, or after a human ruling, write one row: No refutation due.</div>
   </section>
 
-  <footer class="footer">
-    <p>Studio OS · LT Review · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <!-- D · Convergences. If no two members flag the same issue, keep one item that reads "None." -->
+  <section class="pnl" aria-labelledby="ltr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="ltr-d-h">Convergences</h2><span class="ref">two or more members flag</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="d1"><span class="id">D1</span><span class="t">[Element that two or more members flag, and what they agree on.] <span class="wc">[n]/25 words</span></span><span class="side">B[#] · B[#]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Agreement across mandates is a strong signal.</div>
+  </section>
+
+  <!-- E · Routing. One row for each member, in cascade order. -->
+  <section class="pnl" aria-labelledby="ltr-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="ltr-e-h">Routing</h2><span class="ref">cascade PM → CD → DE</span></div>
+    <div class="pnl-b">
+      <div class="tbox"><table>
+        <thead><tr><th>#</th><th>Cascade</th><th>Change</th><th>Specialist</th><th>Then</th></tr></thead>
+        <tbody>
+          <tr id="e1"><td class="m">E1</td><td class="m">1&nbsp;·&nbsp;PM</td><td>[Required change — or "No change." In a post-ship audit, add: targeted fix or breaking redesign.]</td><td>[specialist or skill]</td><td>[The next move once the specialist completes. After a debate, mark (revised) or (confirmed).]</td></tr>
+          <tr id="e2"><td class="m">E2</td><td class="m">2&nbsp;·&nbsp;CD</td><td>[Required change — or "No change."]</td><td>[specialist or skill]</td><td>[The next move]</td></tr>
+          <tr id="e3"><td class="m">E3</td><td class="m">3&nbsp;·&nbsp;DE</td><td>[Required change — or "No change."]</td><td>[specialist or skill]</td><td>[The next move]</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="pnl-f">If PM flags drift, that is the only next action. List no CD or DE action until PM passes.</div>
+  </section>
+
+  <!-- F · Dissent ledger. One row for each overruled or unresolved position. -->
+  <section class="pnl" aria-labelledby="ltr-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="ltr-f-h">Dissent ledger</h2><span class="ref">cascade · tiebreak · debate</span></div>
+    <div class="pnl-b">
+      <div class="tbox"><table>
+        <thead><tr><th>#</th><th>Member</th><th>Dissent</th><th>Ruling</th><th>Reason</th></tr></thead>
+        <tbody>
+          <tr id="f1"><td class="m">F1</td><td>[member]</td><td>[What the member held, and on which element.]</td><td>[Cascade / Tiebreak / Debate] overrules</td><td>[Why the position lost.]</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="pnl-f">List every overruled or unresolved position. With no dissent, write: None — genuine alignment.</div>
+  </section>
+
+  <!-- G · Next action. -->
+  <section class="pnl" aria-labelledby="ltr-g-h">
+    <div class="pnl-h"><span class="ltr">G</span><h2 id="ltr-g-h">Next action</h2><span class="ref">cites E</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="g1"><span class="id">G1</span><div class="t"><p class="lead">[Single most important thing. Name who does it. One sentence.] <span class="wc">[n]/25 words</span></p></div><span class="side">E[#]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">PM issues take priority over all others. With an open tension, the action may be a decision: name it and who decides.</div>
+  </section>
+
+  <!-- H · Debate. Render only if a conflict signal fired and the debate ran. Otherwise omit this panel. -->
+  <section class="pnl" aria-labelledby="ltr-h-h">
+    <div class="pnl-h"><span class="ltr">H</span><h2 id="ltr-h-h">Debate</h2><span class="ref">only if a conflict fired</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="h1"><span class="id">H1</span><span class="t">[Element in conflict]<small>[Signals that fired: split verdict · incompatible routing · dependent verdicts]</small></span><span class="side">Conflict</span></li>
+        <li id="h2"><span class="id">H2</span><span class="t">[Position that survived challenge]<small>[Why it now carries the most weight.]</small></span><span class="side">Hardened</span></li>
+        <li id="h3"><span class="id">H3</span><span class="t">[Position that was revised, qualified, or reversed]<small>[Which member moved, and why.]</small></span><span class="side">Changed</span></li>
+        <li id="h4"><span class="id">H4</span><span class="t">[Open decision, phrased as a question]<small>[What the team or a higher decision-maker must decide.]</small></span><span class="side">Unresolved</span></li>
+        <li id="h5"><span class="id">H5</span><span class="t">[The human ruling — or "Cascade" when --auto decided]<small>[Name the ruling and what it overruled.]</small></span><span class="side">Tiebreak</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The debate runs once. The cascade rule handles unrelated drift. The debate handles same-element disagreement.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>

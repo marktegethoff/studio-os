@@ -3,98 +3,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Critique — [artifact name]</title>
 <link rel="stylesheet" href="../kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Critique · owned by /studio:critique</span>
-    <h1>[Artifact name]<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">Nine design disciplines reviewed this artifact independently. Findings only — no ship verdict. For a ship decision, run <code>/studio:review</code>.</p>
-    <div class="header-meta">
-      <span>[date]</span><span>Phase: [Exploratory / In Progress / Production]</span><span>Round: [1 — Silent / Final — Debated]</span>
+  <!-- Title block. Fill every cell: an empty cell renders as a black block. -->
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>Critique: [artifact name]</h1>
+      <p class="sub">Nine disciplines reviewed this artifact independently. Findings only — no ship verdict. For a ship decision, run <code>/studio:review</code>.</p>
+    </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">critique-report</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">/studio:critique</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">[direct, or the calling workflow]</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">[YYYY-MM-DD]</span></div>
+    <div class="c wide"><span class="l">Subject</span><span class="v">[artifact name] · [version or file path]</span></div>
+    <div class="c"><span class="l">Phase</span><span class="v">[Exploratory / In progress / Production]</span></div>
+    <div class="c"><span class="l">Round</span><span class="v">[1 — silent / Final — debated]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[1]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft / Final]</span></div>
+    <div class="c wide">
+      <!-- Coverage: --val is the count of disciplines that reported. The limit is 9. -->
+      <div class="meas" style="--val:[n];--lim:9;--max:9">
+        <div class="mh"><span>Disciplines reported</span><span class="mv">[n] of 9 · min 9</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>9</span></div>
+      </div>
     </div>
   </header>
 
-  <section class="section">
-    <h2>Convergences</h2>
-    <p>Elements flagged by two or more disciplines — the strongest signals in the report.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">[Element]</div><div class="it-desc">[Which disciplines flagged it and how their concerns align or differ]</div></div>
+  <div class="grid2">
+
+    <!-- A · Reviewed artifact. Replace the skeleton with the structure under review: a screen, a layout, or a flow. -->
+    <section class="pnl" aria-labelledby="cr-a-h">
+      <div class="pnl-h"><span class="ltr">A</span><h2 id="cr-a-h">Reviewed artifact</h2><span class="ref">[artifact] · values in [unit]</span></div>
+      <div class="pnl-b">
+        <svg width="492" height="340" viewBox="0 0 492 340" role="img" aria-labelledby="cr-wf-t">
+          <title id="cr-wf-t">Skeleton of the reviewed artifact. A screen outline holds an image, a headline, a body line, an action and a link. Red numbered callouts mark the findings.</title>
+
+          <!-- frame -->
+          <path d="M84 316 V22 Q84 8 98 8 H304 Q318 8 318 22 V316" class="s-line"/>
+          <line x1="84" y1="316" x2="318" y2="316" class="s-hair" stroke-dasharray="3 3"/>
+          <line x1="84" y1="40" x2="318" y2="40" class="s-hair"/>
+          <text x="201" y="29" text-anchor="middle" class="t-ink" font-size="10.5" font-weight="600">[title]</text>
+
+          <!-- motion extent -->
+          <rect x="92" y="56" width="218" height="240" class="s-dim" stroke-dasharray="4 3"/>
+
+          <!-- image -->
+          <rect x="153" y="64" width="96" height="96" class="s-line" opacity=".3"/>
+          <line x1="153" y1="64" x2="249" y2="160" class="s-hair"/>
+          <line x1="249" y1="64" x2="153" y2="160" class="s-hair"/>
+          <text x="201" y="116" text-anchor="middle" class="t-ink2" font-size="9.5">[image]</text>
+
+          <!-- headline, body, actions -->
+          <text x="201" y="187" text-anchor="middle" class="t-ink" font-size="13" font-weight="700">[headline]</text>
+          <text x="201" y="223" text-anchor="middle" class="t-ink2" font-size="9.5">[body]</text>
+          <rect x="146" y="245" width="110" height="26" rx="6" class="s-fill"/>
+          <text x="201" y="262" text-anchor="middle" class="t-inv" font-size="10" font-weight="500">[action]</text>
+          <text x="201" y="287" text-anchor="middle" class="t-ink2" font-size="9.5" text-decoration="underline">[link]</text>
+
+          <!-- dimension, as specified (blue) -->
+          <line x1="80" y1="64" x2="146" y2="64" class="s-dim" stroke-dasharray="2 2" opacity=".5"/>
+          <line x1="80" y1="160" x2="146" y2="160" class="s-dim" stroke-dasharray="2 2" opacity=".5"/>
+          <line x1="74" y1="64" x2="74" y2="160" class="s-dim"/>
+          <line x1="68" y1="64" x2="80" y2="64" class="s-dim"/>
+          <line x1="68" y1="160" x2="80" y2="160" class="s-dim"/>
+          <text x="64" y="115" text-anchor="end" class="t-dim" font-size="9.5">[n] pt</text>
+
+          <!-- dimension, as found (red): [found]→[target], with its callout number -->
+          <line x1="80" y1="226" x2="104" y2="226" class="s-viol" stroke-dasharray="2 2" opacity=".5"/>
+          <line x1="80" y1="245" x2="146" y2="245" class="s-viol" stroke-dasharray="2 2" opacity=".5"/>
+          <line x1="74" y1="226" x2="74" y2="245" class="s-viol"/>
+          <line x1="68" y1="226" x2="80" y2="226" class="s-viol"/>
+          <line x1="68" y1="245" x2="80" y2="245" class="s-viol"/>
+          <text x="64" y="239" text-anchor="end" class="t-viol" font-size="9">[a]→[b]</text>
+          <circle cx="11" cy="235.5" r="8.5" class="s-viol"/>
+          <text x="11" y="238.5" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+
+          <!-- callout: image -->
+          <circle cx="249" cy="100" r="2" class="t-viol"/>
+          <line x1="249" y1="100" x2="321" y2="100" class="s-viol"/>
+          <circle cx="330" cy="100" r="9" class="s-viol"/><text x="330" y="103" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <circle cx="351" cy="100" r="9" class="s-viol"/><text x="351" y="103" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <text x="369" y="104" class="t-ink2" font-size="11">[element]</text>
+
+          <!-- callout: headline -->
+          <circle cx="300" cy="195" r="2" class="t-viol"/>
+          <line x1="300" y1="195" x2="321" y2="195" class="s-viol"/>
+          <circle cx="330" cy="195" r="9" class="s-viol"/><text x="330" y="198" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <text x="348" y="199" class="t-ink2" font-size="11">[element]</text>
+          <text x="410" y="199" class="t-dim" font-size="9.5">[value]</text>
+
+          <!-- callout: body -->
+          <circle cx="303" cy="220" r="2" class="t-viol"/>
+          <line x1="303" y1="220" x2="321" y2="220" class="s-viol"/>
+          <circle cx="330" cy="220" r="9" class="s-viol"/><text x="330" y="223" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <text x="348" y="224" class="t-ink2" font-size="11">[element]</text>
+          <text x="410" y="224" class="t-dim" font-size="9.5">[value]</text>
+
+          <!-- callout: a group of elements -->
+          <polyline points="264,245 272,245 272,290 264,290" class="s-viol"/>
+          <line x1="272" y1="267" x2="321" y2="267" class="s-viol"/>
+          <circle cx="330" cy="267" r="9" class="s-viol"/><text x="330" y="270" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <circle cx="351" cy="267" r="9" class="s-viol"/><text x="351" y="270" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <text x="369" y="271" class="t-ink2" font-size="11">[elements]</text>
+
+          <!-- callout: a finding on the whole artifact, such as motion -->
+          <polyline points="310,296 310,326 321,326" class="s-viol"/>
+          <circle cx="330" cy="326" r="9" class="s-viol"/><text x="330" y="329" text-anchor="middle" class="t-viol" font-size="8.5" font-weight="700">[n]</text>
+          <text x="348" y="330" class="t-ink2" font-size="11">[element]</text>
+          <text x="410" y="330" class="t-dim" font-size="9.5">[value]</text>
+        </svg>
+      </div>
+      <div class="pnl-f">Red circled numbers match the Id column in D. A finding with no place on the drawing has no number.</div>
+    </section>
+
+    <!-- B · Convergences. Number items B1, B2 and on. If no element has two flags, keep one item that reads "None." -->
+    <section class="pnl" aria-labelledby="cr-b-h">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="cr-b-h">Convergences</h2><span class="ref">two or more disciplines flag</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="b1"><span class="id">B1</span><span class="t">[Element]<small>[Disciplines that flagged it. Say whether their fixes align or differ.]</small></span><span class="side">[D#] [D#]</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Two or more disciplines flag each element. These are the strongest signals.</div>
+    </section>
+
+  </div>
+
+  <!-- C · Triage. Each item cites finding ids in D. Write "None." in a group with no item. -->
+  <section class="pnl" aria-labelledby="cr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="cr-c-h">Triage</h2><span class="ref">cites finding ids in D</span></div>
+    <div class="pnl-b">
+      <div class="grid2">
+        <div>
+          <p><strong>Address now</strong></p>
+          <ol class="items">
+            <li id="c1"><span class="id">C1</span><span class="t">[P0 finding, or blocking incoherence]</span><span class="side">[D#]</span></li>
+          </ol>
+        </div>
+        <div>
+          <p><strong>Before ship</strong></p>
+          <ol class="items">
+            <li id="c2"><span class="id">C2</span><span class="t">[Craft correction, copy, or visual polish]</span><span class="side">[D#]</span></li>
+          </ol>
+        </div>
+        <div>
+          <p><strong>Consider</strong></p>
+          <ol class="items">
+            <li id="c3"><span class="id">C3</span><span class="t">[Judgment call]</span><span class="side">[D#]</span></li>
+          </ol>
+        </div>
+        <div>
+          <p><strong>Decide</strong></p>
+          <ol class="items">
+            <li id="c4"><span class="id">C4</span><span class="t">[Unresolved tension, phrased as one decision question]<small>[Which disciplines disagree.]</small></span><span class="side">[D#]</span></li>
+          </ol>
+        </div>
+      </div>
     </div>
+    <div class="pnl-f">Decide appears after a debate round. Before one, write "None." there.</div>
   </section>
 
-  <section class="section">
-    <h2>Triage</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Address now</span><span class="v">[P0 findings + blocking incoherence]</span></div>
-      <div class="dcard"><span class="k">Address before ship</span><span class="v">[Craft corrections, copy, visual polish]</span></div>
-      <div class="dcard"><span class="k">Consider</span><span class="v">[Judgment calls]</span></div>
-      <div class="dcard"><span class="k">Decide (unresolved tensions)</span><span class="v">[Points where disciplines remain in genuine disagreement — phrased as decisions to make]</span></div>
+  <!-- D · Findings by discipline. One table. Keep one row for each of the nine disciplines, in this order. -->
+  <section class="pnl" aria-labelledby="cr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="cr-d-h">Findings by discipline</h2><span class="ref">[n] findings · 9 disciplines</span></div>
+    <div class="tbox">
+      <table>
+        <thead>
+          <tr><th>Id</th><th>Discipline</th><th>Finding</th><th>Evidence/limit</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <!-- Every finding is a violation, so its measure carries the class "over". Remove "over" only for a value inside its limit. -->
+          <tr id="d1"><td class="m">D1</td><td>Critic</td><td>[What to remove or simplify, with one sentence of rationale — or "Nothing to remove."]</td><td>[Named ban or doctrine breached · the element's measure]</td><td>[Remove it, or give its simplest correct form]</td></tr>
+          <tr id="d2"><td class="m">D2</td><td>Heurist · [P0–P3]</td><td>[Broken mental model, friction, or dead end — or "No violations found."]</td><td>
+            [Heuristic violated]
+            <div class="meas over" style="--val:[n];--lim:[limit];--max:[max]">
+              <div class="mh"><span>[Countable measure]</span><span class="mv">[n] · max [limit]</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+            </div>
+          </td><td>[Fix. Remove before you add.]</td></tr>
+          <tr id="d3"><td class="m">D3</td><td>Accessibility</td><td>[Failure and the WCAG criterion — or "No issues found."]</td><td>
+            <div class="meas over" style="--val:[ratio];--lim:4.5;--max:7">
+              <div class="mh"><span>Contrast</span><span class="mv">[ratio] · min 4.5</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>7</span></div>
+            </div>
+            <span class="lbl">[foreground] on [background]</span>
+          </td><td>[Raise the ratio to the minimum or more]</td></tr>
+          <tr id="d4"><td class="m">D4</td><td>Accessibility</td><td>[Target too small, label missing, or no Reduce Motion alternative]</td><td>
+            <div class="meas over" style="--val:[n];--lim:44;--max:60">
+              <div class="mh"><span>Target size</span><span class="mv">[n] · min 44 pt</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>60</span></div>
+            </div>
+          </td><td>[Fix]</td></tr>
+          <tr id="d5"><td class="m">D5</td><td>Visual Designer</td><td>[Spacing, proportion, or alignment fault — or "No issues found."]</td><td>
+            <div class="meas over" style="--val:[current];--lim:[target];--max:[max]">
+              <div class="mh"><span>[Gap or size]</span><span class="mv">[current] · target [target]</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+            </div>
+          </td><td>Use <span class="annot">[target]</span> (<code>[token]</code>).</td></tr>
+          <tr id="d6"><td class="m">D6</td><td>Typesetter</td><td>[Fault in scale, hierarchy, weight, or rhythm — or "No issues found."]</td><td>[Text level, its role, and its size]</td><td>Use <code>[token]</code>.</td></tr>
+          <tr id="d7"><td class="m">D7</td><td>Materialist</td><td>[Surface that breaks the named material language — or "No surface qualities to evaluate."]</td><td>[Material language · the surface that breaks it]</td><td>[Correction]</td></tr>
+          <tr id="d8"><td class="m">D8</td><td>Writer</td><td>[Fault in the copy — or "No language present."]</td><td><span class="orig" data-ste="off"><s>[Quoted fault]</s> [rest of the quoted copy]</span></td><td>[Rewrite]</td></tr>
+          <tr id="d9"><td class="m">D9</td><td>Choreographer</td><td>[Motion earned or gratuitous — or "No motion present."]</td><td>
+            <div class="meas over" style="--val:[n];--lim:[limit];--max:[max]">
+              <div class="mh"><span>Motion</span><span class="mv">[n] · max [limit] ms</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+            </div>
+          </td><td>[Duration and easing, or removal]</td></tr>
+          <tr id="d10"><td class="m">D10</td><td>Mark Maker</td><td>[Fault in reduction, minimum-scale legibility, or brand coherence — or "No marks present."]</td><td>[Minimum size · brand rule]</td><td>[Fix]</td></tr>
+        </tbody>
+      </table>
     </div>
+    <div class="pnl-f">A discipline with no finding keeps one row with its no-finding line. A failed discipline reads Missing, with its node id. After a debate, mark each finding (revised) or (confirmed). In Production, add the cost of change to the Fix.</div>
   </section>
 
-  <section class="section">
-    <h2>Critic</h2>
-    <div class="callout"><p>[Findings — what should be removed or simplified, or "Nothing to remove."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Heurist</h2>
-    <div class="callout"><p>[Findings with severity (P0–P3) — or "No violations found."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Accessibility</h2>
-    <div class="callout"><p>[Findings with specific WCAG criterion violated — or "No issues found."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Visual Designer</h2>
-    <div class="callout"><p>[Findings with current → target values — or "No issues found."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Typesetter</h2>
-    <div class="callout"><p>[Findings — or "No issues found."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Materialist</h2>
-    <div class="callout"><p>[Findings — or "No surface qualities to evaluate."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Writer</h2>
-    <div class="callout"><p>[Findings — or "No language present."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Choreographer</h2>
-    <div class="callout"><p>[Findings — or "No motion present."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Mark Maker</h2>
-    <div class="callout"><p>[Findings — or "No marks present."]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Debate round</h2>
-    <p>Rendered only if the tension threshold was met and a second round ran. Tracks which positions hardened, which changed, and which remain unresolved.</p>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Hardened</span><span class="v">[Findings that survived challenge or were strengthened — the most credible findings]</span></div>
-      <div class="dcard"><span class="k">Changed</span><span class="v">[Findings that were revised, qualified, or reversed through the debate]</span></div>
-      <div class="dcard"><span class="k">Unresolved tensions</span><span class="v">[Points still in genuine disagreement — decisions, not findings]</span></div>
+  <!-- E · Debate. Render only if the tension threshold was met and the debate ran. Otherwise omit this panel and write "Tension threshold not met" in the Round cell. -->
+  <section class="pnl" aria-labelledby="cr-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="cr-e-h">Debate</h2><span class="ref">volume · convergence · critic tension</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="e1"><span class="id">E1</span><span class="t">[Signals that fired, and the tensions the debate would resolve]<small>[Who spent the debate round: the user, or the --auto default.]</small></span><span class="side">Threshold</span></li>
+        <li id="e2"><span class="id">E2</span><span class="t">[Finding that survived challenge]<small>[Why it is now the most credible finding.]</small></span><span class="side">Hardened · [D#]</span></li>
+        <li id="e3"><span class="id">E3</span><span class="t">[Finding that was revised, qualified, or reversed]<small>[Which discipline moved, and why.]</small></span><span class="side">Changed · [D#]</span></li>
+        <li id="e4"><span class="id">E4</span><span class="t">[Decision question that remains open]<small>[What the team must decide, and who decides.]</small></span><span class="side">Unresolved</span></li>
+      </ol>
     </div>
+    <div class="pnl-f">The debate runs once. Dissent stays visible: never average it away.</div>
   </section>
 
-  <footer class="footer">
-    <p>Studio OS · Critique · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>

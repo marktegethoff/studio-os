@@ -1,50 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Decision Record — [decision]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Decision Record · owned by architect / any</span>
-    <h1>Decision [NN] — [title]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">An HTML view over a ledger entry — the decision, its reasoning, the counter-argument, and what it supersedes.</p>
-    <div class="header-meta"><span>[date]</span><span>Tier: T1 / T2 / T3</span><span>Status: locked / proposed / superseded</span></div>
+<div class="doc">
+
+  <!-- Title block. Fill every cell: an empty cell renders as a black block. -->
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>Decision [NN]: [title]</h1>
+      <p class="sub">An HTML view over a ledger entry. It holds the decision, the options, the reasoning, the dissent, and what it supersedes.</p>
+    </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">decision-record</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">architect / any</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">[workflow or session]</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">[YYYY-MM-DD]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[locked / proposed / superseded]</span></div>
+    <div class="c"><span class="l">Supersedes</span><span class="v">[Decision NN, or none]</span></div>
+    <div class="c"><span class="l">Superseded by</span><span class="v">[Decision NN, or none]</span></div>
+    <div class="c"><span class="l">Ledger path</span><span class="v mono">decisions/[slug]-decision.html</span></div>
   </header>
 
-  <section class="section">
-    <h2>Decision</h2>
-    <div class="callout"><p>[The decision, stated in one or two sentences. What was decided.]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Reasoning</h2>
-    <p>[Why. The forces that made this the right call.]</p>
-  </section>
-
-  <section class="section">
-    <h2>The Counter-Argument</h2>
-    <p>[The strongest case against this decision, stated fairly — and why it did not win. A decision recorded without its counter-argument is an assertion, not a decision.]</p>
-  </section>
-
-  <section class="section">
-    <h2>Supersedes / Superseded By</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Supersedes</span><span class="v">[Decision NN — what it replaces, and why that frame no longer holds]</span></div>
-      <div class="dcard"><span class="k">Constrains</span><span class="v">[what future decisions this one bounds]</span></div>
+  <!-- A · Context. The problem and the forces. -->
+  <section class="pnl" aria-labelledby="dr-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="dr-a-h">Context</h2><span class="ref">the problem and its forces</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="a1"><span class="id">A1</span><span class="t">[What prompted the decision: the problem, and for whom.]</span><span class="side">Problem</span></li>
+        <li id="a2"><span class="id">A2</span><span class="t">[The constraint or invariant that bounds the choice.]<small>[Where it is stated: the project context, a prior decision, or a spec.]</small></span><span class="side">Constraint</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Consequences</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[What becomes true / required / forbidden as a result — migrations, invariants, scope boundaries.]</div></div>
+  <!-- B · Decision. One lead sentence. Tier 1 is reversible, Tier 2 structural, Tier 3 foundational. A Tier 2 or Tier 3 record needs stated reasoning. -->
+  <section class="pnl" aria-labelledby="dr-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="dr-b-h">Decision</h2><span class="ref">one sentence · tier</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="b1"><span class="id">B1</span><div class="t"><p class="lead">[The decision, in one sentence.] <span class="wc">[n]/25 words</span></p><small>[Tier name: Reversible / Structural / Foundational]</small></div><span class="side"><span class="verdict hold">TIER [1 / 2 / 3]</span></span></li>
+        <li id="b2"><span class="id">B2</span><span class="t">[Why this option is right: the forces it meets, in one or two sentences.]</span><span class="side">Reasoning</span></li>
+      </ol>
     </div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Decision Record · run /annotate to review</p></footer>
+  <!-- C · Options. The chosen option is blue. Each rejected option is marked. Add rows C3 and C4 for further options. -->
+  <section class="pnl" aria-labelledby="dr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="dr-c-h">Options</h2><span class="ref">one chosen · rest rejected</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="c1"><span class="id">C1</span><span class="t"><span class="annot">[Chosen option]</span><small>[What it is, and what it costs.]</small></span><span class="side"><span class="verdict pass">CHOSEN</span></span></li>
+        <li id="c2"><span class="id">C2</span><span class="t">[Rejected option]<small>[What was wrong with it. One sentence.]</small></span><span class="side"><span class="no">✕ Rejected</span></span></li>
+      </ol>
+      <!-- The doctrine allows two to four options. Add the class over when the count passes 4. -->
+      <div class="meas" style="--val:[n];--lim:4;--max:6">
+        <div class="mh"><span>Options considered</span><span class="mv">[n] · max 4</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>6</span></div>
+      </div>
+    </div>
+    <div class="pnl-f">Name what was wrong with every rejected option.</div>
+  </section>
+
+  <!-- D · Consequences. Name migrations and spec changes; write "none" where there is none. -->
+  <section class="pnl" aria-labelledby="dr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="dr-d-h">Consequences</h2><span class="ref">required · forbidden · bounded</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="d1"><span class="id">D1</span><span class="t">[What becomes true or required as a result.]</span><span class="side">Required</span></li>
+        <li id="d2"><span class="id">D2</span><span class="t">[What becomes forbidden.]</span><span class="side">Forbidden</span></li>
+        <li id="d3"><span class="id">D3</span><span class="t">[What future decisions this one bounds.]</span><span class="side">Constrains</span></li>
+        <li id="d4"><span class="id">D4</span><span class="t">[The migration this decision needs, or "none".]</span><span class="side">Migration</span></li>
+        <li id="d5"><span class="id">D5</span><span class="t">[The spec to create or update, or "none".]</span><span class="side">Spec</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- E · What must not break. Each invariant names its check. -->
+  <section class="pnl" aria-labelledby="dr-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="dr-e-h">What must not break</h2><span class="ref">invariants · acceptance checks</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="e1"><span class="id">E1</span><span class="t">[Invariant that this decision keeps true.]<small>Check: [the test, review, or measure that proves it holds].</small></span><span class="side">[invariant source]</span></li>
+        <li id="e2"><span class="id">E2</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[limit];--max:[max]">
+            <div class="mh"><span>[Measure the decision must hold]</span><span class="mv">[n] · max [limit]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side">[check]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Add the class over to a measure that breaks its limit.</div>
+  </section>
+
+  <!-- F · Dissent and overruled. The counter-argument is required for Tier 2 and Tier 3. With no dissent, write: None — genuine alignment. -->
+  <section class="pnl" aria-labelledby="dr-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="dr-f-h">Dissent / overruled</h2><span class="ref">the case against, stated fairly</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="f1"><span class="id">F1</span><span class="t">[The strongest case against this decision, stated fairly.]<small>[Why it did not win. For Tier 3: the counter the user was invited to give, and the response.]</small></span><span class="side">Counter-argument</span></li>
+        <li id="f2"><span class="id">F2</span><span class="t">[Who disagreed, with what position.]<small>[Why the position was overruled: cascade, tiebreak, or debate.]</small></span><span class="side">Overruled</span></li>
+        <li id="f3"><span class="id">F3</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:3;--max:[max]">
+            <div class="mh"><span>Consecutive Tier 2 or Tier 3 approvals with no pushback</span><span class="mv">[n] · surface at 3</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side">Guardrail</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">A decision recorded without its counter-argument is an assertion, not a decision.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

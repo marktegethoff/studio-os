@@ -1,50 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Risk Register — [feature]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Risk Register · owned by assumption-mapper</span>
-    <h1>[Feature / initiative]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">The assumptions this work bets on, ranked by risk — and the single one whose failure would make it worthless.</p>
-    <div class="header-meta"><span>[date]</span><span>Decision being made: [the commitment]</span></div>
+<div class="doc">
+
+  <!-- Title block. Fill every cell: an empty cell renders as a black block. -->
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>Risk register: [feature or initiative]</h1>
+      <p class="sub">The assumptions this work bets on, ranked by risk, and the single one whose failure would make it worthless.</p>
+    </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">risk-register</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">assumption-mapper</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">[/studio:discover, or direct]</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">[YYYY-MM-DD]</span></div>
+    <div class="c wide"><span class="l">Decision being made</span><span class="v">[The commitment this register informs]</span></div>
+    <div class="c"><span class="l">Mode</span><span class="v">[Prospective / Retrospective]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft / Final]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[1]</span></div>
+    <div class="c"><span class="l">Binding risk</span><span class="v mono">[B#]</span></div>
+    <div class="c"><span class="l">Threshold</span><span class="v mono">[threshold]</span></div>
+    <div class="c"><span class="l">Scale</span><span class="v">[likelihood] × [impact]</span></div>
   </header>
 
-  <section class="section">
-    <h2>The Binding Assumption</h2>
-    <div class="callout"><p><strong>We are assuming that</strong> [the single assumption whose failure makes this worthless].<br><span style="color:var(--text-2);font-size:0.9rem">Confidence: [H/M/L] · Why it's binding: [the consequence of it being wrong] · Validation path: [cheapest way to raise confidence before committing]</span></p></div>
-  </section>
-
-  <section class="section">
-    <h2>Full Register</h2>
-    <table>
-      <tr><th>Assumption</th><th>Confidence</th><th>Impact if wrong</th><th>Status</th></tr>
-      <tr><td><strong>User</strong> — we are assuming [x]</td><td>H/M/L</td><td>H/M/L</td><td>Validate first / Monitor / Accept</td></tr>
-      <tr><td><strong>Technical</strong> — [x]</td><td>H/M/L</td><td>H/M/L</td><td>…</td></tr>
-      <tr><td><strong>Market</strong> — [x]</td><td>H/M/L</td><td>H/M/L</td><td>…</td></tr>
-      <tr><td><strong>Resource</strong> — [x]</td><td>H/M/L</td><td>H/M/L</td><td>…</td></tr>
-    </table>
-    <p style="font-size:0.8rem">Low confidence + High impact = most dangerous. Each assumption is a testable claim, not a hope.</p>
-  </section>
-
-  <section class="section">
-    <h2>Validation Priorities</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">1</div><div class="it-desc">[binding assumption] — [validation path]</div></div>
-      <div class="item"><div class="it-name">2</div><div class="it-desc">[next highest risk] — [validation path]</div></div>
+  <!-- A · Binding risk. Exactly one. It is the most consequential assumption, not always the riskiest. State it once here and cite it from B. -->
+  <section class="pnl" aria-labelledby="rr-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="rr-a-h">Binding risk</h2><span class="ref">stated here · scored at B[n]</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="a1"><span class="id">A1</span><div class="t">
+          <p class="lead">We are assuming that [the single assumption whose failure makes this worthless].</p>
+          <small><span class="lbl">Category</span> [User / Technical / Market / Resource] · <span class="lbl">Confidence</span> [H / M / L]</small>
+          <small><span class="lbl">Why it is binding</span> [One sentence on the consequence of it being wrong]</small>
+          <small><span class="lbl">Validation path</span> [The cheapest way to raise confidence before you commit]</small>
+        </div><span class="side"><span class="verdict hold">BINDING</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">If two assumptions would each make the work worthless, the work is two features. Scope them apart.</div>
   </section>
 
-  <section class="section">
-    <h2>What the Strategist Needs to Know</h2>
-    <p>[Is the risk profile typical for this type of investment, or is something here unusual enough to warrant revisiting go/no-go? The Assumption Mapper surfaces; the Strategist decides.]</p>
+  <!-- B · Register. One numbered item for each assumption, in four groups. Numbers run on across groups.
+       Mark exactly one item BINDING. It cites A1 and does not restate it.
+       Each score is a measure against the threshold. Add the class over to a measure whose score reaches the threshold. -->
+  <section class="pnl" aria-labelledby="rr-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="rr-b-h">Register</h2><span class="ref">likelihood × impact vs threshold</span></div>
+    <div class="pnl-b">
+
+      <p><strong>User</strong></p>
+      <ol class="items">
+        <li id="b1"><span class="id">B1</span><div class="t"><span class="verdict hold">BINDING</span> Stated in A1.
+          <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
+          <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
+            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side">[Status]</span></li>
+      </ol>
+
+      <p><strong>Technical</strong></p>
+      <ol class="items">
+        <li id="b2"><span class="id">B2</span><div class="t">We are assuming that [specific, testable belief].
+          <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
+          <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
+            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side">[Status]</span></li>
+      </ol>
+
+      <p><strong>Market</strong></p>
+      <ol class="items">
+        <li id="b3"><span class="id">B3</span><div class="t">We are assuming that [specific, testable belief].
+          <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
+          <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
+            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side">[Status]</span></li>
+      </ol>
+
+      <p><strong>Resource</strong></p>
+      <ol class="items">
+        <li id="b4"><span class="id">B4</span><div class="t">We are assuming that [specific, testable belief].
+          <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
+          <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
+            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+        </div><span class="side">[Status]</span></li>
+      </ol>
+
+    </div>
+    <div class="pnl-f">Likelihood is the inverse of confidence. Low confidence with high impact is most dangerous. Write each assumption as a testable claim, not a hope. Status is Validate first, Monitor, or Accept.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Risk Register · run /annotate to review</p></footer>
+  <!-- C · Validation priorities. The binding risk is first. -->
+  <section class="pnl" aria-labelledby="rr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="rr-c-h">Validation priorities</h2><span class="ref">cites A · B</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="c1"><span class="id">C1</span><span class="t">[Binding risk] — [validation path]</span><span class="side">A1</span></li>
+        <li id="c2"><span class="id">C2</span><span class="t">[Next highest risk] — [validation path]</span><span class="side">B[#]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">A validation path is the minimum effort that moves a Low confidence rating to Medium.</div>
+  </section>
+
+  <!-- D · What the Strategist needs to know. -->
+  <section class="pnl" aria-labelledby="rr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="rr-d-h">What the Strategist needs to know</h2><span class="ref">typical or unusual</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="d1"><span class="id">D1</span><div class="t"><p class="lead">[One or two sentences: is this risk profile typical for this type of investment, or unusual enough to revisit the go/no-go decision?] <span class="wc">[n]/25 words</span></p></div><span class="side">Strategist</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The Assumption Mapper surfaces the risk. The Strategist decides.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

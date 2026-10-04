@@ -1,47 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Heuristic Report — [surface]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Heuristic Report · owned by heurist</span>
-    <h1>[Surface / flow]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Usability findings with severity, violation tags, and remediation — invisible friction made visible.</p>
-    <div class="header-meta"><span>[date]</span><span>Evaluated against: canonical heuristics · HIG · AI-UX guidelines · studio ethos</span></div>
+<div class="doc">
+
+  <!-- Title block. Fill every cell: an empty cell renders as a black block. -->
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>Heuristic evaluation: [surface or flow]</h1>
+      <p class="sub">Usability findings with severity, violation tags, and fixes. Invisible friction made visible.</p>
+    </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">heuristic-report</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">heurist</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">[direct, or the calling workflow]</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">[YYYY-MM-DD]</span></div>
+    <div class="c wide"><span class="l">Surface</span><span class="v">[screen or flow] · [build or version]</span></div>
+    <div class="c wide"><span class="l">Evaluated against</span><span class="v">Canonical heuristics · HIG · AI-UX guidelines · studio ethos</span></div>
+    <div class="c"><span class="l">Layers applied</span><span class="v">1 · 2 · [3, if AI behavior shows]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[1]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft / Final]</span></div>
+    <div class="c"><span class="l">AI principle</span><span class="v">[name, or none]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Findings</h2>
-    <table>
-      <tr><th>Sev</th><th>Finding</th><th>Violation</th><th>Remediation</th></tr>
-      <tr><td><span class="s-fail">P0</span></td><td>[what breaks the user's task]</td><td>[heuristic / tag]</td><td>[the fix; remove before add]</td></tr>
-      <tr><td><span class="s-warn">P1</span></td><td>[significant friction]</td><td>[—]</td><td>[—]</td></tr>
-      <tr><td><span class="s-warn">P2</span></td><td>[minor friction]</td><td>[—]</td><td>[—]</td></tr>
-      <tr><td><span class="s-pass">P3</span></td><td>[polish]</td><td>[—]</td><td>[—]</td></tr>
-    </table>
-    <p style="font-size:0.8rem">P0 = blocks the task · P1 = major friction · P2 = minor · P3 = polish. Severity reflects user impact, never inflated to force attention.</p>
-  </section>
-
-  <section class="section">
-    <h2>Tensions</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Where a canonical heuristic fix conflicts with the product's parti or AI principle — surfaced for leadership to decide, not resolved unilaterally.]</div></div>
+  <!-- A · Parti and verdict. State the parti before any finding. -->
+  <section class="pnl" aria-labelledby="hr-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="hr-a-h">Parti and verdict</h2><span class="ref">before the findings</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="a1"><span class="id">A1</span><span class="t">[The parti that governs this surface. If no parti is clear, that is itself a finding.]</span><span class="side">Parti</span></li>
+        <li id="a2"><span class="id">A2</span><span class="t">[Primary archetype(s) for this surface. Name any divergence between them.]</span><span class="side">Archetype</span></li>
+        <li id="a3"><span class="id">A3</span><div class="t"><p class="lead">[Two or three sentences: is this usable, and what is the most important issue?] <span class="wc">[n]/25 words</span></p></div><span class="side">Verdict</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>What the Next Gate Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ Every P0/P1 is resolved or explicitly accepted with reasoning before ship.</div></div>
-      <div class="item"><div class="it-desc">✓ Fixes favor removal/redesign over additive band-aids (no tooltip to paper over a structural problem).</div></div>
+  <!-- B · Layer 1. Each finding is a numbered item.
+       Chip class: fail for P0 and P1, hold for P2 and P3. Keep the Trade line only when the fix adds complexity. -->
+  <section class="pnl" aria-labelledby="hr-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="hr-b-h">Layer 1 · Canonical heuristics</h2><span class="ref">Nielsen H1–H10 · always applied</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="b1"><span class="id">B1</span><div class="t">[Finding: what breaks, and for whom]
+          <small><span class="lbl">Violates</span> [H# · heuristic name]</small>
+          <small><span class="lbl">Evidence</span> [What goes wrong, for whom, and how often]</small>
+          <div class="meas over" style="--val:[n];--lim:[limit];--max:[max]">
+            <div class="mh"><span>[Countable measure]</span><span class="mv">[n] · max [limit]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+          </div>
+          <small><span class="lbl">Fix</span> [Studio-compatible fix. Remove before you add.]</small>
+          <small><span class="lbl">Trade</span> [What the fix costs, if it adds complexity]</small>
+        </div><span class="side"><span class="verdict fail">P[0–1]</span></span></li>
+        <li id="b2"><span class="id">B2</span><div class="t">[Finding: what breaks, and for whom]
+          <small><span class="lbl">Violates</span> [H# · heuristic name]</small>
+          <small><span class="lbl">Evidence</span> [What goes wrong, for whom, and how often]</small>
+          <small><span class="lbl">Fix</span> [Studio-compatible fix. Remove before you add.]</small>
+        </div><span class="side"><span class="verdict hold">P[2–3]</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">Supplements: Shneiderman's 8 rules, Tognazzini's principles, and Laws of UX. Add a measure for each countable threshold.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Heuristic Report · run /annotate to review</p></footer>
+  <!-- C · Layer 2. Each check cites its section of the plugin's apple-platform.md. Always applied to iOS surfaces. -->
+  <section class="pnl" aria-labelledby="hr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="hr-c-h">Layer 2 · Platform contract</h2><span class="ref">HIG · iOS surfaces</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="c1"><span class="id">C1</span><div class="t">[Finding: the platform convention the surface breaks]
+          <small><span class="lbl">Violates</span> [HIG] [§n · check name]</small>
+          <small><span class="lbl">Evidence</span> [What the user expects, and what the surface does]</small>
+          <div class="meas over" style="--val:[n];--lim:5;--max:8">
+            <div class="mh"><span>Tabs</span><span class="mv">[n] · max 5</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>8</span></div>
+          </div>
+          <small><span class="lbl">Fix</span> [Conform, or break it as a named decision. State the trade.]</small>
+        </div><span class="side"><span class="verdict fail">P[0–3]</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Surface any place where the platform itself conflicts with a heuristic. Do not resolve it here.</div>
+  </section>
+
+  <!-- D · Layer 3. If no AI behavior is visible or felt, keep one item that reads "— Not applicable" with the class na. -->
+  <section class="pnl" aria-labelledby="hr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="hr-d-h">Layer 3 · AI interaction</h2><span class="ref">only if AI behavior shows</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="d1"><span class="id">D1</span><div class="t">[Finding: the AI behavior that erodes trust]
+          <small><span class="lbl">Violates</span> [AI-UX] [HAX, PAIR, or CHI '24 principle]</small>
+          <small><span class="lbl">Evidence</span> [What the user sees, and what it signals]</small>
+          <small><span class="lbl">Fix</span> [Studio-compatible fix]</small>
+        </div><span class="side"><span class="verdict fail">P[0–3]</span></span></li>
+        <li id="d2"><span class="id">D2</span><div class="t">[Finding: how the AI breaks the product's own AI principle]
+          <small><span class="lbl">Violates</span> [AI-PRINCIPAL] [the product's named principle]</small>
+          <small><span class="lbl">Evidence</span> [What the user sees]</small>
+          <small><span class="lbl">Fix</span> [Align with the principle before any other fix.]</small>
+        </div><span class="side"><span class="verdict fail">P[0–3]</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">An AI-PRINCIPAL finding needs a product decision before remediation.</div>
+  </section>
+
+  <!-- E · Tensions. If there is none, keep one item that reads "None." -->
+  <section class="pnl" aria-labelledby="hr-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="hr-e-h">Tensions</h2><span class="ref">for leadership to decide</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="e1"><span class="id">E1</span><span class="t">[Where the canonical fix conflicts with the parti or the AI principle]<small>[The canonical fix is X. In this product, X would cause Y. This is the trade.]</small></span><span class="side">[TENSION] · cd</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The heurist surfaces a tension. It never resolves one alone.</div>
+  </section>
+
+  <!-- F · Priority and next gate. Priority order cites finding ids. The top item is the single most important action. -->
+  <section class="pnl" aria-labelledby="hr-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="hr-f-h">Priority and next gate</h2><span class="ref">cites B · C · D</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="f1"><span class="id">F1</span><span class="t">[Top priority: the single most important action]</span><span class="side">[B# / C# / D#]</span></li>
+        <li id="f2"><span class="id">F2</span><span class="t">[Next priority, ordered by severity and impact]</span><span class="side">[B# / C# / D#]</span></li>
+        <li id="f3"><span class="id">F3</span><span class="t">Every P0 and P1 is resolved, or accepted with reasoning, before ship.</span><span class="side">Next gate</span></li>
+        <li id="f4"><span class="id">F4</span><span class="t">Fixes favor removal or redesign over additive band-aids. No tooltip papers over a structural problem.</span><span class="side">Next gate</span></li>
+      </ol>
+      <!-- Open counts. Add the class over when a count breaks its limit. -->
+      <div class="meas" style="--val:[n];--lim:0;--max:[max]">
+        <div class="mh"><span>Open P0</span><span class="mv">[n] · max 0</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+      </div>
+      <div class="meas" style="--val:[n];--lim:0;--max:[max]">
+        <div class="mh"><span>Open P1, not accepted</span><span class="mv">[n] · max 0</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
+      </div>
+    </div>
+    <div class="pnl-f">P0 blocks the task or breaks trust. P1 is major friction. P2 is minor. P3 is polish. Never inflate severity to force attention.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>
