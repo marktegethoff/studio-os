@@ -56,7 +56,7 @@ Example rows: `| SAVE (v) | approved | Add an item to Saved |` and `| bookmark (
 4. Mark shipping product copy `data-ste="copy"`. The checker applies the dictionary check only.
 5. Give the `.orig` class (a quoted draft with red rule breaks) `data-ste="off"`. The class alone skips nothing.
 
-The checker always skips `<script>`, `<style>`, `<svg>`, `<pre>`, `<code>`, and `<head>` content. It also skips bracketed placeholders `[…]`.
+The checker always skips `<script>`, `<style>`, `<svg>`, `<pre>`, `<code>`, and `<head>` content. It also skips bracketed placeholders `[…]`. A sentence ends at `.` `!` `?`, and at the label separators `·` and `•`. Headings and `th` cells are labels: the checker does not length-check them.
 
 ## The checker
 

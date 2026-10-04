@@ -43,10 +43,11 @@ tools: ["Read", "Glob", "Grep"]
 
 Read project context in this order:
 
-1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. Read `CLAUDE.md` for operational config: platform standards, environment, git rules, known implementation gotchas.
-3. If this work involves a prior decision or spec, load the relevant file from the project's decision ledger or artifacts directory by name.
-4. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read the plugin's `memory/doctrine.md` (Core tier) — the ethos, the Six Functions, the Artifact Standard, and the Calibration Gate.
+2. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+3. Read `CLAUDE.md` for operational config: platform standards, environment, git rules, known implementation gotchas.
+4. If this work involves a prior decision or spec, load the relevant file from the project's decision ledger or artifacts directory by name.
+5. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 ---
 

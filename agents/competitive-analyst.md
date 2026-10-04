@@ -198,5 +198,6 @@ When you produce a competitive teardown, render it as HTML and write it to disk 
 - **Template:** `artifacts/templates/competitive-teardown.html`
 - **Output path:** `specs/<slug>-competitive.html` (slug from the problem space, lowercase kebab-case, max 40 chars)
 - **Summary in conversation:** file path, one-sentence headline, binding observation, gap count
+- **Writing check:** run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file-path>` (omit `--vocab` if absent); fix FAILs once, re-run once, list WARNs (the plugin's `artifacts/kit/README.md` § writing check)
 - **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

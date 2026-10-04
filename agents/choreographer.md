@@ -169,5 +169,6 @@ When you produce a motion spec, render it as HTML and write it to disk — do no
 - **Template:** `artifacts/templates/motion-spec.html`
 - **Output path:** `design/<slug>-motion.html` (slug from the surface or transition name, lowercase kebab-case, max 40 chars)
 - **Summary in conversation:** file path, one-sentence headline, verdict distribution (Necessary / Orienting / Remove counts)
+- **Writing check:** run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file-path>` (omit `--vocab` if absent); fix FAILs once, re-run once, list WARNs (the plugin's `artifacts/kit/README.md` § writing check)
 - **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

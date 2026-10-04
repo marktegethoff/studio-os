@@ -113,6 +113,7 @@ For each eval: send the prompt(s) · score each criterion PASS / PARTIAL / FAIL 
 **Pass criteria:**
 - [ ] Surfaces assumptions across categories incl. at least one Low-confidence, high-impact one
 - [ ] Names exactly one binding assumption (the one whose failure makes the feature worthless)
+- [ ] Scores confidence and impact 1–3 each and multiplies, so the ranking is a number, as `artifacts/templates/risk-register.html` does
 - [ ] Each assumption is a testable claim ("users will send AI-drafted replies without heavy editing"), not a hope
 - [ ] Provides a cheap validation path for the binding assumption
 - [ ] Does not recommend whether to proceed

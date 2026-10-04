@@ -538,7 +538,7 @@ function finish_file(   i) {
 BEGIN {
   nfail = 0; nwarn = 0
 
-  bn = split("p li td th dd dt div blockquote figcaption section br tr ul ol dl table thead tbody tfoot header footer main nav aside article figure form fieldset caption summary details address hr h1 h2 h3 h4 h5 h6 body html head pre button label option legend", tmp, " ")
+  bn = split("p li td th dd dt div blockquote figcaption section br tr ul ol dl table thead tbody tfoot header footer main nav aside article figure form fieldset caption summary details address hr h1 h2 h3 h4 h5 h6 body html head pre button label option legend small", tmp, " ")
   for (bi = 1; bi <= bn; bi++) isblock[tmp[bi]] = 1
   bn = split("meta br img hr input link source col wbr area base embed param track", tmp, " ")
   for (bi = 1; bi <= bn; bi++) isvoid[tmp[bi]] = 1

@@ -66,7 +66,8 @@
 #        valid <meta name="studio:genre"> and has no FAIL (sentence over the
 #        genre's limit). With --project: the project's design/ specs/ reviews/
 #        decisions/ HTML, with --vocab from .claude/memory/design-vocabulary.md
-#        when present. ste-check WARNs are counted per file as one lint WARN.
+#        when present; there a missing genre meta is a WARN (a pre-1.8 artifact).
+#        ste-check WARNs are counted per file as one lint WARN.
 #   IBR  included-by-reference         — project-level                  (FAIL)
 #        the invariant the design exists to protect.
 #        Runs regardless of scaffold_state.
@@ -836,7 +837,7 @@ for mf in "$PLUGIN_ROOT"/memory/*.md; do
 done
 CORE_MEMORY_NAMES="${CORE_MEMORY_NAMES#|}"
 USER_TIER_PREFIX='(~|\$HOME|\$\{HOME\})/\.claude/memory/'
-DOCTRINE_TERMS='Six Functions|Artifact Standard|Calibration Gate|Decision hierarchy|Definition of Finished|Communication Standard|Behavioral Rules|Process Sequence|Ethos'
+DOCTRINE_TERMS='Six Functions|Artifact Standard|Calibration Gate|Decision hierarchy|Definition of Finished|Communication Standard|Behavioral Rules|Process Sequence|Minimum Team|Mantra'
 
 r10_hits=0
 for f in "${AGENT_FILES[@]}" "${SKILL_FILES[@]}"; do
@@ -1181,7 +1182,8 @@ fi
 # limit is a FAIL — so the templates teach the writing they enforce:
 #   plugin mode   artifacts/templates/*.html and docs/examples/*.html
 #   --project     the project's design/ specs/ reviews/ decisions/ HTML, with
-#                 --vocab from .claude/memory/design-vocabulary.md when present
+#                 --vocab from .claude/memory/design-vocabulary.md when present;
+#                 a missing genre meta there is a WARN, not a FAIL (pre-1.8)
 # ste-check owns the rules (the meta is its FAIL too); the lint lists each
 # finding. ste-check WARNs (hedges, -ing in procedure, dictionary words, a
 # quoted draft without data-ste="off") are counted per file as one lint WARN and
@@ -1199,10 +1201,12 @@ r13_flush_warns() {
   warn "$1 — $2 writing WARN, first: ${3% — \"*} — list them with evals/ste-check.sh (R13)"
 }
 
-# ste_lint <dir> <vocab-or-empty> <file>...   (files relative to <dir>, or absolute)
+# ste_lint <dir> <vocab-or-empty> <legacy-ok 0|1> <file>...   (files relative to <dir>, or absolute)
+# legacy-ok=1 (project artifacts): a missing genre meta is a WARN, not a FAIL —
+# a pre-1.8 artifact predates the meta.
 ste_lint() {
-  local dir="$1" vocab="$2" out rc line wfile="" wn=0 wfirst="" f
-  shift 2
+  local dir="$1" vocab="$2" legacy="$3" out rc line wfile="" wn=0 wfirst="" f
+  shift 3
   local args=()
   [[ -n "$vocab" ]] && args+=(--vocab "$vocab")
   out="$(cd "$dir" && bash "$STE_CHECK" ${args[@]+"${args[@]}"} "$@" 2>&1)"; rc=$?
@@ -1214,6 +1218,13 @@ ste_lint() {
   r13_checked=$((r13_checked + $#))
   while IFS= read -r line; do
     case "$line" in
+      "FAIL  "*"missing studio:genre meta"*)
+        if [[ "$legacy" == 1 ]]; then
+          f="${line#FAIL  }"; f="${f%%:*}"
+          warn "$f — legacy artifact (pre-1.8), no genre meta — add one to check its writing (R13)"
+        else
+          fail "${line#FAIL  } (R13)"; r13_hits=$((r13_hits + 1))
+        fi ;;
       "FAIL  "*)
         fail "${line#FAIL  } (R13)"; r13_hits=$((r13_hits + 1)) ;;
       "WARN  "*)
@@ -1240,7 +1251,7 @@ else
   if [[ ${#R13_PLUGIN_FILES[@]} -eq 0 ]]; then
     info "no templates or examples — R13 N/A for the plugin"
   else
-    ste_lint "$PLUGIN_ROOT" "" "${R13_PLUGIN_FILES[@]}"
+    ste_lint "$PLUGIN_ROOT" "" 0 "${R13_PLUGIN_FILES[@]}"
   fi
 
   if [[ -n "$PROJECT_ROOT" ]]; then
@@ -1256,7 +1267,7 @@ else
     if [[ ${#R13_PROJECT_FILES[@]} -eq 0 ]]; then
       info "project has no design/ specs/ reviews/ decisions/ HTML — R13 N/A for the project"
     else
-      ste_lint "$PROJECT_ROOT" "$R13_VOCAB" "${R13_PROJECT_FILES[@]}"
+      ste_lint "$PROJECT_ROOT" "$R13_VOCAB" 1 "${R13_PROJECT_FILES[@]}"
     fi
   fi
 fi

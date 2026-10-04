@@ -190,5 +190,6 @@ When you produce any of these artifacts, render them as HTML and write to disk �
 
 For all:
 - **Summary in conversation:** file path, one-sentence headline, string count or key finding
+- **Writing check:** run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file-path>` (omit `--vocab` if absent); fix FAILs once, re-run once, list WARNs (the plugin's `artifacts/kit/README.md` § writing check)
 - **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

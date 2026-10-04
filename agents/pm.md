@@ -45,9 +45,10 @@ tools: ["Read", "Glob", "Grep", "WebSearch"]
 
 Read project context in this order:
 
-1. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
-2. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
-3. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
+1. Read the plugin's `memory/doctrine.md` (Core tier) — the ethos, the Six Functions, the Artifact Standard, and the Calibration Gate.
+2. Read `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session.
+3. If this work involves a prior decision, load the relevant file from `decisions/` by name. Do not scan the full directory.
+4. If `.claude/memory/project-context.md` does not exist, read `CLAUDE.md` for product context and state this clearly.
 
 Memory informs judgment. A validated problem can still be the wrong problem in new context.
 

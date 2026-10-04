@@ -12,7 +12,7 @@ The eight graph-declaring skills (critique · review · design · ideate · solv
 
 ## Writing check — applies to every artifact-emitting skill
 
-The nine artifact-emitting skills (shape · discover · design · critique · review · measure · ideate · handoff · experiment) end their emit step with the writing check (the plugin's `artifacts/kit/README.md` § writing check). Run each once in a project that has `.claude/memory/design-vocabulary.md` and once in one that does not, and seed one run with a sentence over the genre's limit so the first check FAILs.
+The ten artifact-emitting skills (shape · discover · design · critique · review · measure · ideate · handoff · experiment · organize) end their emit step with the writing check (the plugin's `artifacts/kit/README.md` § writing check). Run each once in a project that has `.claude/memory/design-vocabulary.md` and once in one that does not, and seed one run with a sentence over the genre's limit so the first check FAILs.
 **Pass:** runs `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh` on each file written, with `--vocab .claude/memory/design-vocabulary.md` when that file exists and without it when it does not · fixes each FAIL once, by shortening or splitting the sentence, and re-runs once · a FAIL that survives the re-run is reported, not looped · lists the remaining WARNs in the summary · the artifact declares `<meta name="studio:genre">` with the genre the skill's emit step names (the plugin's `memory/writing.md`).
 **Anti:** looping on FAILs (a third run, or editing until green) · skipping the check · an artifact with no `studio:genre` meta · `--vocab` pointed at a file that does not exist · WARNs dropped from the summary.
 
@@ -56,7 +56,7 @@ The nine artifact-emitting skills (shape · discover · design · critique · re
 
 ## discover — Eval: PM gate before the brief
 **Prompt:** "Run discovery on why users abandon onboarding."
-**Pass:** runs researcher → journey → assumptions → PM gate → brief, in sequence · PM gate precedes the brief · produces a validated brief · writes HTML artifact (user-journey template → specs/discovery_<slug>.html); markdown summary surfaces in conversation.
+**Pass:** runs researcher → journey → assumptions → PM gate → brief, in sequence · PM gate precedes the brief · produces a validated brief · writes HTML artifact (user-journey template, panels A–E, plus F research summary, G assumption register, H design brief with `data-genre="verdict"`, I next step → specs/discovery_<slug>.html); markdown summary surfaces in conversation.
 **Anti:** skips the PM gate; jumps to solutions; writes prose only without the HTML artifact.
 
 ## ideate — Eval: problem in, not solution
@@ -126,7 +126,7 @@ The nine artifact-emitting skills (shape · discover · design · critique · re
 
 ## handoff — Eval: complete production package
 **Prompt:** "Prepare this validated prototype for engineering."
-**Pass:** requires a validated prototype · produces all states + flows, synthetic data, UAT scenarios, and a build spec with design-system token translation · writes HTML artifact (state-inventory template → design/handoff_<slug>.html); markdown summary surfaces in conversation.
+**Pass:** requires a validated prototype · produces all states + flows, synthetic data, UAT scenarios, and a build spec with design-system token translation · writes HTML artifacts (state-inventory template → design/handoff_<slug>.html, which cites the spec in its Cites cell; component-spec sheet → design/handoff_<slug>-spec.html, Workflow cell `/studio:handoff`); markdown summary surfaces in conversation.
 **Anti:** happy-path only; no DS token mapping; missing UAT; writes prose only without the HTML artifact.
 
 ## simplify — Eval: DE gates plan and result

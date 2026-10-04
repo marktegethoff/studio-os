@@ -120,7 +120,7 @@ Templates live in `artifacts/templates/`. Each is owned by the agent or the skil
 | Copy deck | writer | all strings, reviewable as language |
 | Competitive teardown | competitive-analyst | read before a brief |
 | Heuristic report | heurist | P0–P3 findings |
-| Decision record | architect / any | an HTML view over a ledger entry |
+| Decision record | architect (`/studio:organize` for the layout record) | an HTML view over a ledger entry |
 | Critique report | `/studio:critique` | nine-discipline findings; triage |
 | Leadership review | `/studio:review` | **gates ship / merge** |
 | Task brief | `/studio:shape --task` | **gates `/implement`** |

@@ -38,6 +38,7 @@ After creating folders, write a decision record:
 - **Template:** `artifacts/templates/decision-record.html`
 - **Output path:** `decisions/<date>-layout.html` (date as YYYY-MM-DD)
 - **Record:** which folders were created, whether project-context.md was updated, date
+- **Writing check, `verdict` genre:** run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
 
 Confirm to the user:
 
@@ -104,6 +105,7 @@ Write a decision record of what was moved:
 
 - **Template:** `artifacts/templates/decision-record.html`
 - **Output path:** `decisions/<date>-reconcile.html`
+- **Writing check, `verdict` genre:** run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
 
 ---
 
