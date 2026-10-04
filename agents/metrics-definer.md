@@ -38,6 +38,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: orange
 tools: ["Read", "Write"]
 artifact: metrics-plan

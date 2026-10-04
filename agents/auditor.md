@@ -34,6 +34,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: blue
 tools: ["Read", "Glob", "Grep", "Write", "Edit"]
 ---

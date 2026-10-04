@@ -36,6 +36,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: yellow
 tools: ["Read", "Write"]
 artifact: design-brief

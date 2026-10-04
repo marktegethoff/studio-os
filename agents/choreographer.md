@@ -30,6 +30,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: cyan
 tools: ["Read", "Glob", "Write"]
 artifact: motion-spec

@@ -26,6 +26,7 @@ description: >
   </commentary>
   </example>
 model: sonnet
+effort: medium
 color: magenta
 tools: ["Read", "Glob", "Write"]
 artifacts: [ascii-wireframe, state-inventory, flow-diagram]

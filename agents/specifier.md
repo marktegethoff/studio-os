@@ -30,7 +30,8 @@ description: >
   </commentary>
   </example>
 
-model: haiku
+model: sonnet
+effort: medium
 color: blue
 tools: ["Read", "Glob", "Write"]
 artifacts: [component-spec, state-inventory]

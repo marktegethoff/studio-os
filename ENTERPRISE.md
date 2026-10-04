@@ -41,7 +41,7 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 | Agent | Model | Purpose |
 |---|---|---|
 | `pm` | Opus | Problem validation gate — upstream of all design |
-| `design-director` | Opus | Design ship/no-ship gate |
+| `cd` | Opus | Design ship/no-ship gate |
 | `de` | Opus | Engineering merge gate |
 | `heurist` | Opus | Usability evaluation |
 | `auditor` | Sonnet | Documentation coherence |

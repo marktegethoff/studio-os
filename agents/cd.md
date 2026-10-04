@@ -36,6 +36,7 @@ description: >
   </example>
 
 model: opus
+effort: high
 color: magenta
 tools: ["Read", "Glob", "Grep"]
 ---

@@ -36,6 +36,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: blue
 tools: ["Read", "Write", "Edit", "Glob", "Grep", "Bash"]
 ---

@@ -37,6 +37,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: purple
 tools: ["Read", "Write"]
 artifact: user-narrative

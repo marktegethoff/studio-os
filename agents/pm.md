@@ -36,6 +36,7 @@ description: >
   </example>
 
 model: opus
+effort: high
 color: green
 tools: ["Read", "Glob", "Grep", "WebSearch"]
 ---

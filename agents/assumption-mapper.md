@@ -37,6 +37,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: red
 tools: ["Read", "Write"]
 artifact: risk-register

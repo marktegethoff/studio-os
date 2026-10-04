@@ -29,6 +29,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: magenta
 tools: ["Read", "Glob"]
 ---

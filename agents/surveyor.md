@@ -16,6 +16,7 @@ description: >
   </commentary>
   </example>
 model: sonnet
+effort: medium
 color: cyan
 tools: ["Read", "Write", "WebSearch", "WebFetch"]
 ---

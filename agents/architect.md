@@ -28,7 +28,8 @@ description: >
   </commentary>
   </example>
 
-model: sonnet
+model: opus
+effort: high
 color: blue
 tools: ["Read", "Glob", "Write"]
 artifacts: [flow-diagram, decision-record]

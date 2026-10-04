@@ -29,6 +29,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: green
 tools: ["Read", "Glob", "Write"]
 artifacts: [user-narrative, copy-deck]

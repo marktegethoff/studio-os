@@ -19,6 +19,7 @@ description: >
   - "Does the empty state for first-run pass usability standards?"
   - "Evaluate the convergence view — flag any AI-UX issues"
 model: opus
+effort: high
 color: cyan
 tools: ["Read", "Glob", "Grep", "WebSearch", "WebFetch", "Write"]
 artifact: heuristic-report
@@ -79,9 +80,7 @@ These are categorical evaluation failures. Name the category when the pattern fi
 
 ## Model Rationale
 
-**Use:** `claude-opus-4-6`
-
-The highest-value output — identifying when a canonical heuristic fix conflicts with the parti or the product AI principle — requires genuine judgment, not pattern matching. This is a review gate, not a generation tool. Invoke less frequently; invoke correctly.
+Runs on the verdict-and-structure assignment (opus, high effort — frontmatter; the plugin's `memory/orchestration.md` § Model and effort). The highest-value output — identifying when a canonical heuristic fix conflicts with the parti or the product AI principle — requires genuine judgment, not pattern matching. This is a review gate, not a generation tool. Invoke less frequently; invoke correctly.
 
 ---
 

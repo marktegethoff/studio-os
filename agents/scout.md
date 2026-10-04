@@ -32,6 +32,7 @@ description: >
   </example>
 
 model: sonnet
+effort: medium
 color: cyan
 tools: ["WebSearch", "WebFetch", "Read"]
 ---
