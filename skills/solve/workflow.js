@@ -47,7 +47,7 @@ const REFUTE_SCHEMA = {
 }
 
 // Every refutation goes through here: adversary model when configured, one fallback to the agent's own model,
-// and the model that actually ran is recorded. A refutation that could not run returns ran:false — never null.
+// and the model used is recorded, marked (fallback) after a rerun. A refutation that could not run returns ran:false — never null.
 async function refute(prompt, opts) {
   if (ADVERSARY_MODEL) {
     const r = await agent(prompt, { ...opts, schema: REFUTE_SCHEMA, model: ADVERSARY_MODEL })

@@ -30,7 +30,8 @@
 #        ${user_config.adversary_model}; (b) its workflow.js defines
 #        `const ADVERSARY_MODEL =` and `async function refute(`; (c) REFUTE_SCHEMA
 #        and ADVERSARY_MODEL appear only in their const lines and inside
-#        refute(); (d) refute() is called at least once.
+#        refute(); (d) refute() is called at least once; (e) its SKILL.md
+#        passes `adversaryModel` to the executor.
 #   R8   auto-contract stub            — skills/**                      (FAIL)
 #        any skill mentioning --auto must reference the Auto-Mode
 #        Safety Contract in memory/orchestration.md (no inline forks).
@@ -671,7 +672,9 @@ for f in "${SKILL_FILES[@]}"; do
   # R7.d — refutation nodes. A node id beginning `refute` marks a refutation; the
   # skill must then (a) cite the adversary_model setting in its prose path and
   # (b) route every refutation in its executor through one refute() helper that
-  # alone touches REFUTE_SCHEMA and ADVERSARY_MODEL (c), and call it (d).
+  # alone touches REFUTE_SCHEMA and ADVERSARY_MODEL (c), and call it (d); and
+  # (e) pass the setting to the executor as `adversaryModel` — without it the
+  # executor silently runs as `agent` forever.
   refute_ids="$(printf '%s\n' "$scan" | awk '/^REFUTE /{print $2}' | tr '\n' ' ')"
   if [[ -n "$refute_ids" ]]; then
     refute_ids="${refute_ids% }"
@@ -680,6 +683,11 @@ for f in "${SKILL_FILES[@]}"; do
 
     if ! grep -qF -- '${user_config.adversary_model}' "$f"; then
       fail "$rel — refutation node(s) ($refute_ids) but SKILL.md never cites \`\${user_config.adversary_model}\` (R7.d.a)"
+      r7_hits=$((r7_hits + 1))
+    fi
+
+    if ! grep -qF -- 'adversaryModel' "$f"; then
+      fail "$rel — refutation node(s) ($refute_ids) but SKILL.md never passes \`adversaryModel\` to the executor (R7.d.e)"
       r7_hits=$((r7_hits + 1))
     fi
 

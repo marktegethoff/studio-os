@@ -122,7 +122,7 @@ Claude Code does not rescue a failed adversary call. Billing and rate-limit erro
 
 **The advisor.** Claude Code's advisor tool (experimental, Anthropic API only; https://code.claude.com/docs/en/advisor) lets a configured stronger model advise at decision points. It complements a refutation node and never replaces one: it reads the author's full transcript, so it is anchored, not blind, and the model decides when to call it, so its timing is improvised, not declared topology. No skill depends on it; a run without an advisor is complete.
 
-`evals/lint-agnostic.sh` R11 reconciles every agent's frontmatter model and effort with the table above, holds pm, cd, and de at opus-or-fable with effort ≥ high, and flags a hard-coded model where the setting or the frontmatter must decide. R7.d requires every graph with a `refute*` node to read `${user_config.adversary_model}` in its `SKILL.md` and to route every refutation through `refute()` in its `workflow.js`, the only place `ADVERSARY_MODEL` is used.
+`evals/lint-agnostic.sh` R11 reconciles every agent's frontmatter model and effort with the table above, holds pm, cd, and de at opus-or-fable with effort ≥ high, and flags a hard-coded model where the setting or the frontmatter must decide. R7.d requires every graph with a `refute*` node to read `${user_config.adversary_model}` in its `SKILL.md`, pass it to the executor as `adversaryModel`, and route every refutation through `refute()` in its `workflow.js`, the only place `ADVERSARY_MODEL` is used.
 
 ---
 
