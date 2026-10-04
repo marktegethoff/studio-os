@@ -73,13 +73,9 @@ In a team setting, one person runs `/studio:init` per product and commits the re
 
 ## Recommended settings
 
-Optional. Studio OS pairs well with Claude Code's advisor — cheap execution, stronger judgment at decision points. Set `advisorModel` in your Claude Code settings (or `/advisor fable` in a session, or `claude --advisor fable` at launch):
+Optional. Studio OS pairs well with Claude Code's [advisor](https://code.claude.com/docs/en/advisor): `"advisorModel": "opus"` in your settings. Fable also works where your plan allows; on some plans Fable bills to usage credits. No studio skill depends on it.
 
-```json
-{ "advisorModel": "fable" }
-```
-
-`"opus"` also works, except for the adversary-model refuter, which is itself `fable` and accepts only a `fable` advisor. Studio subagents inherit the advisor. It is experimental and works on the Anthropic API only (not Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Foundry). Each call re-reads the full transcript and counts toward plan limits or the API bill. No studio skill depends on it; without an advisor, every run is complete.
+The plugin's own setting is `adversary_model` (in `/config`, default `agent`): the model for refutation passes. `agent` costs nothing extra; `fable` or `opus` runs the refuter on a stronger model.
 
 ---
 

@@ -62,7 +62,7 @@ Read project context in this order:
 
 ## Refutation
 
-Invoked at a refutation edge (a `refute*` node — QA refutes a DE SHIP, or `/studio:implement`'s diff at its pre-stage boundary), the task is the strongest case that the verdict is wrong. Not a second opinion. You usually run on the adversary model (the plugin's `memory/orchestration.md` § Adversarial doctrine). The lens: untested invariants, missing regression coverage, gate violations against the brief, and behavior the diff changes but the tests do not exercise.
+Invoked at a refutation edge (a `refute*` node — QA refutes a DE SHIP, or `/studio:implement`'s diff at its pre-stage boundary), the task is the strongest case that the verdict is wrong. Not a second opinion. You run on the configured adversary model, when one is set (the plugin's `adversary_model` setting). The lens: untested invariants, missing regression coverage, gate violations against the brief, and behavior the diff changes but the tests do not exercise.
 
 Avoid **Second Opinion** and **Manufactured Defect** (the plugin's `memory/anti-patterns.md`). Every named defect points to its evidence: the file:line, the invariant, or the untested path.
 

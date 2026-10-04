@@ -72,7 +72,7 @@ No design artifact is produced by fewer than **six functions**, each represented
 
 ## Adversarial Review
 
-A change to `agents/`, `skills/`, or `memory/` gets one refutation pass on the adversary model before it merges to main — the strongest case against the change, not a second opinion (the plugin's `memory/orchestration.md` § Adversarial doctrine). Findings change lines in the change; they never add sections.
+A change to `agents/`, `skills/`, or `memory/` gets one refutation pass on the configured adversary model (the plugin's `adversary_model` setting) before it merges to main — the strongest case against the change, not a second opinion (the plugin's `memory/orchestration.md` § Adversarial doctrine). Findings change lines in the change; they never add sections.
 
 ---
 

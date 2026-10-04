@@ -17,5 +17,13 @@
     "workflow",
     "standard-works",
     "studio-os"
-  ]
+  ],
+  "userConfig": {
+    "adversary_model": {
+      "type": "string",
+      "title": "Adversary model",
+      "description": "Model for refutation passes (refute-* graph nodes; /studio:implement's halt diagnosis and pre-stage refutation). agent = each refuter runs on its own frontmatter model (default, no extra cost). fable or opus = a stronger, independent refuter at the moments that matter; fable may bill to usage credits.",
+      "default": "agent"
+    }
+  }
 }

@@ -73,6 +73,12 @@ Not a rejection — an open question: today the studio *reasons, critiques, and 
 
 Skills now read `stack`, `build_cmd`, `test_cmd`, and related keys from `project-context.md`; no skill hardcodes a path, command, or framework. Engineer discipline delegated to the project's declared specialist. (2026-05-27)
 
+## 12. Auto-mode guard hook — *not built*
+
+A PreToolUse tripwire for the Auto-Mode Safety Contract's items 2–4 (push, tag, merge), armed by a **run marker**: the orchestrator writes it at `--auto` run start and removes it at the final summary. It resolves `-C`/`cd` targets before judging a command. A tripwire, not enforcement — the contract stays the rule.
+
+- **Why the branch-armed draft was withdrawn (1.7.0 review):** armed by `auto/` branch name, it missed real runs (a feature branch, a worktree driven by `git -C`/`cd`, merges without a checkout) and blocked humans on any `auto/` branch, the morning review included. It also matched command text, not commands.
+
 ### Considered, not pursuing (for now)
 
 - **Browser/Chrome extension** — Studio OS doesn't operate on web pages; out of scope for now.

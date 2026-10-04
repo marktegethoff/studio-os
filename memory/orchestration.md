@@ -16,7 +16,7 @@ Every multi-agent skill declares its topology in exactly one fenced ` ```graph `
 skill: <name>
 cost: <low|medium|high> — <one-line spend rationale>
 nodes:
-  <id>   agent:<agent-name> [owner:<deliverable>] [join] [adversary]
+  <id>   agent:<agent-name> [owner:<deliverable>] [join]
   <id>   gate[:<what it verifies>]
   <id>   human decides:<the decision only the human can make>
   <id>   router(<option-a>|<option-b>|...)
@@ -33,7 +33,7 @@ edges:
 
 | Type | Meaning | Existing construct it names |
 |---|---|---|
-| `agent:<name>` | A discipline agent from `agents/`. Executes one node's work. `adversary` runs the node on the adversary model (see § Model and effort). | "Apply the [Discipline] discipline" / subagent spawn |
+| `agent:<name>` | A discipline agent from `agents/`. Executes one node's work. | "Apply the [Discipline] discipline" / subagent spawn |
 | `gate` | A verdict node — work stops here unless it passes. | PM gate · CD SHIP/NO-SHIP · DE review · slop test |
 | `human` | A blocking human decision. Skipped in `--auto`. | PAUSE block |
 | `router(...)` | Mechanical branch on declared options. Not a judgment call. | Phase gates (exploratory / in-progress / refinement), thresholds |
@@ -76,7 +76,7 @@ The studio's quality comes from structured disagreement between disciplines. The
 
 - **Blind fan-out.** Members of a fan-out never see each other's unfinished output. Independence is what produces genuine disagreement; agents that read each other converge early and produce consensus slop. Brief each member from the shared inputs only.
 - **Preserved dissent at joins.** A join synthesizes, but named dissents travel forward to the gate. Verdict artifacts include a dissent ledger: which discipline disagreed, with what, and why it was overruled. Averaging disagreement away is **Consensus Laundering** (see the plugin's `memory/anti-patterns.md`).
-- **Refutation edge on ship verdicts.** A SHIP from CD (design) or DE (engineering) gets one bounded adversarial pass: the critic (design) or qa (engineering) is prompted explicitly to *refute* the verdict — strongest case against, not a second opinion. SHIP stands only if the refutation fails. `loop max:1` — the refutation cannot stall shipping; it can only send work back once with named defects. The refutation runs on **the adversary model**: a refuter on the same model as the verdict shares its blind spots — the discipline supplies the lens, the model supplies the independence. Refutation is a role, not an agent. The refuter avoids **Second Opinion** and **Manufactured Defect** (the plugin's `memory/anti-patterns.md`). `/studio:implement` also refutes at its pre-stage boundary (qa) and diagnoses a second verify failure with `de`, both on the adversary model.
+- **Refutation edge on ship verdicts.** A SHIP from CD (design) or DE (engineering) gets one bounded adversarial pass: the critic (design) or qa (engineering) is prompted explicitly to *refute* the verdict — strongest case against, not a second opinion. SHIP stands only if the refutation fails. `loop max:1` — the refutation cannot stall shipping; it can only send work back once with named defects. Refutation is a role, not an agent: the discipline supplies the lens, the model supplies the independence. By default the refuter runs on its own frontmatter model; the plugin's `adversary_model` setting puts it on a stronger, independent one (§ Model and effort). A refutation that could not run reads "Refutation: did not run" and leaves the verdict labeled **unrefuted** — never silently passed. The refuter avoids **Second Opinion** and **Manufactured Defect** (the plugin's `memory/anti-patterns.md`). `/studio:implement` also refutes at its pre-stage boundary (qa) and diagnoses a second verify failure with `de`, both through the same setting.
 - **The slop gate is topology.** Every artifact-producing graph carries a `gate` node running the seven markers of `/studio:studio-slop` before its output `task` node. The quality floor is a structural property of the graph, not an opt-in skill.
 
 ---
@@ -106,21 +106,23 @@ Parallelism buys quality and wall-clock with tokens. Spend deliberately:
 
 Model follows the kind of thinking; effort follows the cost of being wrong.
 
-| Function | Agents | Model | Effort | Why |
+| Kind of work | Agents | Model | Effort | Why |
 |---|---|---|---|---|
-| Verdict & structure | pm, cd, de, architect, heurist | opus | high | Reversal cost exceeds run cost; invoked once per run |
+| Verdict & structure | pm, cd, de, architect, heurist | opus | high | The decisions everything downstream builds on; reversal cost exceeds run cost |
 | Reduction & verification | critic, qa | sonnet | high | Judgment over the artifact; also the refutation lenses |
-| Craft & analysis | the other 25 Sonnet agents (incl. specifier) | sonnet | medium | Bulk of the tokens; quality lives in the discipline, not the reasoning budget |
-| Checklist | accessibility, design-validator, historian | haiku | — (Haiku takes no effort) | Verification against known criteria |
-| Refutation | the refuting discipline at a `refute*` / `adversary` node | fable (at invocation) | the agent's own | Independence from the verdict's model |
+| Craft & analysis | every other agent | sonnet | medium | Bulk of the tokens; quality lives in the discipline, not the reasoning budget |
+| Checklist | accessibility, design-validator, historian | haiku | — | Verification against known criteria; Haiku takes no effort |
+| Refutation | the refuter at a `refute*` node | `adversary_model` (plugin setting; default `agent`) | the agent's own | Independence from the verdict's model, where it matters |
 
-Effort in agent frontmatter pins each agent regardless of the session's level — a session at `/effort xhigh` does not drag craft agents with it. Agent frontmatter is the source of truth: other docs cite the function above, never per-agent values.
+Agent frontmatter is the source of truth: other docs cite the kind of work above, never per-agent values. Frontmatter effort pins an agent regardless of the session's level (not `CLAUDE_CODE_EFFORT_LEVEL`). What the pins buy: the craft agents' `medium` equals Sonnet 5.5's own default, so it changes nothing at default and matters when the session runs above medium (`/effort high|xhigh`, ultracode) — it stops craft agents inheriting that cost. The `high` pins are an upgrade, not a saving: Opus 5.5 and Sonnet 5.5 both default to `medium`.
 
-The adversary model is `fable`. If it is unavailable, Claude Code substitutes per its allowlist rules and the refutation still runs. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` pins every subagent to one model and removes the independence — the output then says "Refutation: same-model".
+**The adversary model** is the plugin's `adversary_model` setting (`userConfig` in `plugin.json`; a row in `/config`). `agent`, the default, runs each refuter on its own frontmatter model at no extra cost. `fable`, `opus` or `sonnet` runs it on that model — a stronger, independent refuter at the moments that matter; `fable` may bill to usage credits. Any other value, including an unsubstituted `${user_config.adversary_model}`, is `agent`. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` pins every subagent to one model and overrides the setting.
 
-**The advisor.** Claude Code's advisor tool (experimental, Anthropic API only) lets a configured stronger model advise the main model at decision points, and subagents inherit it. It complements a refutation node and never replaces one: it reads the author's full transcript, so it is anchored, not blind, and the model decides when to call it, so its timing is improvised, not declared topology. Refutation stays structural. Where a user has configured an advisor, the haiku, sonnet, and opus assignments above pair with an advisor of `fable` or `opus` — an adversary-model refuter is itself `fable` and accepts only a `fable` advisor — so craft agents get escalation at decision points without running the stronger model throughout. Skills may name the decision points where a consultation is expected ("if an advisor is configured, consult it before …"), but no skill depends on it; a run without an advisor is complete.
+Claude Code does not rescue a failed adversary call. Billing and rate-limit errors, an exhausted usage-credit balance included, fail it; a user-configured `fallbackModel` chain covers only overloaded, unavailable, and server errors. An `availableModels` allowlist block substitutes another model, with a warning only in interactive sessions. A dismissed usage-credits consent prompt continues the turn on the default model; a background session holds the prompt five minutes, then ends the turn without sending; `-p` bills Fable without asking. A workflow script cannot see a substitution or a dismissed prompt. So the studio plans for the failure it can see: `refute()` in each executor, and the prose path, rerun a failed adversary call once on the agent's own model, and the output records the model used, marked `(fallback)` after a rerun. That rerun is what makes the refutation still run.
 
-`evals/lint-agnostic.sh` R11 enforces the frontmatter invariants: valid model; effort present except on Haiku; verdict agents (pm, cd, de) at opus-or-fable with effort ≥ high; no model IDs or `[OPUS]`-style markers in prose. R7.d enforces adversary nodes: every `refute*` node carries `adversary`, and its executor declares `ADVERSARY_MODEL` and passes it.
+**The advisor.** Claude Code's advisor tool (experimental, Anthropic API only; https://code.claude.com/docs/en/advisor) lets a configured stronger model advise at decision points. It complements a refutation node and never replaces one: it reads the author's full transcript, so it is anchored, not blind, and the model decides when to call it, so its timing is improvised, not declared topology. No skill depends on it; a run without an advisor is complete.
+
+`evals/lint-agnostic.sh` R11 reconciles every agent's frontmatter model and effort with the table above, holds pm, cd, and de at opus-or-fable with effort ≥ high, and flags a hard-coded model where the setting or the frontmatter must decide. R7.d requires every graph with a `refute*` node to read `${user_config.adversary_model}` in its `SKILL.md` and to route every refutation through `refute()` in its `workflow.js`, the only place `ADVERSARY_MODEL` is used.
 
 ---
 
@@ -132,7 +134,7 @@ Each graph-declaring skill ships a sidecar `workflow.js` — a deterministic exe
 - **Conformance.** The executor's agent roster and phase titles must match the graph block's agent set and segments — `evals/lint-agnostic.sh` R7.c fails on divergence.
 - **Parity.** Prose path and executor path follow the same graph: same order, same gates, same bounded loops, same node-labeled outputs.
 
-**Agent teams.** Claude Code's experimental agent teams are not a studio executor. With teams enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`), an Agent call that names its subagent launches a teammate, and teammates can message each other — a blind fan-out run that way is not blind. Spawn fan-out members unnamed, or through `workflow.js`. A debate round (members see each other by design) may run as a team where the user has enabled teams; the graph is the contract either way. Agent definitions carry their model and effort into teammates, so the § Model and effort assignments hold under teams too.
+**Agent teams.** Claude Code's experimental agent teams are not a studio executor. With teams enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`), an Agent call that names its subagent launches a teammate, and teammates can message each other — a blind fan-out run that way is not blind. Spawn fan-out members unnamed, or through `workflow.js`.
 
 ---
 
@@ -148,8 +150,6 @@ If `--auto` appears in a skill's arguments, suppress PAUSE checkpoints (`human` 
 4. **No merge.** The orchestrator MUST NOT merge the auto branch into main or any other branch.
 5. **Commit allowed; bounded.** Commits to the auto branch are permitted (and encouraged — they create a reviewable checkpoint history). Each commit is one logical change with a clear message.
 6. **Final summary required.** The Output of every `--auto` run MUST include a "Branch" line naming the auto branch, a "Diff size" line (files changed, lines added/removed), and the exact `git checkout <branch>` + `git diff main...<branch>` commands the human can run to review in the morning.
-
-Items 2–4 are also enforced mechanically: the plugin's PreToolUse guard (`hooks/auto-guard.sh`) blocks push, tag creation, `release.sh`, `gh pr create|merge`, `gh release`, and checking out the primary branch while HEAD is on an `auto/` branch. The guard is a floor, not the contract — a blocked command is a stop condition to surface in the final summary, never something to route around.
 
 If any of conditions 1–4 cannot be satisfied (e.g., dirty tree, no git repo), the orchestrator MUST refuse to proceed and surface the blocking condition in the output. **Never bypass a guard to make a run succeed.**
 

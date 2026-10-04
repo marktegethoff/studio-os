@@ -38,15 +38,15 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 
 **Agents (7):**
 
-| Agent | Model | Purpose |
-|---|---|---|
-| `pm` | Opus | Problem validation gate — upstream of all design |
-| `cd` | Opus | Design ship/no-ship gate |
-| `de` | Opus | Engineering merge gate |
-| `heurist` | Opus | Usability evaluation |
-| `auditor` | Sonnet | Documentation coherence |
-| `luck` | Sonnet | Durability diagnostic for infrastructure decisions |
-| `competitive-analyst` | Sonnet | Structured competitive teardown |
+| Agent | Purpose |
+|---|---|
+| `pm` | Problem validation gate — upstream of all design |
+| `cd` | Design ship/no-ship gate |
+| `de` | Engineering merge gate |
+| `heurist` | Usability evaluation |
+| `auditor` | Documentation coherence |
+| `luck` | Durability diagnostic for infrastructure decisions |
+| `competitive-analyst` | Structured competitive teardown |
 
 **Skills (5):** `studio` · `discovery` · `measure` · `review` · `solve`
 
