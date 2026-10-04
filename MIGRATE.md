@@ -1,5 +1,7 @@
 # Studio OS — Cutover (run once)
 
+> **Historical.** The one-time 2026-05 cutover from the flat `~/.claude` install to the plugin, kept as a record. For a current install, see [INSTALL.md](INSTALL.md); the plugin id is `studio@standard-works`.
+
 This moves you from the old flat `~/.claude/agents` install to the **Studio OS plugin** — the new single source of truth. Everything before this lives on the branch `phase-0-studio-os-foundation`; `main` is untouched and nothing is pushed.
 
 ## The one-time updater

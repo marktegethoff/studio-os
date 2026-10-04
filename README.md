@@ -44,7 +44,7 @@ Product-agnostic. Useful for a solo practitioner; built for a team.
     <td colspan="2" align="center">
       <img src="docs/screenshots/drift-morning-heuristics.png"
            alt="Drift morning playback heuristic report" width="380" />
-      <br /><sub><b>The failure modes surfaced — and resolved — before code ships.</b></sub>
+      <br /><sub><b>The failure modes surfaced, each with a remediation, before code ships.</b></sub>
     </td>
   </tr>
 </table>
@@ -62,6 +62,8 @@ The differentiator is the gate structure. A designer does not run before a strat
 > **Distinguished Engineer** — the engineering gate. SHIP / REVISE / REJECT before any merge.
 
 When a verdict requires further work, each gate names the specific agent or skill that resolves it — not just the problem.
+
+**Since 1.7:** model and effort follow the kind of work — verdict and structure agents (the gates, `architect`, `heurist`) run on Opus at high effort, craft agents on Sonnet at medium, checklist agents on Haiku — and an opt-in `adversary_model` setting runs refutation passes on a stronger, independent model. **Since 1.8:** artifacts are built to read on one page — a title block, lettered panels with citable items, limits drawn as measures, dimensioned wireframes — and each declares a writing genre that `evals/ste-check.sh` checks. Settings: [INSTALL.md § Recommended settings](INSTALL.md#recommended-settings). Detail: [CHANGELOG.md](CHANGELOG.md).
 
 <details>
 <summary>Studio structure — three tiers</summary>
@@ -85,15 +87,22 @@ claude plugin marketplace add marktegethoff/studio-os
 claude plugin install studio@standard-works
 ```
 
-Update any time with `claude plugin update studio-os`. Agents and skills are namespaced (`studio:designer`, `/studio:design`) so they never collide with your own.
+Agents and skills are namespaced (`studio:designer`, `/studio:design`) so they never collide with your own.
 
-**Develop / edit-live** (the source becomes the install — edits go live with `/reload-plugins`):
+**Update:**
+
+```bash
+claude plugin marketplace update standard-works
+claude plugin update studio@standard-works
+```
+
+**Develop / edit-live** (loads the source in place for that session — edits apply with `/reload-plugins`):
 
 ```bash
 claude --plugin-dir /path/to/studio-os
 ```
 
-**Fallback** (non-plugin contexts): `./install.sh` copies agents and skills into `~/.claude/`.
+**Fallback** (non-plugin contexts): `./install.sh` copies agents and each skill's `SKILL.md` into `~/.claude/`. It is a reduced install — no namespace, memory, templates, executors, hook, or `adversary_model`. See [INSTALL.md](INSTALL.md).
 
 **Then set up product context:**
 
@@ -101,33 +110,46 @@ claude --plugin-dir /path/to/studio-os
 /studio:init
 ```
 
-This interviews you for your product's purpose, principles, invariants, and stack; scaffolds production and canvas projects with a shared module included by reference; and writes `.claude/memory/project-context.md` — the Product tier. A lint enforces that the shared module is never copied, never published, never forked. Studio OS works without `init` — agents reason without product context. The calibration is what makes the work specific to your product.
+This interviews you for your product's purpose, principles, invariants, system model, and stack, then writes the Product tier under `.claude/memory/`: `project-context.md`, `design-vocabulary.md` (with the dictionary the writing check reads), and your personal `role-context.md`. It also scaffolds production and canvas projects with a shared module included by reference; `evals/lint-agnostic.sh --project <path>` checks that the shared module is wired by path, not by registry. Studio OS works without `init` — agents reason without product context. The calibration is what makes the work specific to your product.
 
 ---
 
 ## Workflow skills
 
-Each workflow leaves behind an artifact the next session can read — a brief, a journey, an interaction model, a spec, a metrics plan — rendered as an HTML document with a built-in feedback harness.
+Each artifact-producing workflow writes a designed HTML document the next session can read — a brief, a journey, an interaction model, a spec, a metrics plan. `/studio:feedback --overlay` marks any of them up.
 
 | Command | Produces |
 |---|---|
 | `/studio:studio` | Entry point — orientation, routing, artifact menu |
-| `/studio:init` | Product context setup |
-| `/studio:shape` | Shaped brief from interview |
-| `/studio:discover` | Problem frame, research, and assumption map |
-| `/studio:ideate` | Divergent directions before committing |
-| `/studio:design` | Full design workflow |
-| `/studio:prototype` | Testable prototype |
-| `/studio:handoff` | Production-ready package from prototype |
-| `/studio:implement` | Engineering workflow |
+| `/studio:init` | Product context, role calibration, project scaffold |
+| `/studio:design-system-init` | A design-system skill for the project — token files and a component directory |
+| `/studio:organize` | The project layout — scaffold or reconcile `decisions/`, `specs/`, `design/`, `reviews/` |
+| `/studio:shape` | Design brief from an interview; `--task` for a task brief tight enough to delegate |
+| `/studio:discover` | Research, user journey, assumption register, and brief |
+| `/studio:ideate` | Divergent directions, each with a forcing tradeoff, before committing |
+| `/studio:design` | Full design workflow — brief through validated interaction model |
+| `/studio:prototype` | Testable prototype and prototype brief |
+| `/studio:handoff` | Production-ready package from a prototype — state inventory and component spec |
+| `/studio:implement` | Engineering workflow — spec through verified build |
 | `/studio:measure` | Metrics plan and instrumentation |
-| `/studio:experiment` | Experiment design and evaluation plan |
-| `/studio:simulate` | *(deprecated — retiring next release; use `/studio:experiment` + `assumption-mapper`)* |
-| `/studio:solve` | Convergence loop for hard problems |
+| `/studio:experiment` | Experiment plan — hypothesis, metric, falsification condition |
+| `/studio:solve` | Convergence loop for hard design problems |
+| `/studio:troubleshoot` | Convergence loop for hard engineering problems — Architect, stack engineers, DE verdict |
 | `/studio:review` | Leadership review — PM + CD + DE |
-| `/studio:critique` | Single-pass quality review |
+| `/studio:critique` | Nine-discipline findings and triage, no verdict |
 | `/studio:simplify` | Codebase coherence pass |
-| `/studio:scope` | *(deprecated — merged into `/studio:shape --task`)* |
+| `/studio:feedback` | Structured feedback — a Review Surface (`--surface`) or a click-to-annotate overlay (`--overlay`) |
+
+Session and quality skills:
+
+| Command | Produces |
+|---|---|
+| `/studio:studio-slop` | Quality floor — tests output for the seven slop markers |
+| `/studio:studio-drift` | Drift diagnostic — finds stale or contradicting decisions and routes each to a gate |
+| `/studio:studio-postmortem` | Post-ship retrospective — a failure becomes a Named Ban or a precedent |
+| `/studio:studio-close` | Session close — proposes memory deposits; writes nothing unconfirmed |
+
+Deprecated, kept for redirects: `/studio:scope` → `/studio:shape --task` · `/studio:annotate` → `/studio:feedback --overlay` · `/studio:gather-feedback` → `/studio:feedback --surface` · `/studio:simulate` → `/studio:experiment` + `assumption-mapper` · `/studio:luck` → the `luck` agent.
 
 Discipline agents can be invoked directly by name. Run `/studio:studio` to see what each produces.
 

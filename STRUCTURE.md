@@ -5,17 +5,17 @@ Studio OS is a single Claude Code plugin organized in three tiers. The tier boun
 ```
 Standard Works · Studio OS
 ├── CORE      universal craft + method + the Standard Works philosophy   (distributable)
-├── ROLE      discipline agents, installed per practice                  (distributable)
+├── ROLE      discipline agents, used per practice                       (distributable)
 └── PRODUCT   one product's context — lives in each project, not here    (swappable)
 ```
 
-The agent→tier mapping below is authoritative (per-agent `tier:` frontmatter is added during the Phase 1 agent pass). Physically, all agents live flat in `agents/` so plugin discovery and the personal `--plugin-dir` install stay simple; the tier is metadata, not a directory.
+The agent→tier mapping below is authoritative; agents carry no `tier:` frontmatter. Physically, all agents live flat in `agents/` so plugin discovery and the `--plugin-dir` install stay simple; the tier is a grouping, not a directory.
 
 ---
 
 ## Core — universal, always present
 
-The Standard Works philosophy (`PHILOSOPHY.md`), universal method (`memory/design-foundations.md`, decision tiers, the Scene Test), the studio doctrine (`memory/doctrine.md`, shipped with the plugin), the writing registers (`memory/writing.md`), the senior gates, and cross-cutting agents. Adopting Studio OS means adopting Core.
+The Standard Works philosophy (`PHILOSOPHY.md`), universal method (`memory/design-foundations.md`, decision tiers, the Scene Test), the studio doctrine (`memory/doctrine.md`, shipped with the plugin), the writing genres (`memory/writing.md`), the senior gates, and cross-cutting agents. Adopting Studio OS means adopting Core.
 
 **Agents (8):** `pm` · `cd` · `de` · `heurist` · `auditor` · `luck` · `competitive-analyst` · `surveyor`
 
@@ -29,11 +29,15 @@ The gate sequence is **PM → CD → DE**: problem gate, design gate, engineerin
 
 Multi-agent skills are **graphs**: nodes (agents, gates, human decisions, routers, joins, tasks) and declared edges (sequence, conditional, fan-out/fan-in, bounded loops). Each graph-declaring skill carries one lint-validated ` ```graph ` block in its `SKILL.md` — the contract its prose steps and its `workflow.js` executor must match. The shared doctrine — grammar, human-node economics, adversarial rules, model and effort by kind of work, run state, the Auto-Mode Safety Contract — is Core method and lives in `memory/orchestration.md`. Linear and interview skills carry no graph block.
 
+### Artifacts
+
+Artifacts render through the kit (`artifacts/kit/`, templates in `artifacts/templates/`) on four 1.8 principles — title block and lettered panels with citable items, annotation colors (blue annotates or passes, red marks a violation), limits drawn as measures, dimensioned wireframes — plus a declared writing genre checked by `evals/ste-check.sh`; see `artifacts/kit/README.md`.
+
 ---
 
 ## Role — discipline agents, additive
 
-Installed per the user's practice. Product-agnostic — every example is drawn from the public reference palette, never from one product.
+All Role agents ship in the plugin; a practice uses the ones it needs. Product-agnostic — every example is drawn from the public reference palette, never from one product.
 
 **Engineering (6, extensible):** `architect` · `engineer` (stack-neutral base) · `swift-engineer` · `web-engineer` · `qa` · `specifier`
 The engineer family is a base discipline (`engineer`) plus stack specialists that inherit it. `swift-engineer` covers all Apple platforms (the `platform` manifest key — `ios` | `macos` | `multiplatform` — selects within it). More are added per install at setup from `templates/engineer-specialist.template.md` (e.g. `android-engineer`, `backend-engineer`, `fullstack-engineer`, `data-engineer`, `ml-engineer`), each with its own references — the same personalization mechanism as the reference palette and display personas.
@@ -77,6 +81,6 @@ A project that adopts Studio OS holds two kinds of project-specific material —
 
 ## Distribution
 
-- **Plugin:** this repo is a Claude Code plugin (`.claude-plugin/plugin.json`) distributed via the marketplace (`.claude-plugin/marketplace.json`). Install + update with native `/plugin` commands. Agents/skills are namespaced (`studio:designer`) — no collisions with a user's own.
-- **Personal (edit-live):** run `claude --plugin-dir ~/Code/studio-os` so the source *is* the install — edits go live with `/reload-plugins`, and drift is structurally impossible.
-- **Fallback:** `install.sh` copies into `~/.claude/` for non-plugin contexts.
+- **Plugin:** this repo is a Claude Code plugin (`.claude-plugin/plugin.json`) distributed via the marketplace (`.claude-plugin/marketplace.json`). Install and update with `claude plugin install studio@standard-works` and `claude plugin update studio@standard-works` (see `INSTALL.md`). Agents and skills are namespaced (`studio:designer`, `/studio:design`) — no collisions with a user's own.
+- **Edit-live:** run `claude --plugin-dir ~/Code/studio-os` to load the source in place for that session — edits apply with `/reload-plugins`, with no installed copy to drift.
+- **Fallback:** `install.sh` copies the agents and each skill's `SKILL.md` into `~/.claude/` for non-plugin contexts. It carries no namespace, memory, templates, or executors.

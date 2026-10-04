@@ -10,125 +10,117 @@ https://claude.ai/code
 
 ## Install
 
-From the repo root:
+Studio OS is a Claude Code plugin. In your shell:
 
 ```bash
-./install.sh
+claude plugin marketplace add marktegethoff/studio-os
+claude plugin install studio@standard-works
 ```
 
-This asks for your primary discipline, installs the relevant agents and skills to `~/.claude/`, and runs a short interview to build your personal profile at `~/.claude/memory/user-profile.md`.
+The marketplace is `standard-works`; the plugin is `studio`. Inside a session, `/plugin marketplace add marktegethoff/studio-os` and `/plugin install studio@standard-works` do the same. The install command opens the plugin's details so you can choose a scope.
+
+The plugin loads the next time you start Claude Code, or when you run `/reload-plugins`. To check it, type `/` and look for `/studio:studio`, or run `claude plugin list`. Skills and agents are namespaced (`/studio:design`, `studio:designer`), so they never collide with your own.
+
+If you installed with `install.sh` earlier, remove those copies first (see [Uninstall](#uninstall)) so each agent exists once.
 
 ---
 
-## What gets installed
+## Update
 
-Installation varies by discipline selection. The Core tier is always included.
-
-**Core (always installed)**
-```
-~/.claude/agents/          6 core agents
-~/.claude/skills/          6 core skills
-~/.claude/agents/memory/   Design foundations and memory templates
+```bash
+claude plugin marketplace update standard-works
+claude plugin update studio@standard-works
 ```
 
-**Design role adds** ~15 agents + 6 skills
+A marketplace added from GitHub does not auto-update by default (toggle it under `/plugin` → Marketplaces). The first command refreshes the listing. The second installs the new version for your next session, or after `/reload-plugins`.
 
-**Product role adds** ~11 agents + 2 skills
-
-**Engineering role adds** 5 agents + 2 skills
-
-Select **All disciplines** to install everything. Agents shared across roles are installed once.
+The plugin pins `version` in `plugin.json`, so an update lands only when the version number changes. Content changed under an unchanged version never reaches an installed copy ([CHANGELOG](CHANGELOG.md), 1.5.2). An update does not touch your project's `.claude/memory/`.
 
 ---
 
-## Personal profile
-
-During `./install.sh` you'll be asked three questions: your role, your strongest skills, and where you are in your practice. The answers are written to `~/.claude/memory/user-profile.md`.
-
-Agents read this file to calibrate how they work with you — the level of explanation they provide, how they frame tradeoffs, which aspects of a problem they foreground.
-
-Update your profile any time:
+## Edit-live
 
 ```bash
-./install.sh --me
+claude --plugin-dir /path/to/studio-os
 ```
+
+This loads the repo in place for that session. Edits apply with `/reload-plugins`. For that session it replaces an installed copy of the same plugin.
 
 ---
 
 ## Project setup
 
-After installing, open a Claude Code session in your project and run:
+In a Claude Code session in your project:
 
 ```
 /studio:init
 ```
 
-This runs an interview that captures your product's purpose, brand principles, system invariants, user archetypes, and tech stack. It writes `.claude/memory/project-context.md` — the file all agents load to calibrate themselves to your specific product.
+The interview covers the product (identity, ethos, system model, user archetypes, stack, research scope, design system), then your role on this project. It writes to `.claude/memory/`:
 
-Studio OS works without this file, but agents fall back to generic reasoning. The interview takes about 10 minutes and makes every subsequent session more useful.
+- `project-context.md` — the file agents load to calibrate to your product.
+- `design-vocabulary.md` — the product's registers and material language, and the `## Dictionary` the writing check reads.
+- `role-context.md` — your role here. Personal; not committed.
 
-In a team setting, one person runs `/studio:init` per product and commits the resulting `project-context.md` to the repo. Everyone else gets it on pull.
+It then offers optional personalization (reference palette, display personas, extra engineering specialists, brand identity) and scaffolds the workspace: `code/app`, plus `code/canvas` and `code/shared` by the shape you choose.
+
+Studio OS works without these files, but agents fall back to generic reasoning. `/studio:organize` creates the output folders (`decisions/`, `specs/`, `design/`, `reviews/`).
+
+In a team, one person runs `/studio:init` per product and commits `project-context.md` and `design-vocabulary.md`. Everyone else gets them on pull.
+
+---
+
+## Personal profile
+
+`~/.claude/memory/user-profile.md` holds who you are across projects: role, skills, experience. Agents use it to calibrate how much to explain. It is optional, and nothing creates it. `install.sh` does not, and `/studio:init` only suggests it when the file is missing. Write it by hand.
 
 ---
 
 ## Recommended settings
 
-Optional. Studio OS pairs well with Claude Code's [advisor](https://code.claude.com/docs/en/advisor): `"advisorModel": "opus"` in your settings. Fable also works where your plan allows; on some plans Fable bills to usage credits. No studio skill depends on it.
+Optional. No studio skill depends on either setting.
 
-The plugin's own setting is `adversary_model` (in `/config`, default `agent`): the model for refutation passes. `agent` costs nothing extra; `fable` or `opus` runs the refuter on a stronger model.
+**Advisor.** Studio OS pairs well with Claude Code's [advisor](https://code.claude.com/docs/en/advisor): set `"advisorModel": "opus"` in your settings, or run `/advisor opus`. Fable also works where your plan allows; on some plans Fable bills to usage credits. The advisor is experimental and needs the Anthropic API.
+
+**`adversary_model`.** The plugin's own setting, for refutation passes. Set it in `/config` (Claude Code 2.1.269 or later) or under **Configure options** in the plugin's `/plugin` details.
+
+- `agent` (default): each refuter runs on its own frontmatter model, at no extra cost.
+- `fable`, `opus`, or `sonnet`: every refuter runs on that model, independent of the verdict it attacks. `fable` may bill to usage credits.
+
+It applies to the refutation nodes in `/studio:review` and `/studio:solve`, and to `/studio:implement`'s halt diagnosis and pre-stage refutation. Any other value is read as `agent`. Detail: the plugin's `memory/orchestration.md` § Model and effort.
 
 ---
 
-## Enterprise / no-web environments
+## Environments without WebSearch
 
-Some enterprise Claude Code deployments disable WebSearch. Three agents require it and have no useful offline mode: **Scout**, **Research Sweep**, and **Competitive Analyst**. All three are skipped automatically when WebSearch is unavailable.
+Some enterprise Claude Code deployments disable WebSearch. Six agents declare it in `tools`. Four are built around web research: `historian`, `scout`, `competitive-analyst`, and `surveyor`. `pm` (WebSearch) and `heurist` (WebSearch, WebFetch) use it as a supplement.
 
-**Option 1 — flag at install time:**
+Nothing in the plugin detects a missing tool or skips these agents, and `install.sh` has no `--no-web` option. Without WebSearch, the four research agents have no source of live evidence. Use the others.
+
+---
+
+## Fallback: install.sh
+
+Use this only where plugins cannot be installed:
 
 ```bash
-./install.sh --no-web
+./install.sh
 ```
 
-Skips the prompt and does not install the three web-dependent agents.
+The script takes no options and asks no questions. It checks that `claude` is on your PATH. It copies every `agents/*.md` to `~/.claude/agents/` and every `skills/<name>/SKILL.md` to `~/.claude/skills/<name>/`, overwrites files of the same name, and prints the counts.
 
-**Option 2 — interactive prompt:**
+It is a reduced install:
 
-During `./install.sh`, you'll be asked whether WebSearch is enabled. Answer N to skip web-dependent agents.
+- Skills lose the `studio:` namespace. Run `/design`, not `/studio:design`.
+- It copies nothing else: no `memory/`, `artifacts/` (kit and templates), `evals/` (including `ste-check.sh`), hook, `workflow.js` executor, or `skills/feedback/overlay.md`. Agents and skills cite those files, so the cited paths do not resolve.
+- The `adversary_model` setting does not exist, so every refuter runs on its own model.
 
-The remaining agents — Historian, Heurist, PM — work offline. They degrade gracefully: Historian and Heurist label any findings drawn from training knowledge rather than live sources, and neither will fabricate citations it cannot verify.
+To copy only part:
 
----
-
-## Adding disciplines later
-
-```bash
-./xd add
-```
-
-Shows which disciplines are currently installed, and lets you add another — or choose individual agents.
-
----
-
-## Updating
-
-```bash
-./xd update
-```
-
-Updates all currently installed agents and skills to the latest versions. Memory files are not touched — your design preferences, references, and project context are preserved.
-
----
-
-## Manual install
-
-If you prefer to install selectively:
-
-**Agents only:**
 ```bash
 cp agents/*.md ~/.claude/agents/
 ```
 
-**Skills only:**
 ```bash
 for dir in skills/*/; do
   mkdir -p ~/.claude/skills/$(basename "$dir")
@@ -136,40 +128,24 @@ for dir in skills/*/; do
 done
 ```
 
-**Memory templates only:**
-```bash
-mkdir -p ~/.claude/agents/memory
-cp memory/*.md ~/.claude/agents/memory/
-```
-
 ---
 
 ## Uninstall
 
-Studio OS installs only to `~/.claude/agents/`, `~/.claude/skills/`, and `~/.claude/memory/`. Remove those files to uninstall. Nothing is installed system-wide.
-
-To remove all Studio OS agents and skills:
+Plugin:
 
 ```bash
-# Core agents
-rm -f ~/.claude/agents/pm.md
-rm -f ~/.claude/agents/de.md
-rm -f ~/.claude/agents/competitive-analyst.md
-rm -f ~/.claude/agents/studio:design-director.md
-rm -f ~/.claude/agents/studio:heurist.md
-rm -f ~/.claude/agents/studio:audit.md
-
-# Role agents (prefixed and others)
-rm -f ~/.claude/agents/studio:*.md
-rm -f ~/.claude/agents/engineer.md
-rm -f ~/.claude/agents/qa.md
-rm -f ~/.claude/agents/marketer.md
-rm -f ~/.claude/agents/brief-writer.md
-rm -f ~/.claude/agents/assumption-mapper.md
-rm -f ~/.claude/agents/metrics-definer.md
-
-# Skills
-rm -rf ~/.claude/skills/studio:*
-rm -rf ~/.claude/skills/studio:review
-rm -rf ~/.claude/skills/design-system-init
+claude plugin uninstall studio@standard-works
+claude plugin marketplace remove standard-works
 ```
+
+Removing the marketplace also uninstalls every plugin installed from it.
+
+After `install.sh`, from the repo root:
+
+```bash
+for f in agents/*.md; do rm -f ~/.claude/agents/"$(basename "$f")"; done
+for d in skills/*/; do rm -rf ~/.claude/skills/"$(basename "$d")"; done
+```
+
+This also removes a file of the same name that was yours before `install.sh` overwrote it.
