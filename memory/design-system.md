@@ -60,7 +60,7 @@ Rules:
 ### Typefaces
 | Role | Typeface | Used for |
 |------|----------|---------|
-| [Mechanism / UI] | [font name] | [nav, labels, timestamps, metadata] |
+| [Register / role] | [font name] | [nav, labels, timestamps, metadata] |
 | [Content / Body] | [font name] | [primary content text] |
 
 ### Type Violations to Flag

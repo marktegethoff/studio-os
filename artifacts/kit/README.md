@@ -5,7 +5,7 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
 ## Two parts
 
 1. **`studio.css`** — the shared stylesheet, carrying the **Standard Works identity** (the studio's own brand — not any product's): Neue Haas Grotesk (refined grotesk sans) via Typekit with a Helvetica Neue fallback, black on warm white, Courier for technical labels, monochrome with at most a single earned accent (`--accent`) and, since 1.8, two annotation colors (blue and red), generous margins, no decoration. Source of truth: `~/Standard Works/Apps/Standard-Works/brand-system.html`. A *product* that needs its artifacts themed to its own brand overrides `--accent`/fonts; by default everything carries Standard Works. Link it; don't reinvent it.
-2. **The annotation harness** — the click-to-annotate overlay from the `annotate` skill. It injects a review bar, click-to-pin comments, brief-derived questions, a disposition (Approve/Revise/Reject), and a copy-to-Claude output block. Run `/annotate <artifact>.html` (optionally `--brief <brief>`) to attach it. The source artifact is never modified — `annotate` writes `<name>.annotated.html`.
+2. **The annotation harness** — the click-to-annotate overlay, the `--overlay` mode of `/studio:feedback`. It injects a review bar, click-to-pin comments, brief-derived questions, a disposition (Approve/Revise/Reject), and a copy-to-Claude output block. Run `/studio:feedback --overlay <artifact>.html` (optionally `--brief <brief>`) to attach it. The source artifact is never modified — the overlay writes `<name>.annotated.html`.
 
 ## Building an artifact
 
@@ -91,6 +91,7 @@ Every artifact declares how it is written, in `<head>`: `<meta name="studio:genr
 - **Title block** — each row holds 4 cells; `.wide` spans 2. Fill every row, or an empty cell shows as a black block.
 - **Measure** — `--val` and `--max` are required; `--lim` is optional, and without it no limit mark is drawn. Use custom properties only. Never set an inline `width` or `left`.
 - **Also** — `.verdict.pass|.fail|.hold`, `.ok`/`.no`/`.na` (status), `.lead`, `.wc` (word count; `.over`), `.dim` (dimension line with `.tk` ticks), `.note`, `.tbox` (wraps a table so it scrolls inside the panel), `.grid2`/`.grid3` (inside `.doc`), and the text helpers `.mono`, `.lbl`, `.annot`, `.viol`.
+- **Wireframe labels** — drawing regions are `[A]` to `[D]` (the designer's convention) and share letters with panel ids. Cite a panel item as `B2` and a drawing region as `[B]`.
 
 ### The full sheet
 
@@ -102,13 +103,13 @@ After an emitting skill writes an artifact: run `bash ${CLAUDE_PLUGIN_ROOT}/eval
 
 ## The artifact catalog
 
-Templates live in `artifacts/templates/`. Each is owned by the agent that produces it.
+Templates live in `artifacts/templates/`. Each is owned by the agent or the skill that produces it.
 
 | Artifact | Owner | Gates / feeds |
 |---|---|---|
 | User journey | journey-mapper | constrains Designer scope |
-| ASCII wireframe | designer | structure before code |
-| User narrative | user-researcher / writer | pairs with the Scene Test |
+| Wireframe (SVG + ASCII) | designer | structure before code |
+| User narrative | writer | pairs with the Scene Test |
 | Flow diagram | architect / designer | states + transitions |
 | Design brief | brief-writer | **gates `/design`** |
 | Metrics plan | metrics-definer | committed with the spec |
@@ -120,11 +121,11 @@ Templates live in `artifacts/templates/`. Each is owned by the agent that produc
 | Competitive teardown | competitive-analyst | read before a brief |
 | Heuristic report | heurist | P0–P3 findings |
 | Decision record | architect / any | an HTML view over a ledger entry |
-| Critique report | cd | nine-discipline findings; triage |
-| Leadership review | pm / cd / de | **gates ship / merge** |
-| Task brief | pm / architect | **gates `/implement`** |
-| Ideation output | strategist / designer | feeds `/shape` brief |
-| Experiment plan | metrics-definer | feeds validation |
+| Critique report | `/studio:critique` | nine-discipline findings; triage |
+| Leadership review | `/studio:review` | **gates ship / merge** |
+| Task brief | `/studio:shape --task` | **gates `/implement`** |
+| Ideation output | `/studio:ideate` | feeds `/shape` brief |
+| Experiment plan | `/studio:experiment` | feeds validation |
 
 ## Proposing a new template
 
@@ -174,19 +175,15 @@ status: proposed | approved | rejected
 
 ## Interactivity — controls where they're earned
 
-An artifact carries interactive UI controls **when manipulating it is the point** — never as decoration (that would violate the studio's own anti-gratuitous rule). Two kinds of artifact:
+An artifact carries interactive UI controls **only when manipulating it is the point** — never as decoration (that would violate the studio's own anti-gratuitous rule). Two kinds of artifact:
 
-- **Instruments** — the reviewer needs to *tweak and feel* the thing. These ship live controls:
-  - `motion-spec` — duration/easing/distance/delay sliders + a live preview; the controls drive the spec values.
-  - `component-spec` — a state switcher that renders each state live.
-  - `ascii-wireframe`, `flow-diagram` — state/path toggles (extendable per surface).
-  - `copy-deck` — strings are editable in place with live character counts (extendable).
-- **Documents** — the artifact is read and judged (`design-brief`, `user-journey`, `user-narrative`, `risk-register`, `metrics-plan`, `competitive-teardown`, `heuristic-report`, `decision-record`). Their interaction is the **annotation harness** (`/annotate`) — click-to-comment, questions, disposition, copy-to-Claude. No invented controls.
+- **Documents** — the artifact is read and judged. Every template today is a document: static HTML with no script and no controls. A limit is drawn as a measure (`.meas`), not as a slider. The interaction is the **annotation harness** (`/studio:feedback --overlay`) — click-to-comment, questions, disposition, copy-to-Claude. No invented controls.
+- **Instruments** — the reviewer needs to *tweak and feel* the thing, so the artifact ships live controls. No template is one today.
 
 When building a new template, ask: would the reviewer want to *change a value and see the effect*? If yes, it's an instrument — add the minimal controls that answer that, styled with the kit. If no, it's a document — the harness is its interaction.
 
 ## The rule
 
-**If an artifact is primarily for agent context, it still ships with a well-designed HTML version for human review, and it still carries the annotation harness.** A handoff between an agent and a human is not raw text. (This mirrors the `gather-feedback` skill, which renders completed work as a reviewable page and waits for the response block.)
+**If an artifact is primarily for agent context, it still ships with a well-designed HTML version for human review, and it still carries the annotation harness.** A handoff between an agent and a human is not raw text. (This mirrors `/studio:feedback --surface`, which renders completed work as a reviewable page and waits for the response block.)
 
 **R6 — Kit reference enforcement.** Every skill or agent file with an `artifact:` (or `artifacts:`) frontmatter key must reference either `artifacts/templates/<artifact>.html` or `artifacts/kit/studio.css` in its body, and the named template must exist in `artifacts/templates/`. Skills and agents without an `artifact:` key are exempt (orientation and control-plane files). The lint rule in `evals/lint-agnostic.sh` enforces R6 automatically — it fails CI on any artifact-key mismatch or missing template.

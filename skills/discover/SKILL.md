@@ -248,7 +248,7 @@ Produce a complete design brief using the discovery output:
 Render the artifact as HTML using the kit template.
 
 1. Load `artifacts/templates/user-journey.html` as the structural shell.
-2. Populate the artifact-specific fields: research summary, journey stages with friction points and moments that matter, assumption register (binding assumption + full register), design brief, next step / open questions.
+2. Populate the artifact-specific fields: research summary, journey stages with friction points and moments that matter, assumption register (binding assumption + full register), design brief, next step / open questions. The template carries the journey as panels A to E. Append the other panels after E, lettered F onward: F research summary, G assumption register, H design brief, I next step.
 3. Write to `specs/discovery_<slug>.html` where slug is derived from the problem area (lowercase kebab-case, max 40 chars).
 4. Writing check, `exploratory` genre (`data-genre="verdict"` on the design-brief panel): run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
 5. Surface a short markdown summary in conversation:

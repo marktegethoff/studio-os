@@ -28,7 +28,7 @@
     <div class="c"><span class="l">Revision</span><span class="v">[1]</span></div>
     <div class="c"><span class="l">Binding risk</span><span class="v mono">[B#]</span></div>
     <div class="c"><span class="l">Threshold</span><span class="v mono">[threshold]</span></div>
-    <div class="c"><span class="l">Scale</span><span class="v">[likelihood] × [impact]</span></div>
+    <div class="c"><span class="l">Scale</span><span class="v">Confidence × Impact if wrong</span></div>
   </header>
 
   <!-- A · Binding risk. Exactly one. It is the most consequential assumption, not always the riskiest. State it once here and cite it from B. -->
@@ -51,7 +51,7 @@
        Mark exactly one item BINDING. It cites A1 and does not restate it.
        Each score is a measure against the threshold. Add the class over to a measure whose score reaches the threshold. -->
   <section class="pnl" aria-labelledby="rr-b-h">
-    <div class="pnl-h"><span class="ltr">B</span><h2 id="rr-b-h">Register</h2><span class="ref">likelihood × impact vs threshold</span></div>
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="rr-b-h">Register</h2><span class="ref">confidence × impact if wrong vs threshold</span></div>
     <div class="pnl-b">
 
       <p><strong>User</strong></p>
@@ -59,7 +59,7 @@
         <li id="b1"><span class="id">B1</span><div class="t"><span class="verdict hold">BINDING</span> Stated in A1.
           <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
           <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
-            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="mh"><span>Confidence [c] × impact if wrong [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
             <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
             <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
           </div>
@@ -71,7 +71,7 @@
         <li id="b2"><span class="id">B2</span><div class="t">We are assuming that [specific, testable belief].
           <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
           <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
-            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="mh"><span>Confidence [c] × impact if wrong [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
             <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
             <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
           </div>
@@ -83,7 +83,7 @@
         <li id="b3"><span class="id">B3</span><div class="t">We are assuming that [specific, testable belief].
           <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
           <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
-            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="mh"><span>Confidence [c] × impact if wrong [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
             <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
             <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
           </div>
@@ -95,7 +95,7 @@
         <li id="b4"><span class="id">B4</span><div class="t">We are assuming that [specific, testable belief].
           <small><span class="lbl">Confidence</span> [H / M / L] · <span class="lbl">Impact if wrong</span> [H / M / L]</small>
           <div class="meas" style="--val:[score];--lim:[threshold];--max:[max]">
-            <div class="mh"><span>Likelihood [l] × impact [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
+            <div class="mh"><span>Confidence [c] × impact if wrong [i]</span><span class="mv">[score] · threshold [threshold]</span></div>
             <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
             <div class="scale" aria-hidden="true"><span>0</span><span>[max]</span></div>
           </div>
@@ -103,7 +103,7 @@
       </ol>
 
     </div>
-    <div class="pnl-f">Likelihood is the inverse of confidence. Low confidence with high impact is most dangerous. Write each assumption as a testable claim, not a hope. Status is Validate first, Monitor, or Accept.</div>
+    <div class="pnl-f">Score each rating from 1 to 3. Score Low confidence 3 and High impact 3. Low confidence with high impact is most dangerous. Write each assumption as a testable claim, not a hope. Status is Validate first, Monitor, or Accept.</div>
   </section>
 
   <!-- C · Validation priorities. The binding risk is first. -->

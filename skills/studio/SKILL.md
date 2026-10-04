@@ -40,7 +40,7 @@ Full discovery sequence (research → map → assumptions → brief): `/discover
 | Market signal briefing | 5 findings filtered against current product positions | `scout` |
 | Competitive teardown | Feature matrix, UX patterns, positioning map, gaps | `competitive-analyst` |
 | Historical precedent | What similar systems existed, what endured, what failed | `historian` |
-| Strategic evaluation | Pass/fail verdict across four instrument tests | `strategist` |
+| Strategic evaluation | A stated position on core value, long-term value, and feature accumulation | `strategist` |
 | Commercial evaluation | Market differentiation, monetization fit, timing | `marketer` |
 
 ### Design and interaction artifacts
@@ -69,7 +69,7 @@ Full design sequence (strategy → structure → design → accessibility → sp
 | Information architecture | Content organization, navigation model, labeling, site map | `architect` |
 | System boundary definition | What each component owns, delegates, observes | `architect` |
 | Simplification plan | What to remove, why, in what order | `critic` |
-| Design system audit | Pattern proliferation, token drift, coverage gaps | `design-systems-governance` |
+| Design system audit | Pattern proliferation, token drift, coverage gaps | `systematist` |
 
 ### Evaluation artifacts
 
@@ -83,7 +83,7 @@ Full design sequence (strategy → structure → design → accessibility → sp
 | Documentation coherence | Contradictions, orphaned files, superseded content | `auditor` |
 | Feedback record | Review Surface or click-to-annotate overlay on any artifact | `/feedback` |
 
-Full review sequence: `/critique`
+Findings pass (no verdict): `/critique` · ship decision: `/review`
 
 ### Engineering artifacts
 
@@ -106,7 +106,7 @@ Multi-agent workflows are **declared graphs** — each carries a ` ```graph ` bl
 - `/measure` — Metrics Definer → PM gate → Architect (instrumentation feasibility)
 - `/implement` — Spec check → Invariants → Engineer → QA
 - `/solve` — Convergence loop (max 3 iterations) until inevitable
-- `/critique` — Critic → Invariants → Accessibility → Decisions → Verdict
+- `/critique` — nine disciplines review blind → synthesis → optional debate round → findings and triage (no verdict)
 - `/experiment` — Memory check → Hypothesis → Design → Evaluation
 - `/ideate` — Divergent exploration → Facilitated reduction → Engineering feasibility
 - `/simplify` — Complexity audit → Simplification plan → DE gate → Implementation
@@ -116,7 +116,7 @@ Multi-agent workflows are **declared graphs** — each carries a ` ```graph ` bl
 
 ### Deprecated (retiring next release)
 
-- `/scope` → `/shape --task` · `/annotate` + `/gather-feedback` → `/feedback` · `/simulate` → `/experiment` with a falsification condition + the `assumption-mapper` register · `/luck` (skill) → invoke the `luck` agent by name
+- `/scope` → `/shape --task` · `/annotate` → `/feedback --overlay` · `/gather-feedback` → `/feedback --surface` · `/simulate` → `/experiment` with a falsification condition + the `assumption-mapper` register · `/luck` (skill) → invoke the `luck` agent by name
 
 ---
 
@@ -131,7 +131,7 @@ If $ARGUMENTS is empty, **orient the user**: render the compact menu below, then
 > - `/design` — full design pass (strategy → structure → design → accessibility → spec)
 > - `/measure` — metrics + instrumentation feasibility
 > - `/implement` — spec check → invariants → build → QA
-> - `/critique` — review → ship/no-ship verdict
+> - `/critique` — nine-discipline findings and triage, no verdict
 > - `/solve` — convergence loop for a hard problem
 > - `/review` — PM + CD + DE combined verdict
 > - also: `/experiment` · `/ideate` · `/simplify`

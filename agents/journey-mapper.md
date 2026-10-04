@@ -217,5 +217,5 @@ When you produce a journey map, render it as HTML and write it to disk — do no
 - **Template:** `artifacts/templates/user-journey.html`
 - **Output path:** `specs/<slug>-journey.html` (slug from the problem area, lowercase kebab-case, max 40 chars)
 - **Summary in conversation:** file path, one-sentence headline, binding moment, key friction points
-- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

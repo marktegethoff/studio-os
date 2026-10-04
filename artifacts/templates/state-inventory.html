@@ -10,7 +10,8 @@
 <body>
 <!--
   State inventory. Procedure genre: commands, 20 words or fewer.
-  Replace each [placeholder]. Add a state as the next number. Delete a state that does not apply.
+  Replace each [placeholder]. Add a state, flow, content row, or scenario as the next number. Delete a row that does not apply.
+  /studio:handoff fills every panel. /studio:design fills A, B, D, and E. The build spec goes on the component-spec sheet.
   Status marks: <span class="ok">✓ Specified</span> · <span class="no">✕ Gap</span> · <span class="na">— Omitted</span>
 -->
 <div class="doc">
@@ -22,7 +23,7 @@
     <div class="c"><span class="l">Workflow</span><span class="v mono">[/studio:design | /studio:handoff]</span></div>
     <div class="c"><span class="l">Revision</span><span class="v">[A · YYYY-MM-DD]</span></div>
     <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
-    <div class="c"><span class="l">Wireframe</span><span class="v mono">[design/slug-wireframe.html]</span></div>
+    <div class="c"><span class="l">Cites</span><span class="v mono">[design/slug-wireframe.html · design/slug-spec.html]</span></div>
     <div class="c wide">
       <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
         <div class="mh"><span>States specified</span><span class="mv">[n] of [n] · target all</span></div>
@@ -34,7 +35,7 @@
 
   <!-- A · States -->
   <section class="pnl" id="si-a" aria-labelledby="si-a-h">
-    <div class="pnl-h"><span class="ltr">A</span><h2 id="si-a-h">States</h2><span class="ref">delta from A1</span></div>
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="si-a-h">States</h2><span class="ref">designer · delta from A1</span></div>
     <div class="pnl-b">
       <ol class="items">
         <li id="si-a1"><span class="id">A1</span><div class="t">Populated <span class="lbl">default</span>
@@ -79,26 +80,75 @@
 
   <div class="grid2">
 
-    <!-- B · What must not break -->
+    <!-- B · Flows. Paths across the states. Cite the flow diagram for a path with a decision. -->
     <section class="pnl" id="si-b" aria-labelledby="si-b-h">
-      <div class="pnl-h"><span class="ltr">B</span><h2 id="si-b-h">What must not break</h2><span class="ref">gate checks</span></div>
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="si-b-h">Flows</h2><span class="ref">journey-mapper · paths across A</span></div>
       <div class="pnl-b">
         <ol class="items">
-          <li id="si-b1"><span class="id">B1</span><div class="t">Give every state an appearance and an exit. Do not defer a state to engineering.</div><span class="side">[A1 to A7]</span></li>
-          <li id="si-b2"><span class="id">B2</span><div class="t">Show an empty container in an empty state. Do not teach the feature there.<small>Tutorial Dependency ban.</small></div><span class="side">[A2]</span></li>
-          <li id="si-b3"><span class="id">B3</span><div class="t">Give each error state and each offline state a way to recover.</div><span class="side">[A5 · A6]</span></li>
+          <li id="si-b1"><span class="id">B1</span><div class="t">Primary flow
+            <small><span class="lbl">Path</span> [Entry, steps, exit. Cite the states, such as A1 to A3.] <span class="lbl">Prototype</span> [Y | N]</small></div>
+            <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+          <li id="si-b2"><span class="id">B2</span><div class="t">Entry and exit paths
+            <small><span class="lbl">Path</span> [Each way in and each way out.] <span class="lbl">Prototype</span> [Y | N]</small></div>
+            <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+          <li id="si-b3"><span class="id">B3</span><div class="t">Error recovery
+            <small><span class="lbl">Path</span> [From each error state to a working state.] <span class="lbl">Prototype</span> [Y | N]</small></div>
+            <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+          <li id="si-b4"><span class="id">B4</span><div class="t">Edge and abandoned paths
+            <small><span class="lbl">Path</span> [First use, no data, maximum data, and a half-done task.] <span class="lbl">Prototype</span> [Y | N]</small></div>
+            <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
         </ol>
       </div>
+      <div class="pnl-f">Name every flow. Mark each flow as in the prototype or not.</div>
     </section>
 
-    <!-- C · Open items -->
+    <!-- C · Content. Sample data for the states that show content. -->
     <section class="pnl" id="si-c" aria-labelledby="si-c-h">
-      <div class="pnl-h"><span class="ltr">C</span><h2 id="si-c-h">Open items</h2><span class="ref">gaps · removals · questions</span></div>
+      <div class="pnl-h"><span class="ltr">C</span><h2 id="si-c-h">Content</h2><span class="ref">writer · sample data per state</span></div>
       <div class="pnl-b">
         <ol class="items">
-          <li id="si-c1"><span class="id">C1</span><div class="t">[Gap: a state or behavior not yet specified.]</div><span class="side">[owner]</span></li>
-          <li id="si-c2"><span class="id">C2</span><div class="t">[Removed: a state taken out, and why.]</div><span class="side">[A-id]</span></li>
-          <li id="si-c3"><span class="id">C3</span><div class="t">[Open question.]</div><span class="side">[owner]</span></li>
+          <li id="si-c1"><span class="id">C1</span><div class="t">[State name] <span class="lbl">A1</span>
+            <small><span class="lbl">Typical</span> <span data-ste="copy">[A realistic value.]</span></small>
+            <small><span class="lbl">Shortest</span> <span data-ste="copy">[The shortest plausible value.]</span> <span class="lbl">Longest</span> <span data-ste="copy">[The longest plausible value.]</span></small></div>
+            <span class="side">[static | runtime]</span></li>
+          <li id="si-c2"><span class="id">C2</span><div class="t">[State name] <span class="lbl">A[n]</span>
+            <small><span class="lbl">Typical</span> <span data-ste="copy">[A realistic value.]</span></small>
+            <small><span class="lbl">Shortest</span> <span data-ste="copy">[The shortest plausible value.]</span> <span class="lbl">Longest</span> <span data-ste="copy">[The longest plausible value.]</span></small></div>
+            <span class="side">[static | runtime]</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Use realistic values, not placeholder text. Mark content that the app builds at run time as runtime.</div>
+    </section>
+
+  </div>
+
+  <div class="grid2">
+
+    <!-- D · What must not break. D1 to D3 govern this inventory. D4 on are UAT scenarios (qa). -->
+    <section class="pnl" id="si-d" aria-labelledby="si-d-h">
+      <div class="pnl-h"><span class="ltr">D</span><h2 id="si-d-h">What must not break</h2><span class="ref">gate checks · UAT scenarios</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="si-d1"><span class="id">D1</span><div class="t">Give every state an appearance and an exit. Do not defer a state to engineering.</div><span class="side">[A1 to A7]</span></li>
+          <li id="si-d2"><span class="id">D2</span><div class="t">Show an empty container in an empty state. Do not teach the feature there.<small>Tutorial Dependency ban.</small></div><span class="side">[A2]</span></li>
+          <li id="si-d3"><span class="id">D3</span><div class="t">Give each error state and each offline state a way to recover.</div><span class="side">[A5 · A6]</span></li>
+          <li id="si-d4"><span class="id">D4</span><div class="t">[Scenario name]
+            <small><span class="lbl">Given</span> [state] <span class="lbl">When</span> [action] <span class="lbl">Then</span> [observable outcome]</small>
+            <small><span class="lbl">Pass if</span> [objective criterion] <span class="lbl">Fail if</span> [objective criterion]</small></div>
+            <span class="side">[A-id · B-id]</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Write one scenario for each primary flow, each error path, and each interactive element. Judge pass and fail by observation.</div>
+    </section>
+
+    <!-- E · Open items -->
+    <section class="pnl" id="si-e" aria-labelledby="si-e-h">
+      <div class="pnl-h"><span class="ltr">E</span><h2 id="si-e-h">Open items</h2><span class="ref">gaps · removals · questions</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="si-e1"><span class="id">E1</span><div class="t">[Gap or blocker: a state, flow, or behavior not yet specified.]</div><span class="side">[owner]</span></li>
+          <li id="si-e2"><span class="id">E2</span><div class="t">[Removed: a state taken out, and why.]</div><span class="side">[A-id]</span></li>
+          <li id="si-e3"><span class="id">E3</span><div class="t">[Open question.]</div><span class="side">[owner]</span></li>
         </ol>
       </div>
       <div class="pnl-f">Resolve each item, or defer it with a date.</div>

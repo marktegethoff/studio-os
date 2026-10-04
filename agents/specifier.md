@@ -177,5 +177,5 @@ When you produce any of these artifacts, render them as HTML and write to disk â
 
 For all:
 - **Summary in conversation:** file path, one-sentence headline, state count or component count
-- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) â€” do not emit ad-hoc HTML; do not modify the source kit

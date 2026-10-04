@@ -1,7 +1,7 @@
 ---
 description: "Prototype to production-ready package. Produces a state inventory and component spec from a validated prototype."
 argument-hint: "<feature or component being handed off>"
-artifact: state-inventory
+artifacts: [state-inventory, component-spec]
 ---
 
 Run the Studio OS prototype-to-production handoff workflow.
@@ -72,7 +72,7 @@ nodes:
   cd-gate       gate:cd — design completeness sign-off
   pm-gate       gate:pm — UAT-vs-brief and release-gap sign-off
   signoff       human decides:blocker-acceptance
-  emit          task:render state-inventory HTML
+  emit          task:render state-inventory and component-spec HTML
 edges:
   artifacts -> {states, flows}
   {states, flows} -> gaps-join
@@ -276,12 +276,12 @@ If both gates pass clean, proceed to Output — no pause. If either gate flags b
 
 Render the artifact as HTML using the kit template.
 
-1. Load `artifacts/templates/state-inventory.html` as the structural shell.
-2. Populate the artifact-specific fields: state inventory (all states — designed / undesigned / intentionally omitted), flow inventory, synthetic data, UAT scenarios (Given / When / Then / Pass if / Fail if), build spec, known gaps, sign-off status.
-3. Write to `design/handoff_<slug>.html` where slug is derived from the feature or component name (lowercase kebab-case, max 40 chars).
-4. Writing check, `procedure` genre (synthetic data and shipping strings carry `data-ste="copy"`): run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+1. Load `artifacts/templates/state-inventory.html` as the structural shell, and `artifacts/templates/component-spec.html` for the build spec.
+2. Populate the state inventory by panel: states (A — designed / undesigned / intentionally omitted), flow inventory (B), synthetic data (C), UAT scenarios as items in D (Given / When / Then / Pass if / Fail if), known gaps and blockers (E), sign-off status in the Status cell. Write the build spec on the component-spec sheet, with its Workflow cell set to `/studio:handoff`. The state inventory cites the sheet in its Cites cell.
+3. Write the state inventory to `design/handoff_<slug>.html` and the spec sheet to `design/handoff_<slug>-spec.html`, where slug is derived from the feature or component name (lowercase kebab-case, max 40 chars).
+4. Writing check on each file, `procedure` genre (synthetic data and shipping strings carry `data-ste="copy"`): run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
 5. Surface a short markdown summary in conversation:
-   - File path
+   - File paths
    - One-sentence headline
    - State count, flow count, any known gaps flagged
 6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."

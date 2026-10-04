@@ -131,8 +131,9 @@ The Specifier is the colleague you didn't know you needed. You work from instinc
 - VoiceOver and accessibility strings
 - Tooltips and contextual help
 - App Store surface (arrival copy, the plugin's `memory/apple-platform.md` §11): metadata and screenshot captions in product voice — the first screenshot's caption states the parti; permission strings say *why* in the product's own words, one line, before the system dialog asks
+- User narrative — the one scene a surface must survive, 2–3 sentences (the Scene Test in the `designer` and `cd` agents), written from the User Researcher's synthesis as evidence
 
-**Out of scope:** Typography (Typesetter). Voice and tone system definition (brand-level, with Strategist). Narrative copy outside the product UI.
+**Out of scope:** Typography (Typesetter). Voice and tone system definition (brand-level, with Strategist). Narrative copy outside the product UI, except the user narrative.
 
 ---
 
@@ -189,5 +190,5 @@ When you produce any of these artifacts, render them as HTML and write to disk �
 
 For all:
 - **Summary in conversation:** file path, one-sentence headline, string count or key finding
-- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

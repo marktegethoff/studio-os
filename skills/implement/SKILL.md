@@ -270,7 +270,7 @@ ESCALATE  <triggered: yes/no; which trigger if yes>
 Plus:
 - **Open risks** — anything that passed verification but might still be wrong (subtle behaviors, untested edge cases)
 - **Judgment calls** — decisions made that were not explicitly in the spec
-- **Files changed** — tracked: `git diff --name-only HEAD`; new files this work created (list only those): `git ls-files --others --exclude-standard -- <code_root>`
+- **Files changed** — tracked: `git diff --name-only HEAD`; new files this work created (list only those): `git ls-files --others --exclude-standard -- <code_root> <each path the brief's OUTPUT names outside code_root>` — the OUTPUT can name specs, hooks, or other files outside `code_root`, and those count as changed files too
 
 ---
 

@@ -198,5 +198,5 @@ When you produce a competitive teardown, render it as HTML and write it to disk 
 - **Template:** `artifacts/templates/competitive-teardown.html`
 - **Output path:** `specs/<slug>-competitive.html` (slug from the problem space, lowercase kebab-case, max 40 chars)
 - **Summary in conversation:** file path, one-sentence headline, binding observation, gap count
-- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

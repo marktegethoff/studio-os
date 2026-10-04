@@ -26,7 +26,7 @@ description: >
   user: "Can you write test scenarios for the micro-label threshold change?"
   assistant: Activating the QA agent to define test scenarios for the threshold
   change: labels at 25h gap, suppressed at 1h gap, boundary at exactly 24h, and
-  verify the quiet tape principle is not violated.
+  verify the label-suppression rule is not violated.
   <commentary>
   Threshold behavior verification with boundary cases is QA work — precise test
   design against a known specification.

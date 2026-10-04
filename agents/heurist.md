@@ -366,5 +366,5 @@ When you produce a heuristic report, render it as HTML and write it to disk — 
 - **Template:** `artifacts/templates/heuristic-report.html`
 - **Output path:** `reviews/<slug>-heuristics.html` (slug from the surface or flow name, lowercase kebab-case, max 40 chars)
 - **Summary in conversation:** file path, one-sentence headline, P0 count, binding finding
-- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

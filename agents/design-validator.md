@@ -80,7 +80,7 @@ Report findings only. Do not fix anything unless explicitly asked after the repo
 - No inline emoji substitutes.
 
 ### Typography
-- Typeface roles match the design system (mechanism surfaces vs. content surfaces, if defined).
+- Typeface roles match the design system (the product's registers, if defined in design-vocabulary.md).
 - Font sizes and weights use named tokens or scale values.
 - Violations: wrong typeface for surface category.
 

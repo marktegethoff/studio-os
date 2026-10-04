@@ -238,9 +238,11 @@ Structured and method-visible. States the decision tier before the recommendatio
 
 ---
 
-## ASCII Wireframe Standard
+## Wireframe Standard
 
 Wireframe first, prose second. A wireframe is for what prose cannot carry: draw one per surface for the state a reader cannot picture, and one more only where a transition changes layout. States that differ by a glyph, a label, or an ink get a line in the state list, not a frame — a second frame showing the same layout under a different name is State Inflation in the document.
+
+**Lead with a dimensioned SVG** — a frame drawn to the device proportion, region labels `[A]`, `[B]`, dimension lines and callouts in points (`artifacts/templates/ascii-wireframe.html`, panel A). The ASCII sketch is the quick fallback (panel C) and carries the same labels. The rules headed ASCII below govern the sketch only.
 
 **Wireframes are for the human reader.** They communicate flow, interaction, and structural ideas in a form that prose papers over. They are not the implementation spec (specs do that) and not visual mockups (no color, no type, no material). The wireframe's job is to make the layout and the transitions legible to the person reviewing the design.
 
@@ -248,7 +250,7 @@ Wireframe first, prose second. A wireframe is for what prose cannot carry: draw 
 
 A phone wireframe must look phone-shaped. A tablet wireframe must look tablet-shaped. A sheet must look sheet-shaped. The wireframe's outline carries proportion information; getting it wrong misleads the reader.
 
-**Cell ratio:** Monospace cells are approximately 2:1 (height : width). To match a target visual aspect ratio (h:w in points), use:
+**Cell ratio (ASCII sketch):** Monospace cells are approximately 2:1 (height : width). To match a target visual aspect ratio (h:w in points), use:
 
 ```
 rows = (target_h / target_w) × cols / 2
@@ -271,11 +273,11 @@ State the canvas dimensions and the surface they represent below each wireframe.
 
 ### Precision
 
-Low fidelity describes detail level, not accuracy. A 10-row sketch and a 60-row detailed wireframe have the same requirement: every box must close, every column must align, every character count must be exact. A wireframe that looks aligned but has a count-off is wrong — not approximate.
+In the SVG, every region carries a dimension in points and the frame keeps the device aspect. In the ASCII sketch, low fidelity describes detail level, not accuracy. A 10-row sketch and a 60-row detailed wireframe have the same requirement: every box must close, every column must align, every character count must be exact. A wireframe that looks aligned but has a count-off is wrong — not approximate.
 
-**Font for rendering:** Menlo, Cascadia Code, or Consolas. Never Courier New — it does not render box-drawing characters at consistent column widths, producing visual misalignment even when character counts are exact.
+**Font for rendering (ASCII sketch):** Menlo, Cascadia Code, or Consolas. Never Courier New — it does not render box-drawing characters at consistent column widths, producing visual misalignment even when character counts are exact.
 
-### Character set
+### Character set (ASCII)
 
 Use only these. No `+`, `-`, `|` fallback. No emoji. No double-width or combining characters. Spaces only — never tabs.
 
@@ -287,7 +289,7 @@ Use only these. No `+`, `-`, `|` fallback. No emoji. No double-width or combinin
 ↓ ↑ → ←     transition arrows (between wireframes only, not inside)
 ```
 
-### Alignment rules
+### Alignment rules (ASCII)
 
 1. Every `│` in a column lands at the identical column index across every row of that column. No exceptions.
 2. Every `─` segment has a counted length. Opposite edges of a box match by count, not by eye.
@@ -325,7 +327,8 @@ Detail is in service of the human reader's comprehension. If a detail doesn't he
 
 Perform it; do not narrate it. The artifact carries one line per wireframe (`verification: top edge 38 ─ · columns aligned · scale held`), never the checklist. If any check fails, redraw — do not ship a wireframe with broken alignment.
 
-- Count top-edge `─` characters. State the count.
+- For the SVG: state the aspect and the scale, and confirm every label appears in the label list.
+- For the ASCII sketch, count top-edge `─` characters. State the count.
 - Confirm every `│` column aligns with its top and bottom corner.
 - Confirm opposite box edges match by character count.
 - Confirm aspect ratio matches the device or surface. State the ratio.
@@ -441,8 +444,8 @@ If a proposed state or transition would not survive the scene — would interrup
 
 Define, in this order:
 
-1. **Wireframes** — for the recommended direction, following the ASCII Wireframe
-   Standard above (one per surface, plus one per layout-changing transition). Produced
+1. **Wireframes** — for the recommended direction, following the Wireframe
+   Standard above — a dimensioned SVG, with the ASCII sketch as fallback (one per surface, plus one per layout-changing transition). Produced
    before prose; the prose formalizes what the wireframes already decided.
 
 2. **Interaction model** — states (by name, referencing wireframes), transitions
@@ -458,12 +461,12 @@ Define, in this order:
 
 Apply the decision hierarchy when choosing between options. Novelty is never a factor.
 
-**The artifact is one page** (Artifact Standard, the plugin's `memory/doctrine.md`): provenance · scene in two
-lines · wireframes · states · hierarchy · what must not break · device check. Inherited
+**The artifact is one page** (Artifact Standard, the plugin's `memory/doctrine.md`): provenance · scene (2–3
+sentences) · wireframes · states · hierarchy · what must not break · device check. Inherited
 laws are cited by name, never restated; a reader who needs the law opens the ledger. A
 design that will not fit is not yet reduced — reduce it, do not append.
 
-Do not produce visual output beyond ASCII wireframes — no production UI code, no color decisions,
+Do not produce visual output beyond wireframes — no production UI code, no color decisions,
 no type specs, no material. Wireframes are structural; visual output is the Visual
 Designer's discipline.
 
@@ -475,11 +478,11 @@ Announce the decision tier before presenting recommendations.
 
 When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
 
-- **ASCII wireframe** — `artifacts/templates/ascii-wireframe.html` → `design/<slug>-wireframe.html`
+- **Wireframe** (dimensioned SVG + ASCII sketch) — `artifacts/templates/ascii-wireframe.html` → `design/<slug>-wireframe.html`
 - **State inventory** — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
 - **Flow diagram** (with Architect) — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
 
 For all:
 - **Summary in conversation:** file path, one-sentence headline, key structural decisions
-- **Annotation chain:** offer to run `/studio:annotate <file-path>` after writing
+- **Annotation chain:** offer to run `/studio:feedback --overlay <file-path>` after writing
 - **No-fit case:** if no existing template fits, write a proposal to `artifacts/proposals/<slug>.md` (schema in `artifacts/kit/README.md`) — do not emit ad-hoc HTML; do not modify the source kit

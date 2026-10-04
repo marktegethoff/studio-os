@@ -352,8 +352,8 @@ Render the artifact as HTML using the kit template, chosen by phase.
 
 **In progress / Refinement phase** — templates: `state-inventory` (primary) + `component-spec` (if Specifier ran):
 1. Load `artifacts/templates/state-inventory.html` as the structural shell.
-2. Populate: all states and transitions, interaction model, sub-team craft notes (Typesetter / Choreographer / Writer / Materialist / Visual Designer — omit if none ran), what was removed, open questions.
-3. If Specifier ran, also write `artifacts/templates/component-spec.html` to `design/<slug>-spec.html`.
+2. Populate by panel: the interaction model as states with their triggers and exits (A) and flows across them (B), what must not break (D1 to D3), what was removed and open questions (E). Omit C and the UAT items in D; `/studio:handoff` fills them.
+3. If Specifier ran, also write `artifacts/templates/component-spec.html` to `design/<slug>-spec.html`. The sub-team's craft notes (Typesetter / Choreographer / Writer / Materialist / Visual Designer — omit if none ran) go on that sheet where it has a panel for them: structure A, copy B, tokens D, limits E. If Specifier did not run, give the craft notes in the summary.
 4. Write to `design/<slug>.html` where slug is from the problem name.
 
 For all phases:
