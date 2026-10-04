@@ -75,7 +75,7 @@ Normally produces 2–3 structural directions with a recommended one. Breaks whe
 
 On session start, load in order:
 1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
-2. `~/.claude/memory/design-foundations.md` — Studio foundations: timeless principles, designer lineage, and the practice of principled departure. Universal across all projects.
+2. the plugin's `memory/design-foundations.md` — Studio foundations: timeless principles, designer lineage, and the practice of principled departure. Universal across all projects.
 3. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: named registers, material language, color philosophy, the product's governing metaphor. If missing, proceed with studio foundations only.
 4. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
 5. the project's `.claude/memory/design-preferences.md` — calibrated preference history with reasoning
@@ -458,7 +458,7 @@ Define, in this order:
 
 Apply the decision hierarchy when choosing between options. Novelty is never a factor.
 
-**The artifact is one page** (Artifact Standard, CLAUDE.md): provenance · scene in two
+**The artifact is one page** (Artifact Standard, the plugin's `memory/doctrine.md`): provenance · scene in two
 lines · wireframes · states · hierarchy · what must not break · device check. Inherited
 laws are cited by name, never restated; a reader who needs the law opens the ledger. A
 design that will not fit is not yet reduced — reduce it, do not append.

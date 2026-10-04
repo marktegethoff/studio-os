@@ -36,7 +36,7 @@ Every Studio OS installation operates across three concentric tiers. Each tier h
 
 Org-enforced. Every team member receives this. Cannot be bypassed in managed mode.
 
-**Agents (7):**
+**Agents (8):**
 
 | Agent | Purpose |
 |---|---|
@@ -47,10 +47,11 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 | `auditor` | Documentation coherence |
 | `luck` | Durability diagnostic for infrastructure decisions |
 | `competitive-analyst` | Structured competitive teardown |
+| `surveyor` | Trend research sweep → dated trends file |
 
-**Skills (5):** `studio` · `discovery` · `measure` · `review` · `solve`
+**Skills (5):** `studio` · `discover` · `measure` · `review` · `solve`
 
-**Hooks (5, org-enforced):**
+**Hooks (5, org-enforced) — not built.** The plugin ships one hook, `deposit-reminder` (SessionEnd). The five below are the design.
 
 | Hook | Event | Purpose |
 |---|---|---|
@@ -68,22 +69,13 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 
 Individual. Installed via a recommended menu, not enforced packages. Additive — install more disciplines at any time. Re-runnable without penalty.
 
-**Design set (12 agents):**
-`designer` · `strategist` · `historian` · `critic` · `accessibility` · `design-validator` · `typesetter` · `choreographer` · `materialist` · `visual-designer` · `writer` · `systematist`
+Three sets: **Design**, **PM & Discovery**, **Engineering**. The agents in each set are listed in [STRUCTURE.md](STRUCTURE.md), the authoritative agent → tier mapping.
 
-Skills: `design` · `ideate` · `simulate` · `design-validator` · `prototype`
-
-**PM set (10 agents):**
-`strategist` · `scout` · `historian` · `marketer` · `critic` · `user-researcher` · `journey-mapper` · `brief-writer` · `metrics-definer` · `assumption-mapper`
-
-Skills: `experiment` · `ideate` · `discovery` · `measure`
-
-**Engineering set (5 agents):**
-`engineer` · `qa` · `architect` · `specifier` · `surveyor`
-
-Skills: `implement` · `simplify` · `architect`
-
-*Note: Strategist and Historian appear in both Design and PM sets — identical files, same path, no conflict.*
+| Set | Skills |
+|---|---|
+| Design | `design` · `ideate` · `simulate` · `prototype` |
+| PM & Discovery | `experiment` · `ideate` · `discover` · `measure` |
+| Engineering | `implement` · `simplify` |
 
 **Name collision rule:** Core agent names are reserved. The Role menu never presents a Core agent. The install script guards against any Role package file overwriting a Core agent by name — warn and abort if attempted.
 
@@ -92,66 +84,17 @@ Skills: `implement` · `simplify` · `architect`
 Per-team, per-repo. Committed to the product repository's `.claude/` directory. Inherited by every team member on clone.
 
 **Contents:**
-- `.claude/memory/project-context.md` — written by `xd project`; product identity, user archetypes, system invariants, design principles, tech stack, active decisions
-- `.claude/memory/role-context.md` — written by `xd project --role`; user's discipline and experience level for per-project calibration
+- `.claude/memory/project-context.md` — written by `/studio:init`; product identity, user archetypes, system invariants, design principles, tech stack, active decisions
+- `.claude/memory/role-context.md` — written by `/studio:init` (role calibration phase); user's discipline and experience level for per-project calibration
 - Product `CLAUDE.md` — product-specific always-on rules; extends org CLAUDE.md, does not replace it
-- `.claude/settings.json` — product hooks (`canvas-gate`, `branch-guard`)
+- `.claude/settings.json` — product hooks (`canvas-gate`, `branch-guard`; not built)
 - Optional product-specific agents — must use namespaced names (e.g., `acme-regulatory-reviewer`) to prevent collision with Core and Role names
 
 ---
 
-## New Agents (v2 additions)
-
-Seven new agents identified in this sprint. None exist yet — these are to be authored.
-
-### Core additions
-
-**`competitive-analyst`** (Sonnet)
-Structured competitive teardown on demand. Takes a problem space and 3–5 named competitors. Produces: feature coverage matrix, UX pattern analysis, positioning map, gap identification. Distinct from Scout (which surfaces ongoing market signal). Scout gives awareness; Competitive Analyst gives the structured map PMs and designers use for positioning decisions.
-
-### Design Role additions
-
-**`systematist`** (Sonnet)
-Cross-product design system health. Audits pattern proliferation, token drift, component naming inconsistency. Evaluates whether the design system is growing coherently or fragmenting. Distinct from Validate Design (which checks a single mockup against spec). This evaluates the health of the system itself. Load-bearing at multi-product scale.
-
-### PM Role additions
-
-**`user-researcher`** (Sonnet)
-Synthesizes qualitative research — interview transcripts, usability test results, feedback sessions — into product-relevant patterns. Maps findings to feature decisions. Does not conduct research; synthesizes records of research already done. The most-used PM workflow with no current home in Studio OS.
-
-**`journey-mapper`** (Sonnet)
-Maps the user's end-to-end journey before any surface design begins. Surfaces entry points, context switches, adjacent moments, and friction points. Produces a journey artifact that constrains and focuses the Designer's scope. Fills the seam between PM problem validation and Designer interaction modeling.
-
-**`brief-writer`** (Sonnet)
-Produces structured design briefs as the handoff artifact between discovery and design. Output: validated problem, user, success conditions, constraints, out-of-scope. This brief gates `design`. Distinct from Writer (which handles UI copy); Brief Writer handles the strategic handoff document.
-
-**`metrics-definer`** (Sonnet)
-Defines success metrics before implementation begins — leading indicators, lagging indicators, instrumentation requirements, baseline and target values. Works upstream of engineering. Output is an acceptance condition committed alongside the spec, not a post-launch analytics request.
-
-**`assumption-mapper`** (Sonnet)
-Surfaces build assumptions, user assumptions, and technical assumptions before the team invests engineering cycles. Assigns risk levels. Identifies the single assumption whose failure would make the feature worthless. Outputs a risk register. Strategist evaluates whether to proceed; Assumption Mapper surfaces what the Strategist needs.
-
----
-
-## New Skills (v2 additions)
-
-**`discovery`**
-The upstream workflow that precedes `design`. Currently absent — discovery is informal and unstructured.
-
-Sequence: User Researcher (synthesize research) → Journey Mapper (map full context) → Assumption Mapper (surface risks) → PM gate (validate the brief) → Brief Writer (produce handoff artifact)
-
-Output: a completed brief, ready to pass directly into `design`.
-
-**`measure`**
-Success metrics defined before implementation begins, not retrofitted after.
-
-Sequence: Metrics Definer (define success conditions) → PM gate (validate against the validated problem) → Architect (confirm instrumentation is feasible in the current data model)
-
-Output: a measurement plan committed alongside the spec.
-
----
-
 ## Install UX
+
+*Not built. The shipped install is the plugin (`/plugin`), with `install.sh` as a copy-only fallback. Project setup ships as `/studio:init`. The commands, menus, and profile interview here and in Personal Profile and Onboarding Flow are the design.*
 
 ### Commands
 
@@ -159,7 +102,6 @@ Output: a measurement plan committed alongside the spec.
 studio setup          — first-time install: Core + role selection + personal profile
 studio add            — add a discipline after initial setup
 studio update         — update installed collaborators to latest versions
-studio project        — set up a new project (replaces init)
 studio setup --me     — update your personal profile
 ```
 
@@ -170,8 +112,8 @@ Studio OS
 ────────────────────────────────
 Setting up your AI collaborators.
 
-Always included: PM · Design Director · Distinguished Engineer
-                 Heurist · Audit · Luck · Competitive Analyst
+Always included: PM · Creative Director · Distinguished Engineer
+                 Heurist · Audit · Luck · Competitive Analyst · Surveyor
 
 What's your primary discipline?
 
@@ -198,7 +140,7 @@ Add a discipline:
   [U] Update installed collaborators to latest
 ```
 
-The horizontal rule separates expanding (add a discipline) from maintaining (update existing). A user who wants to add engineering agents after initial setup runs `xd add` — one command, additive, no reconfiguration.
+The horizontal rule separates expanding (add a discipline) from maintaining (update existing). A user who wants to add engineering agents after initial setup runs `studio add` — one command, additive, no reconfiguration.
 
 ### Non-managed mode
 
@@ -218,7 +160,7 @@ Hooks function identically in non-managed mode. The only difference: a determine
 
 ## Personal Profile
 
-Runs during `xd setup` immediately after discipline selection. Three questions. Skippable at any point.
+Runs during `studio setup` immediately after discipline selection. Three questions. Skippable at any point.
 
 ### The interview
 
@@ -334,7 +276,7 @@ Added to the Memory Architecture section of every agent definition, loading befo
 
 4. Repo clone             → product .claude/ directory present; product hooks active
 
-5. studio project         → runs product interview; writes project-context.md + role-context.md
+5. /studio:init          → runs product interview; writes project-context.md + role-context.md
 
 Done. All three tiers active. Agents calibrated to product and role.
 ```
@@ -353,14 +295,14 @@ One sentence, added to the Studio OS Integration section of every project CLAUDE
 
 ## Implementation Sequence
 
-| Step | Work | Dependencies |
-|---|---|---|
-| 1 | Redesign install script — `xd setup`, role menu, Core name guard | None |
-| 2 | Author 7 new agents | None (parallel with step 1) |
-| 3 | Author `discovery` + `measure` skills | Step 2 (agents must exist) |
-| 4 | Add personal profile interview to `xd setup` | Step 1 |
-| 5 | Update `xd project` — three-phase interview, role-context.md output | Steps 1–2 |
-| 6 | Delete 12 duplicate single-discipline skill wrappers | None |
-| 7 | Add CLAUDE.md placement rule to template | None |
+| Step | Work | Dependencies | Status |
+|---|---|---|---|
+| 1 | Redesign install script — `studio setup`, role menu, Core name guard | None | Not built |
+| 2 | Author the 7 new agents (`competitive-analyst`, `systematist`, `user-researcher`, `journey-mapper`, `brief-writer`, `metrics-definer`, `assumption-mapper`) | None | Built |
+| 3 | Author `discover` + `measure` skills | Step 2 (agents must exist) | Built |
+| 4 | Add personal profile interview to `studio setup` | Step 1 | Not built |
+| 5 | Project setup — three-phase interview, role-context.md output | Steps 1–2 | Built as `/studio:init` |
+| 6 | Delete 12 duplicate single-discipline skill wrappers | None | Built — `skills/` holds none |
+| 7 | Add CLAUDE.md placement rule to template | None | Not built — the rule lives in this repo's CLAUDE.md only |
 
-Steps 1 and 2 can begin immediately in parallel. Step 6 and 7 are independent cleanup tasks.
+Open work: steps 1, 4 and 7. Step 4 follows step 1; step 7 is independent.

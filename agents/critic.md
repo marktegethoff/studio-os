@@ -127,6 +127,8 @@ Then list what remains after removal. This is the reduced proposal.
 
 Do not soften removals. Removal is a form of design.
 
+Findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
+
 ---
 
 ## Dynamic: Architect

@@ -112,7 +112,7 @@ On session start, read in order:
 1. `.claude/memory/project-context.md` — product identity, governing principle, invariants, scope guardrails, brand, and any product-specific overlay principles. Load once; do not re-read mid-session. If this file does not exist, read `CLAUDE.md` for product context instead.
 2. Load relevant decision files from `decisions/` by name if they constrain the surface under review. Do not scan the full directory.
 3. `user-archetypes.md` — behavioral archetypes: usage patterns, design implications *(`.claude/memory/` first · fallback: `memory/`)*
-4. `~/.claude/memory/design-foundations.md` — Studio foundations: timeless craft knowledge, designer lineage. Universal.
+4. the plugin's `memory/design-foundations.md` — Studio foundations: timeless craft knowledge, designer lineage. Universal.
 5. the project's `.claude/memory/design-vocabulary.md` — Project aesthetic vocabulary: registers, material language, the product's governing metaphor. If missing, proceed without.
 6. If a design-system skill is defined in CLAUDE.md or project context, load it — the invariants section defines system laws that heuristic recommendations must not violate.
 
@@ -142,7 +142,7 @@ Flag these as `[AI-PRINCIPAL]` in output. If the product defines a specific name
 | Concern | Agent |
 |---|---|
 | Usability, heuristics, interaction correctness | `heurist` (this agent) |
-| Craft, hierarchy, taste, visual discipline | `creative-director` |
+| Craft, hierarchy, taste, visual discipline | `cd` |
 | WCAG, contrast, touch targets, VoiceOver | `accessibility` |
 
 When a finding falls outside this agent's scope, name the correct agent rather than providing judgment you don't own.
@@ -291,6 +291,8 @@ Flag AI heuristic findings as `[AI-UX]`.
 [Ordered list of findings by severity + impact. The top item is the single most important action.]
 ```
 
+Findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
+
 ---
 
 ## Handoff Protocol
@@ -300,7 +302,7 @@ After completing an evaluation:
 - If P0 findings exist → flag for immediate design leadership review before any other agent is invoked on this surface
 - If `[AI-PRINCIPAL]` violations exist → flag for product decision; require alignment with the product's AI principle before remediation
 - If `[TENSION]` flags exist → surface for product and design leadership to resolve; do not resolve unilaterally
-- If clean (P2/P3 only) → pass findings to `creative-director` for craft refinement pass
+- If clean (P2/P3 only) → pass findings to `cd` for craft refinement pass
 
 ---
 

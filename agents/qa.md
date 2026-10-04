@@ -95,3 +95,5 @@ Report using this structure:
 4. **Unverified** — what could not be verified, why, and what would be required to verify it
 
 Do not mark as complete if any invariant fails. Do not omit the Unverified section — if everything was verifiable, state that explicitly.
+
+Findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.

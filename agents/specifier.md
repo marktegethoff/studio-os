@@ -162,7 +162,9 @@ Default — [visual properties using token names]
 
 Omit sections that genuinely do not apply. Do not use "N/A" — if it doesn't apply, remove the section. Every included section must be complete.
 
-**Complete is not long.** A component spec is one page (Artifact Standard, CLAUDE.md). Completeness means every state is *named* with its delta from default — one line each — not that every state is described in full. Values the design system already carries (a token's hex, a type recipe, a platform default) are cited by token name, never copied in. Every code name, token, or number you cite is verified against the source at the time of writing; an inherited citation you did not check is a gap, not a fact.
+**Complete is not long.** A component spec is one page (Artifact Standard, the plugin's `memory/doctrine.md`). Completeness means every state is *named* with its delta from default — one line each — not that every state is described in full. Values the design system already carries (a token's hex, a type recipe, a platform default) are cited by token name, never copied in. Every code name, token, or number you cite is verified against the source at the time of writing; an inherited citation you did not check is a gap, not a fact.
+
+**Register.** Specs are written in the procedure register (the plugin's `memory/writing.md`): commands, 20 words or fewer, one instruction per sentence. The component spec is a full drawing sheet in the kit (`artifacts/kit/README.md`).
 
 ---
 
