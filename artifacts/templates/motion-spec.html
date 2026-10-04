@@ -2,118 +2,167 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Motion Spec — [transition]</title>
+<meta name="studio:genre" content="procedure">
+<title>Motion spec — [transition]</title>
 <link rel="stylesheet" href="../kit/studio.css">
-<style>
-  /* Interactive controls — local to this artifact type */
-  .mc-stage{background:var(--bg-1);border:1px solid var(--border);border-radius:6px;padding:2.5rem;display:flex;align-items:center;justify-content:center;min-height:200px;overflow:hidden}
-  .mc-box{width:88px;height:88px;border-radius:8px;background:var(--amber);will-change:transform,opacity}
-  .mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;margin:1.25rem 0}
-  .mc-ctrl{display:flex;flex-direction:column;gap:0.35rem}
-  .mc-ctrl label{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);display:flex;justify-content:space-between}
-  .mc-ctrl label .val{color:var(--amber)}
-  .mc-ctrl input[type=range]{width:100%;accent-color:var(--amber)}
-  .mc-ctrl select{background:var(--bg-2);color:var(--text-1);border:1px solid var(--border);border-radius:4px;padding:0.35rem 0.5rem;font-family:var(--font-mono);font-size:0.75rem}
-  .mc-btns{display:flex;gap:0.5rem;margin:1rem 0}
-  .mc-btn{font-family:var(--font-mono);font-size:0.72rem;padding:0.5rem 1rem;border-radius:5px;border:1px solid var(--border-2);background:var(--bg-2);color:var(--text-1);cursor:pointer}
-  .mc-btn.primary{background:var(--amber);border-color:var(--amber);color:#fff}
-  .mc-note{font-size:0.78rem;color:var(--text-3)}
-</style>
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Motion Spec · owned by choreographer</span>
-    <h1>[Transition]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Timing, easing, and sequencing — only for motion that is earned. Tweak the controls; the preview and the spec values update live. Every transition includes its reduce-motion alternative.</p>
+<!--
+  Motion spec. Procedure genre: commands, 20 words or fewer. One panel for each motion, in order: B, C, D …
+  Replace each [placeholder]. Never invent a budget: write the project value, or leave [budget] and flag a gap.
+  Copy a motion panel for each further motion. Use the next letter, and add a row to the timeline and a measure to A.
+  Move "What must not break" to the last letter.
+-->
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Transition]</h1><p class="sub">Specify only earned motion. Give each motion its parameters and its Reduce Motion alternative.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">motion-spec</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">choreographer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">[/studio:design]</span></div>
+    <div class="c"><span class="l">Platform</span><span class="v">[Apple · springs | web · curves]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[A · YYYY-MM-DD]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
+    <div class="c wide"><span class="l">Motion tokens</span><span class="v mono">[Motion.* file | none]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Is the Motion Earned?</h2>
-    <div class="callout"><p>[What does this motion communicate that the user would otherwise misunderstand? If the honest answer is "nothing," the verdict is <strong>instant</strong>. Gratuitous motion is a defect.]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Live Preview</h2>
-    <div class="mc-stage"><div class="mc-box" id="mc-box"></div></div>
-    <div class="mc-btns">
-      <button class="mc-btn primary" id="mc-play">▶ Play</button>
-      <button class="mc-btn" id="mc-transition">Transition: slide + fade ▾</button>
+  <!-- A · Timeline and budget -->
+  <section class="pnl" id="ms-a" aria-labelledby="ms-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="ms-a-h">Timeline and budget</h2><span class="ref">ms · one axis · rows B C</span></div>
+    <div class="pnl-b">
+      <div class="grid2">
+        <svg viewBox="0 0 440 150" width="440" role="img" aria-labelledby="ms-tl-t">
+          <title id="ms-tl-t">Skeleton of a timeline. Two motions, B and C, sit on one time axis in milliseconds. B starts after a delay. A dashed vertical line marks the budget.</title>
+          <!-- axis, zero line, budget line -->
+          <line x1="60" y1="14" x2="60" y2="118" class="s-hair"/>
+          <line x1="330" y1="14" x2="330" y2="118" class="s-line" stroke-dasharray="4 3"/>
+          <text x="330" y="10" text-anchor="middle" class="t-dim" font-size="10">[budget]</text>
+          <line x1="60" y1="118" x2="424" y2="118" class="s-line"/>
+          <line x1="60" y1="118" x2="60" y2="123" class="s-line"/>
+          <line x1="150" y1="118" x2="150" y2="123" class="s-line"/>
+          <line x1="240" y1="118" x2="240" y2="123" class="s-line"/>
+          <line x1="330" y1="118" x2="330" y2="123" class="s-line"/>
+          <text x="60" y="135" text-anchor="middle" class="t-dim" font-size="10">0</text>
+          <text x="150" y="135" text-anchor="middle" class="t-dim" font-size="10">[n]</text>
+          <text x="240" y="135" text-anchor="middle" class="t-dim" font-size="10">[n]</text>
+          <text x="330" y="135" text-anchor="middle" class="t-dim" font-size="10">[n]</text>
+          <text x="424" y="135" text-anchor="end" class="t-dim" font-size="10">ms</text>
+          <!-- row B: delay, then duration -->
+          <text x="48" y="42" text-anchor="end" class="t-ink" font-size="11" font-weight="600">B</text>
+          <line x1="60" y1="38" x2="90" y2="38" class="s-dim" stroke-dasharray="3 2"/>
+          <rect x="90" y="30" width="150" height="16" class="s-line"/>
+          <line x1="90" y1="25" x2="240" y2="25" class="s-dim"/>
+          <line x1="90" y1="22" x2="90" y2="28" class="s-dim"/>
+          <line x1="240" y1="22" x2="240" y2="28" class="s-dim"/>
+          <text x="165" y="21" text-anchor="middle" class="t-dim" font-size="10">[n] ms</text>
+          <!-- row C: no delay -->
+          <text x="48" y="84" text-anchor="end" class="t-ink" font-size="11" font-weight="600">C</text>
+          <rect x="60" y="72" width="100" height="16" class="s-line"/>
+          <line x1="60" y1="65" x2="160" y2="65" class="s-dim"/>
+          <line x1="60" y1="62" x2="60" y2="68" class="s-dim"/>
+          <line x1="160" y1="62" x2="160" y2="68" class="s-dim"/>
+          <text x="110" y="61" text-anchor="middle" class="t-dim" font-size="10">[n] ms</text>
+        </svg>
+        <ol class="items">
+          <li id="ms-a1"><span class="id">A1</span><div class="t"><div class="meas" style="--val:[n];--lim:[budget];--max:[n]">
+            <div class="mh"><span>B · [element] <span class="lbl">duration</span></span><span class="mv">[n] · budget [budget] ms</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span><span>[n]</span></div>
+          </div></div></li>
+          <li id="ms-a2"><span class="id">A2</span><div class="t"><div class="meas" style="--val:[n];--lim:[budget];--max:[n]">
+            <div class="mh"><span>C · [element] <span class="lbl">duration</span></span><span class="mv">[n] · budget [budget] ms</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span><span>[n]</span></div>
+          </div></div></li>
+          <li id="ms-a3"><span class="id">A3</span><div class="t"><div class="meas" style="--val:[n];--lim:[budget];--max:[n]">
+            <div class="mh"><span>Sequence end <span class="lbl">last row</span></span><span class="mv">[n] · budget [budget] ms</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span><span>[n]</span></div>
+          </div></div></li>
+        </ol>
+      </div>
     </div>
-    <div class="mc-grid">
-      <div class="mc-ctrl"><label>Duration <span class="val" id="mc-dur-v">320ms</span></label><input type="range" id="mc-dur" min="0" max="1200" step="10" value="320"></div>
-      <div class="mc-ctrl"><label>Easing</label>
-        <select id="mc-ease">
-          <option value="cubic-bezier(0.16,1,0.3,1)">easeOutExpo (0.16,1,0.3,1)</option>
-          <option value="cubic-bezier(0.4,0,0.2,1)">standard (0.4,0,0.2,1)</option>
-          <option value="ease-out">ease-out</option>
-          <option value="linear">linear</option>
-          <option value="cubic-bezier(0.34,1.56,0.64,1)">overshoot (0.34,1.56,0.64,1)</option>
-        </select></div>
-      <div class="mc-ctrl"><label>Distance <span class="val" id="mc-dist-v">24px</span></label><input type="range" id="mc-dist" min="0" max="120" step="2" value="24"></div>
-      <div class="mc-ctrl"><label>Delay <span class="val" id="mc-delay-v">0ms</span></label><input type="range" id="mc-delay" min="0" max="600" step="10" value="0"></div>
+    <div class="pnl-f">Draw one row for each motion. The dashed segment is delay. The dashed vertical line is the budget. On springs, duration is the settle time.</div>
+  </section>
+
+  <div class="grid2">
+
+    <!-- B · Motion 1 -->
+    <section class="pnl" id="ms-b" aria-labelledby="ms-b-h">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="ms-b-h">[Element or transition]</h2><span class="ref">motion 1 · measure A1</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="ms-b1"><span class="id">B1</span><div class="t">Trigger<small>[What starts it.]</small></div></li>
+          <li id="ms-b2"><span class="id">B2</span><div class="t">Verdict
+            <small>[Necessary | Orienting | Reinforcing | Decorative]</small>
+            <small>[The user would misunderstand X without this because Y.]</small></div>
+            <span class="side">[keep | remove]</span></li>
+          <li id="ms-b3"><span class="id">B3</span><div class="t">Class
+            <small>[spatial | non-spatial]</small>
+            <small><span class="lbl">Distance</span> [n] pt · [from → to]</small></div></li>
+          <li id="ms-b4"><span class="id">B4</span><div class="t">Specification
+            <small><span class="lbl">Apple</span> <code>response [n] · damping [n] · delay [n] ms</code> or preset <code>[snappy | smooth | bouncy]</code></small>
+            <small><span class="lbl">Web</span> <code>duration [n] ms · easing [curve] · delay [n] ms</code></small>
+            <small><span class="lbl">Token</span> [Motion.Duration.name | Motion.Spring.name | none]</small></div>
+            <span class="side">A1</span></li>
+          <li id="ms-b5"><span class="id">B5</span><div class="t">Haptic<small>[selection | impact-light | impact-medium | success | warning | error | none]</small></div></li>
+          <li id="ms-b6"><span class="id">B6</span><div class="t">Reduce Motion alternative
+            <small>[instant | cross-fade]</small>
+            <small>[Describe the variant. Keep the state change legible.]</small></div>
+            <span class="side">required</span></li>
+          <li id="ms-b7"><span class="id">B7</span><div class="t">Rationale<small>[One sentence: what the user understands because of this motion.]</small></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- C · Motion 2. Copy this panel for each further motion. -->
+    <section class="pnl" id="ms-c" aria-labelledby="ms-c-h">
+      <div class="pnl-h"><span class="ltr">C</span><h2 id="ms-c-h">[Element or transition]</h2><span class="ref">motion 2 · measure A2</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="ms-c1"><span class="id">C1</span><div class="t">Trigger<small>[What starts it.]</small></div></li>
+          <li id="ms-c2"><span class="id">C2</span><div class="t">Verdict
+            <small>[Necessary | Orienting | Reinforcing | Decorative]</small>
+            <small>[The user would misunderstand X without this because Y.]</small></div>
+            <span class="side">[keep | remove]</span></li>
+          <li id="ms-c3"><span class="id">C3</span><div class="t">Class
+            <small>[spatial | non-spatial]</small>
+            <small><span class="lbl">Distance</span> [n] pt · [from → to]</small></div></li>
+          <li id="ms-c4"><span class="id">C4</span><div class="t">Specification
+            <small><span class="lbl">Apple</span> <code>response [n] · damping [n] · delay [n] ms</code> or preset <code>[snappy | smooth | bouncy]</code></small>
+            <small><span class="lbl">Web</span> <code>duration [n] ms · easing [curve] · delay [n] ms</code></small>
+            <small><span class="lbl">Token</span> [Motion.Duration.name | Motion.Spring.name | none]</small></div>
+            <span class="side">A2</span></li>
+          <li id="ms-c5"><span class="id">C5</span><div class="t">Haptic<small>[selection | impact-light | impact-medium | success | warning | error | none]</small></div></li>
+          <li id="ms-c6"><span class="id">C6</span><div class="t">Reduce Motion alternative
+            <small>[instant | cross-fade]</small>
+            <small>[Describe the variant. Keep the state change legible.]</small></div>
+            <span class="side">required</span></li>
+          <li id="ms-c7"><span class="id">C7</span><div class="t">Rationale<small>[One sentence: what the user understands because of this motion.]</small></div></li>
+        </ol>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- D · What must not break -->
+  <section class="pnl" id="ms-d" aria-labelledby="ms-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="ms-d-h">What must not break</h2><span class="ref">gate checks</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ms-d1"><span class="id">D1</span><div class="t">Give each motion a Reduce Motion alternative. Replace spatial movement with a cross-fade.</div></li>
+        <li id="ms-d2"><span class="id">D2</span><div class="t">Remove a motion when the user does not need it to understand the change.</div></li>
+        <li id="ms-d3"><span class="id">D3</span><div class="t">Make each spatial motion interruptible and spatially truthful.</div></li>
+        <li id="ms-d4"><span class="id">D4</span><div class="t">Cite the existing token when its numbers fit. Do not add a token that differs by name alone.</div></li>
+        <li id="ms-d5"><span class="id">D5</span><div class="t">Pair a haptic only with a latch, a threshold, a commit, or a completion.</div></li>
+        <li id="ms-d6"><span class="id">D6</span><div class="t">Name the platform call when the platform already animates the change. Add no spec.</div></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Specification</h2>
-    <table>
-      <tr><th>Property</th><th>Value</th></tr>
-      <tr><td>Duration</td><td><code id="spec-dur">320ms</code></td></tr>
-      <tr><td>Easing</td><td><code id="spec-ease">cubic-bezier(0.16,1,0.3,1)</code></td></tr>
-      <tr><td>Distance</td><td><code id="spec-dist">24px</code></td></tr>
-      <tr><td>Delay</td><td><code id="spec-delay">0ms</code></td></tr>
-      <tr><td>Trigger</td><td>[what starts it]</td></tr>
-    </table>
-    <p class="mc-note">These values are live — they reflect the controls above. Lock them when the motion feels right.</p>
-  </section>
+  <p class="lbl">Cite an item by its letter and number, such as B4. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
-  <section class="section">
-    <h2>Reduce-Motion Alternative <span class="pill">required</span></h2>
-    <p>[With reduce-motion enabled: typically an instant cross-fade or no animation. Never omit.]</p>
-  </section>
-
-  <section class="section">
-    <h2>What the Next Gate Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ The motion communicates something specific; it is not decoration.</div></div>
-      <div class="item"><div class="it-desc">✓ A reduce-motion alternative is specified and accessible.</div></div>
-    </div>
-  </section>
-
-  <footer class="footer"><p>Studio OS · Motion Spec · run /annotate to review</p></footer>
 </div>
-
-<script>
-(function(){
-  var box=document.getElementById('mc-box');
-  var dur=document.getElementById('mc-dur'),ease=document.getElementById('mc-ease'),dist=document.getElementById('mc-dist'),delay=document.getElementById('mc-delay');
-  var modes=['slide + fade','fade','scale','slide'],mi=0;
-  function v(){return {dur:+dur.value,ease:ease.value,dist:+dist.value,delay:+delay.value,mode:modes[mi]};}
-  function sync(){var s=v();
-    document.getElementById('mc-dur-v').textContent=s.dur+'ms';
-    document.getElementById('mc-dist-v').textContent=s.dist+'px';
-    document.getElementById('mc-delay-v').textContent=s.delay+'ms';
-    document.getElementById('spec-dur').textContent=s.dur+'ms';
-    document.getElementById('spec-ease').textContent=s.ease;
-    document.getElementById('spec-dist').textContent=s.dist+'px';
-    document.getElementById('spec-delay').textContent=s.delay+'ms';
-  }
-  function play(){var s=v();
-    box.style.transition='none';
-    var fromT=s.mode==='scale'?'scale(0.6)':s.mode==='fade'?'none':'translateY('+s.dist+'px)';
-    box.style.transform=fromT; box.style.opacity=(s.mode==='slide')?'1':'0';
-    box.getBoundingClientRect();
-    setTimeout(function(){
-      box.style.transition='transform '+s.dur+'ms '+s.ease+' '+s.delay+'ms, opacity '+s.dur+'ms '+s.ease+' '+s.delay+'ms';
-      box.style.transform='translateY(0) scale(1)'; box.style.opacity='1';
-    },20);
-  }
-  [dur,ease,dist,delay].forEach(function(el){el.addEventListener('input',function(){sync();play();});});
-  document.getElementById('mc-play').addEventListener('click',play);
-  document.getElementById('mc-transition').addEventListener('click',function(){mi=(mi+1)%modes.length;this.textContent='Transition: '+modes[mi]+' ▾';play();});
-  sync(); play();
-})();
-</script>
 </body>
 </html>

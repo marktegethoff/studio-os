@@ -2,104 +2,241 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Component Spec — [component]</title>
+<meta name="studio:genre" content="procedure">
+<title>Component spec — [component]</title>
 <link rel="stylesheet" href="../kit/studio.css">
-<style>
-  .cs-stage{background:var(--bg-1);border:1px solid var(--border);border-radius:6px;padding:2.5rem;display:flex;align-items:center;justify-content:center;min-height:140px}
-  .cs-states{display:flex;flex-wrap:wrap;gap:0.4rem;margin:1rem 0}
-  .cs-sbtn{font-family:var(--font-mono);font-size:0.68rem;padding:0.4rem 0.8rem;border-radius:4px;border:1px solid var(--border-2);background:var(--bg-2);color:var(--text-2);cursor:pointer}
-  .cs-sbtn.active{background:var(--amber);border-color:var(--amber);color:#fff}
-  /* the previewed component (a button stand-in; replace with the real component markup) */
-  .cs-demo{font-family:var(--font-body);font-size:0.9rem;font-weight:600;padding:0.7rem 1.4rem;border-radius:8px;border:1px solid var(--border-2);background:var(--bg-3);color:var(--text-1);transition:all .15s}
-  .cs-demo[data-s=default]{background:var(--bg-3);color:var(--text-2)}
-  .cs-demo[data-s=active]{background:var(--amber);border-color:var(--amber);color:#fff}
-  .cs-demo[data-s=pressed]{background:#9a4f20;border-color:#9a4f20;color:#fff;transform:scale(0.97)}
-  .cs-demo[data-s=disabled]{background:var(--bg-2);color:var(--text-3);opacity:0.6;cursor:not-allowed}
-  .cs-demo[data-s=loading]{background:var(--bg-3);color:var(--text-3)}
-  .cs-demo[data-s=error]{background:var(--bg-3);border-color:var(--red);color:var(--red)}
-  tr.cs-row-active td{background:var(--amber-bg)}
-</style>
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Component Spec · owned by specifier</span>
-    <h1>[Component]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Every state, token, and accessibility trait in one place — the handoff that removes implementation guessing. Click a state to preview it.</p>
-  </header>
+<!--
+  Component spec: the one full drawing sheet. Procedure genre: commands, 20 words or fewer.
+  Replace each [placeholder]. Delete a row, not a panel, when it does not apply.
+  Status marks: <span class="ok">✓ Specified</span> · <span class="no">✕ Gap</span> · <span class="na">— Not this sheet</span>
+  Shipping strings carry data-ste="copy". A quoted draft (.orig) carries data-ste="off".
+-->
+<div class="sheet" role="document" aria-label="Drawing sheet: [component]. Component spec.">
+  <div class="zx top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+  <div class="zy l" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
 
-  <section class="section">
-    <h2>State Preview</h2>
-    <div class="cs-stage"><button class="cs-demo" id="cs-demo" data-s="default">[Component]</button></div>
-    <div class="cs-states" id="cs-states">
-      <button class="cs-sbtn active" data-s="default">Default</button>
-      <button class="cs-sbtn" data-s="active">Active</button>
-      <button class="cs-sbtn" data-s="pressed">Pressed</button>
-      <button class="cs-sbtn" data-s="disabled">Disabled</button>
-      <button class="cs-sbtn" data-s="loading">Loading</button>
-      <button class="cs-sbtn" data-s="error">Error</button>
+  <div class="field">
+
+    <!-- Title block. First in the source so it leads on narrow screens. Placed bottom right on the sheet. -->
+    <div class="tblock" role="group" aria-label="Title block" style="grid-column:7/13;grid-row:4;align-self:end">
+      <div class="c title"><span class="l">Title</span><h1>[Component]: [state or variant]</h1><p class="sub">One sheet for every state, token, and limit of the component. Engineering builds from it and does not guess.</p></div>
+      <div class="c wide"><span class="l">Artifact</span><span class="v mono">component-spec</span></div>
+      <div class="c wide"><span class="l">Owner</span><span class="v">specifier</span></div>
+      <div class="c wide"><span class="l">Workflow</span><span class="v mono">/studio:design</span></div>
+      <div class="c wide"><span class="l">Gate</span><span class="v">[cd · SHIP | NO-SHIP]</span></div>
+      <div class="c wide"><span class="l">Revision</span><span class="v">[A · YYYY-MM-DD]</span></div>
+      <div class="c"><span class="l">Sheet</span><span class="v">[1 of 1]</span></div>
+      <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2>States</h2>
-    <table id="cs-table">
-      <tr><th>State</th><th>Trigger</th><th>Appearance (named tokens only)</th></tr>
-      <tr data-s="default"><td>Default</td><td>[—]</td><td>[tokens]</td></tr>
-      <tr data-s="active"><td>Active / content present</td><td>[—]</td><td>[tokens]</td></tr>
-      <tr data-s="pressed"><td>Pressed</td><td>[—]</td><td>[tokens]</td></tr>
-      <tr data-s="disabled"><td>Disabled</td><td>[—]</td><td>[tokens]</td></tr>
-      <tr data-s="loading"><td>Loading / pending</td><td>[—]</td><td>[tokens]</td></tr>
-      <tr data-s="error"><td>Error</td><td>[—]</td><td>[tokens]</td></tr>
-    </table>
-    <p style="font-size:0.8rem">Any state the design did not cover is flagged below — engineering must not guess it.</p>
-  </section>
+    <!-- A · Structure -->
+    <section class="pnl" aria-labelledby="cs-a-h" style="grid-column:1/7;grid-row:1">
+      <div class="pnl-h"><span class="ltr">A</span><h2 id="cs-a-h">Structure</h2><span class="ref">wireframe · [platform] · default size</span></div>
+      <div class="pnl-b">
+        <!-- Redraw the outline for the component. Keep the dimension lines, leaders, and callout style. -->
+        <svg viewBox="0 0 440 316" role="img" aria-labelledby="cs-wf-t">
+          <title id="cs-wf-t">Skeleton of a dimensioned wireframe. A frame holds a headline, a body, and one action. Dimension lines carry token labels. Callouts A1 to A5 name the tokens.</title>
+          <!-- surface -->
+          <rect x="70" y="8" width="188" height="300" rx="18" class="s-line"/>
+          <line x1="70" y1="46" x2="258" y2="46" class="s-line"/>
+          <text x="164" y="32" text-anchor="middle" class="t-ink" font-size="11" font-weight="600">[title]</text>
+          <line x1="70" y1="294" x2="258" y2="294" class="s-hair" stroke-dasharray="3 3"/>
+          <rect x="144" y="299" width="40" height="3" rx="1.5" class="s-fill"/>
+          <!-- block -->
+          <text x="164" y="138" text-anchor="middle" class="t-ink" font-size="10.5" font-weight="600">[headline]</text>
+          <text x="164" y="157" text-anchor="middle" class="t-ink2" font-size="8.4">[body]</text>
+          <rect x="112" y="177" width="104" height="36" rx="8" class="s-fill"/>
+          <text x="164" y="199" text-anchor="middle" class="t-inv" font-size="10" font-weight="500">[action]</text>
+          <!-- left dimensions: headline to body, body to action -->
+          <line x1="118" y1="141" x2="54" y2="141" class="s-dim" stroke-dasharray="2 2"/>
+          <line x1="88" y1="147" x2="54" y2="147" class="s-dim" stroke-dasharray="2 2"/>
+          <line x1="58" y1="141" x2="58" y2="147" class="s-dim"/>
+          <text x="50" y="142" text-anchor="end" class="t-dim" font-size="10">[token]</text>
+          <text x="50" y="153" text-anchor="end" class="t-dim" font-size="10">[n] pt</text>
+          <line x1="88" y1="159" x2="54" y2="159" class="s-dim" stroke-dasharray="2 2"/>
+          <line x1="112" y1="177" x2="54" y2="177" class="s-dim" stroke-dasharray="2 2"/>
+          <line x1="58" y1="159" x2="58" y2="177" class="s-dim"/>
+          <text x="50" y="167" text-anchor="end" class="t-dim" font-size="10">[token]</text>
+          <text x="50" y="178" text-anchor="end" class="t-dim" font-size="10">[n] pt</text>
+          <!-- right dimensions: action height, equal gaps to the safe area -->
+          <line x1="216" y1="177" x2="232" y2="177" class="s-dim" stroke-dasharray="2 2"/>
+          <line x1="216" y1="213" x2="232" y2="213" class="s-dim" stroke-dasharray="2 2"/>
+          <line x1="228" y1="177" x2="228" y2="213" class="s-dim"/>
+          <line x1="246" y1="46" x2="246" y2="127" class="s-dim"/>
+          <line x1="242" y1="46" x2="250" y2="46" class="s-dim"/>
+          <line x1="242" y1="127" x2="250" y2="127" class="s-dim"/>
+          <line x1="246" y1="213" x2="246" y2="294" class="s-dim"/>
+          <line x1="242" y1="213" x2="250" y2="213" class="s-dim"/>
+          <line x1="242" y1="294" x2="250" y2="294" class="s-dim"/>
+          <text x="241" y="90" text-anchor="end" class="t-dim" font-size="10">=</text>
+          <text x="241" y="257" text-anchor="end" class="t-dim" font-size="10">=</text>
+          <!-- leaders -->
+          <circle cx="252" cy="64" r="2" class="s-dim"/>
+          <line x1="254" y1="64" x2="264" y2="64" class="s-dim"/>
+          <line x1="212" y1="133" x2="264" y2="133" class="s-dim"/>
+          <line x1="240" y1="157" x2="264" y2="157" class="s-dim"/>
+          <line x1="228" y1="195" x2="264" y2="195" class="s-dim"/>
+          <line x1="246" y1="254" x2="264" y2="254" class="s-dim"/>
+          <!-- callouts -->
+          <text x="270" y="61" class="t-dim" font-size="10">A1 [surface]</text>
+          <text x="270" y="72" class="t-dim" font-size="10">[token]</text>
+          <text x="270" y="130" class="t-dim" font-size="10">A2 [headline]</text>
+          <text x="270" y="141" class="t-dim" font-size="10">[type] · [color]</text>
+          <text x="270" y="154" class="t-dim" font-size="10">A3 [body]</text>
+          <text x="270" y="165" class="t-dim" font-size="10">[type] · [color]</text>
+          <text x="270" y="187" class="t-dim" font-size="10">A4 [action]</text>
+          <text x="270" y="198" class="t-dim" font-size="10">[token] · [n] pt tall</text>
+          <text x="270" y="209" class="t-dim" font-size="10">[what it does]</text>
+          <text x="270" y="251" class="t-dim" font-size="10">A5 [layout rule]</text>
+          <text x="270" y="262" class="t-dim" font-size="10">[block position]</text>
+        </svg>
+        <span class="lbl">Not to scale.</span>
+      </div>
+      <div class="pnl-f">Purpose: [one sentence on the problem this component solves.] [Evidence: metric or source.]</div>
+    </section>
 
-  <section class="section">
-    <h2>Tokens</h2>
-    <table>
-      <tr><th>Property</th><th>Token</th></tr>
-      <tr><td>Background</td><td><code>[token]</code></td></tr>
-      <tr><td>Foreground</td><td><code>[token]</code></td></tr>
-      <tr><td>Type</td><td><code>[token]</code></td></tr>
-      <tr><td>Radius / spacing</td><td><code>[token]</code></td></tr>
-    </table>
-    <p style="font-size:0.8rem">No raw hex or pt values where a token exists.</p>
-  </section>
+    <!-- B · Copy -->
+    <section class="pnl" aria-labelledby="cs-b-h" style="grid-column:7/13;grid-row:1">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="cs-b-h">Copy</h2><span class="ref">writer · annotated</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li><span class="id">B1</span>
+            <div class="t"><strong>Draft v1</strong> <span class="lbl">quoted · rule breaks in red</span>
+              <small><span class="orig" data-ste="off"><s>[break]</s> [kept words] <s>[break]</s> [kept words]</span></small>
+              <small><span class="viol">[break]</span> [rule broken] · <span class="viol">[break]</span> [rule broken]</small>
+            </div>
+          </li>
+          <li><span class="id">B2</span>
+            <div class="t"><strong>Headline</strong> <span class="lbl">v2</span>
+              <small><span class="anat">
+                <span class="seg"><span class="w" data-ste="copy">[words]</span><span class="t">[what this part does]</span></span>
+                <span class="seg"><span class="w" data-ste="copy">[words]</span><span class="t">[what this part does]</span></span>
+              </span></small>
+            </div>
+          </li>
+          <li><span class="id">B3</span>
+            <div class="t"><strong>Body</strong> <span class="lbl">v2 · [n] sentences</span>
+              <small><span class="dim"><span class="tk"></span><i></i><span>[n] words · limit [limit]</span><i></i><span class="tk"></span></span></small>
+              <small><span class="anat">
+                <span class="seg"><span class="w" data-ste="copy">[words]</span><span class="t">[dictionary word or rule]</span></span>
+                <span class="seg"><span class="w" data-ste="copy">[words]</span><span class="t">[what this part does]</span></span>
+                <span class="seg x"><span class="w" data-ste="copy">[words]</span><span class="t">[rule broken]</span></span>
+              </span></small>
+            </div>
+          </li>
+          <li><span class="id">B4</span>
+            <div class="t"><strong>Action</strong> <span class="lbl">v2 · command</span>
+              <small><span class="dim"><span class="tk"></span><i></i><span>[n] instruction · limit 1</span><i></i><span class="tk"></span></span></small>
+              <small><span class="anat">
+                <span class="seg"><span class="w" data-ste="copy">[words]</span><span class="t">[what this part does]</span></span>
+              </span></small>
+            </div>
+          </li>
+          <li><span class="id">B5</span>
+            <div class="t"><strong>Accessibility</strong> <span class="lbl">label · trait · order</span>
+              <small><span class="lbl">Label</span> <span data-ste="copy">[spoken text]</span> · <span class="lbl">Trait</span> [button | header | …] · <span class="lbl">Order</span> [first, second, third]</small>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="pnl-f">Count one word for each space-separated token.</div>
+    </section>
 
-  <section class="section">
-    <h2>Accessibility</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Label</span><span class="v">[accessibility label]</span></div>
-      <div class="dcard"><span class="k">Trait / role</span><span class="v">[button / etc.]</span></div>
-      <div class="dcard"><span class="k">Touch target</span><span class="v">≥ 44pt</span></div>
-      <div class="dcard"><span class="k">Contrast</span><span class="v">WCAG AA confirmed</span></div>
-    </div>
-  </section>
+    <!-- C · States -->
+    <section class="pnl" aria-labelledby="cs-c-h" style="grid-column:1/7;grid-row:2">
+      <div class="pnl-h"><span class="ltr">C</span><h2 id="cs-c-h">States</h2><span class="ref">trigger · delta from default</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li><span class="id">C1</span><div class="t">Default<small><span class="lbl">Trigger</span> [none · initial state] <span class="lbl">Appearance</span> [tokens as in A2 to A4]</small></div><span class="side">[✓ Specified | ✕ Gap]</span></li>
+          <li><span class="id">C2</span><div class="t">Active · content present<small><span class="lbl">Trigger</span> [event] <span class="lbl">Delta</span> [token changes from C1]</small></div><span class="side">[✓ Specified | ✕ Gap]</span></li>
+          <li><span class="id">C3</span><div class="t">Pressed<small><span class="lbl">Trigger</span> [event] <span class="lbl">Delta</span> [token changes from C1]</small></div><span class="side">[✓ Specified | ✕ Gap]</span></li>
+          <li><span class="id">C4</span><div class="t">Disabled<small><span class="lbl">Trigger</span> [event] <span class="lbl">Delta</span> [token changes from C1]</small></div><span class="side">[✓ Specified | ✕ Gap]</span></li>
+          <li><span class="id">C5</span><div class="t">Loading · pending<small><span class="lbl">Trigger</span> [event] <span class="lbl">Delta</span> [token changes from C1]</small></div><span class="side">[✓ Specified | ✕ Gap]</span></li>
+          <li><span class="id">C6</span><div class="t">Error<small><span class="lbl">Trigger</span> [event] <span class="lbl">Delta</span> [token changes from C1]</small></div><span class="side">[✓ Specified | ✕ Gap]</span></li>
+          <li><span class="id">C7</span><div class="t">[Unspecified state or behavior]<small>Specify it, or accept the risk. Engineering will guess it otherwise.</small></div><span class="side"><span class="no">✕ Gap</span></span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Write each state as its delta from C1. Keep each unlisted property at its default. Resolve every gap before build.</div>
+    </section>
 
-  <section class="section">
-    <h2>Gaps <span class="pill">resolve before build</span></h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Unspecified state/behavior] — "Specify or acknowledge the risk; engineering will guess otherwise."</div></div>
-    </div>
-  </section>
+    <!-- D · Tokens -->
+    <section class="pnl" aria-labelledby="cs-d-h" style="grid-column:7/13;grid-row:2">
+      <div class="pnl-h"><span class="ltr">D</span><h2 id="cs-d-h">Tokens</h2><span class="ref">property → token</span></div>
+      <div class="pnl-b">
+        <div class="tbox">
+          <table>
+            <thead><tr><th>#</th><th>Property</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td class="m">D1</td><td>Background</td><td><code>[token]</code></td></tr>
+              <tr><td class="m">D2</td><td>Foreground</td><td><code>[token]</code></td></tr>
+              <tr><td class="m">D3</td><td>Type</td><td><code>[token]</code> <span class="lbl">[n] pt · [weight]</span></td></tr>
+              <tr><td class="m">D4</td><td>Radius</td><td><code>[token]</code> <span class="lbl">[n] pt</span></td></tr>
+              <tr><td class="m">D5</td><td>Spacing</td><td><code>[token]</code> <span class="lbl">[n] pt</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pnl-f">Write a token name for each value. Flag a value with no token as a gap in C.</div>
+    </section>
 
-  <footer class="footer"><p>Studio OS · Component Spec · run /annotate to review</p></footer>
+    <!-- E · What must not break: measures first, then command lines -->
+    <section class="pnl" aria-labelledby="cs-e-h" style="grid-column:1/7;grid-row:3/5">
+      <div class="pnl-h"><span class="ltr">E</span><h2 id="cs-e-h">What must not break</h2><span class="ref">limits · acceptance</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li><span class="id">E1</span><div class="t"><div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Copy length]</span><span class="mv">[n] · max [limit] words</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span><span>[n]</span></div>
+          </div></div></li>
+          <li><span class="id">E2</span><div class="t"><div class="meas" style="--val:[n];--lim:4.5;--max:10">
+            <div class="mh"><span>Contrast <span class="lbl">body text · UI elements min 3 : 1</span></span><span class="mv">[n] : 1 · min 4.5 : 1</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>5</span><span>10</span></div>
+          </div></div></li>
+          <li><span class="id">E3</span><div class="t"><div class="meas" style="--val:[n];--lim:44;--max:60">
+            <div class="mh"><span>Target size <span class="lbl">[element]</span></span><span class="mv">[n] · min 44 pt</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>20</span><span>40</span><span>60</span></div>
+          </div></div></li>
+          <li><span class="id">E4</span><div class="t"><div class="meas" style="--val:[n];--lim:[budget];--max:[n]">
+            <div class="mh"><span>[Motion] duration</span><span class="mv">[n] · max [budget] ms</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span><span>[n]</span></div>
+          </div></div></li>
+        </ol>
+        <ol class="items">
+          <li><span class="id">E5</span><div class="t">Wrap text at the AX5 text size. Do not truncate any text.</div></li>
+          <li><span class="id">E6</span><div class="t">Show [the Reduce Motion variant] when Reduce Motion is on.</div></li>
+          <li><span class="id">E7</span><div class="t">Read the elements in this order: [first, second, third].</div></li>
+          <li><span class="id">E8</span><div class="t">Do not add [element that must not appear].</div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- F · Vocabulary -->
+    <section class="pnl" aria-labelledby="cs-f-h" style="grid-column:7/13;grid-row:3">
+      <div class="pnl-h"><span class="ltr">F</span><h2 id="cs-f-h">Vocabulary</h2><span class="ref">Product tier · design-vocabulary.md</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li><span class="id">F1</span><div class="t"><span class="mono">[WORD]</span> <span class="lbl">[verb | noun]</span> [Meaning in one sentence.]</div><span class="side"><span class="ok">✓ Approved</span></span></li>
+          <li><span class="id">F2</span><div class="t"><span class="mono">[WORD]</span> <span class="lbl">[verb | noun]</span> [Meaning in one sentence.]</div><span class="side"><span class="ok">✓ Approved</span></span></li>
+          <li><span class="id">F3</span><div class="t"><span class="mono viol">[word]</span> <span class="lbl">[verb | noun]</span> Use <span class="annot">[WORD]</span>.</div><span class="side"><span class="no">✕ Not approved</span></span></li>
+          <li><span class="id">F4</span><div class="t"><span class="mono viol">[word]</span> <span class="lbl">[verb | noun]</span> Use <span class="annot">[WORD]</span>.</div><span class="side"><span class="no">✕ Not approved</span></span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Use approved words only. One word has one meaning.</div>
+    </section>
+
+    <p class="lbl" style="grid-column:1/13;grid-row:5">Cite an item by its letter and number, such as E3. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
+  </div>
+
+  <div class="zy r" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
+  <div class="zx bot" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
 </div>
-
-<script>
-(function(){
-  var demo=document.getElementById('cs-demo');
-  var btns=document.querySelectorAll('#cs-states .cs-sbtn');
-  var rows=document.querySelectorAll('#cs-table tr[data-s]');
-  var labels={default:'[Component]',active:'[Component]',pressed:'[Component]',disabled:'[Component]',loading:'Loading…',error:'Try again'};
-  function set(s){
-    demo.setAttribute('data-s',s); demo.textContent=labels[s]||'[Component]';
-    btns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-s')===s);});
-    rows.forEach(function(r){r.classList.toggle('cs-row-active',r.getAttribute('data-s')===s);});
-  }
-  btns.forEach(function(b){b.addEventListener('click',function(){set(b.getAttribute('data-s'));});});
-})();
-</script>
 </body>
 </html>

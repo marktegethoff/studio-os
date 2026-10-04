@@ -2,41 +2,112 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>State Inventory — [surface]</title>
+<meta name="studio:genre" content="procedure">
+<title>State inventory — [surface]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · State Inventory · owned by designer / specifier</span>
-    <h1>[Surface]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Exhaustive enumeration of a surface's states — the antidote to happy-path-only specs.</p>
+<!--
+  State inventory. Procedure genre: commands, 20 words or fewer.
+  Replace each [placeholder]. Add a state as the next number. Delete a state that does not apply.
+  Status marks: <span class="ok">✓ Specified</span> · <span class="no">✕ Gap</span> · <span class="na">— Omitted</span>
+-->
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Surface]: states</h1><p class="sub">Name every state of one surface. Write each state as its delta from the default. A spec with only the happy path is incomplete.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">state-inventory</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">designer · specifier</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">[/studio:design | /studio:handoff]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[A · YYYY-MM-DD]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
+    <div class="c"><span class="l">Wireframe</span><span class="v mono">[design/slug-wireframe.html]</span></div>
+    <div class="c wide">
+      <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+        <div class="mh"><span>States specified</span><span class="mv">[n] of [n] · target all</span></div>
+        <div class="track" role="img" aria-label="States specified: [n] of [n]"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+      </div>
+    </div>
   </header>
 
-  <section class="section">
-    <h2>States</h2>
-    <table>
-      <tr><th>State</th><th>When it occurs</th><th>What the user sees</th><th>Exit</th></tr>
-      <tr><td>Empty</td><td>[no data yet]</td><td>[empty container — not a tutorial]</td><td>[how it leaves empty]</td></tr>
-      <tr><td>Loading</td><td>[fetch in flight]</td><td>[skeleton / placeholder]</td><td>[resolves to…]</td></tr>
-      <tr><td>Populated</td><td>[data present]</td><td>[the main state]</td><td>[—]</td></tr>
-      <tr><td>Partial / paginated</td><td>[more available]</td><td>[—]</td><td>[—]</td></tr>
-      <tr><td>Error</td><td>[fetch/action failed]</td><td>[honest, recoverable]</td><td>[retry path]</td></tr>
-      <tr><td>Offline</td><td>[no connection]</td><td>[—]</td><td>[—]</td></tr>
-      <tr><td>Edge / overflow</td><td>[very long / very many]</td><td>[—]</td><td>[—]</td></tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>What the Next Gate Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ Every state has a designed appearance and a designed exit — none deferred to "engineering will handle it."</div></div>
-      <div class="item"><div class="it-desc">✓ Empty states describe an empty container, not a feature tutorial (Tutorial Dependency ban).</div></div>
-      <div class="item"><div class="it-desc">✓ Error and offline states are recoverable, not dead ends.</div></div>
+  <!-- A · States -->
+  <section class="pnl" id="si-a" aria-labelledby="si-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="si-a-h">States</h2><span class="ref">delta from A1</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="si-a1"><span class="id">A1</span><div class="t">Populated <span class="lbl">default</span>
+          <small><span class="lbl">When</span> [data present.]</small>
+          <small><span class="lbl">Sees</span> [The main state. Every later delta starts here.]</small>
+          <small><span class="lbl">Exit</span> [How the user leaves this state.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+        <li id="si-a2"><span class="id">A2</span><div class="t">Empty
+          <small><span class="lbl">When</span> [no data yet.]</small>
+          <small><span class="lbl">Delta</span> [An empty container, not a tutorial.]</small>
+          <small><span class="lbl">Exit</span> [How the state leaves empty.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+        <li id="si-a3"><span class="id">A3</span><div class="t">Loading
+          <small><span class="lbl">When</span> [fetch in flight.]</small>
+          <small><span class="lbl">Delta</span> [A skeleton or placeholder.]</small>
+          <small><span class="lbl">Exit</span> [Resolves to A1, A2, or A5.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+        <li id="si-a4"><span class="id">A4</span><div class="t">Partial · paginated
+          <small><span class="lbl">When</span> [more data available.]</small>
+          <small><span class="lbl">Delta</span> [What the user sees.]</small>
+          <small><span class="lbl">Exit</span> [How the user loads more.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+        <li id="si-a5"><span class="id">A5</span><div class="t">Error
+          <small><span class="lbl">When</span> [fetch or action failed.]</small>
+          <small><span class="lbl">Delta</span> [An honest message and a way to recover.]</small>
+          <small><span class="lbl">Exit</span> [The retry path.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+        <li id="si-a6"><span class="id">A6</span><div class="t">Offline
+          <small><span class="lbl">When</span> [no connection.]</small>
+          <small><span class="lbl">Delta</span> [What the user sees.]</small>
+          <small><span class="lbl">Exit</span> [How the state ends.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+        <li id="si-a7"><span class="id">A7</span><div class="t">Edge · overflow
+          <small><span class="lbl">When</span> [very long or very many.]</small>
+          <small><span class="lbl">Delta</span> [What wraps, truncates, or scrolls.]</small>
+          <small><span class="lbl">Exit</span> [How the state ends.]</small></div>
+          <span class="side">[✓ Specified | ✕ Gap | — Omitted]</span></li>
+      </ol>
     </div>
+    <div class="pnl-f">Count a state as specified when it has a delta and an exit. Give a reason for each omitted state. Leave omitted states out of the total.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · State Inventory · run /annotate to review</p></footer>
+  <div class="grid2">
+
+    <!-- B · What must not break -->
+    <section class="pnl" id="si-b" aria-labelledby="si-b-h">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="si-b-h">What must not break</h2><span class="ref">gate checks</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="si-b1"><span class="id">B1</span><div class="t">Give every state an appearance and an exit. Do not defer a state to engineering.</div><span class="side">[A1 to A7]</span></li>
+          <li id="si-b2"><span class="id">B2</span><div class="t">Show an empty container in an empty state. Do not teach the feature there.<small>Tutorial Dependency ban.</small></div><span class="side">[A2]</span></li>
+          <li id="si-b3"><span class="id">B3</span><div class="t">Give each error state and each offline state a way to recover.</div><span class="side">[A5 · A6]</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- C · Open items -->
+    <section class="pnl" id="si-c" aria-labelledby="si-c-h">
+      <div class="pnl-h"><span class="ltr">C</span><h2 id="si-c-h">Open items</h2><span class="ref">gaps · removals · questions</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="si-c1"><span class="id">C1</span><div class="t">[Gap: a state or behavior not yet specified.]</div><span class="side">[owner]</span></li>
+          <li id="si-c2"><span class="id">C2</span><div class="t">[Removed: a state taken out, and why.]</div><span class="side">[A-id]</span></li>
+          <li id="si-c3"><span class="id">C3</span><div class="t">[Open question.]</div><span class="side">[owner]</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Resolve each item, or defer it with a date.</div>
+    </section>
+
+  </div>
+
+  <p class="lbl">Cite an item by its letter and number, such as A3. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

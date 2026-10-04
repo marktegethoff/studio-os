@@ -2,53 +2,163 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="procedure">
 <title>Wireframe — [surface]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · ASCII Wireframe · owned by designer</span>
-    <h1>[Surface]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Structural layout before any implementation code — the arrangement and hierarchy, not the visual treatment.</p>
-    <div class="header-meta"><span>[date]</span><span>State: [which state this shows]</span></div>
+<!--
+  Wireframe (artifact name: ascii-wireframe). Procedure genre: commands, 20 words or fewer.
+  Replace each [placeholder]. Draw A first, then copy its layout into C. Both carry the same labels.
+  Draw the frame to the device proportion. Keep the ASCII sketch aligned: every box closes and every column lines up.
+-->
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Surface]</h1><p class="sub">Draw the arrangement and hierarchy before any code. Show structure only. Leave out color, type, and material.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">ascii-wireframe</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">designer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">[/studio:design]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">[A · YYYY-MM-DD]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
+    <div class="c"><span class="l">State</span><span class="v">[state shown]</span></div>
+    <div class="c wide"><span class="l">Canvas</span><span class="v">[surface · W × H pt · cols ≈ n pt · rows ≈ m pt]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Layout</h2>
-    <pre class="ascii">┌──────────────────────────────────────┐
-│  [region]                      [⋯]   │
-├──────────────────────────────────────┤
-│                                      │
-│   [primary content]                  │
-│                                      │
-│   ┌────────────────────────────┐     │
-│   │ [component]                │     │
-│   └────────────────────────────┘     │
-│                                      │
-├──────────────────────────────────────┤
-│  [action zone]            [ commit ] │
-└──────────────────────────────────────┘</pre>
-    <p style="font-size:0.8rem">Verification: top-edge character count consistent · columns aligned · aspect ratio plausible. No color, no tokens — structure only.</p>
-  </section>
+  <div class="grid2">
 
-  <section class="section">
-    <h2>States</h2>
-    <p>One wireframe per meaningful state. Link or stack them; do not show only the happy path.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">[state]</div><div class="it-desc">[what differs structurally — what appears, collapses, or moves]</div></div>
+    <!-- A · Layout: the primary slot. A dimensioned SVG frame with callouts. -->
+    <section class="pnl" id="aw-a" aria-labelledby="aw-a-h">
+      <div class="pnl-h"><span class="ltr">A</span><h2 id="aw-a-h">Layout</h2><span class="ref">dimensioned · structure only</span></div>
+      <div class="pnl-b">
+        <svg viewBox="0 0 440 372" width="440" role="img" aria-labelledby="aw-wf-t">
+          <title id="aw-wf-t">Skeleton of a dimensioned wireframe. A phone-shaped frame holds four regions: A at the top, B and C in the middle, D at the bottom. Dimension lines give width, height, and region heights. Callouts name each region.</title>
+          <!-- width dimension -->
+          <line x1="96" y1="17" x2="246" y2="17" class="s-dim"/>
+          <line x1="96" y1="13" x2="96" y2="21" class="s-dim"/>
+          <line x1="246" y1="13" x2="246" y2="21" class="s-dim"/>
+          <text x="171" y="11" text-anchor="middle" class="t-dim" font-size="10">[w] pt</text>
+          <!-- height dimension -->
+          <line x1="74" y1="26" x2="74" y2="351" class="s-dim"/>
+          <line x1="70" y1="26" x2="78" y2="26" class="s-dim"/>
+          <line x1="70" y1="351" x2="78" y2="351" class="s-dim"/>
+          <text x="66" y="192" text-anchor="end" class="t-dim" font-size="10">[h] pt</text>
+          <!-- frame and regions -->
+          <rect x="96" y="26" width="150" height="325" rx="20" class="s-line"/>
+          <line x1="96" y1="70" x2="246" y2="70" class="s-line"/>
+          <line x1="96" y1="303" x2="246" y2="303" class="s-line"/>
+          <rect x="108" y="82" width="126" height="100" class="s-hair" stroke-dasharray="3 3"/>
+          <rect x="108" y="194" width="126" height="64" class="s-line"/>
+          <rect x="170" y="313" width="64" height="28" rx="6" class="s-line"/>
+          <text x="106" y="52" class="t-ink2" font-size="10">[A]</text>
+          <text x="116" y="100" class="t-ink2" font-size="10">[B]</text>
+          <text x="116" y="212" class="t-ink2" font-size="10">[C]</text>
+          <text x="106" y="331" class="t-ink2" font-size="10">[D]</text>
+          <!-- region heights, on one chain -->
+          <line x1="258" y1="26" x2="258" y2="351" class="s-dim"/>
+          <line x1="254" y1="26" x2="262" y2="26" class="s-dim"/>
+          <line x1="254" y1="70" x2="262" y2="70" class="s-dim"/>
+          <line x1="254" y1="303" x2="262" y2="303" class="s-dim"/>
+          <line x1="254" y1="351" x2="262" y2="351" class="s-dim"/>
+          <!-- leaders -->
+          <circle cx="258" cy="48" r="2" class="t-dim"/>
+          <line x1="260" y1="48" x2="278" y2="48" class="s-dim"/>
+          <circle cx="234" cy="132" r="2" class="t-dim"/>
+          <line x1="236" y1="132" x2="278" y2="132" class="s-dim"/>
+          <circle cx="234" cy="226" r="2" class="t-dim"/>
+          <line x1="236" y1="226" x2="278" y2="226" class="s-dim"/>
+          <circle cx="258" cy="327" r="2" class="t-dim"/>
+          <line x1="260" y1="327" x2="278" y2="327" class="s-dim"/>
+          <!-- callouts -->
+          <text x="284" y="45" class="t-dim" font-size="10">[A] [region]</text>
+          <text x="284" y="56" class="t-dim" font-size="10">[n] pt · [role]</text>
+          <text x="284" y="129" class="t-dim" font-size="10">[B] [primary content]</text>
+          <text x="284" y="140" class="t-dim" font-size="10">[role]</text>
+          <text x="284" y="223" class="t-dim" font-size="10">[C] [component]</text>
+          <text x="284" y="234" class="t-dim" font-size="10">[role]</text>
+          <text x="284" y="324" class="t-dim" font-size="10">[D] [action zone]</text>
+          <text x="284" y="335" class="t-dim" font-size="10">[n] pt · [role]</text>
+        </svg>
+        <span class="lbl">verification: aspect [h : w] · scale held · every label in B</span>
+      </div>
+      <div class="pnl-f">Draw every state at one scale. Give dimensions in points.</div>
+    </section>
+
+    <!-- B · Labels -->
+    <section class="pnl" id="aw-b" aria-labelledby="aw-b-h">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="aw-b-h">Labels</h2><span class="ref">label · role · content</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="aw-b1"><span class="id">B1</span><div class="t"><span class="mono">[A]</span> [Region name]<small>[Content shown.]</small></div><span class="side">[role]</span></li>
+          <li id="aw-b2"><span class="id">B2</span><div class="t"><span class="mono">[B]</span> [Primary content]<small>[Content shown.]</small></div><span class="side">[role]</span></li>
+          <li id="aw-b3"><span class="id">B3</span><div class="t"><span class="mono">[C]</span> [Component]<small>[Content shown.]</small></div><span class="side">[role]</span></li>
+          <li id="aw-b4"><span class="id">B4</span><div class="t"><span class="mono">[D]</span> [Action zone]<small>[Content shown.]</small></div><span class="side">[role]</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Mark each element with a bracketed letter. Go from top to bottom, then left to right. Name each role: primary, secondary, or tertiary.</div>
+    </section>
+
+  </div>
+
+  <div class="grid2">
+
+    <!-- C · Quick sketch: the ASCII fallback. Same labels as A. -->
+    <section class="pnl" id="aw-c" aria-labelledby="aw-c-h">
+      <div class="pnl-h"><span class="ltr">C</span><h2 id="aw-c-h">Quick sketch</h2><span class="ref">ASCII · fallback for A</span></div>
+      <div class="pnl-b">
+<pre class="ascii" aria-label="ASCII quick sketch of the layout in A">┌────────────────────────────────────┐
+│ [A] [region]                       │
+├────────────────────────────────────┤
+│                                    │
+│  [B] [primary content]             │
+│                                    │
+│  ┌──────────────────────────────┐  │
+│  │ [C] [component]              │  │
+│  └──────────────────────────────┘  │
+│                                    │
+│                                    │
+├────────────────────────────────────┤
+│ [D] [action zone]       [ action ] │
+└────────────────────────────────────┘</pre>
+      </div>
+      <div class="pnl-f">verification: top edge [n] ─ · columns aligned · scale held</div>
+    </section>
+
+    <!-- D · States -->
+    <section class="pnl" id="aw-d" aria-labelledby="aw-d-h">
+      <div class="pnl-h"><span class="ltr">D</span><h2 id="aw-d-h">States</h2><span class="ref">structural delta · trigger</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="aw-d1"><span class="id">D1</span><div class="t">[Rest state]<small>[What the layout shows.]</small></div><span class="side">[↓ trigger]</span></li>
+          <li id="aw-d2"><span class="id">D2</span><div class="t">[Next state]<small>[What appears, collapses, or moves.]</small></div><span class="side">[↓ trigger]</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Add a frame only when a transition changes the layout. Write every other state as one line.</div>
+    </section>
+
+  </div>
+
+  <!-- E · What must not break -->
+  <section class="pnl" id="aw-e" aria-labelledby="aw-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="aw-e-h">What must not break</h2><span class="ref">device check · next step</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="aw-e1"><span class="id">E1</span><div class="t"><div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+          <div class="mh"><span>Aspect ratio <span class="lbl">h : w</span></span><span class="mv">[n] · surface [n]</span></div>
+          <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+          <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span><span>[n]</span></div>
+        </div></div></li>
+        <li id="aw-e2"><span class="id">E2</span><div class="t">Make the hierarchy read at the scan distance the user arrives with.</div></li>
+        <li id="aw-e3"><span class="id">E3</span><div class="t">Account for every state in D. The state inventory enumerates them.</div></li>
+        <li id="aw-e4"><span class="id">E4</span><div class="t">Show structure only. Use no color, no type, and no material.</div></li>
+        <li id="aw-e5"><span class="id">E5</span><div class="t">Use the same bracketed labels in A, B, and C.</div></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>What the Next Step Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ Hierarchy reads correctly at the scan distance the user arrives with.</div></div>
-      <div class="item"><div class="it-desc">✓ Every state is structurally accounted for (Specifier turns this into the spec; the State Inventory enumerates them).</div></div>
-    </div>
-  </section>
+  <p class="lbl">Cite an item by its letter and number, such as B2. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
-  <footer class="footer"><p>Studio OS · ASCII Wireframe · run /annotate to review</p></footer>
 </div>
 </body>
 </html>
