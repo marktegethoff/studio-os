@@ -6,13 +6,13 @@ Behavioral evals for every agent in the roster. Each eval is a prompt + pass cri
 
 ## Coverage
 
-All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simulate, luck, annotate, gather-feedback, scope) are covered across 9 files (34 by name; `swift-engineer` carries its own behavioral evals in `engineering-agents.eval.md` (Evals 8–10) in addition to inheriting `engineer`'s base scenarios; `web-engineer` still inherits the base scenarios via the family discipline — its own behavioral evals are owed when its platform doctrine lands; `evals/lint-agnostic.sh` R5 remains the structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
+All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simulate, luck, annotate, gather-feedback, scope) are covered across 9 files (all 35 agents named; `swift-engineer` (Evals 8–11) and `web-engineer` (Eval 13) each carry their own behavioral evals in `engineering-agents.eval.md` in addition to inheriting `engineer`'s base scenarios; `evals/lint-agnostic.sh` R5 remains the structural check that every `*-engineer.md` carry a `scaffold-commands` anchor):
 
 | File | Covers |
 |---|---|
 | `leadership-agents.eval.md` | pm · strategist · critic · marketer · auditor · luck · surveyor |
 | `cd.eval.md` | cd |
-| `engineering-agents.eval.md` | architect · engineer · swift-engineer · de · qa |
+| `engineering-agents.eval.md` | architect · engineer · swift-engineer · web-engineer · de · qa |
 | `design-agents.eval.md` | designer · choreographer · typesetter · writer · specifier · prototyper |
 | `surface-agents.eval.md` | materialist · visual-designer · mark-maker · accessibility · heurist · design-validator · systematist |
 | `discovery-agents.eval.md` | journey-mapper · user-researcher · brief-writer · metrics-definer · assumption-mapper |
@@ -25,9 +25,9 @@ All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simu
 **Every agent and every skill must have eval coverage. Adding one without an eval is incomplete work.** When you add or substantially change an agent or skill:
 1. Add or update its eval in the appropriate file above (agents → the matching group file; skills → `skills.eval.md`).
 2. If it's a net-new discipline group, add a new `*-agents.eval.md` and list it here.
-3. The full-suite run reconciles the live roster (`agents/*.md`) and skill set (`skills/*/`) against this coverage table and **flags any agent or skill with no eval** as a suite failure.
+3. The lint (R12) performs the reconciliation: every `agents/*.md` must be named on an `Agents:` line of an `evals/*.eval.md`, and every `skills/*/` must have a `## <name>` heading in `skills.eval.md` — **an agent or skill with no eval fails**, on every lint run, not only at suite time.
 
-This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enforced on the Phase 3 scheduled-eval cadence.
+This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enforced on every lint run (R12) and on the Phase 3 scheduled-eval cadence.
 
 ---
 
@@ -39,7 +39,7 @@ This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enfo
 
 ### Full-suite procedure
 
-0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant) and the orchestration invariants from `memory/orchestration.md` (R7 graph-block validity, R7.b Six Functions coverage via `six-functions.map`, R7.c executor conformance, R8 auto-contract stub). FAILs block the suite.
+0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant) and the orchestration invariants from `memory/orchestration.md` (R7 graph-block validity, R7.b Six Functions coverage via `six-functions.map`, R7.c executor conformance, R7.d adversary-node conformance, R8 auto-contract stub, R11 agent model & effort per § Model and effort, R12 eval coverage reconciliation per the Coverage rule above). FAILs block the suite.
 
 1. For each eval file, run every eval: send the prompt(s) to the named agent, score each criterion PASS / PARTIAL / FAIL, flag any anti-pattern fired.
 2. Roll up per agent: an agent PASSES only if all its evals pass. A single failed criterion fails that eval; a single failed eval fails that agent.
@@ -81,3 +81,21 @@ RECOMMENDATIONS
 - **On cadence** — the Phase 3 cron runs the full suite and routes failures to the owning agent. Drift that the suite catches is a signal, not a surprise.
 
 The suite is the quality floor's harness: the Slop Test (Phase 4) is built on top of a passing suite.
+
+---
+
+## Executable layer — `claude plugin eval`
+
+The markdown evals above are the **behavioral contract**. `evals/cases/` is the **executable regression harness**, run by `claude plugin eval` (Claude Code ≥ 2.1.269): each case is a prompt plus graders, runs 3× with the plugin and 3× without, and reports the plugin's Δ.
+
+It matters now because agents pin models and effort (the plugin's `memory/orchestration.md` § Model and effort) — a model rollout is exactly when behavior regresses.
+
+| Run | Command |
+|---|---|
+| Local, every case | `claude plugin eval .` |
+| One case, cheaply | `claude plugin eval . --case <name> --runs 1 --ablation none` |
+| CI | `claude plugin eval . --trust-plugin --json results.json --threshold 0.8 --model <pinned> --judge-model <pinned> --no-publish --max-cost-usd 20` |
+
+A case is a directory: `prompt.md` (frontmatter + the prompt) and `graders/<name>.md` (frontmatter `type:`; an `llm` grader's body is its `PASS if …` / `FAIL if …` rubric).
+
+**Rule:** a new gate or refutation behavior gets a case. `evals/results/` is gitignored.

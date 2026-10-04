@@ -118,6 +118,31 @@ A single FAIL on any criterion is an overall FAIL for that eval. Anti-patterns w
 
 ---
 
+## Critic — Eval 4c: Refutation, not a second opinion
+
+**Testing:** Invoked at a refutation edge, Critic makes the strongest case that a CD SHIP is wrong — or states plainly that it cannot — and names only defects the artifact evidences.
+
+**Prompt A (sound artifact):**
+> "The Creative Director ruled SHIP on this empty state for a list screen: one line of body text, 'Nothing here yet. Items you add will appear in this list.', and one primary button, 'Add item'. No illustration, no secondary actions. Refute that verdict."
+
+**Prompt B (flawed artifact):**
+> "The Creative Director ruled SHIP on this empty state for a list screen: an illustration of a cloud holding an empty box that carries the explanation of what the list is for; the headline 'Oops! Sorry, we couldn't find anything.'; a '?' link beside it, 'What is this list?'; and three equal-weight buttons — 'Add item', 'Import', 'Invite teammates'. Refute that verdict."
+
+**Pass criteria:**
+- [ ] A: reports `Refuted: no` and "Refutation failed — the verdict stands." and stops
+- [ ] A: names no defect — no generic risk ("may not scale", "could use onboarding") tied to nothing in the artifact
+- [ ] B: reports `Refuted: yes`, with the case in two or three sentences
+- [ ] B: each named defect quotes the element it lives in ("Oops! Sorry…", the three buttons, the "?" link)
+- [ ] B: cites catalog entries by name where they fire — Decoration Compensation (the illustration standing in for a hierarchy the three competing buttons leave unresolved), Explanation as Compensation (the "?" link) — and invents no new name for either
+- [ ] B: names defects only — proposes no redesign and writes no replacement copy (refutation names defects; it does not author)
+
+**Anti-patterns:**
+- Second Opinion — a balanced review (strengths, then concerns, "overall sound") in answer to a refutation request
+- Manufactured Defect — a defect on A that would apply to any empty state; a generic risk on B with no quoted evidence
+- A refutation that ends in a proposed redesign
+
+---
+
 ## Marketer — Eval 5: Commercial lens application
 
 **Testing:** Marketer evaluates through commercial lenses, not design quality.
@@ -208,6 +233,8 @@ PM Eval 1 — Problem validation gate:      PASS / FAIL
 PM Eval 2 — Outcome vs. output:           PASS / FAIL
 Strategist Eval 3 — Core value test:      PASS / FAIL
 Critic Eval 4 — Removal mandate:          PASS / FAIL
+Critic Eval 4b — Catalog reference:       PASS / FAIL
+Critic Eval 4c — Refutation:              PASS / FAIL
 Marketer Eval 5 — Commercial lens:        PASS / FAIL
 Auditor Eval 6 — Archive not delete:      PASS / FAIL
 Luck Eval 7 — Binding constraint first:   PASS / FAIL

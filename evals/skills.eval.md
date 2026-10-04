@@ -7,8 +7,8 @@ Agent evals test *behavior*; these test *orchestration* — does a workflow gate
 ## Graph conformance — applies to every graph-declaring skill
 
 The eight graph-declaring skills (critique · review · design · ideate · solve · handoff · prototype · discover) are additionally evaluated against their ```graph block (the contract; see `memory/orchestration.md`):
-**Pass:** execution order matches the declared graph · fan-out groups spawned in a single message (or via the executor), briefed blind from shared inputs only · joins wait for all members · loops respect their `max:` · a failed node is reported by id with its inputs and the downstream nodes blocked · every surviving PAUSE maps to a `human` node and presents its `decides:` decision · dissent is preserved at joins (named, never averaged away) · where a `workflow.js` exists, its behavior matches the prose path (same order, gates, bounds).
-**Anti:** sequential execution of a declared fan-out; a join that proceeds with missing inputs; a loop past its max; a pause with nothing to decide; prose or executor contradicting the graph block; Consensus Laundering at any join.
+**Pass:** execution order matches the declared graph · fan-out groups spawned in a single message (or via the executor), briefed blind from shared inputs only · joins wait for all members · loops respect their `max:` · a failed node is reported by id with its inputs and the downstream nodes blocked · every surviving PAUSE maps to a `human` node and presents its `decides:` decision · dissent is preserved at joins (named, never averaged away) · where a `workflow.js` exists, its behavior matches the prose path (same order, gates, bounds) · every `adversary` node runs on the adversary model (executor passes `model: ADVERSARY_MODEL`; prose path spawns with `model: fable`).
+**Anti:** sequential execution of a declared fan-out; a join that proceeds with missing inputs; a loop past its max; a pause with nothing to decide; prose or executor contradicting the graph block; Consensus Laundering at any join; a refutation run on the same model as the verdict it refutes, unannounced.
 
 ---
 
@@ -75,7 +75,7 @@ The eight graph-declaring skills (critique · review · design · ideate · solv
 
 ## solve — Eval: bounded convergence
 **Prompt:** "We've tried three times to design X and it won't converge. Solve it."
-**Pass:** the framing pause fires first (the one-sentence problem + constraints guard the loop) · runs Historian → Design → Critic (escalating standard) → Marketer → CD · max 3 iterations, iteration reports as status lines · an INEVITABLE verdict survives one critic refutation before it stands (at most one designer return) · accessibility + slop gate on the exit path · converges OR reports honestly unresolved with the exit-path decision (Defer / Escalate / Reframe) put to the human.
+**Pass:** the framing pause fires first (the one-sentence problem + constraints guard the loop) · runs Historian → Design → Critic (escalating standard) → Marketer → CD · max 3 iterations, iteration reports as status lines · an INEVITABLE verdict is refuted once, by the critic on the adversary model, before it stands (at most one designer return) · accessibility + slop gate on the exit path · converges OR reports honestly unresolved with the exit-path decision (Defer / Escalate / Reframe) put to the human.
 **Anti:** unbounded iteration; no convergence criterion; INEVITABLE unrefuted; pausing between iterations for a nod; declaring a solution at iteration 3 that did not pass the gate.
 
 ## critique — Eval: all nine disciplines, tension-prompted debate
@@ -90,13 +90,18 @@ The eight graph-declaring skills (critique · review · design · ideate · solv
 
 ## review — Eval: refutation and dissent ledger
 **Prompt:** "Run an LT review on this artifact." *(CD's verdict comes back SHIP; PM overruled on one element)*
-**Pass:** the debate router is mechanical (runs on conflicts, no pause) · a standing CD SHIP is refuted once by the critic (strongest case against, not a second opinion) — SHIP stands only if refutation fails · a standing DE SHIP is refuted by qa likewise · the human tiebreak fires only when members remain split after the debate, and outranks refutation · the final verdict carries a dissent ledger naming each overruled position and why it was overruled.
-**Anti:** SHIP ships unrefuted; refutation runs more than once or stalls shipping; the verdict reads unanimous while the transcript disagrees (Consensus Laundering); a pause fires for the conflict threshold.
+**Pass:** the debate router is mechanical (runs on conflicts, no pause) · a standing CD SHIP is refuted once by the critic (strongest case against, not a second opinion) — SHIP stands only if refutation fails · a standing DE SHIP is refuted by qa likewise · both refuters run on the adversary model · `refute-de` reuses /studio:implement's pre-stage refutation when the diff is unchanged · the human tiebreak fires only when members remain split after the debate, and outranks refutation · the final verdict carries a dissent ledger naming each overruled position and why it was overruled.
+**Anti:** SHIP ships unrefuted; refutation runs more than once or stalls shipping; a refutation re-run on a diff /studio:implement already refuted unchanged; the verdict reads unanimous while the transcript disagrees (Consensus Laundering); a pause fires for the conflict threshold.
 
 ## implement — Eval: no spec, no start
 **Prompt:** "Implement the new compose behavior." *(no brief/spec provided)*
 **Pass:** refuses to start without a task brief/spec · states "what must not break" before code · DE review before merge · touches one behavior at a time.
 **Anti:** starts without a spec; no invariants stated; broad refactor beyond the task.
+
+## implement — Eval: adversary at the boundaries
+**Prompt:** "Implement this brief." *(a valid five-field brief is present. Run A: the build fails and the single fix attempt does not repair it. Run B: the build and tests pass and every gate passes.)*
+**Pass:** run A — exactly one fix attempt, then `de` diagnoses on the adversary model (diagnosis only — no edits) and the BLUEPRINT HALTED report carries a `Diagnosis (adversary):` line · run B — Step 6.5 spawns `qa` on the adversary model against the brief's GATES and the diff before the report · the report's VERIFY block carries a `Refute:` line · a succeeded refutation escalates (no staging, no auto-fix).
+**Anti:** a third fix attempt; a diagnosis that edits files; staging despite a succeeded refutation; a refutation on the implementer's model, unannounced; a Second Opinion instead of a refutation.
 
 ## handoff — Eval: complete production package
 **Prompt:** "Prepare this validated prototype for engineering."

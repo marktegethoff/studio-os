@@ -1,5 +1,5 @@
 # Engineering Agents Evals
-Agents: `architect`, `engineer`, `swift-engineer`, `de`, `qa`
+Agents: `architect`, `engineer`, `swift-engineer`, `web-engineer`, `de`, `qa`
 Run: after any change to an engineering agent file, or before/after major architectural decisions.
 
 Scenarios are product-agnostic. A consuming project may add product-specific evals alongside these.
@@ -226,6 +226,42 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 **Anti-patterns (flag if present):**
 - Re-derives the sheet from scratch with the library sitting unread; blocks dismissal unconditionally; boolean-driven presentation
 
+## QA — Eval 12: Refutation of a SHIP
+
+**Testing:** Invoked at a refutation edge, QA makes the strongest evidenced case that a DE SHIP is wrong — it names defects, with their evidence, and does not author the fix.
+
+**Prompt:**
+> "The Distinguished Engineer ruled SHIP on this change: ordering within a group moved from write-time reindexing to a read-time sort on a timestamp key. The diff is in the working tree — `src/groups/membership.ts` changed, and `src/groups/membership.test.ts` gained cases for add and remove. Project context declares the invariant 'order within a group is stable across reloads'. Refute that verdict."
+
+**Pass criteria:**
+- [ ] QA reads the changed file, the test file, and the declared invariant before ruling — it does not refute from the description
+- [ ] Reports `Refuted: yes`, with the case in two or three sentences
+- [ ] Names the untested invariant — order within a group is stable across reloads — with path evidence: `membership.ts` changed the ordering path; `membership.test.ts` exercises add and remove only
+- [ ] Names defects only — does not write the missing test or propose the fix
+
+**Anti-patterns:**
+- Second Opinion — a balanced review (what is covered, what might be, "overall reasonable") in answer to a refutation request
+- Manufactured Defect — "needs more tests", "may not scale" — risks with no file, line, or invariant behind them
+- Proposing the fix or drafting the test instead of naming the defect
+
+## web-engineer — Eval 13: Sharing mechanism — by reference, by package name
+
+**Testing:** the Scaffold Blueprint's Sharing Mechanism rule — `shared/` is consumed by reference through its workspace package name; aliases, registry pins, and deep imports break it.
+
+**Prompt:**
+> "The canvas can't resolve our design-system package. Quickest fix: add a `tsconfig` path alias in `canvas` pointing at `../shared/src`. Also pin `app` to the published `^1.0.0` of the package so the two targets can't drift, and import the button straight from `shared/src/components/button`."
+
+**Pass criteria:**
+- [ ] Refuses the path alias and names why — it collapses type resolution and runtime resolution into one fragile string and drifts between targets; imports use the package name
+- [ ] Wires `app` and `canvas` by reference: each `package.json` declares the package with `"workspace:*"`; the package manager's install symlinks it, with no sync step
+- [ ] Names the registry version specifier (`^1.0.0`) as a fork candidate — the project would no longer consume SHARED by reference — and a FAIL under the included-by-reference invariant
+- [ ] Refuses the deep import; routes through the public surface `shared/package.json` declares in `exports`
+
+**Anti-patterns:**
+- Adds the alias with a TODO; pins the registry version "for now"
+- Deep-imports `shared/src/...` across the boundary
+- Copies the component or assets into `canvas` (a fork) or adds a static-copy sync step
+
 ## Eval summary template
 
 ```
@@ -239,6 +275,12 @@ Engineer Eval 4 — Spec gap escalation:          PASS / FAIL
 DE Eval 5 — Read-first rule:                    PASS / FAIL
 QA Eval 6 — Invariant coverage:                 PASS / FAIL
 Architect Eval 7 — HTML via template:           PASS / FAIL
+swift-engineer Eval 8 — Main-actor boundary:    PASS / FAIL
+swift-engineer Eval 9 — State doctrine:         PASS / FAIL
+swift-engineer Eval 10 — Resource and snapshot: PASS / FAIL
+swift-engineer Eval 11 — Pattern library:       PASS / FAIL
+QA Eval 12 — Refutation of a SHIP:              PASS / FAIL
+web-engineer Eval 13 — Sharing mechanism:       PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]
