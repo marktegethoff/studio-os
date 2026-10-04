@@ -1,97 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="exploratory">
 <title>User Journey — Folio Client Share</title>
 <link rel="stylesheet" href="../../artifacts/kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · User Journey · owned by journey-mapper</span>
-    <h1>Folio — Client Share<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">The end-to-end path from the moment the user's need arises to the outcome — the context that constrains and focuses design scope.</p>
-    <div class="header-meta"><span>2026-05-27</span><span>User: Senior architect — 8–15 years practice, curates per client, carries 6–12 active projects</span></div>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>Folio — Client Share</h1>
+      <p class="sub">The path from the moment a need arises to the outcome. It constrains and focuses design scope.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">user-journey</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">journey-mapper</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:discover</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">1 · 2026-05-27</span></div>
+    <div class="c wide"><span class="l">User</span><span class="v">Senior architect · 8–15 years in practice · curates per client · carries 6–12 active projects</span></div>
+    <div class="c wide"><span class="l">Status</span><span class="v">Example</span></div>
   </header>
 
-  <section class="section">
-    <h2>Boundary</h2>
-    <div class="grid3">
-      <div class="dcard"><span class="k">Trigger</span><span class="v">A prospective client books a call — an email arrives, a calendar invite is accepted. The architect now has a deadline and a specific audience. The need to send relevant work arises outside the product entirely.</span></div>
-      <div class="dcard"><span class="k">Successful outcome</span><span class="v">The architect has a live link in the client's inbox, knows it has been opened, and walks into the pitch with confidence that the right work is in front of the right person.</span></div>
-      <div class="dcard"><span class="k">Failed outcome</span><span class="v">The architect either never sends anything (abandons mid-flow and falls back to email attachments), or sends a link they're not sure looks right — and has no way to know if it was ever opened before the call.</span></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Stages</h2>
-    <table>
-      <tr><th>Stage</th><th>Goal</th><th>Today</th><th>Friction (type)</th></tr>
-      <tr>
-        <td><strong>Trigger — registering the need</strong></td>
-        <td>Recognize that a curated share is needed for this specific client</td>
-        <td>Receives calendar invite or email reply. Mentally notes "need to send work." May write it on a to-do or leave the tab open. Does not open Folio yet — the impulse lives in email.</td>
-        <td><b>Orientation</b> — no prompt, reminder, or re-entry path connects the external event (booked call) to the share feature. The gap between impulse and product entry is undesigned.</td>
-      </tr>
-      <tr>
-        <td><strong>Selection — choosing the right projects</strong></td>
-        <td>Decide which 3–5 projects are relevant to this client's project type, scale, and taste</td>
-        <td>Opens Folio, browses all projects, attempts to mentally filter by relevance. No client context is carried in. May open the client's website in a separate tab for reference. Selection is done by memory and instinct.</td>
-        <td><b>Confidence</b> — no way to know if a project will resonate with this client's brief. Selection feels arbitrary. Architects frequently second-guess and restart.</td>
-      </tr>
-      <tr>
-        <td><strong>Curation — ordering and trimming</strong></td>
-        <td>Sequence the selection so the strongest work leads; remove anything that weakens the overall impression</td>
-        <td>Drags projects into a manual order. Re-opens individual project pages to check image quality and completeness. Discovers half-finished entries mid-flow and either patches them or drops the project. Curation and editing blur into one another.</td>
-        <td><b>Effort</b> — trimming a selection requires re-entering individual projects, fixing content, and returning. The task boundary is unclear; curation keeps expanding into editing work.</td>
-      </tr>
-      <tr>
-        <td><strong>Share — generating and sending the link</strong></td>
-        <td>Produce a shareable link and get it into the client's hands before the call</td>
-        <td>Finds the share control (not always where expected on first attempt). Generates a link. Copies it. Switches to email. Pastes it. Writes context around it. Sends. At no point sees what the client will see before sending.</td>
-        <td><b>Confidence</b> — cannot preview the client-facing view before sharing. No knowledge of link expiry, access settings, or whether the link is branded or generic. Sends into uncertainty.</td>
-      </tr>
-      <tr>
-        <td><strong>Confirmation — knowing it landed</strong></td>
-        <td>Confirm the link was received and opened before the pitch call</td>
-        <td>Waits. Sends a follow-up email asking if they received it. Checks sent items to confirm. Has no signal from Folio. Walks into the call not knowing if the client has seen anything.</td>
-        <td><b>Recovery</b> — if the wrong link was sent, or the link was never opened, there is no recovery path. No open notification, no way to resend, no fallback. The failed state is invisible until the call begins.</td>
-      </tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>Entry &amp; Exit Paths</h2>
-    <div class="compare">
-      <div class="pos"><h4>Entry</h4>
-        <div class="crow"><b>Email / calendar</b> — prospect confirms a call; architect is in their inbox, not in Folio. Carries the client's name, project type, and a rough sense of timeline. No Folio session is open.</div>
-        <div class="crow"><b>Direct re-entry</b> — architect remembers a past share attempt mid-week; returns to Folio to finish or update. Carries partial intent but has lost context from the earlier session.</div>
-        <div class="crow"><b>Post-editing impulse</b> — finishes updating a project and thinks "I should send this." Lowest-friction entry but least intentional — selection is driven by recency, not fit.</div>
-      </div>
-      <div class="neg"><h4>Exit</h4>
-        <div class="crow"><b>Success</b> — returns to email to prep talking points for the call. Carries the sent link and, if open-tracking exists, the confidence that the client has engaged. Goes into the pitch prepared.</div>
-        <div class="crow"><b>Failure / abandonment</b> — exits Folio mid-selection, reverts to attaching PDFs in email. Carries friction memory ("took too long, not worth it") — reinforces non-use. Share adoption stays at 23%.</div>
+  <section class="pnl" aria-labelledby="uj-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="uj-a-h">Boundaries</h2><span class="ref">trigger · two outcomes</span></div>
+    <div class="pnl-b">
+      <div class="grid3">
+        <div class="note"><span class="lbl"><strong>A1</strong> · Trigger</span><span>A prospective client books a call. An email arrives, or a calendar invite is accepted. The architect now has a deadline and a specific audience. The need to send relevant work arises outside the product.</span></div>
+        <div class="note"><span class="lbl"><strong>A2</strong> · Successful outcome <span class="ok">✓</span></span><span>The architect has a live link in the client's inbox and knows the client has opened it. They walk into the pitch sure that the right work is in front of the right person.</span></div>
+        <div class="note"><span class="lbl"><strong>A3</strong> · Failed outcome <span class="no">✕</span></span><span>The architect never sends anything. They abandon the flow and fall back to email attachments. Or they send a link they doubt looks right and cannot know whether the client opened it before the call.</span></div>
       </div>
     </div>
+    <div class="pnl-f">A trigger is a real-world event, not a product action. A failed outcome is as specific as a successful one.</div>
   </section>
 
-  <section class="section">
-    <h2>Moments That Matter Most</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">1</div><div class="it-desc"><b>Trigger to first action — the gap between email and Folio.</b> The impulse to share arises in a different context than the tool that enables it. The 77% of users who don't adopt share are not failing at the feature — they never reach it. The trigger is mislocated: Folio waits for users to arrive rather than meeting them at the moment the need fires. Any surface improvement to the share flow that doesn't address this gap will leave the adoption ceiling in place.</div></div>
-      <div class="item"><div class="it-name">2</div><div class="it-desc"><b>Share — sending without seeing.</b> Architects do not send work they are uncertain about. The confidence gap at the moment of link generation — no client-facing preview, no access transparency, no knowledge of what the recipient will experience — is the proximate cause of abandonment for users who do reach the feature. A user who can see exactly what the client will see before they send will send. One who cannot will hesitate, second-guess, and often revert to attachments.</div></div>
+  <section class="pnl" aria-labelledby="uj-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="uj-b-h">Stages</h2><span class="ref">sub-goals · friction per stage</span></div>
+    <div class="pnl-b">
+      <div class="meas" style="--val:5;--lim:8;--max:10">
+        <div class="mh"><span>Stages <span class="lbl">typical 3 to 6</span></span><span class="mv">5 · split above 8</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>5</span><span>10</span></div>
+      </div>
+
+      <div class="tbox">
+        <svg viewBox="0 0 892 270" role="img" aria-labelledby="uj-map-t" style="min-width:800px">
+          <title id="uj-map-t">Stage map, left to right. A booked call triggers the journey. Five chevron stages follow, each with a friction marker below it: orientation, confidence, effort, confidence, recovery. A success exit leaves the last stage. A dashed failure exit drops from the select stage. Blue circles rank the two moments that matter.</title>
+
+          <!-- trigger -->
+          <text x="46" y="60" text-anchor="middle" class="t-dim" font-size="11">A1</text>
+          <rect x="6" y="70" width="80" height="64" rx="32" class="s-line"/>
+          <text x="46" y="106" text-anchor="middle" class="t-ink" font-size="12" font-weight="600">Trigger</text>
+          <line x1="86" y1="102" x2="108" y2="102" class="s-line"/>
+          <polyline points="102,97 108,102 102,107" class="s-line"/>
+
+          <!-- stage 1 -->
+          <text x="168" y="60" text-anchor="middle" class="t-dim" font-size="11">B1</text>
+          <path d="M112 70 H212 L224 102 L212 134 H112 L124 102 Z" class="s-line"/>
+          <text x="168" y="106" text-anchor="middle" class="t-ink" font-size="11">Register need</text>
+          <line x1="168" y1="134" x2="168" y2="152" class="s-hair"/>
+          <circle cx="168" cy="162" r="9" class="s-fill"/>
+          <text x="168" y="190" text-anchor="middle" class="t-ink2" font-size="10.5">Orientation</text>
+
+          <!-- stage 2 -->
+          <text x="296" y="60" text-anchor="middle" class="t-dim" font-size="11">B2</text>
+          <path d="M240 70 H340 L352 102 L340 134 H240 L252 102 Z" class="s-line"/>
+          <text x="296" y="106" text-anchor="middle" class="t-ink" font-size="11">Select projects</text>
+          <line x1="296" y1="134" x2="296" y2="152" class="s-hair"/>
+          <polygon points="296,152 306,162 296,172 286,162" class="s-fill"/>
+          <text x="296" y="190" text-anchor="middle" class="t-ink2" font-size="10.5">Confidence</text>
+
+          <!-- stage 3 -->
+          <text x="424" y="60" text-anchor="middle" class="t-dim" font-size="11">B3</text>
+          <path d="M368 70 H468 L480 102 L468 134 H368 L380 102 Z" class="s-line"/>
+          <text x="424" y="106" text-anchor="middle" class="t-ink" font-size="11">Curate and trim</text>
+          <line x1="424" y1="134" x2="424" y2="152" class="s-hair"/>
+          <rect x="415" y="153" width="18" height="18" class="s-fill"/>
+          <text x="424" y="190" text-anchor="middle" class="t-ink2" font-size="10.5">Effort</text>
+
+          <!-- stage 4 -->
+          <text x="552" y="60" text-anchor="middle" class="t-dim" font-size="11">B4</text>
+          <path d="M496 70 H596 L608 102 L596 134 H496 L508 102 Z" class="s-line"/>
+          <text x="552" y="106" text-anchor="middle" class="t-ink" font-size="11">Send link</text>
+          <line x1="552" y1="134" x2="552" y2="152" class="s-hair"/>
+          <polygon points="552,152 562,162 552,172 542,162" class="s-fill"/>
+          <text x="552" y="190" text-anchor="middle" class="t-ink2" font-size="10.5">Confidence</text>
+
+          <!-- stage 5 -->
+          <text x="680" y="60" text-anchor="middle" class="t-dim" font-size="11">B5</text>
+          <path d="M624 70 H724 L736 102 L724 134 H624 L636 102 Z" class="s-line"/>
+          <text x="680" y="106" text-anchor="middle" class="t-ink" font-size="11">Confirm receipt</text>
+          <line x1="680" y1="134" x2="680" y2="152" class="s-hair"/>
+          <polygon points="680,153 690,171 670,171" class="s-fill"/>
+          <text x="680" y="190" text-anchor="middle" class="t-ink2" font-size="10.5">Recovery</text>
+
+          <!-- moments that matter: blue ring and the id from panel D, on ranked stages -->
+          <circle cx="168" cy="30" r="13" class="s-dim"/>
+          <text x="168" y="34" text-anchor="middle" class="t-dim" font-size="11" font-weight="700">D1</text>
+          <circle cx="552" cy="30" r="13" class="s-dim"/>
+          <text x="552" y="34" text-anchor="middle" class="t-dim" font-size="11" font-weight="700">D2</text>
+
+          <!-- success exit -->
+          <line x1="738" y1="102" x2="778" y2="102" class="s-dim"/>
+          <polyline points="772,97 778,102 772,107" class="s-dim"/>
+          <text x="834" y="60" text-anchor="middle" class="t-dim" font-size="11">A2</text>
+          <rect x="782" y="70" width="104" height="64" rx="32" class="s-dim"/>
+          <text x="834" y="99" text-anchor="middle" class="t-ink" font-size="11" font-weight="600">Successful</text>
+          <text x="834" y="114" text-anchor="middle" class="t-ink" font-size="11" font-weight="600">outcome</text>
+
+          <!-- failure exit: dashed red, from the stage where users stall or leave -->
+          <path d="M296 196 V240 H782" class="s-viol" stroke-dasharray="5 4"/>
+          <polyline points="776,235 782,240 776,245" class="s-viol"/>
+          <text x="288" y="234" text-anchor="end" class="t-viol" font-size="10.5">users leave mid-selection</text>
+          <text x="834" y="204" text-anchor="middle" class="t-viol" font-size="11">A3</text>
+          <rect x="782" y="212" width="104" height="56" rx="28" class="s-viol"/>
+          <text x="834" y="236" text-anchor="middle" class="t-ink" font-size="11" font-weight="600">Failed</text>
+          <text x="834" y="251" text-anchor="middle" class="t-ink" font-size="11" font-weight="600">outcome</text>
+        </svg>
+      </div>
+      <span class="lbl">Friction marker: ● Orientation · ■ Effort · ◆ Confidence · ▲ Recovery · Blue ring: ranked moment in D</span>
+
+      <div class="tbox">
+        <table style="min-width:760px">
+          <thead><tr><th>#</th><th>Stage</th><th>Goal</th><th>Current state</th><th>Need</th><th>Friction</th></tr></thead>
+          <tbody>
+            <tr><td class="m">B1</td><td>Register need</td><td>Recognize that a curated share is needed for this specific client.</td><td>Receives a calendar invite or email reply. Notes "need to send work" in mind. May write it on a to-do or leave the tab open. Does not open Folio: the impulse lives in email.</td><td>A prompt or re-entry path from the booked call to the share feature.</td><td>● Orientation: no prompt, reminder, or re-entry path connects the booked call to the share feature. The gap between impulse and product entry is undesigned.</td></tr>
+            <tr><td class="m">B2</td><td>Select projects</td><td>Decide which 3–5 projects fit this client's project type, scale, and taste.</td><td>Opens Folio and browses all projects. Filters by relevance from memory. Carries no client context in. May open the client's website in another tab. Chooses by memory and instinct.</td><td>Evidence that a project will resonate with this client's brief.</td><td>◆ Confidence: no way to know whether a project will resonate with this client's brief. Selection feels arbitrary. Architects often second-guess and restart.</td></tr>
+            <tr><td class="m">B3</td><td>Curate and trim</td><td>Order the selection so the strongest work leads. Remove anything that weakens the overall impression.</td><td>Drags projects into a manual order. Reopens project pages to check image quality and completeness. Finds half-finished entries mid-flow, then patches them or drops the project. Curation and editing blur together.</td><td>A clear boundary between curating and editing.</td><td>■ Effort: trimming a selection means re-entering projects, fixing content, and returning. The task boundary is unclear. Curation keeps growing into editing work.</td></tr>
+            <tr><td class="m">B4</td><td>Send link</td><td>Produce a shareable link and get it to the client before the call.</td><td>Finds the share control, which is not always where expected on the first attempt. Generates and copies the link. Switches to email, pastes it, writes context around it, and sends. Never sees what the client will see.</td><td>A preview of the client view, plus link expiry, access settings, and branding.</td><td>◆ Confidence: no preview of the client-facing view before sharing. The user knows nothing of link expiry, access settings, or whether the link is branded or generic. They send into uncertainty.</td></tr>
+            <tr><td class="m">B5</td><td>Confirm receipt</td><td>Confirm that the client received and opened the link before the pitch call.</td><td>Waits. Sends a follow-up email to ask whether the client got it. Checks sent items. Gets no signal from Folio. Walks into the call without knowing whether the client has seen anything.</td><td>A signal that the link landed.</td><td>▲ Recovery: if the user sent the wrong link, or the client never opened it, no recovery path exists. There is no open notification, no resend, and no fallback. The failed state stays invisible until the call begins.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <div class="pnl-f">A stage is one sub-goal, not a screen. Name the friction type for each stage. "Confusing" is not a finding.</div>
   </section>
 
-  <section class="section">
-    <h2>What the Design Gate Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ Design attention concentrates on the ranked moments above.</div></div>
-      <div class="item"><div class="it-desc">✓ The trigger and both outcomes are honored — including a designed failure exit.</div></div>
+  <section class="pnl" aria-labelledby="uj-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="uj-c-h">Entry and exit paths</h2><span class="ref">how users arrive and leave</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">C1</span><span class="t">Email or calendar<small>A prospect confirms a call. The architect is in the inbox, not in Folio. They carry the client's name, project type, and a rough timeline. No Folio session is open.</small></span><span class="side">Entry</span></li>
+        <li><span class="id">C2</span><span class="t">Direct re-entry<small>The architect remembers a past share attempt mid-week and returns to finish or update it. They carry partial intent but have lost the context of the earlier session.</small></span><span class="side">Entry</span></li>
+        <li><span class="id">C3</span><span class="t">Post-editing impulse<small>The architect finishes updating a project and thinks "I should send this." This is the lowest-friction entry and the least intentional. Recency drives selection, not fit.</small></span><span class="side">Entry</span></li>
+        <li><span class="id">C4</span><span class="t">Success<small>The architect returns to email to prepare talking points. They carry the sent link and, if open tracking exists, confidence that the client engaged. They go into the pitch prepared.</small></span><span class="side"><span class="ok">✓ Exit</span></span></li>
+        <li><span class="id">C5</span><span class="t">Failure or abandonment<small>The architect exits Folio mid-selection and attaches PDFs in email. They carry a friction memory: "took too long, not worth it". That memory reinforces non-use.</small></span><span class="side"><span class="no">✕ Exit</span></span></li>
+      </ol>
+      <div class="meas" style="--val:23;--max:100">
+        <div class="mh"><span>Share adoption</span><span class="mv">23 % of users</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div>
+      </div>
     </div>
+    <div class="pnl-f">Every journey needs a designed failure exit. A success case alone is half a map.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · User Journey · run /annotate to review</p></footer>
+  <section class="pnl" aria-labelledby="uj-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="uj-d-h">Moments that matter</h2><span class="ref">ranked · D1 first</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">D1</span><span class="t">Trigger to first action: the gap between email and Folio<small>The impulse to share arises in a different context than the tool that enables it. The 77% of users who do not adopt share are not failing at the feature. They never reach it. The trigger is mislocated: Folio waits for users to arrive instead of meeting them when the need fires. A share-flow fix that skips this gap leaves the adoption ceiling in place.</small></span><span class="side"><span class="annot">cites B1</span></span></li>
+        <li><span class="id">D2</span><span class="t">Share: sending without seeing<small>Architects do not send work they doubt. The confidence gap at link generation is the proximate cause of abandonment for users who do reach the feature. It has three parts: no client-facing preview, no access transparency, and no sense of what the recipient will see. A user who sees what the client sees will send. One who cannot will hesitate, second-guess, and often revert to attachments.</small></span><span class="side"><span class="annot">cites B4</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Rank by impact on the outcome: which improvement would most change whether the journey succeeds.</div>
+  </section>
+
+  <section class="pnl" aria-labelledby="uj-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="uj-e-h">Design brief anchor</h2><span class="ref">feeds design-brief · gate checks</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">E1</span><div class="t"><p class="lead">The 2 moments in D are where design attention should concentrate. A solution that misses the gap between email and Folio will not change the journey outcome.</p></div></li>
+        <li><span class="id">E2</span><span class="t">Design attention concentrates on the ranked moments in D.</span><span class="side"><span class="ok">✓ Confirmed</span></span></li>
+        <li><span class="id">E3</span><span class="t">The design honors the trigger and both outcomes in A, including a designed failure exit.</span><span class="side"><span class="ok">✓ Confirmed</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The Brief Writer anchors the design brief to this moment. The Design Gate confirms E2 and E3.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

@@ -1,75 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Heuristic Report — Drift Morning Playback</title>
 <link rel="stylesheet" href="../../artifacts/kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Heuristic Report · owned by heurist</span>
-    <h1>Drift — Morning Playback<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Usability findings with severity, violation tags, and remediation — invisible friction made visible. Surface evaluated: the screen presented on app open before 10am — previous night's voice memo, AI-generated one-sentence summary, mood tag, and reflect prompt.</p>
-    <div class="header-meta"><span>2026-05-27</span><span>Evaluated against: canonical heuristics · HIG · AI-UX guidelines · studio ethos</span></div>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>Heuristic evaluation: Drift Morning Playback</h1>
+      <p class="sub">Usability findings with severity, violation tags, and fixes. Invisible friction made visible.</p>
+    </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">heuristic-report</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">heurist</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">Direct</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">2026-05-27</span></div>
+    <div class="c wide"><span class="l">Surface</span><span class="v">Morning playback · app open before 10am</span></div>
+    <div class="c wide"><span class="l">Evaluated against</span><span class="v">Canonical heuristics · HIG · AI-UX guidelines · studio ethos</span></div>
+    <div class="c"><span class="l">Layers applied</span><span class="v">1 · 2 · 3</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">1</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">Example</span></div>
+    <div class="c"><span class="l">AI principle</span><span class="v">None named</span></div>
   </header>
 
-  <section class="section">
-    <h2>Findings</h2>
-    <table>
-      <tr><th>Sev</th><th>Finding</th><th>Violation</th><th>Remediation</th></tr>
-      <tr>
-        <td><span class="s-fail">P0</span></td>
-        <td>Mood tag ("Anxious", "Restless", "Calm") cannot be corrected or dismissed once generated. An AI-assigned emotional label sits on the user's morning with no path to disagree. Wrong tags accumulate as silent record; trust erodes per encounter.</td>
-        <td>H3 User control and freedom · AI-UX correction · AI attribution</td>
-        <td>Make the tag tappable. One tap reveals alternatives and a dismiss action — no modal, no chrome added to the resting state. The mechanism appears only when the user reaches for it. Removal before addition: do not add a persistent "edit" affordance.</td>
-      </tr>
-      <tr>
-        <td><span class="s-fail">P0</span></td>
-        <td>AI-generated one-sentence summary is rendered in the same type, weight, and color as the user's own transcribed words. In feedback sessions users call the AI summary "what I said" — they cannot distinguish their voice from the model's paraphrase.</td>
-        <td>AI-UX attribution · H4 Consistency and standards</td>
-        <td>Demote the AI summary visually below the user's content and re-set it in the system's established AI register (lighter weight, secondary color, mono label "summary"). The user's words are the principal; the summary is a quiet annotation. Do not add an "AI" badge to the user's transcript — fix the summary, not the source.</td>
-      </tr>
-      <tr>
-        <td><span class="s-warn">P1</span></td>
-        <td>Reflect prompt is AI-generated from the previous night's memo but presented as if it were a static, hand-authored app prompt. No origin indicator. Users cannot tell whether the question was written by Drift's team or composed for them this morning.</td>
-        <td>H4 Consistency and standards · AI-UX transparency</td>
-        <td>Apply the same AI register used for the summary — one mono label, no decoration. Consistency means: every AI-authored surface in this app reads as AI-authored at a glance. If the system has no register yet, define it once and apply it here and to the summary in the same pass.</td>
-      </tr>
-      <tr>
-        <td><span class="s-warn">P1</span></td>
-        <td>Voice memo play button is 36×36pt. It is the primary action on the screen and the gesture the entire surface is organized around. Fails WCAG 2.5.5 minimum (44pt).</td>
-        <td>HIG touch target · WCAG 2.5.5</td>
-        <td>Raise to 44×44pt minimum. The visual mark can remain at current size; expand the hit region. No visible change to composition required.</td>
-      </tr>
-      <tr>
-        <td><span class="s-revise">P2</span></td>
-        <td>No indication of whether the mood tag was generated from the bedtime memo, the morning memo, or both. The model's input scope is invisible — users cannot reason about why the tag is what it is.</td>
-        <td>H1 Visibility of system status · AI-UX model transparency</td>
-        <td>When the tag is tapped (per P0 fix above), reveal source alongside alternatives — "from last night" / "from this morning" / "from both." The disclosure rides on the correction mechanism already being introduced; no new surface required.</td>
-      </tr>
-    </table>
-    <p style="font-size:0.8rem">P0 = blocks the task or breaks trust · P1 = major friction · P2 = minor · P3 = polish. Severity reflects user impact, never inflated to force attention.</p>
-  </section>
-
-  <section class="section">
-    <h2>Tensions</h2>
-    <div class="callout">
-      <p><strong>Correctable mood tag vs. the calm, passive register of the morning surface.</strong> The canonical fix for P0 (correction mechanism) introduces an interactive affordance onto a screen whose parti is quiet receipt — the user wakes, hears themselves, reads one sentence, sits with one question. Any visible "edit" chrome violates that posture. The proposed fix (tap-to-reveal, no resting affordance) reduces the cost but does not eliminate it: a user who does not discover the tap will continue to live with wrong tags. This is a parti-vs-heuristic trade and belongs to the Creative Director, not to this evaluator. Surfaced, not resolved.</p>
+  <section class="pnl" aria-labelledby="hr-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="hr-a-h">Parti and verdict</h2><span class="ref">before the findings</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="a1"><span class="id">A1</span><span class="t">Quiet receipt. The user wakes, hears themselves, reads one sentence, and sits with one question.</span><span class="side">Parti</span></li>
+        <li id="a2"><span class="id">A2</span><span class="t">The screen on app open before 10am. It shows last night's voice memo, a one-sentence AI summary, a mood tag, and a reflect prompt.</span><span class="side">Surface</span></li>
+        <li id="a3"><span class="id">A3</span><div class="t"><p class="lead">Usable, but trust breaks twice. Two P0 findings: the AI mood tag cannot be corrected, and the AI summary reads as the user's words. <span class="wc">24/25 words</span></p></div><span class="side">Verdict</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>What the Next Gate Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ Every P0/P1 is resolved or explicitly accepted with reasoning before ship.</div></div>
-      <div class="item"><div class="it-desc">✓ Fixes favor removal or redesign over additive band-aids — no tooltip papers over a structural problem.</div></div>
-      <div class="item"><div class="it-desc">✓ AI register is defined once and applied consistently — summary, reflect prompt, and any future AI-authored surface share one visual vocabulary.</div></div>
-      <div class="item"><div class="it-desc">✓ P1 touch-target fix verified by accessibility before ship.</div></div>
+  <section class="pnl" aria-labelledby="hr-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="hr-b-h">Layer 1 · Canonical heuristics</h2><span class="ref">Nielsen H1–H10 · always applied</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="b1"><span class="id">B1</span><div class="t">The mood tag ("Anxious", "Restless", "Calm") cannot be corrected or dismissed once generated
+          <small><span class="lbl">Violates</span> H3 · User control and freedom · AI-UX correction · AI attribution</small>
+          <small><span class="lbl">Evidence</span> An AI-assigned emotional label sits on the user's morning with no path to disagree. Wrong tags build a silent record. Trust erodes at each encounter.</small>
+          <small><span class="lbl">Fix</span> Make the tag tappable. One tap reveals alternatives and a dismiss action. Use no modal. Add no chrome to the resting state. Do not add a persistent edit affordance.</small>
+          <small><span class="lbl">Trade</span> A user who misses the tap keeps a wrong tag (E1).</small>
+        </div><span class="side"><span class="verdict fail">P0</span></span></li>
+        <li id="b2"><span class="id">B2</span><div class="t">The reflect prompt is AI-generated from the previous night's memo, but it reads as a static, hand-authored app prompt
+          <small><span class="lbl">Violates</span> H4 · Consistency and standards · AI-UX transparency</small>
+          <small><span class="lbl">Evidence</span> The prompt has no origin indicator. Users cannot tell whether Drift's team wrote the question or the app composed it this morning.</small>
+          <small><span class="lbl">Fix</span> Apply the AI register from D1: one mono label, no decoration. Every AI-authored surface reads as AI-authored at a glance. If the system has no AI register, define it once. Apply it to the summary and to this prompt in the same pass.</small>
+        </div><span class="side"><span class="verdict fail">P1</span></span></li>
+        <li id="b3"><span class="id">B3</span><div class="t">Nothing shows whether the mood tag came from the bedtime memo, the morning memo, or both
+          <small><span class="lbl">Violates</span> H1 · Visibility of system status · AI-UX model transparency</small>
+          <small><span class="lbl">Evidence</span> The model's input scope is invisible. Users cannot reason about why the tag is what it is.</small>
+          <small><span class="lbl">Fix</span> When the user taps the tag (B1), reveal the source beside the alternatives: <span data-ste="copy">"from last night"</span>, <span data-ste="copy">"from this morning"</span>, or <span data-ste="copy">"from both"</span>. The disclosure rides on the B1 fix. It needs no new surface.</small>
+        </div><span class="side"><span class="verdict hold">P2</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">Layer 1 holds three findings.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Heuristic Report · run /annotate to review</p></footer>
+  <section class="pnl" aria-labelledby="hr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="hr-c-h">Layer 2 · Platform contract</h2><span class="ref">HIG · iOS surfaces</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="c1"><span class="id">C1</span><div class="t">The voice memo play button measures 36 × 36 pt. It is the primary action and the gesture the whole surface serves
+          <small><span class="lbl">Violates</span> HIG · Touch target · WCAG 2.5.5</small>
+          <small><span class="lbl">Evidence</span> The primary control sits below the 44 pt minimum.</small>
+          <div class="meas over" style="--val:36;--lim:44;--max:60">
+            <div class="mh"><span>Target size</span><span class="mv">36 · min 44 pt</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>60</span></div>
+          </div>
+          <small><span class="lbl">Fix</span> Raise the target to 44 × 44 pt. Keep the visual mark at its current size. Expand the hit region. The composition does not change.</small>
+        </div><span class="side"><span class="verdict fail">P1</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Layer 2 holds one finding.</div>
+  </section>
+
+  <section class="pnl" aria-labelledby="hr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="hr-d-h">Layer 3 · AI interaction</h2><span class="ref">AI behavior shows</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="d1"><span class="id">D1</span><div class="t">The AI summary uses the same type, weight, and color as the user's own transcribed words
+          <small><span class="lbl">Violates</span> AI-UX · Attribution · H4 · Consistency and standards</small>
+          <small><span class="lbl">Evidence</span> In feedback sessions users call the AI summary <span data-ste="copy">"what I said"</span>. They cannot tell their voice from the model's paraphrase.</small>
+          <small><span class="lbl">Fix</span> Demote the summary below the user's content. Set it in the system's AI register: lighter weight, secondary color, mono label <span data-ste="copy">"summary"</span>. The user's words are the principal. The summary is a quiet annotation. Do not add an AI badge to the transcript. Fix the summary, not the source.</small>
+        </div><span class="side"><span class="verdict fail">P0</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Layer 3 applies because AI behavior shows. The product names no AI principle.</div>
+  </section>
+
+  <section class="pnl" aria-labelledby="hr-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="hr-e-h">Tensions</h2><span class="ref">for leadership to decide</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="e1"><span class="id">E1</span><span class="t">A correctable mood tag against the calm, passive surface<small>The canonical fix for B1 adds an interactive affordance to a screen whose parti is quiet receipt. Visible edit chrome breaks that parti. Tap to reveal lowers the cost but does not remove it: a user who misses the tap keeps wrong tags. This is a parti-against-heuristic trade. It belongs to the Creative Director, not to this evaluator.</small></span><span class="side">TENSION · cd</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The heurist surfaces a tension. It never resolves one alone.</div>
+  </section>
+
+  <section class="pnl" aria-labelledby="hr-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="hr-f-h">Priority and next gate</h2><span class="ref">cites B · C · D</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="f1"><span class="id">F1</span><span class="t">Make the mood tag correctable. B3 rides on the same tap.</span><span class="side">B1 B3</span></li>
+        <li id="f2"><span class="id">F2</span><span class="t">Demote the AI summary into the AI register.</span><span class="side">D1</span></li>
+        <li id="f3"><span class="id">F3</span><span class="t">Apply the same register to the reflect prompt, in the same pass.</span><span class="side">B2</span></li>
+        <li id="f4"><span class="id">F4</span><span class="t">Raise the play button target to 44 × 44 pt.</span><span class="side">C1</span></li>
+        <li id="f5"><span class="id">F5</span><span class="t">Every P0 and P1 is resolved, or accepted with reasoning, before ship.</span><span class="side">Next gate</span></li>
+        <li id="f6"><span class="id">F6</span><span class="t">Fixes favor removal or redesign over additive band-aids. No tooltip papers over a structural problem.</span><span class="side">Next gate</span></li>
+        <li id="f7"><span class="id">F7</span><span class="t">The AI register is defined once and applied consistently. The summary, the reflect prompt, and any later AI-authored surface share one visual vocabulary.</span><span class="side">Next gate</span></li>
+        <li id="f8"><span class="id">F8</span><span class="t">Accessibility verifies the P1 touch-target fix before ship.</span><span class="side">Next gate</span></li>
+      </ol>
+      <div class="meas over" style="--val:2;--lim:0;--max:4">
+        <div class="mh"><span>Open P0</span><span class="mv">2 · max 0</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>4</span></div>
+      </div>
+      <div class="meas over" style="--val:2;--lim:0;--max:4">
+        <div class="mh"><span>Open P1, not accepted</span><span class="mv">2 · max 0</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>4</span></div>
+      </div>
+    </div>
+    <div class="pnl-f">P0 blocks the task or breaks trust. P1 is major friction. P2 is minor. P3 is polish. Severity reflects user impact. Never inflate it to force attention.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

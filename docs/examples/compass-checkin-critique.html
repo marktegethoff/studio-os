@@ -3,99 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Critique — Compass Goal Check-In Card</title>
 <link rel="stylesheet" href="../../artifacts/kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Critique · owned by /studio:critique</span>
-    <h1>Compass — Goal Check-In Card<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">Nine design disciplines reviewed this artifact independently. Findings only — no ship verdict. For a ship decision, run <code>/studio:review</code>.</p>
-    <div class="header-meta">
-      <span>2026-05-27</span><span>Phase: In Progress</span><span>Round: 1 — Silent</span>
+  <header class="tblock">
+    <div class="c title">
+      <span class="l">Title</span>
+      <h1>Critique: Compass Goal Check-In Card</h1>
+      <p class="sub">Nine disciplines reviewed this card independently. Findings only — no ship verdict. For a ship decision, run <code>/studio:review</code>.</p>
+    </div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">critique-report</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">/studio:critique</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">Direct</span></div>
+    <div class="c"><span class="l">Date</span><span class="v">2026-05-27</span></div>
+    <div class="c wide"><span class="l">Subject</span><span class="v">Goal check-in card · current wireframe</span></div>
+    <div class="c"><span class="l">Phase</span><span class="v">In progress</span></div>
+    <div class="c"><span class="l">Round</span><span class="v">1 — silent · tension threshold not met</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">1</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">Example</span></div>
+    <div class="c wide">
+      <div class="meas" style="--val:9;--lim:9;--max:9">
+        <div class="mh"><span>Disciplines reported</span><span class="mv">9 of 9 · min 9</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>9</span></div>
+      </div>
     </div>
   </header>
 
-  <section class="section">
-    <h2>Convergences</h2>
-    <p>Elements flagged by two or more disciplines — the strongest signals in the report.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">Sparkline — remove or defer</div><div class="it-desc">PM and CD reach the same conclusion from different directions. PM: the sparkline is not load-bearing for the success condition (user rates their goal). CD: at ~80pt wide with 6 data points it reads as decoration, not signal. Neither role finds it earning its place on a prompt card. The Critic's accumulation finding adds a third voice — the card is carrying three information layers when its job is one.</div></div>
-      <div class="item"><div class="it-name">Rating control — structurally broken on two independent grounds</div><div class="it-desc">Heurist and Accessibility flag the same control for different but compounding failures. Heurist: tap targets are ~28pt against a 44pt minimum (WCAG 2.5.5). Accessibility: the control has no accessible label — a screen reader announces "button, button, button, button, button" with no group context. These are not the same finding. Fixing one does not fix the other. Both must be addressed before this card ships.</div></div>
+  <div class="grid2">
+
+    <section class="pnl" aria-labelledby="cr-a-h">
+      <div class="pnl-h"><span class="ltr">A</span><h2 id="cr-a-h">Reviewed artifact</h2><span class="ref">check-in card · values in pt</span></div>
+      <div class="pnl-b">
+        <svg width="492" height="340" viewBox="0 0 492 340" role="img" aria-labelledby="cr-wf-t">
+          <title id="cr-wf-t">Wireframe of the goal check-in card inside a feed screen. The card holds a title, five rating dots, a sparkline with data labels, a coach note, a notes field with the placeholder Add a note, and a submit button. Red numbered callouts mark the findings.</title>
+
+          <!-- screen -->
+          <path d="M84 316 V22 Q84 8 98 8 H304 Q318 8 318 22 V316" class="s-line"/>
+          <line x1="84" y1="316" x2="318" y2="316" class="s-hair" stroke-dasharray="3 3"/>
+          <line x1="84" y1="40" x2="318" y2="40" class="s-hair"/>
+          <text x="201" y="29" text-anchor="middle" class="t-ink" font-size="10.5" font-weight="600">Feed</text>
+
+          <!-- card, with its shadow -->
+          <rect x="95" y="52" width="214" height="250" class="s-hair" opacity=".6"/>
+          <rect x="94" y="50" width="214" height="248" class="s-line"/>
+
+          <!-- title and prompt -->
+          <text x="201" y="67" text-anchor="middle" class="t-ink" font-size="10.5" font-weight="600">Goal check-in</text>
+          <line x1="171" y1="80" x2="231" y2="80" class="s-hair"/>
+
+          <!-- rating control: five dots, one selected -->
+          <circle cx="147" cy="104" r="8.4" class="s-line"/>
+          <circle cx="174" cy="104" r="8.4" class="s-line"/>
+          <circle cx="201" cy="104" r="8.4" class="s-fill"/>
+          <circle cx="228" cy="104" r="8.4" class="s-line"/>
+          <circle cx="255" cy="104" r="8.4" class="s-line"/>
+
+          <!-- sparkline: about 80 pt wide, six points, data labels -->
+          <polyline points="177,138 186.6,133 196.2,136 205.8,128 215.4,131 225,124" class="s-line"/>
+          <text x="177" y="152" text-anchor="middle" class="t-ink2" font-size="5.4">3</text>
+          <text x="186.6" y="152" text-anchor="middle" class="t-ink2" font-size="5.4">4</text>
+          <text x="196.2" y="152" text-anchor="middle" class="t-ink2" font-size="5.4">3</text>
+          <text x="205.8" y="152" text-anchor="middle" class="t-ink2" font-size="5.4">4</text>
+          <text x="215.4" y="152" text-anchor="middle" class="t-ink2" font-size="5.4">4</text>
+          <text x="225" y="152" text-anchor="middle" class="t-ink2" font-size="5.4">5</text>
+
+          <!-- coach comment -->
+          <rect x="104" y="166" width="194" height="40" class="s-hair"/>
+          <text x="112" y="179" class="t-ink2" font-size="8">Coach note:</text>
+          <line x1="112" y1="190" x2="272" y2="190" class="s-hair"/>
+          <line x1="112" y1="198" x2="232" y2="198" class="s-hair"/>
+
+          <!-- notes field -->
+          <rect x="104" y="214" width="194" height="28" class="s-line"/>
+          <text x="112" y="232" class="t-ink2" font-size="9.5">Add a note.</text>
+
+          <!-- submit -->
+          <rect x="146" y="256" width="110" height="26" rx="6" class="s-fill"/>
+          <text x="201" y="273" text-anchor="middle" class="t-inv" font-size="10" font-weight="500">Submit</text>
+
+          <!-- dimension, as found (red): rating target 28 pt, target 44 pt -->
+          <line x1="80" y1="95.6" x2="138" y2="95.6" class="s-viol" stroke-dasharray="2 2" opacity=".5"/>
+          <line x1="80" y1="112.4" x2="138" y2="112.4" class="s-viol" stroke-dasharray="2 2" opacity=".5"/>
+          <line x1="74" y1="95.6" x2="74" y2="112.4" class="s-viol"/>
+          <line x1="68" y1="95.6" x2="80" y2="95.6" class="s-viol"/>
+          <line x1="68" y1="112.4" x2="80" y2="112.4" class="s-viol"/>
+          <text x="64" y="107.5" text-anchor="end" class="t-viol" font-size="9">28 → 44</text>
+          <circle cx="11" cy="104" r="8.5" class="s-viol"/>
+          <text x="11" y="107.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">2</text>
+
+          <!-- callout: rating control -->
+          <circle cx="263.4" cy="104" r="2" class="t-viol"/>
+          <line x1="263.4" y1="104" x2="321" y2="104" class="s-viol"/>
+          <circle cx="330" cy="104" r="9" class="s-viol"/><text x="330" y="107.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">2</text>
+          <circle cx="351" cy="104" r="9" class="s-viol"/><text x="351" y="107.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">4</text>
+          <circle cx="372" cy="104" r="9" class="s-viol"/><text x="372" y="107.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">5</text>
+          <circle cx="393" cy="104" r="9" class="s-viol"/><text x="393" y="107.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">9</text>
+          <circle cx="414" cy="104" r="9" class="s-viol"/><text x="414" y="107.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">14</text>
+          <text x="432" y="108" class="t-ink2" font-size="11">rating</text>
+
+          <!-- callout: sparkline -->
+          <circle cx="225" cy="138" r="2" class="t-viol"/>
+          <line x1="225" y1="138" x2="321" y2="138" class="s-viol"/>
+          <circle cx="330" cy="138" r="9" class="s-viol"/><text x="330" y="141.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">1</text>
+          <circle cx="351" cy="138" r="9" class="s-viol"/><text x="351" y="141.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">8</text>
+          <circle cx="372" cy="138" r="9" class="s-viol"/><text x="372" y="141.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">10</text>
+          <text x="390" y="142" class="t-ink2" font-size="11">sparkline</text>
+          <text x="446" y="142" class="t-dim" font-size="9.5">80 pt</text>
+
+          <!-- callout: coach note -->
+          <circle cx="298" cy="186" r="2" class="t-viol"/>
+          <line x1="298" y1="186" x2="321" y2="186" class="s-viol"/>
+          <circle cx="330" cy="186" r="9" class="s-viol"/><text x="330" y="189.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">1</text>
+          <circle cx="351" cy="186" r="9" class="s-viol"/><text x="351" y="189.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">7</text>
+          <circle cx="372" cy="186" r="9" class="s-viol"/><text x="372" y="189.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">11</text>
+          <text x="390" y="190" class="t-ink2" font-size="11">coach note</text>
+
+          <!-- callout: notes field -->
+          <circle cx="298" cy="228" r="2" class="t-viol"/>
+          <line x1="298" y1="228" x2="321" y2="228" class="s-viol"/>
+          <circle cx="330" cy="228" r="9" class="s-viol"/><text x="330" y="231.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">6</text>
+          <circle cx="351" cy="228" r="9" class="s-viol"/><text x="351" y="231.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">11</text>
+          <circle cx="372" cy="228" r="9" class="s-viol"/><text x="372" y="231.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">13</text>
+          <text x="390" y="232" class="t-ink2" font-size="11">notes field</text>
+
+          <!-- callout: card shadow -->
+          <circle cx="308" cy="290" r="2" class="t-viol"/>
+          <line x1="308" y1="290" x2="321" y2="290" class="s-viol"/>
+          <circle cx="330" cy="290" r="9" class="s-viol"/><text x="330" y="293.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">12</text>
+          <text x="348" y="294" class="t-ink2" font-size="11">card shadow</text>
+          <text x="422" y="294" class="t-viol" font-size="9.5">4 pt blur</text>
+
+          <!-- callout: whole card, tab order and motion -->
+          <polyline points="310,302 310,326 321,326" class="s-viol"/>
+          <circle cx="330" cy="326" r="9" class="s-viol"/><text x="330" y="329.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">3</text>
+          <circle cx="351" cy="326" r="9" class="s-viol"/><text x="351" y="329.3" text-anchor="middle" class="t-viol" font-size="9.5" font-weight="700">15</text>
+          <text x="369" y="330" class="t-ink2" font-size="11">whole card</text>
+        </svg>
+      </div>
+      <div class="pnl-f">Red circled numbers match the Id column in D. Red values break the target. D16 reports no finding, so it has no number.</div>
+    </section>
+
+    <section class="pnl" aria-labelledby="cr-b-h">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="cr-b-h">Convergences</h2><span class="ref">two or more disciplines flag</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="b1"><span class="id">B1</span><span class="t">Sparkline<small>Critic, Visual Designer, Typesetter. The sparkline does not carry the success condition: the user rates the goal. At about 80 pt it reads as decoration. No discipline argues for retention. All fixes agree: remove it or defer it.</small></span><span class="side">D1 D8 D10</span></li>
+          <li id="b2"><span class="id">B2</span><span class="t">Rating control<small>Heurist, Accessibility. Two independent failures: targets measure 28 pt against a 44 pt minimum, and the control has no accessible label. Fixing one does not fix the other. Fix both before ship.</small></span><span class="side">D2 D5</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Two or more disciplines flag each element. These are the strongest signals.</div>
+    </section>
+
+  </div>
+
+  <section class="pnl" aria-labelledby="cr-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="cr-c-h">Triage</h2><span class="ref">cites finding ids in D</span></div>
+    <div class="pnl-b">
+      <div class="grid2">
+        <div>
+          <p><strong>Address now</strong></p>
+          <ol class="items">
+            <li id="c1"><span class="id">C1</span><span class="t">Label the rating scale. Nothing defines "1" and "5": effort, progress, or mood.</span><span class="side">D4 D14</span></li>
+            <li id="c2"><span class="id">C2</span><span class="t">Expand each rating target to 44 pt. The current 28 pt fails WCAG 2.5.5.</span><span class="side">D2</span></li>
+            <li id="c3"><span class="id">C3</span><span class="t">Add the accessible label. Group the buttons and remove the bare button sequence the screen reader announces.</span><span class="side">D5</span></li>
+          </ol>
+        </div>
+        <div>
+          <p><strong>Before ship</strong></p>
+          <ol class="items">
+            <li id="c4"><span class="id">C4</span><span class="t">Remove the sparkline, or defer it to a dedicated progress view.</span><span class="side">D1 D8 D10</span></li>
+            <li id="c5"><span class="id">C5</span><span class="t">Raise the card elevation. The 4 pt blur and 1 pt offset do not register at typical device brightness.</span><span class="side">D12</span></li>
+          </ol>
+        </div>
+        <div>
+          <p><strong>Consider</strong></p>
+          <ol class="items">
+            <li id="c6"><span class="id">C6</span><span class="t">Replace the notes placeholder with a question. "Add a note." describes the field. A question prompts reflection at no extra cost.</span><span class="side">D13</span></li>
+          </ol>
+        </div>
+        <div>
+          <p><strong>Decide</strong></p>
+          <ol class="items">
+            <li id="c7"><span class="id">C7</span><span class="t">Where does the coach comment live: inline on the card, or in a conversation thread? Settle this before ship.<small>Inline keeps context beside the rating prompt. A thread keeps the card to one job. Neither is clearly wrong. This is a product model decision, not a craft one.</small></span><span class="side">D1 D7 D11</span></li>
+          </ol>
+        </div>
+      </div>
     </div>
+    <div class="pnl-f">No debate ran. C7 holds the one tension the silent round left open.</div>
   </section>
 
-  <section class="section">
-    <h2>Triage</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Address now</span><span class="v">Rating control labels — "1" and "5" are undefined in context (effort? progress? mood?). Tap target expansion — current ~28pt fails WCAG 2.5.5; minimum 44pt. Accessible label — add role="group" with a fieldset label; remove the raw button sequence a screen reader currently announces.</span></div>
-      <div class="dcard"><span class="k">Address before ship</span><span class="v">Sparkline removal or deferral to a dedicated progress view. Coach comment placement — determine whether it belongs inline on the prompt card or in a conversation thread model. Card elevation — current 4pt blur / 1pt offset shadow fails to register at typical device brightness; the elevation model is doing structural work and not doing it.</span></div>
-      <div class="dcard"><span class="k">Consider</span><span class="v">Notes placeholder copy — "Add a note." describes the field rather than prompting reflection. A context-sensitive question ("What's making this harder than expected?") would do more work at zero additional cost.</span></div>
-      <div class="dcard"><span class="k">Decide (unresolved tensions)</span><span class="v">Should the coach comment live inline on the check-in card, or move to a dedicated conversation thread? Inline keeps context co-located with the rating prompt. Thread keeps the prompt card to a single job. Neither is obviously wrong — this is a product model decision, not a craft one.</span></div>
+  <section class="pnl" aria-labelledby="cr-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="cr-d-h">Findings by discipline</h2><span class="ref">15 findings · 9 disciplines</span></div>
+    <div class="tbox">
+      <table>
+        <thead>
+          <tr><th>Id</th><th>Discipline</th><th>Finding</th><th>Evidence/limit</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr id="d1"><td class="m">D1</td><td>Critic</td><td>The card carries three information layers: a rating prompt, a sparkline, and a coach comment. The surface has one job: prompt the weekly rating. Each layer is defensible. Together they outweigh the task.</td><td>
+            Accumulation
+            <div class="meas over" style="--val:3;--lim:1;--max:4">
+              <div class="mh"><span>Layers on the card</span><span class="mv">3 · max 1</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>4</span></div>
+            </div>
+          </td><td>Remove the sparkline now. Settle where the coach comment lives (C7). Never leave both on the card by default. A prompt card must not need reading before the user can act.</td></tr>
+          <tr id="d2"><td class="m">D2</td><td>Heurist · P0</td><td>Rating targets measure about 28 pt. The control is the primary action of a weekly card, so undersized targets add friction at the busiest point.</td><td>
+            WCAG 2.5.5
+            <div class="meas over" style="--val:28;--lim:44;--max:60">
+              <div class="mh"><span>Target size</span><span class="mv">28 · min 44 pt</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>60</span></div>
+            </div>
+          </td><td>Expand the targets to 44 pt before any further visual refinement. Do not leave the touch area to a later pass.</td></tr>
+          <tr id="d3"><td class="m">D3</td><td>Heurist · P1</td><td>The card has no defined keyboard order. The notes field, rating control, and submit action have no declared sequence. Keyboard users meet an unpredictable order.</td><td>No declared tab order · 3 elements</td><td>Define the sequence explicitly.</td></tr>
+          <tr id="d4"><td class="m">D4</td><td>Heurist · P2</td><td>The rating dots are icon-only circles with no labels. The user must recall what the poles mean on each weekly visit. The scale could mean effort, confidence, progress, or mood.</td><td>Recognition over recall · no label on either pole</td><td>Add pole labels that define 1 and 5 for this goal type. The Writer owns the words (D14).</td></tr>
+          <tr id="d5"><td class="m">D5</td><td>Accessibility · Critical</td><td>The five rating buttons have no individual labels and no group container. A screen reader announces <code>button, button, button, button, button</code>. It gives no scale meaning, current value, or range.</td><td>
+            WCAG 1.3.1, 4.1.2
+            <div class="meas over" style="--val:0;--lim:5;--max:5">
+              <div class="mh"><span>Buttons with a name</span><span class="mv">0 · min 5</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>5</span></div>
+            </div>
+          </td><td>Wrap the control in a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code> that names the scale and its context, such as <span class="annot" data-ste="copy">"Rate your progress on this goal, 1 to 5"</span>. Label each button with its value and meaning, such as <span class="annot" data-ste="copy">"1 — not on track"</span> and <span class="annot" data-ste="copy">"5 — fully on track"</span>.</td></tr>
+          <tr id="d6"><td class="m">D6</td><td>Accessibility · Moderate</td><td>Verify that the notes field has a label. A placeholder is no substitute: it disappears on input.</td><td>WCAG 3.3.2</td><td>Give the <code>&lt;textarea&gt;</code> an associated <code>&lt;label&gt;</code> element.</td></tr>
+          <tr id="d7"><td class="m">D7</td><td>Accessibility · Moderate</td><td>The coach comment has no role or landmark that sets it apart from user-authored content. Assistive technology users cannot tell whose voice is present.</td><td>The visible <span data-ste="copy">"Coach note:"</span> label has no programmatic equivalent</td><td>Add a programmatic equivalent of the visible attribution.</td></tr>
+          <tr id="d8"><td class="m">D8</td><td>Visual Designer</td><td>The sparkline is decorative, not informational. At about 80 pt wide, six data points read as texture, not a trend. It fills a full card row and gives no actionable signal.</td><td>Sparkline · about 80 pt wide · 6 data points · full card row</td><td>Remove it from this surface. If history is needed, show it in a dedicated progress view wide enough to read.</td></tr>
+          <tr id="d9"><td class="m">D9</td><td>Visual Designer</td><td>Selected and unselected ratings have no clear hierarchy. Filled and unfilled circles give the five options equal weight. The selected state must read at a glance.</td><td>Filled against unfilled circles · five options</td><td>Give the selected state a distinct color or size shift that reads instantly.</td></tr>
+          <tr id="d10"><td class="m">D10</td><td>Typesetter</td><td>The sparkline data labels are below the legible threshold. At about 9 pt they are sub-legible on 1x displays. They assume a retina screen the card cannot assume.</td><td>
+            Body text min 11 pt
+            <div class="meas over" style="--val:9;--lim:10;--max:14">
+              <div class="mh"><span>Data label size</span><span class="mv">9 · min 10 pt</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>14</span></div>
+            </div>
+          </td><td>Set secondary data labels at 10 pt or more. The point is moot if D8 removes the sparkline.</td></tr>
+          <tr id="d11"><td class="m">D11</td><td>Typesetter</td><td>The coach comment and the user notes share one type style: the same weight, size, and color. A scanning user cannot tell which voice they read.</td><td>Attribution is structural. The type system must show it without the source label.</td><td>Give the coach comment its own treatment: a lighter weight, a smaller size, or a background tint.</td></tr>
+          <tr id="d12"><td class="m">D12</td><td>Materialist</td><td>The card is a white surface on a near-white feed. Its shadow signals elevation but disappears at typical brightness, mostly on OLED displays in auto-brightness mode. The card loses its boundary.</td><td>
+            White on white · shadow only
+            <div class="meas over" style="--val:4;--lim:12;--max:16">
+              <div class="mh"><span>Shadow blur</span><span class="mv">4 · min 12 pt</span></div>
+              <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+              <div class="scale" aria-hidden="true"><span>0</span><span>16</span></div>
+            </div>
+            <span class="lbl">Offset 1 pt · target 2–3 pt · no color shift</span>
+          </td><td>Raise the shadow to 12–16 pt blur and 2–3 pt offset, with a slight color cast. Or tint the card surface. Never rely on shadow alone for separation on white-on-white.</td></tr>
+          <tr id="d13"><td class="m">D13</td><td>Writer</td><td>The notes placeholder describes the field. It gives no reason to use the field and no prompt to reflect.</td><td><span class="orig" data-ste="off"><s>Add a note.</s></span></td><td>Ask a question tied to the week, such as <span class="annot" data-ste="copy">"What's making this harder than expected?"</span> or <span class="annot" data-ste="copy">"What shifted this week?"</span> Vary it by goal state: a falling goal needs a different prompt than a steady one.</td></tr>
+          <tr id="d14"><td class="m">D14</td><td>Writer</td><td>The rating poles have no microcopy. Nothing defines what 1 and 5 mean for this goal type. This is a writing problem, not only a design one.</td><td>Shared with D4</td><td>Write the labels, such as the examples in D5. Placing them is not enough.</td></tr>
+          <tr id="d15"><td class="m">D15</td><td>Choreographer</td><td>The wireframe specifies no motion. Two interactions need motion before ship: the rating selection change and the submit confirmation.</td><td>2 interactions · 0 motions specified</td><td>Define both motions with the component states. Make the rating selection immediate and tactile. Retrofitting motion after the states lock costs more.</td></tr>
+          <tr id="d16"><td class="m">D16</td><td>Mark Maker</td><td>No findings at this stage.</td><td>The rating circles are functional controls, not marks.</td><td>None. Engage the Mark Maker if the scale moves to icons, such as arrows or expressive symbols.</td></tr>
+        </tbody>
+      </table>
     </div>
+    <div class="pnl-f">D16 keeps one row with its no-finding line. Severity: P0 to P3 for the Heurist, Critical and Moderate for Accessibility.</div>
   </section>
 
-  <section class="section">
-    <h2>Critic</h2>
-    <div class="callout"><p>The card is carrying three information layers — rating prompt, historical sparkline, and coach comment — on a surface whose job is one: prompt the weekly rating. Each layer is individually defensible; together they accumulate into something heavier than the task warrants. The sparkline competes with the primary action. The coach comment introduces a second voice and a second reading mode (reflection vs. response). Remove the sparkline now. Decide whether the coach comment earns inline placement or belongs in a thread; do not leave both co-present by default. A prompt card should not require the user to read before they can act.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Heurist</h2>
-    <div class="callout"><p><strong>P0 — Tap target below minimum (WCAG 2.5.5).</strong> The 1–5 rating dots measure approximately 28pt. The required minimum is 44pt. On a weekly-use card where the primary action is this control, undersized targets create consistent friction at the highest-frequency interaction point. Expand targets before any further visual refinement — the touch area cannot be an afterthought in a later pass.<br><br><strong>P1 — No defined keyboard navigation order.</strong> Tab order through the card is undefined. The notes field, rating control, and submit action have no declared sequence. Users navigating without a pointer will encounter an unpredictable order. Define it explicitly.<br><br><strong>P2 — Rating scale provides no recognition cues.</strong> Icon-only filled circles with no labels require the user to recall what the poles mean in this context. Without labels, the scale could represent effort, confidence, progress, or mood — and the user has to remember which on each weekly visit. This is a recall burden on a prompt designed to reduce friction.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Accessibility</h2>
-    <div class="callout"><p><strong>Critical — Rating control has no accessible label (WCAG 1.3.1, 4.1.2).</strong> The five rating buttons have no individual labels and no group container. A screen reader currently announces: "button, button, button, button, button." There is no programmatic indication of the scale's meaning, the current value, or the range. Fix: wrap the control in a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code> that names the scale and its context (e.g., "Rate your progress on [goal name], 1 to 5"). Label each button with its value and meaning (e.g., "1 — not on track", "5 — fully on track").<br><br><strong>Moderate — Notes field accessible name.</strong> Verify that the notes <code>&lt;textarea&gt;</code> has an associated <code>&lt;label&gt;</code> element, not just a placeholder. Placeholder text is not a substitute for a label and disappears on input (WCAG 3.3.2).<br><br><strong>Moderate — Coach comment attribution.</strong> The coach comment has no role or landmark distinguishing it from user-authored content. Users relying on assistive technology cannot distinguish whose voice is present. A visually labeled attribution ("Coach note:") needs a programmatic equivalent.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Visual Designer</h2>
-    <div class="callout"><p><strong>Sparkline at card width is decorative, not informational.</strong> At ~80pt wide, six data points cannot be read as a trend — they register as a visual texture. The sparkline occupies a full card row while delivering no actionable signal at this render size. Current: sparkline rendered inline at card width. Target: remove from this surface; if history is needed, surface it in a dedicated progress view at sufficient width to be legible.<br><br><strong>Rating scale lacks visual hierarchy between selected and unselected states.</strong> The filled-circle approach creates equal visual weight across all five options. The selected state needs to be unambiguous at a glance, not a matter of careful comparison. Current: filled vs. unfilled circles. Target: selected state should carry a distinct color or size shift that reads instantly.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Typesetter</h2>
-    <div class="callout"><p><strong>Sparkline data labels are below the legible threshold.</strong> The numerics below the sparkline line are set at approximately 9pt. On 1x displays this is sub-legible. Minimum body type on screen is 11pt; data labels for secondary information should be no smaller than 10pt. This is a moot point if the sparkline is removed — but worth noting that the data labels were set at a size that presupposes a retina context that cannot be assumed.<br><br><strong>Coach comment and user notes share a type style.</strong> Both use the same weight, size, and color — creating attribution ambiguity. A user scanning the card cannot immediately identify which voice they are reading. The coach comment requires a distinct treatment: a lighter weight, a smaller size, or a background tint that signals "this is not yours." Attribution is structural, not decorative — the type system should make it legible without requiring the user to read the source label.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Materialist</h2>
-    <div class="callout"><p><strong>Elevation model is doing structural work and failing at it.</strong> The card uses a white surface on a white or near-white feed background, relying on a box shadow (4pt blur, 1pt offset) to signal elevation and separate the card from context. At typical device brightness settings — particularly on OLED displays in auto-brightness mode — this shadow is invisible. The card loses its boundary, and its separation from the feed collapses. Current: 4pt blur, 1pt offset, no color shift. Target: either increase shadow depth to a level that registers reliably (12–16pt blur, 2–3pt offset, with slight color cast), or shift the card surface to a tinted background that creates separation through color rather than shadow. Do not rely on shadow alone for structural separation on a white-on-white surface.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Writer</h2>
-    <div class="callout"><p><strong>Notes placeholder fails the prompt's job.</strong> "Add a note." describes the field. It tells the user what the field is, not why they should use it or what to put there. On a weekly check-in card designed to prompt reflection, the placeholder is the primary writing prompt — it should do that job. Current: "Add a note." Target: a question tied to the week's context, e.g., "What's making this harder than expected?" or "What shifted this week?" The specific question should be variable by goal state — a goal trending down warrants a different prompt than one holding steady. At minimum, replace the generic descriptor with a reflective question that creates forward motion.<br><br><strong>Rating scale poles are unlabeled in copy as well as visually.</strong> There is no microcopy defining what "1" and "5" mean for this goal type. This is a shared finding with the Designer — noted here because the fix is a writing problem, not just a design one. The labels need to be written, not just placed.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Choreographer</h2>
-    <div class="callout"><p>No motion is specified in the current wireframe. Two interactions will require motion decisions before ship: the rating selection state change (the transition between unselected and selected for a rating dot), and the card submission confirmation. The rating selection should feel immediate and tactile — a state change that confirms input without requiring the user to look for a separate confirmation signal. Recommend defining these two motion behaviors before visual refinement locks the component states; retrofitting motion after states are finalized is more costly than specifying it alongside them.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Mark Maker</h2>
-    <div class="callout"><p>No iconography or custom marks are present in the current wireframe beyond the rating-scale circles, which are functional controls rather than marks. If the rating scale evolves to use icons (e.g., directional arrows or expressive symbols) rather than neutral circles, the Mark Maker should be engaged at that point. No findings at this stage.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Debate round</h2>
-    <p>Rendered only if the tension threshold was met and a second round ran. Tracks which positions hardened, which changed, and which remain unresolved.</p>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Hardened</span><span class="v">Sparkline removal: PM, CD, and Critic converged independently. No discipline argued for retention. The finding is unambiguous — remove or defer. Rating control failures: Heurist and Accessibility findings are independent and non-overlapping. Both hold. Both must be addressed.</span></div>
-      <div class="dcard"><span class="k">Changed</span><span class="v">No debate round ran. This section would populate if a tension threshold was met and disciplines were given a second pass with each other's findings visible.</span></div>
-      <div class="dcard"><span class="k">Unresolved tensions</span><span class="v">Coach comment placement. No discipline found the inline placement structurally sound, but the thread model introduces a product-level complexity (conversation threading) that is out of scope for a critique finding. This remains a product decision: accept the cost of inline ambiguity, or commit to a thread model before ship.</span></div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>Studio OS · Critique · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>

@@ -2,24 +2,185 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="procedure">
 <title>Wireframe — Keel · Weekly Review</title>
 <link rel="stylesheet" href="../../artifacts/kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Keel · ASCII Wireframe · owned by designer</span>
-    <h1>Weekly Review<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">Structural layout before any implementation code — the arrangement and hierarchy, not the visual treatment.</p>
-    <div class="header-meta"><span>2026-05-27</span><span>State: scanning — full open-work picture before any decisions</span></div>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>Keel — Weekly Review</h1><p class="sub">Draw the arrangement and hierarchy before any code. Show structure only. Leave out color, type, and material.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">ascii-wireframe</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">designer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:design</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v">A · 2026-05-27</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">Example</span></div>
+    <div class="c"><span class="l">State</span><span class="v"><code>scanning</code> · the full open-work picture before any decision</span></div>
+    <div class="c wide"><span class="l">Canvas</span><span class="v">Phone full screen · 400 × 860 pt (40 × 43) · cols ≈ 10 pt · rows ≈ 20 pt</span></div>
   </header>
 
-  <section class="section">
-    <h2>Layout</h2>
-    <pre class="ascii">state: scanning — week of Jun 2
+  <div class="grid2">
+
+    <section class="pnl" id="aw-a" aria-labelledby="aw-a-h">
+      <div class="pnl-h"><span class="ltr">A</span><h2 id="aw-a-h">Layout</h2><span class="ref">dimensioned · structure only</span></div>
+      <div class="pnl-b">
+        <svg viewBox="0 0 460 472" width="460" role="img" aria-labelledby="aw-wf-t">
+          <title id="aw-wf-t">Dimensioned wireframe of the Keel Weekly Review screen, scanning state. A phone frame 400 by 860 points holds a header with the week label A and an overflow glyph B, four client sections C to F with open item rows, and a close week action G. Safe areas of 60 points sit at the top and bottom. Dimension lines give width, height, and region heights. Callouts name each region.</title>
+          <!-- width dimension -->
+          <line x1="100" y1="17" x2="300" y2="17" class="s-dim"/>
+          <line x1="100" y1="13" x2="100" y2="21" class="s-dim"/>
+          <line x1="300" y1="13" x2="300" y2="21" class="s-dim"/>
+          <text x="200" y="11" text-anchor="middle" class="t-dim" font-size="10">400 pt</text>
+          <!-- height dimension -->
+          <line x1="74" y1="26" x2="74" y2="456" class="s-dim"/>
+          <line x1="70" y1="26" x2="78" y2="26" class="s-dim"/>
+          <line x1="70" y1="456" x2="78" y2="456" class="s-dim"/>
+          <text x="66" y="244" text-anchor="end" class="t-dim" font-size="10">860 pt</text>
+          <!-- frame, separators, safe areas -->
+          <rect x="100" y="26" width="200" height="430" rx="14" class="s-line"/>
+          <line x1="100" y1="91" x2="300" y2="91" class="s-line"/>
+          <line x1="100" y1="181" x2="300" y2="181" class="s-line"/>
+          <line x1="100" y1="251" x2="300" y2="251" class="s-line"/>
+          <line x1="100" y1="331" x2="300" y2="331" class="s-line"/>
+          <line x1="100" y1="391" x2="300" y2="391" class="s-line"/>
+          <line x1="100" y1="56" x2="300" y2="56" class="s-hair" stroke-dasharray="3 3"/>
+          <line x1="100" y1="426" x2="300" y2="426" class="s-hair" stroke-dasharray="3 3"/>
+          <text x="200" y="45" text-anchor="middle" class="t-ink2" font-size="8">safe area · 60 pt</text>
+          <text x="200" y="444" text-anchor="middle" class="t-ink2" font-size="8">safe area · 60 pt</text>
+          <!-- A and B: header -->
+          <rect x="108" y="65" width="76" height="12" class="s-hair" stroke-dasharray="3 3"/>
+          <text x="112" y="74" class="t-ink2" font-size="9">[A]</text>
+          <rect x="262" y="65" width="30" height="12" class="s-hair" stroke-dasharray="3 3"/>
+          <text x="266" y="74" class="t-ink2" font-size="9">[B]</text>
+          <!-- C: client header and item rows -->
+          <rect x="108" y="106" width="184" height="10" class="s-line"/>
+          <text x="112" y="114" class="t-ink2" font-size="8">[C]</text>
+          <line x1="116" y1="131" x2="212" y2="131" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="131" r="2.5" class="s-line"/>
+          <line x1="272" y1="131" x2="286" y2="131" class="s-hair" stroke-width="2"/>
+          <line x1="116" y1="141" x2="212" y2="141" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="141" r="2.5" class="s-line"/>
+          <line x1="272" y1="141" x2="286" y2="141" class="s-hair" stroke-width="2"/>
+          <line x1="116" y1="151" x2="212" y2="151" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="151" r="2.5" class="s-line"/>
+          <line x1="272" y1="151" x2="286" y2="151" class="s-hair" stroke-width="2"/>
+          <line x1="116" y1="161" x2="212" y2="161" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="161" r="2.5" class="s-line"/>
+          <polyline points="260.6,161 261.8,162.4 264,159.4" class="s-line"/>
+          <line x1="272" y1="161" x2="286" y2="161" class="s-hair" stroke-width="2"/>
+          <!-- D: client header and item rows -->
+          <rect x="108" y="196" width="184" height="10" class="s-line"/>
+          <text x="112" y="204" class="t-ink2" font-size="8">[D]</text>
+          <line x1="116" y1="221" x2="212" y2="221" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="221" r="2.5" class="s-line"/>
+          <line x1="272" y1="221" x2="286" y2="221" class="s-hair" stroke-width="2"/>
+          <line x1="116" y1="231" x2="212" y2="231" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="231" r="2.5" class="s-line"/>
+          <line x1="272" y1="231" x2="286" y2="231" class="s-hair" stroke-width="2"/>
+          <!-- E: client header and item rows -->
+          <rect x="108" y="266" width="184" height="10" class="s-line"/>
+          <text x="112" y="274" class="t-ink2" font-size="8">[E]</text>
+          <line x1="116" y1="291" x2="212" y2="291" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="291" r="2.5" class="s-line"/>
+          <line x1="272" y1="291" x2="286" y2="291" class="s-hair" stroke-width="2"/>
+          <line x1="116" y1="301" x2="212" y2="301" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="301" r="2.5" class="s-line"/>
+          <line x1="272" y1="301" x2="286" y2="301" class="s-hair" stroke-width="2"/>
+          <line x1="116" y1="311" x2="212" y2="311" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="311" r="2.5" class="s-line"/>
+          <line x1="272" y1="311" x2="286" y2="311" class="s-hair" stroke-width="2"/>
+          <!-- F: client header and item rows -->
+          <rect x="108" y="346" width="184" height="10" class="s-line"/>
+          <text x="112" y="354" class="t-ink2" font-size="8">[F]</text>
+          <line x1="116" y1="371" x2="212" y2="371" class="s-hair" stroke-width="2"/>
+          <circle cx="262" cy="371" r="2.5" class="s-line"/>
+          <line x1="272" y1="371" x2="286" y2="371" class="s-hair" stroke-width="2"/>
+          <!-- G: close week -->
+          <rect x="195" y="400" width="95" height="22" rx="6" class="s-line"/>
+          <text x="201" y="414" class="t-ink2" font-size="9">[G]</text>
+          <!-- region heights, on one chain -->
+          <line x1="312" y1="26" x2="312" y2="456" class="s-dim"/>
+          <line x1="308" y1="26" x2="316" y2="26" class="s-dim"/>
+          <line x1="308" y1="56" x2="316" y2="56" class="s-dim"/>
+          <line x1="308" y1="91" x2="316" y2="91" class="s-dim"/>
+          <line x1="308" y1="181" x2="316" y2="181" class="s-dim"/>
+          <line x1="308" y1="251" x2="316" y2="251" class="s-dim"/>
+          <line x1="308" y1="331" x2="316" y2="331" class="s-dim"/>
+          <line x1="308" y1="391" x2="316" y2="391" class="s-dim"/>
+          <line x1="308" y1="426" x2="316" y2="426" class="s-dim"/>
+          <line x1="308" y1="456" x2="316" y2="456" class="s-dim"/>
+          <!-- leaders -->
+          <circle cx="146" cy="65" r="2" class="t-dim"/>
+          <polyline points="146,65 146,33 330,33" class="s-dim"/>
+          <circle cx="292" cy="71" r="2" class="t-dim"/>
+          <line x1="292" y1="71" x2="330" y2="71" class="s-dim"/>
+          <circle cx="292" cy="111" r="2" class="t-dim"/>
+          <line x1="292" y1="111" x2="330" y2="111" class="s-dim"/>
+          <circle cx="292" cy="201" r="2" class="t-dim"/>
+          <line x1="292" y1="201" x2="330" y2="201" class="s-dim"/>
+          <circle cx="292" cy="271" r="2" class="t-dim"/>
+          <line x1="292" y1="271" x2="330" y2="271" class="s-dim"/>
+          <circle cx="292" cy="351" r="2" class="t-dim"/>
+          <line x1="292" y1="351" x2="330" y2="351" class="s-dim"/>
+          <circle cx="290" cy="411" r="2" class="t-dim"/>
+          <line x1="290" y1="411" x2="330" y2="411" class="s-dim"/>
+          <!-- callouts -->
+          <text x="336" y="30" class="t-dim" font-size="10">[A] week label</text>
+          <text x="336" y="41" class="t-dim" font-size="10">70 pt · primary</text>
+          <text x="336" y="68" class="t-dim" font-size="10">[B] overflow glyph</text>
+          <text x="336" y="79" class="t-dim" font-size="10">tertiary</text>
+          <text x="336" y="108" class="t-dim" font-size="10">[C] client header</text>
+          <text x="336" y="119" class="t-dim" font-size="10">180 pt · secondary</text>
+          <text x="336" y="198" class="t-dim" font-size="10">[D] client header</text>
+          <text x="336" y="209" class="t-dim" font-size="10">140 pt · secondary</text>
+          <text x="336" y="268" class="t-dim" font-size="10">[E] client header</text>
+          <text x="336" y="279" class="t-dim" font-size="10">160 pt · secondary</text>
+          <text x="336" y="348" class="t-dim" font-size="10">[F] client header</text>
+          <text x="336" y="359" class="t-dim" font-size="10">120 pt · secondary</text>
+          <text x="336" y="408" class="t-dim" font-size="10">[G] close week</text>
+          <text x="336" y="419" class="t-dim" font-size="10">70 pt · primary</text>
+        </svg>
+        <span class="lbl">verification: aspect 860 : 400 = 2.15 · device 19.5 : 9 = 2.17 · scale held · every label in B</span>
+      </div>
+      <div class="pnl-f">Draw every state at one scale. Give dimensions in points.</div>
+    </section>
+
+    <section class="pnl" id="aw-b" aria-labelledby="aw-b-h">
+      <div class="pnl-h"><span class="ltr">B</span><h2 id="aw-b-h">Labels</h2><span class="ref">label · role · content</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="aw-b1"><span class="id">B1</span><div class="t"><span class="mono">[A]</span> Week label<small>Show the current ISO week range. It anchors orientation.</small></div><span class="side">primary</span></li>
+          <li id="aw-b2"><span class="id">B2</span><div class="t"><span class="mono">[B]</span> Overflow glyph<small>Open archived weeks and settings.</small></div><span class="side">tertiary</span></li>
+          <li id="aw-b3"><span class="id">B3</span><div class="t"><span class="mono">[C]</span> Client header<small>Show the client name in caps and the open count. Tap to collapse.</small></div><span class="side">secondary</span></li>
+          <li id="aw-b4"><span class="id">B4</span><div class="t"><span class="mono">[D]</span> Client header<small>Use the same pattern. 2 open items.</small></div><span class="side">secondary</span></li>
+          <li id="aw-b5"><span class="id">B5</span><div class="t"><span class="mono">[E]</span> Client header<small>Use the same pattern. 3 open items.</small></div><span class="side">secondary</span></li>
+          <li id="aw-b6"><span class="id">B6</span><div class="t"><span class="mono">[F]</span> Client header<small>Use the same pattern. 1 open item.</small></div><span class="side">secondary</span></li>
+          <li id="aw-b7"><span class="id">B7</span><div class="t"><span class="mono">[G]</span> Close week<small>Commit action. It dims until all items are resolved.</small></div><span class="side">primary</span></li>
+          <li id="aw-b8"><span class="id">B8</span><div class="t"><span class="mono">·</span> Item name<small>Show the deliverable label. Wrap it after 24 characters.</small></div><span class="side">secondary</span></li>
+          <li id="aw-b9"><span class="id">B9</span><div class="t"><span class="mono">[·]</span> Status dot<small>Open is hollow. Closed is a check. Overdue is filled.</small></div><span class="side">meta</span></li>
+          <li id="aw-b10"><span class="id">B10</span><div class="t"><span class="mono">fri</span> Due indicator<small>Show the abbreviated day, mon to fri. Show a dash if the item has no date.</small></div><span class="side">meta</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">Mark each element with a bracketed letter. Go from top to bottom, then left to right. Name each role: primary, secondary, tertiary, or meta. Rows B8 to B10 repeat under each client.</div>
+    </section>
+
+  </div>
+
+  <div class="grid2">
+
+    <section class="pnl" id="aw-c" aria-labelledby="aw-c-h">
+      <div class="pnl-h"><span class="ltr">C</span><h2 id="aw-c-h">Quick sketch</h2><span class="ref">ASCII · fallback for A</span></div>
+      <div class="pnl-b">
+<pre class="ascii" aria-label="ASCII quick sketch of the layout in A">state: scanning — week of Jun 2
 
 ┌──────────────────────────────────────┐
+│              safe area               │
+│                                      │
+│                                      │
 │ [A] Week of Jun 2          [B] ···   │
+│                                      │
 ├──────────────────────────────────────┤
 │                                      │
 │ [C] MERIDIAN STRATEGIES       4 open │
@@ -27,7 +188,7 @@
 │  · Brand audit deck          [·] fri │
 │  · Stakeholder map v2        [·] fri │
 │  · Competitive scan          [·] wed │
-│  · Kick-off agenda           [✓] —   │
+│  · Kick-off agenda           [✓] -   │
 │                                      │
 ├──────────────────────────────────────┤
 │                                      │
@@ -54,55 +215,50 @@
 │                                      │
 │                  [G] Close week →    │
 │                                      │
-└──────────────────────────────────────┘
+│                                      │
+│              safe area               │
+└──────────────────────────────────────┘</pre>
+      </div>
+      <div class="pnl-f">verification: top edge 38 ─ · │ at col 0 and col 39 on every row · 43 rows · separators 38 ─ · scale held</div>
+    </section>
 
-phone full screen · 40 × 43
-aspect: 40 × 43 ≈ 2.15 : 1  (phone 19.5 : 9, matches device)
-scale:  1 col ≈ 10 pt · 1 row ≈ 20 pt
+    <section class="pnl" id="aw-d" aria-labelledby="aw-d-h">
+      <div class="pnl-h"><span class="ltr">D</span><h2 id="aw-d-h">States</h2><span class="ref">structural delta · trigger</span></div>
+      <div class="pnl-b">
+        <ol class="items">
+          <li id="aw-d1"><span class="id">D1</span><div class="t">Scanning<small>All clients show expanded. The full open-work list is visible. <span data-ste="copy">"Close week →"</span> shows dim because no action has happened yet. This is the entry state every week. It is the state in A.</small></div><span class="side">entry state</span></li>
+          <li id="aw-d2"><span class="id">D2</span><div class="t">Item closed<small>Tap an open item. [·] flips to [✓]. The row dims. The client open count drops by one. The row stays in place until the user closes the week. The user sees what got done, not only what remains.</small></div><span class="side">↓ tap an open item</span></li>
+          <li id="aw-d3"><span class="id">D3</span><div class="t">Client collapsed<small>Tap a client header. Its item rows collapse. The header and the open count stay. This clears noise from clients already reviewed. <span data-ste="copy">"Close week →"</span> activates only when all items across all clients are resolved or rolled.</small></div><span class="side">↓ tap a client header</span></li>
+          <li id="aw-d4"><span class="id">D4</span><div class="t">Roll unfinished<small>Tap <span data-ste="copy">"Close week →"</span> while any [·] item remains. A sheet lists every open item with a binary choice: roll to next week, or mark dropped. The decision waits until the user finishes the scan. It does not interrupt the review.</small></div><span class="side">↓ Close week with open items</span></li>
+          <li id="aw-d5"><span class="id">D5</span><div class="t">Week closed<small>All items are resolved or rolled. <span data-ste="copy">"Close week →"</span> becomes <span data-ste="copy">"Week closed ✓"</span>. The week label advances to the next ISO week. The screen moves to the empty <code>scanning</code> state of the new week.</small></div><span class="side">↓ all items resolved or rolled</span></li>
+        </ol>
+      </div>
+      <div class="pnl-f">D1 is drawn in A. Add a frame only when a transition changes the layout. Write every other state as one line.</div>
+    </section>
 
-[A] week label       primary   · current ISO week range; anchors orientation
-[B] overflow glyph   tertiary  · access archived weeks / settings
-[C] client header    secondary · name in caps + open count; tap to collapse
-[D] client header    secondary · same pattern; 2 open items
-[E] client header    secondary · same pattern; 3 open items
-[F] client header    secondary · same pattern; 1 open item
-[G] close week       primary   · commit action; dims until all items resolved
+  </div>
 
-item rows (under each client):
-  · name             secondary · deliverable label; max 24 chars before wrap
-  [·] status dot     meta      · open = hollow · closed = check · overdue = filled
-  due indicator      meta      · abbreviated day (mon–fri) or — if undated
-
-verification: top edge ─ = 38 · │ at col 0 and col 39 on every row
-· separator rows ├──────────────────────────────────────┤ = 38 dashes
-· all content rows 38 chars between pipes (counted per row)
-· aspect 40 × 43 correct for phone portrait 19.5:9</pre>
-    <p style="font-size:0.8rem">Verification: top-edge ─ count = 38 · │ columns at 0 and 39 on every content row · separator ─ count = 38 · client header rows corrected for visible width (HTML entity &amp;amp; renders as single char) · aspect 40 × 43 matches phone 19.5:9. No color, no tokens — structure only.</p>
-  </section>
-
-  <section class="section">
-    <h2>States</h2>
-    <p>One wireframe per meaningful state. The scanning state is shown above — it is the entry state every week.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">scanning</div><div class="it-desc">All clients expanded. Full open-work list visible. "Close week →" is present but dim — no action has been taken yet. This is the state shown above.</div></div>
-      <div class="item"><div class="it-name">item closed</div><div class="it-desc">Tapping an open item marks it done: [·] flips to [✓], row dims, client open count decrements. Row stays in place until week is closed — the consultant can see what got done, not just what remains.</div></div>
-      <div class="item"><div class="it-name">client collapsed</div><div class="it-desc">Tapping a client header collapses its item rows. Header and open count persist. Lets the consultant clear visual noise from clients already reviewed. "Close week →" activates only when all items across all clients are resolved or rolled.</div></div>
-      <div class="item"><div class="it-name">roll unfinished</div><div class="it-desc">Triggered from "Close week →" if any [·] items remain. A sheet lists every open item with a binary choice: roll to next week, or mark dropped. This decision point is deferred until the consultant has finished scanning — it does not interrupt the review.</div></div>
-      <div class="item"><div class="it-name">week closed</div><div class="it-desc">All items resolved or rolled. "Close week →" becomes "Week closed ✓". The week label advances to the next ISO week. Screen transitions to the new week's empty scanning state.</div></div>
+  <section class="pnl" id="aw-e" aria-labelledby="aw-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="aw-e-h">What must not break</h2><span class="ref">device check · next step</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="aw-e1"><span class="id">E1</span><div class="t"><div class="meas" style="--val:2.15;--lim:2.17;--max:2.5">
+          <div class="mh"><span>Aspect ratio <span class="lbl">h : w</span></span><span class="mv">2.15 · device 2.17</span></div>
+          <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+          <div class="scale" aria-hidden="true"><span>0</span><span>1.25</span><span>2.5</span></div>
+        </div></div></li>
+        <li id="aw-e2"><span class="id">E2</span><div class="t">Make the hierarchy read at the scan distance the user arrives with. The client name and open count register first. Item detail comes second.</div></li>
+        <li id="aw-e3"><span class="id">E3</span><div class="t">Account for every state in D. The Specifier turns the states into the spec. The state inventory enumerates them.</div></li>
+        <li id="aw-e4"><span class="id">E4</span><div class="t">Keep <span class="mono">[G]</span> visible in the action zone. Never bury the primary. Gate it by item state, not behind a secondary action.</div></li>
+        <li id="aw-e5"><span class="id">E5</span><div class="t">Give each item enough signal for a fast scan: the status dot and the due day. The user opens nothing. The surface respects the time pressure of a weekly review.</div></li>
+        <li id="aw-e6"><span class="id">E6</span><div class="t">Show structure only. Use no color and no tokens.</div></li>
+        <li id="aw-e7"><span class="id">E7</span><div class="t">Use the same bracketed labels in A, B, and C.</div></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>What the Next Step Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ Hierarchy reads correctly at the scan distance the user arrives with — client name and open count register first, item detail second.</div></div>
-      <div class="item"><div class="it-desc">✓ Every state is structurally accounted for (Specifier turns this into the spec; the State Inventory enumerates them).</div></div>
-      <div class="item"><div class="it-desc">✓ "Close week →" is always visible in the action zone — no Buried Primary. It is gated by item state, not hidden behind a secondary action.</div></div>
-      <div class="item"><div class="it-desc">✓ Status dot + due day give enough per-item signal for a fast scan without requiring the consultant to open anything. The surface respects the time pressure of a weekly review.</div></div>
-    </div>
-  </section>
+  <p class="lbl">Cite an item by its letter and number, such as B2. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
-  <footer class="footer"><p>Studio OS · ASCII Wireframe · run /annotate to review</p></footer>
 </div>
 </body>
 </html>
