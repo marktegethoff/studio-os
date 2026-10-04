@@ -25,12 +25,24 @@
 #        artifact-producing graphs cover all six functions + slop gate.
 #   R7.c executor conformance          — skills/*/workflow.js           (FAIL)
 #        executor roster must include every graph agent; meta present.
+#   R7.d adversary nodes               — skills/**                      (FAIL)
+#        every refute* node carries `adversary`; a skill with any adversary
+#        node declares `const ADVERSARY_MODEL` and passes it in workflow.js.
 #   R8   auto-contract stub            — skills/**                      (FAIL)
 #        any skill mentioning --auto must reference the Auto-Mode
 #        Safety Contract in memory/orchestration.md (no inline forks).
 #   R9   pattern-entry structure       — patterns/**                    (FAIL)
 #        every entry carries Problem/Standard/Verified + Solution/
 #        Why this shape/Prevents sections (per patterns/README.md).
+#   R10  memory citations name tier    — agents/** + skills/**          (FAIL)
+#        a bare `memory/…` citation resolves only inside the plugin root.
+#   R11  agent model & effort          — agents/*.md                    (FAIL)
+#        frontmatter model: ∈ haiku|sonnet|opus|fable; effort: absent on
+#        haiku, else low..max; verdict agents (pm cd de) opus|fable at
+#        high+; no prose model pins in agents, SKILL.md, workflow.js.
+#   R12  eval coverage                 — agents/ + skills/ vs evals/    (FAIL)
+#        every agent is on an `Agents:` line of an evals/*.eval.md; every
+#        skill has a `## <name>` heading in evals/skills.eval.md.
 #   IBR  included-by-reference         — project-level                  (FAIL)
 #        the invariant the design exists to protect.
 #        Runs regardless of scaffold_state.
@@ -410,6 +422,8 @@ SIX_MAP="$SCRIPT_DIR/six-functions.map"
 #   COST 1            cost: line present
 #   ERR <message>     structural failure
 #   AGENT <name>      each agent: node
+#   ADV <id>          each agent node carrying the bare token `adversary` (R7.d)
+#   REFUTE <id>       each node whose id begins with `refute` (R7.d)
 #   GATESPEC <text>   each gate node's full spec (for R7.b gate/slop coverage)
 graph_scan() {
   awk '
@@ -436,9 +450,11 @@ graph_scan() {
         spec = s; sub(/^[^[:space:]]+[[:space:]]*/, "", spec)
         if (id == "") next
         declared[id] = 1
+        if (id ~ /^refute/) print "REFUTE " id
         if (spec ~ /agent:/) {
           a = spec; sub(/^.*agent:/, "", a); sub(/[[:space:]].*$/, "", a)
           print "AGENT " a
+          if (spec ~ /(^|[[:space:]])adversary([[:space:]]|$)/) print "ADV " id
         } else if (spec ~ /^human/) {
           if (spec !~ /decides:/) print "ERR human node \"" id "\" has no decides: annotation"
         }
@@ -615,6 +631,35 @@ for f in "${SKILL_FILES[@]}"; do
       fi
     done <<< "$scan"
   fi
+
+  # R7.d — adversary nodes: every refute* node runs on the adversary model, and
+  # a skill with any adversary node pins that model once and passes it.
+  adv_ids="$(printf '%s\n' "$scan" | awk '/^ADV /{print $2}')"
+  while IFS= read -r rid; do
+    [[ -n "$rid" ]] || continue
+    if ! grep -qxF -- "$rid" <<< "$adv_ids"; then
+      fail "$rel — refutation node $rid is not marked adversary (R7.d)"
+      r7_hits=$((r7_hits + 1))
+    fi
+  done < <(printf '%s\n' "$scan" | awk '/^REFUTE /{print $2}')
+
+  if [[ -n "$adv_ids" ]]; then
+    wf="$(dirname "$f")/workflow.js"
+    wrel="$(rel_plugin "$wf")"
+    if [[ ! -r "$wf" ]]; then
+      fail "$rel — has adversary node(s) but $wrel does not exist (R7.d)"
+      r7_hits=$((r7_hits + 1))
+    else
+      if ! grep -qF -- "const ADVERSARY_MODEL = " "$wf"; then
+        fail "$wrel — adversary node(s) but no \`const ADVERSARY_MODEL = \` declaration (R7.d)"
+        r7_hits=$((r7_hits + 1))
+      fi
+      if ! grep -qF -- "model: ADVERSARY_MODEL" "$wf"; then
+        fail "$wrel — adversary node(s) but no agent() call passes \`model: ADVERSARY_MODEL\` (R7.d)"
+        r7_hits=$((r7_hits + 1))
+      fi
+    fi
+  fi
 done
 if [[ $r7_hits -eq 0 ]]; then
   info "$r7_graphs graph block(s) valid"
@@ -688,6 +733,130 @@ for f in "${AGENT_FILES[@]}" "${SKILL_FILES[@]}"; do
   done < <(grep -n '`memory/' "$f" 2>/dev/null | grep -v "plugin's \`memory/" | grep -v '\.claude/memory/')
 done
 [[ $r10_hits -eq 0 ]] && info "all memory citations name their tier"
+
+# ── R11 — agent model & effort ────────────────────────────────────────────────
+#
+# Frontmatter is the source of truth for each agent's model and effort; prose
+# never pins a model. Haiku takes no effort parameter, so `effort:` must be
+# absent there and present everywhere else.
+#
+# Verdict agents (pm cd de) are the PM → CD → DE guard chain in
+# memory/orchestration.md: the last judgment before a ship, so they run on
+# opus or fable at high effort or above.
+
+section "R11 · agent model & effort — agents/*.md"
+
+R11_MODELS="haiku sonnet opus fable"
+R11_EFFORTS="low medium high xhigh max"
+R11_VERDICT_AGENTS="pm cd de"
+
+in_list() { [[ -n "$1" ]] || return 1; case " $2 " in *" $1 "*) return 0 ;; esac; return 1; }
+
+# Value of a top-level frontmatter key (inline comment + quotes stripped).
+# Exit 0 when the key is present (even if empty), 1 when absent.
+frontmatter_get() {
+  awk -v k="$2" '
+    BEGIN { in_fm = 0; found = 0 }
+    NR == 1 && /^---[[:space:]]*$/ { in_fm = 1; next }
+    in_fm && /^---[[:space:]]*$/ { exit }
+    in_fm && index($0, k ":") == 1 {
+      v = substr($0, length(k) + 2)
+      sub(/[[:space:]]+#.*$/, "", v)
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", v)
+      gsub(/^["'\'']|["'\'']$/, "", v)
+      print v
+      found = 1
+      exit
+    }
+    END { exit (found ? 0 : 1) }
+  ' "$1"
+}
+
+r11_hits=0
+for f in "${AGENT_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  rel="$(rel_plugin "$f")"
+  name="$(basename "$f" .md)"
+  file_hits=0
+
+  model="$(frontmatter_get "$f" model)" && has_model=1 || has_model=0
+  effort="$(frontmatter_get "$f" effort)" && has_effort=1 || has_effort=0
+
+  if [[ $has_model -eq 0 ]]; then
+    fail "$rel — frontmatter has no model: (R11)"; file_hits=$((file_hits + 1))
+  elif ! in_list "$model" "$R11_MODELS"; then
+    fail "$rel — model: \"$model\" is not one of: $R11_MODELS (R11)"; file_hits=$((file_hits + 1))
+  elif [[ "$model" == "haiku" ]]; then
+    if [[ $has_effort -eq 1 ]]; then
+      fail "$rel — model: haiku takes no effort, but effort: \"$effort\" is declared (R11)"; file_hits=$((file_hits + 1))
+    fi
+  elif [[ $has_effort -eq 0 ]]; then
+    fail "$rel — frontmatter has no effort: (one of: $R11_EFFORTS) (R11)"; file_hits=$((file_hits + 1))
+  elif ! in_list "$effort" "$R11_EFFORTS"; then
+    fail "$rel — effort: \"$effort\" is not one of: $R11_EFFORTS (R11)"; file_hits=$((file_hits + 1))
+  fi
+
+  # Verdict floor — checked once the declaration itself is well-formed.
+  if [[ $file_hits -eq 0 ]] && in_list "$name" "$R11_VERDICT_AGENTS"; then
+    if ! in_list "$model" "opus fable" || ! in_list "$effort" "high xhigh max"; then
+      fail "$rel — verdict agent must declare model opus|fable and effort high|xhigh|max, found model: $model effort: ${effort:-none} (R11)"
+      file_hits=$((file_hits + 1))
+    fi
+  fi
+  r11_hits=$((r11_hits + file_hits))
+done
+
+# Prose model pins — agents, SKILL.md, workflow.js. Frontmatter `model:` aliases
+# do not match this pattern, so no exclusion is needed.
+WORKFLOW_FILES=()
+while IFS= read -r line; do WORKFLOW_FILES+=("$line"); done < <(find "$PLUGIN_ROOT/skills" -type f -name 'workflow.js' 2>/dev/null | sort)
+
+MODEL_PIN_RE='claude-(opus|sonnet|haiku|fable)-[0-9][A-Za-z0-9._-]*|\[(HAIKU|SONNET|OPUS|FABLE)\]'
+for f in "${AGENT_FILES[@]}" "${SKILL_FILES[@]}" ${WORKFLOW_FILES[@]+"${WORKFLOW_FILES[@]}"}; do   # bash 3.2 + set -u: an empty array must not expand bare
+  [[ -r "$f" ]] || continue
+  rel="$(rel_plugin "$f")"
+  while IFS=: read -r lineno pin; do
+    [[ -n "$lineno" ]] || continue
+    fail "$rel:$lineno — prose model pin \"$pin\" — the model lives in frontmatter or ADVERSARY_MODEL (R11)"
+    r11_hits=$((r11_hits + 1))
+  done < <(grep -noE "$MODEL_PIN_RE" "$f" 2>/dev/null || true)
+done
+[[ $r11_hits -eq 0 ]] && info "${#AGENT_FILES[@]} agents declare valid model & effort; no prose model pins"
+
+# ── R12 — eval coverage ───────────────────────────────────────────────────────
+#
+# CLAUDE.md "Eval Coverage": no agent or skill ships without an eval. Agents are
+# covered by an `Agents:` line in any evals/*.eval.md; skills by a `## <name>`
+# heading in evals/skills.eval.md (the whole token — `## design` does not cover
+# design-system-init).
+
+section "R12 · eval coverage — agents/ + skills/ vs evals/"
+
+r12_hits=0
+SKILLS_EVAL="$SCRIPT_DIR/skills.eval.md"
+agent_eval_lines="$(grep -hE '^Agents?:' "$SCRIPT_DIR"/*.eval.md 2>/dev/null || true)"
+
+for f in "${AGENT_FILES[@]}"; do
+  name="$(basename "$f" .md)"
+  if ! grep -qF -- "\`$name\`" <<< "$agent_eval_lines"; then
+    fail "agent $name has no eval coverage (R12)"
+    r12_hits=$((r12_hits + 1))
+  fi
+done
+
+if [[ ! -r "$SKILLS_EVAL" ]]; then
+  fail "$(rel_plugin "$SKILLS_EVAL") is missing — no skill has eval coverage (R12)"
+  r12_hits=$((r12_hits + 1))
+else
+  for f in "${SKILL_FILES[@]}"; do
+    name="$(basename "$(dirname "$f")")"
+    if ! grep -qE "^## ${name}([[:space:]]|\$)" "$SKILLS_EVAL"; then
+      fail "skill $name has no eval coverage — no \`## $name\` heading in evals/skills.eval.md (R12)"
+      r12_hits=$((r12_hits + 1))
+    fi
+  done
+fi
+[[ $r12_hits -eq 0 ]] && info "${#AGENT_FILES[@]} agents and ${#SKILL_FILES[@]} skills have eval coverage"
 
 # ── project-level checks (R3 + IBR) ───────────────────────────────────────────
 
