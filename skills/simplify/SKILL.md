@@ -127,7 +127,7 @@ Read the actual files in scope before rendering a verdict.
 State the verdict: **PROCEED / REVISE PLAN / REJECT**.
 
 - **PROCEED:** Exit the loop. Move to implementation.
-- **REVISE PLAN:** Name exactly what must change. Switch back to [SONNET] for another loop iteration. State what the next iteration must resolve.
+- **REVISE PLAN:** Name exactly what must change. Return to Step 2 for another loop iteration. State what the next iteration must resolve.
 - **REJECT:** The simplification direction is structurally wrong. Stop. State what reframing is required before this can proceed.
 
 If REVISE PLAN and iterations remain:
