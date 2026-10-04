@@ -305,10 +305,11 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/critique-report.html` as the structural shell.
 2. Populate the artifact-specific fields: per-discipline findings for all nine specialists, P0–P3 triage (address now / before ship / consider / decide), debate output if applicable (what hardened, what changed, unresolved tensions).
 3. Write to `reviews/critique_<slug>_<timestamp>.html` where slug is from the artifact name (lowercase kebab-case, max 40 chars) and timestamp is `YYYYMMDD`.
-4. Surface a short markdown summary in conversation:
+4. Writing check, `verdict` genre: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
    - P0 count and top findings
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

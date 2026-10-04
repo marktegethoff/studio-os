@@ -7,7 +7,7 @@ Find the essential, categorically right solution to a hard problem.
 
 Arguments: $ARGUMENTS
 
-**Six Functions (see CLAUDE.md).** The solution this loop converges on is a design artifact — it must satisfy all six functions. The graph enforces all six: framing (Architect/context), generation (Design), craft (the conditional sub-team fan-out), reduction (Critic), usability (the Accessibility check on the exit path), and the Gate (CD's verdict, refuted once before it stands).
+**Six Functions (the plugin's `memory/doctrine.md` § Minimum Team).** The solution this loop converges on is a design artifact — it must satisfy all six functions. The graph enforces all six: framing (Architect/context), generation (Design), craft (the conditional sub-team fan-out), reduction (Critic), usability (the Accessibility check on the exit path), and the Gate (CD's verdict, refuted once before it stands).
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -97,7 +97,7 @@ edges:
   exit-path -> emit
 ```
 
-The `verdict -> architect` edge is the NOT YET re-entry, bounded to three iterations total. An INEVITABLE verdict must survive one refutation pass (`refute` — the critic argues the strongest case *against* inevitability; at most one return to the designer) before the accessibility check, the slop gate, and emission. Only the sub-team disciplines the solution requires are spawned; the fan-out is **blind**. Dissents — including a marketer commercial objection the CD overrules — are preserved to the output, never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`).
+The `verdict -> architect` edge is the NOT YET re-entry, bounded to three iterations total. An INEVITABLE verdict must survive one refutation pass (`refute` — the critic argues the strongest case *against* inevitability; at most one return to the designer) before the accessibility check, the slop gate, and emission. Only the sub-team disciplines the solution requires are spawned; the fan-out is **blind**. Dissents — including a marketer commercial objection the CD overrules — are preserved to the output, never averaged away (see Consensus Laundering, the plugin's `memory/anti-patterns.md`). A node that returns nothing stops the loop and is reported as failed — node id, the inputs it was given, the blocked nodes — never read through (see Failure reporting, the plugin's `memory/orchestration.md`).
 
 ## What this command does
 

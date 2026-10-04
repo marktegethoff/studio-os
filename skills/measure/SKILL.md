@@ -229,11 +229,12 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/metrics-plan.html` as the structural shell.
 2. Populate the artifact-specific fields: lagging indicator, leading indicators, counter-metrics, instrumentation requirements (with feasibility verdict), review cadence, open questions (only genuine blockers).
 3. Write to `specs/measurement_<slug>.html` where slug is derived from the feature name (lowercase kebab-case, max 40 chars).
-4. Surface a short markdown summary in conversation:
+4. Writing check, `verdict` genre: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
    - Lagging indicator and top leading indicators
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
 

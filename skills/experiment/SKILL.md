@@ -126,10 +126,11 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/experiment-plan.html` as the structural shell.
 2. Populate the artifact-specific fields: hypothesis (IF/THEN/BECAUSE), experiment design and scenarios, findings, conclusion (CONFIRMED / FALSIFIED / INCONCLUSIVE), consequences.
 3. Write to `specs/experiment_<slug>.html` where slug is derived from the hypothesis (lowercase kebab-case, max 40 chars).
-4. Surface a short markdown summary in conversation:
+4. Writing check, `verdict` genre: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
    - Conclusion verdict and key consequences
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

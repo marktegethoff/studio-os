@@ -10,7 +10,7 @@ Arguments: $ARGUMENTS
 
 **Parallel agents:** Step 2 and Step 6 each use an outer background agent. Inner parallelism is managed within the outer agent — you receive one notification per phase, not one per inner agent. The outer agent is an execution detail; the graph below declares the logical fan-out.
 
-**Six Functions (see CLAUDE.md).** Ideate is an artifact-producing workflow and is governed by the six-function floor (`evals/six-functions.map`). The graph covers all six: framing (architect, strategist), generation (designer), craft (writer, choreographer), reduction (critic), usability (heurist), and the Gate (cd — the ship verdict rendered on the final directions before the artifact renders).
+**Six Functions (the plugin's `memory/doctrine.md` § Minimum Team).** Ideate is an artifact-producing workflow and is governed by the six-function floor (`evals/six-functions.map`). The graph covers all six: framing (architect, strategist), generation (designer), craft (writer, choreographer), reduction (critic), usability (heurist), and the Gate (cd — the ship verdict rendered on the final directions before the artifact renders).
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -430,10 +430,11 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/ideation-output.html` as the structural shell.
 2. Populate the artifact-specific fields: problem statement, shipped directions (1–2 with the CD verdict, desirability and feasibility summary), recommended next step, deferred ideas with conditions for reconsideration.
 3. Write to `specs/ideation_<slug>.html` where slug is derived from the problem statement (lowercase kebab-case, max 40 chars).
-4. Surface a short markdown summary in conversation:
+4. Writing check, `exploratory` genre: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
    - Shipped direction names and verdicts
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

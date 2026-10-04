@@ -8,7 +8,7 @@ Run the Studio OS prototype-to-production handoff workflow.
 
 Arguments: $ARGUMENTS
 
-**Six Functions (see CLAUDE.md).** A handoff packages an already-validated design. Confirm the six functions were satisfied upstream (in `/studio:design`) before producing the build spec — flag any function that was skipped (especially usability/accessibility and the CD gate) as a gap to close before engineering begins, not after.
+**Six Functions (the plugin's `memory/doctrine.md` § Minimum Team).** A handoff packages an already-validated design. Confirm the six functions were satisfied upstream (in `/studio:design`) before producing the build spec — flag any function that was skipped (especially usability/accessibility and the CD gate) as a gap to close before engineering begins, not after.
 
 When you reach a PAUSE block: stop, output the pause text to the user, and wait for their reply before continuing.
 
@@ -279,10 +279,11 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/state-inventory.html` as the structural shell.
 2. Populate the artifact-specific fields: state inventory (all states — designed / undesigned / intentionally omitted), flow inventory, synthetic data, UAT scenarios (Given / When / Then / Pass if / Fail if), build spec, known gaps, sign-off status.
 3. Write to `design/handoff_<slug>.html` where slug is derived from the feature or component name (lowercase kebab-case, max 40 chars).
-4. Surface a short markdown summary in conversation:
+4. Writing check, `procedure` genre (synthetic data and shipping strings carry `data-ste="copy"`): run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
    - State count, flow count, any known gaps flagged
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

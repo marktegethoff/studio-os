@@ -95,8 +95,9 @@ If a brief is present, validate it:
 3. **GATES** — confirm at least one gate is listed.
 4. **VERIFY** — confirm the verification method is concrete.
 5. **ESCALATE** — confirm at least one trigger is listed.
+6. **Gate coverage** — confirm each gate maps to a VERIFY item or a named manual method (`manual: <method>`).
 
-If any field is malformed, stop and ask the user to revise via `/studio:shape --task`.
+If any field is malformed or a gate has no check, stop and ask the user to revise via `/studio:shape --task`.
 
 ---
 
@@ -138,7 +139,7 @@ When implementation is complete (code written, files saved), proceed to Step 3.
 
 ## [Det] Step 3 — Build verify
 
-Run the project's declared **build** command(s) — the `build` field in project-context. If the project declares more than one build target (e.g. app + prototype), determine which to run from the changed files via `git diff --name-only HEAD` mapped against `code_root`, and run the matching target(s).
+Run the project's declared **build** command(s) — the `build` field in project-context. If the project declares more than one build target (e.g. app + prototype), determine which to run from the changed files (tracked and new — the two commands in Step 7) mapped against `code_root`, and run the matching target(s).
 
 Invoke the declared command(s) via the Bash tool, exactly as project-context declares them.
 
@@ -182,7 +183,7 @@ End the skill. Do not attempt a third fix.
 
 ## [Det] Step 4 — Test verify (conditional)
 
-Run the project's declared **test** command only if production code was modified — check `git diff --name-only HEAD` against `code_root` (excluding any preview/example-only paths the project names).
+Run the project's declared **test** command only if production code was modified — check the changed files (tracked and new — the two commands in Step 7) against `code_root` (excluding any preview/example-only paths the project names).
 
 Invoke the declared `test` command via the Bash tool, exactly as project-context declares it.
 
@@ -269,7 +270,7 @@ ESCALATE  <triggered: yes/no; which trigger if yes>
 Plus:
 - **Open risks** — anything that passed verification but might still be wrong (subtle behaviors, untested edge cases)
 - **Judgment calls** — decisions made that were not explicitly in the spec
-- **Files changed** — `git diff --name-only HEAD`
+- **Files changed** — tracked: `git diff --name-only HEAD`; new files this work created (list only those): `git ls-files --others --exclude-standard -- <code_root>`
 
 ---
 
@@ -303,10 +304,10 @@ If the refutation succeeds, this is an ESCALATE: stop before staging, surface th
 
 ## [Det] Step 8 — Stage (do not commit)
 
-Stage the changed files for review. Invoke via the Bash tool:
+Stage the changed files for review, tracked and new. Invoke via the Bash tool:
 
 ```
-git add <each file from the report's "Files changed" list>
+git add <each file from the report's "Files changed" list — both commands' output>
 ```
 
 Then run:
@@ -333,7 +334,7 @@ After staging, ask:
 
 **If user replies 'review':**
 
-Invoke `/studio:review`, passing the brief, implementation summary, and changed files as context. After the review completes: if the verdict is SHIP or REVISE, proceed to the 'gather' path below. If REJECT, end the skill and surface the blocking findings — do not stage or render the feedback surface.
+Invoke `/studio:review`, passing the brief, implementation summary, and changed files as context. After the review completes: if the verdict is SHIP or REVISE, proceed to the 'gather' path below. If REJECT, unstage what Step 8 staged with `git restore --staged <files>` (or `git reset -- <files>`), surface the blocking findings, and end the skill — do not render the feedback surface.
 
 **If user replies 'gather' or anything else (default path):**
 

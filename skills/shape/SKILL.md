@@ -235,7 +235,7 @@ A task brief answers one question before execution begins: is this tight enough 
 ```
 SPEC      <path to spec, or inline description if infrastructure task>
 OUTPUT    <exact artifact, file, or commit expected>
-GATES     <what must not break — invariants, must-not-touch files>
+GATES     <what must not break — invariants, must-not-touch files; each names the VERIFY item that proves it>
 VERIFY    <how the agent confirms success — build, render, artifact written>
 ESCALATE  <triggers to stop and ask — ambiguity, gate violation, retry exhaustion>
 ```
@@ -246,12 +246,12 @@ ESCALATE  <triggers to stop and ask — ambiguity, gate violation, retry exhaust
 2. **Read and assess.** Read the spec; confirm it has invariants and states/tokens as applicable, naming any gap. **Refusal rule:** no spec + not infrastructure → stop; recommend `/studio:design` (the brief assembles from a spec — without one there is nothing to verify against). Do not produce a half-brief.
 3. **Output.** Propose a default from the spec or task type (production files from the spec; canvas experiments to the manifest's `code_root` canvas path; hooks to `.claude/hooks/`; docs to the flat folders). Confirm or adjust.
 4. **Gates.** Auto-extract from the spec's "what must not break" plus project invariants. Confirm, add, remove.
-5. **Verify.** Propose per output type (build succeeds, preview renders, hook exit codes, artifact valid). Confirm or extend.
+5. **Verify.** Propose per output type (build succeeds, preview renders, hook exit codes, artifact valid). Confirm or extend. **Gate coverage rule:** a gate without a verifying item is incomplete. Add a VERIFY item for it, or mark it "manual: <method>".
 6. **Escalate.** Defaults always included: spec ambiguity mid-implementation, build/test fails twice, any gate violation, scope expansion. Add task-specific triggers.
 7. **Lock.** Present the assembled brief; locked only on explicit confirmation.
 8. **Path fork.** `/studio:prototype` (validate visually first — the bias for anything new or visual) or `/studio:implement` (production direct). Ambiguous reply → re-ask, never auto-pick.
 
-**Five fields rule:** no additional fields — what doesn't fit belongs in the spec. **Ephemeral + artifact:** the brief lives in conversation context as the execution contract, and is written as HTML (load `artifacts/templates/task-brief.html` as the structural shell → `specs/task_brief_<slug>.html`) for review.
+**Five fields rule:** no additional fields — what doesn't fit belongs in the spec. **Ephemeral + artifact:** the brief lives in conversation context as the execution contract, and is written as HTML (load `artifacts/templates/task-brief.html` as the structural shell → `specs/task_brief_<slug>.html`) for review, then run the Output section's writing check on it.
 
 ---
 
@@ -278,10 +278,11 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/design-brief.html` as the structural shell.
 2. Populate the artifact-specific fields: problem statement, user, today's behavior, success conditions, out of scope, constraints, open questions.
 3. Write to `specs/product_brief_<slug>.html` where slug is derived from the problem name (lowercase kebab-case, max 40 chars).
-4. Surface a short markdown summary in conversation:
+4. Writing check, `verdict` genre (`procedure` for a task brief): run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence problem statement
    - Success conditions and key constraints
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

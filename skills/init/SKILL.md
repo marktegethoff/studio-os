@@ -11,12 +11,13 @@ Arguments: $ARGUMENTS
 
 ## Purpose
 
-Studio OS discipline agents load two context files to calibrate themselves:
+Studio OS discipline agents load three context files to calibrate themselves:
 
 - `project-context.md` — the product, its invariants, user archetypes, and engineering context. Shared across the team; often committed to the repo.
+- `design-vocabulary.md` — the product's registers, material language, and dictionary (one word, one meaning). `cd`, `designer`, `heurist`, and `writer` read it; the writing check reads its dictionary. Shared across the team.
 - `role-context.md` — your specific role on this project and how you're using Studio OS here. Personal; lives in `.claude/memory/`, not committed.
 
-Without these, agents fall back to generic reasoning. With both, they calibrate to the specific product *and* to you.
+Without these, agents fall back to generic reasoning. With all three, they calibrate to the specific product *and* to you.
 
 Run this once at the start of a new project. Re-run with `--update` when your role changes, or when the product direction, invariants, or system model changes significantly.
 
@@ -25,9 +26,10 @@ Run this once at the start of a new project. Re-run with `--update` when your ro
 ## Mode
 
 If `--update` is in $ARGUMENTS:
-- Load existing `project-context.md` and `role-context.md` first
+- Load existing `project-context.md`, `role-context.md`, and `design-vocabulary.md` first
 - Show current values and ask what has changed
 - Update only the sections that have changed — do not re-run the full interview
+- If `design-vocabulary.md` is absent, ask question 6b and write it (see Writing design-vocabulary.md)
 
 Otherwise: run the full three-phase interview.
 
@@ -86,6 +88,7 @@ Ask:
 
 Ask:
 6. What are the core primitives — the fundamental objects your system works with? (e.g., Entry, Thread, Collection; or Document, Tag, Workspace.)
+6b. What are the core verbs — the actions people take on those primitives? (e.g., Save, Archive, Share. Name any rival word the product rejects, e.g. "bookmark" for Save.) The primitives and verbs seed the product dictionary.
 7. How do these primitives relate to each other? (Parent/child? Many-to-many? Sequential?)
 8. What are the system invariants — the rules that must never be violated? (e.g., "chronology is never rewritten", "AI assists but never authors".)
 
@@ -252,6 +255,45 @@ Domains: [list]
 
 Skill location: `.claude/skills/design-system/` (present / not yet initialized)
 ```
+
+Confirm the write, then write the product vocabulary.
+
+---
+
+### Writing design-vocabulary.md
+
+Write:
+
+```
+.claude/memory/design-vocabulary.md
+```
+
+If the file exists, keep it and add only the missing `## Dictionary` rows. The interview seeds the dictionary with the product's core nouns (the primitives, Section 3) and verbs (6b). Registers and material language are not interviewed here: write each as a one-line prompt for the team, unless the user already volunteered them.
+
+Use this structure (dictionary format: the plugin's `memory/writing.md`):
+
+```markdown
+# Design Vocabulary
+Last updated: [date]
+
+## Registers
+
+_Name the product's registers — each distinct tone or visual mode — and where each applies._
+
+## Material language
+
+_Say what the interface is made of: surface, depth, color, the governing metaphor._
+
+## Dictionary
+
+| Word (part of speech) | Status | Meaning or alternative |
+|---|---|---|
+| [PRIMITIVE] (n) | approved | [definition from Section 3] |
+| [VERB] (v) | approved | [what it does to a primitive] |
+| [rival word] (n or v) | not approved | [APPROVED WORD] |
+```
+
+One row per noun and verb. Write an approved word in UPPERCASE and a not-approved word in lowercase. The status is exactly `approved` or `not approved`. Add a not-approved row only for a rival word the user named.
 
 Confirm the write, then continue to Phase 3.
 
@@ -558,6 +600,7 @@ confirm:
 >
 > Written:
 > - `.claude/memory/project-context.md` — product context + engineering manifest (shareable with your team)
+> - `.claude/memory/design-vocabulary.md` — registers, material language, and the product dictionary (shareable with your team)
 > - `.claude/memory/role-context.md` — your role on this project (personal, don't commit)
 > - `code/app/`, `code/canvas/`, `code/shared/` — the paired scaffold ([shape: triple | collapse | app-only])
 >

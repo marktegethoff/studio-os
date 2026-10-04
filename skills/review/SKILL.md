@@ -309,10 +309,11 @@ Render the artifact as HTML using the kit template.
 1. Load `artifacts/templates/lt-review.html` as the structural shell.
 2. Populate the artifact-specific fields: PM verdict, CD verdict (if design exists), DE verdict (if implementation exists), convergences, cascade routing, debate output if applicable, next action (single most important).
 3. Write to `reviews/lt_review_<slug>_<timestamp>.html` where slug is from the artifact name (lowercase kebab-case, max 40 chars) and timestamp is `YYYYMMDD`.
-4. Surface a short markdown summary in conversation:
+4. Writing check, `verdict` genre: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path
    - One-sentence headline
    - Each LT member's verdict in one word, convergences, next action
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.

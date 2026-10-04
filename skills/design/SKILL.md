@@ -21,7 +21,7 @@ Auto-mode defaults for the surviving human nodes:
 - `direction` node: adopt the Designer's recommended option; state this in the "Auto-mode decisions" section.
 - `proto-gate` node: build and verify the prototype on the auto branch; never write production source files in the same run.
 
-**Minimum team (the Six Functions — see CLAUDE.md).** A design artifact is never produced by fewer than the six required functions. This workflow's graph covers all six — framing/structure, generation, craft (Phase A), reduction, usability/accessibility, and **the Gate (CD)** as the `ship` node, applied via the `cd` agent or `/studio:review` before emission. The **Designer owns the deliverable** (the interaction model); the other disciplines inform it.
+**Minimum team (the Six Functions — the plugin's `memory/doctrine.md` § Minimum Team).** A design artifact is never produced by fewer than the six required functions. This workflow's graph covers all six — framing/structure, generation, craft (Phase A), reduction, usability/accessibility, and **the Gate (CD)** as the `ship` node, applied via the `cd` agent or `/studio:review` before emission. The **Designer owns the deliverable** (the interaction model); the other disciplines inform it.
 
 ## Graph
 
@@ -357,10 +357,11 @@ Render the artifact as HTML using the kit template, chosen by phase.
 4. Write to `design/<slug>.html` where slug is from the problem name.
 
 For all phases:
-4. Surface a short markdown summary in conversation:
+4. Writing check on each file written — `verdict` genre for the direction brief, `procedure` for the state inventory and spec: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).
+5. Surface a short markdown summary in conversation:
    - File path(s)
    - One-sentence decision or direction
    - Key removals and open questions
-5. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
+6. Offer: "Run `/studio:feedback --overlay <file-path>` to attach the feedback harness."
 
 If `--text` is in $ARGUMENTS, skip HTML emission and present the markdown summary as the full output.
