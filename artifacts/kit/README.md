@@ -4,7 +4,7 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
 
 ## Two parts
 
-1. **`studio.css`** — the shared stylesheet, carrying the **Standard Works identity** (the studio's own brand — not any product's): Neue Haas Grotesk (refined grotesk sans) via Typekit with a Helvetica Neue fallback, black on warm white, Courier for technical labels, monochrome with at most a single earned accent (`--accent`), generous margins, no decoration. Source of truth: `~/Standard Works/Apps/Standard-Works/brand-system.html`. A *product* that needs its artifacts themed to its own brand overrides `--accent`/fonts; by default everything carries Standard Works. Link it; don't reinvent it.
+1. **`studio.css`** — the shared stylesheet, carrying the **Standard Works identity** (the studio's own brand — not any product's): Neue Haas Grotesk (refined grotesk sans) via Typekit with a Helvetica Neue fallback, black on warm white, Courier for technical labels, monochrome with at most a single earned accent (`--accent`) and, since 1.8, two annotation colors (blue and red), generous margins, no decoration. Source of truth: `~/Standard Works/Apps/Standard-Works/brand-system.html`. A *product* that needs its artifacts themed to its own brand overrides `--accent`/fonts; by default everything carries Standard Works. Link it; don't reinvent it.
 2. **The annotation harness** — the click-to-annotate overlay from the `annotate` skill. It injects a review bar, click-to-pin comments, brief-derived questions, a disposition (Approve/Revise/Reject), and a copy-to-Claude output block. Run `/annotate <artifact>.html` (optionally `--brief <brief>`) to attach it. The source artifact is never modified — `annotate` writes `<name>.annotated.html`.
 
 ## Building an artifact
@@ -12,23 +12,93 @@ Every studio artifact is a **well-designed HTML document in the studio visual la
 ```html
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="studio:genre" content="[procedure | verdict | exploratory]">
   <title>[Artifact] — [subject]</title>
   <link rel="stylesheet" href="../kit/studio.css">
   <!-- optional: a studio/product brand override (fonts + --accent/palette), captured at /studio:init Step D -->
   <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head><body>
-  <div class="wrap">
-    <header class="header">
-      <span class="eyebrow">Studio OS · [artifact type]</span>
-      <h1>[Title]<span style="color:var(--accent)">.</span></h1>
-      <p class="header-sub">[one-line framing]</p>
+  <div class="doc">
+    <header class="tblock">
+      <div class="c title"><span class="l">Title</span><h1>[Title]</h1></div>
+      <div class="c"><span class="l">Artifact</span><span class="v mono">[artifact type]</span></div>
+      <div class="c"><span class="l">Owner</span><span class="v">[agent]</span></div>
+      <div class="c"><span class="l">Revision</span><span class="v">[1]</span></div>
+      <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
     </header>
-    <!-- sections using .section / .callout / .itemlist / .dcard / .tier / table / pre.ascii -->
+    <!-- one lettered panel (.pnl) per part: A, B, C … Components are below. -->
   </div>
 </body></html>
 ```
 
-Use the component classes from `studio.css` (`.callout`, `.itemlist`/`.item`, `.dcard`, `.tier`, `.compare`, `table`, `pre.ascii`, `.tag`, `.pill`). ASCII wireframes go in `pre.ascii` — styled and monospaced, never raw.
+The genre meta is required; the writing check fails without it. Build with the 1.8 components below. ASCII wireframes go in `pre.ascii` — styled and monospaced, never raw.
+
+**Legacy classes** — `.wrap`, `.header`/`.header-sub`/`.header-meta`, `.eyebrow`, `.section`, `.callout`, `.itemlist`/`.item`, `.dcard`, `.tier`, `.compare`, `.tag`, `.pill`, `.grid2`/`.grid3`, `pre.ascii` — are still supported and render unchanged. Existing artifacts need no migration. New artifacts use the 1.8 components.
+
+## 1.8 — legible artifacts
+
+One person builds from an artifact and another judges it, so it must be citable, checkable, and plain. Four principles and one writing rule:
+
+1. **Title block and lettered panels.** Provenance sits in one `.tblock`. Each part is a panel with a letter. Each item has a number. A reviewer cites "B2".
+2. **Annotation colors.** Blue annotates or passes. Red marks a violation or a fail. Nothing else is colored.
+3. **Limits as measures.** A value is drawn against its limit, not written beside it.
+4. **Dimensioned wireframes.** Where structure matters, an SVG wireframe carries its dimensions and callouts (`.s-*`, `.t-*`).
+
+### Genre and markup
+
+Every artifact declares how it is written, in `<head>`: `<meta name="studio:genre" content="procedure|verdict|exploratory">`. The plugin's `memory/writing.md` holds the rules, the sentence limits, and the dictionary format. Four markers adjust the check:
+
+- `data-genre="…"` on an element overrides the genre for its subtree.
+- `data-ste="off"` skips the subtree: a quoted draft under critique, a rule-break example, third-party text. `.orig` always carries it.
+- `data-ste="copy"` marks shipping product copy (UI strings). Only the dictionary applies. Product copy follows the product's voice, not studio prose.
+- The check always skips `<script> <style> <svg> <pre> <code> <head>` and bracketed `[placeholders]`.
+
+| Genre | Sentence limit | Templates |
+|---|---|---|
+| `procedure` | 20 words | `component-spec` (full sheet), `task-brief`, `motion-spec`, `state-inventory`, `ascii-wireframe`, `flow-diagram`, `copy-deck` (its shipping strings carry `data-ste="copy"`) |
+| `verdict` | 25 words | `critique-report`, `lt-review`, `heuristic-report`, `decision-record`, `risk-register`, `metrics-plan`, `experiment-plan`, `design-brief` |
+| `exploratory` | 25 words, as a guide | `ideation-output`, `user-journey`, `user-narrative`, `competitive-teardown` |
+
+### Components
+
+```html
+<!-- Panel A: numbered items. Each item is citable as A1, A2 … -->
+<section class="pnl" aria-labelledby="a-h">
+  <div class="pnl-h"><span class="ltr">A</span><h2 id="a-h">[Panel]</h2><span class="ref">[cites B2]</span></div>
+  <div class="pnl-b">
+    <ol class="items">
+      <li><span class="id">A1</span><span class="t">[Item]<small>[detail]</small></span><span class="side"><span class="ok">✓ [Pass]</span></span></li>
+    </ol>
+
+    <!-- A measure: set the data; CSS draws the fill and the limit. Add .over when the value breaks the limit. -->
+    <div class="meas" style="--val:7;--lim:25;--max:30">
+      <div class="mh"><span>[Body length]</span><span class="mv">7 · max 25 words</span></div>
+      <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+      <div class="scale" aria-hidden="true"><span>0</span><span>15</span><span>30</span></div>
+    </div>
+
+    <!-- Annotated copy: the quoted draft, then the annotated rewrite. .seg.x marks a violation. -->
+    <span class="orig" data-ste="off"><s>Oops!</s> Nothing saved yet.</span>
+    <span class="anat">
+      <span class="seg"><span class="w">Nothing saved</span><span class="t">State, not mood</span></span>
+      <span class="seg x"><span class="w">yet</span><span class="t">[Rule broken]</span></span>
+    </span>
+  </div>
+  <div class="pnl-f">[One line: scope, count rule, or source.]</div>
+</section>
+```
+
+- **Title block** — each row holds 4 cells; `.wide` spans 2. Fill every row, or an empty cell shows as a black block.
+- **Measure** — `--val` and `--max` are required; `--lim` is optional, and without it no limit mark is drawn. Use custom properties only. Never set an inline `width` or `left`.
+- **Also** — `.verdict.pass|.fail|.hold`, `.ok`/`.no`/`.na` (status), `.lead`, `.wc` (word count; `.over`), `.dim` (dimension line with `.tk` ticks), `.note`, `.tbox` (wraps a table so it scrolls inside the panel), `.grid2`/`.grid3` (inside `.doc`), and the text helpers `.mono`, `.lbl`, `.annot`, `.viol`.
+
+### The full sheet
+
+A document of lettered panels in `.doc` is the default. An artifact earns the full `.sheet` only when one surface must show its structure, states, copy, and limits on one page. Today that is `component-spec` alone. The sheet adds a zone frame (`.zx`, `.zy`) and a 12-column `.field`. Panels place themselves in the field with `grid-column` and `grid-row`. The sheet stands alone in `<body>`, not inside `.doc`. Below 900px it becomes one column and the zone frame hides.
+
+### The writing check step
+
+After an emitting skill writes an artifact: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <artifact.html>` (omit `--vocab` if the file does not exist). Fix each FAIL once by shortening or splitting the sentence, re-run once, and list remaining WARNs in the summary. A second FAIL is reported, not looped. (Bounded, like /implement's retry rule.)
 
 ## The artifact catalog
 
