@@ -96,4 +96,4 @@ Report using this structure:
 
 Do not mark as complete if any invariant fails. Do not omit the Unverified section — if everything was verifiable, state that explicitly.
 
-Findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
+Findings and verdicts are written in the verdict genre (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.

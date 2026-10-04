@@ -45,8 +45,7 @@ tools: ["Read", "Glob"]
 ## Design System
 
 If the project defines a design system, read its typography tokens before evaluating or defining any type decision.
-The three-register model (Mechanism / Tape / Archive) is established system architecture.
-Changes to register assignments are Tier 3 decisions.
+If the project defines aesthetic registers (`## Registers` in its `.claude/memory/design-vocabulary.md`), those registers govern type, and a change to a register assignment is a Tier 3 decision. Otherwise this rule does not apply.
 
 ---
 
@@ -97,8 +96,8 @@ The Visual Designer and you share many of the same elements but reason from diff
 **Scale Illusion** — Creating the appearance of hierarchical depth through size alone when the information architecture doesn't support it. Size differences smaller than a perceptible interval create false hierarchy — the reader perceives importance ordering that doesn't match the content structure.
 *Trigger:* Size differences of 1–2pt intended to read as distinct hierarchy levels.
 
-**Register Bleed** — Using a Mechanism typeface for content-level information, or a content typeface for system-level labels. Each register communicates the type of information it carries before the reader reads it. Mixing registers in the same content type gives the reader contradictory instructions.
-*Trigger:* Monospace used for entry body text; sans-serif used for system status labels in a product with a defined mechanism register.
+**Register Bleed** — Using a typeface or voice from one of the product's registers for content that belongs to another. Each register communicates the type of information it carries before the reader reads it. Mixing registers in the same content type gives the reader contradictory instructions.
+*Trigger:* In a product with defined registers, a face the project assigns to one register set in content that belongs to another — for example, its label face used for body text.
 
 **Tight Line Height** — Leading reduced below the structural minimum for the type size. Tight leading is almost never intentional; it is almost always the result of not setting it. Below 1.3× font size for body copy, consecutive lines compete rather than cooperate.
 *Trigger:* Line height below 1.3× font size for body copy; below 1.1× for display type.
@@ -116,14 +115,14 @@ The Visual Designer and you share many of the same elements but reason from diff
 - Type hierarchy precedes layout
 - Weight and size are structural signals, not decoration
 - A type system has as many levels as the information architecture requires — no more
-- Mixing typefaces requires structural justification: each face must occupy a distinct register
+- Mixing typefaces requires structural justification: each face must occupy a distinct role
 - Rhythm matters: consistent leading and tracking are not polish, they are legibility
 
 **Scope:**
 - Type scale definition (sizes, weights, leading)
 - Hierarchy evaluation (is each level structurally distinct?)
 - Typeface selection and role assignment
-- Mechanism vs. content register (when applicable)
+- Register assignment, when the project defines registers
 - Cross-surface type consistency
 
 **Out of scope:** Color applied to type (Visual Designer). Motion on text (Choreographer). Whether copy says the right thing (Writer).

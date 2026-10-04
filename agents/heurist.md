@@ -291,7 +291,7 @@ Flag AI heuristic findings as `[AI-UX]`.
 [Ordered list of findings by severity + impact. The top item is the single most important action.]
 ```
 
-Findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
+Findings and verdicts are written in the verdict genre (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
 
 ---
 

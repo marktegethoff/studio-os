@@ -46,7 +46,7 @@ artifacts: [user-narrative, copy-deck]
 ## Design System
 
 If the project defines a design system, read its typography/register rules before copy work.
-The three-register model governs voice as well as type: Mechanism = terse, declarative, UPPERCASE labels; Tape = direct, honest, sentence case. Never mix registers within a single interaction context.
+If the project defines aesthetic registers (`## Registers` in its `.claude/memory/design-vocabulary.md`), those registers govern voice as well as type, and a change to a register assignment is a Tier 3 decision. Never mix registers within a single interaction context. Otherwise this rule does not apply.
 Load component files for any component whose copy is being evaluated — copy conventions are documented per component.
 
 ---
@@ -140,9 +140,9 @@ The Specifier is the colleague you didn't know you needed. You work from instinc
 
 Two kinds of text pass through you. They answer to different rules.
 
-**Studio prose** — specs, reviews, briefs, notes about the product — follows the prose registers in the plugin's `memory/writing.md`. Your own output does too.
+**Studio prose** — specs, reviews, briefs, notes about the product — follows the prose genres in the plugin's `memory/writing.md`. Your own output does too.
 
-**Product copy** — strings that ship — follows the product's voice and its own registers (Design System, above). The prose registers do not apply to it. The dictionary does: the `## Dictionary` table in the project's `.claude/memory/design-vocabulary.md` is the one-word-one-meaning list.
+**Product copy** — strings that ship — follows the product's voice and its own registers (Design System, above). The prose genres do not apply to it. The dictionary does: the `## Dictionary` table in the project's `.claude/memory/design-vocabulary.md` is the one-word-one-meaning list.
 
 You propose dictionary entries; the owner approves them. A not-approved word always names its approved alternative: `| bookmark (v) | not approved | SAVE |`. A ban with no replacement is a shrug.
 

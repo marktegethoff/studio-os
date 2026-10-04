@@ -1,16 +1,16 @@
-# Writing — Registers
+# Writing — Genres
 
-How the studio writes. Every artifact declares one register. `evals/ste-check.sh` enforces the limits.
+How the studio writes. Every artifact declares one genre. `evals/ste-check.sh` enforces the limits.
 
 **Principle:** strictness follows the cost of a misreading. A builder acts on a procedure, a reader weighs a verdict, a thinker explores.
 
-The registers adapt ASD-STE100 (Simplified Technical English, STE). Each register relaxes the standard by the reader's task.
+The genres adapt ASD-STE100 (Simplified Technical English, STE). Each genre relaxes the standard by the reader's task.
 
 ---
 
-## Registers
+## Genres
 
-| Register | Used for | Sentence limit | Rule |
+| Genre | Used for | Sentence limit | Rule |
 |---|---|---|---|
 | `procedure` | specs, task briefs, handoff, motion specs, state inventories, wireframe and flow annotations, implement steps | 20 words | Strict STE |
 | `verdict` | reviews, critiques, heuristic reports, decision records, risk registers, metrics plans, experiment plans, design briefs | 25 words | About 80% STE |
@@ -50,8 +50,8 @@ Example rows: `| SAVE (v) | approved | Add an item to Saved |` and `| bookmark (
 
 ## Markup contract
 
-1. Declare the register in `<head>`: `<meta name="studio:register" content="procedure|verdict|exploratory">`.
-2. Override the register for one subtree with `data-register="…"` on its element.
+1. Declare the genre in `<head>`: `<meta name="studio:genre" content="procedure|verdict|exploratory">`.
+2. Override the genre for one subtree with `data-genre="…"` on its element.
 3. Mark a subtree `data-ste="off"` to skip it. Use it for quoted drafts under critique, rule-break examples, and third-party text.
 4. Mark shipping product copy `data-ste="copy"`. The checker applies the dictionary check only.
 5. Give the `.orig` class (a quoted draft with red rule breaks) `data-ste="off"`.
@@ -63,7 +63,7 @@ The checker always skips `<script>`, `<style>`, `<svg>`, `<pre>`, `<code>`, and 
 `evals/ste-check.sh [--vocab <design-vocabulary.md>] <file.html>...` exits 0 with no FAIL, 1 with a FAIL, and 2 for a bad call. `artifacts/kit/README.md` holds the step skills run after they write an artifact.
 
 **FAIL** (lint R13 enforces it)
-- The `studio:register` meta is missing or invalid.
+- The `studio:genre` meta is missing or invalid.
 - A sentence is over the limit in `procedure` (20) or `verdict` (25).
 
 **WARN** (listed in the summary)
@@ -74,7 +74,7 @@ The checker always skips `<script>`, `<style>`, `<svg>`, `<pre>`, `<code>`, and 
 
 ## Before and after
 
-| Register | Before | After |
+| Genre | Before | After |
 |---|---|---|
 | `procedure` | Oops! It looks like you haven't saved anything yet. | Nothing saved yet. |
 | `verdict` | Perhaps this could ship, but it seems to have a few small issues. | No-ship. Two defects block release: contrast fails and the label truncates. |

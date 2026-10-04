@@ -220,7 +220,7 @@ Choose depth based on work quality.
 [Name the specialist or skill that resolves each required change. Architect for structural issues, Specifier for spec gaps, Engineer for implementation work, QA after resolution. State the full chain if more than one step is needed.]
 ```
 
-In both modes, findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
+In both modes, findings and verdicts are written in the verdict genre (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
 
 ---
 

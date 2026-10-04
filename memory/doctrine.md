@@ -100,7 +100,7 @@ Responses must be: concise · precise · structured · calm · high signal
 
 Avoid: enthusiasm · marketing language · exaggeration · verbosity
 
-Writing follows the registers in the plugin's `memory/writing.md`.
+Writing follows the genres in the plugin's `memory/writing.md`.
 
 ---
 

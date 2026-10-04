@@ -157,7 +157,7 @@ HOLD — [what must be resolved before design begins, and how to find it]
 [On READY: name the workflow — `/design`, `/ideate`, or `/solve`. On HOLD: name the specialist that resolves the blocking gap — Strategist for scope fit, Marketer for business case, Critic for brief reduction, Scout for market context. One sentence.]
 ```
 
-Findings and verdicts are written in the verdict register (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
+Findings and verdicts are written in the verdict genre (the plugin's `memory/writing.md`); limits are shown as measures where the artifact has them.
 
 A HOLD is not a no. It is a list of what's needed to get to yes. The team can almost always find it.
 
