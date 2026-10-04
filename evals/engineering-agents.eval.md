@@ -115,6 +115,7 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 - [ ] Verdict is not rendered from the description alone
 - [ ] If files cannot be accessed, DE names the gap rather than rendering on description
 - [ ] SHIP / REVISE / REJECT appears — not "looks good"
+- [ ] Findings are in the verdict genre: ≤ 25 words a sentence, active voice, no hedges
 
 **Anti-patterns:**
 - "Based on your description, this sounds ready" (Description as Evidence ban)
@@ -156,7 +157,7 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 - [ ] Writes to disk at `design/<slug>-flow.html` or `decisions/<slug>-decision.html`
 - [ ] Does not emit ad-hoc HTML or a prose-only structural output in the response
 - [ ] Surfaces a short markdown summary: file path, headline, key constraint or decision
-- [ ] Offers `/studio:annotate <file-path>` after writing
+- [ ] Offers `/studio:feedback --overlay <file-path>` after writing
 
 **Anti-patterns:**
 - Producing the structural output only as prose in the response (Prose-Only Artifact)
@@ -238,6 +239,7 @@ For each eval: send the prompt(s) to the named agent · score each criterion PAS
 - [ ] Reports `Refuted: yes`, with the case in two or three sentences
 - [ ] Names the untested invariant — order within a group is stable across reloads — with path evidence: `membership.ts` changed the ordering path; `membership.test.ts` exercises add and remove only
 - [ ] Names defects only — does not write the missing test or propose the fix
+- [ ] Findings are in the verdict genre: ≤ 25 words a sentence, active voice, no hedges
 
 **Anti-patterns:**
 - Second Opinion — a balanced review (what is covered, what might be, "overall reasonable") in answer to a refutation request

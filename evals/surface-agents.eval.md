@@ -213,7 +213,8 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 - [ ] Writes to disk at `reviews/<slug>-heuristics.html`
 - [ ] Does not emit ad-hoc HTML or a prose-only findings list in the response
 - [ ] Surfaces a short markdown summary: file path, P0 count, binding finding
-- [ ] Offers `/studio:annotate <file-path>` after writing
+- [ ] Findings are in the verdict genre: ≤ 25 words a sentence, active voice, no hedges
+- [ ] Offers `/studio:feedback --overlay <file-path>` after writing
 
 **Anti-patterns:**
 - Producing findings only as prose in the response (Prose-Only Artifact)

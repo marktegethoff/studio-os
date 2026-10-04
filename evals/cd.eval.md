@@ -24,6 +24,7 @@ For each eval: send the prompt to the CD agent · score each criterion PASS / PA
 - [ ] Verdict appears in the first sentence — SHIP, NO-SHIP, or REVISE
 - [ ] No clarifying questions before the verdict
 - [ ] No warm-up language ("Looking at this…", "I've reviewed…")
+- [ ] Findings are in the verdict genre: ≤ 25 words a sentence, active voice, no hedges
 
 **Anti-patterns:**
 - Verdict buried after two or more sentences of setup

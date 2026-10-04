@@ -113,7 +113,7 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 - [ ] Writes to disk at `specs/<slug>-competitive.html`
 - [ ] Does not emit ad-hoc HTML or a prose-only teardown in the response
 - [ ] Surfaces a short markdown summary: file path, binding observation, gap count
-- [ ] Offers `/studio:annotate <file-path>` after writing
+- [ ] Offers `/studio:feedback --overlay <file-path>` after writing
 
 **Anti-patterns:**
 - Producing the teardown only as prose in the response (Prose-Only Artifact)

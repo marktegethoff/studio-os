@@ -20,15 +20,15 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 ## Designer — Eval 1: Wireframe first
 
-**Testing:** Designer produces an ASCII wireframe before prose when defining a surface.
+**Testing:** Designer produces a wireframe before prose when defining a surface.
 
 **Prompt:**
 > "How should the status dot indicator work on list rows? The system can mark each item with one of several categories. What states does the row have and how does it communicate the category?"
 
 **Pass criteria:**
-- [ ] An ASCII wireframe is produced before any structural prose
+- [ ] A wireframe is produced before any structural prose: a dimensioned SVG, or the ASCII sketch as the fallback
 - [ ] The wireframe shows both the uncategorized and categorized row states
-- [ ] Verification is stated: top-edge character count, column alignment, aspect ratio
+- [ ] Verification is stated: for the SVG, aspect and scale; for the ASCII sketch, top-edge character count, column alignment, aspect ratio
 - [ ] No implementation code, no color tokens — structural description only
 
 **Anti-patterns:**
@@ -84,16 +84,17 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 
 **Prompt:**
 > "The document outline has section titles, body text under each section, and a thesis sentence at the top. What should the type system be?"
+> (The project's `design-vocabulary.md` defines `## Registers`: Interface, the product's own voice (labels, counts, section titles), set in the mono face; Content, the user's own writing, set in the body face.)
 
 **Pass criteria:**
 - [ ] Typesetter names the information hierarchy — what each level communicates, what relationship it has to the others
 - [ ] Typeface and weight are chosen to serve the hierarchy, not imposed on it
-- [ ] The structural/content register distinction is respected (a structural/mono face for interface elements, the body face for user-authored content)
+- [ ] The registers the project defines are respected (the Interface register's mono face for interface elements, the Content register's body face for user-authored content)
 - [ ] Scale values use named tokens, not raw pt values
 
 **Anti-patterns:**
 - Starting with typeface/weight choices before naming structural roles
-- Using the structural face for content output (which belongs in the content register)
+- Using the Interface register's face for user-authored content (which belongs in the Content register)
 - Raw pt values without token names
 
 ---
@@ -194,7 +195,7 @@ Anti-patterns that appear without a failing criterion are flagged as warnings, n
 - [ ] Writes the file to disk at the expected path (e.g., `design/<slug>-wireframe.html`)
 - [ ] Does not emit ad-hoc HTML or a prose-only artifact in the response
 - [ ] Surfaces a short markdown summary in conversation: file path, headline, key decisions
-- [ ] Offers `/studio:annotate <file-path>` after writing
+- [ ] Offers `/studio:feedback --overlay <file-path>` after writing
 
 **Anti-patterns:**
 - Producing the artifact only as prose in the response (Prose-Only Artifact)
@@ -252,6 +253,8 @@ Specifier Eval 6 — State counting:        PASS / FAIL
 Prototyper Eval 7 — Minimum prototype:    PASS / FAIL
 Designer Eval 8 — Scene Test:             PASS / FAIL
 Artifact Production Eval 9 — HTML via template:PASS / FAIL
+Writer Eval 13 — Copy check:              PASS / FAIL
+Specifier Eval 14 — Procedure genre:      PASS / FAIL
 
 Overall: PASS / FAIL
 Failed criteria: [list]
@@ -263,7 +266,7 @@ Notes: [anything unexpected in the responses]
 
 ## Designer — Eval 12: One page (Artifact Standard)
 
-**Testing:** Designer's artifact obeys the Artifact Standard (CLAUDE.md) — one page, fixes not sections, cite not restate — on a Tier 3 surface where the temptation to over-document is strongest.
+**Testing:** Designer's artifact obeys the Artifact Standard (the plugin's `memory/doctrine.md`) — one page, fixes not sections, cite not restate — on a Tier 3 surface where the temptation to over-document is strongest.
 
 **Prompt:**
 > "Design the pending state of a list row's leading marker while the system is still classifying the row (a few hundred ms to a few seconds). Existing marks: a dash for a note, a ring for an open task. TIER 3 — this touches the system's mark vocabulary."
@@ -281,3 +284,48 @@ Notes: [anything unexpected in the responses]
 - Re-deriving a prior document's geometry or rationale instead of citing it
 - A second wireframe that shows the same layout under a different state name
 - Appending sections to satisfy an anticipated reviewer rather than reducing the design
+
+---
+
+## Writer — Eval 13: Copy check — marked draft, annotated rewrite
+
+**Testing:** Writer checks shipping copy against its Named Bans and the product dictionary: the draft is shown with each rule break marked and named, the rewrite is annotated by rule, and a not-approved word is replaced by its approved alternative.
+
+**Prompt:**
+> "Check this empty-state copy for the Saved list and rewrite it: 'Oops! It looks like you haven't saved anything yet. Bookmark items to see them here.' The project dictionary (`## Dictionary` in design-vocabulary.md) has `| SAVE (v) | approved | Add an item to Saved |` and `| bookmark (v) | not approved | SAVE |`."
+
+**Pass criteria:**
+- [ ] The draft is shown first with each rule break marked and named: "Oops!" as System Apology, "Bookmark" as Synonym Drift, and the hedge "It looks like" marked and named
+- [ ] The rewrite is annotated by rule: one line per change, each naming the rule it satisfies
+- [ ] "Bookmark" is replaced by SAVE, the dictionary's approved alternative, and not by another synonym such as "favorite"
+- [ ] Synonym Drift is named: "saved" and "bookmark" are two words for one action
+- [ ] The rewrite states the state (nothing saved yet) with no apology, no hedge, and no encouragement
+
+**Anti-patterns:**
+- A rewrite alone, with no marked draft
+- A rationale with no rule behind it ("reads better", "friendlier")
+- A not-approved word swapped for a new word the dictionary does not hold
+- Judging the copy against the studio genres (sentence limits, -ing words) instead of the product's voice and the dictionary
+- Naming the defects as a tone preference
+
+---
+
+## Specifier — Eval 14: Procedure genre
+
+**Testing:** Specifier writes the spec in the procedure genre (the plugin's `memory/writing.md`): commands of 20 words or fewer, one instruction per sentence, every state named with its delta from default.
+
+**Prompt:**
+> "Write the component spec for a reply button under a message. States: default, pressed, disabled while the reply sends, and focused by keyboard. The design is validated."
+
+**Pass criteria:**
+- [ ] Instructions are commands in the imperative ("Set the label to Reply."), not descriptions of the finished button
+- [ ] Every sentence is 20 words or fewer, and each sentence carries one instruction
+- [ ] Every state is named with its delta from default, one line each: pressed, disabled, focused
+- [ ] No -ing form outside a technical name, and no hedge ("should probably", "presumably")
+- [ ] The artifact declares `<meta name="studio:genre" content="procedure">`, and `evals/ste-check.sh` reports no FAIL on it
+
+**Anti-patterns:**
+- Descriptive prose in place of commands ("The button turns darker when pressed")
+- Two instructions joined in one sentence by "and" or ";"
+- A state with no delta, or a state described in full instead of by its delta from default
+- A hedge standing in for a decision: "presumably", "probably"

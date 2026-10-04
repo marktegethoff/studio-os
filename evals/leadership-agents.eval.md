@@ -30,6 +30,7 @@ A single FAIL on any criterion is an overall FAIL for that eval. Anti-patterns w
 - [ ] PM evaluates whether this is the right problem or a proxy metric (engagement) masking a shallow outcome
 - [ ] PM does not approve design to begin until the customer problem is stated
 - [ ] PM names whether this is an acquisition or retention feature, and whether that matches the current product stage
+- [ ] Findings are in the verdict genre: ≤ 25 words a sentence, active voice, no hedges
 
 **Anti-patterns:**
 - Approving design from the feature description alone
@@ -90,6 +91,7 @@ A single FAIL on any criterion is an overall FAIL for that eval. Anti-patterns w
 - [ ] Critic names which elements should be removed, not only which could be simplified
 - [ ] Critic's default is removal: every element must justify its presence
 - [ ] Critic names the structural consequence of removing each element
+- [ ] Findings are in the verdict genre: ≤ 25 words a sentence, active voice, no hedges
 
 **Anti-patterns:**
 - "The export option might be simplified" when it should be removed
