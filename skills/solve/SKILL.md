@@ -55,7 +55,7 @@ Problem: $ARGUMENTS
 
 ## Graph
 
-This skill's topology — the repo's canonical bounded evaluator-optimizer. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`; the graph is the contract either way.
+This skill's topology — the repo's canonical bounded evaluator-optimizer. The prose steps below are the executable instructions; this block is the contract they must match (see the plugin's `memory/orchestration.md`). Where the Workflow tool is available, execute segments via `workflow.js`, passing `adversaryModel: '${user_config.adversary_model}'` in its args; the graph is the contract either way.
 
 ```graph
 skill: solve
@@ -75,7 +75,7 @@ nodes:
   marketer      agent:marketer
   cd            agent:cd
   verdict       router(inevitable|not-yet|structurally-wrong|iterations-exhausted)
-  refute        agent:critic adversary
+  refute        agent:critic
   accessibility agent:accessibility
   exit-path     human decides:exit-path
   slop          gate:slop — seven markers of /studio:studio-slop
@@ -207,7 +207,7 @@ Apply the embedded calibration gate. Answer each question explicitly (YES / NO).
 
 ### 6. Refutation (`refute` node — runs only on INEVITABLE, at most once)
 
-An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). Spawn the critic on the adversary model (Agent tool `model: fable`); it argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission.
+An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). Spawn the critic with the Agent tool's `model` set to `${user_config.adversary_model}` — omit `model` when the value is `agent` (or appears unsubstituted). If the call fails (model unavailable, usage credits, consent declined), rerun it once without `model` and record `Refutation model: <model> (fallback)`. The critic argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission. If the refuter still cannot run, record "Refutation: did not run" and carry the verdict to the exit path labeled **INEVITABLE — unrefuted**: it neither downgrades nor passes silently.
 
 ---
 
@@ -233,6 +233,7 @@ When the calibration gate passes:
 ## Solution: [Problem Name]
 Date: [today]
 Iterations: [N]
+Refutation: [failed — INEVITABLE stands | succeeded — revised once | did not run — INEVITABLE unrefuted]; add `Refutation model: <model> (fallback)` where the rerun happened
 
 ### The essential form
 [State the solution. Nothing more than what is necessary to implement it.]

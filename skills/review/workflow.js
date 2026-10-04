@@ -11,11 +11,12 @@
 //   mode:       string  — 'round1' (segment 1) | 'resolve' (segment 2) | 'auto' (both)
 //   round1:     object  — prior segment result, required when mode === 'resolve'
 //   tiebreak:   object  — human ruling when one was made: { element, ruling }
-//   implementRefutation: object — /studio:implement Step 6.5 result: { diffUnchanged, refuted, case, defects };
-//                         when diffUnchanged === true, refute-de cites it instead of spawning qa
+//   adversaryModel: string — the adversary_model setting: 'fable' | 'opus' | 'sonnet'; 'agent', absent, or anything
+//                         else = each refuter runs on its own frontmatter model
 //   date:       string  — run date, stamped by the orchestrator
 // }
-// Returns structured verdicts; the orchestrator renders the lt-review HTML (emit node).
+// Returns structured verdicts, refutations (each with ran + model), refutationReport, and unrefuted (the SHIP members
+// whose refutation did not run); the orchestrator renders the lt-review HTML (emit node).
 
 export const meta = {
   name: 'review',
@@ -60,7 +61,8 @@ const CONFLICT_SCHEMA = {
   },
 }
 
-const ADVERSARY_MODEL = 'fable' // the adversary model — the plugin's memory/orchestration.md § Model and effort
+// adversary_model userConfig, passed by the orchestrator as args.adversaryModel — the plugin's memory/orchestration.md § Model and effort
+const ADVERSARY_MODEL = ['fable', 'opus', 'sonnet'].includes(args.adversaryModel) ? args.adversaryModel : null
 
 const REFUTE_SCHEMA = {
   type: 'object',
@@ -70,6 +72,19 @@ const REFUTE_SCHEMA = {
     case: { type: 'string', description: 'the strongest case against, with named defects — or why no credible case exists' },
     defects: { type: 'array', items: { type: 'string' } },
   },
+}
+
+// Every refutation goes through here: adversary model when configured, one fallback to the agent's own model,
+// and the model that actually ran is recorded. A refutation that could not run returns ran:false — never null.
+async function refute(prompt, opts) {
+  if (ADVERSARY_MODEL) {
+    const r = await agent(prompt, { ...opts, schema: REFUTE_SCHEMA, model: ADVERSARY_MODEL })
+    if (r) return { ...r, ran: true, model: ADVERSARY_MODEL }
+    log(`${opts.label}: adversary model ${ADVERSARY_MODEL} unavailable — rerunning once on the agent's own model`)
+  }
+  const r = await agent(prompt, { ...opts, schema: REFUTE_SCHEMA })
+  if (r) return { ...r, ran: true, model: ADVERSARY_MODEL ? 'agent (fallback)' : 'agent' }
+  return { refuted: false, ran: false, case: 'Refutation did not run', model: null }
 }
 
 const FINAL_SCHEMA = {
@@ -119,6 +134,8 @@ if (mode === 'round1' || mode === 'auto') {
 let debate = null
 let tiebreakNeeded = false
 let refutations = []
+let refutationReport = []
+let unrefuted = []
 let final = null
 
 if (mode === 'resolve' || mode === 'auto') {
@@ -149,28 +166,31 @@ if (mode === 'resolve' || mode === 'auto') {
     const standing = (debate && debate.post ? debate.post.standingVerdicts : round1.verdicts.map((v) => ({ member: v.member, verdict: v.verdict })))
     const refuters = []
     if (standing.some((v) => v.member === 'cd' && v.verdict === 'SHIP'))
-      refuters.push({ node: 'refute-cd', agentType: 'studio:critic', target: 'the Design Director has ruled SHIP on this artifact', lens: 'what is unresolved, unearned, or incoherent in the design' })
+      refuters.push({ node: 'refute-cd', member: 'cd', agentType: 'studio:critic', target: 'the Design Director has ruled SHIP on this artifact', lens: 'what is unresolved, unearned, or incoherent in the design' })
     if (standing.some((v) => v.member === 'de' && v.verdict === 'SHIP'))
-      refuters.push({ node: 'refute-de', agentType: 'studio:qa', target: 'the Distinguished Engineer has ruled SHIP on this implementation', lens: 'untested invariants, missing regression coverage, boundary failures' })
-    // refute-de cites /studio:implement's Step 6.5 result when it ran on this exact diff and the diff is unchanged since.
-    const cited = args.implementRefutation && args.implementRefutation.diffUnchanged === true ? args.implementRefutation : null
-    const spawned = refuters.filter((r) => !(cited && r.node === 'refute-de'))
-    refutations = (await parallel(spawned.map((r) => () =>
-      agent(
+      refuters.push({ node: 'refute-de', member: 'de', agentType: 'studio:qa', target: 'the Distinguished Engineer has ruled SHIP on this implementation', lens: 'untested invariants, missing regression coverage, boundary failures' })
+    const outcomes = await parallel(refuters.map((r) => () =>
+      refute(
         `${r.target}. Your task is to REFUTE that verdict — make the strongest case against shipping, not a second opinion. Name specific defects: ${r.lens}. If you cannot build a credible case, say so plainly (refuted: false).\n\n${shared}\n\nSTANDING VERDICTS:\n${JSON.stringify(standing)}`,
-        { label: r.node, phase: 'Resolution', agentType: r.agentType, model: ADVERSARY_MODEL, schema: REFUTE_SCHEMA }
-      ).then((v) => ({ node: r.node, result: v }))
-    ))).filter(Boolean)
-    if (cited && refuters.some((r) => r.node === 'refute-de')) {
-      log('refute-de: citing the /studio:implement Step 6.5 refutation — diff unchanged since')
-      refutations.push({ node: 'refute-de', result: { refuted: cited.refuted, case: cited.case, defects: cited.defects }, citedFrom: 'implement Step 6.5' })
-    }
+        { label: r.node, phase: 'Resolution', agentType: r.agentType }
+      )
+    ))
+    // One entry per refuter, never filtered: refute() returns ran:false when it could not run, and a slot parallel itself
+    // dropped is recorded the same way — a refutation that did not happen is reported, not hidden.
+    refutations = refuters.map((r, i) => ({ node: r.node, member: r.member, result: outcomes[i] || { refuted: false, ran: false, case: 'Refutation did not run', model: null } }))
+    refutationReport = refutations.map(({ node, member, result: r }) => {
+      const M = member.toUpperCase()
+      if (!r.ran) return `${node}: Refutation: did not run — ${M} SHIP unrefuted`
+      if (r.refuted) return `${node}: succeeded — ${M} downgraded to REVISE: ${(r.defects && r.defects.length ? r.defects : [r.case]).join('; ')} (Refutation model: ${r.model})`
+      return `${node}: failed — ${M} SHIP stands (Refutation model: ${r.model})`
+    })
+    unrefuted = refutations.filter((x) => !x.result.ran).map((x) => x.member)
   }
 
   final = await agent(
-    `Produce the final LT review synthesis (final node). Apply the combined-verdict logic (SHIP = all pass; REVISE = changes required; HOLD = PM drift subordinates others; REJECT = structural restart) and cascade priority PM > CD > DE. A successful refutation downgrades that member's SHIP to REVISE with the named defects as routing items. Preserve every overruled or unresolved position in the dissent ledger — a verdict with vanished dissent is Consensus Laundering.\n\nROUND 1:\n${JSON.stringify(round1)}\n\nCONFLICT:\n${JSON.stringify(conflict)}\n\nDEBATE:\n${JSON.stringify(debate)}\n\nTIEBREAK (human ruling, outranks refutation):\n${JSON.stringify(args.tiebreak || null)}\n\nREFUTATIONS:\n${JSON.stringify(refutations)}`,
+    `Produce the final LT review synthesis (final node). Apply the combined-verdict logic (SHIP = all pass; REVISE = changes required; HOLD = PM drift subordinates others; REJECT = structural restart) and cascade priority PM > CD > DE. A successful refutation downgrades that member's SHIP to REVISE with the named defects as routing items. A refutation that did not run (ran:false) neither downgrades nor passes silently: that member's SHIP stands labeled \"unrefuted\", and the Refutation section reads \"Refutation: did not run\". Preserve every overruled or unresolved position in the dissent ledger — a verdict with vanished dissent is Consensus Laundering.\n\nROUND 1:\n${JSON.stringify(round1)}\n\nCONFLICT:\n${JSON.stringify(conflict)}\n\nDEBATE:\n${JSON.stringify(debate)}\n\nTIEBREAK (human ruling, outranks refutation):\n${JSON.stringify(args.tiebreak || null)}\n\nREFUTATIONS:\n${JSON.stringify(refutations)}\n\nREFUTATION REPORT (carry into the Refutation section verbatim):\n${refutationReport.join('\n') || 'none ran'}`,
     { label: 'final', phase: 'Resolution', schema: FINAL_SCHEMA }
   )
 }
 
-return { date: args.date, phase: args.phase, round1, conflict, debate, refutations, tiebreak: args.tiebreak || null, final }
+return { date: args.date, phase: args.phase, round1, conflict, debate, refutations, refutationReport, unrefuted, tiebreak: args.tiebreak || null, final }

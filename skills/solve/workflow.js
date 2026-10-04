@@ -10,9 +10,12 @@
 //   surfaceWork: boolean — the solution involves a surface (if:surface-work)
 //   crafts:      array   — sub-team subset of ['typesetter','choreographer','writer','visual'] the solution requires
 //   mode:        string  — 'loop' | 'auto'  (the exit-path decision returns to the orchestrator either way)
+//   adversaryModel: string — the adversary_model setting: 'fable' | 'opus' | 'sonnet'; 'agent', absent, or anything
+//                          else = the refuter runs on its own frontmatter model
 //   date:        string  — run date, stamped by the orchestrator
 // }
-// Returns the solution or honest-unresolved state; the orchestrator emits and pauses at exit-path when unresolved.
+// Returns the solution or honest-unresolved state; outcome is 'inevitable-unrefuted' when the refutation did not run;
+// the orchestrator emits and pauses at exit-path when unresolved.
 
 export const meta = {
   name: 'solve',
@@ -35,11 +38,25 @@ const VERDICT_SCHEMA = {
     dissents: { type: 'array', items: TEXT, description: 'overruled objections, incl. any marketer commercial objection — preserved, never averaged away' },
   },
 }
-const ADVERSARY_MODEL = 'fable' // the adversary model — the plugin's memory/orchestration.md § Model and effort
+// adversary_model userConfig, passed by the orchestrator as args.adversaryModel — the plugin's memory/orchestration.md § Model and effort
+const ADVERSARY_MODEL = ['fable', 'opus', 'sonnet'].includes(args.adversaryModel) ? args.adversaryModel : null
 const REFUTE_SCHEMA = {
   type: 'object',
   required: ['refuted', 'case'],
   properties: { refuted: { type: 'boolean' }, case: TEXT, defects: { type: 'array', items: TEXT } },
+}
+
+// Every refutation goes through here: adversary model when configured, one fallback to the agent's own model,
+// and the model that actually ran is recorded. A refutation that could not run returns ran:false — never null.
+async function refute(prompt, opts) {
+  if (ADVERSARY_MODEL) {
+    const r = await agent(prompt, { ...opts, schema: REFUTE_SCHEMA, model: ADVERSARY_MODEL })
+    if (r) return { ...r, ran: true, model: ADVERSARY_MODEL }
+    log(`${opts.label}: adversary model ${ADVERSARY_MODEL} unavailable — rerunning once on the agent's own model`)
+  }
+  const r = await agent(prompt, { ...opts, schema: REFUTE_SCHEMA })
+  if (r) return { ...r, ran: true, model: ADVERSARY_MODEL ? 'agent (fallback)' : 'agent' }
+  return { refuted: false, ran: false, case: 'Refutation did not run', model: null }
 }
 const SLOP_SCHEMA = { type: 'object', required: ['markersFired', 'pass'], properties: { markersFired: { type: 'array', items: TEXT }, pass: { type: 'boolean' } } }
 
@@ -104,13 +121,16 @@ let slop = null
 
 if (solution) {
   phase('Close')
-  refutation = await agent(`The Creative Director has ruled this solution INEVITABLE. Your task is to REFUTE that verdict — the strongest case against inevitability, not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If you cannot build a credible case, say so plainly (refuted: false).\n\n${shared}\n\nSOLUTION:\n${solution}\n\nCD REASONING:\n${JSON.stringify(cdResult)}`,
-    { label: 'refute', phase: 'Close', agentType: 'studio:critic', model: ADVERSARY_MODEL, schema: REFUTE_SCHEMA })
+  refutation = await refute(`The Creative Director has ruled this solution INEVITABLE. Your task is to REFUTE that verdict — the strongest case against inevitability, not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If you cannot build a credible case, say so plainly (refuted: false).\n\n${shared}\n\nSOLUTION:\n${solution}\n\nCD REASONING:\n${JSON.stringify(cdResult)}`,
+    { label: 'refute', phase: 'Close', agentType: 'studio:critic' })
 
-  if (refutation.refuted) {
+  if (!refutation || !refutation.ran) {
+    // The refutation could not run: INEVITABLE stands but is labeled unrefuted — never silently passed, never downgraded.
+    log('refutation did not run — INEVITABLE stands, labeled unrefuted')
+  } else if (refutation.refuted) {
     // refute -> designer, loop max:1 — one bounded return, then the verdict question re-poses to CD once.
-    log(`refutation succeeded — one bounded designer return: ${refutation.defects ? refutation.defects.join('; ') : refutation.case}`)
-    solution = await agent(`You are the designer revising the solution once, per the refutation's named defects. Change precisely what the defects require and nothing else.\n\nDEFECTS:\n${JSON.stringify(refutation.defects || [refutation.case])}\n\nCURRENT SOLUTION:\n${solution}`,
+    log(`refutation succeeded — one bounded designer return: ${refutation.defects && refutation.defects.length ? refutation.defects.join('; ') : refutation.case}`)
+    solution = await agent(`You are the designer revising the solution once, per the refutation's named defects. Change precisely what the defects require and nothing else.\n\nDEFECTS:\n${JSON.stringify(refutation.defects && refutation.defects.length ? refutation.defects : [refutation.case])}\n\nCURRENT SOLUTION:\n${solution}`,
       { label: 'designer-revision', phase: 'Close', agentType: 'studio:designer' })
   }
 
@@ -123,13 +143,19 @@ if (solution) {
     { label: 'slop-gate', phase: 'Close', schema: SLOP_SCHEMA })
 }
 
+const unrefuted = !!solution && !(refutation && refutation.ran)
+
 return {
   date: args.date,
   problem: args.problem,
   iterations,
-  outcome: solution ? 'inevitable' : (cdResult && cdResult.verdict === 'STRUCTURALLY WRONG' ? 'structurally-wrong' : 'unresolved'),
+  outcome: solution ? (unrefuted ? 'inevitable-unrefuted' : 'inevitable') : (cdResult && cdResult.verdict === 'STRUCTURALLY WRONG' ? 'structurally-wrong' : 'unresolved'),
   solution,
   refutation,
+  refutationReport: !solution ? null
+    : unrefuted ? 'Refutation: did not run — INEVITABLE unrefuted'
+    : refutation.refuted ? `succeeded — revised once: ${refutation.defects && refutation.defects.length ? refutation.defects.join('; ') : refutation.case} (Refutation model: ${refutation.model})`
+    : `failed — INEVITABLE stands (Refutation model: ${refutation.model})`,
   accessibility,
   slopGate: slop,
   dissentLedger: iterations.flatMap((it) => it.verdict.dissents || []),

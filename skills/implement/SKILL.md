@@ -1,6 +1,6 @@
 ---
 description: "Engineering workflow — spec through verified build. Reads project-context stack and runs declared build and test commands."
-argument-hint: "<optional — usually the brief is already in context from /scope>"
+argument-hint: "<optional — usually the brief is already in context from /studio:shape --task>"
 ---
 
 Run the engineering blueprint against a task brief.
@@ -64,7 +64,7 @@ Argument (optional): $ARGUMENTS
 
 ## [Det] Step 0 — Task brief required
 
-Implementation requires a task brief produced by `/scope`. Without one, implementation runs without a verifiable contract.
+Implementation requires a task brief produced by `/studio:shape --task`. Without one, implementation runs without a verifiable contract.
 
 Check conversation context for a task brief in the canonical format:
 
@@ -80,11 +80,11 @@ ESCALATE  <...>
 
 If no brief is present, stop. State:
 
-> "Implementation requires a task brief. Run `/scope <task>` first.
+> "Implementation requires a task brief. Run `/studio:shape --task <task>` first.
 >
 > A brief defines: spec, output, gates, verification, and escalation triggers. It is the contract that lets implementation run unattended.
 >
-> If the task is too loose to scope, run `/shape` (problem unclear) or `/design` (no spec) first."
+> If the task is too loose to scope, run `/studio:shape` (problem unclear) or `/studio:design` (no spec) first."
 
 End the skill.
 
@@ -96,7 +96,7 @@ If a brief is present, validate it:
 4. **VERIFY** — confirm the verification method is concrete.
 5. **ESCALATE** — confirm at least one trigger is listed.
 
-If any field is malformed, stop and ask the user to revise via `/scope`.
+If any field is malformed, stop and ask the user to revise via `/studio:shape --task`.
 
 ---
 
@@ -165,7 +165,7 @@ Re-invoke the same declared build command that failed in Step 3.
 
 If the script exits 0, the build passed — proceed to Step 4.
 
-If the script exits non-zero a second time, **stop**. This is an ESCALATE trigger. **Halt diagnosis:** before reporting, spawn `de` on the adversary model (Agent tool `model: fable`) with both diagnostics and the attempted fix, asking for the root-cause hypothesis and the evidence that supports it — diagnosis only. DE's tools are read-only, so the no-third-fix rule holds structurally. Report:
+If the script exits non-zero a second time, **stop**. This is an ESCALATE trigger. **Halt diagnosis:** before reporting, spawn `de` with the Agent tool's `model` set to `${user_config.adversary_model}` — omit `model` when the value is `agent` (or appears unsubstituted). If the call fails (model unavailable, usage credits, consent declined), rerun it once without `model`. Give it both diagnostics and the attempted fix, asking for the root-cause hypothesis and the evidence that supports it — diagnosis only. DE's tools are read-only, so the no-third-fix rule holds structurally. In the report, `<model>` is the model it ran on — `agent` when `model` was omitted, `<model> (fallback)` after the rerun; if it still cannot run, write `Diagnosis (adversary): did not run`. Report:
 
 ```
 BLUEPRINT HALTED: build verification failed twice
@@ -173,7 +173,7 @@ Failed script: <path>
 First failure diagnostics: <summary>
 Second failure diagnostics: <summary>
 Fix attempted: <description>
-Diagnosis (adversary): <hypothesis + evidence>
+Diagnosis (adversary, <model>): <hypothesis + evidence>
 ```
 
 End the skill. Do not attempt a third fix.
@@ -248,14 +248,6 @@ If any gate fails, **stop**. Report the violation. Do not attempt to fix gate vi
 
 ---
 
-## [Ag] Step 6.5 — Pre-stage refutation
-
-Spawn `qa` on the adversary model (Agent tool `model: fable`) with the brief's GATES and VERIFY, the `git diff HEAD` output, and the paths of any untracked new files (qa's tools are read-only; it reads them). Task: the strongest case against staging this diff, not a second opinion — gate violations, untested invariants, behavior the diff changes that the tests do not exercise. One pass.
-
-If the refutation fails, record "Refutation: failed — stands" and proceed. If it succeeds, this is an ESCALATE: stop before staging, surface the named defects, and let the user decide — never auto-fix (as with gate violations, Step 6). If the environment pins every subagent to one model, say "Refutation: same-model" in the report.
-
----
-
 ## [Ag] Step 7 — Report
 
 Produce a structured report against the brief:
@@ -271,7 +263,6 @@ GATES     <each gate from brief>
 VERIFY    Build:  <PASS/FAIL>
           Tests:  <PASS/FAIL/SKIPPED>
           QA:     <scenarios named, or invariant gaps flagged>
-          Refute: <FAILED — stands | SUCCEEDED — defects>
 ESCALATE  <triggered: yes/no; which trigger if yes>
 ```
 
@@ -292,9 +283,21 @@ Ask the user:
 
 **If user replies 'simplify':**
 
-Invoke `/studio:simplify`, passing the changed files from the report as the argument. After it completes (it runs its own build verification), return here and proceed to Step 8.
+Invoke `/studio:simplify`, passing the changed files from the report as the argument. After it completes (it runs its own build verification), return here and proceed to Step 7.8.
 
-**If user replies 'skip':** proceed to Step 8.
+**If user replies 'skip':** proceed to Step 7.8.
+
+---
+
+## [Ag] Step 7.8 — Pre-stage refutation (conditional)
+
+Runs only if production code was modified — the same condition as Step 4. Otherwise skip it, and the status line reads `Refute: skipped — no production code changed`.
+
+It runs after Step 7.5 so it refutes the diff that Step 8 will stage. Gather `git diff HEAD` and the content of the untracked new files Step 8 will stage, and pass both in the prompt (qa's tools are read-only). Spawn `qa` with the Agent tool's `model` set to `${user_config.adversary_model}` — omit `model` when the value is `agent` (or appears unsubstituted). If the call fails (model unavailable, usage credits, consent declined), rerun it once without `model` and record `Refutation model: <model> (fallback)` beside the status line. Brief: the brief's GATES and VERIFY, plus the strongest case against staging this diff, not a second opinion — gate violations, untested invariants, behavior the diff changes that the tests do not exercise. One pass.
+
+Status line, printed with Step 8's staging status (or with the escalation, if the refutation succeeds): `Refute: <FAILED — stands | SUCCEEDED — defects | did not run | skipped — no production code changed>`. `did not run` means the refuter could not run; it never reads as a pass.
+
+If the refutation succeeds, this is an ESCALATE: stop before staging, surface the named defects, and let the user decide — never auto-fix (as with gate violations, Step 6).
 
 ---
 
@@ -312,6 +315,8 @@ Then run:
 git status
 ```
 
+Print the Step 7.8 status line with the `git status` output.
+
 **Do not run `git commit`.** The user reviews the staged diff and commits manually.
 
 ---
@@ -328,7 +333,7 @@ After staging, ask:
 
 **If user replies 'review':**
 
-Invoke `/studio:review`, passing the brief, implementation summary, changed files, and the Step 6.5 refutation result as context (review's `refute-de` cites it if the diff is unchanged since). After the review completes: if the verdict is SHIP or REVISE, proceed to the 'gather' path below. If REJECT, end the skill and surface the blocking findings — do not stage or render the feedback surface.
+Invoke `/studio:review`, passing the brief, implementation summary, and changed files as context. After the review completes: if the verdict is SHIP or REVISE, proceed to the 'gather' path below. If REJECT, end the skill and surface the blocking findings — do not stage or render the feedback surface.
 
 **If user replies 'gather' or anything else (default path):**
 
@@ -364,5 +369,5 @@ If `/studio:feedback` was skipped or has finished, the skill ends here. The user
 - Tests fail twice (Step 4b)
 - Test failure is ambiguous between regression vs. legitimate change (Step 4a)
 - Any gate violation (Step 6)
-- Pre-stage refutation succeeds (Step 6.5)
+- Pre-stage refutation succeeds (Step 7.8)
 - Any ESCALATE trigger from the brief surfaces during implementation
