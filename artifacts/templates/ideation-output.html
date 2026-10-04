@@ -3,83 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="exploratory">
 <title>Ideation — [problem area]</title>
 <link rel="stylesheet" href="../kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Ideation · owned by /studio:ideate</span>
-    <h1>[Problem area]<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">Divergence across seven lenses + three constraint frames, reduced to 1–2 ideas with synthetic-user desirability and engineering feasibility. The selected idea routes to <code>/studio:design</code> or <code>/studio:solve</code>.</p>
-    <div class="header-meta">
-      <span>[date]</span><span>Source brief: [path or "no brief — exploratory"]</span><span>Status: Awaiting selection / Selected: [idea name]</span>
-    </div>
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Problem area]</h1>
+      <p class="sub">Seven lenses diverge on the problem. Reduction keeps 3 to 5 ideas. Feasibility and the CD gate carry 1 to 2 forward.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">ideation-output</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">/studio:ideate</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v">[interactive | --auto]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c wide"><span class="l">Source brief</span><span class="v mono">[path | no PM brief, unvalidated problem]</span></div>
+    <div class="c wide"><span class="l">Feeds</span><span class="v mono">[/studio:design | /studio:solve | /studio:prototype]</span></div>
+    <div class="c wide"><span class="l">Gate</span><span class="v">cd · [SHIP | NO-SHIP]</span></div>
+    <div class="c wide"><span class="l">Status</span><span class="v">[Awaiting selection | Directions shipped | NO-SHIP]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Problem framing</h2>
-    <div class="callout"><p>[One sentence: the problem in user terms — not a solution in disguise. If the input was a solution, this re-frames it as a problem.]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Ideas</h2>
-    <p>1–2 ideas survived facilitated reduction. Each is presented with desirability per archetype and feasibility per stack so selection is informed.</p>
-
-    <div class="dcard"><span class="k">Idea 1 — [name]</span><span class="v">[2–3 sentence description: what it is, how it works, what it shifts for the user]</span></div>
-
-    <table>
-      <tr><th>Archetype</th><th>Desirability</th><th>Why</th></tr>
-      <tr><td>[Primary archetype]</td><td>[High / Medium / Low]</td><td>[3 sentences on whether and why this idea serves them]</td></tr>
-      <tr><td>[Secondary archetype]</td><td>[High / Medium / Low]</td><td>[3 sentences]</td></tr>
-    </table>
-
-    <table>
-      <tr><th>Stack</th><th>Feasibility</th><th>Cost / risk</th></tr>
-      <tr><td>[Stack — e.g., iOS / web / backend]</td><td>[Buildable / Constrained / Blocked]</td><td>[Effort estimate; named risks; required new primitives]</td></tr>
-    </table>
-
-    <div class="dcard"><span class="k">Idea 2 — [name]</span><span class="v">[2–3 sentence description]</span></div>
-
-    <table>
-      <tr><th>Archetype</th><th>Desirability</th><th>Why</th></tr>
-      <tr><td>[Primary archetype]</td><td>[High / Medium / Low]</td><td>[3 sentences]</td></tr>
-    </table>
-
-    <table>
-      <tr><th>Stack</th><th>Feasibility</th><th>Cost / risk</th></tr>
-      <tr><td>[Stack]</td><td>[Buildable / Constrained / Blocked]</td><td>[Notes]</td></tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>Selected idea</h2>
-    <div class="callout"><p><strong>[Idea name]</strong> — [why this one over the other; what the selection commits the team to]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Next step</h2>
-    <p>The selected idea is ready to move to:</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc"><code>/studio:design</code> — if the idea has clear shape and the design problem is well-defined</div></div>
-      <div class="item"><div class="it-desc"><code>/studio:solve</code> — if the idea is correct in spirit but the structural form has not converged</div></div>
+  <!-- A · Problem -->
+  <section class="pnl" aria-labelledby="io-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="io-a-h">Problem</h2><span class="ref">one sentence · user terms</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">A1</span><div class="t"><p class="lead">[One sentence: what users cannot do, or do poorly. A gap in user terms, not a solution in disguise.]</p></div></li>
+      </ol>
     </div>
+    <div class="pnl-f">The problem gate rejects a solution in disguise. Every lens and verdict below inherits this sentence.</div>
   </section>
 
-  <section class="section">
-    <h2>Lenses applied</h2>
-    <p>For traceability — the divergence frames this ideation passed through.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Lens 1 — what it surfaced]</div></div>
-      <div class="item"><div class="it-desc">[Lens 2 — what it surfaced]</div></div>
+  <!-- B · Lenses -->
+  <section class="pnl" aria-labelledby="io-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="io-b-h">Lenses</h2><span class="ref">7 lenses · blind</span></div>
+    <div class="pnl-b">
+      <div class="meas" style="--val:[n];--lim:7;--max:7">
+        <div class="mh"><span>Lenses reported</span><span class="mv">[n] of 7</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>7</span></div>
+      </div>
+      <ol class="items">
+        <li><span class="id">B1</span><span class="t">Historian <span class="lbl">patterns that endured · mistakes to avoid</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+        <li><span class="id">B2</span><span class="t">Designer <span class="lbl">interaction model · hierarchy · behavior</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+        <li><span class="id">B3</span><span class="t">Architect <span class="lbl">data model · boundaries · integration</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+        <li><span class="id">B4</span><span class="t">Scout <span class="lbl">what adjacent products do</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+        <li><span class="id">B5</span><span class="t">Marketer <span class="lbl">what users seek, choose, or pay for</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+        <li><span class="id">B6</span><span class="t">Writer <span class="lbl">vocabulary · framing · copy</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+        <li><span class="id">B7</span><span class="t">Choreographer <span class="lbl">motion · gesture · transition</span><small>[What this lens surfaced in this run.]</small></span><span class="side">[n] ideas</span></li>
+      </ol>
     </div>
+    <div class="pnl-f">Each lens works blind, from the problem alone. Three frames sharpen it: Capture moment, Review moment, Transition moment. Name a failed lens as missing.</div>
   </section>
 
-  <footer class="footer">
-    <p>Studio OS · Ideation · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <!-- C · Divergent ideas. Number the ideas C1, C2 … across all lenses. Repeat the group block for each lens. -->
+  <section class="pnl" aria-labelledby="io-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="io-c-h">Divergent ideas</h2><span class="ref">grouped by lens · unfiltered</span></div>
+    <div class="pnl-b">
+      <div class="meas" style="--val:[n];--lim:14;--max:16">
+        <div class="mh"><span>Raw ideas</span><span class="mv">[n] · target 10 to 14</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>8</span><span>16</span></div>
+      </div>
+      <div>
+        <p><strong>Historian</strong> <span class="lbl">1 to 2 ideas</span></p>
+        <ol class="items">
+          <li><span class="id">C1</span><span class="t">[Idea name]<small>[One sentence: what the idea is.] <span class="lbl">Strategist: [FITS | TENSIONS | OUTSIDE]</span></small></span><span class="side">[→ D1 | cut]</span></li>
+          <li><span class="id">C2</span><span class="t">[Idea name]<small>[One sentence: what the idea is.] <span class="lbl">Strategist: [FITS | TENSIONS | OUTSIDE]</span></small></span><span class="side">[→ D2 | cut]</span></li>
+        </ol>
+      </div>
+      <div>
+        <p><strong>Designer</strong> <span class="lbl">1 to 2 ideas</span></p>
+        <ol class="items">
+          <li><span class="id">C3</span><span class="t">[Idea name]<small>[One sentence: what the idea is.] <span class="lbl">Strategist: [FITS | TENSIONS | OUTSIDE]</span></small></span><span class="side">[→ D3 | cut]</span></li>
+          <li><span class="id">C4</span><span class="t">[Idea name]<small>[One sentence: what the idea is.] <span class="lbl">Strategist: [FITS | TENSIONS | OUTSIDE]</span></small></span><span class="side">[→ D4 | cut]</span></li>
+        </ol>
+      </div>
+      <p class="lbl">[Repeat for Architect, Scout, Marketer, Writer, Choreographer.]</p>
+    </div>
+    <div class="pnl-f">One line per idea. Each lens offers 1 to 2 ideas, with no feasibility judgment and no cross-lens comparison.</div>
+  </section>
+
+  <!-- D · Reduction. 3 to 5 cards. Carried ideas use .ok; the others use .na. -->
+  <section class="pnl" aria-labelledby="io-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="io-d-h">Reduction</h2><span class="ref">3 to 5 cards</span></div>
+    <div class="pnl-b">
+      <div class="meas" style="--val:[n];--lim:5;--max:6">
+        <div class="mh"><span>Ideas kept</span><span class="mv">[n] · 3 to 5</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>3</span><span>6</span></div>
+      </div>
+      <ol class="items">
+        <li><span class="id">D1</span><div class="t">[Idea name]
+            <small><span class="lbl">Concept</span> [One sentence: what this is.]</small>
+            <small><span class="lbl">Differentiator</span> [Why this is not the first thing anyone would try.]</small>
+            <small><span class="lbl">Risk</span> [The one thing most likely to kill it.]</small>
+            <small><span class="lbl">Dissent</span> [Strategist and critic disagreement, named. Otherwise none.]</small></div>
+          <span class="side"><span class="ok">✓ Carried → E1</span></span></li>
+        <li><span class="id">D2</span><div class="t">[Idea name]
+            <small><span class="lbl">Concept</span> [One sentence: what this is.]</small>
+            <small><span class="lbl">Differentiator</span> [Why this is not the first thing anyone would try.]</small>
+            <small><span class="lbl">Risk</span> [The one thing most likely to kill it.]</small>
+            <small><span class="lbl">Dissent</span> [Strategist and critic disagreement, named. Otherwise none.]</small></div>
+          <span class="side"><span class="ok">✓ Carried → E2</span></span></li>
+        <li><span class="id">D3</span><div class="t">[Idea name]
+            <small><span class="lbl">Concept</span> [One sentence: what this is.]</small>
+            <small><span class="lbl">Differentiator</span> [Why this is not the first thing anyone would try.]</small>
+            <small><span class="lbl">Risk</span> [The one thing most likely to kill it.]</small>
+            <small><span class="lbl">Dissent</span> [Strategist and critic disagreement, named. Otherwise none.]</small></div>
+          <span class="side"><span class="na">— Deferred → F1</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The CD chairs the reduction. Cut the redundant, the obvious, and the forgettable. Do not pad to 5.</div>
+  </section>
+
+  <!-- E · Directions carried forward. Number the dissent ledger on from the last direction. For NO-SHIP use .verdict.fail. -->
+  <section class="pnl" aria-labelledby="io-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="io-e-h">Directions carried forward</h2><span class="ref">1 to 2 · CD verdict</span></div>
+    <div class="pnl-b">
+      <div class="meas" style="--val:[n];--lim:2;--max:3">
+        <div class="mh"><span>Directions carried</span><span class="mv">[n] · max 2</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span></div>
+      </div>
+      <ol class="items">
+        <li><span class="id">E1</span><div class="t"><strong class="annot">[Direction name]</strong> <span class="lbl">from D[n]</span>
+            <small><span class="lbl">Desirability</span> [Persona it lands with and why. Real or projected. How they would describe it to someone else.]</small>
+            <small><span class="lbl">Feasibility</span> [LOW | MEDIUM | HIGH] complexity. [One sentence of rationale.]</small>
+            <small><span class="lbl">Must not break</span> [2 to 3 invariants.]</small>
+            <small><span class="lbl">Heuristic concerns</span> [Concern | none identified.]</small>
+            <small><span class="lbl">DE verdict</span> [PROTOTYPE | INVESTIGATE]. [The single next action.]</small>
+            <small><span class="lbl">Next</span> [/studio:design | /studio:solve | /studio:prototype]</small>
+            <small><span class="lbl">CD</span> [One line: why it is inevitable, distinct, and worth the next phase.]</small></div>
+          <span class="side"><span class="verdict pass">CD · SHIP</span></span></li>
+        <li><span class="id">E2</span><div class="t"><strong class="annot">[Direction name]</strong> <span class="lbl">from D[n]</span>
+            <small><span class="lbl">Desirability</span> [Persona it lands with and why. Real or projected. How they would describe it to someone else.]</small>
+            <small><span class="lbl">Feasibility</span> [LOW | MEDIUM | HIGH] complexity. [One sentence of rationale.]</small>
+            <small><span class="lbl">Must not break</span> [2 to 3 invariants.]</small>
+            <small><span class="lbl">Heuristic concerns</span> [Concern | none identified.]</small>
+            <small><span class="lbl">DE verdict</span> [PROTOTYPE | INVESTIGATE]. [The single next action.]</small>
+            <small><span class="lbl">Next</span> [/studio:design | /studio:solve | /studio:prototype]</small>
+            <small><span class="lbl">CD</span> [One line: why it is inevitable, distinct, and worth the next phase.]</small></div>
+          <span class="side"><span class="verdict pass">CD · SHIP</span></span></li>
+      </ol>
+      <div>
+        <p><strong>Dissent ledger</strong> <span class="lbl">CD gate · who disagreed, and why it was overruled</span></p>
+        <ol class="items">
+          <li><span class="id">E3</span><span class="t">[Lens or evaluator]: [what it disagreed with.]<small>[Why it was overruled.]</small></span><span class="side">[Overruled | Upheld]</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="pnl-f">Design when the shape is clear and the problem is defined. Solve when the idea is right but the form has not converged. Prototype on a PROTOTYPE verdict. Auto-mode decisions: [none | what the run chose at select and pick].</div>
+  </section>
+
+  <!-- F · Deferred ideas. Number on from the last deferred idea. -->
+  <section class="pnl" aria-labelledby="io-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="io-f-h">Deferred ideas</h2><span class="ref">reason · what must change</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">F1</span><span class="t">[Idea name]
+            <small><span class="lbl">Reason</span> [DEFER verdict rationale | not picked at the direction step.]</small>
+            <small><span class="lbl">Reconsider when</span> [What would need to change.]</small></span>
+          <span class="side"><span class="na">— Deferred</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Deferred is not cut. Each idea names the change that reopens it. If every idea defers, state whether the problem needs reframing or the divergence needs a new constraint.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>

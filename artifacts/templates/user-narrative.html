@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="exploratory">
 <title>User Narrative — [scene]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · User Narrative · owned by user-researcher / writer</span>
-    <h1>[The person, the moment]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">The scene and the person, in prose. Pairs with the Scene Test — a moment in a body, in a room, not a persona or a use case.</p>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[The person, the moment]</h1>
+      <p class="sub">The scene and the person, in prose. It pairs with the Scene Test: a moment in a body, in a room.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">user-narrative</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">user-researcher / writer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">[skill | direct call]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c wide"><span class="l">Surface</span><span class="v">[The surface this scene constrains]</span></div>
+    <div class="c wide"><span class="l">Pairs with</span><span class="v">Scene Test · designer, cd</span></div>
+    <div class="c wide"><span class="l">Evidence</span><span class="v">[n participants · High | Medium | Low | assumption, no research]</span></div>
+    <div class="c wide"><span class="l">Status</span><span class="v">[Draft]</span></div>
   </header>
 
-  <section class="section">
-    <h2>The Scene</h2>
-    <div class="callout"><p>[A specific physical moment: who, where, at what time, in what emotional state. 2–4 sentences. The kind of moment a design choice will either serve or intrude on.]</p></div>
+  <!-- A · The scene -->
+  <section class="pnl" aria-labelledby="un-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="un-a-h">The scene</h2><span class="ref">who · where · when · state</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">A1</span><div class="t"><p class="lead">[A specific physical moment: who, where, at what time, in what emotional state. The kind of moment a design choice will either serve or intrude on.]</p></div></li>
+      </ol>
+      <div class="meas" style="--val:[n];--lim:[limit];--max:[n]">
+        <div class="mh"><span>Scene length</span><span class="mv">[n] sentences · max [limit]</span></div>
+        <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+      </div>
+    </div>
+    <div class="pnl-f">A scene is a moment in a body, in a room. A feature action is not a scene.</div>
   </section>
 
-  <section class="section">
-    <h2>What They're Trying to Do</h2>
-    <p>[In their own terms — the job they're hiring the product to do, the thing they'd say if asked, and the thing they actually do. Grounded in research where available; cite sample/confidence if it is.]</p>
+  <!-- B · What they are trying to do -->
+  <section class="pnl" aria-labelledby="un-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="un-b-h">What they are trying to do</h2><span class="ref">their terms · said · done</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">B1</span><span class="t">The job<small>[The job they hire the product to do, in their own terms.]</small></span></li>
+        <li><span class="id">B2</span><span class="t">What they would say<small>[What they say if asked.]</small></span></li>
+        <li><span class="id">B3</span><span class="t">What they do<small>[What they actually do.]</small></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">State the sample size and the confidence. Label a belief with no research as an assumption.</div>
   </section>
 
-  <section class="section">
-    <h2>What Would Make This Moment Worse</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[An element or behavior that would interrupt, demand attention, or signal effort in this moment — a constraint the design must honor.]</div></div>
+  <!-- C · What would make this moment worse -->
+  <section class="pnl" aria-labelledby="un-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="un-c-h">What would make this moment worse</h2><span class="ref">constraints the design must honor</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">C1</span><span class="t">[An element or behavior that would interrupt, demand attention, or signal effort in this moment.]<small>[The constraint the design must honor.]</small></span></li>
+        <li><span class="id">C2</span><span class="t">[An element or behavior that would interrupt, demand attention, or signal effort in this moment.]<small>[The constraint the design must honor.]</small></span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>What the Design Must Survive</h2>
-    <p>Every aesthetic and interaction choice for this surface must survive this scene. A choice that feels wrong in this moment is a finding, regardless of how it looks in isolation.</p>
+  <!-- D · What the design must survive -->
+  <section class="pnl" aria-labelledby="un-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="un-d-h">What the design must survive</h2><span class="ref">tests every choice against A1</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">D1</span><span class="t">Every aesthetic and interaction choice for this surface must survive this scene.</span><span class="side">A1</span></li>
+        <li><span class="id">D2</span><span class="t">A choice that feels wrong in this moment is a finding, regardless of how it looks in isolation.</span><span class="side">C1 · C2</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">At the CD gate, a choice that fails this scene is a critical finding.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · User Narrative · run /annotate to review</p></footer>
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

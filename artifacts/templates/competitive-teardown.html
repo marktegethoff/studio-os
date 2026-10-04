@@ -1,50 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="exploratory">
 <title>Competitive Teardown — [space]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Competitive Teardown · owned by competitive-analyst</span>
-    <h1>[Problem space]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">A comparative map — not a feature list — read before a brief. What has converged into table stakes, and where differentiation still exists.</p>
-    <div class="header-meta"><span>[date]</span><span>3–5 competitors analyzed</span></div>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Problem space]</h1>
+      <p class="sub">A comparative map, not a feature list. Read it before the brief. It shows what has converged and where room remains.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">competitive-teardown</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v mono">competitive-analyst</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">[skill | direct call]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
+    <div class="c wide"><span class="l">Capability</span><span class="v">[The capability or problem space, not the product]</span></div>
+    <div class="c wide"><span class="l">User served</span><span class="v">[Archetype]</span></div>
+    <div class="c wide"><span class="l">Competitive set</span><span class="v">[Comp A · Comp B · Comp C]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c"><span class="l">Feeds</span><span class="v mono">design-brief</span></div>
   </header>
 
-  <section class="section">
-    <h2>Feature-Coverage Matrix</h2>
-    <table>
-      <tr><th>Capability</th><th>[Comp A]</th><th>[Comp B]</th><th>[Comp C]</th><th>Read</th></tr>
-      <tr><td>[capability]</td><td>✓ / ◐ / ✗</td><td>—</td><td>—</td><td>[table stakes / differentiated]</td></tr>
-    </table>
-  </section>
+  <!-- A · Category map. 3 to 5 numbered dots, one per competitor. Dot n matches item An. -->
+  <section class="pnl" aria-labelledby="ct-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="ct-a-h">Category map</h2><span class="ref">two axes that split the set</span></div>
+    <div class="pnl-b">
+      <div class="grid2">
+        <div>
+          <svg viewBox="0 0 480 340" role="img" aria-labelledby="ct-map-t">
+            <title id="ct-map-t">Positioning map. A square plot with a placeholder axis on each side. Four numbered dots mark the competitors. A dashed blue ring marks the open position, a region where no competitor sits.</title>
 
-  <section class="section">
-    <h2>Positioning Map</h2>
-    <div class="compare">
-      <div class="pos"><h4>Converged — table stakes</h4>
-        <div class="crow"><b>[pattern]</b> — everyone does it; absence is a deficit, presence is not an advantage</div></div>
-      <div class="neg"><h4>Still differentiated</h4>
-        <div class="crow"><b>[pattern]</b> — genuine room to be different, not just differently-named</div></div>
+            <!-- plot frame and centre lines -->
+            <rect x="56" y="16" width="408" height="270" class="s-line"/>
+            <line x1="260" y1="16" x2="260" y2="286" class="s-hair" stroke-dasharray="3 3"/>
+            <line x1="56" y1="151" x2="464" y2="151" class="s-hair" stroke-dasharray="3 3"/>
+
+            <!-- axes: name and both ends -->
+            <text x="260" y="324" text-anchor="middle" class="t-ink" font-size="12" font-weight="600">[Axis X]</text>
+            <text x="56" y="304" class="t-ink2" font-size="10.5">[low]</text>
+            <text x="464" y="304" text-anchor="end" class="t-ink2" font-size="10.5">[high]</text>
+            <text x="14" y="151" text-anchor="middle" class="t-ink" font-size="12" font-weight="600" transform="rotate(-90 14 151)">[Axis Y]</text>
+            <text x="50" y="28" text-anchor="end" class="t-ink2" font-size="10.5">[high]</text>
+            <text x="50" y="286" text-anchor="end" class="t-ink2" font-size="10.5">[low]</text>
+
+            <!-- competitor dots -->
+            <circle cx="120" cy="70" r="11" class="s-fill"/>
+            <text x="120" y="74" text-anchor="middle" class="t-inv" font-size="11" font-weight="600">1</text>
+            <text x="136" y="74" class="t-ink2" font-size="11">[Comp 1]</text>
+            <circle cx="380" cy="86" r="11" class="s-fill"/>
+            <text x="380" y="90" text-anchor="middle" class="t-inv" font-size="11" font-weight="600">2</text>
+            <text x="396" y="90" class="t-ink2" font-size="11">[Comp 2]</text>
+            <circle cx="236" cy="176" r="11" class="s-fill"/>
+            <text x="236" y="180" text-anchor="middle" class="t-inv" font-size="11" font-weight="600">3</text>
+            <text x="252" y="180" class="t-ink2" font-size="11">[Comp 3]</text>
+            <circle cx="360" cy="226" r="11" class="s-fill"/>
+            <text x="360" y="230" text-anchor="middle" class="t-inv" font-size="11" font-weight="600">4</text>
+            <text x="376" y="230" class="t-ink2" font-size="11">[Comp 4]</text>
+
+            <!-- open position -->
+            <ellipse cx="250" cy="62" rx="52" ry="26" class="s-dim" stroke-dasharray="4 3"/>
+            <text x="250" y="66" text-anchor="middle" class="t-dim" font-size="11">Open · [D#]</text>
+          </svg>
+          <span class="lbl">Not to scale. Dot numbers match A1 to A4.</span>
+        </div>
+
+        <div style="display:grid;gap:12px;align-content:start">
+          <div class="meas" style="--val:[n];--lim:5;--max:6">
+            <div class="mh"><span>Competitors mapped</span><span class="mv">[n] · 3 to 5</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>3</span><span>6</span></div>
+          </div>
+          <ol class="items">
+            <li><span class="id">A1</span><span class="t">[Competitor 1]<small>[Where it lands on each axis, and why.]</small></span><span class="side">[source]</span></li>
+            <li><span class="id">A2</span><span class="t">[Competitor 2]<small>[Where it lands on each axis, and why.]</small></span><span class="side">[source]</span></li>
+            <li><span class="id">A3</span><span class="t">[Competitor 3]<small>[Where it lands on each axis, and why.]</small></span><span class="side">[source]</span></li>
+            <li><span class="id">A4</span><span class="t">[Competitor 4]<small>[Where it lands on each axis, and why.]</small></span><span class="side">[source]</span></li>
+          </ol>
+        </div>
+      </div>
     </div>
+    <div class="pnl-f">Choose the two axes that separate the set most. Source every placement to the product itself, not to press coverage.</div>
   </section>
 
-  <section class="section">
-    <h2>Gaps in the Landscape</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[An unmet need or an unoccupied position — what no one is doing well.]</div></div>
+  <!-- B · Table stakes. One row per capability that 3 or more competitors share. Columns A1 to An match the map. -->
+  <section class="pnl" aria-labelledby="ct-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="ct-b-h">Table stakes</h2><span class="ref">3 or more competitors share it</span></div>
+    <div class="pnl-b">
+      <div class="tbox">
+        <table style="min-width:640px">
+          <thead><tr><th>#</th><th>Capability</th><th>A1</th><th>A2</th><th>A3</th><th>A4</th><th>Ours</th><th>Shared by</th></tr></thead>
+          <tbody>
+            <tr><td class="m">B1</td><td>[Capability]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>
+              <div class="meas" style="--val:[n];--lim:3;--max:5">
+                <div class="mh"><span class="mv">[n] · min 3</span></div>
+                <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+                <div class="scale" aria-hidden="true"><span>0</span><span>5</span></div>
+              </div></td></tr>
+            <tr><td class="m">B2</td><td>[Capability]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>[✓ | ◐ | —]</td><td>
+              <div class="meas" style="--val:[n];--lim:3;--max:5">
+                <div class="mh"><span class="mv">[n] · min 3</span></div>
+                <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+                <div class="scale" aria-hidden="true"><span>0</span><span>5</span></div>
+              </div></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <div class="pnl-f">Table stakes need three or more competitors. One is an experiment. Two is a coincidence. Absence is a deficit, and presence is no advantage.</div>
   </section>
 
-  <section class="section">
-    <h2>For the Brief</h2>
-    <p>[What this map means the brief should account for. The Competitive Analyst maps; the Strategist evaluates what to do — no "you should build X" here.]</p>
+  <!-- C · Differentiators -->
+  <section class="pnl" aria-labelledby="ct-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="ct-c-h">Differentiators</h2><span class="ref">divergent approaches · live bets</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">C1</span><span class="t">[Pattern]<small>[Who does it. What they bet on. What they sacrifice.]</small></span><span class="side">[A# · source]</span></li>
+        <li><span class="id">C2</span><span class="t">[Pattern]<small>[Who does it. What they bet on. What they sacrifice.]</small></span><span class="side">[A# · source]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">A differentiator is a different bet, not a different name.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Competitive Teardown · run /annotate to review</p></footer>
+  <!-- D · Open position. D1 is the binding observation. Gaps follow, each with a confidence level. -->
+  <section class="pnl" aria-labelledby="ct-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="ct-d-h">Open position</h2><span class="ref">what no competitor does well</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">D1</span><div class="t"><p class="lead">[Binding observation, one sentence: the single most structurally important finding, stated as an observation.]</p></div><span class="side">Binding observation</span></li>
+        <li><span class="id">D2</span><span class="t">[Gap]<small>[What it is. Why it is a gap. Source.]</small></span><span class="side">[High | Medium | Low]</span></li>
+        <li><span class="id">D3</span><span class="t">[Gap]<small>[What it is. Why it is a gap. Source.]</small></span><span class="side">[High | Medium | Low]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">State the finding as an observation, not a recommendation. The Strategist decides what it means.</div>
+  </section>
+
+  <!-- E · What to avoid -->
+  <section class="pnl" aria-labelledby="ct-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="ct-e-h">What to avoid</h2><span class="ref">patterns that cost competitors</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li><span class="id">E1</span><span class="t">[Pattern]<small>[Who shipped it. What it cost them. Source.]</small></span><span class="side">[A#]</span></li>
+        <li><span class="id">E2</span><span class="t">[Pattern]<small>[Who shipped it. What it cost them. Source.]</small></span><span class="side">[A#]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Report what happened to competitors. The Strategist decides what the studio does.</div>
+  </section>
+
+  <p class="lbl">Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>
