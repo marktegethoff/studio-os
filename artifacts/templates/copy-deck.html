@@ -1,49 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="procedure">
 <title>Copy Deck — [surface]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Copy Deck · owned by writer</span>
-    <h1>[Surface]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">All strings for a surface in one document — reviewable as language, not scattered across views.</p>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Surface]</h1><p class="sub">All strings for one surface in one document. Review them as language, not scattered across views.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">copy-deck</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">writer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:design</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c wide"><span class="l">Surface</span><span class="v">[surface and states covered]</span></div>
+    <div class="c"><span class="l">Dictionary</span><span class="v mono">[design-vocabulary.md]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Strings</h2>
-    <table>
-      <tr><th>Key</th><th>String</th><th>Notes / voice</th></tr>
-      <tr><td>[title]</td><td>[copy]</td><td>[—]</td></tr>
-      <tr><td>[placeholder]</td><td>[copy]</td><td>[—]</td></tr>
-      <tr><td>[primary action]</td><td>[copy]</td><td>[verb-first, honest]</td></tr>
-      <tr><td>[empty state]</td><td>[copy]</td><td>describes the empty container, not a tutorial</td></tr>
-      <tr><td>[error]</td><td>[copy]</td><td>honest + recoverable, never punishing</td></tr>
-      <tr><td>[confirmation]</td><td>[copy]</td><td>—</td></tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>VoiceOver / Accessibility Strings</h2>
-    <table>
-      <tr><th>Element</th><th>Label</th><th>Hint</th></tr>
-      <tr><td>[control]</td><td>[what it is/does]</td><td>[what happens on activation]</td></tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>What the Next Gate Confirms</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ No punishing, vague, or apologetic language (those are defects, not preferences).</div></div>
-      <div class="item"><div class="it-desc">✓ Empty states describe a container, not a feature lesson.</div></div>
-      <div class="item"><div class="it-desc">✓ Every interactive element has a VoiceOver label that says what it does.</div></div>
+  <section class="pnl" id="cd-a" aria-labelledby="cd-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="cd-a-h">Strings</h2><span class="ref">strings that ship · one per key</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="cd-a1"><span class="id">A1</span>
+          <div class="t"><strong data-ste="copy">[String]</strong>
+            <small><span class="lbl">[title key] · [where it shows, and in which state]</span></small>
+            <small>VoiceOver label: <span data-ste="copy">[label]</span>. Hint: <span data-ste="copy">[hint, or none]</span>.</small>
+            <small>[Voice note, if any.]</small>
+          </div>
+          <span class="side"><span class="wc">[n]/[limit] words</span></span></li>
+        <li id="cd-a2"><span class="id">A2</span>
+          <div class="t"><strong data-ste="copy">[String]</strong>
+            <small><span class="lbl">[placeholder key] · [where it shows, and in which state]</span></small>
+            <small>VoiceOver label: <span data-ste="copy">[label]</span>. Hint: <span data-ste="copy">[hint, or none]</span>.</small>
+            <small>[Voice note, if any.]</small>
+          </div>
+          <span class="side"><span class="wc">[n]/[limit] words</span></span></li>
+        <li id="cd-a3"><span class="id">A3</span>
+          <div class="t"><strong data-ste="copy">[String]</strong>
+            <small><span class="lbl">[primary action key] · [where it shows, and in which state]</span></small>
+            <small>VoiceOver label: <span data-ste="copy">[label]</span>. Hint: <span data-ste="copy">[hint, or none]</span>.</small>
+            <small>Start with a verb. Describe the real outcome.</small>
+          </div>
+          <span class="side"><span class="wc">[n]/[limit] words</span></span></li>
+        <li id="cd-a4"><span class="id">A4</span>
+          <div class="t"><strong data-ste="copy">[String]</strong>
+            <small><span class="lbl">[empty state key] · [where it shows, and in which state]</span></small>
+            <small>VoiceOver label: <span data-ste="copy">[label]</span>. Hint: <span data-ste="copy">[hint, or none]</span>.</small>
+            <small>Describe the empty container. Do not teach the feature.</small>
+          </div>
+          <span class="side"><span class="wc">[n]/[limit] words</span></span></li>
+        <li id="cd-a5"><span class="id">A5</span>
+          <div class="t"><strong data-ste="copy">[String]</strong>
+            <small><span class="lbl">[error key] · [where it shows, and in which state]</span></small>
+            <small>VoiceOver label: <span data-ste="copy">[label]</span>. Hint: <span data-ste="copy">[hint, or none]</span>.</small>
+            <small>Name what failed. Give one recovery step. Never blame the user.</small>
+          </div>
+          <span class="side"><span class="wc">[n]/[limit] words</span></span></li>
+        <li id="cd-a6"><span class="id">A6</span>
+          <div class="t"><strong data-ste="copy">[String]</strong>
+            <small><span class="lbl">[confirmation key] · [where it shows, and in which state]</span></small>
+            <small>VoiceOver label: <span data-ste="copy">[label]</span>. Hint: <span data-ste="copy">[hint, or none]</span>.</small>
+            <small>[Voice note, if any.]</small>
+          </div>
+          <span class="side"><span class="wc">[n]/[limit] words</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">Take each limit from the Typesetter. Count one word for each space-separated token.</div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Copy Deck · run /annotate to review</p></footer>
+  <section class="pnl" id="cd-b" aria-labelledby="cd-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="cd-b-h">Dictionary</h2><span class="ref">Product · design-vocabulary.md</span></div>
+    <div class="pnl-b">
+      <div class="tbox"><table>
+        <thead><tr><th>#</th><th>Word (part of speech)</th><th>Status</th><th>Meaning or alternative</th></tr></thead>
+        <tbody>
+          <tr id="cd-b1"><td class="m">B1</td><td class="m">[WORD] (v)</td><td><span class="ok">approved</span></td><td>[Meaning.]</td></tr>
+          <tr id="cd-b2"><td class="m">B2</td><td class="m">[WORD] (n)</td><td><span class="ok">approved</span></td><td>[Meaning.]</td></tr>
+          <tr id="cd-b3"><td class="m">B3</td><td class="m">[word] (v)</td><td><span class="no">not approved</span></td><td>[APPROVED WORD]</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="pnl-f">Write an approved word in UPPERCASE and a not-approved word in lowercase. Name the alternative for each not-approved word. The writer proposes entries. The owner approves them.</div>
+  </section>
+
+  <section class="pnl" id="cd-c" aria-labelledby="cd-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="cd-c-h">Annotated rewrite</h2><span class="ref">draft marked · rewrite annotated</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="cd-c1"><span class="id">C1</span>
+          <div class="t"><strong>Draft</strong> <span class="lbl">rule breaks in red</span>
+            <small><span class="orig" data-ste="off"><s>[Rule break]</s> [Draft text] <s>[Rule break]</s> [Draft text]</span></small>
+            <small><span class="viol">[Rule break]</span> [rule name] · <span class="viol">[Rule break]</span> [rule name]</small>
+          </div>
+        </li>
+        <li id="cd-c2"><span class="id">C2</span>
+          <div class="t"><strong>Rewrite</strong> <span class="lbl">annotated by rule</span>
+            <small><span class="anat">
+              <span class="seg"><span class="w" data-ste="copy">[Rewrite segment]</span><span class="t">[Rule it meets]</span></span>
+              <span class="seg"><span class="w" data-ste="copy">[Rewrite segment]</span><span class="t">[Rule it meets]</span></span>
+            </span></small>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="pnl-f">Fill this panel when you check a draft. Write none when no draft exists. Take rule names from the writer defects and Named Bans.</div>
+  </section>
+
+  <section class="pnl" id="cd-d" aria-labelledby="cd-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="cd-d-h">Next gate</h2><span class="ref">what the gate confirms</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="cd-d1"><span class="id">D1</span><span class="t">No string punishes the user, apologizes for the system or stays vague.</span><span class="side">A</span></li>
+        <li id="cd-d2"><span class="id">D2</span><span class="t">Each empty state describes a container. It does not teach the feature.</span><span class="side">A4</span></li>
+        <li id="cd-d3"><span class="id">D3</span><span class="t">Each interactive element has a VoiceOver label that says what it does.</span><span class="side">A</span></li>
+        <li id="cd-d4"><span class="id">D4</span><span class="t">Each word has an approved entry in the dictionary.</span><span class="side">B</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Each item is a defect check, not a preference.</div>
+  </section>
+
+  <p class="lbl">Cite an item by letter and number, such as A3. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

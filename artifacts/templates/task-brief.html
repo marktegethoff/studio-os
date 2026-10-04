@@ -3,68 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="procedure">
 <title>Task Brief — [task name]</title>
 <link rel="stylesheet" href="../kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Task Brief · owned by /studio:scope</span>
-    <h1>[Task name]<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">A task brief tight enough to delegate unattended. Five fields — SPEC, OUTPUT, GATES, VERIFY, ESCALATE — that define the contract before <code>/studio:implement</code> or <code>/studio:prototype</code> runs.</p>
-    <div class="header-meta">
-      <span>[date]</span><span>Source brief: [path to product brief]</span><span>Status: Ready / Pending [open question]</span>
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Task name]</h1><p class="sub">A brief tight enough to run unattended. Five fields define the contract before <code>/studio:implement</code> runs.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">task-brief</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:shape --task</span></div>
+    <div class="c"><span class="l">Consumer</span><span class="v mono">/studio:implement</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c wide"><span class="l">Spec path</span><span class="v mono">[path to spec, or "inline"]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Ready | Pending: open question]</span></div>
+    <div class="c">
+      <div class="meas" style="--val:[n];--lim:5;--max:5">
+        <div class="mh"><span>Fields complete</span><span class="mv">[n] of 5</span></div>
+        <div class="track" role="img" aria-label="Fields complete: [n] of 5"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>5</span></div>
+      </div>
     </div>
   </header>
 
-  <section class="section">
-    <h2>SPEC</h2>
-    <p>What this task changes — the precise scope. Reference the design or product brief that authorizes it.</p>
-    <div class="callout"><p>[Specific behavior, file paths, or interaction to be built or modified. Not a feature description — a contract.]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>OUTPUT</h2>
-    <p>What this task produces. Code, artifacts, or both. Named locations.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[File or artifact 1 — what it contains and where it lives]</div></div>
-      <div class="item"><div class="it-desc">[File or artifact 2]</div></div>
+  <section class="pnl" id="tb-a" aria-labelledby="tb-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="tb-a-h">SPEC</h2><span class="ref">Scope · what the task changes</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="tb-a1"><span class="id">A1</span><span class="t">[Build or change what: the behavior, file or interaction. Write a contract, not a feature description.]</span><span class="side">[spec version]</span></li>
+        <li id="tb-a2"><span class="id">A2</span><span class="t">[Fix one problem, in one sentence.]</span><span class="side">[path to product brief]</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>GATES</h2>
-    <p>What must hold true for the work to be considered correct. Invariants, not aspirations.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Invariant 1 — a specific behavior or state that cannot break]</div></div>
-      <div class="item"><div class="it-desc">[Invariant 2]</div></div>
-      <div class="item"><div class="it-desc">[Invariant 3]</div></div>
+  <section class="pnl" id="tb-b" aria-labelledby="tb-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="tb-b-h">OUTPUT</h2><span class="ref">Files · what the task writes</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="tb-b1"><span class="id">B1</span><span class="t"><code>[path/to/file]</code><small>[What the file contains.]</small></span></li>
+        <li id="tb-b2"><span class="id">B2</span><span class="t"><code>[path/to/second-file]</code><small>[What the file contains.]</small></span></li>
+        <li id="tb-b3"><span class="id">B3</span><span class="t">Write no other files.</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>VERIFY</h2>
-    <p>How to confirm the gates hold. Concrete commands, manual checks, or QA scenarios.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Command or scenario 1]</div></div>
-      <div class="item"><div class="it-desc">[Command or scenario 2]</div></div>
+  <section class="pnl" id="tb-c" aria-labelledby="tb-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="tb-c-h">GATES</h2><span class="ref">Invariants · each names its VERIFY item</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="tb-c1"><span class="id">C1</span><span class="t">[Invariant: one behavior or state that must not break.] <span class="wc">[n]/20</span></span><span class="side">[D#]</span></li>
+        <li id="tb-c2"><span class="id">C2</span><span class="t">[Invariant.] <span class="wc">[n]/20</span></span><span class="side">[D#]</span></li>
+        <li id="tb-c3"><span class="id">C3</span><span class="t">[Invariant.] <span class="wc">[n]/20</span></span><span class="side">manual: [method]</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>ESCALATE</h2>
-    <p>What forces a pause: ambiguity, scope creep, missing information, broken assumption. The execution path that stops the run and surfaces the issue.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Escalation trigger 1 — when this happens, stop and ask]</div></div>
-      <div class="item"><div class="it-desc">[Escalation trigger 2]</div></div>
+  <section class="pnl" id="tb-d" aria-labelledby="tb-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="tb-d-h">VERIFY</h2><span class="ref">Checks · how to confirm the gates</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="tb-d1"><span class="id">D1</span><span class="t">Run [command]. <span class="wc">[n]/20</span><small>Expect [result]. <span class="wc">[n]/20</span></small></span></li>
+        <li id="tb-d2"><span class="id">D2</span><span class="t">Check [scenario or artifact]. <span class="wc">[n]/20</span><small>Expect [result]. <span class="wc">[n]/20</span></small></span></li>
+      </ol>
     </div>
   </section>
 
-  <footer class="footer">
-    <p>Studio OS · Task Brief · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <section class="pnl" id="tb-e" aria-labelledby="tb-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="tb-e-h">ESCALATE</h2><span class="ref">Triggers · what stops the run</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="tb-e1"><span class="id">E1</span><span class="t">Stop if the spec is ambiguous. <span class="wc">6/20</span></span></li>
+        <li id="tb-e2"><span class="id">E2</span><span class="t">Stop if the build or a test fails twice. <span class="wc">9/20</span></span></li>
+        <li id="tb-e3"><span class="id">E3</span><span class="t">Stop if the work would break a gate. <span class="wc">8/20</span></span></li>
+        <li id="tb-e4"><span class="id">E4</span><span class="t">Stop if the task needs a file outside OUTPUT. <span class="wc">9/20</span></span></li>
+        <li id="tb-e5"><span class="id">E5</span><span class="t">Stop if [task-specific trigger]. <span class="wc">[n]/20</span></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <p class="lbl">wc = words in one sentence, limit 20. Cite an item by letter and number, such as C2. Run /studio:feedback --overlay on this file to return feedback in one paste.</p>
 
 </div>
 </body>

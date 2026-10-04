@@ -1,63 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Metrics Plan — [feature]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
-  <header class="header">
-    <span class="eyebrow">Studio OS · Metrics Plan · owned by metrics-definer</span>
-    <h1>[Feature]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">What success looks like in measurable terms — defined before implementation, committed with the spec.</p>
-    <div class="header-meta"><span>[date]</span><span>Problem solved: [the validated problem]</span></div>
+<div class="doc">
+
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Feature]</h1><p class="sub">Success in measurable terms. Define it before implementation and commit it with the spec.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">metrics-plan</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">metrics-definer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:measure</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c wide"><span class="l">Problem solved</span><span class="v">[the validated problem, in one sentence]</span></div>
+    <div class="c"><span class="l">Plan owner</span><span class="v">[who monitors and reports]</span></div>
+    <div class="c"><span class="l">Status</span><span class="v">[Draft | PM validated]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Lagging Indicator</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Metric (user behavior, not usage)</span><span class="v">[specific, user-centric outcome]</span></div>
-      <div class="dcard"><span class="k">Measurement method</span><span class="v">[event tracked · window · aggregation]</span></div>
-      <div class="dcard"><span class="k">Baseline</span><span class="v">[current state — or "establish during [period]"]</span></div>
-      <div class="dcard"><span class="k">Target</span><span class="v">[threshold + timeframe — a specific number]</span></div>
+  <section class="pnl" id="mp-a" aria-labelledby="mp-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="mp-a-h">Outcome metric</h2><span class="ref">lagging · user behavior</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="mp-a1"><span class="id">A1</span><div class="t">[Metric: the user behavior that proves the problem is solved.]
+          <small>Method: [event · window · aggregation].</small>
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Metric]</span><span class="mv">baseline [n] → target [n] by [date]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Measure user behavior, not product usage. Label a proxy as a proxy. Set no target without a baseline.</div>
+  </section>
+
+  <section class="pnl" id="mp-b" aria-labelledby="mp-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="mp-b-h">Leading indicators</h2><span class="ref">2–3 early signals · cites A1</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="mp-b1"><span class="id">B1</span><div class="t">[Signal]
+          <small>Predicts A1 because [reason].</small>
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Signal]</span><span class="mv">baseline [n] → target [n] by [date]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div><span class="side">Review: [cadence]</span></li>
+        <li id="mp-b2"><span class="id">B2</span><div class="t">[Signal]
+          <small>Predicts A1 because [reason].</small>
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Signal]</span><span class="mv">baseline [n] → target [n] by [date]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div><span class="side">Review: [cadence]</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Leading Indicators</h2>
-    <table>
-      <tr><th>Signal</th><th>Why it predicts the lagging indicator</th><th>Review cadence</th></tr>
-      <tr><td>[signal]</td><td>[reason]</td><td>[cadence]</td></tr>
-    </table>
+  <section class="pnl" id="mp-c" aria-labelledby="mp-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="mp-c-h">Counter-metrics</h2><span class="ref">mandatory · must not degrade</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="mp-c1"><span class="id">C1</span><div class="t">[Existing metric the change could affect]
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Metric]</span><span class="mv">baseline [n] · alert at [n]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Name at least one counter-metric. The alert value is the value at which you investigate.</div>
   </section>
 
-  <section class="section">
-    <h2>Counter-metrics <span class="pill">must not degrade</span></h2>
-    <table>
-      <tr><th>Metric</th><th>Current baseline</th><th>Alert threshold</th></tr>
-      <tr><td>[existing metric the change could affect]</td><td>[value]</td><td>[value at which to investigate]</td></tr>
-    </table>
+  <section class="pnl" id="mp-d" aria-labelledby="mp-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="mp-d-h">Instrumentation events</h2><span class="ref">pre-launch commitments</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="mp-d1"><span class="id">D1</span><span class="t">[Event: user action or system state]<small>Capture: [context · segment · timestamp].</small></span><span class="side">Pre-launch: [Yes | No]</span></li>
+        <li id="mp-d2"><span class="id">D2</span><span class="t">[Event]<small>Capture: [context · segment · timestamp].</small></span><span class="side">Pre-launch: [Yes | No]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">An event that needs new instrumentation is a launch requirement, not a follow-up task.</div>
   </section>
 
-  <section class="section">
-    <h2>Instrumentation Requirements</h2>
-    <table>
-      <tr><th>Event</th><th>Data to capture</th><th>Pre-launch required?</th></tr>
-      <tr><td>[user action / system state]</td><td>[context · segment · timestamp]</td><td>Yes / No</td></tr>
-    </table>
+  <section class="pnl" id="mp-e" aria-labelledby="mp-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="mp-e-h">Feasibility</h2><span class="ref">architect · each pre-launch event</span></div>
+    <div class="pnl-b">
+      <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+        <div class="mh"><span>Pre-launch events feasible as stated or with minor work</span><span class="mv">[n] of [n]</span></div>
+        <div class="track" role="img" aria-label="Pre-launch events feasible: [n] of [n]"><span class="fill"></span><span class="limit"></span></div>
+        <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+      </div>
+      <ol class="items">
+        <li id="mp-e1"><span class="id">E1</span><span class="t">[Verdict for D1]<small>Cost: [n] iteration cycles. Reuse: [existing hook, or none].</small></span><span class="side">D1</span></li>
+        <li id="mp-e2"><span class="id">E2</span><span class="t">[Verdict for D2]<small>Cost: [n] iteration cycles. Reuse: [existing hook, or none].</small></span><span class="side">D2</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Verdicts: feasible as stated, feasible with minor work, requires an architectural decision, not feasible pre-launch. Flag any event that costs more than the feature.</div>
   </section>
 
-  <section class="section">
-    <h2>Review Cadence</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">During rollout</div><div class="it-desc">[leading indicators on what schedule]</div></div>
-      <div class="item"><div class="it-name">30-day read</div><div class="it-desc">[what is evaluated]</div></div>
-      <div class="item"><div class="it-name">Decision gate</div><div class="it-desc">[what must be true at [date] for success]</div></div>
+  <section class="pnl" id="mp-f" aria-labelledby="mp-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="mp-f-h">Review cadence</h2><span class="ref">rollout · 30 days · decision</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="mp-f1"><span class="id">F1</span><span class="t">During rollout<small>[Leading indicators reviewed on what schedule.]</small></span></li>
+        <li id="mp-f2"><span class="id">F2</span><span class="t">30-day read<small>[What is evaluated at 30 days.]</small></span></li>
+        <li id="mp-f3"><span class="id">F3</span><span class="t">Decision gate<small>[What must be true at the decision date for success.]</small></span><span class="side">[date]</span></li>
+      </ol>
     </div>
   </section>
 
-  <footer class="footer"><p>Studio OS · Metrics Plan · owner: [who monitors] · run /annotate to review</p></footer>
+  <section class="pnl" id="mp-g" aria-labelledby="mp-g-h">
+    <div class="pnl-h"><span class="ltr">G</span><h2 id="mp-g-h">Open questions</h2><span class="ref">genuine blockers only</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="mp-g1"><span class="id">G1</span><span class="t">[Instrumentation or feasibility issue that needs a decision before launch.]</span><span class="side">[owner]</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Write none when no blocker exists.</div>
+  </section>
+
+  <p class="lbl">Cite an item by letter and number, such as A1. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
+
 </div>
 </body>
 </html>

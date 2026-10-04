@@ -3,82 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="studio:genre" content="verdict">
 <title>Design Brief — [feature]</title>
 <link rel="stylesheet" href="../kit/studio.css">
+<!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Design Brief · owned by brief-writer</span>
-    <h1>[Feature / problem area]<span style="color:var(--amber)">.</span></h1>
-    <p class="header-sub">The validated problem, the user, what success means, and where the designer's authority begins. This brief gates <code>/studio-os:design</code> — design does not start without it.</p>
-    <div class="header-meta">
-      <span>[date]</span><span>Validated by: [PM / stakeholder]</span><span>Status: Ready for design / Pending [open question]</span>
-    </div>
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Feature / problem area]</h1><p class="sub">The validated problem, the user, what success means, and where the designer's authority begins. This brief gates <code>/studio:design</code>. Design does not start without it.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">design-brief</span></div>
+    <div class="c"><span class="l">Owner</span><span class="v">brief-writer</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:shape</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c"><span class="l">Gates</span><span class="v mono">/studio:design</span></div>
+    <div class="c"><span class="l">Validated by</span><span class="v">[PM or stakeholder]</span></div>
+    <div class="c wide"><span class="l">Status</span><span class="v">[Ready for design | Pending: open question]</span></div>
   </header>
 
-  <section class="section">
-    <h2>The Problem</h2>
-    <div class="callout"><p>[One sentence: a specific user has this problem in this context, and the current state fails in this way.]</p></div>
-  </section>
-
-  <section class="section">
-    <h2>User</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Primary</span><span class="v">[Specific archetype — who, in what context, with what prior state]</span></div>
-      <div class="dcard"><span class="k">Secondary (if any)</span><span class="v">[Who, and what they need that differs from primary]</span></div>
+  <section class="pnl" id="db-a" aria-labelledby="db-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="db-a-h">Problem</h2><span class="ref">one sentence · cites G1</span></div>
+    <div class="pnl-b">
+      <p class="lead">[User type] who [context] cannot [do X] because [constraint], which means [consequence]. <span class="wc">[n]/25 words</span></p>
     </div>
+    <div class="pnl-f">Write one sentence. A second sentence means a second problem. Split the brief.</div>
   </section>
 
-  <section class="section">
-    <h2>Success Conditions</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-name">1</div><div class="it-desc">[Specific, observable, tied to the user's goal — not feature count]</div></div>
-      <div class="item"><div class="it-name">2</div><div class="it-desc">[…]</div></div>
-      <div class="item"><div class="it-name">3</div><div class="it-desc">[…]</div></div>
+  <section class="pnl" id="db-b" aria-labelledby="db-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="db-b-h">Who and today</h2><span class="ref">user · current behavior</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="db-b1"><span class="id">B1</span><span class="t"><strong>Primary</strong> — [who, in what context, with what prior state]</span></li>
+        <li id="db-b2"><span class="id">B2</span><span class="t"><strong>Secondary</strong> — [who, and what they need that differs from the primary user]</span></li>
+        <li id="db-b3"><span class="id">B3</span><span class="t"><strong>Today</strong> — [what the primary user does now when the problem occurs: the workaround or behavior]</span></li>
+      </ol>
     </div>
+    <div class="pnl-f">Name one primary user. Name a secondary user only when the needs are compatible.</div>
   </section>
 
-  <section class="section">
-    <h2>Constraints</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[What cannot change and why — a technical / business / architectural boundary not in scope to revisit]</div></div>
-      <div class="item"><div class="it-desc">[What the designer is not authorized to modify]</div></div>
+  <section class="pnl" id="db-c" aria-labelledby="db-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="db-c-h">Success criteria</h2><span class="ref">measure · against target</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="db-c1"><span class="id">C1</span><div class="t">[Criterion: specific, observable, tied to the user's goal.]
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Measure]</span><span class="mv">[n] · target [target]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+        <li id="db-c2"><span class="id">C2</span><div class="t">[Criterion.]
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Measure]</span><span class="mv">[n] · target [target]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+        <li id="db-c3"><span class="id">C3</span><div class="t">[Criterion.]
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>[Measure]</span><span class="mv">[n] · target [target]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+      </ol>
     </div>
+    <div class="pnl-f">Write what changes for the user, not what ships. Give each criterion an observable test.</div>
   </section>
 
-  <section class="section">
-    <h2>Out of Scope</h2>
-    <p>This section exists to stop scope creep before it starts.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Thing that might seem in scope but is not — and why]</div></div>
-      <div class="item"><div class="it-desc">[Adjacent problem not addressed in this work]</div></div>
+  <section class="pnl" id="db-d" aria-labelledby="db-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="db-d-h">Constraints and invariants</h2><span class="ref">what must not change</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="db-d1"><span class="id">D1</span><span class="t">[What cannot change, and why: a technical, business or architectural boundary.]</span><span class="side">constraint</span></li>
+        <li id="db-d2"><span class="id">D2</span><span class="t">[What the designer must not modify.]</span><span class="side">constraint</span></li>
+        <li id="db-d3"><span class="id">D3</span><span class="t">[Product invariant that applies, from project context.]</span><span class="side">invariant</span></li>
+      </ol>
     </div>
+    <div class="pnl-f">A constraint is a boundary, not a preference. This work does not revisit it.</div>
   </section>
 
-  <section class="section">
-    <h2>Open Questions</h2>
-    <table>
-      <tr><th>Question</th><th>Owner</th><th>Needed by</th></tr>
-      <tr><td>[Question that must be answered before/during design]</td><td>[name/role]</td><td>[when]</td></tr>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>What the Design Gate Confirms</h2>
-    <p>The handoff contract: when this brief reaches <code>/studio-os:design</code>, the design must demonstrate it satisfies each of these — or name the gap.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">✓ The interaction model solves <strong>the one-sentence problem</strong> above — not an adjacent one.</div></div>
-      <div class="item"><div class="it-desc">✓ Every <strong>success condition</strong> is addressable by the design (the CD verdict names any that isn't).</div></div>
-      <div class="item"><div class="it-desc">✓ No <strong>constraint</strong> is violated; nothing <strong>out of scope</strong> was designed.</div></div>
-      <div class="item"><div class="it-desc">✓ The six functions are represented and the Designer owns the interaction model (see the Minimum Team rule).</div></div>
+  <section class="pnl" id="db-e" aria-labelledby="db-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="db-e-h">Out of scope</h2><span class="ref">mandatory · stops scope creep</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="db-e1"><span class="id">E1</span><span class="t">[Thing that seems in scope but is not, and why.]</span><span class="side"><span class="na">— Out of scope</span></span></li>
+        <li id="db-e2"><span class="id">E2</span><span class="t">[Adjacent problem this work does not address.]</span><span class="side"><span class="na">— Out of scope</span></span></li>
+      </ol>
     </div>
+    <div class="pnl-f">A brief with no out-of-scope entry is incomplete. State each entry firmly.</div>
   </section>
 
-  <footer class="footer">
-    <p>Studio OS · Design Brief · run /annotate on this file to review and return feedback in one paste</p>
-  </footer>
+  <section class="pnl" id="db-f" aria-labelledby="db-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="db-f-h">Open questions</h2><span class="ref">blockers · owner · date</span></div>
+    <div class="pnl-b">
+      <div class="tbox"><table>
+        <thead><tr><th>#</th><th>Question</th><th>Owner</th><th>Needed by</th></tr></thead>
+        <tbody>
+          <tr id="db-f1"><td class="m">F1</td><td>[Question to answer before or during design]</td><td>[name or role]</td><td>[when]</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="pnl-f">Every question has an owner. A question with no owner is a blocker.</div>
+  </section>
+
+  <section class="pnl" id="db-g" aria-labelledby="db-g-h">
+    <div class="pnl-h"><span class="ltr">G</span><h2 id="db-g-h">PM validation gate</h2><span class="ref">before the brief locks</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="db-g1"><span class="id">G1</span><span class="t">The PM confirms that the problem in A is real and specific.<small>[Source: the PM gate output, or the PM's written confirmation.]</small></span><span class="side"><span class="verdict hold">[PASS | HOLD]</span></span></li>
+        <li id="db-g2"><span class="id">G2</span><span class="t">The Strategist confirms that the problem belongs in the product.<small>[Name the tension, if any.]</small></span><span class="side"><span class="verdict hold">[PASS | TENSION]</span></span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Lock the brief only after G1 passes. A problem stated as an assumption fails G1. A Strategist FAIL stops the brief.</div>
+  </section>
+
+  <section class="pnl" id="db-h" aria-labelledby="db-h-h">
+    <div class="pnl-h"><span class="ltr">H</span><h2 id="db-h-h">Design gate</h2><span class="ref">what /studio:design confirms</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="db-h1"><span class="id">H1</span><span class="t">The interaction model solves the problem in A, not an adjacent one.</span><span class="side">A</span></li>
+        <li id="db-h2"><span class="id">H2</span><span class="t">The design addresses every criterion in C. The CD verdict names any criterion it does not address.</span><span class="side">C</span></li>
+        <li id="db-h3"><span class="id">H3</span><span class="t">The design breaks no constraint in D and designs nothing in E.</span><span class="side">D · E</span></li>
+        <li id="db-h4"><span class="id">H4</span><span class="t">The six functions are represented. The Designer owns the interaction model.</span><span class="side">Core · doctrine.md § Minimum Team</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The design demonstrates each item or names the gap.</div>
+  </section>
+
+  <p class="lbl">Cite an item by letter and number, such as C2. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>

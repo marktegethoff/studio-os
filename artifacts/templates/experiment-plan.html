@@ -3,86 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiment — [hypothesis name]</title>
+<meta name="studio:genre" content="verdict">
+<title>Experiment Plan — [hypothesis name]</title>
 <link rel="stylesheet" href="../kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Studio OS · Experiment Plan · owned by /studio:experiment</span>
-    <h1>[Hypothesis name]<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">An experiment frames a falsifiable claim, designs the minimum test that can falsify it, and forecasts what success and failure look like at short, medium, and long horizons using the drum simulation model.</p>
-    <div class="header-meta">
-      <span>[date]</span><span>Owner: [role]</span><span>Status: Planned / Running / Concluded</span>
-    </div>
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>[Hypothesis name]</h1><p class="sub">This plan frames a falsifiable claim and the smallest test that can falsify it. It forecasts success and failure at three horizons with the drum simulation model.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">experiment-plan</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:experiment</span></div>
+    <div class="c"><span class="l">Lead</span><span class="v">[role]</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">[1] · [date]</span></div>
+    <div class="c wide"><span class="l">PM brief</span><span class="v mono">[path to product brief, or "none"]</span></div>
+    <div class="c wide"><span class="l">Status</span><span class="v">[Planned | Running | Concluded]</span></div>
   </header>
 
-  <section class="section">
-    <h2>Hypothesis</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">IF</span><span class="v">[The specific change introduced — a single intervention, not a bundle]</span></div>
-      <div class="dcard"><span class="k">THEN</span><span class="v">[The observable outcome — measurable, not aspirational]</span></div>
-      <div class="dcard"><span class="k">BECAUSE</span><span class="v">[The causal mechanism — why this change should produce this outcome]</span></div>
-      <div class="dcard"><span class="k">Falsifiable when</span><span class="v">[The specific evidence that would disprove the hypothesis]</span></div>
+  <section class="pnl" id="ep-a" aria-labelledby="ep-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="ep-a-h">Hypothesis</h2><span class="ref">IF · THEN · BECAUSE</span></div>
+    <div class="pnl-b">
+      <p class="lead">If [one change, not a bundle], then [measurable outcome], because [causal mechanism]. <span class="wc">[n]/25 words</span></p>
+    </div>
+    <div class="pnl-f">State the hypothesis in this form. If it does not fit the form, it is not ready to test.</div>
+  </section>
+
+  <section class="pnl" id="ep-b" aria-labelledby="ep-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="ep-b-h">Falsification condition</h2><span class="ref">what would disprove it</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-b1"><span class="id">B1</span><span class="t">The experiment falsifies the hypothesis if [evidence that disproves it].</span><span class="side">C1</span></li>
+        <li id="ep-b2"><span class="id">B2</span><span class="t">The experiment confirms the hypothesis if [evidence that supports it].</span><span class="side">C1</span></li>
+        <li id="ep-b3"><span class="id">B3</span><span class="t">[Invariant that holds whatever the outcome.]</span><span class="side">invariant</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Experiment design</h2>
-    <table>
-      <tr><th>Variable</th><th>Value</th></tr>
-      <tr><td>Variant</td><td>[The treatment — what users in the experiment group see/get]</td></tr>
-      <tr><td>Control</td><td>[The baseline — what the control group sees/gets]</td></tr>
-      <tr><td>Population</td><td>[Who is eligible; who is excluded and why]</td></tr>
-      <tr><td>Sample size</td><td>[N per arm; powered to detect the minimum effect of interest]</td></tr>
-      <tr><td>Duration</td><td>[How long; rationale tied to the metric's natural cadence]</td></tr>
-      <tr><td>Assignment</td><td>[Randomization unit and method]</td></tr>
-    </table>
+  <section class="pnl" id="ep-c" aria-labelledby="ep-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="ep-c-h">Metric and counter-metric</h2><span class="ref">measure · against threshold</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-c1"><span class="id">C1</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>Primary metric · [name]</span><span class="mv">[n] · threshold [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+        <li id="ep-c2"><span class="id">C2</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>Secondary metric · [name]</span><span class="mv">[n] · threshold [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+        <li id="ep-c3"><span class="id">C3</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>Counter-metric · [name]</span><span class="mv">[n] · breach at [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+        <li id="ep-c4"><span class="id">C4</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>Counter-metric · [name]</span><span class="mv">[n] · breach at [threshold]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The secondary metric moves the right way or stays flat. A counter-metric breach ends the experiment, whatever the primary result.</div>
   </section>
 
-  <section class="section">
-    <h2>Drum simulation</h2>
-    <p>Three time horizons. For each, name the expected behavior under success and the failure mode that would force a pivot.</p>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Short-term (days–weeks)</span><span class="v"><strong>Success:</strong> [What the metric looks like]<br><strong>Failure:</strong> [What forces a pause]</span></div>
-      <div class="dcard"><span class="k">Medium-term (weeks–months)</span><span class="v"><strong>Success:</strong> [System behavior]<br><strong>Failure:</strong> [Drift signal]</span></div>
-      <div class="dcard"><span class="k">Long-term (months+)</span><span class="v"><strong>Success:</strong> [Compounding behavior]<br><strong>Failure:</strong> [Decay or saturation]</span></div>
+  <section class="pnl" id="ep-d" aria-labelledby="ep-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="ep-d-h">Sample and duration</h2><span class="ref">design · size · time</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-d1"><span class="id">D1</span><span class="t">Variant<small>[The treatment: what the experiment group sees or gets.]</small></span></li>
+        <li id="ep-d2"><span class="id">D2</span><span class="t">Control<small>[The baseline: what the control group sees or gets.]</small></span></li>
+        <li id="ep-d3"><span class="id">D3</span><span class="t">Population<small>[Who is eligible. Who is excluded, and why.]</small></span></li>
+        <li id="ep-d4"><span class="id">D4</span><span class="t">Assignment<small>[Randomization unit and method.]</small></span></li>
+        <li id="ep-d5"><span class="id">D5</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>Sample size per arm</span><span class="mv">[n] · required [n]</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+        <li id="ep-d6"><span class="id">D6</span><div class="t">
+          <div class="meas" style="--val:[n];--lim:[n];--max:[n]">
+            <div class="mh"><span>Duration</span><span class="mv">[n] days · minimum [n] days</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>[n]</span></div>
+          </div></div></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Power the sample to detect the minimum effect of interest. Tie the duration to the natural cadence of the metric.</div>
+  </section>
+
+  <section class="pnl" id="ep-e" aria-labelledby="ep-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="ep-e-h">Decision rules</h2><span class="ref">cites C1 · C3</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-e1"><span class="id">E1</span><span class="t">If the primary metric reaches [threshold] and no counter-metric breaches, ship to all.</span><span class="side">Ship</span></li>
+        <li id="ep-e2"><span class="id">E2</span><span class="t">If the primary metric moves between 0 and [threshold], or a counter-metric breaches, [next action].</span><span class="side">Hold</span></li>
+        <li id="ep-e3"><span class="id">E3</span><span class="t">If the primary metric moves negative, [rollback action].</span><span class="side">Roll back</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Success criteria</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Primary metric and the threshold that constitutes a win]</div></div>
-      <div class="item"><div class="it-desc">[Secondary metrics that must move in the right direction or stay flat]</div></div>
+  <section class="pnl" id="ep-f" aria-labelledby="ep-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="ep-f-h">Risks</h2><span class="ref">what could bias or harm</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-f1"><span class="id">F1</span><span class="t">[Risk: what could bias the result or harm users.]<small>Mitigation: [action].</small></span><span class="side">[owner]</span></li>
+        <li id="ep-f2"><span class="id">F2</span><span class="t">[Risk.]<small>Mitigation: [action].</small></span><span class="side">[owner]</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Counter-metrics</h2>
-    <p>What must NOT degrade. Guardrails that, if breached, end the experiment regardless of primary outcome.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">[Counter-metric 1 — and the breach threshold]</div></div>
-      <div class="item"><div class="it-desc">[Counter-metric 2]</div></div>
+  <section class="pnl" id="ep-g" aria-labelledby="ep-g-h">
+    <div class="pnl-h"><span class="ltr">G</span><h2 id="ep-g-h">Drum simulation</h2><span class="ref">three horizons · success and failure</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-g1"><span class="id">G1</span><span class="t">Short term: days to weeks<small>Success: [what the metric looks like].</small><small>Failure: [what forces a pause].</small></span><span class="side">[scenario]</span></li>
+        <li id="ep-g2"><span class="id">G2</span><span class="t">Medium term: weeks to months<small>Success: [system behavior].</small><small>Failure: [drift signal].</small></span><span class="side">[scenario]</span></li>
+        <li id="ep-g3"><span class="id">G3</span><span class="t">Long term: months and beyond<small>Success: [compounding behavior].</small><small>Failure: [decay or saturation].</small></span><span class="side">[scenario]</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Decision rule</h2>
-    <div class="callout"><p>[Concrete: if primary moves +X% with no counter-metric breach, ship to all. If primary moves 0–X% or any counter breaches, [next action]. If primary moves negative, [rollback action].]</p></div>
+  <section class="pnl" id="ep-h" aria-labelledby="ep-h-h">
+    <div class="pnl-h"><span class="ltr">H</span><h2 id="ep-h-h">Findings</h2><span class="ref">fill after the experiment ends</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-h1"><span class="id">H1</span><span class="t">[Observed results against the hypothesis.]</span></li>
+        <li id="ep-h2"><span class="id">H2</span><span class="t">[Conclusion, in one sentence.]<small>State one of CONFIRMED, FALSIFIED or INCONCLUSIVE.</small></span><span class="side"><span class="verdict hold">[VERDICT]</span></span></li>
+        <li id="ep-h3"><span class="id">H3</span><span class="t">[Consequences: what changes, and lessons for the next experiment.]</span></li>
+      </ol>
+    </div>
   </section>
 
-  <section class="section">
-    <h2>Findings</h2>
-    <p>Filled in after the experiment concludes.</p>
-    <div class="callout"><p>[Observed results vs. hypothesis. Decision taken. Lessons for the next experiment.]</p></div>
-  </section>
-
-  <footer class="footer">
-    <p>Studio OS · Experiment Plan · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <p class="lbl">Cite an item by letter and number, such as C3. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>
