@@ -49,7 +49,7 @@ edges:
 
 ### Established mappings
 
-PM → CD → DE is a guard-node chain. The Six Functions are a minimum-coverage invariant over any artifact-producing graph (`evals/six-functions.map` drives the lint check). `/studio:solve`'s three-iteration convergence is the canonical bounded evaluator-optimizer loop (`loop max:3`).
+PM → CD → DE is a guard-node chain. The Six Functions (the plugin's `memory/doctrine.md` § Minimum Team) are a minimum-coverage invariant over any artifact-producing graph (`evals/six-functions.map` drives the lint check). `/studio:solve`'s three-iteration convergence is the canonical bounded evaluator-optimizer loop (`loop max:3`).
 
 ---
 

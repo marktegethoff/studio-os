@@ -15,7 +15,7 @@ The agent→tier mapping below is authoritative (per-agent `tier:` frontmatter i
 
 ## Core — universal, always present
 
-The Standard Works philosophy (`PHILOSOPHY.md`), universal method (`memory/design-foundations.md`, decision tiers, the Scene Test), the senior gates, and cross-cutting agents. Adopting Studio OS means adopting Core.
+The Standard Works philosophy (`PHILOSOPHY.md`), universal method (`memory/design-foundations.md`, decision tiers, the Scene Test), the studio doctrine (`memory/doctrine.md`, shipped with the plugin), the writing registers (`memory/writing.md`), the senior gates, and cross-cutting agents. Adopting Studio OS means adopting Core.
 
 **Agents (8):** `pm` · `cd` · `de` · `heurist` · `auditor` · `luck` · `competitive-analyst` · `surveyor`
 
