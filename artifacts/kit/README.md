@@ -49,7 +49,7 @@ One person builds from an artifact and another judges it, so it must be citable,
 Every artifact declares how it is written, in `<head>`: `<meta name="studio:genre" content="procedure|verdict|exploratory">`. The plugin's `memory/writing.md` holds the rules, the sentence limits, and the dictionary format. Four markers adjust the check:
 
 - `data-genre="…"` on an element overrides the genre for its subtree.
-- `data-ste="off"` skips the subtree: a quoted draft under critique, a rule-break example, third-party text. `.orig` always carries it.
+- `data-ste="off"` skips the subtree: a quoted draft under critique, a rule-break example, third-party text. `.orig` always carries it. The class alone skips nothing: the checker WARNs when `.orig` lacks `data-ste="off"`.
 - `data-ste="copy"` marks shipping product copy (UI strings). Only the dictionary applies. Product copy follows the product's voice, not studio prose.
 - The check always skips `<script> <style> <svg> <pre> <code> <head>` and bracketed `[placeholders]`.
 

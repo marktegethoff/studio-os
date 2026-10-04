@@ -54,7 +54,7 @@ Example rows: `| SAVE (v) | approved | Add an item to Saved |` and `| bookmark (
 2. Override the genre for one subtree with `data-genre="…"` on its element.
 3. Mark a subtree `data-ste="off"` to skip it. Use it for quoted drafts under critique, rule-break examples, and third-party text.
 4. Mark shipping product copy `data-ste="copy"`. The checker applies the dictionary check only.
-5. Give the `.orig` class (a quoted draft with red rule breaks) `data-ste="off"`.
+5. Give the `.orig` class (a quoted draft with red rule breaks) `data-ste="off"`. The class alone skips nothing.
 
 The checker always skips `<script>`, `<style>`, `<svg>`, `<pre>`, `<code>`, and `<head>` content. It also skips bracketed placeholders `[…]`.
 
@@ -71,6 +71,7 @@ The checker always skips `<script>`, `<style>`, `<svg>`, `<pre>`, `<code>`, and 
 - A hedge or interjection occurs in `procedure` or `verdict`: oops, sorry, unfortunately, hopefully, perhaps, maybe, "it looks like", "seems to", "kind of", "sort of".
 - An -ing word occurs in `procedure`. It is not an allowlisted noun or adjective, and not an approved dictionary word.
 - A not-approved dictionary word occurs in any text, `copy` included. The WARN names the alternative.
+- An element with the `.orig` class lacks its own `data-ste="off"`. The checker then reads the quoted draft as prose.
 
 ## Before and after
 

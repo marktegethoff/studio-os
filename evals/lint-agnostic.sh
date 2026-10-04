@@ -11,12 +11,15 @@
 #        content duplication + #filePath resource loading when
 #        sharing_mechanism: spm-local. Runs regardless of scaffold_state.
 #   R4   skills do not hardcode paths — skills/**                      (WARN)
+#        paths prefixed ${CLAUDE_PLUGIN_ROOT}/ are plugin-relative and exempt.
 #   R5   specialist scaffold anchor   — agents/*-engineer.md           (FAIL)
 #        exactly one fenced ```scaffold-commands block; required keys present.
 #   R6   kit reference                 — agents/** + skills/**          (FAIL)
 #        any file with artifact:/artifacts: frontmatter must reference
 #        the named template(s) or artifacts/kit/studio.css; named
 #        templates must exist in artifacts/templates/.
+#        R6.c a template declared by more than one agent is a FAIL (single
+#             owner, the plugin's memory/doctrine.md § Ownership).
 #   R7   graph block validation        — skills/**                      (FAIL)
 #        exactly one fenced ```graph block per graph-declaring skill;
 #        agents resolve; edges reference declared nodes; loops bounded;
@@ -40,6 +43,12 @@
 #        Why this shape/Prevents sections (per patterns/README.md).
 #   R10  memory citations name tier    — agents/** + skills/**          (FAIL)
 #        a bare `memory/…` citation resolves only inside the plugin root.
+#        R10.a a Core memory file (any plugin memory/<name>.md) cited at the
+#              User-tier path ~/.claude/memory/<name>.md.
+#        R10.b a line naming studio doctrine (Six Functions, Artifact Standard,
+#              …) together with CLAUDE.md — doctrine is cited from the
+#              plugin's memory/doctrine.md; a plugin-root CLAUDE.md is not
+#              loaded in consuming projects.
 #   R11  agent model & effort          — agents/*.md                    (FAIL)
 #        every agent's frontmatter model/effort matches its row in the
 #        memory/orchestration.md § Model and effort table (named row, else
@@ -51,13 +60,20 @@
 #        every agent has a `## <Name> —` heading in an evals/*.eval.md (name
 #        lowercased, spaces→hyphens) or is the file's singular `Agent:` line;
 #        every skill has a `## <name>` heading in evals/skills.eval.md.
+#   R13  writing check                 — templates, examples, projects   (FAIL)
+#        evals/ste-check.sh (the genres in memory/writing.md) over
+#        artifacts/templates/*.html and docs/examples/*.html: each declares a
+#        valid <meta name="studio:genre"> and has no FAIL (sentence over the
+#        genre's limit). With --project: the project's design/ specs/ reviews/
+#        decisions/ HTML, with --vocab from .claude/memory/design-vocabulary.md
+#        when present. ste-check WARNs are counted per file as one lint WARN.
 #   IBR  included-by-reference         — project-level                  (FAIL)
 #        the invariant the design exists to protect.
 #        Runs regardless of scaffold_state.
 #
 # Usage:
-#   lint-agnostic.sh                          plugin-internal (R1, R2, R4, R5)
-#   lint-agnostic.sh --project <path>         + project-level (R3, IBR)
+#   lint-agnostic.sh                          plugin-internal (R1, R2, R4–R13)
+#   lint-agnostic.sh --project <path>         + project-level (R3, IBR, R13 over the project's artifacts)
 #
 # Exit codes:
 #   0  all PASS (WARNs allowed)
@@ -260,11 +276,17 @@ EXEMPT_RE='^(agents/|skills/|evals/|templates/|memory/|\.claude/|\.\./|http)'
 PATH_RE='(\.{0,2}/)?[a-zA-Z0-9_.-]+(/[a-zA-Z0-9_.-]+)+'
 PATH_NARROW_RE='\.(md|swift|ts|tsx|jsx|js|mjs|cjs|json|yml|yaml|html|css|scss|sh|bash|py|kt|gradle|toml|xml|plist|sql|graphql|gql|env|cfg|ini|txt|pbxproj|lock)([^a-zA-Z0-9]|$)|^(\.\./|\./|/)'
 
+# A path prefixed ${CLAUDE_PLUGIN_ROOT}/ is plugin-relative by construction: drop
+# it before matching (sed keeps one output line per input line, so line numbers
+# stay aligned). The brace skip below silences a whole line that carries a ${…};
+# dropping the path first leaves such a line's other paths checked.
+PLUGIN_ROOT_PATH_SED='s#\$\{CLAUDE_PLUGIN_ROOT\}/[^[:space:])>"]*##g'
+
 r4_hits=0
 for f in "${SKILL_FILES[@]}"; do
   [[ -r "$f" ]] || continue
   rel="$(rel_plugin "$f")"
-  prose="$(prose_only "$f")"
+  prose="$(prose_only "$f" | sed -E "$PLUGIN_ROOT_PATH_SED")"
 
   while IFS= read -r line; do
     lineno="${line%%:*}"
@@ -411,6 +433,24 @@ for f in "${ALL_ARTIFACT_FILES[@]}"; do
     fi
   done <<< "$artifacts"
 done
+
+# R6.c  single owner — a template name declared by more than one AGENT is a FAIL
+#       (the plugin's memory/doctrine.md § Ownership). Skills may also declare
+#       artifacts and do not count.
+r6c_owners=""
+for f in "${AGENT_FILES[@]}"; do
+  [[ -r "$f" ]] || continue
+  while IFS= read -r artifact_name; do
+    [[ -n "$artifact_name" ]] && r6c_owners="$r6c_owners$artifact_name $(basename "$f" .md)"$'\n'
+  done <<< "$(frontmatter_artifacts "$f")"
+done
+while IFS= read -r dup; do
+  [[ -n "$dup" ]] || continue
+  fail "artifacts/templates/${dup%%:*}.html is declared by more than one agent (${dup#*:}); one agent owns each deliverable (R6.c)"
+  r6_hits=$((r6_hits + 1))
+done < <(printf '%s' "$r6c_owners" | sort -u | awk '
+  { n[$1]++; a[$1] = (a[$1] == "" ? $2 : a[$1] ", " $2) }
+  END { for (k in n) if (n[k] > 1) print k ":" a[k] }' | sort)
 
 if [[ $r6_files_checked -eq 0 ]]; then
   info "no files declare artifact: — R6 N/A"
@@ -779,8 +819,24 @@ fi
 # Exempt: lines that also carry `.claude/memory/` are the deliberate fallback
 # chains (".claude/memory/X; if not found, check memory/X"), which degrade
 # gracefully across project layouts by design.
+#
+# R10.a  A Core file (any memory/<name>.md in the plugin) cited at the User-tier
+#        path ~/.claude/memory/<name>.md. The User tier holds user-profile.md
+#        and nothing the plugin ships, so such a citation never resolves.
+# R10.b  A line that names studio doctrine together with CLAUDE.md. A plugin-root
+#        CLAUDE.md is not loaded in consuming projects; the doctrine ships in
+#        the plugin's memory/doctrine.md and is cited from there.
 
 section "R10 · memory citations name their tier — agents/** + skills/**"
+
+CORE_MEMORY_NAMES=""
+for mf in "$PLUGIN_ROOT"/memory/*.md; do
+  [[ -r "$mf" ]] || continue
+  CORE_MEMORY_NAMES="$CORE_MEMORY_NAMES|$(basename "$mf" .md)"
+done
+CORE_MEMORY_NAMES="${CORE_MEMORY_NAMES#|}"
+USER_TIER_PREFIX='(~|\$HOME|\$\{HOME\})/\.claude/memory/'
+DOCTRINE_TERMS='Six Functions|Artifact Standard|Calibration Gate|Decision hierarchy|Definition of Finished|Communication Standard|Behavioral Rules|Process Sequence|Ethos'
 
 r10_hits=0
 for f in "${AGENT_FILES[@]}" "${SKILL_FILES[@]}"; do
@@ -791,8 +847,23 @@ for f in "${AGENT_FILES[@]}" "${SKILL_FILES[@]}"; do
     fail "$rel:${hit%%:*} — bare \`memory/…\` citation does not name its tier (R10)"
     r10_hits=$((r10_hits + 1))
   done < <(grep -n '`memory/' "$f" 2>/dev/null | grep -v "plugin's \`memory/" | grep -v '\.claude/memory/')
+
+  if [[ -n "$CORE_MEMORY_NAMES" ]]; then
+    while IFS= read -r hit; do
+      [[ -n "$hit" ]] || continue
+      cited="${hit#*:}"
+      fail "$rel:${hit%%:*} — Core memory file cited at the User-tier path \"$cited\"; cite the plugin's \`memory/${cited##*/}\` (R10.a)"
+      r10_hits=$((r10_hits + 1))
+    done < <(grep -noE "${USER_TIER_PREFIX}(${CORE_MEMORY_NAMES})\\.md" "$f" 2>/dev/null)
+  fi
+
+  while IFS= read -r hit; do
+    [[ -n "$hit" ]] || continue
+    fail "$rel:${hit%%:*} — studio doctrine cited from CLAUDE.md; cite the plugin's \`memory/doctrine.md\` § <Section> (R10.b)"
+    r10_hits=$((r10_hits + 1))
+  done < <(grep -nwiE "$DOCTRINE_TERMS" "$f" 2>/dev/null | grep -F 'CLAUDE.md')
 done
-[[ $r10_hits -eq 0 ]] && info "all memory citations name their tier"
+[[ $r10_hits -eq 0 ]] && info "all memory citations name their tier; no Core file at a User path; no doctrine cited from CLAUDE.md"
 
 # ── R11 — agent model & effort ────────────────────────────────────────────────
 #
@@ -1101,6 +1172,95 @@ else
   done
 fi
 [[ $r12_hits -eq 0 ]] && info "${#AGENT_FILES[@]} agents and ${#SKILL_FILES[@]} skills have eval coverage"
+
+# ── R13 — writing check ───────────────────────────────────────────────────────
+#
+# evals/ste-check.sh is the mechanical half of the plugin's memory/writing.md
+# (the genres). Every shipped artifact must declare a valid
+# <meta name="studio:genre"> and pass the check — a sentence over its genre's
+# limit is a FAIL — so the templates teach the writing they enforce:
+#   plugin mode   artifacts/templates/*.html and docs/examples/*.html
+#   --project     the project's design/ specs/ reviews/ decisions/ HTML, with
+#                 --vocab from .claude/memory/design-vocabulary.md when present
+# ste-check owns the rules (the meta is its FAIL too); the lint lists each
+# finding. ste-check WARNs (hedges, -ing in procedure, dictionary words, a
+# quoted draft without data-ste="off") are counted per file as one lint WARN and
+# never fail the lint.
+
+section "R13 · writing check — templates, examples${PROJECT_ROOT:+, project artifacts}"
+
+STE_CHECK="$SCRIPT_DIR/ste-check.sh"
+r13_hits=0
+r13_checked=0
+
+# One WARN per file, not one per finding: the lint gates, ste-check lists.
+r13_flush_warns() {
+  [[ $2 -gt 0 ]] || return 0
+  warn "$1 — $2 writing WARN, first: ${3% — \"*} — list them with evals/ste-check.sh (R13)"
+}
+
+# ste_lint <dir> <vocab-or-empty> <file>...   (files relative to <dir>, or absolute)
+ste_lint() {
+  local dir="$1" vocab="$2" out rc line wfile="" wn=0 wfirst="" f
+  shift 2
+  local args=()
+  [[ -n "$vocab" ]] && args+=(--vocab "$vocab")
+  out="$(cd "$dir" && bash "$STE_CHECK" ${args[@]+"${args[@]}"} "$@" 2>&1)"; rc=$?
+  if [[ $rc -ne 0 && $rc -ne 1 ]]; then
+    fail "ste-check.sh could not run (exit $rc): $(printf '%s\n' "$out" | head -1) (R13)"
+    r13_hits=$((r13_hits + 1))
+    return
+  fi
+  r13_checked=$((r13_checked + $#))
+  while IFS= read -r line; do
+    case "$line" in
+      "FAIL  "*)
+        fail "${line#FAIL  } (R13)"; r13_hits=$((r13_hits + 1)) ;;
+      "WARN  "*)
+        f="${line#WARN  }"; f="${f%%:*}"
+        if [[ "$f" != "$wfile" ]]; then
+          r13_flush_warns "$wfile" "$wn" "$wfirst"
+          wfile="$f"; wn=0; wfirst="${line#WARN  }"; wfirst="${wfirst#*:}"
+        fi
+        wn=$((wn + 1)) ;;
+    esac
+  done <<< "$out"
+  r13_flush_warns "$wfile" "$wn" "$wfirst"
+}
+
+if [[ ! -r "$STE_CHECK" ]]; then
+  fail "$(rel_plugin "$STE_CHECK") is missing — the writing check cannot run (R13)"
+  r13_hits=$((r13_hits + 1))
+else
+  R13_PLUGIN_FILES=()
+  while IFS= read -r line; do
+    [[ -n "$line" ]] && R13_PLUGIN_FILES+=("$(rel_plugin "$line")")
+  done < <({ find "$PLUGIN_ROOT/artifacts/templates" -maxdepth 1 -type f -name '*.html' 2>/dev/null
+             find "$PLUGIN_ROOT/docs/examples" -maxdepth 1 -type f -name '*.html' 2>/dev/null; } | sort)
+  if [[ ${#R13_PLUGIN_FILES[@]} -eq 0 ]]; then
+    info "no templates or examples — R13 N/A for the plugin"
+  else
+    ste_lint "$PLUGIN_ROOT" "" "${R13_PLUGIN_FILES[@]}"
+  fi
+
+  if [[ -n "$PROJECT_ROOT" ]]; then
+    R13_PROJECT_FILES=()
+    for d in design specs reviews decisions; do
+      [[ -d "$PROJECT_ROOT/$d" ]] || continue
+      while IFS= read -r line; do
+        [[ -n "$line" ]] && R13_PROJECT_FILES+=("${line#$PROJECT_ROOT/}")
+      done < <(find "$PROJECT_ROOT/$d" -type f -name '*.html' 2>/dev/null | sort)
+    done
+    R13_VOCAB="$PROJECT_ROOT/.claude/memory/design-vocabulary.md"
+    [[ -r "$R13_VOCAB" ]] || R13_VOCAB=""
+    if [[ ${#R13_PROJECT_FILES[@]} -eq 0 ]]; then
+      info "project has no design/ specs/ reviews/ decisions/ HTML — R13 N/A for the project"
+    else
+      ste_lint "$PROJECT_ROOT" "$R13_VOCAB" "${R13_PROJECT_FILES[@]}"
+    fi
+  fi
+fi
+[[ $r13_hits -eq 0 ]] && info "$r13_checked artifact(s) declare a valid genre and pass the writing check"
 
 # ── project-level checks (R3 + IBR) ───────────────────────────────────────────
 
