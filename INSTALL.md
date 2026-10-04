@@ -71,6 +71,18 @@ In a team setting, one person runs `/studio:init` per product and commits the re
 
 ---
 
+## Recommended settings
+
+Optional. Studio OS pairs well with Claude Code's advisor — cheap execution, stronger judgment at decision points. Set `advisorModel` in your Claude Code settings (or `/advisor fable` in a session, or `claude --advisor fable` at launch):
+
+```json
+{ "advisorModel": "fable" }
+```
+
+`"opus"` also works, except for the adversary-model refuter, which is itself `fable` and accepts only a `fable` advisor. Studio subagents inherit the advisor. It is experimental and works on the Anthropic API only (not Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Foundry). Each call re-reads the full transcript and counts toward plan limits or the API bill. No studio skill depends on it; without an advisor, every run is complete.
+
+---
+
 ## Enterprise / no-web environments
 
 Some enterprise Claude Code deployments disable WebSearch. Three agents require it and have no useful offline mode: **Scout**, **Research Sweep**, and **Competitive Analyst**. All three are skipped automatically when WebSearch is unavailable.

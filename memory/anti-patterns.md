@@ -1,6 +1,6 @@
 # Anti-pattern Catalog
 
-Named failure modes in design and product work. Agents cite entries by name when a pattern fires. Each entry includes the observable tell, the structural reason it fails, and the minimum viable correction.
+Named failure modes in design, product, and studio process. Agents cite entries by name when a pattern fires. Each entry includes the observable tell, the structural reason it fails, and the minimum viable correction.
 
 ---
 
@@ -89,6 +89,22 @@ Named failure modes in design and product work. Agents cite entries by name when
 **Tell:** A synthesis of parallel discipline reviews reads as unanimous; no verdict names a disagreement, yet the individual reviews conflicted. The join smoothed the dissent away.
 **Why it fails:** The studio's quality comes from structured disagreement between disciplines. A synthesis that averages conflicting judgments discards exactly the signal the fan-out was paid for — the resulting verdict is confident, polished, and owned by no one. Consensus produced by omission is not agreement; it is slop with a byline.
 **Correction:** Joins preserve dissent. The verdict artifact carries a dissent ledger: which discipline disagreed, with what, and why it was overruled. A gate reads the dissents before ruling; an overruled dissent is a decision, a vanished one is a defect.
+
+---
+
+### Second Opinion
+
+**Tell:** A refutation request returns a balanced review — strengths, concerns, "overall sound." The verdict is neither attacked nor conceded.
+**Why it fails:** A refutation exists to test whether a SHIP survives its strongest opposition. A balanced review answers a different question, and its hedges let any verdict stand. The pass is paid for and the independence it bought is spent on agreement.
+**Correction:** A refutation answers one question: what is the strongest case that this verdict is wrong? Either make it, with evidence, or state "Refutation failed" and stop.
+
+---
+
+### Manufactured Defect
+
+**Tell:** A refutation names defects the artifact does not evidence — "may not scale," "edge cases unhandled," "needs more testing" — risks that would apply to any artifact of its kind.
+**Why it fails:** The refuter was asked to find something, so it found something. A generic risk cannot be checked or fixed, so it sends work back with nothing to change and teaches the gate to discount every refutation, including the true one.
+**Correction:** Every named defect quotes or points to the artifact line it lives in. A defect that would apply to any artifact is not a finding.
 
 ---
 
