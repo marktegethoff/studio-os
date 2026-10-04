@@ -3,86 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiment — Streak Shield Recovery Path</title>
+<meta name="studio:genre" content="verdict">
+<title>Experiment Plan — Streak Shield Recovery Path</title>
 <link rel="stylesheet" href="../../artifacts/kit/studio.css">
 <!-- <link rel="stylesheet" href="../../.claude/memory/brand.css"> -->
 </head>
 <body>
-<div class="wrap">
+<div class="doc">
 
-  <header class="header">
-    <span class="eyebrow">Meridian · Experiment Plan · owned by /studio:experiment</span>
-    <h1>Streak Shield Recovery Path<span style="color:var(--accent)">.</span></h1>
-    <p class="header-sub">An experiment frames a falsifiable claim, designs the minimum test that can falsify it, and forecasts what success and failure look like at short, medium, and long horizons using the drum simulation model.</p>
-    <div class="header-meta">
-      <span>2026-05-27</span><span>Owner: Product / Growth</span><span>Status: Planned</span>
-    </div>
+  <header class="tblock">
+    <div class="c title"><span class="l">Title</span><h1>Streak Shield Recovery Path</h1><p class="sub">This plan frames a falsifiable claim and the smallest test that can falsify it. It forecasts success and failure at three horizons and names the binding assumption.</p></div>
+    <div class="c"><span class="l">Artifact</span><span class="v mono">experiment-plan</span></div>
+    <div class="c"><span class="l">Workflow</span><span class="v mono">/studio:experiment</span></div>
+    <div class="c"><span class="l">Lead</span><span class="v">Product / Growth</span></div>
+    <div class="c"><span class="l">Revision</span><span class="v mono">1 · 2026-05-27</span></div>
+    <div class="c wide"><span class="l">PM brief</span><span class="v mono">none</span></div>
+    <div class="c wide"><span class="l">Status</span><span class="v">Example</span></div>
   </header>
 
-  <section class="section">
-    <h2>Hypothesis</h2>
-    <div class="grid2">
-      <div class="dcard"><span class="k">IF</span><span class="v">We show a streak shield — one free recovery per 7-day period — to users who break their first tracked streak in days 8–14, surfaced immediately at the moment of break with a clear recovery path</span></div>
-      <div class="dcard"><span class="k">THEN</span><span class="v">30-day retention for that cohort increases by at least 12% relative to control</span></div>
-      <div class="dcard"><span class="k">BECAUSE</span><span class="v">The 61% abandonment cliff at days 8–14 is driven by perceived irrecoverable failure — users interpret a reset-to-zero as a definitive signal that they are not a "habit person," triggering exit rather than re-engagement; a bounded recovery path removes that interpretation without eliminating the cost of breaking habits</span></div>
-      <div class="dcard"><span class="k">Falsifiable when</span><span class="v">30-day retention lifts ≥12% for the streak-shield cohort AND week-3 daily active rate is not lower than control — both conditions required; retention gain without maintained engagement proves the shield reduces urgency rather than rescues commitment</span></div>
+  <section class="pnl" id="ep-a" aria-labelledby="ep-a-h">
+    <div class="pnl-h"><span class="ltr">A</span><h2 id="ep-a-h">Hypothesis</h2><span class="ref">IF · THEN · BECAUSE</span></div>
+    <div class="pnl-b">
+      <p class="lead">If we offer one free streak recovery after a first break, then 30-day retention rises 12% over control, because a reset stops feeling final. <span class="wc">24/25 words</span></p>
+    </div>
+    <div class="pnl-f">State the hypothesis in this form. If it does not fit the form, it is not ready to test.</div>
+  </section>
+
+  <section class="pnl" id="ep-b" aria-labelledby="ep-b-h">
+    <div class="pnl-h"><span class="ltr">B</span><h2 id="ep-b-h">Falsification condition</h2><span class="ref">what would disprove it</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-b1"><span class="id">B1</span><span class="t">The experiment falsifies the hypothesis if 30-day retention lifts less than 12%, or if week-3 daily active rate falls below control.</span><span class="side">C1 · C2</span></li>
+        <li id="ep-b2"><span class="id">B2</span><span class="t">The experiment confirms the hypothesis if 30-day retention lifts at least 12% and week-3 daily active rate holds at control or above. <small>Both conditions are required. A retention gain without held engagement shows that the shield lowers urgency. It does not rescue commitment.</small></span><span class="side">C1 · C2</span></li>
+        <li id="ep-b3"><span class="id">B3</span><span class="t">No concurrent experiment touches the streak surface. Assignment holds for the full 30-day window.</span><span class="side">invariant</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Experiment design</h2>
-    <table>
-      <tr><th>Variable</th><th>Value</th></tr>
-      <tr><td>Variant</td><td>On first tracked streak break in days 8–14: streak counter holds, shield indicator appears ("1 recovery available this week"), user prompted to resume tomorrow — streak continues if next day completed</td></tr>
-      <tr><td>Control</td><td>Current behavior: streak counter resets to zero on missed day, no acknowledgment or recovery path shown</td></tr>
-      <tr><td>Population</td><td>New users (account age ≤ 14 days) who complete at least one tracked habit on day 7 or earlier and miss a tracked day for the first time in the days 8–14 window; excludes users who already churned before day 8 and users in any concurrent experiment touching the streak surface</td></tr>
-      <tr><td>Sample size</td><td>Minimum 800 per arm (1,600 total) to detect a 12% retention lift at 80% power, α = 0.05; based on current new-user volume this requires two 30-day cohort intakes</td></tr>
-      <tr><td>Duration</td><td>30 days per cohort (matching the primary retention metric horizon), two sequential cohort intakes — 60 days total data collection before analysis</td></tr>
-      <tr><td>Assignment</td><td>User-level random assignment (50/50 split) at the moment the qualifying first streak break is detected; assignment persists for the full 30-day observation window</td></tr>
-    </table>
+  <section class="pnl" id="ep-c" aria-labelledby="ep-c-h">
+    <div class="pnl-h"><span class="ltr">C</span><h2 id="ep-c-h">Metric and counter-metric</h2><span class="ref">measure · against threshold</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-c1"><span class="id">C1</span><div class="t">
+          <div class="meas" style="--val:0;--lim:12;--max:20">
+            <div class="mh"><span>Primary metric · 30-day retention lift, relative to control</span><span class="mv">pending · min 12%</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>10</span><span>20</span></div>
+          </div></div></li>
+        <li id="ep-c2"><span class="id">C2</span><span class="t">Secondary metric · week-3 daily active rate <small>The shield cohort holds at or above control. This is the engagement integrity check, and it must not degrade.</small></span><span class="side">≥ control</span></li>
+        <li id="ep-c3"><span class="id">C3</span><div class="t">
+          <div class="meas" style="--val:0;--lim:3;--max:6">
+            <div class="mh"><span>Counter-metric · week-3 streak continuation, points below control</span><span class="mv">pending · breach at 3</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>3</span><span>6</span></div>
+          </div>
+           <small>A larger drop shows that the shield erodes the perceived cost of breaking a habit. This is the core risk of the intervention.</small></div></li>
+        <li id="ep-c4"><span class="id">C4</span><div class="t">
+          <div class="meas" style="--val:0;--lim:60;--max:100">
+            <div class="mh"><span>Counter-metric · shield usage by week 4, share of eligible cohort</span><span class="mv">pending · breach at 60%</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div>
+          </div>
+           <small>Unusually high use means that users skip on purpose. They treat the shield as a skipping mechanism, not an emergency buffer.</small></div></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The secondary metric moves the right way or stays flat. A counter-metric breach ends the experiment, whatever the primary result.</div>
   </section>
 
-  <section class="section">
-    <h2>Drum simulation</h2>
-    <p>Three time horizons. For each, name the expected behavior under success and the failure mode that would force a pivot.</p>
-    <div class="grid2">
-      <div class="dcard"><span class="k">Short-term (days 8–14)</span><span class="v"><strong>Success:</strong> Shield cohort same-day or next-day resume rate is meaningfully higher than control's post-reset return rate; abandonment in the days 8–14 window drops below 40% vs. current 61%.<br><strong>Failure:</strong> Shield cohort abandons at the same rate as control — suggests the problem is genuine disengagement, not perceived irrecoverability; pause and investigate whether the shield UX was understood.</span></div>
-      <div class="dcard"><span class="k">Medium-term (days 15–30)</span><span class="v"><strong>Success:</strong> Shield cohort maintains ≥ control week-3 daily active rate; streak lengths in the shield group at day 30 are equal to or longer than control streaks at day 30 — evidence that users who were retained remained genuinely engaged.<br><strong>Failure:</strong> Shield cohort week-3 DAR drops below control — indicates the shield delayed exit without changing the underlying behavior pattern; the recovery path may have taught users that streaks are negotiable.</span></div>
-      <div class="dcard"><span class="k">Long-term (months+)</span><span class="v"><strong>Success:</strong> Day-60 and day-90 retention tracks higher for the shield cohort; shield users accumulate longer net streaks over a 90-day window, supporting rollout of shield as a permanent mechanic.<br><strong>Failure:</strong> Retained users plateau at week-5 or earlier at the same rate as control — shield postponed but did not prevent the same eventual disengagement, indicating a deeper onboarding or habit-formation gap the shield alone cannot address.</span></div>
+  <section class="pnl" id="ep-d" aria-labelledby="ep-d-h">
+    <div class="pnl-h"><span class="ltr">D</span><h2 id="ep-d-h">Sample and duration</h2><span class="ref">design · size · time</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-d1"><span class="id">D1</span><span class="t">Variant <small>On a first tracked streak break in days 8–14, the streak counter holds. A shield indicator reads <span data-ste="copy">"1 recovery available this week"</span>. The user is prompted to resume tomorrow. The streak continues if the user completes the next day.</small></span></li>
+        <li id="ep-d2"><span class="id">D2</span><span class="t">Control <small>Current behavior. The streak counter resets to zero on a missed day. The product shows no acknowledgment and no recovery path.</small></span></li>
+        <li id="ep-d3"><span class="id">D3</span><span class="t">Population <small>Eligible users are new (account age ≤ 14 days). They complete a tracked habit by day 7. They then miss a tracked day for the first time in days 8–14. Excluded: users who churned before day 8, and users in any concurrent experiment on the streak surface.</small></span></li>
+        <li id="ep-d4"><span class="id">D4</span><span class="t">Assignment <small>User-level random assignment, 50/50, when the product detects the qualifying first break. Assignment persists for the full 30-day observation window.</small></span></li>
+        <li id="ep-d5"><span class="id">D5</span><div class="t">
+          <div class="meas" style="--val:800;--lim:800;--max:1000">
+            <div class="mh"><span>Sample size per arm</span><span class="mv">800 · min 800</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>500</span><span>1,000</span></div>
+          </div>
+           <small>1,600 in total. This sample detects a 12% retention lift at 80% power and α = 0.05. Current new-user volume needs two 30-day cohort intakes.</small></div></li>
+        <li id="ep-d6"><span class="id">D6</span><div class="t">
+          <div class="meas" style="--val:30;--lim:30;--max:60">
+            <div class="mh"><span>Duration per cohort</span><span class="mv">30 days · min 30</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>30</span><span>60</span></div>
+          </div>
+           <small>The 30 days match the horizon of the primary metric. Two sequential cohort intakes give 60 days of data before analysis.</small></div></li>
+      </ol>
+    </div>
+    <div class="pnl-f">Power the sample to detect the minimum effect of interest. Tie the duration to the natural cadence of the metric.</div>
+  </section>
+
+  <section class="pnl" id="ep-e" aria-labelledby="ep-e-h">
+    <div class="pnl-h"><span class="ltr">E</span><h2 id="ep-e-h">Decision rules</h2><span class="ref">cites C1 · C3 · C4</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-e1"><span class="id">E1</span><span class="t">If 30-day retention lifts at least 12% and no counter-metric breaches, ship the shield to all new users. <small>Schedule a day-90 follow-up to confirm that the gain holds.</small></span><span class="side">Ship</span></li>
+        <li id="ep-e2"><span class="id">E2</span><span class="t">If 30-day retention lifts 5–11% and no counter-metric breaches, do not ship. <small>Run a follow-on experiment with a more prominent recovery path, or pair the shield with a push notification. Do this before you conclude that the mechanic is worth its complexity.</small></span><span class="side">Hold</span></li>
+        <li id="ep-e3"><span class="id">E3</span><span class="t">If 30-day retention is flat or negative, or any counter-metric breaches, roll back immediately. <small>Treat the problem as disengagement, not perceived failure. Investigate onboarding and habit-selection quality as the next lever.</small></span><span class="side">Roll back</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Success criteria</h2>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">30-day retention rate for shield cohort ≥ control + 12 percentage points (primary win threshold)</div></div>
-      <div class="item"><div class="it-desc">Week-3 daily active rate for shield cohort ≥ control week-3 daily active rate (engagement integrity check — must not degrade)</div></div>
+  <section class="pnl" id="ep-f" aria-labelledby="ep-f-h">
+    <div class="pnl-h"><span class="ltr">F</span><h2 id="ep-f-h">Risks</h2><span class="ref">assumption register · binding first</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-f1"><span class="id">F1</span><span class="t">Binding assumption: perceived irrecoverable failure drives the 61% abandonment cliff in days 8–14. <small>A reset to zero reads as proof that the user is not a "habit person", so the user exits and does not return. Mitigation: the short-term horizon G1 tests it. Equal abandonment in both arms falsifies it.</small></span><span class="side">binding</span></li>
+        <li id="ep-f2"><span class="id">F2</span><span class="t">The shield may delay exit and not prevent it. <small>Mitigation: the week-3 condition in B2, and the day-60 and day-90 follow-up in G3.</small></span><span class="side">B2 · G3</span></li>
+        <li id="ep-f3"><span class="id">F3</span><span class="t">Users may use the shield to skip on purpose. <small>Mitigation: counter-metric C4 caps shield usage at 60% of the eligible cohort by week 4.</small></span><span class="side">C4</span></li>
+      </ol>
+    </div>
+    <div class="pnl-f">The assumption-mapper names the binding assumption first. Each risk cites the item that tests it.</div>
+  </section>
+
+  <section class="pnl" id="ep-g" aria-labelledby="ep-g-h">
+    <div class="pnl-h"><span class="ltr">G</span><h2 id="ep-g-h">Scenarios by horizon</h2><span class="ref">three horizons · success and failure</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-g1"><span class="id">G1</span><div class="t">Short term: days 8–14
+          <div class="meas over" style="--val:61;--lim:40;--max:100">
+            <div class="mh"><span>Abandonment in days 8–14</span><span class="mv">61% now · target below 40%</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div>
+          </div>
+           <small>Success: the same-day or next-day resume rate of the shield cohort beats the post-reset return rate of control. Abandonment drops below 40%.</small>
+           <small>Failure: the shield cohort abandons at the control rate. The cause is then genuine disengagement, not perceived irrecoverability. Pause and check that users understood the shield.</small></div><span class="side">tests F1</span></li>
+        <li id="ep-g2"><span class="id">G2</span><span class="t">Medium term: days 15–30 <small>Success: the shield cohort holds at least the control week-3 daily active rate. Day-30 streaks match or exceed control streaks, so retained users stay engaged.</small> <small>Failure: week-3 daily active rate falls below control. The shield delayed exit and did not change the behavior pattern. It may have taught users that streaks are negotiable.</small></span><span class="side">tests F2</span></li>
+        <li id="ep-g3"><span class="id">G3</span><span class="t">Long term: months and beyond <small>Success: day-60 and day-90 retention stays higher for the shield cohort. Shield users build longer net streaks over 90 days. This supports a permanent shield mechanic.</small> <small>Failure: retained users plateau at week 5 or earlier, at the control rate. The shield postponed disengagement and did not prevent it. A deeper onboarding or habit-formation gap remains.</small></span><span class="side">tests F2</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Counter-metrics</h2>
-    <p>What must NOT degrade. Guardrails that, if breached, end the experiment regardless of primary outcome.</p>
-    <div class="itemlist">
-      <div class="item"><div class="it-desc">Week-3 streak continuation rate in shield cohort must not fall more than 3 percentage points below control — a larger drop signals the shield is eroding the perceived cost of breaking habits, the core risk of the intervention</div></div>
-      <div class="item"><div class="it-desc">Shield usage rate must not exceed 60% of eligible cohort by week 4 — unusually high shield consumption would indicate users are deliberately using the recovery as a skipping mechanism rather than as an emergency buffer</div></div>
+  <section class="pnl" id="ep-h" aria-labelledby="ep-h-h">
+    <div class="pnl-h"><span class="ltr">H</span><h2 id="ep-h-h">Findings</h2><span class="ref">fill after the experiment ends</span></div>
+    <div class="pnl-b">
+      <ol class="items">
+        <li id="ep-h1"><span class="id">H1</span><span class="t">No results yet. The plan awaits two cohort intakes. Record the observed results against the hypothesis here.</span></li>
+        <li id="ep-h2"><span class="id">H2</span><span class="t">No conclusion yet. <small>State one of CONFIRMED, FALSIFIED or INCONCLUSIVE.</small></span><span class="side"><span class="verdict hold">PENDING</span></span></li>
+        <li id="ep-h3"><span class="id">H3</span><span class="t">Record the consequences here: what changes, and lessons for the next experiment. Decision rules E1 to E3 apply.</span></li>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Decision rule</h2>
-    <div class="callout"><p>If 30-day retention lifts ≥12% AND week-3 streak continuation rate is within 3 points of control AND shield usage rate stays below 60%: ship streak shield to all new users, schedule a day-90 follow-up to confirm the retention gain holds. If 30-day retention lifts 5–11% with no counter-metric breach: do not ship; run a follow-on experiment testing a more prominent recovery path or pairing the shield with a push notification before concluding the mechanic is worth the complexity. If 30-day retention is flat or negative, or any counter-metric breaches: roll back immediately, treat the problem as a disengagement issue rather than a perceived-failure issue, and investigate onboarding and habit-selection quality as the next lever.</p></div>
-  </section>
-
-  <section class="section">
-    <h2>Findings</h2>
-    <p>Filled in after the experiment concludes.</p>
-    <div class="callout"><p>[Observed results vs. hypothesis. Decision taken. Lessons for the next experiment.]</p></div>
-  </section>
-
-  <footer class="footer">
-    <p>Studio OS · Experiment Plan · run /studio:annotate on this file to return marked-up feedback in one paste</p>
-  </footer>
+  <p class="lbl">Cite an item by letter and number, such as C3. Run /studio:feedback --overlay on this file to return marked-up feedback in one paste.</p>
 
 </div>
 </body>
