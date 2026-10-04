@@ -35,6 +35,7 @@ const VERDICT_SCHEMA = {
     dissents: { type: 'array', items: TEXT, description: 'overruled objections, incl. any marketer commercial objection — preserved, never averaged away' },
   },
 }
+const ADVERSARY_MODEL = 'fable' // the adversary model — the plugin's memory/orchestration.md § Model and effort
 const REFUTE_SCHEMA = {
   type: 'object',
   required: ['refuted', 'case'],
@@ -104,7 +105,7 @@ let slop = null
 if (solution) {
   phase('Close')
   refutation = await agent(`The Creative Director has ruled this solution INEVITABLE. Your task is to REFUTE that verdict — the strongest case against inevitability, not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If you cannot build a credible case, say so plainly (refuted: false).\n\n${shared}\n\nSOLUTION:\n${solution}\n\nCD REASONING:\n${JSON.stringify(cdResult)}`,
-    { label: 'refute', phase: 'Close', agentType: 'studio:critic', schema: REFUTE_SCHEMA })
+    { label: 'refute', phase: 'Close', agentType: 'studio:critic', model: ADVERSARY_MODEL, schema: REFUTE_SCHEMA })
 
   if (refutation.refuted) {
     // refute -> designer, loop max:1 — one bounded return, then the verdict question re-poses to CD once.

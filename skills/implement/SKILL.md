@@ -165,7 +165,7 @@ Re-invoke the same declared build command that failed in Step 3.
 
 If the script exits 0, the build passed — proceed to Step 4.
 
-If the script exits non-zero a second time, **stop**. This is an ESCALATE trigger. Report:
+If the script exits non-zero a second time, **stop**. This is an ESCALATE trigger. **Halt diagnosis:** before reporting, spawn `de` on the adversary model (Agent tool `model: fable`) with both diagnostics and the attempted fix, asking for the root-cause hypothesis and the evidence that supports it — diagnosis only. DE's tools are read-only, so the no-third-fix rule holds structurally. Report:
 
 ```
 BLUEPRINT HALTED: build verification failed twice
@@ -173,6 +173,7 @@ Failed script: <path>
 First failure diagnostics: <summary>
 Second failure diagnostics: <summary>
 Fix attempted: <description>
+Diagnosis (adversary): <hypothesis + evidence>
 ```
 
 End the skill. Do not attempt a third fix.
@@ -209,7 +210,7 @@ Re-invoke the same declared test command.
 
 If exit 0, tests passed — proceed to Step 5.
 
-If exit non-zero a second time, **stop** with the same blueprint-halted report format from Step 3b.
+If exit non-zero a second time, **stop** with the same halt diagnosis and blueprint-halted report format from Step 3b.
 
 ---
 
@@ -247,6 +248,14 @@ If any gate fails, **stop**. Report the violation. Do not attempt to fix gate vi
 
 ---
 
+## [Ag] Step 6.5 — Pre-stage refutation
+
+Spawn `qa` on the adversary model (Agent tool `model: fable`) with the brief's GATES and VERIFY, the `git diff HEAD` output, and the paths of any untracked new files (qa's tools are read-only; it reads them). Task: the strongest case against staging this diff, not a second opinion — gate violations, untested invariants, behavior the diff changes that the tests do not exercise. One pass.
+
+If the refutation fails, record "Refutation: failed — stands" and proceed. If it succeeds, this is an ESCALATE: stop before staging, surface the named defects, and let the user decide — never auto-fix (as with gate violations, Step 6). If the environment pins every subagent to one model, say "Refutation: same-model" in the report.
+
+---
+
 ## [Ag] Step 7 — Report
 
 Produce a structured report against the brief:
@@ -262,6 +271,7 @@ GATES     <each gate from brief>
 VERIFY    Build:  <PASS/FAIL>
           Tests:  <PASS/FAIL/SKIPPED>
           QA:     <scenarios named, or invariant gaps flagged>
+          Refute: <FAILED — stands | SUCCEEDED — defects>
 ESCALATE  <triggered: yes/no; which trigger if yes>
 ```
 
@@ -282,7 +292,7 @@ Ask the user:
 
 **If user replies 'simplify':**
 
-Read the `simplify` skill at `~/.claude/skills/simplify/SKILL.md` and follow its steps from Step 1, passing the changed files from the report as the argument. After the simplify skill completes (it runs its own build verification), return here and proceed to Step 8.
+Invoke `/studio:simplify`, passing the changed files from the report as the argument. After it completes (it runs its own build verification), return here and proceed to Step 8.
 
 **If user replies 'skip':** proceed to Step 8.
 
@@ -318,13 +328,13 @@ After staging, ask:
 
 **If user replies 'review':**
 
-Read the `review` skill at `~/.claude/skills/review/SKILL.md` and follow its steps from Step 1, passing the brief, implementation summary, and changed files as context. After the review completes: if the verdict is SHIP or REVISE, proceed to the 'gather' path below. If REJECT, end the skill and surface the blocking findings — do not stage or render the feedback surface.
+Invoke `/studio:review`, passing the brief, implementation summary, changed files, and the Step 6.5 refutation result as context (review's `refute-de` cites it if the diff is unchanged since). After the review completes: if the verdict is SHIP or REVISE, proceed to the 'gather' path below. If REJECT, end the skill and surface the blocking findings — do not stage or render the feedback surface.
 
 **If user replies 'gather' or anything else (default path):**
 
-Read the `feedback` skill (surface mode) at `skills/feedback/SKILL.md` and follow its steps from Step 1. Pass the implementation context (task title, brief summary, build status, test status, files changed, summary, and 1–3 task-specific questions you'd ask the user) directly into the manifest construction step.
+Invoke `/studio:feedback` (surface mode), passing the implementation context (task title, brief summary, build status, test status, files changed, summary, and 1–3 task-specific questions you'd ask the user) into its Gather-context and Questions steps.
 
-After `/studio:feedback` (surface mode) completes parsing the user's response block, return here for the disposition action defined by `/gather-feedback`'s Step 9. The `/gather-feedback` skill owns the disposition flow.
+After `/studio:feedback` (surface mode) completes parsing the user's response block, return here for the disposition action defined in its Response block. `/studio:feedback` owns the disposition flow.
 
 **If user replies 'skip':**
 
@@ -354,4 +364,5 @@ If `/studio:feedback` was skipped or has finished, the skill ends here. The user
 - Tests fail twice (Step 4b)
 - Test failure is ambiguous between regression vs. legitimate change (Step 4a)
 - Any gate violation (Step 6)
+- Pre-stage refutation succeeds (Step 6.5)
 - Any ESCALATE trigger from the brief surfaces during implementation

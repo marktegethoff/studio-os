@@ -75,7 +75,7 @@ nodes:
   marketer      agent:marketer
   cd            agent:cd
   verdict       router(inevitable|not-yet|structurally-wrong|iterations-exhausted)
-  refute        agent:critic
+  refute        agent:critic adversary
   accessibility agent:accessibility
   exit-path     human decides:exit-path
   slop          gate:slop — seven markers of /studio:studio-slop
@@ -125,7 +125,7 @@ If this is a structural, architectural, or systems problem — not a customer or
 
 ---
 
-## [HAIKU] Before iteration 1 — Context loading
+## Before iteration 1 — Context loading
 
 **Check prior work.**
 If `decisions/` exists (or the ledger path defined in CLAUDE.md), read the decision files. Has this problem been solved before? Do not repeat work already done.
@@ -146,7 +146,7 @@ List every constraint that applies: embedded invariants, prior ledger decisions 
 
 ## Iteration structure
 
-Each iteration follows this sequence on [SONNET], then pauses for [OPUS] judgment.
+Each iteration follows this sequence and ends in the Creative Director's judgment. Each agent runs on the model its frontmatter assigns (the plugin's `memory/orchestration.md` § Model and effort).
 
 ### 1. Historian pass
 What has been tried before on this class of problem? What survived? What failed and why?
@@ -207,7 +207,7 @@ Apply the embedded calibration gate. Answer each question explicitly (YES / NO).
 
 ### 6. Refutation (`refute` node — runs only on INEVITABLE, at most once)
 
-An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). The Critic argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission.
+An INEVITABLE verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). Spawn the critic on the adversary model (Agent tool `model: fable`); it argues the strongest case **against** inevitability — not a second opinion: what could still be removed, what constraint was quietly relaxed, what alternative was dismissed without being priced. If the refutation succeeds, the verdict downgrades to NOT YET with the named defects (one bounded return to the Designer — it cannot stall the loop further). If it fails, record "Refutation: failed — INEVITABLE stands" and proceed to the exit path: an Accessibility check at production weight (`accessibility` node) if the solution involves a surface, then the slop gate (`slop` node — run the seven markers of /studio:studio-slop against the solution artifact; quote and fix anything that fires) before emission.
 
 ---
 

@@ -41,7 +41,7 @@ This skill's topology. The prose steps below are the executable instructions; th
 
 ```graph
 skill: review
-cost: medium — up to two fan-outs of 3 LT agents plus up to 2 refutation passes (debate and refutation conditional)
+cost: medium — up to two fan-outs of 3 LT agents plus up to 2 refutation passes on the adversary model (debate and refutation conditional)
 nodes:
   scope      gate:artifact-classified-and-phase-confirmed
   fan        task:brief the applicable LT members from shared inputs only
@@ -52,8 +52,8 @@ nodes:
   conflict   router(conflicts|aligned)
   debate     task:re-run applicable LT members with each other's Round 1 verdicts, blind to each other's responses
   tiebreak   human decides:break-the-leadership-tie
-  refute-cd  agent:critic
-  refute-de  agent:qa
+  refute-cd  agent:critic adversary
+  refute-de  agent:qa adversary
   final      task:final verdict — combined verdict, dissent ledger, refutation outcomes
   emit       task:render lt-review HTML
 edges:
@@ -222,6 +222,8 @@ A human ruling goes directly to the final synthesis — it outranks refutation. 
 
 A SHIP verdict must survive one adversarial pass before it stands (see Adversarial doctrine, the plugin's `memory/orchestration.md`). Runs at most once per gate; skipped entirely when a human tiebreak has already ruled.
 
+Spawn each refuter on the adversary model (Agent tool `model: fable`) — the discipline is the lens, the model is the independence (see Model and effort, the plugin's `memory/orchestration.md`). If the environment pins every subagent to one model, independence is lost: record "Refutation: same-model" in the output rather than hiding it. If `/studio:implement`'s pre-stage refutation (its Step 6.5) already ran on this exact diff and the diff is unchanged since, `refute-de` cites that result instead of re-running.
+
 - **If CD's standing verdict is SHIP** (`refute-cd` node): spawn the **critic** with: "The Design Director has ruled SHIP on this artifact. Your task is to refute that verdict — make the strongest case against shipping, not a second opinion. Name specific defects: what is unresolved, unearned, or incoherent. If you cannot build a credible case, say so plainly."
 - **If DE's standing verdict is SHIP** (`refute-de` node): spawn **qa** with the same framing against the implementation — strongest case against merging: untested invariants, missing regression coverage, boundary failures.
 
@@ -265,7 +267,7 @@ Phase: [Pre-ship / Checkpoint / Post-ship audit]
 ---
 
 **Refutation:**
-[Outcome of each refutation pass that ran: "failed — SHIP stands" or "succeeded — downgraded to REVISE: <named defects>". Omit if none ran.]
+[Outcome of each refutation pass that ran: "failed — SHIP stands" or "succeeded — downgraded to REVISE: <named defects>"; add "Refutation: same-model" if independence was lost. Omit if none ran.]
 
 **Tiebreak:**
 [The human ruling, if one was made. Omit otherwise.]

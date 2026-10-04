@@ -11,6 +11,8 @@
 //   mode:       string  — 'round1' (segment 1) | 'resolve' (segment 2) | 'auto' (both)
 //   round1:     object  — prior segment result, required when mode === 'resolve'
 //   tiebreak:   object  — human ruling when one was made: { element, ruling }
+//   implementRefutation: object — /studio:implement Step 6.5 result: { diffUnchanged, refuted, case, defects };
+//                         when diffUnchanged === true, refute-de cites it instead of spawning qa
 //   date:       string  — run date, stamped by the orchestrator
 // }
 // Returns structured verdicts; the orchestrator renders the lt-review HTML (emit node).
@@ -57,6 +59,8 @@ const CONFLICT_SCHEMA = {
     elements: { type: 'array', items: { type: 'string' }, description: 'the specific elements in conflict' },
   },
 }
+
+const ADVERSARY_MODEL = 'fable' // the adversary model — the plugin's memory/orchestration.md § Model and effort
 
 const REFUTE_SCHEMA = {
   type: 'object',
@@ -148,12 +152,19 @@ if (mode === 'resolve' || mode === 'auto') {
       refuters.push({ node: 'refute-cd', agentType: 'studio:critic', target: 'the Design Director has ruled SHIP on this artifact', lens: 'what is unresolved, unearned, or incoherent in the design' })
     if (standing.some((v) => v.member === 'de' && v.verdict === 'SHIP'))
       refuters.push({ node: 'refute-de', agentType: 'studio:qa', target: 'the Distinguished Engineer has ruled SHIP on this implementation', lens: 'untested invariants, missing regression coverage, boundary failures' })
-    refutations = (await parallel(refuters.map((r) => () =>
+    // refute-de cites /studio:implement's Step 6.5 result when it ran on this exact diff and the diff is unchanged since.
+    const cited = args.implementRefutation && args.implementRefutation.diffUnchanged === true ? args.implementRefutation : null
+    const spawned = refuters.filter((r) => !(cited && r.node === 'refute-de'))
+    refutations = (await parallel(spawned.map((r) => () =>
       agent(
         `${r.target}. Your task is to REFUTE that verdict — make the strongest case against shipping, not a second opinion. Name specific defects: ${r.lens}. If you cannot build a credible case, say so plainly (refuted: false).\n\n${shared}\n\nSTANDING VERDICTS:\n${JSON.stringify(standing)}`,
-        { label: r.node, phase: 'Resolution', agentType: r.agentType, schema: REFUTE_SCHEMA }
+        { label: r.node, phase: 'Resolution', agentType: r.agentType, model: ADVERSARY_MODEL, schema: REFUTE_SCHEMA }
       ).then((v) => ({ node: r.node, result: v }))
     ))).filter(Boolean)
+    if (cited && refuters.some((r) => r.node === 'refute-de')) {
+      log('refute-de: citing the /studio:implement Step 6.5 refutation — diff unchanged since')
+      refutations.push({ node: 'refute-de', result: { refuted: cited.refuted, case: cited.case, defects: cited.defects }, citedFrom: 'implement Step 6.5' })
+    }
   }
 
   final = await agent(
