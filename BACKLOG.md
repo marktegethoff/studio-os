@@ -83,6 +83,14 @@ A PreToolUse tripwire for the Auto-Mode Safety Contract's items 2–4 (push, tag
 
 - **Browser/Chrome extension** — Studio OS doesn't operate on web pages; out of scope for now.
 
+## 13. Explainer video for artifacts — *deferred in 1.8.0*
+
+A short video that walks through a studio artifact — title block, lettered panels, measures, the annotation harness — for people who have not seen one. The owner deferred it in the 1.8.0 interview: the artifacts had to settle first. Revisit once the 1.8 kit has run on a real project. Open question: a recording of a real `/studio:design` run, or a scripted walk through `docs/examples/`.
+
+## 14. Re-capture screenshots with the house fonts — *not done*
+
+The 26 screenshots in `docs/screenshots/` were re-rendered for 1.8.0 in a Linux container where Typekit was unreachable. Inter Tight and Courier Prime stand in for Neue Haas Grotesk and Courier New. Re-capture all 26 on a machine with the house fonts, from the same `docs/examples/` and `artifacts/templates/` sources, so the type is exact.
+
 ---
 
 ## Done (reference)
