@@ -42,13 +42,13 @@ say "3. Install the Studio OS plugin"
 echo "  Two ways — pick one:"
 echo "    A. Marketplace (versioned, native updates):"
 echo "         claude plugin marketplace add \"$STUDIO\""
-echo "         claude plugin install studio-os@standard-works"
+echo "         claude plugin install studio@standard-works"
 echo "    B. Edit-live (source IS the install, zero drift — recommended for you):"
 echo "         alias claude='claude --plugin-dir \"$STUDIO\"'   # add to ~/.zshrc"
 echo ""
 read -r -p "  Run option A now (marketplace add + install)? [y/N] " a
 if [ "${a:-N}" = "y" ] || [ "${a:-N}" = "Y" ]; then
-  claude plugin marketplace add "$STUDIO" && claude plugin install studio-os@standard-works && ok "plugin installed" || warn "install reported an issue — check output"
+  claude plugin marketplace add "$STUDIO" && claude plugin install studio@standard-works && ok "plugin installed" || warn "install reported an issue — check output"
 else
   warn "skipped — set up option B (alias) yourself, or run A later"
 fi
@@ -67,12 +67,12 @@ fi
 
 # 5) Verify -------------------------------------------------------------------
 say "5. Verify"
-claude plugin list 2>/dev/null | grep -qi "studio-os" && ok "studio-os plugin present" || warn "studio-os not listed — finish step 3"
+claude plugin list 2>/dev/null | grep -qF "studio@standard-works" && ok "studio plugin present" || warn "studio plugin not listed — finish step 3"
 echo ""
 say "Next — confirm no regression (restart Claude Code first):"
 cat <<'EOF'
-  - Open a session in your Log project and run /studio-os:studio — it should orient.
-  - Invoke a gate (e.g. the cd agent) and a workflow (e.g. /studio-os:design) — confirm they load and behave as before.
+  - Open a session in your Log project and run /studio:studio — it should orient.
+  - Invoke a gate (e.g. the cd agent) and a workflow (e.g. /studio:design) — confirm they load and behave as before.
   - Run the eval suite (see evals/README.md) for the full confidence pass.
   - If anything is wrong: restore with  cp -R "$BK"/agents/* ~/.claude/agents/
 EOF

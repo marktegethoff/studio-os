@@ -1,6 +1,6 @@
 # The Artifact Kit
 
-Every studio artifact is a **well-designed HTML document in the studio visual language, with a built-in review harness.** Not raw markdown, not a wall of text — a designed page the human can read, mark up, and return as agent-friendly feedback in one paste. This kit is what every artifact inherits, so no agent restyles from scratch.
+Every studio artifact is a **well-designed HTML document in the studio visual language that `/studio:feedback --overlay` can mark up on demand.** Not raw markdown, not a wall of text — a designed page the human can read, mark up, and return as agent-friendly feedback in one paste. This kit is what every artifact inherits, so no agent restyles from scratch.
 
 ## Two parts
 
@@ -110,12 +110,12 @@ Templates live in `artifacts/templates/`. Each is owned by the agent or the skil
 | User journey | journey-mapper | constrains Designer scope |
 | Wireframe (SVG + ASCII) | designer | structure before code |
 | User narrative | writer | pairs with the Scene Test |
-| Flow diagram | architect / designer | states + transitions |
+| Flow diagram | architect | states + transitions |
 | Design brief | brief-writer | **gates `/design`** |
 | Metrics plan | metrics-definer | committed with the spec |
 | Risk register | assumption-mapper | names the binding assumption |
 | Component spec sheet | specifier | removes implementation guessing |
-| State inventory | designer / specifier | prevents happy-path-only specs |
+| State inventory | designer | prevents happy-path-only specs |
 | Motion spec | choreographer | timing/easing + reduce-motion |
 | Copy deck | writer | all strings, reviewable as language |
 | Competitive teardown | competitive-analyst | read before a brief |

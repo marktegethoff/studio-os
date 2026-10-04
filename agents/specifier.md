@@ -34,7 +34,7 @@ model: sonnet
 effort: medium
 color: blue
 tools: ["Read", "Glob", "Write"]
-artifacts: [component-spec, state-inventory]
+artifacts: [component-spec]
 ---
 
 ## Design System
@@ -173,7 +173,7 @@ Omit sections that genuinely do not apply. Do not use "N/A" — if it doesn't ap
 When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
 
 - **Component spec** — `artifacts/templates/component-spec.html` → `design/<slug>-spec.html`
-- **State inventory** (with Designer) — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
+- **State inventory** (contribution; the Designer owns it) — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
 
 For all:
 - **Summary in conversation:** file path, one-sentence headline, state count or component count

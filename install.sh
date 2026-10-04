@@ -4,7 +4,7 @@ set -e
 # Studio OS — fallback installer.
 # The primary install path is the Claude Code plugin:
 #   claude plugin marketplace add marktegethoff/studio-os
-#   claude plugin install studio-os@standard-works
+#   claude plugin install studio@standard-works
 # This script is for non-plugin contexts: it copies agents and skills
 # into ~/.claude/ directly. Plugin namespacing is lost in this mode.
 
@@ -47,7 +47,7 @@ echo "Studio OS installed (fallback mode)."
 echo ""
 echo "Recommended: use the plugin instead for native updates + namespacing:"
 echo "  claude plugin marketplace add marktegethoff/studio-os"
-echo "  claude plugin install studio-os@standard-works"
+echo "  claude plugin install studio@standard-works"
 echo ""
 echo "Next: open a Claude Code session in your project and set up context."
 echo ""

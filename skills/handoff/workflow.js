@@ -12,7 +12,7 @@
 //   gapNotes:  string  — the human's gap-closure/scope ruling (gaps node), when one was made
 //   date:      string  — run date, stamped by the orchestrator
 // }
-// Returns the package data; the orchestrator renders the state-inventory HTML (emit node).
+// Returns the package data; the orchestrator renders the state-inventory and component-spec HTML (emit node; SKILL.md § Output).
 
 export const meta = {
   name: 'handoff',

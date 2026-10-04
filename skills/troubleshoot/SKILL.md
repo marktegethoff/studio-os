@@ -1,5 +1,5 @@
 ---
-description: "Systematic debugging. Reads the failing signal, forms hypotheses, tests from narrowest to broadest, stops when root cause is found."
+description: "Convergence loop for hard engineering problems. Architect frames, stack engineers propose, the Distinguished Engineer gives the verdict."
 argument-hint: "<the technical problem to solve>"
 ---
 

@@ -354,7 +354,7 @@ Render the artifact as HTML using the kit template, chosen by phase.
 1. Load `artifacts/templates/state-inventory.html` as the structural shell.
 2. Populate by panel: the interaction model as states with their triggers and exits (A) and flows across them (B), what must not break (D1 to D3), what was removed and open questions (E). Omit C and the UAT items in D; `/studio:handoff` fills them.
 3. If Specifier ran, also write `artifacts/templates/component-spec.html` to `design/<slug>-spec.html`. The sub-team's craft notes (Typesetter / Choreographer / Writer / Materialist / Visual Designer — omit if none ran) go on that sheet where it has a panel for them: structure A, copy B, tokens D, limits E. If Specifier did not run, give the craft notes in the summary.
-4. Write to `design/<slug>.html` where slug is from the problem name.
+4. Write the state inventory to `design/<slug>-states.html` where slug is from the problem name.
 
 For all phases:
 4. Writing check on each file written — `verdict` genre for the direction brief, `procedure` for the state inventory and spec: run `bash ${CLAUDE_PLUGIN_ROOT}/evals/ste-check.sh --vocab .claude/memory/design-vocabulary.md <file>` (omit `--vocab` if absent). Fix FAILs once, then list WARNs in the summary (the plugin's `artifacts/kit/README.md` § writing check).

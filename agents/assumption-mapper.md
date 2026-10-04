@@ -146,7 +146,7 @@ For each assumption, assess two dimensions:
 - **Confidence:** High (strong evidence), Medium (some evidence or strong reasoning), Low (belief without evidence)
 - **Impact if wrong:** High (would require abandoning or fundamentally redesigning the feature), Medium (would require significant rework), Low (would require a targeted adjustment)
 
-Combine: Low confidence + High impact = most dangerous.
+Combine: Low confidence + High impact = most dangerous. Score each rating 1 to 3 (Low confidence 3, High impact 3), as `artifacts/templates/risk-register.html` does, and multiply.
 
 ### Step 4 — Name the binding assumption
 

@@ -196,7 +196,7 @@ Produce a structure diagram in plain text if the system has non-trivial relation
 
 When you produce any of these artifacts, render them as HTML and write to disk — do not emit as prose buried in the response.
 
-- **Flow diagram** (with Designer) — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
+- **Flow diagram** — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
 - **Decision record** — `artifacts/templates/decision-record.html` → `decisions/<slug>-decision.html`
 
 For all:

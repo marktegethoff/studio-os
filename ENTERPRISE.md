@@ -63,7 +63,7 @@ Org-enforced. Every team member receives this. Cannot be bypassed in managed mod
 
 **Distribution:**
 - Enterprise: Claude Code managed plugin + `allowManagedHooksOnly` in managed settings
-- Non-managed: `./install.sh` installs Core first, then prompts for Role selection. Hooks function identically; no technical enforcement. See [Non-Managed Mode](#non-managed-mode).
+- Non-managed: `./install.sh` copies every agent and skill into `~/.claude/` with no prompts; the Role menu is designed, not built (see [Implementation Sequence](#implementation-sequence)). Hooks function identically; no technical enforcement. See [Non-Managed Mode](#non-managed-mode).
 
 ### Role Tier
 
@@ -268,11 +268,11 @@ Added to the Memory Architecture section of every agent definition, loading befo
 ```
 1. IT push (enterprise)   → managed settings applied; Core plugin installed; allowManagedHooksOnly set
    — or —
-   Manual (non-managed)   → user runs: ./install.sh → Core installed automatically
+   Manual (non-managed)   → user runs: ./install.sh → all agents and skills copied, no prompts
 
-2. Role selection         → menu shown; user selects discipline(s); Role agents installed
+2. Role selection         → designed, not built; `install.sh` installs every agent
 
-3. Personal profile       → three questions; writes ~/.claude/memory/user-profile.md
+3. Personal profile       → designed, not built; write ~/.claude/memory/user-profile.md by hand
 
 4. Repo clone             → product .claude/ directory present; product hooks active
 

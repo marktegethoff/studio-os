@@ -20,7 +20,7 @@
       <div class="c wide"><span class="l">Artifact</span><span class="v mono">component-spec</span></div>
       <div class="c wide"><span class="l">Owner</span><span class="v">specifier</span></div>
       <div class="c wide"><span class="l">Workflow</span><span class="v mono">/studio:design</span></div>
-      <div class="c wide"><span class="l">Gate</span><span class="v">cd · pending · 4 gaps open</span></div>
+      <div class="c wide"><span class="l">Gate</span><span class="v">cd · pending · 6 gaps open (C7–C10, E3, E4)</span></div>
       <div class="c wide"><span class="l">Revision</span><span class="v">A · 2026-05-27</span></div>
       <div class="c"><span class="l">Sheet</span><span class="v">1 of 1</span></div>
       <div class="c"><span class="l">Status</span><span class="v">Example</span></div>
@@ -183,9 +183,21 @@
             <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
             <div class="scale" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30</span></div>
           </div></div></li>
-          <li><span class="id">E2</span><div class="t">Text on <code>--bg-2</code> meets WCAG AA.</div><span class="side"><span class="ok">✓ Confirmed</span></span></li>
-          <li><span class="id">E3</span><div class="t">Resolved text, <code>--text-3</code> on <code>--bg-3</code>, meets WCAG AA for muted content.</div><span class="side"><span class="ok">✓ Confirmed</span></span></li>
-          <li><span class="id">E4</span><div class="t">The unread indicator, <code>--amber</code>, meets WCAG AA on light and dark backgrounds.</div><span class="side"><span class="ok">✓ Confirmed</span></span></li>
+          <li><span class="id">E2</span><div class="t"><div class="meas" style="--val:4.65;--lim:4.5;--max:7">
+            <div class="mh"><span>Contrast <span class="lbl">--text-2 on --bg-2, D8</span></span><span class="mv">4.65 · min 4.5:1</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>3</span><span>5</span><span>7</span></div>
+          </div></div><span class="side"><span class="ok">✓ Pass</span></span></li>
+          <li><span class="id">E3</span><div class="t"><div class="meas over" style="--val:2.31;--lim:4.5;--max:7">
+            <div class="mh"><span>Contrast <span class="lbl">--text-3 on --bg-3, D9</span></span><span class="mv">2.31 · min 4.5:1</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>3</span><span>5</span><span>7</span></div>
+          </div></div><span class="side"><span class="no">✕ Fail</span></span></li>
+          <li><span class="id">E4</span><div class="t"><div class="meas over" style="--val:1.79;--lim:3;--max:7">
+            <div class="mh"><span>Contrast, non-text <span class="lbl">--amber #D4A844 on --bg-2, D1</span></span><span class="mv">1.79 · min 3:1</span></div>
+            <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>
+            <div class="scale" aria-hidden="true"><span>0</span><span>3</span><span>5</span><span>7</span></div>
+          </div></div><span class="side"><span class="no">✕ Fail</span></span></li>
           <li><span class="id">E5</span><div class="t"><div class="meas" style="--val:44;--lim:44;--max:60">
             <div class="mh"><span>Target size <span class="lbl">comment anchor, height</span></span><span class="mv">44 · min 44 pt</span></div>
             <div class="track" aria-hidden="true"><span class="fill"></span><span class="limit"></span></div>

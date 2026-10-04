@@ -110,7 +110,7 @@ Multi-agent workflows are **declared graphs** — each carries a ` ```graph ` bl
 - `/experiment` — Memory check → Hypothesis → Design → Evaluation
 - `/ideate` — Divergent exploration → Facilitated reduction → Engineering feasibility
 - `/simplify` — Complexity audit → Simplification plan → DE gate → Implementation
-- `/review` — PM + Design Director + Distinguished Engineer combined verdict
+- `/review` — PM + Creative Director + Distinguished Engineer combined verdict
 - `/shape` — interview-driven briefs at two altitudes (product; `--task` for task briefs)
 - `/feedback` — Review Surface (`--surface`) or annotation overlay (`--overlay`)
 

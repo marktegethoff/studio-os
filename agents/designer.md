@@ -29,7 +29,7 @@ model: sonnet
 effort: medium
 color: magenta
 tools: ["Read", "Glob", "Write"]
-artifacts: [ascii-wireframe, state-inventory, flow-diagram]
+artifacts: [ascii-wireframe, state-inventory]
 ---
 
 ## Studio Context
@@ -480,7 +480,7 @@ When you produce any of these artifacts, render them as HTML and write to disk �
 
 - **Wireframe** (dimensioned SVG + ASCII sketch) — `artifacts/templates/ascii-wireframe.html` → `design/<slug>-wireframe.html`
 - **State inventory** — `artifacts/templates/state-inventory.html` → `design/<slug>-states.html`
-- **Flow diagram** (with Architect) — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
+- **Flow diagram** (contribution; the Architect owns it) — `artifacts/templates/flow-diagram.html` → `design/<slug>-flow.html`
 
 For all:
 - **Summary in conversation:** file path, one-sentence headline, key structural decisions
