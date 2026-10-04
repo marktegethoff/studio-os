@@ -25,7 +25,7 @@ All **35 agents + 28 skills** (23 active + 5 deprecated pending archive — simu
 **Every agent and every skill must have eval coverage. Adding one without an eval is incomplete work.** When you add or substantially change an agent or skill:
 1. Add or update its eval in the appropriate file above (agents → the matching group file; skills → `skills.eval.md`).
 2. If it's a net-new discipline group, add a new `*-agents.eval.md` and list it here.
-3. The lint (R12) performs the reconciliation: every `agents/*.md` must be named on an `Agents:` line of an `evals/*.eval.md`, and every `skills/*/` must have a `## <name>` heading in `skills.eval.md` — **an agent or skill with no eval fails**, on every lint run, not only at suite time.
+3. The lint (R12) performs the reconciliation: every `agents/*.md` needs a `## <Display Name> —` heading in an `evals/*.eval.md` (or be the singular `Agent:` of a file that has `## Eval` headings), and every `skills/*/` a `## <name>` heading in `skills.eval.md` — **an agent or skill with no eval fails**, on every lint run, not only at suite time.
 
 This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enforced on every lint run (R12) and on the Phase 3 scheduled-eval cadence.
 
@@ -39,7 +39,7 @@ This rule is mirrored in `CLAUDE.md` so it governs all contributors, and is enfo
 
 ### Full-suite procedure
 
-0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant) and the orchestration invariants from `memory/orchestration.md` (R7 graph-block validity, R7.b Six Functions coverage via `six-functions.map`, R7.c executor conformance, R7.d adversary-node conformance, R8 auto-contract stub, R11 agent model & effort per § Model and effort, R12 eval coverage reconciliation per the Coverage rule above). FAILs block the suite.
+0. **Structural lint** — run `evals/lint-agnostic.sh` (and `evals/lint-agnostic.sh --project <path>` for any consuming project under test). The lint enforces the seam invariants the agents/skills depend on (no product names, no stack-token leaks across files, specialist `scaffold-commands` anchors present, INCLUDED-BY-REFERENCE invariant) and the orchestration invariants from `memory/orchestration.md` (R7 graph-block validity, R7.b Six Functions coverage via `six-functions.map`, R7.c executor conformance, R7.d refutation-node conformance — every `refute*` node cites `${user_config.adversary_model}` in its SKILL.md and routes every refutation through `refute()` in its workflow.js, R8 auto-contract stub, R11 agent model & effort — each agent's frontmatter matches its row in the § Model and effort table, and no prose pins a model, R12 eval coverage — a heading per agent and per skill, per the Coverage rule above). FAILs block the suite.
 
 1. For each eval file, run every eval: send the prompt(s) to the named agent, score each criterion PASS / PARTIAL / FAIL, flag any anti-pattern fired.
 2. Roll up per agent: an agent PASSES only if all its evals pass. A single failed criterion fails that eval; a single failed eval fails that agent.
@@ -88,7 +88,9 @@ The suite is the quality floor's harness: the Slop Test (Phase 4) is built on to
 
 The markdown evals above are the **behavioral contract**. `evals/cases/` is the **executable regression harness**, run by `claude plugin eval` (Claude Code ≥ 2.1.269): each case is a prompt plus graders, runs 3× with the plugin and 3× without, and reports the plugin's Δ.
 
-It matters now because agents pin models and effort (the plugin's `memory/orchestration.md` § Model and effort) — a model rollout is exactly when behavior regresses.
+It matters now because agents pin models and effort (the plugin's `memory/orchestration.md` § Model and effort) — a model rollout is exactly when behavior regresses. The cases cover **gate behavior** (the skill refuses a missing brief or a solution-as-problem) and the **refutation discipline** (the critic refutes with evidence, or says it cannot). Model routing — the adversary model and its fallback — has no executable case: it needs a refuter call that fails, which an empty-workspace case cannot induce; lint R7.d and R11 enforce it.
+
+Measure a model or effort change with `claude plugin eval` before and after — run the suite on the old assignment, then the new, and keep only what the score difference pays for.
 
 | Run | Command |
 |---|---|
@@ -98,4 +100,4 @@ It matters now because agents pin models and effort (the plugin's `memory/orches
 
 A case is a directory: `prompt.md` (frontmatter + the prompt) and `graders/<name>.md` (frontmatter `type:`; an `llm` grader's body is its `PASS if …` / `FAIL if …` rubric).
 
-**Rule:** a new gate or refutation behavior gets a case. `evals/results/` is gitignored.
+**Rule:** a new gate or refutation discipline gets a case. `evals/results/` is gitignored.

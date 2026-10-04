@@ -3,7 +3,7 @@ name: critic-refutation-sound
 description: "Critic refutes a CD SHIP on a sound artifact: the refutation fails, no defects are manufactured."
 tags: [refutation]
 plugins: ["../../.."]
-expected_outcome: "The critic reports the refutation failed and the verdict stands, or names only defects quoted from the artifact."
+expected_outcome: "The critic reports Refuted: no — the refutation failed and the verdict stands — and names no defect."
 max_turns: 6
 allowed_tools: [Read, Glob, Agent]
 ---
