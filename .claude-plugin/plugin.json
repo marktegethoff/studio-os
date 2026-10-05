@@ -2,7 +2,7 @@
   "name": "studio",
   "displayName": "Studio OS",
   "description": "A product-agnostic design studio for Claude Code. Discipline agents, gated workflows, and a designed artifact system that bring studio rigor to design and product work. Built by Standard Works.",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "author": {
     "name": "Mark Tegethoff",
     "url": "https://github.com/marktegethoff"
@@ -22,7 +22,7 @@
     "adversary_model": {
       "type": "string",
       "title": "Adversary model",
-      "description": "Model for refutation passes (refute-* graph nodes; /studio:implement's halt diagnosis and pre-stage refutation). agent = each refuter runs on its own frontmatter model (default, no extra cost). fable, opus or sonnet = run refuters on that model — a stronger, independent refuter at the moments that matter; fable may bill to usage credits.",
+      "description": "Model for refutation passes (refute-* graph nodes; /studio:implement's halt diagnosis and pre-stage refutation). agent = each refuter runs on its own frontmatter model (default, no extra cost). fable, opus or sonnet = run refuters on that model \u2014 a stronger, independent refuter at the moments that matter; fable may bill to usage credits.",
       "default": "agent"
     }
   }
